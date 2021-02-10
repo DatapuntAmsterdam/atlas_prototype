@@ -8,7 +8,7 @@
  * @return {number} The number from the header title.
  */
 const getCountFromHeader = (text: string): number => {
-  const match = text.match(/\(([0-9.,]*)\)/)
+  const match = /\(([0-9.,]*)\)/.exec(text)
   const countStr = match ? match[1].replace('.', '') : null
   return countStr ? parseInt(countStr, 10) : 0
 }

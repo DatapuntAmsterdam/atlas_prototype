@@ -104,6 +104,7 @@ describe('panorama module', () => {
       cy.get(PANORAMA.markerPane).find('img').should('exist').and('be.visible')
       cy.get(DATA_SEARCH.autoSuggestInput).type('Leidsegracht')
       cy.wait('@getSuggestions')
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(500)
       cy.get(DATA_SEARCH.autoSuggest).contains('Leidsegracht').click()
 
@@ -138,7 +139,7 @@ describe('panorama module', () => {
       cy.wait('@getResults')
       // verify that something happened by comparing the url
       cy.location().then((loc) => {
-        newUrl = loc.pathname + loc.search
+        newUrl = `${loc.pathname as string}${loc.search as string}`
         expect(newUrl).not.to.equal(panoUrl)
       })
 
@@ -155,7 +156,7 @@ describe('panorama module', () => {
 
       // verify that something happened by comparing the url
       cy.location().then((loc) => {
-        const thisUrl = loc.pathname + loc.hash
+        const thisUrl = `${loc.pathname as string}${loc.hash as string}`
         expect(thisUrl).not.to.equal(newUrl)
       })
       cy.get(ADDRESS_PAGE.buttonMaximizeMap).last().click()

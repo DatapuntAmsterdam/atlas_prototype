@@ -2,7 +2,6 @@ import Enzyme from 'enzyme'
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17'
 import 'leaflet'
 import 'leaflet-draw'
-import 'raf/polyfill'
 import 'jest-localstorage-mock'
 import 'isomorphic-fetch'
 

@@ -8,9 +8,9 @@ export interface DatasetFilterOption {
 }
 
 /** Matches the key (enum) of a type to a label (enumName) */
-function getOptions(propertyType: any): DatasetFilterOption[] {
+function getOptions(propertyType: { enum: string[]; enumNames: string[] }): DatasetFilterOption[] {
   return propertyType.enum.map((item: string, i: number) => {
-    const index = propertyType.enum[i].indexOf(':')
+    const index: number = propertyType.enum[i].indexOf(':')
     return {
       id: index === -1 ? propertyType.enum[i] : propertyType.enum[i].substring(index + 1),
       label: propertyType.enumNames[i] ? propertyType.enumNames[i] : 'Anders',

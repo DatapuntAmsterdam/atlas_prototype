@@ -3,7 +3,7 @@ import { forwardRef, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import LoadingSpinner from '../../../app/components/LoadingSpinner/LoadingSpinner'
-import SearchType from '../../../app/pages/SearchPage/constants'
+import { SearchType } from '../../../app/pages/SearchPage/constants'
 import { searchQueryParam } from '../../../app/pages/SearchPage/query-params'
 import { routing } from '../../../app/routes'
 import { CmsType } from '../../../shared/config/cms.config'
@@ -72,7 +72,7 @@ const AutoSuggest = forwardRef<HTMLDivElement, AutoSuggestProps>(
         {!loading && !suggestions.length && (
           <NoResults>
             Er zijn geen resultaten gevonden{' '}
-            {searchCategoryLabel && `in categorie "${searchCategoryLabel}"`}
+            {searchCategoryLabel && `in categorie "${searchCategoryLabel as string}"`}
           </NoResults>
         )}
         {!loading && searchBarFilterValue !== SearchType.Search && (

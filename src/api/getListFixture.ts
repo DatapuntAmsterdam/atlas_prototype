@@ -4,7 +4,7 @@ import environment from '../environment'
 const getListResultFixture = (
   results: APIReference[],
   selfHref: string,
-  count: number = 0,
+  count = 0,
   nextHref: string | null = null,
   prevHref: string | null = null,
 ) => {

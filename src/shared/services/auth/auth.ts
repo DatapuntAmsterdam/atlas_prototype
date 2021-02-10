@@ -97,6 +97,16 @@ export const ACCESS_TOKEN = 'accessToken'
 
 let returnPath = ''
 
+enum ErrorCode {
+  InvalidRequest = 'invalid_request',
+  UnauthorizedClient = 'unauthorized_client',
+  AccessDenied = 'access_denied',
+  UnsupportedResponseType = 'unsupported_response_type',
+  InvalidScope = 'invalid_scope',
+  ServerError = 'server_error',
+  TemporarilyUnavailable = 'temporarily_unavailable',
+}
+
 /**
  * Finishes an error from the OAuth2 authorization service.
  *
@@ -104,7 +114,7 @@ let returnPath = ''
  * @param description Error description as returned from the
  * service.
  */
-function handleError(code: string, description: string) {
+function handleError(code: ErrorCode, description: string) {
   /* istanbul ignore else */
   if (typeof window !== 'undefined') {
     sessionStorage.removeItem(STATE_TOKEN)
@@ -132,7 +142,7 @@ function catchError() {
     const params = queryStringParser(window.location.search)
 
     if (params && params.error) {
-      handleError(params.error, params.error_description)
+      handleError(params.error as ErrorCode, params.error_description)
     }
   }
 }

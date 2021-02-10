@@ -81,6 +81,7 @@ function formatFilters(filters, catalogFilters) {
 function formatData(config, rawData) {
   return rawData.map((rawDataRow) => {
     const newDataRow = { ...rawDataRow }
+    // eslint-disable-next-line no-underscore-dangle
     newDataRow._links = {
       self: {
         href: getDetailEndpoint(config, newDataRow),
@@ -148,7 +149,7 @@ export function query(
   searchParams.offset = (page - 1) * config.MAX_ITEMS_PER_PAGE
   searchParams.limit = config.MAX_ITEMS_PER_PAGE
 
-  return fetchWithToken(environment.API_ROOT + config.ENDPOINT_PREVIEW, searchParams).then(
+  return fetchWithToken(`${environment.API_ROOT}${config.ENDPOINT_PREVIEW}`, searchParams).then(
     (data) => ({
       numberOfPages: Math.ceil(data['void:documents'] / config.MAX_ITEMS_PER_PAGE),
       numberOfRecords: data['void:documents'],

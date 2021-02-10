@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Position } from 'geojson'
 import { RdCoordinate, rdToWgs84, wgs84ToRd, Wsg84Coordinate } from './crs-converter'
 

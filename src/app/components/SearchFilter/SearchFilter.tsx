@@ -24,7 +24,9 @@ export function getFilterComponent(filterType: FilterType) {
       return SelectFilter
     default:
       throw Error(
-        `Unable to get filter component, no component for filter of type '${filterType}' could be found.`,
+        `Unable to get filter component, no component for filter of type '${
+          filterType as string
+        }' could be found.`,
       )
   }
 }

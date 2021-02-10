@@ -1,5 +1,5 @@
-/* eslint-disable camelcase */
 import { useStateRef } from '@amsterdam/arm-core'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Feature } from 'geojson'
 import { LatLng, LatLngTuple } from 'leaflet'
 import { useCallback, useEffect, useState, FunctionComponent } from 'react'
@@ -71,6 +71,7 @@ async function getMapVisualization(
   type: DataSelectionType,
 ): Promise<MapVisualization> {
   const searchParams = new URLSearchParams(params)
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   const { object_list: data, eigenpercelen, niet_eigenpercelen, extent } = await fetchWithToken(
     `${config[type].endpointMapVisualization}?${searchParams.toString()}`,
   )
@@ -78,7 +79,7 @@ async function getMapVisualization(
   switch (type) {
     case DataSelectionType.BAG:
     case DataSelectionType.HR: {
-      const response: MapVisualizationMarkers = {
+      return {
         id: '',
         type: DataSelectionMapVisualizationType.Markers,
         data: data.map(
@@ -94,11 +95,9 @@ async function getMapVisualization(
           }),
         ),
       }
-
-      return response
     }
     case DataSelectionType.BRK: {
-      const response: MapVisualizationGeoJSON = {
+      return {
         id: '',
         type: DataSelectionMapVisualizationType.GeoJSON,
         data: [
@@ -130,12 +129,12 @@ async function getMapVisualization(
           },
         ],
       }
-
-      return response
     }
     default:
       throw new Error(
-        `Unable to get map visualization, encountered an unknown data selection type '${type}'.`,
+        `Unable to get map visualization, encountered an unknown data selection type '${
+          type as string
+        }'.`,
       )
   }
 }
@@ -160,7 +159,9 @@ async function getData(
             huisletter,
           }: any) => ({
             id: landelijk_id || uuidv4(),
+            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
             name: `${_openbare_ruimte_naam} ${huisnummer}${huisletter && ` ${huisletter}`}${
+              // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
               huisnummer_toevoeging && `-${huisnummer_toevoeging}`
             }`.trim(),
           }),
@@ -183,7 +184,9 @@ async function getData(
         })),
       }
     default:
-      throw new Error(`Unable to get data, encountered an unknown data selection type '${type}'.`)
+      throw new Error(
+        `Unable to get data, encountered an unknown data selection type '${type as string}'.`,
+      )
   }
 }
 
@@ -200,7 +203,7 @@ const DataSelectionProvider: FunctionComponent = ({ children }) => {
     config[type].authScope === AuthScope.None ? false : !userScopes.includes(config[type].authScope)
 
   const fetchResults = async <T,>(
-    fn: (params: { [key: string]: string }, type: DataSelectionType) => void,
+    fn: (params: { [key: string]: string }, type: DataSelectionType) => Promise<T | void>,
     latLngs: LatLng[][],
     id?: string,
     extraParams?: { [key: string]: string },
@@ -222,7 +225,7 @@ const DataSelectionProvider: FunctionComponent = ({ children }) => {
         throw new Error(`No data selection type set.`)
       }
 
-      return await fn(params, typeRef.current)
+      return fn(params, typeRef.current)
     } catch (e) {
       if (id) {
         setErrorIds([...errorIds, id])
@@ -343,12 +346,22 @@ const DataSelectionProvider: FunctionComponent = ({ children }) => {
       promises.data.push(fetchDataSelection(latLngs, id, { size, page: 1 }, mapData, false))
       promises.mapVisualization.push(fetchMapVisualization(latLngs, id, false))
     })
-    ;(async () => {
-      const dataResults = await Promise.all(promises.data)
-      const mapVisualizationResults = await Promise.all(promises.mapVisualization)
-      setMapVisualization(mapVisualizationResults)
-      setDataSelection(dataResults)
-    })()
+    Promise.all(promises.data)
+      .then((dataResults) => {
+        setDataSelection(dataResults)
+      })
+      .catch((error: string) => {
+        // eslint-disable-next-line no-console
+        console.error(`DataSelectionProvider: failed to retrieve dataselection: ${error}`)
+      })
+    Promise.all(promises.mapVisualization)
+      .then((mapVisualizationResults) => {
+        setMapVisualization(mapVisualizationResults)
+      })
+      .catch((error: string) => {
+        // eslint-disable-next-line no-console
+        console.error(`DataSelectionProvider: failed to retrieve map visualizations: ${error}`)
+      })
   }, [type])
 
   return (

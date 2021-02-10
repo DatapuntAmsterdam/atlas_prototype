@@ -19,6 +19,7 @@ describe('DatasetCard', () => {
 
     const paragraph = component.find('Styled(Paragraph)')
     expect(paragraph.exists()).toBeTruthy()
+    // eslint-disable-next-line no-underscore-dangle
     expect(paragraph.props()?.dangerouslySetInnerHTML?.__html).toBe(mockDatasetItem.teaser)
   })
 

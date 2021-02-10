@@ -1,4 +1,5 @@
 import path from 'path'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import TerserPlugin from 'terser-webpack-plugin'
 import { merge } from 'webpack-merge'
 import { GenerateSW } from 'workbox-webpack-plugin'

@@ -14,10 +14,13 @@ const normalize = async (result) => {
       .map((item) => `${item.sbi_code}${item.sbi_omschrijving ? `: ${item.sbi_omschrijving}` : ''}`)
       .join('\n'),
     type: result.hoofdvestiging ? 'Hoofdvestiging' : 'Nevenvestiging',
+    // eslint-disable-next-line no-underscore-dangle
     ...(result._bijzondere_rechts_toestand.faillissement ||
+    // eslint-disable-next-line no-underscore-dangle
     result._bijzondere_rechts_toestand.status
       ? {
           bijzondereRechtstoestand: {
+            // eslint-disable-next-line no-underscore-dangle
             label: result._bijzondere_rechts_toestand.faillissement
               ? 'Faillissement'
               : 'Surseance van betaling',

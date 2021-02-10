@@ -1,4 +1,6 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import center from '@turf/center'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Geometry, Position } from 'geojson'
 import { LatLngLiteral } from 'leaflet'
 import { fetchWithToken } from '../../../shared/services/api/api'
@@ -12,8 +14,10 @@ import { getAccessToken } from '../../../shared/services/auth/auth'
 
 export interface DetailResponse {
   data: any
+  geometrie?: Geometry
   geometry?: Geometry
   location?: LatLngLiteral
+  _display?: LatLngLiteral
 }
 
 /**

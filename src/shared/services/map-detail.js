@@ -1,5 +1,5 @@
 import { fetchWithToken } from './api/api'
-import { rdToWgs84 } from './coordinate-reference-system/crs-converter'
+import { rdToWgs84 } from './coordinate-reference-system'
 import getCenter from './geo-json/geo-json'
 
 export default function fetchByUri(uri, normalization) {
@@ -16,6 +16,7 @@ export default function fetchByUri(uri, normalization) {
       ...(normalizedData || result),
       ...(result.wkb_geometry ? { geometrie: result.wkb_geometry } : {}),
       ...(result.geometry ? { geometrie: result.geometry } : {}), // evenementen
+      // eslint-disable-next-line no-underscore-dangle
       label: result._display,
       location: result.location || wgs84Center,
     }

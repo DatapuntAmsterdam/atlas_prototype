@@ -12,6 +12,7 @@ export function loadMore(category) {
     output.results = category.results.concat(formatLinks(category.slug, nextPageData.results))
 
     if (output.count > output.results.length) {
+      // eslint-disable-next-line no-underscore-dangle
       output.next = nextPageData._links.next.href
     } else {
       output.next = null

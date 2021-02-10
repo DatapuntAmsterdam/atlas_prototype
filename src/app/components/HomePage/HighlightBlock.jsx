@@ -75,9 +75,7 @@ const HighlightBlock = () => {
   const { results, fetchData, loading, error } = useFromCMS(cmsConfig.HOME_HIGHLIGHT)
 
   useEffect(() => {
-    ;(async () => {
-      await fetchData()
-    })()
+    fetchData()
   }, [])
 
   return (

@@ -93,7 +93,7 @@ describe('usePromise', () => {
 
     async function nextNumber() {
       // eslint-disable-next-line no-plusplus
-      return currentCount++
+      return Promise.resolve(currentCount++)
     }
 
     const { result, rerender, waitForNextUpdate } = renderHook(() =>

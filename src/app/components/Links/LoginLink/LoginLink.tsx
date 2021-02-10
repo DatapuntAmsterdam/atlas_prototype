@@ -9,7 +9,7 @@ export interface LoginLinkProps {
   showChevron?: boolean
 }
 
-export const LoginLink: FunctionComponent<LoginLinkProps> = ({ showChevron = true, children }) => {
+const LoginLink: FunctionComponent<LoginLinkProps> = ({ showChevron = true, children }) => {
   const { trackEvent } = useMatomo()
   const { documentTitle } = useDocumentTitle()
 

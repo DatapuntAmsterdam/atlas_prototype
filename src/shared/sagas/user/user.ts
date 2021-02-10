@@ -26,7 +26,7 @@ export function* authenticateUser(
 }
 
 export function* waitForAuthentication() {
-  const didAuthCheck = yield select(userCheckedAuthentication)
+  const didAuthCheck = (yield select(userCheckedAuthentication)) as boolean
 
   if (!didAuthCheck) {
     yield race({

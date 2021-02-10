@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Point } from 'geojson'
 import { APIReference, Links, SmallAPIReference } from '../../types'
 

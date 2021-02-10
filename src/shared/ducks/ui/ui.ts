@@ -66,10 +66,10 @@ export const initialState: UiState = {
 }
 
 export default function uiReducer(state = initialState, action: UiAction): UiState {
-  const enrichedState: UiState = {
+  const enrichedState = {
     ...state,
     ...paramsRegistry.getStateFromQueries(REDUCER_KEY, action),
-  }
+  } as UiState
 
   switch (action.type) {
     case HIDE_EMBED_PREVIEW:

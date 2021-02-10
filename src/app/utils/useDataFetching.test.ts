@@ -1,5 +1,4 @@
-import { act } from 'react-dom/test-utils'
-import testHook from '../../../test/test-hook'
+import { act, renderHook } from '@testing-library/react-hooks'
 import useDataFetching from './useDataFetching'
 
 jest.mock('../../shared/services/api/api', () => ({
@@ -8,32 +7,29 @@ jest.mock('../../shared/services/api/api', () => ({
 
 jest.useFakeTimers()
 
-let mockUseDataFetching: ReturnType<typeof useDataFetching>
-
 describe('useDataFetching', () => {
-  beforeEach(() => {
-    testHook(() => {
-      mockUseDataFetching = useDataFetching()
-    })
-  })
-
   it('should have a fetchData function', () => {
-    expect(mockUseDataFetching.fetchData).toBeInstanceOf(Function)
+    const { result } = renderHook(() => useDataFetching())
+    expect(result.current.fetchData).toBeInstanceOf(Function)
   })
 
   it('should have correct initial values', () => {
-    expect(mockUseDataFetching.loading).toBe(false)
-    expect(mockUseDataFetching.errorMessage).toBe(false)
-    expect(mockUseDataFetching.results).toBe(null)
+    const { result } = renderHook(() => useDataFetching())
+    expect(result.current.loading).toBe(false)
+    expect(result.current.errorMessage).toBe(false)
+    expect(result.current.results).toBe(null)
   })
 
-  it('should set the loading state when fetchData is called', () => {
-    expect(mockUseDataFetching.loading).toBe(false)
+  it('should set the loading state when fetchData is called', async () => {
+    const { result, waitForNextUpdate } = renderHook(() => useDataFetching())
+    expect(result.current.loading).toBe(false)
 
     act(() => {
-      mockUseDataFetching.fetchData('test')
+      result.current.fetchData('test')
     })
 
-    expect(mockUseDataFetching.loading).toBe(true)
+    expect(result.current.loading).toBe(true)
+    await waitForNextUpdate()
+    expect(result.current.loading).toBe(false)
   })
 })

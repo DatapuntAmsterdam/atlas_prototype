@@ -19,7 +19,8 @@ class Video extends Component {
       if (play) {
         this.playPromise = videoPlayer.play()
       } else if (this.playPromise !== undefined) {
-        this.playPromise.then(() => {
+        // eslint-disable-next-line no-void
+        void this.playPromise.then(() => {
           videoPlayer.pause()
         })
       } else {

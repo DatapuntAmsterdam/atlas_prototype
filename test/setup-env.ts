@@ -1,6 +1,7 @@
 import { server } from './server'
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSDOM {
     interface Global {
       unsetAuthentication: () => void

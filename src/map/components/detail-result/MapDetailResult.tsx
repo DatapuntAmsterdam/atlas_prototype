@@ -92,7 +92,7 @@ function renderDefinitionListItem(item: DetailResultItemDefinitionList, index: n
       {item.entries
         ?.filter(({ description }) => description)
         .map((entry) => (
-          <li key={entry.term + entry.description} className="map-detail-result__item">
+          <li key={`${entry.term}${entry.description ?? ''}`} className="map-detail-result__item">
             <section className="map-detail-result__item-content">
               <div className="map-detail-result__item-label">{entry.term}</div>
               <div className="map-detail-result__item-value">

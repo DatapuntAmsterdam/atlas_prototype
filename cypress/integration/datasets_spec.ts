@@ -84,6 +84,7 @@ describe('datasets module', () => {
       cy.wait('@graphql')
 
       cy.contains('Datasets (')
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(500)
       let countDatasets = 0
       // Count amount of Datasets
@@ -99,6 +100,7 @@ describe('datasets module', () => {
       cy.get(`#${CSS.escape('theme-theme:bestuur')}`).check({ force: true })
 
       // Count amount of Datasets again and check against previous
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(800)
       cy.get('h1')
         .contains('Datasets')
@@ -145,6 +147,7 @@ describe('datasets module', () => {
       cy.get(DATA_SEARCH.input).trigger('focus')
       cy.get(DATA_SEARCH.input).type('Vergunningen')
       cy.wait('@typeaheadResults')
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(500)
       cy.get(DATA_SEARCH.autoSuggest).click()
       cy.get(DATA_SEARCH.autoSuggestHeader)

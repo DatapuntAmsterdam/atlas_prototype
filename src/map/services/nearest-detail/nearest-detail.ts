@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Feature, Geometry } from 'geojson'
 import environment from '../../../environment'
 import { fetchWithToken } from '../../../shared/services/api/api'
@@ -53,12 +54,17 @@ export default async function fetchNearestDetail(
   const results = sortResults(
     (
       await Promise.all(
-        layers.map(async (layer) => {
-          const params = generateParams(layer, location, zoom)
-          const result = await fetchWithToken(environment.API_ROOT + layer.detailUrl, params)
+        layers
+          .filter((layer) => layer.detailUrl)
+          .map(async (layer) => {
+            const params = generateParams(layer, location, zoom)
+            const result = await fetchWithToken(
+              `${environment.API_ROOT}${layer.detailUrl as string}`,
+              params,
+            )
 
-          return retrieveLayers(result.features, layer.detailIsShape)
-        }),
+            return retrieveLayers(result.features, layer.detailIsShape)
+          }),
       )
     ).reduce(/* istanbul ignore next */ (a, b) => [...a, ...b]),
   )

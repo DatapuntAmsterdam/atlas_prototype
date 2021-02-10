@@ -84,10 +84,8 @@ const AboutBlock = () => {
   } = useFromCMS(cmsConfig.HOME_ABOUT_DATA)
 
   useEffect(() => {
-    ;(async () => {
-      await fetchDataAbout()
-      await fetchDataAboutData()
-    })()
+    fetchDataAbout()
+    fetchDataAboutData()
   }, [])
 
   return (

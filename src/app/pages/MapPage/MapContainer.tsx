@@ -1,4 +1,5 @@
 import { Alert, Heading, hooks, Link } from '@amsterdam/asc-ui'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Feature } from 'geojson'
 import { FunctionComponent, useEffect, useMemo, useReducer, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -87,8 +88,12 @@ const MapContainer: FunctionComponent = ({ children }) => {
   }
 
   useEffect(() => {
-    getPanelLayers()
-    getMapLayers()
+    Promise.all([getPanelLayers, getMapLayers])
+      .then(() => {})
+      .catch((error: string) => {
+        // eslint-disable-next-line no-console
+        console.error(`MapContainer: problem fetching panel and map layers: ${error}`)
+      })
   }, [])
 
   return (

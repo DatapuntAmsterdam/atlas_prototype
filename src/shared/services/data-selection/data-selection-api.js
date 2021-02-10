@@ -74,6 +74,7 @@ function formatData(dataset, view, rawData) {
   return {
     head: fields.map((item) => item.label),
     body: rawData.map((rawDataRow) => ({
+      // eslint-disable-next-line no-underscore-dangle
       detailEndpoint: rawDataRow._links.self.href,
       content: fields.map((item) =>
         item.variables.map((variable) => ({

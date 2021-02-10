@@ -60,6 +60,7 @@ describe('map module', () => {
       cy.get(DATA_SEARCH.autoSuggestInput).focus().type('dam 1')
 
       cy.wait('@getTypeaheadResults')
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(500)
       cy.get(DATA_SEARCH.autoSuggest).contains('Dam 1').click()
 

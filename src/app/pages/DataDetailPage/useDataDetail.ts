@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { fetchMapDetailSuccess } from '../../../map/ducks/detail/actions'
 import { getCurrentEndpoint } from '../../../map/ducks/detail/selectors'
-import { fetchDetailData, getServiceDefinition } from '../../../map/services/map'
+import { DetailResponse, fetchDetailData, getServiceDefinition } from '../../../map/services/map'
 import mapFetch from '../../../map/services/map-fetch/map-fetch'
 import { clearMapDetail, showDetail } from '../../../shared/ducks/detail/actions'
 import { getViewMode, setViewMode, ViewMode } from '../../../shared/ducks/ui/ui'
@@ -32,12 +32,12 @@ export default function useDataDetail() {
 
       if (!serviceDefinition) {
         history.push(routing.niet_gevonden.path)
-        return Promise.reject()
+        return await Promise.reject()
       }
 
       if (!userIsAuthorized && serviceDefinition.authScopeRequired) {
         const error = new AuthError(401, serviceDefinition.authExcludedInfo || '')
-        return Promise.reject(error)
+        return await Promise.reject(error)
       }
 
       let data
@@ -53,7 +53,7 @@ export default function useDataDetail() {
       dispatch(clearMapDetail())
 
       const mapDetail: any = await mapFetch(
-        data,
+        data as DetailResponse,
         {
           id,
           type,
@@ -67,6 +67,7 @@ export default function useDataDetail() {
 
       dispatch(
         showDetail({
+          // eslint-disable-next-line no-underscore-dangle
           display: mapDetail._display,
           geometry,
         }),

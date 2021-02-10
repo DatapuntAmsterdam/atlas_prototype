@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import nodeCrypto from 'crypto'
 import {
   getAuthHeaders,
@@ -31,7 +32,7 @@ describe('The auth service', () => {
           value: {
             ...global.window,
             crypto: {
-              getRandomValues: (buffer: any): string => nodeCrypto.randomFillSync(buffer),
+              getRandomValues: (buffer: any): string => nodeCrypto.randomFillSync(buffer) as string,
             },
           },
         },
@@ -90,7 +91,9 @@ describe('The auth service', () => {
 
         it('Updates the session storage', () => {
           const accessToken = sessionStorage.getItem(STATE_TOKEN)
-          window.location.hash = `#access_token=${accessToken}&token_type=token&expires_in=36000&state=${accessToken}`
+          if (accessToken) {
+            window.location.hash = `#access_token=${accessToken}&token_type=token&expires_in=36000&state=${accessToken}`
+          }
 
           initAuth()
 
@@ -111,7 +114,9 @@ describe('The auth service', () => {
 
         it('Does not work when a parameter is missing', () => {
           const accessToken = sessionStorage.getItem(STATE_TOKEN)
-          window.location.hash = `#access_token=${accessToken}&token_type=token&state=${accessToken}`
+          if (accessToken) {
+            window.location.hash = `#access_token=${accessToken}&token_type=token&state=${accessToken}`
+          }
 
           initAuth()
 
@@ -138,8 +143,10 @@ describe('The auth service', () => {
 
         const accessToken = sessionStorage.getItem(STATE_TOKEN)
 
-        // simulating coming back from auth server
-        window.location.hash = `#access_token=${accessToken}&token_type=bearer&expires_in=36000&state=${accessToken}`
+        if (accessToken) {
+          // simulating coming back from auth server
+          window.location.hash = `#access_token=${accessToken}&token_type=bearer&expires_in=36000&state=${accessToken}`
+        }
 
         initAuth()
 

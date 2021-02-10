@@ -241,7 +241,7 @@ describe('draw-tool service', () => {
     })
 
     describe('distroy', () => {
-      it('should deregister all mapevents', async () => {
+      it('should deregister all mapevents', () => {
         drawTool.drawnItems = layer
         currentShape.layer = layer
         destroy()
@@ -638,6 +638,7 @@ describe('draw-tool service', () => {
         })
 
         it('should delete the marker when this is not the first one', () => {
+          // eslint-disable-next-line no-underscore-dangle
           drawTool.drawShapeHandler._markers = [
             // eslint-disable-line no-underscore-dangle
             {},

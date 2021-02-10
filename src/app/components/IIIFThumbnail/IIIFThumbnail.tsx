@@ -31,39 +31,35 @@ const IIIFThumbnail = ({ src, title }: Thumbnail) => {
   const { accessToken } = getState().user
 
   useEffect(() => {
-    async function fetchImage() {
-      await fetch(src, {
-        headers: {
-          authorization: `Bearer ${accessToken || ''}`,
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            setError(true)
-            return null
-          }
-
-          return response.blob()
-        })
-        .then((image) => {
-          setLoading(false)
-
-          // Then create a local URL for that image and pass it to the local state
-          const localUrl = image ? ((URL.createObjectURL(image) as unknown) as string) : ''
-
-          return setLocalImage(localUrl)
-        })
-        .catch(() => {
-          setLoading(false)
+    fetch(src, {
+      headers: {
+        authorization: `Bearer ${accessToken || ''}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
           setError(true)
-        })
-    }
+          return null
+        }
 
-    fetchImage()
+        return response.blob()
+      })
+      .then((image) => {
+        setLoading(false)
+
+        // Then create a local URL for that image and pass it to the local state
+        const localUrl = image ? ((URL.createObjectURL(image) as unknown) as string) : ''
+
+        return setLocalImage(localUrl)
+      })
+      .catch(() => {
+        setLoading(false)
+        setError(true)
+      })
   }, [src])
 
   return (
-    <StyledCard data-testid="Card" isLoading={!!loading}>
+    <StyledCard data-testid="Card" isLoading={loading}>
       <CardMedia>
         {!loading && (
           <Image

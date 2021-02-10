@@ -227,7 +227,7 @@ const MapLegend = ({
         })
 
       mapLayers.forEach((mapLayer) => {
-        // eslint-disable-next-line no-unused-expressions
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         mapLayer.legendItems?.length > 0
           ? mapLayer.legendItems
               .filter(({ isVisible }) => !isVisible)

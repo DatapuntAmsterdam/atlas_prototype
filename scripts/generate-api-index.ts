@@ -39,7 +39,7 @@ function getFiles(path: string): Array<DirectoryResult | FileResult> {
         .map((file) => ({
           ...file,
           path,
-          apiName: camelize(path.match(/([^/]*)\/*$/)?.[1].replace('-', ' ')),
+          apiName: camelize(/([^/]*)\/*$/.exec(path)?.[1].replace('-', ' ')),
         }))
         .filter(({ apiName }) => apiName)
     : []
@@ -62,12 +62,13 @@ const createImport = (res: Array<FileResult | DirectoryResult>): string[] => {
   return res
     .map((value) => {
       if ('apiName' in value) {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         return `import * as ${value.apiName} from './${value.path
           .split(API_PATH)
           ?.pop()
           ?.slice(0, -1)}'`
       }
-      return createImport(value.results).flat()
+      return 'results' in value ? createImport(value.results).flat() : []
     })
     .flat()
 }
@@ -75,12 +76,12 @@ const createImport = (res: Array<FileResult | DirectoryResult>): string[] => {
 const createExport = (res: Array<FileResult | DirectoryResult>): string[] => {
   return res
     .map((value) => {
-      if ('apiName' in value) {
+      if ('apiName' in value && value.apiName) {
         return `
             ${value.apiName}
             `
       }
-      return createExport(value.results).flat()
+      return 'results' in value ? createExport(value.results).flat() : []
     })
     .flat()
 }

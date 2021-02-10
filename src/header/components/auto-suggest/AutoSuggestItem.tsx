@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { generatePath, Link as RouterLink } from 'react-router-dom'
 import { Link, themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import SearchType from '../../../app/pages/SearchPage/constants'
+import { SearchType } from '../../../app/pages/SearchPage/constants'
 import { routing } from '../../../app/routes'
 import toSlug from '../../../app/utils/toSlug'
 import { CmsType } from '../../../shared/config/cms.config'
@@ -20,7 +20,7 @@ export interface AutoSuggestItemProps {
   content: string
   suggestion: AutoSuggestSearchContent
   highlightValue: string
-  inputValue?: string
+  inputValue: string
   label: string
 }
 
@@ -84,7 +84,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
       let subType = ''
 
       if (suggestion.type === CmsType.Special) {
-        const match = suggestion.label.match(/\(([^()]*)\)$/)
+        const match = /\(([^()]*)\)$/.exec(suggestion.label)
 
         if (match) {
           ;[, subType] = match
@@ -118,7 +118,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
 
     // suggestion.category TRACK
     return {
-      pathname: generatePath(routing.dataDetail.path, { type, subtype, id: `id${id}` }),
+      pathname: generatePath(routing.dataDetail.path, { type, subtype, id: `id${id as string}` }),
       search: new URLSearchParams({
         [PARAMETERS.VIEW]: view,
         [PARAMETERS.QUERY]: `${inputValue}`,

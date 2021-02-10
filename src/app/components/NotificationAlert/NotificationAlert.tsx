@@ -1,4 +1,4 @@
-/* eslint-disable camelcase */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Alert } from '@amsterdam/asc-ui'
 import { FunctionComponent, useEffect } from 'react'
 import { useSelector } from 'react-redux'
@@ -34,8 +34,10 @@ const NotificationAlert: FunctionComponent = () => {
     }
     // Limit = 1 because this prevents us from getting multiple notifications
     const endpoint = `${environment.CMS_ROOT}jsonapi/node/notification?filter[field_active]=1&page[limit]=1`
-    ;(async () => {
-      await fetchData(endpoint)
+    ;(() => {
+      fetchData(endpoint)
+        .then(() => {})
+        .catch(() => {})
     })()
   }, [])
 

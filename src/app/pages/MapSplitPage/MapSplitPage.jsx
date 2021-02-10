@@ -31,7 +31,7 @@ const PanoramaWrapper = lazy(() =>
 let MapComponent = () => null
 
 if (typeof window !== 'undefined') {
-  // eslint-disable-next-line global-require
+  // eslint-disable-next-line @typescript-eslint/no-var-requires,global-require
   MapComponent = require('../../../map/containers/map/MapContainer').default
 }
 

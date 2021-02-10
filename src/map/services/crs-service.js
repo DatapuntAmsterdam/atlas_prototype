@@ -8,6 +8,7 @@ function getCrs() {
   rdSettings.transformation.bounds = L.bounds.apply(null, RD.transformation.bounds)
   const crs = new L.Proj.CRS(rdSettings.code, rdSettings.projection, rdSettings.transformation)
 
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   crs.distance = L.CRS.Earth.distance
   crs.R = EARTH_RADIUS
 

@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Geometry } from 'geojson'
 import { APIReference, Links } from '../../../types'
 

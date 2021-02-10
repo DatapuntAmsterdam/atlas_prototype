@@ -15,6 +15,7 @@ jest.mock('../../../shared/services/redux/get-state', () =>
 
 // The function createObjectURL doesnt exist on global
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace NodeJS {
     interface Global {
       URL: {
@@ -31,7 +32,7 @@ global.URL.createObjectURL = mockCreateObjectURL
 describe('IIIFThumbnail', () => {
   beforeEach(() => cleanup())
 
-  it('should set the loading skeleton when the src is being fetched', async () => {
+  it('should set the loading skeleton when the src is being fetched', () => {
     const component = shallow(<IIIFThumbnail src="" title="foo" />) // We want to test the props that are set on a component, this is something testing-library doesn't support, as it prefers to test the DOM
 
     const card = component.find('Styled(Card)')

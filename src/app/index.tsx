@@ -10,17 +10,24 @@ import resolveRedirects from './redirects'
 import './sentry'
 
 // If there are no redirects for the current url, render the application
-resolveRedirects().then((hasToRedirect) => {
-  if (!hasToRedirect) {
-    const { store, history } = configureStore()
+resolveRedirects()
+  .then((hasToRedirect) => {
+    if (!hasToRedirect) {
+      const { store, history } = configureStore()
 
-    renderApp(store, history)
-  }
-})
+      renderApp(store, history)
+    }
+  })
+  .catch((error: string) => {
+    // eslint-disable-next-line no-console
+    console.error(`Can't resolve redirects: ${error}`)
+  })
 
 function renderApp(store: Store<any, AnyAction>, history: History) {
   // eslint-disable-next-line no-console
-  console.log(`Dataportaal: version: ${process.env.VERSION}, deploy env: ${environment.DEPLOY_ENV}`)
+  console.log(
+    `Dataportaal: version: ${process.env.VERSION as string}, deploy env: ${environment.DEPLOY_ENV}`,
+  )
 
   ReactDOM.render(
     <Provider store={store}>

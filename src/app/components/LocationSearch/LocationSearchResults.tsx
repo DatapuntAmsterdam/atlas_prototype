@@ -5,7 +5,7 @@ import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { ViewMode } from '../../../shared/ducks/ui/ui'
-import LocationSearchList from './LocationSearchList'
+import LocationSearchList, { CategoryResult } from './LocationSearchList'
 import { getUserScopes } from '../../../shared/ducks/user/user'
 import { getNumberOfResults } from '../../../shared/ducks/data-search/selectors'
 import { toDetailFromEndpoint } from '../../../store/redux-first-router/actions'
@@ -31,7 +31,7 @@ const NestedResult = styled.div`
 `
 
 type Props = {
-  searchResults: any[]
+  searchResults: Array<CategoryResult>
 }
 
 const LocationSearchResults: FunctionComponent<Props> = ({ searchResults }) => {
@@ -74,7 +74,7 @@ const LocationSearchResults: FunctionComponent<Props> = ({ searchResults }) => {
                       iconLeft={<Enlarge />}
                       type="button"
                       onClick={() =>
-                        dispatch(toDetailFromEndpoint(result.more.endpoint, ViewMode.Split))
+                        dispatch(toDetailFromEndpoint(result.more?.endpoint, ViewMode.Split))
                       }
                     >
                       {result.more.label}

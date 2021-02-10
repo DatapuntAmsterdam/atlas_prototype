@@ -34,7 +34,7 @@ describe('ConstructionFileDetail', () => {
 
     listElements.forEach((element) => {
       const definitionDescription = within(definitionList).getByText(
-        `${bouwdossierFixture[element]}`,
+        `${bouwdossierFixture[element] as string}`,
       )
       expect(definitionDescription).toBeInTheDocument()
     })
@@ -49,7 +49,7 @@ describe('ConstructionFileDetail', () => {
 
     expect(queryByTestId('oloLiaanNumber')).not.toBeInTheDocument()
 
-    // eslint-disable-next-line camelcase
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const olo_liaan_nummer = 1
 
     rerender(
@@ -68,7 +68,8 @@ describe('ConstructionFileDetail', () => {
 
     expect(getByTestId('DocumentsHeading')).toBeInTheDocument()
 
-    bouwdossierFixture.documenten.forEach((doc: any, index: number) => {
+    bouwdossierFixture.documenten.forEach((doc, index) => {
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       expect(getByText(`${doc.subdossier_titel} (${doc.bestanden.length})`)).toBeInTheDocument()
       const filesGallery = within(getByTestId(`constructionDocuments-${index}`)).getByTestId(
         'filesGallery',
@@ -81,7 +82,7 @@ describe('ConstructionFileDetail', () => {
       ).toHaveLength(0)
     })
 
-    // eslint-disable-next-line camelcase
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const olo_liaan_nummer = 1
 
     rerender(

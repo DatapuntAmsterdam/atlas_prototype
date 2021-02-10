@@ -24,10 +24,10 @@ export const initialState: FilesState = {
 }
 
 export default function filesReducer(state = initialState, action: FilesAction): FilesState {
-  const enrichedState: FilesState = {
+  const enrichedState = {
     ...state,
     ...paramsRegistry.getStateFromQueries(REDUCER_KEY, action),
-  }
+  } as FilesState
 
   switch (action.type) {
     case RESET_FILE:

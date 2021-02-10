@@ -1,14 +1,14 @@
 import api from '../../src/api'
 
-type Intercepts = [Cypress.HttpMethod, RegExp, object, string][]
+type Intercepts = [Cypress.HttpMethod, RegExp, Record<string, unknown>, string][]
 
 type Fixture = {
   single: string
   any: string
   list?: string
   path: string
-  singleFixture?: object
-  listFixture?: object
+  singleFixture?: Record<string, unknown>
+  listFixture?: Record<string, unknown>
 } & {
   intercepts: Intercepts
 }
@@ -19,7 +19,8 @@ type FixtureKey = keyof typeof api
 
 const API_HOSTNAME = `^https?://([a-z0-9]+[.])*api.data.amsterdam.nl/`
 
-export const constructApiURLRegex = (path: string) => new RegExp(`${API_HOSTNAME}${path}`, 'i')
+export const constructApiURLRegex = (path: string): RegExp =>
+  new RegExp(`${API_HOSTNAME}${path}`, 'i')
 
 export const fixtureKeys = Object.keys(api) as FixtureKey[]
 
@@ -36,7 +37,7 @@ export const apiFixtures = Object.entries(api).reduce<APIFixtures>((acc, [key, v
   const intercepts: Intercepts = [
     [
       'GET',
-      constructApiURLRegex(`${value.path}${value?.fixtureId}`),
+      constructApiURLRegex(`${value.path}${value?.fixtureId ? value?.fixtureId : ''}`),
       value.singleFixture,
       singleAlias,
     ],
@@ -57,7 +58,7 @@ export const apiFixtures = Object.entries(api).reduce<APIFixtures>((acc, [key, v
   }
 }, {} as APIFixtures)
 
-export const interceptApiFixtures = () => {
+export const interceptApiFixtures = (): void => {
   Object.values(apiFixtures).forEach(({ intercepts }) => {
     intercepts.forEach(([method, url, response, alias]) => {
       cy.intercept(method as any, url, response).as(alias)

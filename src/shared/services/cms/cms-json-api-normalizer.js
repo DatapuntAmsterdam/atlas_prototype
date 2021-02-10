@@ -4,7 +4,7 @@ import normalize from 'json-api-normalize'
 export const getType = (type) => type && type.replace('node--', '')
 
 function getNormalizedItem(item, extraData = {}) {
-  // Make sure the correct fields have data here to be used by useNormalizedCMSResults()
+  // Make sure the correct fields have data here to be used by normalizeCMSResults()
   return {
     ...extraData,
     ...item,
@@ -55,7 +55,7 @@ const cmsJsonApiNormalizer = (data, fields) => {
   const sortedItems = data?.data?.relationships?.field_items?.data ?? []
 
   if (normalizedData?.field_items?.length && sortedItems.length) {
-    const field_items = [...normalizedData.field_items].sort(
+    const fieldItems = [...normalizedData.field_items].sort(
       (a, b) =>
         sortedItems.indexOf(sortedItems.filter(({ id }) => a.id === id)[0]) -
         sortedItems.indexOf(sortedItems.filter(({ id }) => b.id === id)[0]),
@@ -63,7 +63,7 @@ const cmsJsonApiNormalizer = (data, fields) => {
 
     return reformatJSONApiResults({
       ...normalizedData,
-      field_items,
+      field_items: fieldItems,
     })
   }
 

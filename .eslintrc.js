@@ -1,24 +1,56 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  extends: ['airbnb', 'plugin:jsx-a11y/strict', 'plugin:prettier/recommended', 'prettier/react'],
+  extends: [
+    'airbnb-typescript',
+    'airbnb/hooks',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:jsx-a11y/strict',
+    'plugin:prettier/recommended',
+    'prettier',
+    'prettier/react',
+    'prettier/@typescript-eslint',
+    'plugin:cypress/recommended',
+  ],
+  parserOptions: {
+    project: './tsconfig.eslint.json',
+  },
   env: {
     jest: true,
     browser: true,
     node: true,
+    'cypress/globals': true,
   },
-  plugins: ['@typescript-eslint', 'jsx-a11y'],
   root: true,
   globals: {
     jsdom: true,
     jasmine: true,
   },
   rules: {
-    'jsx-a11y/anchor-is-valid': [
+    'import/no-cycle': 'off',
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'no-console': 'error',
+
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-use-before-define': ['error', { functions: false }],
+
+    'react-hooks/exhaustive-deps': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
+
+    'jsx-a11y/label-has-for': [
       'error',
       {
-        components: ['a'],
-        specialLink: ['hrefLeft', 'hrefRight'],
-        aspects: ['noHref', 'invalidHref', 'preferButton'],
+        required: {
+          some: ['nesting', 'id'],
+        },
       },
     ],
     'jsx-a11y/label-has-associated-control': [
@@ -29,74 +61,22 @@ module.exports = {
         },
       },
     ],
-    'jsx-a11y/label-has-for': [
-      'error',
-      {
-        required: {
-          some: ['nesting', 'id'],
-        },
-      },
-    ],
-    'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx'] }],
-    'react/prop-types': [0],
-    'react/jsx-props-no-spreading': [0],
-    'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': 'error',
-    'no-useless-constructor': 'off',
-    '@typescript-eslint/no-useless-constructor': 'error',
-    'no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': ['error', { functions: false }],
-    'import/no-extraneous-dependencies': 'off',
-    'no-console': 'error',
-    'prettier/prettier': 'error',
-    'no-underscore-dangle': [
-      'error',
-      {
-        allow: [
-          '_bijzondere_rechts_toestand',
-          '_grootstedelijkgebied',
-          '_display',
-          '_embedded',
-          '_links',
-          '_northEast',
-          '_paq',
-          '_southWest',
-          '_markers',
-          '_display',
-          '_getStorage',
-          '_storage',
-          '_keys',
-          '_key',
-          '_defaultValue',
-          '_provider',
-        ],
-      },
-    ],
-    'import/extensions': [
-      'error',
-      'ignorePackages',
-      {
-        js: 'never',
-        jsx: 'never',
-        ts: 'never',
-        tsx: 'never',
-      },
-    ],
-    'react/jsx-uses-react': 'off',
-    'react/react-in-jsx-scope': 'off',
   },
-  settings: {
-    'import/resolver': {
-      node: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+  overrides: [
+    {
+      files: ['*.js', '*.jsx'],
+      rules: {
+        '@typescript-eslint/restrict-template-expressions': 'off',
+        '@typescript-eslint/restrict-plus-operands': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
       },
     },
-  },
-  parserOptions: {
-    ecmaVersion: 2017,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
+    {
+      files: ['*.test.*'],
+      rules: {
+        '@typescript-eslint/unbound-method': 'off',
+        '@typescript-eslint/no-floating-promises': 'off',
+      },
     },
-  },
+  ],
 }

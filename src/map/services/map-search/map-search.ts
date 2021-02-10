@@ -1,4 +1,5 @@
 import { LatLngLiteral } from 'leaflet'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { FeatureCollection, Geometry } from 'geojson'
 import environment from '../../../environment'
 import { UserState } from '../../../shared/ducks/user/user'
@@ -109,7 +110,9 @@ export const fetchRelatedForUser = (user: UserState) => (
           results.map((result) => ({
             ...result,
             properties: {
+              // eslint-disable-next-line no-underscore-dangle
               uri: result._links.self.href,
+              // eslint-disable-next-line no-underscore-dangle
               display: result._display,
               type: resource.type,
               parent: relatableFeature.properties.type,

@@ -1,6 +1,6 @@
 import { createBrowserHistory, createMemoryHistory, History } from 'history'
 import queryString from 'querystring'
-import { applyMiddleware, createStore } from 'redux'
+import { applyMiddleware, createStore, Store } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { connectRoutes, Options as RoutingOptions } from 'redux-first-router'
 import restoreScroll from 'redux-first-router-restore-scroll'
@@ -18,7 +18,7 @@ import setQueriesFromStateMiddleware from './middleware/setQueriesFromStateMiddl
 import paramsRegistry from './params-registry'
 import './queryParameters'
 
-const configureStore = () => {
+const configureStore = (): { store: Store<any>; history: History<unknown> } => {
   const routesMap = routes
   const routingOptions: RoutingOptions = {
     querySerializer: queryString,

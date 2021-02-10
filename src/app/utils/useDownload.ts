@@ -1,13 +1,10 @@
 import { useState } from 'react'
 import fileSaver from 'file-saver'
 
-function useDownload(): [
-  boolean,
-  (url: string, options: Object, fileName?: string) => Promise<void>,
-] {
+function useDownload(): [boolean, (url: string, options: RequestInit, fileName?: string) => void] {
   const [loading, setLoading] = useState(false)
 
-  async function downloadFile(url: string, options = {}, fileName = '') {
+  function downloadFile(url: string, options = {}, fileName = '') {
     setLoading(true)
 
     fetch(url, options)
@@ -16,6 +13,10 @@ function useDownload(): [
         // @ts-ignore
         fileSaver(blob, fileName || url.split('/').pop())
         setLoading(false)
+      })
+      .catch((error: string) => {
+        // eslint-disable-next-line no-console
+        console.error(`Failed to download file: ${error}`)
       })
   }
 

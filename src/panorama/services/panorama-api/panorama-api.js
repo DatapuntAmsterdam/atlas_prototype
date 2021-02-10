@@ -75,26 +75,26 @@ const imageData = (response) => {
           year: adjacency.mission_year,
         }))
       : [],
-    location: [center.x, center.y],
+    location: [center?.x || 0, center?.y || 0],
     image: {
       baseurl: panorama.cubic_img_baseurl,
       pattern: panorama.cubic_img_pattern,
+      // eslint-disable-next-line no-underscore-dangle
       preview: panorama._links.cubic_img_preview.href,
     },
   }
 }
 
 function fetchPanorama(url) {
-  const promise = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     fetchWithToken(url)
+      // eslint-disable-next-line no-underscore-dangle
       .then((json) => json._embedded.adjacencies)
       .then((data) => {
         resolve(imageData(data))
       })
       .catch((error) => reject(error))
   })
-
-  return promise
 }
 
 function getAdjacencies(url, params) {
@@ -118,26 +118,28 @@ export function getImageDataByLocation(location, tags) {
   const getLocationUrl = `${environment.API_ROOT}${prefix}/?${locationRange}${tagsQuery}`
   const limitResults = 'limit_results=1'
 
-  const promise = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     fetchWithToken(`${getLocationUrl}&${standardRadius}&${newestInRange}&${limitResults}`)
+      // eslint-disable-next-line no-underscore-dangle
       .then((json) => json._embedded.panoramas[0])
       .then((data) => {
         if (data) {
           // we found a pano nearby go to it
+          // eslint-disable-next-line no-underscore-dangle
           resolve(getAdjacencies(data._links.adjacencies.href, adjacenciesParams))
         } else {
           // there is no pano nearby search with a large radius and go to it
           resolve(
             fetchWithToken(`${getLocationUrl}&${largeRadius}&${limitResults}`)
+              // eslint-disable-next-line no-underscore-dangle
               .then((json) => json._embedded.panoramas[0])
+              // eslint-disable-next-line no-underscore-dangle
               .then((_data) => getAdjacencies(_data._links.adjacencies.href, adjacenciesParams)),
           )
         }
       })
       .catch((error) => reject(error))
   })
-
-  return promise
 }
 
 export function getImageDataById(id, tags) {
