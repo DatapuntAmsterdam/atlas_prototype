@@ -1,7 +1,6 @@
 import { MapPanelContent, Marker } from '@amsterdam/arm-core'
 import { Table } from '@amsterdam/asc-assets'
 import {
-  Accordion,
   AccordionWrapper,
   Alert,
   breakpoint,
@@ -283,7 +282,7 @@ const DrawResults: FunctionComponent<DrawResultsProps> = ({ currentOverlay }) =>
         </StyledAlert>
       ) : (
         <AccordionWrapper>
-          {dataSelectionWithMarkers.map(({ id, result, size, page, totalCount, mapData }, i) => (
+          {dataSelectionWithMarkers.map(({ id, result, size, page, totalCount, mapData }) => (
             <Fragment key={id}>
               {/* @ts-ignore */}
               <ResultsHeading as="h5" styleAs="h3">
