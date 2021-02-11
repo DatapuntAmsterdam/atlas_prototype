@@ -106,4 +106,20 @@ describe('useFromCMS', () => {
     expect(result.current.results).toEqual(undefined)
     expect(result.current.error).toBe(true)
   })
+
+  it('keeps the loading state correct when fetching', async () => {
+    const { result, waitForNextUpdate } = renderHook(() => useFromCMS(mockCMSconfig.TEST))
+
+    expect(result.current.loading).toBe(true)
+
+    // call the fetchData function
+    result.current.fetchData()
+
+    expect(result.current.loading).toBe(true)
+
+    // wait until it resolves
+    await waitForNextUpdate()
+
+    expect(result.current.loading).toBe(false)
+  })
 })
