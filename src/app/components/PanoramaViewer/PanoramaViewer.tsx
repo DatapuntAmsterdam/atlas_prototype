@@ -99,7 +99,7 @@ const PanoramaViewer: FunctionComponent = () => {
   useEffect(() => {
     if (marzipanoViewer) {
       marzipanoViewer.updateSize() // Updates the stage size to fill the containing element.
-      if (panoHeading && panoPitch && marzipanoViewer.view()) {
+      if (panoHeading && marzipanoViewer.view()) {
         setTimeout(() => {
           marzipanoViewer.view().setFov(100) // some high number, the viewer itself will set the max FOV
         }, 0)
@@ -109,7 +109,7 @@ const PanoramaViewer: FunctionComponent = () => {
 
   // Fetch image when the location changes
   useEffect(() => {
-    if (marzipanoViewer && location && panoHeading && panoPitch) {
+    if (marzipanoViewer && location && panoHeading) {
       ;(() => {
         // @ts-ignore
         getImageDataByLocation(

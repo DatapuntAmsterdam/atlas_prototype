@@ -47,7 +47,7 @@ describe('MapPage', () => {
     expect(component).toBeDefined()
   })
 
-  it('should show the PanoramaViewer when panoHeading and panoPitch parameters are set', async () => {
+  it('should show the PanoramaViewer when panoHeading and locatie parameters are set', async () => {
     const { findByTestId } = render(
       withAppContext(
         <MapContext.Provider value={initialState}>
