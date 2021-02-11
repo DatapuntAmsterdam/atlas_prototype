@@ -20,4 +20,8 @@ By default, access tokens are valid for a maximum of five minutes. The Keycloak 
 
 ## Decision
 
-The [react-keycloak package](https://github.com/react-keycloak/react-keycloak)] can be used to replace the current implementation. The available `useKeyclock` hook can be used to verify if a user is authenticated and the `init` function can be passed props to refresh the access token at a set interval so that sessions do not expire.
+The [react-keycloak package](https://github.com/react-keycloak/react-keycloak) can be used to replace the current implementation. The available `useKeyclock` hook can be used to verify if a user is authenticated and the `init` function can be passed props to refresh the access token at a set interval so that sessions do not expire.
+
+## Consequences
+
+All of the entries in the IdP need to be transferred to the Keycloak service before Keycloak can fully replace the existing Authz service.
