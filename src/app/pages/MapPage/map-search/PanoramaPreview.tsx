@@ -121,7 +121,7 @@ const PanoramaPreview: FunctionComponent<PanoramaPreviewProps> = ({
         search: buildQueryString<any>([
           [panoPitchParam, panoPitchParam.initialValue],
           [panoFovParam, panoFovParam.initialValue],
-          [panoHeadingParam, result?.value?.heading],
+          [panoHeadingParam, result?.value?.heading ?? panoHeadingParam.initialValue],
           [locationParam, location],
           // Zoom to level 11 when opening the PanoramaViewer, to show the panorama map layers
           [mapLayersParam, newLayers],

@@ -108,7 +108,10 @@ export const panoPitchParam: UrlParam<number | null> = {
   name: 'pitch',
   defaultValue: null,
   initialValue: 10,
-  decode: (value) => parseFloat(value) ?? null,
+  decode: (value) => {
+    const float = parseFloat(value)
+    return !Number.isNaN(float) ? float : null
+  },
   encode: (value) => (typeof value === 'number' ? value.toString() : null),
 }
 
@@ -116,14 +119,21 @@ export const panoFovParam: UrlParam<number | null> = {
   name: 'fov',
   defaultValue: null,
   initialValue: 30,
-  decode: (value) => parseInt(value, 10) ?? null,
+  decode: (value) => {
+    const integer = parseInt(value, 10)
+    return !Number.isNaN(integer) ? integer : null
+  },
   encode: (value) => (typeof value === 'number' ? value.toFixed(0).toString() : null),
 }
 
 export const panoHeadingParam: UrlParam<number | null> = {
   name: 'heading',
   defaultValue: null,
-  decode: (value) => parseFloat(value) ?? null,
+  initialValue: 0,
+  decode: (value) => {
+    const float = parseFloat(value)
+    return !Number.isNaN(float) ? float : null
+  },
   encode: (value) => (typeof value === 'number' ? value.toString() : null),
 }
 
