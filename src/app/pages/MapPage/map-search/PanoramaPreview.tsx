@@ -5,14 +5,20 @@ import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import { FetchPanoramaOptions, getPanoramaThumbnail } from '../../../../api/panorama/thumbnail'
-import { PANORAMA_CONFIG } from '../../../../panorama/services/panorama-api/panorama-api'
 import { toPanoramaAndPreserveQuery } from '../../../../store/redux-first-router/actions'
 import { getDetailLocation } from '../../../../store/redux-first-router/selectors'
 import { PANO_LAYERS } from '../../../components/PanoramaViewer/PanoramaViewer'
 import pickLinkComponent from '../../../utils/pickLinkComponent'
 import useBuildQueryString from '../../../utils/useBuildQueryString'
 import usePromise, { PromiseStatus } from '../../../utils/usePromise'
-import { locationParam, mapLayersParam, panoParam, zoomParam } from '../query-params'
+import {
+  locationParam,
+  mapLayersParam,
+  panoFovParam,
+  panoHeadingParam,
+  panoPitchParam,
+  zoomParam,
+} from '../query-params'
 import useParam from '../../../utils/useParam'
 import { ForbiddenError } from '../../../../shared/services/api/customError'
 import PanoAlert from '../../../components/PanoAlert/PanoAlert'
@@ -113,14 +119,9 @@ const PanoramaPreview: FunctionComponent<PanoramaPreviewProps> = ({
     ? {
         pathname: browserLocation.pathname,
         search: buildQueryString<any>([
-          [
-            panoParam,
-            {
-              heading: result?.value?.heading || 0,
-              pitch: 0,
-              fov: PANORAMA_CONFIG.DEFAULT_FOV,
-            },
-          ],
+          [panoPitchParam, panoPitchParam.initialValue],
+          [panoFovParam, panoFovParam.initialValue],
+          [panoHeadingParam, result?.value?.heading],
           [locationParam, location],
           // Zoom to level 11 when opening the PanoramaViewer, to show the panorama map layers
           [mapLayersParam, newLayers],

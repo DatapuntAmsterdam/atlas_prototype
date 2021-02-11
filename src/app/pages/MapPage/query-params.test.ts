@@ -1,6 +1,14 @@
 import { v4 as uuid } from 'uuid'
 import encodeParam from '../../utils/encodeParam'
-import { panoTagParam, PolyDrawing, polygonParam, polylineParam } from './query-params'
+import {
+  panoFovParam,
+  panoHeadingParam,
+  panoPitchParam,
+  panoTagParam,
+  PolyDrawing,
+  polygonParam,
+  polylineParam,
+} from './query-params'
 
 describe('panoTagParam', () => {
   it('encodes the parameter', () => {
@@ -23,6 +31,44 @@ describe('panoTagParam', () => {
     expect(panoTagParam.decode('somevalue,missionwoz,someothervalue')).toBe(
       panoTagParam.defaultValue,
     )
+  })
+})
+
+describe('panoPitchParam and panoHeadingParam', () => {
+  it('should encode the value to parameter value', () => {
+    expect(panoPitchParam.encode(123)).toBe('123')
+    expect(panoPitchParam.encode(0)).toBe('0')
+
+    expect(panoHeadingParam.encode(123)).toBe('123')
+    expect(panoHeadingParam.encode(0)).toBe('0')
+
+    expect(panoPitchParam.encode(-123.12312412344)).toBe('-123.12312412344')
+    expect(panoHeadingParam.encode(-123.12312412344)).toBe('-123.12312412344')
+  })
+
+  it('should decode the value from the parameter', () => {
+    expect(panoPitchParam.decode('123')).toBe(123)
+    expect(panoPitchParam.decode('0')).toBe(0)
+
+    expect(panoHeadingParam.decode('123')).toBe(123)
+    expect(panoHeadingParam.decode('0')).toBe(0)
+
+    expect(panoPitchParam.decode('-123.12312412344')).toBe(-123.12312412344)
+    expect(panoHeadingParam.decode('-123.12312412344')).toBe(-123.12312412344)
+  })
+})
+
+describe('panoFovParam', () => {
+  it('should encode the value to parameter value', () => {
+    expect(panoFovParam.encode(123)).toBe('123')
+    expect(panoFovParam.encode(0)).toBe('0')
+    expect(panoFovParam.encode(-123.12312412344)).toBe('-123')
+  })
+
+  it('should decode the value from the parameter', () => {
+    expect(panoFovParam.decode('123')).toBe(123)
+    expect(panoFovParam.decode('0')).toBe(0)
+    expect(panoFovParam.decode('-123.12312412344')).toBe(-123)
   })
 })
 

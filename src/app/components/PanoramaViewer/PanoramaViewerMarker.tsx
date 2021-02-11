@@ -4,7 +4,7 @@ import { Icon, Marker as LeafletMarker } from 'leaflet'
 import 'leaflet-rotatedmarker'
 import { FunctionComponent, useEffect, useState } from 'react'
 import { MarkerProps } from '../../pages/MapPage/MapMarkers'
-import { panoParam } from '../../pages/MapPage/query-params'
+import { panoHeadingParam } from '../../pages/MapPage/query-params'
 import useMapCenterToMarker from '../../utils/useMapCenterToMarker'
 import useParam from '../../utils/useParam'
 
@@ -22,7 +22,7 @@ const pawnIcon = new Icon({
 
 const PanoramaViewerMarker: FunctionComponent<MarkerProps> = ({ location, setLocation }) => {
   const [orientationMarker, setOrientationMarker] = useState<LeafletMarker>()
-  const [pano] = useParam(panoParam)
+  const [panoHeading] = useParam(panoHeadingParam)
 
   // TODO: be able to give a x & y offset (when MapPanel is open)
   useMapCenterToMarker(location)
@@ -32,10 +32,10 @@ const PanoramaViewerMarker: FunctionComponent<MarkerProps> = ({ location, setLoc
   })
 
   useEffect(() => {
-    if (orientationMarker && pano) {
-      orientationMarker.setRotationAngle(pano.heading)
+    if (orientationMarker && panoHeading) {
+      orientationMarker.setRotationAngle(panoHeading)
     }
-  }, [orientationMarker, pano])
+  }, [orientationMarker, panoHeading])
 
   return location ? (
     <>

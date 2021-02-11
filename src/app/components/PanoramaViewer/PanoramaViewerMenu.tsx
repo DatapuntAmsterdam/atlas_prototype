@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { PANO_LABELS } from '../../../panorama/ducks/constants'
 import { getStreetViewUrl } from '../../../panorama/services/panorama-api/panorama-api'
 import Clock from '../../../shared/assets/icons/Clock.svg'
-import { locationParam, panoParam, panoTagParam } from '../../pages/MapPage/query-params'
+import { locationParam, panoHeadingParam, panoTagParam } from '../../pages/MapPage/query-params'
 import useParam from '../../utils/useParam'
 
 export const getLabel = (id: string): string =>
@@ -42,13 +42,13 @@ const ContextMenuButton = styled(ControlButton)`
 
 const PanoramaViewerMenu: FunctionComponent = () => {
   const [location] = useParam(locationParam)
-  const [pano] = useParam(panoParam)
+  const [panoHeading] = useParam(panoHeadingParam)
   const [panoTag, setPanoTag] = useParam(panoTagParam)
   const { trackEvent } = useMatomo()
 
   const handleOpenPanoramaExternal = () => {
     if (location) {
-      const url = getStreetViewUrl([location.lat, location.lng], pano?.heading)
+      const url = getStreetViewUrl([location.lat, location.lng], panoHeading)
 
       trackEvent({
         category: 'panorama-set',

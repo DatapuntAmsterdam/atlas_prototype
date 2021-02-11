@@ -13,7 +13,7 @@ export default function useBuildQueryString() {
     paramsToAdd?.forEach(([param, value]) => {
       const newValue = encodeParam(param, value)
 
-      if (newValue) {
+      if (newValue !== null) {
         searchParams.set(param.name, newValue)
       } else {
         searchParams.delete(param.name)

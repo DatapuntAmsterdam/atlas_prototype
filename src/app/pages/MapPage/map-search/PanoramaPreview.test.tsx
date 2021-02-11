@@ -5,6 +5,7 @@ import withAppContext from '../../../utils/withAppContext'
 import joinUrl from '../../../utils/joinUrl'
 import environment from '../../../../environment'
 import { server } from '../../../../../test/server'
+import { mapLayersParam, panoHeadingParam, panoPitchParam } from '../query-params'
 
 jest.mock('react-router-dom', () => ({
   // @ts-ignore
@@ -21,10 +22,11 @@ describe('PanoramaPreview', () => {
     await waitFor(() => {
       const link = container.querySelector('a')
       const params = new URLSearchParams(link?.search)
-      expect(params.get('someOtherParam')).toBeDefined()
-      expect(params.get('lagen')).toContain('random-layer')
-      expect(params.get('lagen')).toContain('pano')
-      expect(params.get('pano')).toBeDefined()
+      expect(params.get('someOtherParam')).toContain(1)
+      expect(params.get(mapLayersParam.name)).toContain('random-layer')
+      expect(params.get(mapLayersParam.name)).toContain('pano')
+      expect(params.get(panoPitchParam.name)).toContain(0)
+      expect(params.get(panoHeadingParam.name)).toContain(131)
     })
   })
 

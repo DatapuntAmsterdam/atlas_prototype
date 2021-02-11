@@ -12,7 +12,13 @@ import MapContext from './MapContext'
 import MapControls from './MapControls'
 import MapMarkers from './MapMarkers'
 import MapPanelContent from './MapPanelContent'
-import { centerParam, panoParam, zoomParam } from './query-params'
+import {
+  centerParam,
+  locationParam,
+  panoHeadingParam,
+  panoPitchParam,
+  zoomParam,
+} from './query-params'
 import { Overlay, SnapPoint } from './types'
 
 const MapView = styled.div`
@@ -60,10 +66,12 @@ const MapPage: FunctionComponent = () => {
   const [, setMapInstance, mapInstanceRef] = useStateRef<L.Map | null>(null)
   const [center, setCenter] = useParam(centerParam)
   const [zoom, setZoom] = useParam(zoomParam)
-  const [pano] = useParam(panoParam)
+  const [location] = useParam(locationParam)
+  const [panoPitch] = useParam(panoPitchParam)
+  const [panoHeading] = useParam(panoHeadingParam)
   // TODO: Import 'useMatchMedia' directly once this issue has been resolved: https://github.com/Amsterdam/amsterdam-styled-components/issues/1120
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
-  const panoActive = !!pano
+  const panoActive = panoHeading !== null && location !== null
 
   // This is necessary to call, because we resize the map dynamically
   // https://leafletjs.com/reference-1.7.1.html#map-invalidatesize
@@ -71,7 +79,7 @@ const MapPage: FunctionComponent = () => {
     if (mapInstanceRef.current) {
       mapInstanceRef.current.invalidateSize()
     }
-  }, [panoFullScreen, pano, mapInstanceRef])
+  }, [panoFullScreen, panoPitch, mapInstanceRef])
 
   return (
     <MapView>

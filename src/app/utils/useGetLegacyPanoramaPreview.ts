@@ -2,10 +2,9 @@ import { LatLngLiteral } from 'leaflet'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { getPanoramaThumbnail } from '../../api/panorama/thumbnail'
-import { PANORAMA_CONFIG } from '../../panorama/services/panorama-api/panorama-api'
 import { toPanoramaAndPreserveQuery } from '../../store/redux-first-router/actions'
 import { getDetailLocation } from '../../store/redux-first-router/selectors'
-import { locationParam, panoParam } from '../pages/MapPage/query-params'
+import { locationParam, panoHeadingParam, panoPitchParam } from '../pages/MapPage/query-params'
 import pickLinkComponent from './pickLinkComponent'
 import useBuildQueryString from './useBuildQueryString'
 import usePromise, { PromiseStatus } from './usePromise'
@@ -48,10 +47,8 @@ const useGetLegacyPanoramaPreview = (
   const panoramaUrl = panoramaResult?.value?.url
 
   const panoramaLink = buildQueryString<any>([
-    [
-      panoParam,
-      { heading: panoramaResult?.value?.heading, pitch: 0, fov: PANORAMA_CONFIG.DEFAULT_FOV },
-    ],
+    [panoPitchParam, 0],
+    [panoHeadingParam, panoramaResult?.value?.heading],
     [locationParam, location],
   ])
   const link =

@@ -29,7 +29,7 @@ import useAuthScope from '../../../utils/useAuthScope'
 import useBuildQueryString from '../../../utils/useBuildQueryString'
 import PanoramaPreview, { PreviewContainer } from '../map-search/PanoramaPreview'
 import MapContext from '../MapContext'
-import { panoParam } from '../query-params'
+import { panoFovParam, panoHeadingParam, panoPitchParam } from '../query-params'
 import DetailDefinitionList from './DetailDefinitionList'
 import DetailHeading from './DetailHeading'
 import DetailInfoBox from './DetailInfoBox'
@@ -168,7 +168,11 @@ const DetailPanel: FunctionComponent = () => {
             onClose={() => {
               history.push({
                 pathname: routing.dataSearchGeo.path,
-                search: buildQueryString([[panoParam, null]]),
+                search: buildQueryString([
+                  [panoPitchParam, null],
+                  [panoHeadingParam, null],
+                  [panoFovParam, null],
+                ]),
               })
             }}
           >

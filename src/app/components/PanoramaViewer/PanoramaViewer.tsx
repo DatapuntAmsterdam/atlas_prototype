@@ -11,8 +11,10 @@ import {
   locationParam,
   mapLayersParam,
   panoFullScreenParam,
-  panoParam,
   panoTagParam,
+  panoPitchParam,
+  panoHeadingParam,
+  panoFovParam,
 } from '../../pages/MapPage/query-params'
 import useBuildQueryString from '../../utils/useBuildQueryString'
 import useMarzipano from '../../utils/useMarzipano'
@@ -42,7 +44,9 @@ export const PANO_LAYERS = [
 const PanoramaViewer: FunctionComponent = () => {
   const ref = useRef<HTMLDivElement>(null)
   const [panoImageDate, setPanoImageDate] = useState<string>()
-  const [pano, setPano] = useParam(panoParam)
+  const [panoPitch, setPanoPitch] = useParam(panoPitchParam)
+  const [panoHeading, setPanoHeading] = useParam(panoHeadingParam)
+  const [panoFov, setPanoFov] = useParam(panoFovParam)
   const [panoTag, setPanoTag] = useParam(panoTagParam)
   const [panoFullScreen, setPanoFullScreen] = useParam(panoFullScreenParam)
   const [location, setLocation] = useParam(locationParam)
@@ -65,26 +69,28 @@ const PanoramaViewer: FunctionComponent = () => {
 
   const fetchPanoramaImage = useCallback(
     (res) => {
-      if (pano) {
+      if (panoPitch && panoHeading) {
         setPanoImageDate(res.date)
         loadScene(
           marzipanoViewer,
           onClickHotspot,
           res.image,
-          pano.heading,
-          pano.pitch,
-          pano.fov,
+          panoHeading,
+          panoPitch || panoPitchParam.initialValue,
+          panoFov || panoFovParam.initialValue,
           res.hotspots,
         )
       }
     },
-    [pano, setPanoImageDate, marzipanoViewer, onClickHotspot],
+    [panoPitch, panoHeading, setPanoImageDate, marzipanoViewer, onClickHotspot],
   )
 
   // Update the URL queries when the view changes
   useEffect(() => {
     if (currentMarzipanoView) {
-      setPano(currentMarzipanoView, 'replace')
+      setPanoHeading(currentMarzipanoView.heading, 'replace')
+      setPanoPitch(currentMarzipanoView.pitch, 'replace')
+      setPanoFov(currentMarzipanoView.fov, 'replace')
     }
   }, [currentMarzipanoView])
 
@@ -93,7 +99,7 @@ const PanoramaViewer: FunctionComponent = () => {
   useEffect(() => {
     if (marzipanoViewer) {
       marzipanoViewer.updateSize() // Updates the stage size to fill the containing element.
-      if (pano && marzipanoViewer.view()) {
+      if (panoHeading && panoPitch && marzipanoViewer.view()) {
         setTimeout(() => {
           marzipanoViewer.view().setFov(100) // some high number, the viewer itself will set the max FOV
         }, 0)
@@ -103,7 +109,7 @@ const PanoramaViewer: FunctionComponent = () => {
 
   // Fetch image when the location changes
   useEffect(() => {
-    if (marzipanoViewer && location && pano) {
+    if (marzipanoViewer && location && panoHeading && panoPitch) {
       ;(() => {
         // @ts-ignore
         getImageDataByLocation(
@@ -128,10 +134,10 @@ const PanoramaViewer: FunctionComponent = () => {
       pathname: browserLocation.pathname,
       search: buildQueryString(
         [[mapLayersParam, activeLayersWithoutPano]],
-        [panoParam, panoTagParam, panoFullScreenParam],
+        [panoHeadingParam, panoPitchParam, panoTagParam, panoFovParam, panoFullScreenParam],
       ),
     })
-  }, [setPano, setPanoTag, setPanoFullScreen])
+  }, [setPanoHeading, setPanoPitch, setPanoTag, setPanoFullScreen])
 
   return (
     <PanoramaStyle panoFullScreen={panoFullScreen}>
