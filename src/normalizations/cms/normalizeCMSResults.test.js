@@ -10,7 +10,6 @@ import normalizeCMSResults, {
 jest.mock('../../app/links')
 jest.mock('../../store/redux-first-router/actions')
 
-// const toArticleDetailSpy = jest.fn((id, slug) => `${id}/${slug}`)
 toArticleDetail.mockImplementation((id, slug) => `${id}/${slug}`)
 toSpecialDetail.mockImplementation((id, slug) => `${id}/${slug}`)
 
