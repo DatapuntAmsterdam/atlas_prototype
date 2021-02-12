@@ -10,8 +10,9 @@ import normalizeCMSResults, {
 jest.mock('../../app/links')
 jest.mock('../../store/redux-first-router/actions')
 
-toArticleDetail.mockImplementation(() => 'to-article')
-toSpecialDetail.mockImplementation(() => 'to-special')
+// const toArticleDetailSpy = jest.fn((id, slug) => `${id}/${slug}`)
+toArticleDetail.mockImplementation((id, slug) => `${id}/${slug}`)
+toSpecialDetail.mockImplementation((id, slug) => `${id}/${slug}`)
 
 describe('normalizeCMSResults', () => {
   describe('getLocaleFormattedDate', () => {
@@ -101,12 +102,11 @@ describe('normalizeCMSResults', () => {
     })
 
     it('returns an object with dates from field_publication_year, field_publication_month and field_publication_day 1', () => {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
+      /* eslint-disable @typescript-eslint/naming-convention */
       const field_publication_year = 2020
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       const field_publication_month = 1
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       const field_publication_day = 1
+      /* eslint-enable @typescript-eslint/naming-convention */
       const { localeDate, localeDateFormatted } = getLocaleFormattedDate({
         field_publication_year,
         field_publication_month,
@@ -164,6 +164,10 @@ describe('normalizeCMSResults', () => {
   }
 
   describe('getLinkProps', () => {
+    // beforeEach(() => {
+    //   toArticleDetailSpy.mockReset()
+    // })
+
     it('sets the "to" prop', () => {
       expect(
         getLinkProps(
@@ -174,7 +178,20 @@ describe('normalizeCMSResults', () => {
           input.title,
         ),
       ).toMatchObject({
-        to: 'to-article',
+        to: `${input.uuid}/${input.title}`,
+      })
+    })
+
+    it('falls back to the id prop when the uuid prop is missing', () => {
+      const inputWithoutUuid = {
+        ...input,
+        type: CmsType.Article,
+      }
+      inputWithoutUuid.id = 'some-other-id'
+      delete inputWithoutUuid.uuid
+
+      expect(getLinkProps(inputWithoutUuid, input.title)).toMatchObject({
+        to: `${inputWithoutUuid.id}/${inputWithoutUuid.title}`,
       })
     })
 
@@ -191,7 +208,7 @@ describe('normalizeCMSResults', () => {
           input.title,
         ),
       ).toMatchObject({
-        to: 'to-special',
+        to: `${input.uuid}/${field_special_type}`,
       })
     })
 

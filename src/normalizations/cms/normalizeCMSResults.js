@@ -65,14 +65,19 @@ export const getLocaleFormattedDate = ({
   }
 }
 
-export const getLinkProps = ({ type, uuid, field_link, field_special_type, title }, slug) => {
+export const getLinkProps = ({ type, uuid, id, field_link, field_special_type, title }, slug) => {
   let to = {}
 
+  // not every node has a uuid prop
+  const nodeId = uuid || id
+
   if (EDITORIAL_DETAIL_ACTIONS[type]) {
+    const nodeAnchorPropsFn = EDITORIAL_DETAIL_ACTIONS[type]
+
     if (type === CmsType.Special) {
-      to = EDITORIAL_DETAIL_ACTIONS[type](uuid, field_special_type, slug)
+      to = nodeAnchorPropsFn(nodeId, field_special_type, slug)
     } else {
-      to = EDITORIAL_DETAIL_ACTIONS[type](uuid, slug)
+      to = nodeAnchorPropsFn(nodeId, slug)
     }
   }
 
@@ -90,6 +95,7 @@ export const getLinkProps = ({ type, uuid, field_link, field_special_type, title
 
 export const normalizeObject = (data) => {
   const {
+    id,
     uuid,
     title,
     type,
@@ -137,7 +143,7 @@ export const normalizeObject = (data) => {
 
   return {
     key: uuid,
-    id: uuid,
+    id: id || uuid,
     title,
     type,
     body: body && body.value,
