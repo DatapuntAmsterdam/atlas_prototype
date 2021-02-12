@@ -124,7 +124,7 @@ describe('normalizeCMSResults', () => {
   })
 
   const input = {
-    uuid: 'id',
+    id: 'foobarbaz',
     title: 'title',
     type: 'foo',
     body: {
@@ -141,8 +141,8 @@ describe('normalizeCMSResults', () => {
   }
 
   const output = {
-    key: input.uuid,
-    id: input.uuid,
+    key: input.id,
+    id: input.id,
     title: input.title,
     type: input.type,
     body: input.body.value,
@@ -172,20 +172,7 @@ describe('normalizeCMSResults', () => {
           input.title,
         ),
       ).toMatchObject({
-        to: `${input.uuid}/${input.title}`,
-      })
-    })
-
-    it('falls back to the id prop when the uuid prop is missing', () => {
-      const inputWithoutUuid = {
-        ...input,
-        type: CmsType.Article,
-      }
-      inputWithoutUuid.id = 'some-other-id'
-      delete inputWithoutUuid.uuid
-
-      expect(getLinkProps(inputWithoutUuid, input.title)).toMatchObject({
-        to: `${inputWithoutUuid.id}/${inputWithoutUuid.title}`,
+        to: `${input.id}/${input.title}`,
       })
     })
 
@@ -202,7 +189,7 @@ describe('normalizeCMSResults', () => {
           input.title,
         ),
       ).toMatchObject({
-        to: `${input.uuid}/${field_special_type}`,
+        to: `${input.id}/${field_special_type}`,
       })
     })
 

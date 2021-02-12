@@ -3,23 +3,21 @@ import normalize from 'json-api-normalize'
 
 export const getType = (type) => type && type.replace('node--', '')
 
-function getNormalizedItem(item, extraData = {}) {
+const getNormalizedItem = (item, extraData = {}) =>
   // Make sure the correct fields have data here to be used by normalizeCMSResults()
-  return {
+  ({
     ...extraData,
     ...item,
     type: getType(item.type),
     intro: item.field_intro,
     short_title: item.field_short_title,
-    uuid: item.id,
     media_image_url: item.field_cover_image
       ? item.field_cover_image.field_media_image.uri.url
       : item.media_image_url,
     teaser_url: item.field_teaser_image
       ? item.field_teaser_image.field_media_image.uri.url
       : item.teaser_url,
-  }
-}
+  })
 
 export const reformatJSONApiResults = (normalizedData) => {
   // In case of a Drupal collection resource the returned data will include several objects that need to be normalized
