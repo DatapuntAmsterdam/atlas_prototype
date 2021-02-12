@@ -78,12 +78,11 @@ describe('normalizeCMSResults', () => {
     })
 
     it('returns an object with dates from field_publication_year, field_publication_month and field_publication_day', () => {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
+      /* eslint-disable @typescript-eslint/naming-convention */
       const field_publication_year = 2020
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       const field_publication_month = 10
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       const field_publication_day = 31
+      /* eslint-enable @typescript-eslint/naming-convention */
       const { localeDate, localeDateFormatted } = getLocaleFormattedDate({
         field_publication_year,
         field_publication_month,
@@ -163,10 +162,6 @@ describe('normalizeCMSResults', () => {
   }
 
   describe('getLinkProps', () => {
-    // beforeEach(() => {
-    //   toArticleDetailSpy.mockReset()
-    // })
-
     it('sets the "to" prop', () => {
       expect(
         getLinkProps(
