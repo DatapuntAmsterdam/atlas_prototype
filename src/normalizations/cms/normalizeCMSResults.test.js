@@ -10,8 +10,8 @@ import normalizeCMSResults, {
 jest.mock('../../app/links')
 jest.mock('../../store/redux-first-router/actions')
 
-toArticleDetail.mockImplementation(() => 'to-article')
-toSpecialDetail.mockImplementation(() => 'to-special')
+toArticleDetail.mockImplementation((id, slug) => `${id}/${slug}`)
+toSpecialDetail.mockImplementation((id, slug) => `${id}/${slug}`)
 
 describe('normalizeCMSResults', () => {
   describe('getLocaleFormattedDate', () => {
@@ -78,12 +78,11 @@ describe('normalizeCMSResults', () => {
     })
 
     it('returns an object with dates from field_publication_year, field_publication_month and field_publication_day', () => {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
+      /* eslint-disable @typescript-eslint/naming-convention */
       const field_publication_year = 2020
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       const field_publication_month = 10
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       const field_publication_day = 31
+      /* eslint-enable @typescript-eslint/naming-convention */
       const { localeDate, localeDateFormatted } = getLocaleFormattedDate({
         field_publication_year,
         field_publication_month,
@@ -101,12 +100,11 @@ describe('normalizeCMSResults', () => {
     })
 
     it('returns an object with dates from field_publication_year, field_publication_month and field_publication_day 1', () => {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
+      /* eslint-disable @typescript-eslint/naming-convention */
       const field_publication_year = 2020
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       const field_publication_month = 1
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       const field_publication_day = 1
+      /* eslint-enable @typescript-eslint/naming-convention */
       const { localeDate, localeDateFormatted } = getLocaleFormattedDate({
         field_publication_year,
         field_publication_month,
@@ -126,7 +124,7 @@ describe('normalizeCMSResults', () => {
   })
 
   const input = {
-    uuid: 'id',
+    id: 'foobarbaz',
     title: 'title',
     type: 'foo',
     body: {
@@ -143,8 +141,8 @@ describe('normalizeCMSResults', () => {
   }
 
   const output = {
-    key: input.uuid,
-    id: input.uuid,
+    key: input.id,
+    id: input.id,
     title: input.title,
     type: input.type,
     body: input.body.value,
@@ -174,7 +172,7 @@ describe('normalizeCMSResults', () => {
           input.title,
         ),
       ).toMatchObject({
-        to: 'to-article',
+        to: `${input.id}/${input.title}`,
       })
     })
 
@@ -191,7 +189,7 @@ describe('normalizeCMSResults', () => {
           input.title,
         ),
       ).toMatchObject({
-        to: 'to-special',
+        to: `${input.id}/${field_special_type}`,
       })
     })
 
