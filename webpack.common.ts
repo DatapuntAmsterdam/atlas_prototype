@@ -189,12 +189,6 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
           ],
         },
         {
-          test: /\.html$/,
-          use: {
-            loader: 'html-loader',
-          },
-        },
-        {
           test: /\.svg$/,
           use: [
             {

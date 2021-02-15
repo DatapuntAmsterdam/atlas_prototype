@@ -7,9 +7,10 @@
     "**/*.test.tsx"
   ],
   "compilerOptions": {
+    "noEmit": true,
     "strict": true,
-    "target": "es2020",
-    "module": "es2020",
+    "target": "ES2020",
+    "module": "ES2020",
     "moduleResolution": "node",
     "jsx": "react-jsx",
     "allowJs": true,
