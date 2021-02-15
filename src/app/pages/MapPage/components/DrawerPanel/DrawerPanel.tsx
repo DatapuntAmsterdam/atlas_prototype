@@ -1,5 +1,5 @@
 import { themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 import { DeviceMode, isMobile } from '../DrawerOverlay'
 
 const STACK_SPACING = 8
@@ -9,6 +9,29 @@ export interface DrawerPanelProps {
   deviceMode?: DeviceMode
 }
 
+export const slideInMobile = keyframes`
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+`
+
+export const slideInDesktop = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+`
+
+// I tried to get this to work with 'defaultProps' to reduce repetition,
+// but I could not come to a solution that works with Styled Components and TS.
+// If you like a challenge, check out: https://github.com/microsoft/TypeScript/issues/27425
+const defaultDeviceMode = DeviceMode.Mobile
+
 const DrawerPanel = styled.div<DrawerPanelProps>`
   height: 100%;
   width: 100%;
@@ -16,10 +39,12 @@ const DrawerPanel = styled.div<DrawerPanelProps>`
   top: 0;
   left: 0;
   overflow-y: auto;
-  animation: slidein 0.25s ease-in-out;
+  animation: ${({ deviceMode = defaultDeviceMode }) =>
+      deviceMode === DeviceMode.Mobile ? slideInMobile : slideInDesktop}
+    0.25s ease-in-out;
   background-color: ${themeColor('tint', 'level1')};
 
-  ${({ deviceMode = DeviceMode.Mobile, stackLevel = 0 }) => {
+  ${({ deviceMode = defaultDeviceMode, stackLevel = 0 }) => {
     if (isMobile(deviceMode)) {
       return css`
         margin-top: ${themeSpacing(STACK_SPACING * stackLevel)};
@@ -39,29 +64,6 @@ const DrawerPanel = styled.div<DrawerPanelProps>`
       `}
     `
   }}
-
-  ${({ deviceMode = DeviceMode.Mobile }) =>
-    isMobile(deviceMode)
-      ? css`
-          @keyfames slidein {
-            from {
-              transform: translateY(100%);
-            }
-            to {
-              transform: translateY(0);
-            }
-          }
-        `
-      : css`
-          @keyfames slidein {
-            from {
-              transform: translateX(-100%);
-            }
-            to {
-              transform: translateX(0);
-            }
-          }
-        `}
 `
 
 export default DrawerPanel
