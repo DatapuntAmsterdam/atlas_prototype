@@ -3,11 +3,11 @@ import isObject from '../is-object'
 import BOUNDING_BOX from '../../../map/services/bounding-box.constant'
 import * as crsConverter from '../coordinate-reference-system/crs-converter'
 
-type GeometryContainer = {
+interface GeometryContainer {
   geometrie?: Point
 }
 
-type Data = {
+interface Data {
   bezoekadres?: GeometryContainer
   monumentcoordinaten?: Point
 }
