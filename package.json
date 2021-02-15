@@ -43,6 +43,7 @@
     "core-js": "^3.8.3",
     "escape-string-regexp": "^4.0.0",
     "file-saver": "^2.0.5",
+    "geojson": "^0.5.0",
     "graphql": "^15.5.0",
     "graphql-tag": "^2.11.0",
     "history": "4.10.1",
