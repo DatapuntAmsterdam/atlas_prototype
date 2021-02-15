@@ -37,9 +37,10 @@ export enum DrawerState {
   Preview = 'PREVIEW',
 }
 
-export const isMobile = (mode: DeviceMode): boolean => mode === DeviceMode.Mobile
+export const isMobile = (mode: DeviceMode): mode is DeviceMode.Mobile => mode === DeviceMode.Mobile
 
-export const isDesktop = (mode: DeviceMode): boolean => mode === DeviceMode.Desktop
+export const isDesktop = (mode: DeviceMode): mode is DeviceMode.Desktop =>
+  mode === DeviceMode.Desktop
 
 const DrawerMapOverlay = styled(MapOverlay)`
   flex-direction: column;

@@ -40,7 +40,7 @@ const DrawerPanel = styled.div<DrawerPanelProps>`
   left: 0;
   overflow-y: auto;
   animation: ${({ deviceMode = defaultDeviceMode }) =>
-      deviceMode === DeviceMode.Mobile ? slideInMobile : slideInDesktop}
+      isMobile(deviceMode) ? slideInMobile : slideInDesktop}
     0.25s ease-in-out;
   background-color: ${themeColor('tint', 'level1')};
 
