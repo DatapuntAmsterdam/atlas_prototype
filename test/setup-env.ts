@@ -1,17 +1,18 @@
 import { server } from './server'
 
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSDOM {
-    interface Global {
-      unsetAuthentication: () => void
-      setInvalidAuthentication: () => void
-      setExpiredAuthentication: () => void
-      setValidAuthentication: () => void
-      setAuthenticationWithToken: (token: string) => void
-    }
-  }
-}
+const globalThis: any = global
+// declare global {
+//   // eslint-disable-next-line @typescript-eslint/no-namespace
+//   namespace JSDOM {
+//     interface Global {
+//       unsetAuthentication: () => void
+//       setInvalidAuthentication: () => void
+//       setExpiredAuthentication: () => void
+//       setValidAuthentication: () => void
+//       setAuthenticationWithToken: (token: string) => void
+//     }
+//   }
+// }
 
 beforeAll(() => server.listen())
 
@@ -21,7 +22,7 @@ beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
 
 afterAll(() => {
-  global.unsetAuthentication()
+  globalThis.unsetAuthentication()
   server.close()
 })
 
@@ -38,23 +39,23 @@ const invalidToken =
 const validToken =
   'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImp0aSI6ImMxOWRhNDgwLTAyM2UtNGM2YS04NDM2LWNhMzNkYzZjYzVlMyIsImlhdCI6MTU4ODE2NDUyMCwiZXhwIjoxNTg4MTY4MTQ1MH0.LMA3E950H0EACrvME7Gps1Y-Q43Fux1q8YCJUl9pbYE'
 
-global.unsetAuthentication = () => {
-  global.sessionStorage.removeItem('accessToken')
+globalThis.unsetAuthentication = () => {
+  globalThis.sessionStorage.removeItem('accessToken')
 }
 
-global.setExpiredAuthentication = () => {
-  global.sessionStorage.setItem('accessToken', expiredToken)
+globalThis.setExpiredAuthentication = () => {
+  globalThis.sessionStorage.setItem('accessToken', expiredToken)
 }
 
-global.setValidAuthentication = () => {
-  global.sessionStorage.setItem('accessToken', validToken)
-  global.sessionStorage.setItem('stateToken', validToken)
+globalThis.setValidAuthentication = () => {
+  globalThis.sessionStorage.setItem('accessToken', validToken)
+  globalThis.sessionStorage.setItem('stateToken', validToken)
 }
 
-global.setInvalidAuthentication = () => {
-  global.sessionStorage.setItem('accessToken', invalidToken)
+globalThis.setInvalidAuthentication = () => {
+  globalThis.sessionStorage.setItem('accessToken', invalidToken)
 }
 
-global.setAuthenticationWithToken = (token) => {
-  global.sessionStorage.setItem('accessToken', token)
+globalThis.setAuthenticationWithToken = (token: string) => {
+  globalThis.sessionStorage.setItem('accessToken', token)
 }
