@@ -5,7 +5,6 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { FunctionComponent } from 'react'
 import environment from '../../../environment'
 import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
-import isDefined from '../../../shared/services/is-defined'
 import { encodeQueryParams } from '../../../shared/services/query-string-parser/query-string-parser'
 import { getAccessToken } from '../../../shared/services/auth/auth'
 import { getGeometryFilter } from '../../../shared/ducks/data-selection/selectors'
@@ -33,7 +32,7 @@ const DataSelectionDownloadButton: FunctionComponent<Props> = ({ dataset, active
     }
   })
 
-  if (isDefined(geometryFilter && geometryFilter.markers)) {
+  if (geometryFilter?.markers !== undefined) {
     filterParams.push(
       // @ts-ignore
       `shape=${JSON.stringify(geometryFilter.markers.map(([lat, lng]) => [lng, lat]))}`,
