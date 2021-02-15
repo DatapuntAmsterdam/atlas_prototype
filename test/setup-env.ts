@@ -1,18 +1,6 @@
 import { server } from './server'
 
 const globalThis: any = global
-// declare global {
-//   // eslint-disable-next-line @typescript-eslint/no-namespace
-//   namespace JSDOM {
-//     interface Global {
-//       unsetAuthentication: () => void
-//       setInvalidAuthentication: () => void
-//       setExpiredAuthentication: () => void
-//       setValidAuthentication: () => void
-//       setAuthenticationWithToken: (token: string) => void
-//     }
-//   }
-// }
 
 beforeAll(() => server.listen())
 
