@@ -15,8 +15,8 @@ const StyledButton = styled(Button)`
 
 const LegendControl: FunctionComponent<LegendControlProps> = ({ showDesktopVariant, onClick }) => {
   const iconProps = showDesktopVariant
-    ? { iconLeft: <MapLayers /> }
-    : { icon: <MapLayers />, size: 32 }
+    ? { iconLeft: <MapLayers data-testid="desktopIcon" /> }
+    : { icon: <MapLayers data-testid="mobileIcon" />, size: 32 }
 
   return (
     <Control>
