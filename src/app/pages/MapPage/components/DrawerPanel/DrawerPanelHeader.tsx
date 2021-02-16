@@ -1,6 +1,6 @@
 import { Close } from '@amsterdam/asc-assets'
 import { Button, themeSpacing } from '@amsterdam/asc-ui'
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 
 const HeaderContainer = styled.div`

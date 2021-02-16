@@ -1,6 +1,6 @@
 import { ChevronRight } from '@amsterdam/asc-assets'
 import { Button, Icon, styles, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React, {
+import {
   Children,
   cloneElement,
   CSSProperties,

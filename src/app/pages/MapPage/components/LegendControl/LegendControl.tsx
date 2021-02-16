@@ -1,7 +1,7 @@
 import { MapLayers } from '@amsterdam/asc-assets'
 import { Button } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import Control from '../Control'
 
 export interface LegendControlProps {
@@ -13,7 +13,7 @@ const StyledButton = styled(Button)`
   min-width: inherit;
 `
 
-const LegendControl: React.FC<LegendControlProps> = ({ showDesktopVariant, onClick }) => {
+const LegendControl: FunctionComponent<LegendControlProps> = ({ showDesktopVariant, onClick }) => {
   const iconProps = showDesktopVariant
     ? { iconLeft: <MapLayers /> }
     : { icon: <MapLayers />, size: 32 }
