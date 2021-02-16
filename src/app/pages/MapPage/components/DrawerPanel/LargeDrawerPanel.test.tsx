@@ -7,7 +7,7 @@ import LargeDrawerPanel from './LargeDrawerPanel'
 const { breakpoints } = ascDefaultTheme
 
 describe('LargeDrawerPanel', () => {
-  it('should set the width for a medium tablet and smaller', () => {
+  it('should set the width for a medium tablet', () => {
     const { container } = render(withAppContext(<LargeDrawerPanel />))
 
     expect(container.firstChild).toHaveStyleRule('width', '356px', {
@@ -15,7 +15,7 @@ describe('LargeDrawerPanel', () => {
     })
   })
 
-  it('should set the width for a laptop and smaller', () => {
+  it('should set the width for a laptop', () => {
     const { container } = render(withAppContext(<LargeDrawerPanel />))
 
     expect(container.firstChild).toHaveStyleRule('width', '596px', {
@@ -23,7 +23,7 @@ describe('LargeDrawerPanel', () => {
     })
   })
 
-  it('should set the width for a large laptop and smaller', () => {
+  it('should set the width for a large laptop', () => {
     const { container } = render(withAppContext(<LargeDrawerPanel />))
 
     expect(container.firstChild).toHaveStyleRule('width', '756px', {
