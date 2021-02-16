@@ -1,16 +1,8 @@
 import { Point } from 'geojson'
-import isObject from '../is-object'
+import { PotentialApiResult } from '../../../map/types/details'
+import isObject from '../../../app/utils/isObject'
 import BOUNDING_BOX from '../../../map/services/bounding-box.constant'
 import * as crsConverter from '../coordinate-reference-system/crs-converter'
-
-interface GeometryContainer {
-  geometrie?: Point
-}
-
-interface Data {
-  bezoekadres?: GeometryContainer
-  monumentcoordinaten?: Point
-}
 
 export const isVestigingAmsterdam = (geometrie: Point) => {
   const southWestWgs84Coordinates = {
@@ -40,7 +32,7 @@ export const isVestigingAmsterdam = (geometrie: Point) => {
   return false
 }
 
-const getGeometry = (data: Data & GeometryContainer) => {
+const getGeometry = (data: PotentialApiResult) => {
   if (isObject(data.geometrie)) {
     return data.geometrie
   }

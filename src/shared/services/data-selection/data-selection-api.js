@@ -1,4 +1,4 @@
-import isObject from '../is-object'
+import isObject from '../../../app/utils/isObject'
 import DATA_SELECTION_CONFIG from './data-selection-config'
 
 function formatFilters(dataset, rawData) {

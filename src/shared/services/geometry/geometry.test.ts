@@ -4,13 +4,13 @@ import getGeometry from './geometry'
 
 describe('geometry', () => {
   it('returns null', () => {
-    expect(getGeometry({})).toBeNull()
+    expect(getGeometry({ href: '' })).toBeNull()
   })
 
   it('returns geometry', () => {
     const geometrie: Point = { type: 'Point', coordinates: [0.5000001, 0.0000001] }
 
-    expect(getGeometry({ geometrie })).toEqual(geometrie)
+    expect(getGeometry({ href: '', geometrie })).toEqual(geometrie)
   })
 
   it('returns geometry from bezoekadres', () => {
@@ -20,6 +20,7 @@ describe('geometry', () => {
     const geometrie: Point = { type: 'Point', coordinates: [x, y] }
 
     const data = {
+      href: '',
       bezoekadres: {
         geometrie,
       },
@@ -32,6 +33,7 @@ describe('geometry', () => {
     const monumentcoordinaten: Point = { type: 'Point', coordinates: [0.5000001, 0.0000001] }
 
     const data = {
+      href: '',
       monumentcoordinaten,
     }
 
@@ -46,6 +48,7 @@ describe('geometry', () => {
     const monumentcoordinaten: Point = { type: 'Point', coordinates: [0.5000001, 0.0000001] }
 
     const data = {
+      href: '',
       bezoekadres: {
         geometrie,
       },

@@ -1,6 +1,6 @@
 // Todo: fix / add tests
 import SEARCH_CONFIG from './search-config'
-import isObject from '../is-object'
+import isObject from '../../../app/utils/isObject'
 
 function formatLabel(item) {
   // eslint-disable-next-line no-underscore-dangle
