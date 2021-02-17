@@ -26,9 +26,6 @@ import DataSelectionContext from './DataSelectionContext'
 import { routing } from '../../../routes'
 import useBuildQueryString from '../../../utils/useBuildQueryString'
 
-const POLYGON_STORAGE_KEY = 'polygon'
-const POLYLINE_STORAGE_KEY = 'polyline'
-
 function getTotalDistance(latLngs: LatLng[]) {
   return latLngs.reduce(
     (total, latlng, i) => {
@@ -66,9 +63,7 @@ const bindDistanceAndAreaToTooltip = (layer: ExtendedLayer, toolTipText: string)
 }
 
 const createPolyLayer = (drawing: PolyDrawing, line = false): PolylineType | PolygonType => {
-  const bounds = (drawing.polygon.map(({ lat, lng }) => [lat, lng]) as unknown) as LatLng[]
-
-  const polygon = L[line ? 'polyline' : 'polygon'](bounds, {
+  const polygon = L[line ? 'polyline' : 'polygon'](drawing.polygon, {
     color: themeColor('support', line ? 'valid' : 'invalid')({ theme: ascDefaultTheme }),
     bubblingMouseEvents: false,
   }) as PolylineType | PolygonType
@@ -131,9 +126,6 @@ const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
   }, [])
 
   const updateShapes = (shape: { polygon: PolyDrawing | null; polyline: PolyDrawing | null }) => {
-    window.localStorage.setItem(POLYGON_STORAGE_KEY, JSON.stringify(shape.polygon))
-    window.localStorage.setItem(POLYLINE_STORAGE_KEY, JSON.stringify(shape.polyline))
-
     const pushReplace = !polygon && shape.polygon ? 'push' : 'replace'
 
     // If user removes all the drawings, close the drawtool
@@ -250,17 +242,9 @@ const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
   }, [drawnItemsGroup])
 
   useEffect(() => {
-    const savedPolygonRaw = window.localStorage.getItem(POLYGON_STORAGE_KEY)
-    const savedPolylineRaw = window.localStorage.getItem(POLYLINE_STORAGE_KEY)
-    const savedPolygon = savedPolygonRaw ? (JSON.parse(savedPolygonRaw) as PolyDrawing) : null
-    const savedPolyline = savedPolylineRaw ? (JSON.parse(savedPolylineRaw) as PolyDrawing) : null
-
-    setPolyline(savedPolyline)
-    setPolygon(savedPolygon)
-
     setInitialDrawnItems([
-      ...(savedPolygon ? [createPolyLayer(savedPolygon)] : []),
-      ...(savedPolyline ? [createPolyLayer(savedPolyline, true)] : []),
+      ...(polygon ? [createPolyLayer(polygon)] : []),
+      ...(polyline ? [createPolyLayer(polyline, true)] : []),
     ])
 
     fitToBounds()
@@ -290,7 +274,7 @@ const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
           search: buildQueryString(undefined, [polylineParam, polygonParam]),
         })
       }}
-      drawnItems={initialDrawnItems.length ? initialDrawnItems : []}
+      drawnItems={initialDrawnItems}
       onDrawStart={() => {
         setCurrentOverlay(Overlay.Results)
       }}
