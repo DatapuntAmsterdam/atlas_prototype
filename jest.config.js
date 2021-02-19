@@ -15,10 +15,10 @@ module.exports = {
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
-      statements: 67.91,
-      branches: 45.13,
+      statements: 67.89,
+      branches: 45.11,
       functions: 54.73,
-      lines: 67.17,
+      lines: 67.15,
     },
   },
   coverageReporters: process.env.CI ? ['text'] : ['lcov'],
