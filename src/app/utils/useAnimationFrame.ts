@@ -1,15 +1,15 @@
 import { useRef } from 'react'
 
+const voidCallback = () => {}
+
 export default function useAnimationFrame(): (callback: FrameRequestCallback) => void {
   const isPendingRef = useRef(false)
-  const callbackRef = useRef<FrameRequestCallback | null>(null)
+  const callbackRef = useRef<FrameRequestCallback>(voidCallback)
 
   function handleFrame(time: number) {
-    if (callbackRef.current) {
-      callbackRef.current(time)
-    }
+    callbackRef.current(time)
 
-    callbackRef.current = null
+    callbackRef.current = voidCallback
     isPendingRef.current = false
   }
 
