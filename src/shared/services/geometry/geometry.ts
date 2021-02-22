@@ -4,7 +4,7 @@ import isObject from '../../../app/utils/isObject'
 import BOUNDING_BOX from '../../../map/services/bounding-box.constant'
 import * as crsConverter from '../coordinate-reference-system/crs-converter'
 
-export const isVestigingAmsterdam = (geometrie: Point) => {
+const isVestigingAmsterdam = (geometrie: Point) => {
   const southWestWgs84Coordinates = {
     latitude: BOUNDING_BOX.COORDINATES.southWest[0],
     longitude: BOUNDING_BOX.COORDINATES.southWest[1],
