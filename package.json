@@ -34,7 +34,7 @@
     "@amsterdam/asc-ui": "^0.27.0",
     "@amsterdam/react-maps": "^0.10.0",
     "@babel/runtime-corejs3": "^7.12.13",
-    "@datapunt/matomo-tracker-js": "0.3.1",
+    "@datapunt/matomo-tracker-js": "0.4.0",
     "@datapunt/matomo-tracker-react": "0.3.1",
     "@sentry/browser": "6.1.0",
     "@turf/turf": "^6.3.0",
