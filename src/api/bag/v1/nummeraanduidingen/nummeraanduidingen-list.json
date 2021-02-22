@@ -1,0 +1,1383 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/?_format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "_embedded": {
+    "nummeraanduidingen": [
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006110/?_format=json&volgnummer=3",
+            "title": "0363200000006110"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543292/?_format=json&volgnummer=7",
+            "title": "0363010000543292.7"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 1,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1005-01-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006110",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1005-01-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-27T05:56:51",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": "H",
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 7,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543292",
+        "adresseertVerblijfsobjectId": "0363010000543292",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006110.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006111/?_format=json&volgnummer=3",
+            "title": "0363200000006111"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543293/?_format=json&volgnummer=9",
+            "title": "0363010000543293.9"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 1,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1005-01-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006111",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1005-01-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-24T01:54:40",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": "1",
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 9,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543293",
+        "adresseertVerblijfsobjectId": "0363010000543293",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006111.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006112/?_format=json&volgnummer=3",
+            "title": "0363200000006112"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543294/?_format=json&volgnummer=6",
+            "title": "0363010000543294.6"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 1,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1005-01-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006112",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1005-01-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-24T01:54:40",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": "2",
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 6,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543294",
+        "adresseertVerblijfsobjectId": "0363010000543294",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006112.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006114/?_format=json&volgnummer=3",
+            "title": "0363200000006114"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543296/?_format=json&volgnummer=6",
+            "title": "0363010000543296.6"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 3,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1005-01-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006114",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1005-01-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-24T01:54:41",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": "1",
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 6,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543296",
+        "adresseertVerblijfsobjectId": "0363010000543296",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006114.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006115/?_format=json&volgnummer=3",
+            "title": "0363200000006115"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543297/?_format=json&volgnummer=9",
+            "title": "0363010000543297.9"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 3,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1005-01-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006115",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1005-01-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-25T09:46:57",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": "2",
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 9,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543297",
+        "adresseertVerblijfsobjectId": "0363010000543297",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006115.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006119/?_format=json&volgnummer=3",
+            "title": "0363200000006119"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543300/?_format=json&volgnummer=9",
+            "title": "0363010000543300.9"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 5,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1005-01-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006119",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1005-01-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-24T01:54:41",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": "1",
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 9,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543300",
+        "adresseertVerblijfsobjectId": "0363010000543300",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006119.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006120/?_format=json&volgnummer=3",
+            "title": "0363200000006120"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543301/?_format=json&volgnummer=6",
+            "title": "0363010000543301.6"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 5,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1005-01-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006120",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1005-01-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-24T01:54:42",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": "2",
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 6,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543301",
+        "adresseertVerblijfsobjectId": "0363010000543301",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006120.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006123/?_format=json&volgnummer=3",
+            "title": "0363200000006123"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543304/?_format=json&volgnummer=9",
+            "title": "0363010000543304.9"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 7,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1005-01-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006123",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1005-01-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-24T01:54:42",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": "1",
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 9,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543304",
+        "adresseertVerblijfsobjectId": "0363010000543304",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006123.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006124/?_format=json&volgnummer=3",
+            "title": "0363200000006124"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543305/?_format=json&volgnummer=9",
+            "title": "0363010000543305.9"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 7,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1005-01-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006124",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1005-01-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-24T01:54:43",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": "2",
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 9,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543305",
+        "adresseertVerblijfsobjectId": "0363010000543305",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006124.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006127/?_format=json&volgnummer=3",
+            "title": "0363200000006127"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543309/?_format=json&volgnummer=6",
+            "title": "0363010000543309.6"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 18,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1922-01-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006127",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1922-01-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-26T04:00:51",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": "H",
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 6,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543309",
+        "adresseertVerblijfsobjectId": "0363010000543309",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006127.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006128/?_format=json&volgnummer=3",
+            "title": "0363200000006128"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543310/?_format=json&volgnummer=6",
+            "title": "0363010000543310.6"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 18,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1922-01-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006128",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1922-01-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-24T01:54:43",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": "2",
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 6,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543310",
+        "adresseertVerblijfsobjectId": "0363010000543310",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006128.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006129/?_format=json&volgnummer=3",
+            "title": "0363200000006129"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543314/?_format=json&volgnummer=8",
+            "title": "0363010000543314.8"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 25,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1983-10-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006129",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1983-10-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-24T01:53:37",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": null,
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 8,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543314",
+        "adresseertVerblijfsobjectId": "0363010000543314",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006129.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006130/?_format=json&volgnummer=3",
+            "title": "0363200000006130"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543315/?_format=json&volgnummer=6",
+            "title": "0363010000543315.6"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 26,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1005-01-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006130",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1005-01-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-24T01:53:38",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": null,
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 6,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543315",
+        "adresseertVerblijfsobjectId": "0363010000543315",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006130.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006131/?_format=json&volgnummer=3",
+            "title": "0363200000006131"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543316/?_format=json&volgnummer=8",
+            "title": "0363010000543316.8"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 27,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1983-10-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006131",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1983-10-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-26T16:22:12",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": null,
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 8,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543316",
+        "adresseertVerblijfsobjectId": "0363010000543316",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006131.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006132/?_format=json&volgnummer=3",
+            "title": "0363200000006132"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543317/?_format=json&volgnummer=9",
+            "title": "0363010000543317.9"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 28,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1005-01-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006132",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1005-01-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-24T01:53:39",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": null,
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 9,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543317",
+        "adresseertVerblijfsobjectId": "0363010000543317",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006132.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006133/?_format=json&volgnummer=3",
+            "title": "0363200000006133"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543318/?_format=json&volgnummer=8",
+            "title": "0363010000543318.8"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 29,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1983-10-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006133",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1983-10-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-24T01:53:39",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": null,
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 8,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543318",
+        "adresseertVerblijfsobjectId": "0363010000543318",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006133.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006134/?_format=json&volgnummer=3",
+            "title": "0363200000006134"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543319/?_format=json&volgnummer=6",
+            "title": "0363010000543319.6"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 30,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1005-01-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006134",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1005-01-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-25T09:46:59",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": null,
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 6,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543319",
+        "adresseertVerblijfsobjectId": "0363010000543319",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006134.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006135/?_format=json&volgnummer=3",
+            "title": "0363200000006135"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543320/?_format=json&volgnummer=8",
+            "title": "0363010000543320.8"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 31,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1983-10-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006135",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1983-10-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-26T16:22:13",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": null,
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 8,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543320",
+        "adresseertVerblijfsobjectId": "0363010000543320",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006135.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006136/?_format=json&volgnummer=3",
+            "title": "0363200000006136"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543321/?_format=json&volgnummer=6",
+            "title": "0363010000543321.6"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 32,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1005-01-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006136",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1005-01-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-24T01:53:39",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": null,
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 6,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543321",
+        "adresseertVerblijfsobjectId": "0363010000543321",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006136.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006137/?_format=json&volgnummer=3",
+            "title": "0363200000006137"
+          },
+          "heeftNevenadresStandplaatsen": [],
+          "heeftNevenadresLigplaatsen": [],
+          "heeftNevenadresVerblijfsobjecten": [],
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+            "title": "GV00000402"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "adresseertLigplaats": null,
+          "adresseertStandplaats": null,
+          "ligtAanOpenbareruimte": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+            "title": "0363300000002529.8"
+          },
+          "adresseertVerblijfsobject": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543322/?_format=json&volgnummer=5",
+            "title": "0363010000543322.5"
+          },
+          "heeftOnderzoeken": []
+        },
+        "postcode": "1015NR",
+        "typeAdres": "Hoofdadres",
+        "huisletter": null,
+        "huisnummer": 33,
+        "statusCode": 1,
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV00000402",
+        "heeftDossierId": "GV00000402",
+        "bagprocesCode": null,
+        "documentdatum": "1983-10-01",
+        "geconstateerd": false,
+        "identificatie": "0363200000006137",
+        "documentnummer": "GV00000402",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "1983-10-01T00:00:00",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2010-10-24T01:53:40",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "adresseertLigplaatsVolgnummer": null,
+        "adresseertLigplaatsIdentificatie": null,
+        "adresseertLigplaatsId": "",
+        "huisnummertoevoeging": null,
+        "adresseertStandplaatsVolgnummer": null,
+        "adresseertStandplaatsIdentificatie": null,
+        "adresseertStandplaatsId": "",
+        "bagprocesOmschrijving": null,
+        "ligtAanOpenbareruimteVolgnummer": 8,
+        "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+        "ligtAanOpenbareruimteId": "0363300000002529",
+        "adresseertVerblijfsobjectVolgnummer": 5,
+        "adresseertVerblijfsobjectIdentificatie": "0363010000543322",
+        "adresseertVerblijfsobjectId": "0363010000543322",
+        "typeAdresseerbaarObjectCode": 1,
+        "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+        "id": "0363200000006137.3"
+      }
+    ]
+  },
+  "page": {
+    "number": 1,
+    "size": 20,
+    "totalElements": 719007,
+    "totalPages": 35951
+  }
+}

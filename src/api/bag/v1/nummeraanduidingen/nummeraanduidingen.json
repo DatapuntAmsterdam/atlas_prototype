@@ -1,0 +1,68 @@
+{
+  "_links": {
+    "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduidingen",
+    "self": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006110/?_format=json&volgnummer=3",
+      "title": "0363200000006110"
+    },
+    "heeftNevenadresStandplaatsen": [],
+    "heeftNevenadresLigplaatsen": [],
+    "heeftNevenadresVerblijfsobjecten": [],
+    "heeftDossier": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000402/?_format=json",
+      "title": "GV00000402"
+    },
+    "ligtInWoonplaats": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+      "title": "3594.3"
+    },
+    "adresseertLigplaats": null,
+    "adresseertStandplaats": null,
+    "ligtAanOpenbareruimte": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000002529/?_format=json&volgnummer=8",
+      "title": "0363300000002529.8"
+    },
+    "adresseertVerblijfsobject": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543292/?_format=json&volgnummer=7",
+      "title": "0363010000543292.7"
+    },
+    "heeftOnderzoeken": []
+  },
+  "postcode": "1015NR",
+  "typeAdres": "Hoofdadres",
+  "huisletter": null,
+  "huisnummer": 1,
+  "statusCode": 1,
+  "volgnummer": 3,
+  "heeftDossierDossier": "GV00000402",
+  "heeftDossierId": "GV00000402",
+  "bagprocesCode": null,
+  "documentdatum": "1005-01-01",
+  "geconstateerd": false,
+  "identificatie": "0363200000006110",
+  "documentnummer": "GV00000402",
+  "eindGeldigheid": null,
+  "beginGeldigheid": "1005-01-01T00:00:00",
+  "ligtInWoonplaatsVolgnummer": 3,
+  "ligtInWoonplaatsIdentificatie": "3594",
+  "ligtInWoonplaatsId": "3594",
+  "registratiedatum": "2010-10-27T05:56:51",
+  "statusOmschrijving": "Naamgeving uitgegeven",
+  "adresseertLigplaatsVolgnummer": null,
+  "adresseertLigplaatsIdentificatie": null,
+  "adresseertLigplaatsId": "",
+  "huisnummertoevoeging": "H",
+  "adresseertStandplaatsVolgnummer": null,
+  "adresseertStandplaatsIdentificatie": null,
+  "adresseertStandplaatsId": "",
+  "bagprocesOmschrijving": null,
+  "ligtAanOpenbareruimteVolgnummer": 8,
+  "ligtAanOpenbareruimteIdentificatie": "0363300000002529",
+  "ligtAanOpenbareruimteId": "0363300000002529",
+  "adresseertVerblijfsobjectVolgnummer": 7,
+  "adresseertVerblijfsobjectIdentificatie": "0363010000543292",
+  "adresseertVerblijfsobjectId": "0363010000543292",
+  "typeAdresseerbaarObjectCode": 1,
+  "typeAdresseerbaarObjectOmschrijving": "Verblijfsobject",
+  "id": "0363200000006110.3"
+}

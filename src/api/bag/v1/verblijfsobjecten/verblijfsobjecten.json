@@ -1,0 +1,80 @@
+{
+  "_links": {
+    "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#verblijfsobjecten",
+    "self": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543292/?_format=json&volgnummer=5",
+      "title": "0363010000543292.5"
+    },
+    "heeftEenRelatieMetVerblijfsobjectKadastraleobjecten": [],
+    "ligtInBuurt": null,
+    "heeftDossier": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000406/?_format=json",
+      "title": "GV00000406"
+    },
+    "heeftHoofdadres": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006110/?_format=json&volgnummer=3",
+      "title": "0363200000006110.3"
+    },
+    "ligtInPanden": [],
+    "heeftNevenadres": [],
+    "heeftOnderzoeken": []
+  },
+  "cbsNummer": null,
+  "geometrie": {
+    "type": "Point",
+    "coordinates": [
+      120700,
+      487936
+    ]
+  },
+  "statusCode": 4,
+  "volgnummer": 5,
+  "ligtInBuurtVolgnummer": null,
+  "ligtInBuurtIdentificatie": null,
+  "ligtInBuurtId": "",
+  "oppervlakte": 30,
+  "aantalKamers": null,
+  "heeftDossierDossier": "GV00000406",
+  "heeftDossierId": "GV00000406",
+  "bagprocesCode": null,
+  "documentdatum": "2010-09-09",
+  "geconstateerd": false,
+  "identificatie": "0363010000543292",
+  "documentnummer": "GV00000406",
+  "eindGeldigheid": "2010-09-09T00:00:00",
+  "aantalBouwlagen": null,
+  "beginGeldigheid": "2010-09-09T00:00:00",
+  "heeftHoofdadresVolgnummer": 3,
+  "heeftHoofdadresIdentificatie": "0363200000006110",
+  "heeftHoofdadresId": "0363200000006110",
+  "hoogsteBouwlaag": null,
+  "laagsteBouwlaag": null,
+  "redenafvoerCode": null,
+  "redenopvoerCode": 11,
+  "registratiedatum": "2010-10-27T05:56:51",
+  "verdiepingToegang": 0,
+  "statusOmschrijving": "Verblijfsobject in gebruik",
+  "feitelijkGebruikCode": 3110,
+  "aantalEenhedenComplex": null,
+  "bagprocesOmschrijving": null,
+  "financieringscodeCode": null,
+  "eigendomsverhoudingCode": 1,
+  "indicatieWoningvoorraad": "N",
+  "redenafvoerOmschrijving": null,
+  "redenopvoerOmschrijving": "Mutatie",
+  "gebruiksdoelWoonfunctieCode": null,
+  "feitelijkGebruikOmschrijving": "(detail)handel / winkel",
+  "financieringscodeOmschrijving": null,
+  "eigendomsverhoudingOmschrijving": "Huur",
+  "gebruiksdoelWoonfunctieOmschrijving": null,
+  "gebruiksdoelGezondheidszorgfunctieCode": null,
+  "gebruiksdoelGezondheidszorgfunctieOmschrijving": null,
+  "id": "0363010000543292.5",
+  "toegang": [],
+  "gebruiksdoel": [
+    {
+      "code": "10",
+      "omschrijving": "winkelfunctie"
+    }
+  ]
+}

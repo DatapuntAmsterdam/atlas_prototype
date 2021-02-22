@@ -1,0 +1,267 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/?_format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "_embedded": {
+    "openbareruimtes": [
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#openbareruimtes",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000000869/?_format=json&volgnummer=3",
+            "title": "0363300000000869.3"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV20030128/?_format=json",
+            "title": "GV20030128"
+          },
+          "ligtInWoonplaats": null,
+          "heeftOnderzoeken": []
+        },
+        "naam": "Vriesseveem",
+        "naamNen": "Vriesseveem",
+        "typeCode": 1,
+        "geometrie": null,
+        "statusCode": 1,
+        "straatcode": "61891",
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV20030128",
+        "heeftDossierId": "GV20030128",
+        "bagprocesCode": null,
+        "documentdatum": "2003-01-28",
+        "geconstateerd": false,
+        "identificatie": "0363300000000869",
+        "straatnaamPtt": "VRIESSEVEEM",
+        "documentnummer": "GV20030128_SB01SB",
+        "eindGeldigheid": "2014-01-10T00:00:00",
+        "beginGeldigheid": "2003-01-28T00:00:00",
+        "beschrijvingNaam": null,
+        "ligtInWoonplaatsVolgnummer": null,
+        "ligtInWoonplaatsIdentificatie": null,
+        "ligtInWoonplaatsId": "",
+        "registratiedatum": "2010-10-22T14:41:02",
+        "typeOmschrijving": "Weg",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "bagprocesOmschrijving": null,
+        "id": "0363300000000869.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#openbareruimtes",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000000869/?_format=json&volgnummer=6",
+            "title": "0363300000000869.6"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00001729/?_format=json",
+            "title": "GV00001729"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "heeftOnderzoeken": []
+        },
+        "naam": "Vriesseveem",
+        "naamNen": "Vriesseveem",
+        "typeCode": 1,
+        "geometrie": null,
+        "statusCode": 1,
+        "straatcode": "61891",
+        "volgnummer": 6,
+        "heeftDossierDossier": "GV00001729",
+        "heeftDossierId": "GV00001729",
+        "bagprocesCode": null,
+        "documentdatum": "2014-01-10",
+        "geconstateerd": false,
+        "identificatie": "0363300000000869",
+        "straatnaamPtt": "VRIESSEVEEM",
+        "documentnummer": "GV00001729_AC00AC",
+        "eindGeldigheid": "2014-01-10T00:00:00",
+        "beginGeldigheid": "2014-01-10T00:00:00",
+        "beschrijvingNaam": "Een veem is een onderneming zich belast met het opslaan en afleveren van goederen in en uit haar pakhuizen. De vemen hadden ieder hun eigen kenteken, waarnaar ze werden genoemd. Dat konden verschillende kleuren en modellen hoeden zijn (o.a. Blauwhoeden, Klapmutsen). Ze ontleenden hun naam ook wel naar de herkomst van de werklieden (o.a. Vriesseveem, Zeeuwse Veem).",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2014-01-11T08:52:44",
+        "typeOmschrijving": "Weg",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "bagprocesOmschrijving": null,
+        "id": "0363300000000869.6"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#openbareruimtes",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000000869/?_format=json&volgnummer=7",
+            "title": "0363300000000869.7"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00001729/?_format=json",
+            "title": "GV00001729"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "heeftOnderzoeken": []
+        },
+        "naam": "Vriesseveem",
+        "naamNen": "Vriesseveem",
+        "typeCode": 1,
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                123085.382,
+                487795.504
+              ],
+              [
+                123099.09,
+                487792.469
+              ],
+              [
+                123113.461,
+                487842.061
+              ],
+              [
+                123100.2,
+                487849.232
+              ],
+              [
+                123094.447,
+                487827.601
+              ],
+              [
+                123085.382,
+                487795.504
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "straatcode": "61891",
+        "volgnummer": 7,
+        "heeftDossierDossier": "GV00001729",
+        "heeftDossierId": "GV00001729",
+        "bagprocesCode": null,
+        "documentdatum": "2014-01-10",
+        "geconstateerd": false,
+        "identificatie": "0363300000000869",
+        "straatnaamPtt": "VRIESSEVEEM",
+        "documentnummer": "GV00001729_AC00AC",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2014-01-10T00:00:00",
+        "beschrijvingNaam": "Een veem is een onderneming zich belast met het opslaan en afleveren van goederen in en uit haar pakhuizen. De vemen hadden ieder hun eigen kenteken, waarnaar ze werden genoemd. Dat konden verschillende kleuren en modellen hoeden zijn (o.a. Blauwhoeden, Klapmutsen). Ze ontleenden hun naam ook wel naar de herkomst van de werklieden (o.a. Vriesseveem, Zeeuwse Veem).",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2019-06-28T19:28:13",
+        "typeOmschrijving": "Weg",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "bagprocesOmschrijving": null,
+        "id": "0363300000000869.7"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#openbareruimtes",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000000870/?_format=json&volgnummer=3",
+            "title": "0363300000000870.3"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV20030128/?_format=json",
+            "title": "GV20030128"
+          },
+          "ligtInWoonplaats": null,
+          "heeftOnderzoeken": []
+        },
+        "naam": "Jollemanhof",
+        "naamNen": "Jollemanhof",
+        "typeCode": 1,
+        "geometrie": null,
+        "statusCode": 1,
+        "straatcode": "61905",
+        "volgnummer": 3,
+        "heeftDossierDossier": "GV20030128",
+        "heeftDossierId": "GV20030128",
+        "bagprocesCode": null,
+        "documentdatum": "2003-01-28",
+        "geconstateerd": false,
+        "identificatie": "0363300000000870",
+        "straatnaamPtt": "JOLLEMANHOF",
+        "documentnummer": "GV20030128_SB01SB",
+        "eindGeldigheid": "2014-01-10T00:00:00",
+        "beginGeldigheid": "2003-01-28T00:00:00",
+        "beschrijvingNaam": null,
+        "ligtInWoonplaatsVolgnummer": null,
+        "ligtInWoonplaatsIdentificatie": null,
+        "ligtInWoonplaatsId": "",
+        "registratiedatum": "2010-10-22T14:41:02",
+        "typeOmschrijving": "Weg",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "bagprocesOmschrijving": null,
+        "id": "0363300000000870.3"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#openbareruimtes",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/0363300000000870/?_format=json&volgnummer=6",
+            "title": "0363300000000870.6"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00001729/?_format=json",
+            "title": "GV00001729"
+          },
+          "ligtInWoonplaats": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/3594/?_format=json&volgnummer=3",
+            "title": "3594.3"
+          },
+          "heeftOnderzoeken": []
+        },
+        "naam": "Jollemanhof",
+        "naamNen": "Jollemanhof",
+        "typeCode": 1,
+        "geometrie": null,
+        "statusCode": 1,
+        "straatcode": "61905",
+        "volgnummer": 6,
+        "heeftDossierDossier": "GV00001729",
+        "heeftDossierId": "GV00001729",
+        "bagprocesCode": null,
+        "documentdatum": "2014-01-10",
+        "geconstateerd": false,
+        "identificatie": "0363300000000870",
+        "straatnaamPtt": "JOLLEMANHOF",
+        "documentnummer": "GV00001729_AC00AC",
+        "eindGeldigheid": "2014-01-10T00:00:00",
+        "beginGeldigheid": "2014-01-10T00:00:00",
+        "beschrijvingNaam": "Jollemannen brachten met hun roeiboot (jol) personen van en naar schepen.",
+        "ligtInWoonplaatsVolgnummer": 3,
+        "ligtInWoonplaatsIdentificatie": "3594",
+        "ligtInWoonplaatsId": "3594",
+        "registratiedatum": "2014-01-11T08:52:51",
+        "typeOmschrijving": "Weg",
+        "statusOmschrijving": "Naamgeving uitgegeven",
+        "bagprocesOmschrijving": null,
+        "id": "0363300000000870.6"
+      }
+    ]
+  },
+  "page": {
+    "number": 1,
+    "size": 20,
+    "totalElements": 20994,
+    "totalPages": 1050
+  }
+}
