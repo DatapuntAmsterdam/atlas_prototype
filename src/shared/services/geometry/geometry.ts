@@ -1,47 +1,52 @@
-import isObject from '../is-object'
+import { Point } from 'geojson'
+import { PotentialApiResult } from '../../../map/types/details'
+import isObject from '../../../app/utils/isObject'
 import BOUNDING_BOX from '../../../map/services/bounding-box.constant'
 import * as crsConverter from '../coordinate-reference-system/crs-converter'
 
-export const isVestigingAmsterdam = (data) => {
-  let isVestiging = false
+const isVestigingAmsterdam = (geometrie: Point) => {
   const southWestWgs84Coordinates = {
     latitude: BOUNDING_BOX.COORDINATES.southWest[0],
     longitude: BOUNDING_BOX.COORDINATES.southWest[1],
   }
+
   const northEastWgs84Coordinates = {
     latitude: BOUNDING_BOX.COORDINATES.northEast[0],
     longitude: BOUNDING_BOX.COORDINATES.northEast[1],
   }
+
   const southWest = crsConverter.wgs84ToRd(southWestWgs84Coordinates)
   const northEast = crsConverter.wgs84ToRd(northEastWgs84Coordinates)
 
+  const { coordinates } = geometrie
+
   if (
-    isObject(data.bezoekadres) &&
-    isObject(data.bezoekadres.geometrie) &&
-    data.bezoekadres.geometrie.coordinates[0] > southWest.x &&
-    data.bezoekadres.geometrie.coordinates[0] < northEast.x &&
-    data.bezoekadres.geometrie.coordinates[1] > southWest.y &&
-    data.bezoekadres.geometrie.coordinates[1] < northEast.y
+    coordinates[0] > southWest.x &&
+    coordinates[0] < northEast.x &&
+    coordinates[1] > southWest.y &&
+    coordinates[1] < northEast.y
   ) {
-    isVestiging = true
+    return true
   }
-  return isVestiging
+
+  return false
 }
 
-const getGeometry = (data) => {
+const getGeometry = (data: PotentialApiResult) => {
   if (isObject(data.geometrie)) {
     return data.geometrie
   }
-  if (isVestigingAmsterdam(data)) {
-    return data.bezoekadres.geometrie
-    // } else if (isAPerceel(url, data)) {
-    //   return getGPerceel(data).then(getGeometry);
-    // } else if (isNummeraanduiding(url)) {
-    //   return getAdresseerbaarObject(data).then(getGeometry);
+
+  const bezoekAdresGeometry = data?.bezoekadres?.geometrie
+
+  if (bezoekAdresGeometry && isVestigingAmsterdam(bezoekAdresGeometry)) {
+    return bezoekAdresGeometry
   }
+
   if (isObject(data.monumentcoordinaten)) {
     return data.monumentcoordinaten
   }
+
   return null
 }
 

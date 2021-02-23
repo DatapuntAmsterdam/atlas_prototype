@@ -2,7 +2,6 @@ import { FilterOption } from '@amsterdam/asc-ui'
 import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import { useQuery } from 'urql'
-import isDefined from '../../../shared/services/is-defined'
 import PARAMETERS from '../../../store/parameters'
 import SEARCH_PAGE_CONFIG from '../../pages/SearchPage/config'
 import { totalCountSearch } from '../../pages/SearchPage/documents.graphql'
@@ -72,8 +71,8 @@ export default memo(({ currentPage, query }) => {
             >
               {SEARCH_PAGE_CONFIG[page].label}{' '}
               {page === routing.search.page
-                ? isDefined(totalCount) && `(${formatCount(totalCount)})`
-                : isDefined(count) && `(${formatCount(count)})`}
+                ? totalCount !== undefined && `(${formatCount(totalCount)})`
+                : count !== undefined && `(${formatCount(count)})`}
             </FilterOption>
           </li>
         ))}

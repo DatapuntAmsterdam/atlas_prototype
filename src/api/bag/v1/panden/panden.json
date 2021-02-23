@@ -1,0 +1,205 @@
+{
+  "_links": {
+    "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#panden",
+    "self": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/panden/0363100012061164/?_format=json&volgnummer=3",
+      "title": "0363100012061164.3"
+    },
+    "ligtInPandenVerblijfsobjecten": [
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984737/?_format=json&volgnummer=4",
+        "title": "0363010000984737.4"
+      },
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984737/?_format=json&volgnummer=7",
+        "title": "0363010000984737.7"
+      },
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984737/?_format=json&volgnummer=8",
+        "title": "0363010000984737.8"
+      },
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984738/?_format=json&volgnummer=4",
+        "title": "0363010000984738.4"
+      },
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984738/?_format=json&volgnummer=7",
+        "title": "0363010000984738.7"
+      },
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984738/?_format=json&volgnummer=8",
+        "title": "0363010000984738.8"
+      },
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984739/?_format=json&volgnummer=4",
+        "title": "0363010000984739.4"
+      },
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984739/?_format=json&volgnummer=7",
+        "title": "0363010000984739.7"
+      },
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984739/?_format=json&volgnummer=8",
+        "title": "0363010000984739.8"
+      },
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984740/?_format=json&volgnummer=4",
+        "title": "0363010000984740.4"
+      },
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984740/?_format=json&volgnummer=7",
+        "title": "0363010000984740.7"
+      },
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984740/?_format=json&volgnummer=8",
+        "title": "0363010000984740.8"
+      },
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984741/?_format=json&volgnummer=4",
+        "title": "0363010000984741.4"
+      },
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984741/?_format=json&volgnummer=7",
+        "title": "0363010000984741.7"
+      },
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984741/?_format=json&volgnummer=8",
+        "title": "0363010000984741.8"
+      },
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984742/?_format=json&volgnummer=4",
+        "title": "0363010000984742.4"
+      },
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984742/?_format=json&volgnummer=7",
+        "title": "0363010000984742.7"
+      },
+      {
+        "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000984742/?_format=json&volgnummer=8",
+        "title": "0363010000984742.8"
+      }
+    ],
+    "heeftDossier": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000406/?_format=json",
+      "title": "GV00000406"
+    },
+    "ligtInBouwblok": {
+      "href": "https://api.data.amsterdam.nl/v1/gebieden/bouwblokken/03630012096483/?_format=json&volgnummer=1",
+      "title": "03630012096483.1"
+    },
+    "heeftOnderzoeken": []
+  },
+  "naam": null,
+  "geometrie": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          123743.204,
+          487977.833
+        ],
+        [
+          123743.179,
+          487977.988
+        ],
+        [
+          123743.08,
+          487977.97
+        ],
+        [
+          123736.324,
+          487979.944
+        ],
+        [
+          123736.189,
+          487979.983
+        ],
+        [
+          123733.77,
+          487980.69
+        ],
+        [
+          123724.975,
+          487983.258
+        ],
+        [
+          123723.314,
+          487977.572
+        ],
+        [
+          123733.889,
+          487974.473
+        ],
+        [
+          123733.729,
+          487973.927
+        ],
+        [
+          123742.135,
+          487971.463
+        ],
+        [
+          123743.304,
+          487971.141
+        ],
+        [
+          123743.391,
+          487971.136
+        ],
+        [
+          123743.46,
+          487973.515
+        ],
+        [
+          123743.449,
+          487974.236
+        ],
+        [
+          123743.426,
+          487974.957
+        ],
+        [
+          123743.389,
+          487975.677
+        ],
+        [
+          123743.34,
+          487976.397
+        ],
+        [
+          123743.278,
+          487977.116
+        ],
+        [
+          123743.204,
+          487977.833
+        ]
+      ]
+    ]
+  },
+  "statusCode": 11,
+  "volgnummer": 3,
+  "liggingCode": 4,
+  "heeftDossierDossier": "GV00000406",
+  "heeftDossierId": "GV00000406",
+  "bagprocesCode": null,
+  "documentdatum": "2010-09-09",
+  "geconstateerd": false,
+  "identificatie": "0363100012061164",
+  "documentnummer": "GV00000406",
+  "eindGeldigheid": null,
+  "ligtInBouwblokVolgnummer": 1,
+  "ligtInBouwblokIdentificatie": "03630012096483",
+  "ligtInBouwblokId": "03630012096483",
+  "typeWoonobject": "Meerdere woningen",
+  "aantalBouwlagen": null,
+  "beginGeldigheid": "2010-09-09T00:00:00",
+  "hoogsteBouwlaag": null,
+  "laagsteBouwlaag": null,
+  "registratiedatum": "2010-10-22T14:54:18",
+  "statusOmschrijving": "Pand in gebruik",
+  "liggingOmschrijving": "Hoekgebouw",
+  "bagprocesOmschrijving": null,
+  "oorspronkelijkBouwjaar": 1998,
+  "id": "0363100012061164.3"
+}

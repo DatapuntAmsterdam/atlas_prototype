@@ -1,0 +1,59 @@
+{
+  "_links": {
+    "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#woonplaatsen",
+    "self": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/1024/?_format=json&volgnummer=10",
+      "title": "1024.10"
+    },
+    "heeftDossier": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00001729/?_format=json",
+      "title": "GV00001729"
+    },
+    "ligtInGemeente": {
+      "href": "https://api.data.amsterdam.nl/v1/brk/gemeentes/0363/?_format=json",
+      "title": "0363"
+    },
+    "heeftOnderzoeken": []
+  },
+  "naam": "Amsterdam",
+  "geometrie": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [133164.494, 492181.711],
+        [133134.952, 492194.636],
+        [133107.918, 492206.968],
+        [133067.905, 492174.568],
+        [133037.468, 492153.394],
+        [133000, 492125.293],
+        [132989.826, 492117.663],
+        [132956.081, 492098.474],
+        [132913.071, 492089.211],
+        [132881.31, 492090.534]
+      ]
+    ]
+  },
+  "openbareruimtes": {
+    "count": 13861,
+    "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/?3594.3=ligt_in_woonplaatsId"
+  },
+  "statusCode": 2,
+  "volgnummer": 10,
+  "heeftDossierDossier": "GV00001729",
+  "heeftDossierId": "GV00001729",
+  "bagprocesCode": 128,
+  "documentdatum": "2014-01-10",
+  "geconstateerd": "N",
+  "identificatie": "1024",
+  "woonplaatsPtt": "AMSTERDAM",
+  "documentnummer": "GV00001729_AC00AC",
+  "eindGeldigheid": null,
+  "ligtInGemeenteIdentificatie": "0363",
+  "ligtInGemeenteId": "0363",
+  "beginGeldigheid": "2014-01-10T00:00:00",
+  "registratiedatum": "2014-01-11T20:23:41",
+  "amsterdamseSleutel": null,
+  "statusOmschrijving": "Woonplaats ingetrokken",
+  "bagprocesOmschrijving": "Intrekken woonplaats",
+  "id": "1024.10"
+}

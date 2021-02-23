@@ -1,0 +1,141 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/"
+    },
+    "next": {
+      "href": null
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "_embedded": {
+    "woonplaatsen": [
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#woonplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/1024/?_format=json&volgnummer=4",
+            "title": "1024.4"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000401/?_format=json",
+            "title": "GV00000401"
+          },
+          "ligtInGemeente": {
+            "href": "https://api.data.amsterdam.nl/v1/brk/gemeentes/0363/?_format=json",
+            "title": "0363"
+          },
+          "heeftOnderzoeken": []
+        },
+        "naam": "Amsterdam",
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [116132.974, 482300.26],
+              [116149.018, 482281.692],
+              [116162.893, 482265.019],
+              [116176.998, 482245.302],
+              [116194.859, 482219.133],
+              [116208.389, 482196.434],
+              [116216.25, 482181.101],
+              [116224.608, 482164.58]
+            ]
+          ]
+        },
+        "openbareruimtes": {
+          "count": 13861,
+          "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/?3594.3=ligt_in_woonplaatsId"
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "heeftDossierDossier": "GV00000401",
+        "heeftDossierId": "GV00000401",
+        "bagprocesCode": null,
+        "documentdatum": "2007-01-30",
+        "geconstateerd": "N",
+        "identificatie": "1024",
+        "woonplaatsPtt": "AMSTERDAM",
+        "documentnummer": "GV00000401",
+        "eindGeldigheid": "2013-12-12T00:00:00",
+        "ligtInGemeenteIdentificatie": "0363",
+        "ligtInGemeenteId": "0363",
+        "beginGeldigheid": "2007-01-30T00:00:00",
+        "registratiedatum": "2010-10-22T14:38:38",
+        "amsterdamseSleutel": null,
+        "statusOmschrijving": "Woonplaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "1024.4"
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#woonplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/woonplaatsen/1024/?_format=json&volgnummer=7",
+            "title": "1024.7"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/SF00000851/?_format=json",
+            "title": "SF00000851"
+          },
+          "ligtInGemeente": {
+            "href": "https://api.data.amsterdam.nl/v1/brk/gemeentes/0363/?_format=json",
+            "title": "0363"
+          },
+          "heeftOnderzoeken": []
+        },
+        "naam": "Amsterdam",
+        "openbareruimtes": {
+          "count": 13861,
+          "href": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/?3594.3=ligt_in_woonplaatsId"
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [133164.494, 492181.711],
+              [133134.952, 492194.636],
+              [133107.918, 492206.968],
+              [133067.905, 492174.568],
+              [133037.468, 492153.394],
+              [133000, 492125.293],
+              [132989.826, 492117.663],
+              [132956.081, 492098.474],
+              [132913.071, 492089.211],
+              [132881.31, 492090.534],
+              [132850, 492094.86],
+              [132586.714, 492131.237]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 7,
+        "heeftDossierDossier": "SF00000851",
+        "heeftDossierId": "SF00000851",
+        "bagprocesCode": null,
+        "documentdatum": "2013-12-12",
+        "geconstateerd": "N",
+        "identificatie": "1024",
+        "woonplaatsPtt": "AMSTERDAM",
+        "documentnummer": "SF00000851_NB00OR",
+        "eindGeldigheid": "2014-01-10T00:00:00",
+        "ligtInGemeenteIdentificatie": "0363",
+        "ligtInGemeenteId": "0363",
+        "beginGeldigheid": "2013-12-12T00:00:00",
+        "registratiedatum": "2013-12-12T09:21:14",
+        "amsterdamseSleutel": null,
+        "statusOmschrijving": "Woonplaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "1024.7"
+      }
+    ]
+  },
+  "page": {
+    "number": 1,
+    "size": 20,
+    "totalElements": 6,
+    "totalPages": 1
+  }
+}

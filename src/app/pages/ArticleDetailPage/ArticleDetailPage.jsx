@@ -1,7 +1,6 @@
 import {
   Accordion,
   AccordionWrapper,
-  Alert,
   Article,
   breakpoint,
   Column,
@@ -25,10 +24,10 @@ import { Fragment, useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import environment from '../../../environment'
-import normalizeDownloadsObject from '../../../normalizations/cms/normalizeDownloadFiles'
 import normalizeCMSResults, {
   EDITORIAL_FIELD_TYPE_VALUES,
 } from '../../../normalizations/cms/normalizeCMSResults'
+import normalizeDownloadsObject from '../../../normalizations/cms/normalizeDownloadFiles'
 import cmsConfig from '../../../shared/config/cms.config'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
@@ -118,10 +117,6 @@ const StyledAccordion = styled(Accordion)`
   margin-top: ${themeSpacing(2)};
 `
 
-const StyledAlert = styled(Alert)`
-  margin-top: ${themeSpacing(2)};
-`
-
 const StyledLink = styled(Link)`
   & > * {
     pointer-events: none;
@@ -187,10 +182,6 @@ const ArticleDetailPage = () => {
       image={coverImage}
       description={intro}
     >
-      <StyledAlert level="error">
-        Er is een storing waardoor niet alle publicaties, afbeeldingen en overige bestanden
-        beschikbaar zijn. Onze excuses, wij werken aan een oplossing.
-      </StyledAlert>
       {!loading && (
         <StyledRow>
           <StyledContentContainer hasImage={!!image}>

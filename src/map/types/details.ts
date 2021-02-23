@@ -1,6 +1,5 @@
 import { AlertLevel } from '@amsterdam/asc-ui'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Position } from 'geojson'
+import { Point } from 'geojson'
 import { LocationDescriptor, LocationDescriptorObject } from 'history'
 import { ReactNode } from 'react'
 import AuthScope from '../../shared/services/api/authScope'
@@ -173,9 +172,7 @@ interface ApiAddress {
   buitenland_woonplaats?: string
   buitenland_naam?: string
   buitenland_land?: ApiDescription
-  geometrie?: {
-    coordinates?: Position
-  }
+  geometrie?: Point
 }
 
 export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay {
@@ -311,9 +308,7 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   meetboutidentificatie?: string | null
   adres?: string | null
   locatie?: string | null
-  geometrie?: {
-    coordinates?: Position
-  } | null
+  geometrie?: Point
   bouwblok?: string | null
   bouwblok_link?: string | null
   bouwblokzijde?: string | null
@@ -482,6 +477,7 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   ontstaan_uit?: string | null
   betrokken_bij?: string | null
   verblijfsobjectidentificatie?: string | null
+  monumentcoordinaten?: Point
 }
 
 export type ExtraApiResults = {
