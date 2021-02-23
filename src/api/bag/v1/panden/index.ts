@@ -1,9 +1,9 @@
 import fixtureSingle from './panden.json'
 import fixtureList from './panden-list.json'
 import { Single } from './types'
-import { BagList } from '../types'
+import { HALList } from '../../../types'
 
-type List = BagList<{ panden: Single[] }>
+type List = HALList<{ panden: Single[] }>
 
 export const singleFixture = fixtureSingle as Single
 export const listFixture = fixtureList as List

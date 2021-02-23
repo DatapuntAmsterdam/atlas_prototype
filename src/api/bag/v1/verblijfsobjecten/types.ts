@@ -1,7 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Geometry } from 'geojson'
-import { Link } from '../../../types'
-import { CodeWithDescription } from '../types'
+import { CodeWithDescription, Link } from '../../../types'
 
 export interface Single {
   _links: Links | null

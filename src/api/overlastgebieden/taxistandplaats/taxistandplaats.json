@@ -1,0 +1,28 @@
+{
+  "_links": {
+    "schema": "https://schemas.data.amsterdam.nl/datasets/overlastgebieden/overlastgebieden#taxistandplaats",
+    "self": {
+      "href": "https://api.data.amsterdam.nl/v1/overlastgebieden/taxistandplaats/2/?_format=json",
+      "title": "TAXI"
+    }
+  },
+  "id": 2,
+  "url": "https://zoek/officielebekendmakingen.nl",
+  "type": "TAXI",
+  "soort": null,
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [124676.17847709346, 480417.66939568735],
+          [124933.652, 480560.021],
+          [124951.4016090026, 480527.9170108514],
+          [124693.92808609606, 480385.5654065387],
+          [124676.17847709346, 480417.66939568735]
+        ]
+      ]
+    ]
+  },
+  "oovNaam": "Johan Cruijff ArenA"
+}

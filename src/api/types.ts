@@ -26,3 +26,23 @@ export interface APIReference {
   type_adres?: string
   vbo_status?: string
 }
+
+export interface HALList<T> {
+  _links: {
+    self: Link
+    next: Link
+    previous: Link
+  }
+  _embedded: T
+  page: {
+    number: number
+    size: number
+    totalElements: number
+    totalPages: number
+  }
+}
+
+export interface CodeWithDescription {
+  code: string
+  omschrijving: string
+}

@@ -1,9 +1,9 @@
 import fixtureSingle from './ligplaatsen.json'
 import fixtureList from './ligplaatsen-list.json'
 import { Single } from './types'
-import { BagList } from '../types'
+import { HALList } from '../../../types'
 
-type List = BagList<{ ligplaatsen: Single[] }>
+type List = HALList<{ ligplaatsen: Single[] }>
 
 export const singleFixture = fixtureSingle as Single
 export const listFixture = fixtureList as List
