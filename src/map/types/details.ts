@@ -105,12 +105,12 @@ export interface DetailResultItemPaginatedData extends DefaultDetailResultItem {
   type: DetailResultItemType.PaginatedData
   getData: (url?: string, pageSize?: number) => Promise<PaginatedData<any> | null>
   pageSize: number
-  toView: (data?: any[]) => DetailResultItem
+  toView: (data?: any) => DetailResultItem
 }
 
 export interface DetailResultItemLinkList extends DefaultDetailResultItem {
   type: DetailResultItemType.LinkList
-  links?: Link[]
+  links?: Array<Link & { id?: string | null }>
 }
 
 export interface DetailResultItemBulletList extends DefaultDetailResultItem {

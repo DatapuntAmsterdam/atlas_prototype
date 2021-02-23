@@ -142,6 +142,13 @@ export const toPanoramaAndPreserveQuery = (
 export const extractIdEndpoint = (endpoint) => {
   return endpoint.match(/(\w+)\/([\w-]+)\/?$/)
 }
+
+const URL_SUBTYPES_MAPPING = {
+  openbareruimtes: 'openbareruimte',
+  woonplaatsen: 'woonplaats',
+  ligplaatsen: 'ligplaats',
+}
+
 export const getDetailPageData = (endpoint) => {
   // TODO: Add endpoint mapping when new router is introduced
   let matches = endpoint
@@ -150,9 +157,21 @@ export const getDetailPageData = (endpoint) => {
     .replace('iiif-metadata/', 'bouwdossiers/') // Clean URL if this is using the new IIIF Metadata API
   // eslint-disable-next-line no-useless-escape
   matches = matches.match(/(\w+)\/([\w-]+)\/([\w\.-]+)\/?$/)
+
+  if (matches === null) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      `Type, subtype and id from the given endpoint to getDetailPageData could not be extracted`,
+    )
+    return {
+      type: null,
+      subtype: null,
+      id: null,
+    }
+  }
   return {
     type: matches[1],
-    subtype: matches[2],
+    subtype: URL_SUBTYPES_MAPPING[matches[2]] ?? matches[2],
     id: matches[3],
   }
 }

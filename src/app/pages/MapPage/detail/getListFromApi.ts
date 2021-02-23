@@ -45,12 +45,14 @@ const getListFromApi = (
   }
 
   const results = normalize
-    ? await normalize(response.results || [response])
+    ? // @ts-ignore
+      // eslint-disable-next-line no-underscore-dangle
+      await normalize(response._embedded || response.results || [response])
     : response.results || [response]
 
   return {
     data: results,
-    count: response.count,
+    count: response?.page?.totalElements ?? response.count,
     // eslint-disable-next-line no-underscore-dangle
     previous: response._links?.previous?.href || null,
     // eslint-disable-next-line no-underscore-dangle

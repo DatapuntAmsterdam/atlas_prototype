@@ -35,7 +35,7 @@ const DetailLinkList: FunctionComponent<DetailLinkListProps> = ({ item, ...other
         if ('url' in link) {
           return (
             <StyledLink
-              key={link.url}
+              key={link.id ?? link.url}
               inList
               onClick={() => trackClick(link)}
               target="_blank"
@@ -55,7 +55,7 @@ const DetailLinkList: FunctionComponent<DetailLinkListProps> = ({ item, ...other
             }}
             forwardedAs={RouterLink}
             to={link.to}
-            key={link.title}
+            key={link.id ?? link.title}
           >
             {link.title}
           </StyledLink>

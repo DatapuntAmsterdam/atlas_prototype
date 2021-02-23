@@ -12,7 +12,7 @@ export function* fetchNearestDetails(action) {
     const { uri } = yield call(fetchNearestDetail, location, layers, zoom)
     const isEmbed = yield select(isEmbedded)
 
-    if (uri) {
+    if (uri.type) {
       yield put(toDetailFromEndpoint(uri, view))
     } else if (!isEmbed && location) {
       yield call(goToGeoSearch, location)
