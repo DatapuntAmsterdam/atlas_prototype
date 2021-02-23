@@ -634,6 +634,18 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.MONUMENTEN,
             `${environment.API_ROOT}monumenten/situeringen/?betreft_nummeraanduiding=${verblijfsobjectData?.hoofdadres?.landelijk_id}`,
+            {
+              // This is pretty terrible, but if a result has the key 'hoort_bij_monument', it should fetch data
+              // that is linked to that and show that in the frontend instead.
+              normalize: async (resultToNormalize) =>
+                Promise.all(
+                  resultToNormalize?.map(async (res) =>
+                    res?.hoort_bij_monument?._links?.self?.href
+                      ? fetchWithToken(res?.hoort_bij_monument?._links?.self?.href)
+                      : res,
+                  ),
+                ),
+            },
           ),
           getConstructionFileList(detailInfo),
           getPaginatedListBlock(GLOSSARY.DEFINITIONS.STANDPLAATS, result?.standplaats),

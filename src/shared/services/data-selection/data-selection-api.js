@@ -1,5 +1,4 @@
-import isDefined from '../is-defined'
-import isObject from '../is-object'
+import isObject from '../../../app/utils/isObject'
 import DATA_SELECTION_CONFIG from './data-selection-config'
 
 function formatFilters(dataset, rawData) {
@@ -100,7 +99,7 @@ function filterUnavailableFilters(dataset, activeFilters = {}) {
         (filter) => activeFilterKey === filter.slug,
       ).length === 1
 
-    if (!isAvailable && !isDefined(activeFilters.shape)) {
+    if (!isAvailable && activeFilters?.shape === undefined) {
       delete activeAndAvailableFilters[activeFilterKey]
     }
   })

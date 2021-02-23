@@ -1,0 +1,84 @@
+{
+  "_links": {
+    "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#standplaatsen",
+    "self": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/standplaatsen/0363030000612614/?_format=json&volgnummer=4",
+      "title": "0363030000612614.4"
+    },
+    "ligtInBuurt": {
+      "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000537/?_format=json&volgnummer=2",
+      "title": "03630000000537.2"
+    },
+    "heeftDossier": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+      "title": "GV00000407"
+    },
+    "heeftHoofdadres": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000426259/?_format=json&volgnummer=3",
+      "title": "0363200000426259.3"
+    },
+    "heeftNevenadres": [],
+    "heeftOnderzoeken": []
+  },
+  "geometrie": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          113007.864,
+          489877.078
+        ],
+        [
+          112998.342,
+          489880.067
+        ],
+        [
+          112998.269,
+          489879.837
+        ],
+        [
+          112994.662,
+          489879.015
+        ],
+        [
+          112993.202,
+          489875.87
+        ],
+        [
+          112987.26,
+          489840.135
+        ],
+        [
+          112995.922,
+          489838.6
+        ],
+        [
+          113007.864,
+          489877.078
+        ]
+      ]
+    ]
+  },
+  "statusCode": 1,
+  "volgnummer": 4,
+  "ligtInBuurtVolgnummer": 2,
+  "ligtInBuurtIdentificatie": "03630000000537",
+  "ligtInBuurtId": "03630000000537",
+  "heeftDossierDossier": "GV00000407",
+  "heeftDossierId": "GV00000407",
+  "bagprocesCode": null,
+  "documentdatum": "2010-09-09",
+  "geconstateerd": false,
+  "identificatie": "0363030000612614",
+  "documentnummer": "GV00000407",
+  "eindGeldigheid": null,
+  "beginGeldigheid": "2010-09-09T00:00:00",
+  "heeftHoofdadresVolgnummer": 3,
+  "heeftHoofdadresIdentificatie": "0363200000426259",
+  "heeftHoofdadresId": "0363200000426259",
+  "registratiedatum": "2010-10-27T06:58:46",
+  "statusOmschrijving": "Plaats aangewezen",
+  "bagprocesOmschrijving": null,
+  "id": "0363030000612614.4",
+  "gebruiksdoel": []
+}
