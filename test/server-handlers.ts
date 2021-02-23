@@ -10,7 +10,7 @@ const iiifMetadataUrl = joinUrl([environment.API_ROOT, 'iiif-metadata/bouwdossie
 const dcatDatasetsUrl = joinUrl([environment.API_ROOT, 'dcatd/datasets', ':id'])
 const dcatDatasetFiltersUrl = joinUrl([environment.API_ROOT, 'dcatd/openapi'])
 const panoramaThumbnailUrl = joinUrl([environment.API_ROOT, 'panorama/thumbnail', '?:q'])
-const stadsdeelUrl = joinUrl([environment.API_ROOT, 'gebieden/stadsdeel'])
+const stadsdeelUrl = joinUrl([environment.API_ROOT, 'gebieden/stadsdeel', ':id'])
 
 const handlers = [
   rest.get(typeaheadUrl, async (req, res, ctx) => {

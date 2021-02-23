@@ -36,7 +36,7 @@ describe('fetchNearestDetails', () => {
     },
   }
 
-  it.only('should call fetchNearestDetails and dispatch the correct actions if uri is returned', () => {
+  it('should call fetchNearestDetails and dispatch the correct actions if uri is returned', () => {
     getViewMode.mockReturnValueOnce(ViewMode.Map)
     return expectSaga(fetchNearestDetails, action)
       .provide({

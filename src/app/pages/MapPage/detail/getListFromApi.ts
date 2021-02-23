@@ -44,14 +44,16 @@ const getListFromApi = (
     return emptyResult
   }
 
-  const results = normalize
-    ? // @ts-ignore
-      // eslint-disable-next-line no-underscore-dangle
-      await normalize(response._embedded || response.results || [response])
-    : response.results || [response]
+  // @ts-ignore
+  // eslint-disable-next-line no-underscore-dangle
+  const apiResponse = response._embedded ? response : response.results ?? [response]
+
+  // @ts-ignore
+  const results = normalize ? await normalize(apiResponse) : apiResponse
 
   return {
     data: results,
+    // @ts-ignore
     count: response?.page?.totalElements ?? response.count,
     // eslint-disable-next-line no-underscore-dangle
     previous: response._links?.previous?.href || null,

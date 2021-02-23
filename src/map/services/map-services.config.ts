@@ -55,7 +55,8 @@ import getRdAndWgs84Coordinates from '../../shared/services/coordinate-reference
 import AuthScope from '../../shared/services/api/authScope'
 import { Root as Vastgoed } from '../../api/vsd/vastgoed/types'
 import { Wsg84Coordinate } from '../../shared/services/coordinate-reference-system/crs-converter'
-import woonplaatsConfig from '../../api/bag/v1/woonplaatsen/detail-config'
+import { path as woonplaatsenPath, Single as Woonplaatsen } from '../../api/bag/v1/woonplaatsen'
+import { List as OpenbareRuimtesList } from '../../api/bag/v1/openbareruimtes'
 
 export const endpointTypes = {
   adressenLigplaats: 'bag/v1.1/ligplaats/',
@@ -2227,7 +2228,38 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       ],
     }),
   },
-  [endpointTypes.woonplaats]: woonplaatsConfig,
+  [endpointTypes.woonplaats]: {
+    type: 'bag/woonplaats',
+    endpoint: woonplaatsenPath,
+    mapDetail: (result) => {
+      const typedResult = (result as unknown) as Woonplaatsen
+      return {
+        title: GLOSSARY.DEFINITIONS.WOONPLAATS.singular,
+        subTitle: typedResult.naam,
+        noPanorama: true,
+        infoBox: getMainMetaBlock<Woonplaatsen>(typedResult, GLOSSARY.DEFINITIONS.WOONPLAATS),
+        items: [
+          typedResult.openbareruimtes
+            ? getPaginatedListBlock(
+                GLOSSARY.DEFINITIONS.WOONPLAATS,
+                `${typedResult.openbareruimtes.href}&_sort=naam&eindGeldigheid[isnull]=true`,
+                {
+                  pageSize: 25,
+                  normalize: (data) => {
+                    const typedData = (data as unknown) as OpenbareRuimtesList['_embedded']
+                    return typedData.openbareruimtes.map(({ _links, naam, id }) => ({
+                      _display: naam,
+                      _links,
+                      id,
+                    }))
+                  },
+                },
+              )
+            : undefined,
+        ],
+      }
+    },
+  },
   [endpointTypes.precarioShips]: {
     type: 'precariobelasting/woonschepen',
     endpoint: 'v1/precariobelasting/woonschepen',
