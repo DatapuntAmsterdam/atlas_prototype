@@ -26,6 +26,7 @@ module.exports = {
     jsdom: true,
     jasmine: true,
   },
+  ignorePatterns: ['public/*'],
   rules: {
     'consistent-return': 'off',
     'import/no-cycle': 'off',

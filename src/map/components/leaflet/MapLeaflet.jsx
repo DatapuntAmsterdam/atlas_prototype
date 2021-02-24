@@ -5,8 +5,7 @@ import 'leaflet.markercluster'
 import PropTypes from 'prop-types'
 import { Component } from 'react'
 import { GeoJSON, Map, ScaleControl, TileLayer, ZoomControl } from 'react-leaflet'
-// TODO: Polyfill is needed for Firefox 68 ESR, can be removed once we drop support.
-import ReactResizeDetector from 'react-resize-detector/build/withPolyfill'
+import ReactResizeDetector from 'react-resize-detector'
 import {
   dataSelectionType,
   DEFAULT_LAT,
