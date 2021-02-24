@@ -3,6 +3,7 @@ import { FunctionComponent, lazy, Suspense } from 'react'
 import { Helmet } from 'react-helmet'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
+import BrowserSupportAlert from './components/BrowserSupportAlert'
 import EmbedIframeComponent from './components/EmbedIframe/EmbedIframe'
 import ErrorAlert from './components/ErrorAlert/ErrorAlert'
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
@@ -85,6 +86,7 @@ const AppBody: FunctionComponent<AppBodyProps> = ({
         <>
           <AppContainer id={APP_CONTAINER_ID} className="main-container">
             <NotificationAlert />
+            <BrowserSupportAlert />
             <Suspense fallback={<StyledLoadingSpinner />}>
               <Switch>
                 <Route exact path="/" component={HomePage} />
