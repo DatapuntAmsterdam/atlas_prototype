@@ -1,44 +1,13 @@
-import { endpointTypes } from '../map-services.config'
+import servicesByEndpointType, { endpointTypes } from '../map-services.config'
 import environment from '../../../environment'
-import { path as woonplaatsenPath } from '../../../api/bag/v1/woonplaatsen'
-
-export const pageEndpointTypeMapping = {
-  'bag/ligplaats/': 'bag/v1.1/ligplaats/',
-  'bag/nummeraanduiding/': 'bag/v1.1/nummeraanduiding/',
-  'bag/openbareruimte/': 'bag/v1.1/openbareruimte/',
-  'bag/pand/': 'bag/v1.1/pand/',
-  'bag/standplaats/': 'bag/v1.1/standplaats/',
-  'bag/verblijfsobject/': 'bag/v1.1/verblijfsobject/',
-  'bag/woonplaats/': woonplaatsenPath,
-  'bouwstroompunten/bouwstroompunten/': 'v1/bouwstroompunten/bouwstroompunten/',
-  'explosieven/gevrijwaardgebied/': 'milieuthemas/explosieven/gevrijwaardgebied/',
-  'explosieven/inslagen/': 'milieuthemas/explosieven/inslagen/',
-  'explosieven/uitgevoerdonderzoek/': 'milieuthemas/explosieven/uitgevoerdonderzoek/',
-  'explosieven/verdachtgebied/': 'milieuthemas/explosieven/verdachtgebied/',
-  'fietspaaltjes/fietspaaltjes/': 'v1/fietspaaltjes/fietspaaltjes/',
-  'grex/projecten/': 'v1/grex/projecten/',
-  'parkeervakken/parkeervakken/': 'v1/parkeervakken/parkeervakken/',
-  'bouwdossiers/bouwdossier/': 'iiif-metadata/bouwdossier/',
-  'precariobelasting/woonschepen/': 'v1/precariobelasting/woonschepen/',
-  'precariobelasting/bedrijfsvaartuigen/': 'v1/precariobelasting/bedrijfsvaartuigen/',
-  'precariobelasting/passagiersvaartuigen/': 'v1/precariobelasting/passagiersvaartuigen/',
-  'precariobelasting/terrassen/': 'v1/precariobelasting/terrassen/',
-  'hoofdroutes/tunnels_gevaarlijke_stoffen/': 'v1/hoofdroutes/tunnels_gevaarlijke_stoffen/',
-  'covid_19/aanlegverbod/': 'v1/covid_19/aanlegverbod/',
-  'covid_19/straatartiestverbod/': 'v1/covid_19/straatartiestverbod/',
-  'covid_19/alcoholverkoopverbod/': 'v1/covid_19/alcoholverkoopverbod/',
-  'covid_19/mondmaskerverplichting/': 'v1/covid_19/mondmaskerverplichting/',
-  'covid_19/gebiedsverbod/': 'v1/covid_19/gebiedsverbod/',
-  'woningbouwplannen/gebied_bouwblok_woningen/': 'v1/woningbouwplannen/gebied_bouwblok_woningen/',
-  'woningbouwplannen/bag_pand_sloop_status/': 'v1/woningbouwplannen/bag_pand_sloop_status/',
-  'woningbouwplannen/strategischeruimtes/': 'v1/woningbouwplannen/strategischeruimtes/',
-  'woningbouwplannen/woningbouwplan/': 'v1/woningbouwplannen/woningbouwplan/',
-}
+import joinUrl from '../../../app/utils/joinUrl'
 
 export const pageTypeToEndpoint = (type: string, subtype: string, id: string) => {
-  const endpointType: keyof typeof pageEndpointTypeMapping =
-    pageEndpointTypeMapping[`${type}/${subtype}/`] || `${type}/${subtype}/`
-  return `${environment.API_ROOT}${endpointType}${id}/`
+  const endpointType =
+    Object.values(servicesByEndpointType).find(
+      ({ type: serviceType }) => serviceType === `${type}/${subtype}`,
+    )?.endpoint || `${type}/${subtype}`
+  return joinUrl([environment.API_ROOT, endpointType, id], true)
 }
 
 export const getEndpointTypeForResult = (endpointType: string, detail: any) => {
