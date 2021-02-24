@@ -57,6 +57,13 @@ import { Root as Vastgoed } from '../../api/vsd/vastgoed/types'
 import { Wsg84Coordinate } from '../../shared/services/coordinate-reference-system/crs-converter'
 import { path as woonplaatsenPath, Single as Woonplaatsen } from '../../api/bag/v1/woonplaatsen'
 import { List as OpenbareRuimtesList } from '../../api/bag/v1/openbareruimtes'
+import { path as algemeenoverlastPath } from '../../api/overlastgebieden/algemeenoverlast'
+import { path as dealeroverlastPath } from '../../api/overlastgebieden/dealeroverlast'
+import { path as alcoholverbodPath } from '../../api/overlastgebieden/alcoholverbod'
+import { path as cameratoezichtPath } from '../../api/overlastgebieden/cameratoezicht'
+import { path as rondleidingverbodPath } from '../../api/overlastgebieden/rondleidingverbod'
+import { path as taxistandplaatsPath } from '../../api/overlastgebieden/taxistandplaats'
+import { Single as OverlastgebiedenSingle } from '../../api/overlastgebieden/types'
 
 export const endpointTypes = {
   adressenLigplaats: 'bag/v1.1/ligplaats/',
@@ -107,11 +114,17 @@ export const endpointTypes = {
   vastgoed: 'vsd/vastgoed',
   vestiging: 'handelsregister/vestiging/',
   winkelgebied: 'vsd/winkgeb',
-  woonplaats: 'v1/bag/woonplaatsen',
+  woonplaats: woonplaatsenPath,
   woningbouwplannen: 'v1/woningbouwplannen/woningbouwplan/',
   woningbouwplannenGebiedBouwblokWoningen: 'v1/woningbouwplannen/gebied_bouwblok_woningen/',
   woningbouwplannenBagPandSloopStatus: 'v1/woningbouwplannen/bag_pand_sloop_status/',
   woningbouwplannenStrategischeRuimtes: 'v1/woningbouwplannen/strategischeruimtes/',
+  overlastgebiedenAlgemeenoverlast: algemeenoverlastPath,
+  overlastgebiedenDealeroverlast: dealeroverlastPath,
+  overlastgebiedenCameratoezicht: cameratoezichtPath,
+  overlastgebiedenAlcoholverbod: alcoholverbodPath,
+  overlastgebiedenRondleidingverbod: rondleidingverbodPath,
+  overlastgebiedenTaxistandplaats: taxistandplaatsPath,
 }
 
 export interface ServiceDefinition extends DetailAuthentication {
@@ -415,6 +428,23 @@ const getCovidBlock = (result: PotentialApiResult): DetailResult => ({
           href: result.url,
         },
       ],
+    },
+  ],
+})
+
+const getOverlastgebiedenBlock = (
+  result: OverlastgebiedenSingle,
+): DetailResultItemDefinitionList => ({
+  type: DetailResultItemType.DefinitionList,
+  entries: [
+    {
+      term: 'Soort overlastgebied',
+      description: result.soort,
+    },
+    {
+      term: 'Aanvullende informatie',
+      description: result.url,
+      href: result.url,
     },
   ],
 })
@@ -2625,6 +2655,78 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         },
       ],
     }),
+  },
+  [endpointTypes.overlastgebiedenAlgemeenoverlast]: {
+    type: 'overlastgebieden/algemeenoverlast',
+    endpoint: endpointTypes.overlastgebiedenAlgemeenoverlast,
+    mapDetail: (result) => {
+      const typedResult = (result as unknown) as OverlastgebiedenSingle
+      return {
+        title: 'Overlastgebieden Algemeenoverlast',
+        subTitle: typedResult.oovNaam,
+        items: [getOverlastgebiedenBlock(typedResult)],
+      }
+    },
+  },
+  [endpointTypes.overlastgebiedenDealeroverlast]: {
+    type: 'overlastgebieden/dealeroverlast',
+    endpoint: endpointTypes.overlastgebiedenDealeroverlast,
+    mapDetail: (result) => {
+      const typedResult = (result as unknown) as OverlastgebiedenSingle
+      return {
+        title: 'Overlastgebieden Dealeroverlast',
+        subTitle: typedResult.oovNaam,
+        items: [getOverlastgebiedenBlock(typedResult)],
+      }
+    },
+  },
+  [endpointTypes.overlastgebiedenCameratoezicht]: {
+    type: 'overlastgebieden/cameratoezicht',
+    endpoint: endpointTypes.overlastgebiedenCameratoezicht,
+    mapDetail: (result) => {
+      const typedResult = (result as unknown) as OverlastgebiedenSingle
+      return {
+        title: 'Overlastgebieden Cameratoezicht',
+        subTitle: typedResult.oovNaam,
+        items: [getOverlastgebiedenBlock(typedResult)],
+      }
+    },
+  },
+  [endpointTypes.overlastgebiedenAlcoholverbod]: {
+    type: 'overlastgebieden/alcoholverbod',
+    endpoint: endpointTypes.overlastgebiedenAlcoholverbod,
+    mapDetail: (result) => {
+      const typedResult = (result as unknown) as OverlastgebiedenSingle
+      return {
+        title: 'Overlastgebieden Alcoholverbod',
+        subTitle: typedResult.oovNaam,
+        items: [getOverlastgebiedenBlock(typedResult)],
+      }
+    },
+  },
+  [endpointTypes.overlastgebiedenRondleidingverbod]: {
+    type: 'overlastgebieden/rondleidingverbod',
+    endpoint: endpointTypes.overlastgebiedenRondleidingverbod,
+    mapDetail: (result) => {
+      const typedResult = (result as unknown) as OverlastgebiedenSingle
+      return {
+        title: 'Overlastgebieden Rondleidingverbod',
+        subTitle: typedResult.oovNaam,
+        items: [getOverlastgebiedenBlock(typedResult)],
+      }
+    },
+  },
+  [endpointTypes.overlastgebiedenTaxistandplaats]: {
+    type: 'overlastgebieden/taxistandplaats',
+    endpoint: taxistandplaatsPath,
+    mapDetail: (result) => {
+      const typedResult = (result as unknown) as OverlastgebiedenSingle
+      return {
+        title: 'Overlastgebieden Taxistandplaats',
+        subTitle: typedResult.oovNaam,
+        items: [getOverlastgebiedenBlock(typedResult)],
+      }
+    },
   },
 }
 
