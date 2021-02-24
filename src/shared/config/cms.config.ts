@@ -1,6 +1,7 @@
 import environment from '../../environment'
 import { Environment } from '../environment'
 import { HOMEPAGE_LINKS } from './content-links'
+import { HIGHLIGHT } from './constants'
 
 const SHARED_FIELDS = ['field_intro', 'field_cover_image.field_media_image.uri', 'field_language']
 
@@ -217,7 +218,7 @@ const cmsConfig = {
         HOMEPAGE_LINKS.HIGHLIGHT.id[
           (environment.DEPLOY_ENV as Environment) || Environment.Production
         ]
-      }?include=field_items.field_teaser_image.field_media_image&sort=-created`,
+      }?include=field_items.field_teaser_image.field_media_image&sort=-created&__type__=${HIGHLIGHT}`,
     fields: [
       'field_items.id',
       'field_items.title',

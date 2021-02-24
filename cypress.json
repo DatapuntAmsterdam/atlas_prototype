@@ -7,5 +7,6 @@
     "runMode": 1,
     "openMode": 0
   },
-  "video": false
+  "video": false,
+  "experimentalRunEvents": true
 }

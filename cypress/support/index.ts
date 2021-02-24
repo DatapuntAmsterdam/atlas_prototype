@@ -12,7 +12,6 @@
 // You can read more here:
 // https://on.cypress.io/configuration
 // ***********************************************************
-
 import './authentication-commands'
 import './detail-panel-commands'
 import './helper-functions'

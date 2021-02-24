@@ -7,6 +7,9 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
 import { Configuration, DefinePlugin } from 'webpack'
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { version } = require('./package.json')
+
 /**
  * Gets the absolute path to a module in the `node_modules` directory.
  *
@@ -226,8 +229,10 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
         ],
       }),
       new DefinePlugin({
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        'process.env.VERSION': JSON.stringify(require('./package.json').version),
+        'process.env': JSON.stringify({
+          ...process.env,
+          version,
+        }),
       }),
       new MiniCssExtractPlugin({
         filename: '[name].css',

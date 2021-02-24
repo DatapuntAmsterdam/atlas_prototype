@@ -7,7 +7,8 @@ import {
 } from '../../src/shared/config/content-links'
 
 describe('Homepage module', () => {
-  const sizes: Cypress.ViewportPreset[] = ['iphone-x', 'ipad-2', 'macbook-15']
+  // const sizes: Cypress.ViewportPreset[] = ['iphone-x', 'ipad-2', 'macbook-15']
+  const sizes: Cypress.ViewportPreset[] = ['macbook-15']
   sizes.forEach((size) => {
     describe(`Header navigation ${size as string}`, () => {
       beforeEach(() => {
@@ -190,7 +191,9 @@ describe('Homepage module', () => {
         cy.get(menuSelector).contains('Inloggen')
       })
 
-      it('Should check the highlight block', () => {
+      it.only('Should check the highlight block', () => {
+        // cy.wait('@highlightsListFixture')
+
         cy.get(HOMEPAGE.highlightBlock).scrollIntoView().and('be.visible')
         cy.get(HOMEPAGE.highlightCard).should('have.length', '3')
         cy.contains('Bekijk overzicht').click()

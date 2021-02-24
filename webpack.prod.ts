@@ -1,19 +1,12 @@
-import path from 'path'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import TerserPlugin from 'terser-webpack-plugin'
 import { merge } from 'webpack-merge'
 import { GenerateSW } from 'workbox-webpack-plugin'
-import { createConfig, srcPath } from './webpack.common'
+import { createConfig } from './webpack.common'
 
 const debugMode = process.env.DEBUG === 'true'
 
 export default merge(createConfig({ mode: 'production' }), {
   bail: true,
-  resolve: {
-    alias: {
-      [path.resolve(srcPath, 'environment.ts')]: path.resolve(srcPath, 'environment.prod.ts'),
-    },
-  },
   output: {
     filename: '[name].js',
     chunkFilename: '[name].js',

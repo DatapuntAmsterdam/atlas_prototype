@@ -1,55 +1,64 @@
 /* eslint-disable global-require,@typescript-eslint/no-var-requires */
-
 import { rest } from 'msw'
-import environment from '../src/environment'
-import joinUrl from '../src/app/utils/joinUrl'
-import { isAuthenticated } from '../src/shared/services/auth/auth'
+// import joinUrl from '../src/app/utils/joinUrl'
+// import { isAuthenticated } from '../src/shared/services/auth/auth'
+import { HIGHLIGHT } from '../src/shared/config/constants'
+import { highlightsListFixture } from '../src/api/cms/jsonapi/node'
 
-const typeaheadUrl = joinUrl([environment.API_ROOT, 'typeahead'])
-const iiifMetadataUrl = joinUrl([environment.API_ROOT, 'iiif-metadata/bouwdossier', ':id'])
-const dcatDatasetsUrl = joinUrl([environment.API_ROOT, 'dcatd/datasets', ':id'])
-const dcatDatasetFiltersUrl = joinUrl([environment.API_ROOT, 'dcatd/openapi'])
-const panoramaThumbnailUrl = joinUrl([environment.API_ROOT, 'panorama/thumbnail', '?:q'])
-const stadsdeelUrl = joinUrl([environment.API_ROOT, 'gebieden/stadsdeel'])
+// const typeaheadUrl = joinUrl([API_ROOT, 'typeahead'])
+// const iiifMetadataUrl = joinUrl([API_ROOT, 'iiif-metadata/bouwdossier', ':id'])
+// const dcatDatasetsUrl = joinUrl([API_ROOT, 'dcatd/datasets', ':id'])
+// const dcatDatasetFiltersUrl = joinUrl([API_ROOT, 'dcatd/openapi'])
+// const panoramaThumbnailUrl = joinUrl([API_ROOT, 'panorama/thumbnail', '?:q'])
+// const stadsdeelUrl = joinUrl([API_ROOT, 'gebieden/stadsdeel'])
+
+const highLightRegExp = `**/jsonapi/node/list/**&__type__=${HIGHLIGHT}`
 
 const handlers = [
-  rest.get(typeaheadUrl, async (req, res, ctx) => {
-    const typeaheadFixture = require('../src/api/typeahead/typeahead.json')
-    const typeaheadAuthFixture = require('../src/api/typeahead/typeahead_auth.json')
+  rest.get(highLightRegExp, async (req, res, ctx) => res(ctx.json(highlightsListFixture))),
 
-    const fixture = isAuthenticated() ? typeaheadAuthFixture : typeaheadFixture
-    return res(ctx.json(fixture))
-  }),
+  // rest.get(/typeahead$/, async (req, res, ctx) => {
+  //   const typeaheadFixture = require('../src/api/typeahead/typeahead.json')
+  //   // const typeaheadAuthFixture = require('../src/api/typeahead/typeahead_auth.json')
 
-  rest.get(iiifMetadataUrl, async (req, res, ctx) => {
-    const bouwdossierFixture = require('../src/api/iiif-metadata/bouwdossier').singleFixture
+  //   // const fixture = isAuthenticated() ? typeaheadAuthFixture : typeaheadFixture
+  //   return res(ctx.json(typeaheadFixture))
+  // }),
 
-    return res(ctx.json(bouwdossierFixture))
-  }),
+  // rest.get(/iiif-metadata\/bouwdossier$/, async (req, res, ctx) => {
+  //   const bouwdossierFixture = require('../src/api/iiif-metadata/bouwdossier').singleFixture
 
-  rest.get(dcatDatasetsUrl, async (req, res, ctx) => {
-    const datasetsFixture = require('../src/api/dcatd/datasets').singleFixture
+  //   return res(ctx.json(bouwdossierFixture))
+  // }),
 
-    return res(ctx.json(datasetsFixture))
-  }),
+  // rest.get(/dcatd\/datasets$/, async (req, res, ctx) => {
+  //   const datasetsFixture = require('../src/api/dcatd/datasets').singleFixture
 
-  rest.get(dcatDatasetFiltersUrl, async (req, res, ctx) => {
-    const datasetFiltersFixture = require('../src/api/dcatd/openapi').singleFixture
+  //   return res(ctx.json(datasetsFixture))
+  // }),
 
-    return res(ctx.json(datasetFiltersFixture))
-  }),
+  // rest.get(/dcatd\/openapi$/, async (req, res, ctx) => {
+  //   const datasetFiltersFixture = require('../src/api/dcatd/openapi').singleFixture
 
-  rest.get(panoramaThumbnailUrl, async (req, res, ctx) => {
-    const panoramaThumbnailFixture = require('../src/api/panorama/thumbnail').singleFixture
+  //   return res(ctx.json(datasetFiltersFixture))
+  // }),
 
-    return res(ctx.json(panoramaThumbnailFixture))
-  }),
+  // rest.get(/'panorama\/thumbnail$/, async (req, res, ctx) => {
+  //   const panoramaThumbnailFixture = require('../src/api/panorama/thumbnail').singleFixture
 
-  rest.get(stadsdeelUrl, async (req, res, ctx) => {
-    const stadsdeelFixture = require('../src/api/gebieden/stadsdeel').singleFixture
+  //   return res(ctx.json(panoramaThumbnailFixture))
+  // }),
 
-    return res(ctx.json(stadsdeelFixture))
-  }),
+  // rest.get(/gebieden\/stadsdeel$/, async (req, res, ctx) => {
+  //   const stadsdeelFixture = require('../src/api/gebieden/stadsdeel').singleFixture
+
+  //   return res(ctx.json(stadsdeelFixture))
+  // }),
 ]
 
-export default handlers
+const highlightsList = {
+  fixture: highlightsListFixture,
+  url: highLightRegExp,
+}
+
+export { handlers as default, highlightsList }

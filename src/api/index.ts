@@ -39,6 +39,7 @@ import * as oplaadpunten from './vsd/oplaadpunten'
 import * as parkeerzonesUitzondering from './vsd/parkeerzones-uitzondering'
 import * as reclamebelasting from './vsd/reclamebelasting'
 import * as vastgoed from './vsd/vastgoed'
+import * as highlights from './cms/jsonapi/node'
 
 type ApiConfig = {
   singleFixture: any
@@ -93,5 +94,6 @@ const api = typeHelper({
   parkeerzonesUitzondering,
   reclamebelasting,
   vastgoed,
+  highlights,
 })
 export default api
