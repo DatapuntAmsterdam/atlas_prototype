@@ -12,4 +12,14 @@ describe('getDetailUrl', () => {
       `${environment.API_ROOT}v1/grex/projecten/1234/`,
     )
   })
+
+  it('should handle endpoints with a trailing slash', () => {
+    const serviceDefinition = {
+      endpoint: 'v1/grex/projecten/',
+    } as ServiceDefinition
+
+    expect(getDetailUrl(serviceDefinition, '1234')).toEqual(
+      `${environment.API_ROOT}v1/grex/projecten/1234/`,
+    )
+  })
 })

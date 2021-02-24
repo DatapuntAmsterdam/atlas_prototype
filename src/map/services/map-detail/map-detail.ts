@@ -1,5 +1,6 @@
 import { endpointTypes } from '../map-services.config'
 import environment from '../../../environment'
+import { path as woonplaatsenPath } from '../../../api/bag/v1/woonplaatsen'
 
 export const pageEndpointTypeMapping = {
   'bag/ligplaats/': 'bag/v1.1/ligplaats/',
@@ -8,7 +9,7 @@ export const pageEndpointTypeMapping = {
   'bag/pand/': 'bag/v1.1/pand/',
   'bag/standplaats/': 'bag/v1.1/standplaats/',
   'bag/verblijfsobject/': 'bag/v1.1/verblijfsobject/',
-  'bag/woonplaats/': 'bag/v1.1/woonplaats/',
+  'bag/woonplaats/': woonplaatsenPath,
   'bouwstroompunten/bouwstroompunten/': 'v1/bouwstroompunten/bouwstroompunten/',
   'explosieven/gevrijwaardgebied/': 'milieuthemas/explosieven/gevrijwaardgebied/',
   'explosieven/inslagen/': 'milieuthemas/explosieven/inslagen/',

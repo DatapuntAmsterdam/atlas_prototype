@@ -1,0 +1,629 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/?_format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "_embedded": {
+    "verblijfsobjecten": [
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#verblijfsobjecten",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543292/?_format=json&volgnummer=5",
+            "title": "0363010000543292.5"
+          },
+          "heeftEenRelatieMetVerblijfsobjectKadastraleobjecten": [],
+          "ligtInBuurt": null,
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000406/?_format=json",
+            "title": "GV00000406"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006110/?_format=json&volgnummer=3",
+            "title": "0363200000006110.3"
+          },
+          "ligtInPanden": [],
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "cbsNummer": null,
+        "geometrie": {
+          "type": "Point",
+          "coordinates": [
+            120700,
+            487936
+          ]
+        },
+        "statusCode": 4,
+        "volgnummer": 5,
+        "ligtInBuurtVolgnummer": null,
+        "ligtInBuurtIdentificatie": null,
+        "ligtInBuurtId": "",
+        "oppervlakte": 30,
+        "aantalKamers": null,
+        "heeftDossierDossier": "GV00000406",
+        "heeftDossierId": "GV00000406",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363010000543292",
+        "documentnummer": "GV00000406",
+        "eindGeldigheid": "2010-09-09T00:00:00",
+        "aantalBouwlagen": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000006110",
+        "heeftHoofdadresId": "0363200000006110",
+        "hoogsteBouwlaag": null,
+        "laagsteBouwlaag": null,
+        "redenafvoerCode": null,
+        "redenopvoerCode": 11,
+        "registratiedatum": "2010-10-27T05:56:51",
+        "verdiepingToegang": 0,
+        "statusOmschrijving": "Verblijfsobject in gebruik",
+        "feitelijkGebruikCode": 3110,
+        "aantalEenhedenComplex": null,
+        "bagprocesOmschrijving": null,
+        "financieringscodeCode": null,
+        "eigendomsverhoudingCode": 1,
+        "indicatieWoningvoorraad": "N",
+        "redenafvoerOmschrijving": null,
+        "redenopvoerOmschrijving": "Mutatie",
+        "gebruiksdoelWoonfunctieCode": null,
+        "feitelijkGebruikOmschrijving": "(detail)handel / winkel",
+        "financieringscodeOmschrijving": null,
+        "eigendomsverhoudingOmschrijving": "Huur",
+        "gebruiksdoelWoonfunctieOmschrijving": null,
+        "gebruiksdoelGezondheidszorgfunctieCode": null,
+        "gebruiksdoelGezondheidszorgfunctieOmschrijving": null,
+        "id": "0363010000543292.5",
+        "toegang": [],
+        "gebruiksdoel": [
+          {
+            "code": "10",
+            "omschrijving": "winkelfunctie"
+          }
+        ]
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#verblijfsobjecten",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543292/?_format=json&volgnummer=6",
+            "title": "0363010000543292.6"
+          },
+          "heeftEenRelatieMetVerblijfsobjectKadastraleobjecten": [],
+          "ligtInBuurt": null,
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000406/?_format=json",
+            "title": "GV00000406"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006110/?_format=json&volgnummer=3",
+            "title": "0363200000006110.3"
+          },
+          "ligtInPanden": [],
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "cbsNummer": null,
+        "geometrie": {
+          "type": "Point",
+          "coordinates": [
+            120700,
+            487936
+          ]
+        },
+        "statusCode": 4,
+        "volgnummer": 6,
+        "ligtInBuurtVolgnummer": null,
+        "ligtInBuurtIdentificatie": null,
+        "ligtInBuurtId": "",
+        "oppervlakte": 30,
+        "aantalKamers": null,
+        "heeftDossierDossier": "GV00000406",
+        "heeftDossierId": "GV00000406",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363010000543292",
+        "documentnummer": "GV00000406",
+        "eindGeldigheid": "2010-09-09T00:00:00",
+        "aantalBouwlagen": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000006110",
+        "heeftHoofdadresId": "0363200000006110",
+        "hoogsteBouwlaag": null,
+        "laagsteBouwlaag": null,
+        "redenafvoerCode": null,
+        "redenopvoerCode": null,
+        "registratiedatum": "2014-07-05T17:18:37",
+        "verdiepingToegang": 0,
+        "statusOmschrijving": "Verblijfsobject in gebruik",
+        "feitelijkGebruikCode": 3110,
+        "aantalEenhedenComplex": null,
+        "bagprocesOmschrijving": null,
+        "financieringscodeCode": null,
+        "eigendomsverhoudingCode": 1,
+        "indicatieWoningvoorraad": "N",
+        "redenafvoerOmschrijving": null,
+        "redenopvoerOmschrijving": null,
+        "gebruiksdoelWoonfunctieCode": null,
+        "feitelijkGebruikOmschrijving": "(detail)handel / winkel",
+        "financieringscodeOmschrijving": null,
+        "eigendomsverhoudingOmschrijving": "Huur",
+        "gebruiksdoelWoonfunctieOmschrijving": null,
+        "gebruiksdoelGezondheidszorgfunctieCode": null,
+        "gebruiksdoelGezondheidszorgfunctieOmschrijving": null,
+        "id": "0363010000543292.6",
+        "toegang": [],
+        "gebruiksdoel": [
+          {
+            "code": "10",
+            "omschrijving": "winkelfunctie"
+          }
+        ]
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#verblijfsobjecten",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543292/?_format=json&volgnummer=7",
+            "title": "0363010000543292.7"
+          },
+          "heeftEenRelatieMetVerblijfsobjectKadastraleobjecten": [
+            {
+              "href": "https://api.data.amsterdam.nl/v1/brk/kadastraleobjecten/NL.KAD.OnroerendeZaak.11490559370000/?_format=json&volgnummer=2",
+              "title": "NL.KAD.OnroerendeZaak.11490559370000.2"
+            }
+          ],
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630023753961/?_format=json&volgnummer=1",
+            "title": "03630023753961.1"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000406/?_format=json",
+            "title": "GV00000406"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006110/?_format=json&volgnummer=3",
+            "title": "0363200000006110.3"
+          },
+          "ligtInPanden": [
+            {
+              "href": "https://api.data.amsterdam.nl/v1/bag/panden/0363100012174784/?_format=json&volgnummer=6",
+              "title": "0363100012174784.6"
+            }
+          ],
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "cbsNummer": null,
+        "geometrie": {
+          "type": "Point",
+          "coordinates": [
+            120700,
+            487936
+          ]
+        },
+        "statusCode": 4,
+        "volgnummer": 7,
+        "ligtInBuurtVolgnummer": 1,
+        "ligtInBuurtIdentificatie": "03630023753961",
+        "ligtInBuurtId": "03630023753961",
+        "oppervlakte": 30,
+        "aantalKamers": null,
+        "heeftDossierDossier": "GV00000406",
+        "heeftDossierId": "GV00000406",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363010000543292",
+        "documentnummer": "GV00000406",
+        "eindGeldigheid": null,
+        "aantalBouwlagen": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000006110",
+        "heeftHoofdadresId": "0363200000006110",
+        "hoogsteBouwlaag": null,
+        "laagsteBouwlaag": null,
+        "redenafvoerCode": null,
+        "redenopvoerCode": null,
+        "registratiedatum": "2019-04-12T19:30:23",
+        "verdiepingToegang": 0,
+        "statusOmschrijving": "Verblijfsobject in gebruik",
+        "feitelijkGebruikCode": 3111,
+        "aantalEenhedenComplex": null,
+        "bagprocesOmschrijving": null,
+        "financieringscodeCode": null,
+        "eigendomsverhoudingCode": 1,
+        "indicatieWoningvoorraad": "N",
+        "redenafvoerOmschrijving": null,
+        "redenopvoerOmschrijving": null,
+        "gebruiksdoelWoonfunctieCode": null,
+        "feitelijkGebruikOmschrijving": "winkel",
+        "financieringscodeOmschrijving": null,
+        "eigendomsverhoudingOmschrijving": "Huur",
+        "gebruiksdoelWoonfunctieOmschrijving": null,
+        "gebruiksdoelGezondheidszorgfunctieCode": null,
+        "gebruiksdoelGezondheidszorgfunctieOmschrijving": null,
+        "id": "0363010000543292.7",
+        "toegang": [],
+        "gebruiksdoel": [
+          {
+            "code": "10",
+            "omschrijving": "winkelfunctie"
+          }
+        ]
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#verblijfsobjecten",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543293/?_format=json&volgnummer=4",
+            "title": "0363010000543293.4"
+          },
+          "heeftEenRelatieMetVerblijfsobjectKadastraleobjecten": [],
+          "ligtInBuurt": null,
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000406/?_format=json",
+            "title": "GV00000406"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006111/?_format=json&volgnummer=3",
+            "title": "0363200000006111.3"
+          },
+          "ligtInPanden": [],
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "cbsNummer": null,
+        "geometrie": {
+          "type": "Point",
+          "coordinates": [
+            120700,
+            487936
+          ]
+        },
+        "statusCode": 4,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": null,
+        "ligtInBuurtIdentificatie": null,
+        "ligtInBuurtId": "",
+        "oppervlakte": 1,
+        "aantalKamers": 2,
+        "heeftDossierDossier": "GV00000406",
+        "heeftDossierId": "GV00000406",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363010000543293",
+        "documentnummer": "GV00000406",
+        "eindGeldigheid": "2012-08-09T00:00:00",
+        "aantalBouwlagen": 1,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000006111",
+        "heeftHoofdadresId": "0363200000006111",
+        "hoogsteBouwlaag": null,
+        "laagsteBouwlaag": null,
+        "redenafvoerCode": null,
+        "redenopvoerCode": 11,
+        "registratiedatum": "2010-10-24T01:54:40",
+        "verdiepingToegang": 1,
+        "statusOmschrijving": "Verblijfsobject in gebruik",
+        "feitelijkGebruikCode": 1800,
+        "aantalEenhedenComplex": null,
+        "bagprocesOmschrijving": null,
+        "financieringscodeCode": 500,
+        "eigendomsverhoudingCode": 1,
+        "indicatieWoningvoorraad": "J",
+        "redenafvoerOmschrijving": null,
+        "redenopvoerOmschrijving": "Mutatie",
+        "gebruiksdoelWoonfunctieCode": null,
+        "feitelijkGebruikOmschrijving": "woning",
+        "financieringscodeOmschrijving": "Ongesubsidieerde bouw (500)",
+        "eigendomsverhoudingOmschrijving": "Huur",
+        "gebruiksdoelWoonfunctieOmschrijving": null,
+        "gebruiksdoelGezondheidszorgfunctieCode": null,
+        "gebruiksdoelGezondheidszorgfunctieOmschrijving": null,
+        "id": "0363010000543293.4",
+        "toegang": [
+          {
+            "code": "1",
+            "omschrijving": "Trap"
+          }
+        ],
+        "gebruiksdoel": [
+          {
+            "code": "1",
+            "omschrijving": "woonfunctie"
+          }
+        ]
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#verblijfsobjecten",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543293/?_format=json&volgnummer=7",
+            "title": "0363010000543293.7"
+          },
+          "heeftEenRelatieMetVerblijfsobjectKadastraleobjecten": [],
+          "ligtInBuurt": null,
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00001551/?_format=json",
+            "title": "GV00001551"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006111/?_format=json&volgnummer=3",
+            "title": "0363200000006111.3"
+          },
+          "ligtInPanden": [],
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "cbsNummer": null,
+        "geometrie": {
+          "type": "Point",
+          "coordinates": [
+            120700,
+            487936
+          ]
+        },
+        "statusCode": 4,
+        "volgnummer": 7,
+        "ligtInBuurtVolgnummer": null,
+        "ligtInBuurtIdentificatie": null,
+        "ligtInBuurtId": "",
+        "oppervlakte": 32,
+        "aantalKamers": 2,
+        "heeftDossierDossier": "GV00001551",
+        "heeftDossierId": "GV00001551",
+        "bagprocesCode": 100,
+        "documentdatum": "2012-08-09",
+        "geconstateerd": false,
+        "identificatie": "0363010000543293",
+        "documentnummer": "GV00001551",
+        "eindGeldigheid": "2012-08-09T00:00:00",
+        "aantalBouwlagen": 1,
+        "beginGeldigheid": "2012-08-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000006111",
+        "heeftHoofdadresId": "0363200000006111",
+        "hoogsteBouwlaag": null,
+        "laagsteBouwlaag": null,
+        "redenafvoerCode": null,
+        "redenopvoerCode": 11,
+        "registratiedatum": "2012-08-09T21:07:07",
+        "verdiepingToegang": 1,
+        "statusOmschrijving": "Verblijfsobject in gebruik",
+        "feitelijkGebruikCode": 1800,
+        "aantalEenhedenComplex": null,
+        "bagprocesOmschrijving": "Muteren naar aanleiding van signalering",
+        "financieringscodeCode": 500,
+        "eigendomsverhoudingCode": 1,
+        "indicatieWoningvoorraad": "J",
+        "redenafvoerOmschrijving": null,
+        "redenopvoerOmschrijving": "Mutatie",
+        "gebruiksdoelWoonfunctieCode": null,
+        "feitelijkGebruikOmschrijving": "woning",
+        "financieringscodeOmschrijving": "Ongesubsidieerde bouw (500)",
+        "eigendomsverhoudingOmschrijving": "Huur",
+        "gebruiksdoelWoonfunctieOmschrijving": null,
+        "gebruiksdoelGezondheidszorgfunctieCode": null,
+        "gebruiksdoelGezondheidszorgfunctieOmschrijving": null,
+        "id": "0363010000543293.7",
+        "toegang": [
+          {
+            "code": "1",
+            "omschrijving": "Trap"
+          }
+        ],
+        "gebruiksdoel": [
+          {
+            "code": "1",
+            "omschrijving": "woonfunctie"
+          }
+        ]
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#verblijfsobjecten",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543293/?_format=json&volgnummer=8",
+            "title": "0363010000543293.8"
+          },
+          "heeftEenRelatieMetVerblijfsobjectKadastraleobjecten": [],
+          "ligtInBuurt": null,
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00001551/?_format=json",
+            "title": "GV00001551"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006111/?_format=json&volgnummer=3",
+            "title": "0363200000006111.3"
+          },
+          "ligtInPanden": [],
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "cbsNummer": null,
+        "geometrie": {
+          "type": "Point",
+          "coordinates": [
+            120700,
+            487936
+          ]
+        },
+        "statusCode": 4,
+        "volgnummer": 8,
+        "ligtInBuurtVolgnummer": null,
+        "ligtInBuurtIdentificatie": null,
+        "ligtInBuurtId": "",
+        "oppervlakte": 32,
+        "aantalKamers": 2,
+        "heeftDossierDossier": "GV00001551",
+        "heeftDossierId": "GV00001551",
+        "bagprocesCode": 100,
+        "documentdatum": "2012-08-09",
+        "geconstateerd": false,
+        "identificatie": "0363010000543293",
+        "documentnummer": "GV00001551",
+        "eindGeldigheid": "2012-08-09T00:00:00",
+        "aantalBouwlagen": 1,
+        "beginGeldigheid": "2012-08-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000006111",
+        "heeftHoofdadresId": "0363200000006111",
+        "hoogsteBouwlaag": null,
+        "laagsteBouwlaag": null,
+        "redenafvoerCode": null,
+        "redenopvoerCode": null,
+        "registratiedatum": "2014-07-05T17:18:55",
+        "verdiepingToegang": 1,
+        "statusOmschrijving": "Verblijfsobject in gebruik",
+        "feitelijkGebruikCode": 1800,
+        "aantalEenhedenComplex": null,
+        "bagprocesOmschrijving": "Muteren naar aanleiding van signalering",
+        "financieringscodeCode": 500,
+        "eigendomsverhoudingCode": 1,
+        "indicatieWoningvoorraad": "J",
+        "redenafvoerOmschrijving": null,
+        "redenopvoerOmschrijving": null,
+        "gebruiksdoelWoonfunctieCode": null,
+        "feitelijkGebruikOmschrijving": "woning",
+        "financieringscodeOmschrijving": "Ongesubsidieerde bouw (500)",
+        "eigendomsverhoudingOmschrijving": "Huur",
+        "gebruiksdoelWoonfunctieOmschrijving": null,
+        "gebruiksdoelGezondheidszorgfunctieCode": null,
+        "gebruiksdoelGezondheidszorgfunctieOmschrijving": null,
+        "id": "0363010000543293.8",
+        "toegang": [
+          {
+            "code": "1",
+            "omschrijving": "Trap"
+          }
+        ],
+        "gebruiksdoel": [
+          {
+            "code": "1",
+            "omschrijving": "woonfunctie"
+          }
+        ]
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#verblijfsobjecten",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/0363010000543293/?_format=json&volgnummer=9",
+            "title": "0363010000543293.9"
+          },
+          "heeftEenRelatieMetVerblijfsobjectKadastraleobjecten": [
+            {
+              "href": "https://api.data.amsterdam.nl/v1/brk/kadastraleobjecten/NL.KAD.OnroerendeZaak.11490559370000/?_format=json&volgnummer=2",
+              "title": "NL.KAD.OnroerendeZaak.11490559370000.2"
+            }
+          ],
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630023753961/?_format=json&volgnummer=1",
+            "title": "03630023753961.1"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00001551/?_format=json",
+            "title": "GV00001551"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000006111/?_format=json&volgnummer=3",
+            "title": "0363200000006111.3"
+          },
+          "ligtInPanden": [
+            {
+              "href": "https://api.data.amsterdam.nl/v1/bag/panden/0363100012174784/?_format=json&volgnummer=6",
+              "title": "0363100012174784.6"
+            }
+          ],
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "cbsNummer": null,
+        "geometrie": {
+          "type": "Point",
+          "coordinates": [
+            120700,
+            487936
+          ]
+        },
+        "statusCode": 4,
+        "volgnummer": 9,
+        "ligtInBuurtVolgnummer": 1,
+        "ligtInBuurtIdentificatie": "03630023753961",
+        "ligtInBuurtId": "03630023753961",
+        "oppervlakte": 32,
+        "aantalKamers": 2,
+        "heeftDossierDossier": "GV00001551",
+        "heeftDossierId": "GV00001551",
+        "bagprocesCode": 100,
+        "documentdatum": "2012-08-09",
+        "geconstateerd": false,
+        "identificatie": "0363010000543293",
+        "documentnummer": "GV00001551",
+        "eindGeldigheid": null,
+        "aantalBouwlagen": 1,
+        "beginGeldigheid": "2012-08-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000006111",
+        "heeftHoofdadresId": "0363200000006111",
+        "hoogsteBouwlaag": null,
+        "laagsteBouwlaag": null,
+        "redenafvoerCode": null,
+        "redenopvoerCode": null,
+        "registratiedatum": "2019-04-12T20:09:27",
+        "verdiepingToegang": 1,
+        "statusOmschrijving": "Verblijfsobject in gebruik",
+        "feitelijkGebruikCode": 1800,
+        "aantalEenhedenComplex": null,
+        "bagprocesOmschrijving": "Muteren naar aanleiding van signalering",
+        "financieringscodeCode": 500,
+        "eigendomsverhoudingCode": 1,
+        "indicatieWoningvoorraad": "J",
+        "redenafvoerOmschrijving": null,
+        "redenopvoerOmschrijving": null,
+        "gebruiksdoelWoonfunctieCode": null,
+        "feitelijkGebruikOmschrijving": "woning",
+        "financieringscodeOmschrijving": "Ongesubsidieerde bouw (500)",
+        "eigendomsverhoudingOmschrijving": "Huur",
+        "gebruiksdoelWoonfunctieOmschrijving": null,
+        "gebruiksdoelGezondheidszorgfunctieCode": null,
+        "gebruiksdoelGezondheidszorgfunctieOmschrijving": null,
+        "id": "0363010000543293.9",
+        "toegang": [
+          {
+            "code": "1",
+            "omschrijving": "Trap"
+          }
+        ],
+        "gebruiksdoel": [
+          {
+            "code": "1",
+            "omschrijving": "woonfunctie"
+          }
+        ]
+      }
+    ]
+  },
+  "page": {
+    "number": 1,
+    "size": 20,
+    "totalElements": 2290826,
+    "totalPages": 114542
+  }
+}

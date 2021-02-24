@@ -81,6 +81,21 @@ const META = {
   woonplaatsidentificatie: {
     label: 'Woonplaatsidentificatie',
   },
+  // Fields from new BAG API
+  beginGeldigheid: {
+    label: 'Datum begin geldigheid',
+    type: 'date',
+  },
+  documentdatum: {
+    label: 'Documentdatum mutatie',
+    type: 'date',
+  },
+  documentnummer: {
+    label: 'Documentnummer mutatie',
+  },
+  identificatie: {
+    label: 'Identificatie',
+  },
 }
 
 export type Definition = {
@@ -604,7 +619,7 @@ const DEFINITIONS = typeHelper({
       'Vanaf 10 januari 2014 bestaat alleen nog de woonplaats Amsterdam met ' +
       'Woonplaatsidentificatie 3594.',
     url: 'https://www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse/',
-    meta: ['begin_geldigheid', 'document_mutatie', 'document_nummer', 'woonplaatsidentificatie'],
+    meta: ['beginGeldigheid', 'documentdatum', 'documentnummer', 'identificatie'],
   },
   ZAKELIJK_RECHT: {
     singular: 'Zakelijk recht',

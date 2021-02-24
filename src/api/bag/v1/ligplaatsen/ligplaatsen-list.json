@@ -1,0 +1,2029 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/?_format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "_embedded": {
+    "ligplaatsen": [
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000544489/?_format=json&volgnummer=4",
+            "title": "0363020000544489.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000839/?_format=json&volgnummer=2",
+            "title": "03630000000839.2"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000430239/?_format=json&volgnummer=3",
+            "title": "0363200000430239.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                122228.303,
+                483297.811
+              ],
+              [
+                122226.11,
+                483279.203
+              ],
+              [
+                122226.272,
+                483278.683
+              ],
+              [
+                122226.484,
+                483278.181
+              ],
+              [
+                122226.745,
+                483277.703
+              ],
+              [
+                122227.051,
+                483277.253
+              ],
+              [
+                122227.4,
+                483276.835
+              ],
+              [
+                122227.789,
+                483276.453
+              ],
+              [
+                122228.213,
+                483276.112
+              ],
+              [
+                122228.73,
+                483276.392
+              ],
+              [
+                122229.216,
+                483276.723
+              ],
+              [
+                122229.667,
+                483277.101
+              ],
+              [
+                122230.078,
+                483277.522
+              ],
+              [
+                122230.445,
+                483277.982
+              ],
+              [
+                122230.765,
+                483278.476
+              ],
+              [
+                122231.033,
+                483279
+              ],
+              [
+                122233.22,
+                483297.607
+              ],
+              [
+                122233.097,
+                483298.005
+              ],
+              [
+                122232.91,
+                483298.377
+              ],
+              [
+                122232.665,
+                483298.714
+              ],
+              [
+                122232.368,
+                483299.006
+              ],
+              [
+                122232.028,
+                483299.247
+              ],
+              [
+                122231.653,
+                483299.428
+              ],
+              [
+                122231.254,
+                483299.546
+              ],
+              [
+                122230.84,
+                483299.597
+              ],
+              [
+                122230.424,
+                483299.581
+              ],
+              [
+                122230.016,
+                483299.496
+              ],
+              [
+                122229.628,
+                483299.346
+              ],
+              [
+                122229.268,
+                483299.135
+              ],
+              [
+                122228.949,
+                483298.868
+              ],
+              [
+                122228.677,
+                483298.553
+              ],
+              [
+                122228.46,
+                483298.197
+              ],
+              [
+                122228.303,
+                483297.811
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 2,
+        "ligtInBuurtIdentificatie": "03630000000839",
+        "ligtInBuurtId": "03630000000839",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000544489",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000430239",
+        "heeftHoofdadresId": "0363200000430239",
+        "registratiedatum": "2010-10-27T06:45:55",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000544489.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000544490/?_format=json&volgnummer=4",
+            "title": "0363020000544490.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000839/?_format=json&volgnummer=2",
+            "title": "03630000000839.2"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000430270/?_format=json&volgnummer=3",
+            "title": "0363200000430270.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                122225.13,
+                483272.234
+              ],
+              [
+                122221.403,
+                483245.367
+              ],
+              [
+                122221.599,
+                483245
+              ],
+              [
+                122221.853,
+                483244.669
+              ],
+              [
+                122222.156,
+                483244.385
+              ],
+              [
+                122222.503,
+                483244.154
+              ],
+              [
+                122222.882,
+                483243.983
+              ],
+              [
+                122223.284,
+                483243.875
+              ],
+              [
+                122223.698,
+                483243.835
+              ],
+              [
+                122224.113,
+                483243.863
+              ],
+              [
+                122224.518,
+                483243.959
+              ],
+              [
+                122224.902,
+                483244.119
+              ],
+              [
+                122225.255,
+                483244.34
+              ],
+              [
+                122225.567,
+                483244.616
+              ],
+              [
+                122225.829,
+                483244.938
+              ],
+              [
+                122229.399,
+                483271.852
+              ],
+              [
+                122229.228,
+                483272.229
+              ],
+              [
+                122228.994,
+                483272.57
+              ],
+              [
+                122228.704,
+                483272.865
+              ],
+              [
+                122228.366,
+                483273.105
+              ],
+              [
+                122227.992,
+                483273.281
+              ],
+              [
+                122227.593,
+                483273.39
+              ],
+              [
+                122227.18,
+                483273.427
+              ],
+              [
+                122226.768,
+                483273.391
+              ],
+              [
+                122226.368,
+                483273.283
+              ],
+              [
+                122225.994,
+                483273.108
+              ],
+              [
+                122225.656,
+                483272.869
+              ],
+              [
+                122225.365,
+                483272.574
+              ],
+              [
+                122225.13,
+                483272.234
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 2,
+        "ligtInBuurtIdentificatie": "03630000000839",
+        "ligtInBuurtId": "03630000000839",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000544490",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000430270",
+        "heeftHoofdadresId": "0363200000430270",
+        "registratiedatum": "2010-10-27T06:44:22",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000544490.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000544491/?_format=json&volgnummer=4",
+            "title": "0363020000544491.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000841/?_format=json&volgnummer=2",
+            "title": "03630000000841.2"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000430240/?_format=json&volgnummer=3",
+            "title": "0363200000430240.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                122202.058,
+                483184.222
+              ],
+              [
+                122213.662,
+                483204.528
+              ],
+              [
+                122213.797,
+                483204.949
+              ],
+              [
+                122213.866,
+                483205.386
+              ],
+              [
+                122213.869,
+                483205.829
+              ],
+              [
+                122213.803,
+                483206.266
+              ],
+              [
+                122213.672,
+                483206.689
+              ],
+              [
+                122213.478,
+                483207.086
+              ],
+              [
+                122213.225,
+                483207.449
+              ],
+              [
+                122212.921,
+                483207.77
+              ],
+              [
+                122212.507,
+                483207.835
+              ],
+              [
+                122212.088,
+                483207.838
+              ],
+              [
+                122211.673,
+                483207.78
+              ],
+              [
+                122211.272,
+                483207.661
+              ],
+              [
+                122210.892,
+                483207.484
+              ],
+              [
+                122210.542,
+                483207.253
+              ],
+              [
+                122210.231,
+                483206.974
+              ],
+              [
+                122209.964,
+                483206.651
+              ],
+              [
+                122209.747,
+                483206.292
+              ],
+              [
+                122197.977,
+                483186.413
+              ],
+              [
+                122202.058,
+                483184.222
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 2,
+        "ligtInBuurtIdentificatie": "03630000000841",
+        "ligtInBuurtId": "03630000000841",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000544491",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000430240",
+        "heeftHoofdadresId": "0363200000430240",
+        "registratiedatum": "2010-10-27T06:45:55",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000544491.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000544492/?_format=json&volgnummer=4",
+            "title": "0363020000544492.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000841/?_format=json&volgnummer=2",
+            "title": "03630000000841.2"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000430271/?_format=json&volgnummer=3",
+            "title": "0363200000430271.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                122188.542,
+                483155.892
+              ],
+              [
+                122198.943,
+                483173.298
+              ],
+              [
+                122193.063,
+                483176.812
+              ],
+              [
+                122182.662,
+                483159.406
+              ],
+              [
+                122188.542,
+                483155.892
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 2,
+        "ligtInBuurtIdentificatie": "03630000000841",
+        "ligtInBuurtId": "03630000000841",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000544492",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000430271",
+        "heeftHoofdadresId": "0363200000430271",
+        "registratiedatum": "2010-10-27T06:44:23",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000544492.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000549114/?_format=json&volgnummer=4",
+            "title": "0363020000549114.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000456/?_format=json&volgnummer=4",
+            "title": "03630000000456.4"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000416027/?_format=json&volgnummer=3",
+            "title": "0363200000416027.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                114429.134,
+                484011.354
+              ],
+              [
+                114434.334,
+                484008.419
+              ],
+              [
+                114444.299,
+                484026.075
+              ],
+              [
+                114439.099,
+                484029.01
+              ],
+              [
+                114429.134,
+                484011.354
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 4,
+        "ligtInBuurtIdentificatie": "03630000000456",
+        "ligtInBuurtId": "03630000000456",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000549114",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000416027",
+        "heeftHoofdadresId": "0363200000416027",
+        "registratiedatum": "2010-10-27T06:49:34",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000549114.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000566641/?_format=json&volgnummer=4",
+            "title": "0363020000566641.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000540/?_format=json&volgnummer=3",
+            "title": "03630000000540.3"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": null,
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                120781.118,
+                489777.16
+              ],
+              [
+                120781.273,
+                489776.349
+              ],
+              [
+                120781.534,
+                489775.521
+              ],
+              [
+                120781.861,
+                489774.833
+              ],
+              [
+                120782.336,
+                489774.066
+              ],
+              [
+                120792.332,
+                489760.1
+              ],
+              [
+                120792.973,
+                489759.513
+              ],
+              [
+                120793.669,
+                489759.151
+              ],
+              [
+                120794.067,
+                489759.067
+              ],
+              [
+                120794.58,
+                489759.157
+              ],
+              [
+                120795.128,
+                489759.242
+              ],
+              [
+                120795.542,
+                489759.446
+              ],
+              [
+                120795.776,
+                489759.583
+              ],
+              [
+                120795.985,
+                489759.763
+              ],
+              [
+                120796.307,
+                489760.086
+              ],
+              [
+                120796.568,
+                489760.58
+              ],
+              [
+                120796.816,
+                489761.034
+              ],
+              [
+                120796.865,
+                489761.438
+              ],
+              [
+                120796.746,
+                489762.214
+              ],
+              [
+                120796.398,
+                489763.01
+              ],
+              [
+                120786.402,
+                489776.976
+              ],
+              [
+                120785.829,
+                489777.673
+              ],
+              [
+                120785.283,
+                489778.204
+              ],
+              [
+                120784.583,
+                489778.718
+              ],
+              [
+                120783.866,
+                489779.127
+              ],
+              [
+                120783.232,
+                489779.411
+              ],
+              [
+                120782.667,
+                489779.591
+              ],
+              [
+                120781.872,
+                489779.791
+              ],
+              [
+                120781.226,
+                489779.912
+              ],
+              [
+                120781.132,
+                489779.261
+              ],
+              [
+                120781.065,
+                489778.445
+              ],
+              [
+                120781.053,
+                489777.852
+              ],
+              [
+                120781.118,
+                489777.16
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 3,
+        "ligtInBuurtIdentificatie": "03630000000540",
+        "ligtInBuurtId": "03630000000540",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000566641",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": "2015-01-28T00:00:00",
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": null,
+        "heeftHoofdadresIdentificatie": null,
+        "heeftHoofdadresId": "",
+        "registratiedatum": "2010-10-27T06:44:24",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000566641.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000566641/?_format=json&volgnummer=7",
+            "title": "0363020000566641.7"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000540/?_format=json&volgnummer=3",
+            "title": "03630000000540.3"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00001913/?_format=json",
+            "title": "GV00001913"
+          },
+          "heeftHoofdadres": null,
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                120781.118,
+                489777.16
+              ],
+              [
+                120781.273,
+                489776.349
+              ],
+              [
+                120781.534,
+                489775.521
+              ],
+              [
+                120781.861,
+                489774.833
+              ],
+              [
+                120782.336,
+                489774.066
+              ],
+              [
+                120792.332,
+                489760.1
+              ],
+              [
+                120792.973,
+                489759.513
+              ],
+              [
+                120793.669,
+                489759.151
+              ],
+              [
+                120794.067,
+                489759.067
+              ],
+              [
+                120794.58,
+                489759.157
+              ],
+              [
+                120795.128,
+                489759.242
+              ],
+              [
+                120795.542,
+                489759.446
+              ],
+              [
+                120795.776,
+                489759.583
+              ],
+              [
+                120795.985,
+                489759.763
+              ],
+              [
+                120796.307,
+                489760.086
+              ],
+              [
+                120796.568,
+                489760.58
+              ],
+              [
+                120796.816,
+                489761.034
+              ],
+              [
+                120796.865,
+                489761.438
+              ],
+              [
+                120796.746,
+                489762.214
+              ],
+              [
+                120796.398,
+                489763.01
+              ],
+              [
+                120786.402,
+                489776.976
+              ],
+              [
+                120785.829,
+                489777.673
+              ],
+              [
+                120785.283,
+                489778.204
+              ],
+              [
+                120784.583,
+                489778.718
+              ],
+              [
+                120783.866,
+                489779.127
+              ],
+              [
+                120783.232,
+                489779.411
+              ],
+              [
+                120782.667,
+                489779.591
+              ],
+              [
+                120781.872,
+                489779.791
+              ],
+              [
+                120781.226,
+                489779.912
+              ],
+              [
+                120781.132,
+                489779.261
+              ],
+              [
+                120781.065,
+                489778.445
+              ],
+              [
+                120781.053,
+                489777.852
+              ],
+              [
+                120781.118,
+                489777.16
+              ]
+            ]
+          ]
+        },
+        "statusCode": 2,
+        "volgnummer": 7,
+        "ligtInBuurtVolgnummer": 3,
+        "ligtInBuurtIdentificatie": "03630000000540",
+        "ligtInBuurtId": "03630000000540",
+        "heeftDossierDossier": "GV00001913",
+        "heeftDossierId": "GV00001913",
+        "bagprocesCode": 120,
+        "documentdatum": "2015-01-28",
+        "geconstateerd": false,
+        "identificatie": "0363020000566641",
+        "documentnummer": "GV00001913_NB00NB",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2015-01-28T00:00:00",
+        "heeftHoofdadresVolgnummer": null,
+        "heeftHoofdadresIdentificatie": null,
+        "heeftHoofdadresId": "",
+        "registratiedatum": "2015-01-28T12:31:48",
+        "statusOmschrijving": "Plaats ingetrokken",
+        "bagprocesOmschrijving": "Intrekken ligplaats",
+        "id": "0363020000566641.7",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000566642/?_format=json&volgnummer=4",
+            "title": "0363020000566642.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000541/?_format=json&volgnummer=2",
+            "title": "03630000000541.2"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000454013/?_format=json&volgnummer=3",
+            "title": "0363200000454013.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                120910.52,
+                489320.047
+              ],
+              [
+                120928.138,
+                489316.704
+              ],
+              [
+                120932.384,
+                489317.606
+              ],
+              [
+                120928.722,
+                489320.578
+              ],
+              [
+                120911.051,
+                489323.762
+              ],
+              [
+                120910.693,
+                489323.8
+              ],
+              [
+                120910.334,
+                489323.77
+              ],
+              [
+                120909.987,
+                489323.671
+              ],
+              [
+                120909.666,
+                489323.508
+              ],
+              [
+                120909.381,
+                489323.287
+              ],
+              [
+                120909.144,
+                489323.016
+              ],
+              [
+                120908.963,
+                489322.704
+              ],
+              [
+                120908.845,
+                489322.364
+              ],
+              [
+                120908.794,
+                489322.007
+              ],
+              [
+                120908.812,
+                489321.647
+              ],
+              [
+                120908.899,
+                489321.297
+              ],
+              [
+                120909.05,
+                489320.97
+              ],
+              [
+                120909.261,
+                489320.678
+              ],
+              [
+                120909.524,
+                489320.432
+              ],
+              [
+                120909.83,
+                489320.24
+              ],
+              [
+                120910.166,
+                489320.11
+              ],
+              [
+                120910.52,
+                489320.047
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 2,
+        "ligtInBuurtIdentificatie": "03630000000541",
+        "ligtInBuurtId": "03630000000541",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000566642",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000454013",
+        "heeftHoofdadresId": "0363200000454013",
+        "registratiedatum": "2010-10-27T06:48:39",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000566642.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000577572/?_format=json&volgnummer=4",
+            "title": "0363020000577572.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000662/?_format=json&volgnummer=1",
+            "title": "03630000000662.1"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000425959/?_format=json&volgnummer=3",
+            "title": "0363200000425959.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                121430.337,
+                492745.557
+              ],
+              [
+                121416.602,
+                492739.483
+              ],
+              [
+                121419.284,
+                492733.418
+              ],
+              [
+                121426.249,
+                492736.498
+              ],
+              [
+                121425.351,
+                492738.527
+              ],
+              [
+                121432.122,
+                492741.521
+              ],
+              [
+                121430.337,
+                492745.557
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 1,
+        "ligtInBuurtIdentificatie": "03630000000662",
+        "ligtInBuurtId": "03630000000662",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000577572",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000425959",
+        "heeftHoofdadresId": "0363200000425959",
+        "registratiedatum": "2010-10-27T06:58:10",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000577572.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000577573/?_format=json&volgnummer=4",
+            "title": "0363020000577573.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000662/?_format=json&volgnummer=1",
+            "title": "03630000000662.1"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000425960/?_format=json&volgnummer=3",
+            "title": "0363200000425960.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                121445.868,
+                492751.465
+              ],
+              [
+                121432.96,
+                492746.044
+              ],
+              [
+                121435.283,
+                492740.512
+              ],
+              [
+                121448.191,
+                492745.933
+              ],
+              [
+                121445.868,
+                492751.465
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 1,
+        "ligtInBuurtIdentificatie": "03630000000662",
+        "ligtInBuurtId": "03630000000662",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000577573",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000425960",
+        "heeftHoofdadresId": "0363200000425960",
+        "registratiedatum": "2010-10-27T06:43:03",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000577573.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000585947/?_format=json&volgnummer=4",
+            "title": "0363020000585947.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000662/?_format=json&volgnummer=1",
+            "title": "03630000000662.1"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000425961/?_format=json&volgnummer=3",
+            "title": "0363200000425961.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                121460.83,
+                492757.338
+              ],
+              [
+                121446.913,
+                492751.742
+              ],
+              [
+                121448.778,
+                492747.103
+              ],
+              [
+                121462.695,
+                492752.699
+              ],
+              [
+                121460.83,
+                492757.338
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 1,
+        "ligtInBuurtIdentificatie": "03630000000662",
+        "ligtInBuurtId": "03630000000662",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000585947",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000425961",
+        "heeftHoofdadresId": "0363200000425961",
+        "registratiedatum": "2010-10-27T06:49:38",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000585947.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000585948/?_format=json&volgnummer=4",
+            "title": "0363020000585948.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000662/?_format=json&volgnummer=1",
+            "title": "03630000000662.1"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000425962/?_format=json&volgnummer=3",
+            "title": "0363200000425962.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                121476.214,
+                492763.11
+              ],
+              [
+                121462.122,
+                492757.969
+              ],
+              [
+                121463.836,
+                492753.272
+              ],
+              [
+                121477.927,
+                492758.413
+              ],
+              [
+                121476.214,
+                492763.11
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 1,
+        "ligtInBuurtIdentificatie": "03630000000662",
+        "ligtInBuurtId": "03630000000662",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000585948",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000425962",
+        "heeftHoofdadresId": "0363200000425962",
+        "registratiedatum": "2010-10-27T06:49:38",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000585948.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000585949/?_format=json&volgnummer=4",
+            "title": "0363020000585949.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000662/?_format=json&volgnummer=1",
+            "title": "03630000000662.1"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000425963/?_format=json&volgnummer=3",
+            "title": "0363200000425963.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                121491.671,
+                492769.551
+              ],
+              [
+                121478.278,
+                492764.304
+              ],
+              [
+                121480.945,
+                492757.498
+              ],
+              [
+                121494.338,
+                492762.745
+              ],
+              [
+                121491.671,
+                492769.551
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 1,
+        "ligtInBuurtIdentificatie": "03630000000662",
+        "ligtInBuurtId": "03630000000662",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000585949",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000425963",
+        "heeftHoofdadresId": "0363200000425963",
+        "registratiedatum": "2010-10-27T06:43:04",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000585949.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000585950/?_format=json&volgnummer=4",
+            "title": "0363020000585950.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000662/?_format=json&volgnummer=1",
+            "title": "03630000000662.1"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000425964/?_format=json&volgnummer=3",
+            "title": "0363200000425964.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                121507.915,
+                492773.957
+              ],
+              [
+                121493.905,
+                492768.599
+              ],
+              [
+                121495.798,
+                492763.649
+              ],
+              [
+                121509.808,
+                492769.007
+              ],
+              [
+                121507.915,
+                492773.957
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 1,
+        "ligtInBuurtIdentificatie": "03630000000662",
+        "ligtInBuurtId": "03630000000662",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000585950",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000425964",
+        "heeftHoofdadresId": "0363200000425964",
+        "registratiedatum": "2010-10-27T06:49:39",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000585950.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000585969/?_format=json&volgnummer=4",
+            "title": "0363020000585969.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000662/?_format=json&volgnummer=1",
+            "title": "03630000000662.1"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000425965/?_format=json&volgnummer=3",
+            "title": "0363200000425965.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                121520.222,
+                492781.808
+              ],
+              [
+                121508.549,
+                492777.336
+              ],
+              [
+                121510.445,
+                492772.387
+              ],
+              [
+                121522.118,
+                492776.859
+              ],
+              [
+                121520.222,
+                492781.808
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 1,
+        "ligtInBuurtIdentificatie": "03630000000662",
+        "ligtInBuurtId": "03630000000662",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000585969",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000425965",
+        "heeftHoofdadresId": "0363200000425965",
+        "registratiedatum": "2010-10-27T06:49:39",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000585969.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000585970/?_format=json&volgnummer=4",
+            "title": "0363020000585970.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000662/?_format=json&volgnummer=1",
+            "title": "03630000000662.1"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000425966/?_format=json&volgnummer=3",
+            "title": "0363200000425966.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                121522.819,
+                492777.056
+              ],
+              [
+                121542.732,
+                492784.641
+              ],
+              [
+                121540.945,
+                492789.334
+              ],
+              [
+                121521.031,
+                492781.749
+              ],
+              [
+                121522.819,
+                492777.056
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 1,
+        "ligtInBuurtIdentificatie": "03630000000662",
+        "ligtInBuurtId": "03630000000662",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000585970",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000425966",
+        "heeftHoofdadresId": "0363200000425966",
+        "registratiedatum": "2010-10-27T06:49:39",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000585970.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000592207/?_format=json&volgnummer=4",
+            "title": "0363020000592207.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000456/?_format=json&volgnummer=4",
+            "title": "03630000000456.4"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000422357/?_format=json&volgnummer=3",
+            "title": "0363200000422357.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                114409.713,
+                483979.461
+              ],
+              [
+                114402.229,
+                483965.546
+              ],
+              [
+                114409.451,
+                483961.662
+              ],
+              [
+                114416.935,
+                483975.577
+              ],
+              [
+                114409.713,
+                483979.461
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 4,
+        "ligtInBuurtIdentificatie": "03630000000456",
+        "ligtInBuurtId": "03630000000456",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000592207",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000422357",
+        "heeftHoofdadresId": "0363200000422357",
+        "registratiedatum": "2010-10-27T06:43:04",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000592207.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000592208/?_format=json&volgnummer=4",
+            "title": "0363020000592208.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000456/?_format=json&volgnummer=4",
+            "title": "03630000000456.4"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000422358/?_format=json&volgnummer=3",
+            "title": "0363200000422358.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                114402.401,
+                483964.765
+              ],
+              [
+                114388.525,
+                483952.834
+              ],
+              [
+                114393.154,
+                483947.451
+              ],
+              [
+                114407.03,
+                483959.382
+              ],
+              [
+                114402.401,
+                483964.765
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 4,
+        "ligtInBuurtIdentificatie": "03630000000456",
+        "ligtInBuurtId": "03630000000456",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000592208",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000422358",
+        "heeftHoofdadresId": "0363200000422358",
+        "registratiedatum": "2010-10-27T06:44:36",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000592208.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000597811/?_format=json&volgnummer=4",
+            "title": "0363020000597811.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000606/?_format=json&volgnummer=3",
+            "title": "03630000000606.3"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000386753/?_format=json&volgnummer=3",
+            "title": "0363200000386753.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                123383.978,
+                490214.333
+              ],
+              [
+                123383.27,
+                490236.621
+              ],
+              [
+                123377.828,
+                490236.448
+              ],
+              [
+                123378.535,
+                490214.161
+              ],
+              [
+                123383.978,
+                490214.333
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 3,
+        "ligtInBuurtIdentificatie": "03630000000606",
+        "ligtInBuurtId": "03630000000606",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000597811",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000386753",
+        "heeftHoofdadresId": "0363200000386753",
+        "registratiedatum": "2010-10-27T06:43:05",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000597811.4",
+        "gebruiksdoel": []
+      },
+      {
+        "_links": {
+          "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#ligplaatsen",
+          "self": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/ligplaatsen/0363020000633397/?_format=json&volgnummer=4",
+            "title": "0363020000633397.4"
+          },
+          "ligtInBuurt": {
+            "href": "https://api.data.amsterdam.nl/v1/gebieden/buurten/03630000000456/?_format=json&volgnummer=4",
+            "title": "03630000000456.4"
+          },
+          "heeftDossier": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/dossiers/GV00000407/?_format=json",
+            "title": "GV00000407"
+          },
+          "heeftHoofdadres": {
+            "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/0363200000422359/?_format=json&volgnummer=3",
+            "title": "0363200000422359.3"
+          },
+          "heeftNevenadres": [],
+          "heeftOnderzoeken": []
+        },
+        "geometrie": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                114385.263,
+                483953.451
+              ],
+              [
+                114365.837,
+                483950.844
+              ],
+              [
+                114366.742,
+                483944.104
+              ],
+              [
+                114386.167,
+                483946.712
+              ],
+              [
+                114385.263,
+                483953.451
+              ]
+            ]
+          ]
+        },
+        "statusCode": 1,
+        "volgnummer": 4,
+        "ligtInBuurtVolgnummer": 4,
+        "ligtInBuurtIdentificatie": "03630000000456",
+        "ligtInBuurtId": "03630000000456",
+        "heeftDossierDossier": "GV00000407",
+        "heeftDossierId": "GV00000407",
+        "bagprocesCode": null,
+        "documentdatum": "2010-09-09",
+        "geconstateerd": false,
+        "identificatie": "0363020000633397",
+        "documentnummer": "GV00000407",
+        "eindGeldigheid": null,
+        "beginGeldigheid": "2010-09-09T00:00:00",
+        "heeftHoofdadresVolgnummer": 3,
+        "heeftHoofdadresIdentificatie": "0363200000422359",
+        "heeftHoofdadresId": "0363200000422359",
+        "registratiedatum": "2010-10-27T06:44:36",
+        "statusOmschrijving": "Plaats aangewezen",
+        "bagprocesOmschrijving": null,
+        "id": "0363020000633397.4",
+        "gebruiksdoel": []
+      }
+    ]
+  },
+  "page": {
+    "number": 1,
+    "size": 20,
+    "totalElements": 3868,
+    "totalPages": 194
+  }
+}

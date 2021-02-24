@@ -155,7 +155,7 @@ describe('employee permissions', () => {
       cy.checkInfoBoxes(['Adressen', 'Standplaatsen', 'Vestigingen', 'Monumenten'])
     })
     it('5. Should show a "woonplaats"', () => {
-      cy.intercept('**/bag/v1.1/woonplaats/*').as('getWoonplaats')
+      cy.intercept('**/v1/bag/woonplaatsen/*').as('getWoonplaats')
       cy.intercept('**/bag/v1.1/openbareruimte/*').as('getOpenbareRuimte')
       cy.visit('data/bag/woonplaats/id3594/?zoom=7')
       cy.wait('@getWoonplaats')

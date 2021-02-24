@@ -5,7 +5,7 @@ import 'leaflet.markercluster'
 import PropTypes from 'prop-types'
 import { Component } from 'react'
 import { GeoJSON, Map, ScaleControl, TileLayer, ZoomControl } from 'react-leaflet'
-import ReactResizeDetector from 'react-resize-detector'
+import ReactResizeDetector from 'react-resize-detector/build/withPolyfill'
 import {
   dataSelectionType,
   DEFAULT_LAT,

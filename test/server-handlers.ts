@@ -13,6 +13,12 @@ import { highlightsListFixture } from '../src/api/cms/jsonapi/node'
 // const stadsdeelUrl = joinUrl([API_ROOT, 'gebieden/stadsdeel'])
 
 const highLightRegExp = `**/jsonapi/node/list/**&__type__=${HIGHLIGHT}`
+const typeaheadUrl = joinUrl([environment.API_ROOT, 'typeahead'])
+const iiifMetadataUrl = joinUrl([environment.API_ROOT, 'iiif-metadata/bouwdossier', ':id'])
+const dcatDatasetsUrl = joinUrl([environment.API_ROOT, 'dcatd/datasets', ':id'])
+const dcatDatasetFiltersUrl = joinUrl([environment.API_ROOT, 'dcatd/openapi'])
+const panoramaThumbnailUrl = joinUrl([environment.API_ROOT, 'panorama/thumbnail', '?:q'])
+const stadsdeelUrl = joinUrl([environment.API_ROOT, 'gebieden/stadsdeel', ':id'])
 
 const handlers = [
   rest.get(highLightRegExp, async (req, res, ctx) => res(ctx.json(highlightsListFixture))),

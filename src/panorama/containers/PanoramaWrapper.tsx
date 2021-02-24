@@ -4,7 +4,7 @@ import PanoramaContainer from './PanoramaContainer'
 import PanoAlert from '../../app/components/PanoAlert/PanoAlert'
 import { ERROR_MESSAGES, ErrorType } from '../../shared/ducks/error/error-message'
 import usePromise from '../../app/utils/usePromise'
-import { fetchProxy } from '../../shared/services/api/api'
+import { fetchWithoutToken } from '../../shared/services/api/api'
 import { ForbiddenError } from '../../shared/services/api/customError'
 
 /**
@@ -15,7 +15,8 @@ import { ForbiddenError } from '../../shared/services/api/customError'
 const PanoramaWrapper: FunctionComponent = () => {
   const result = usePromise(
     // A small response that will only be available on gov. network
-    () => fetchProxy('https://acc.api.data.amsterdam.nl/brk/?format=json'),
+    // Do not pass the token, as this will result in a 401 on production environment
+    () => fetchWithoutToken('https://acc.api.data.amsterdam.nl/brk/?format=json'),
     [],
   )
 

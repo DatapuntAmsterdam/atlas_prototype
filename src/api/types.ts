@@ -5,7 +5,7 @@ export interface Links {
   previous?: Link
 }
 
-interface Link {
+export interface Link {
   href: string | null
   title?: string
 }

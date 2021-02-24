@@ -1,7 +1,6 @@
 import {
   Accordion,
   AccordionWrapper,
-  Alert,
   Article,
   breakpoint,
   Column,
@@ -26,13 +25,10 @@ import { useParams } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import environment from '../../../environment'
 import normalizeDownloadsObject from '../../../normalizations/cms/normalizeDownloadFiles'
-import normalizeCMSResults, {
-  EDITORIAL_FIELD_TYPE_VALUES,
-} from '../../../normalizations/cms/normalizeCMSResults'
+import { EDITORIAL_FIELD_TYPE_VALUES } from '../../../normalizations/cms/normalizeCMSResults'
 import cmsConfig from '../../../shared/config/cms.config'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
-import EditorialResults from '../../components/EditorialResults'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import ShareBar from '../../components/ShareBar/ShareBar'
 import { toArticleDetail } from '../../links'
@@ -103,22 +99,7 @@ const EditorialBodyStyled = styled(EditorialBody)`
   width: 100%;
 `
 
-const Divider = styled.div`
-  width: 200px;
-  height: 3px;
-  background-color: ${themeColor('secondary')};
-  margin: ${themeSpacing(8, 0, 6)};
-`
-
-const StyledEditorialResults = styled(EditorialResults)`
-  margin-bottom: ${themeSpacing(25)};
-`
-
 const StyledAccordion = styled(Accordion)`
-  margin-top: ${themeSpacing(2)};
-`
-
-const StyledAlert = styled(Alert)`
   margin-top: ${themeSpacing(2)};
 `
 
@@ -160,7 +141,6 @@ const ArticleDetailPage = () => {
     intro,
     field_type: articleType,
     field_language: lang,
-    related,
   } = results || {}
 
   const image = useMemo(() => (coverImage ? getImageFromCms(coverImage, 1200, 600) : null), [
@@ -187,10 +167,6 @@ const ArticleDetailPage = () => {
       image={coverImage}
       description={intro}
     >
-      <StyledAlert level="error">
-        Er is een storing waardoor niet alle publicaties, afbeeldingen en overige bestanden
-        beschikbaar zijn. Onze excuses, wij werken aan een oplossing.
-      </StyledAlert>
       {!loading && (
         <StyledRow>
           <StyledContentContainer hasImage={!!image}>
@@ -246,17 +222,6 @@ const ArticleDetailPage = () => {
                             )}
                           </AccordionWrapper>
                         )}
-                        {related && related.length ? (
-                          <>
-                            <Divider />
-                            <StyledEditorialResults
-                              headingLevel="h2"
-                              results={normalizeCMSResults(related)}
-                              errors={[]}
-                              title="Verder lezen"
-                            />
-                          </>
-                        ) : null}
                       </EditorialBodyStyled>
                     </Column>
                     <Column

@@ -47,7 +47,7 @@ describe('fetchNearestDetails', () => {
           return next()
         },
       })
-      .call(goToGeoSearch, action.payload.location)
+      .call(fetchNearestDetail, action.payload.location, [], 12)
       .run()
   })
 
