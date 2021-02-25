@@ -442,7 +442,15 @@ const getOverlastgebiedenBlock = (
       description: result.soort,
     },
     {
-      term: 'Aanvullende informatie',
+      term: 'Geldigheid',
+      description: result.geldigheidsPeriode,
+    },
+    {
+      term: 'Tijd',
+      description: result.geldigheidsSpecificatie,
+    },
+    {
+      term: 'Besluit',
       description: result.url,
       href: result.url,
     },

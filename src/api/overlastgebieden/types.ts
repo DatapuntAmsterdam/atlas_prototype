@@ -10,6 +10,8 @@ export interface Single {
   soort: any | null
   geometry: Geometry | null
   oovNaam: string | null
+  geldigheidsPeriode: string | null
+  geldigheidsSpecificatie: string | null
 }
 
 interface Links {
