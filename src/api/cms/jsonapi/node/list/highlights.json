@@ -1,0 +1,906 @@
+{
+  "jsonapi": {
+    "version": "1.0",
+    "meta": { "links": { "self": { "href": "http://jsonapi.org/format/1.0/" } } }
+  },
+  "data": {
+    "type": "node--list",
+    "id": "9f02e2cd-b74d-474c-b251-c96e8416979d",
+    "links": {
+      "self": {
+        "href": "http://cms.data.amsterdam.nl/jsonapi/node/list/9f02e2cd-b74d-474c-b251-c96e8416979d?resourceVersion=id%3A3958"
+      }
+    },
+    "attributes": {
+      "drupal_internal__nid": 3958,
+      "drupal_internal__vid": 3958,
+      "langcode": "en",
+      "revision_timestamp": "2019-10-10T15:32:41+00:00",
+      "revision_log": null,
+      "status": true,
+      "title": "Blok voorpagina Uitgelicht",
+      "created": "2019-10-10T15:30:28+00:00",
+      "changed": "2021-02-08T09:37:49+00:00",
+      "promote": false,
+      "sticky": false,
+      "default_langcode": true,
+      "revision_translation_affected": true,
+      "path": { "alias": "", "pid": null, "langcode": "en" },
+      "field_button_link": null,
+      "field_button_text": null
+    },
+    "relationships": {
+      "node_type": {
+        "data": { "type": "node_type--node_type", "id": "c02b5d79-c44b-4aec-9ff9-71ba5c808855" },
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/list/9f02e2cd-b74d-474c-b251-c96e8416979d/node_type?resourceVersion=id%3A3958"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/list/9f02e2cd-b74d-474c-b251-c96e8416979d/relationships/node_type?resourceVersion=id%3A3958"
+          }
+        }
+      },
+      "revision_uid": {
+        "data": { "type": "user--user", "id": "528ad455-9bb5-46d2-88d9-1c07b6d45e04" },
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/list/9f02e2cd-b74d-474c-b251-c96e8416979d/revision_uid?resourceVersion=id%3A3958"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/list/9f02e2cd-b74d-474c-b251-c96e8416979d/relationships/revision_uid?resourceVersion=id%3A3958"
+          }
+        }
+      },
+      "uid": {
+        "data": { "type": "user--user", "id": "528ad455-9bb5-46d2-88d9-1c07b6d45e04" },
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/list/9f02e2cd-b74d-474c-b251-c96e8416979d/uid?resourceVersion=id%3A3958"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/list/9f02e2cd-b74d-474c-b251-c96e8416979d/relationships/uid?resourceVersion=id%3A3958"
+          }
+        }
+      },
+      "field_items": {
+        "data": [
+          { "type": "node--special", "id": "123c7cb8-f759-4bbb-a292-68366f54885b" },
+          { "type": "node--article", "id": "cfcbd7db-3310-4d85-9b41-6637a8248092" },
+          { "type": "node--special", "id": "e6d25646-a296-4af9-8081-9fe454db2b02" }
+        ],
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/list/9f02e2cd-b74d-474c-b251-c96e8416979d/field_items?resourceVersion=id%3A3958"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/list/9f02e2cd-b74d-474c-b251-c96e8416979d/relationships/field_items?resourceVersion=id%3A3958"
+          }
+        }
+      }
+    }
+  },
+  "included": [
+    {
+      "type": "node--special",
+      "id": "123c7cb8-f759-4bbb-a292-68366f54885b",
+      "links": {
+        "self": {
+          "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/123c7cb8-f759-4bbb-a292-68366f54885b?resourceVersion=id%3A4298"
+        }
+      },
+      "attributes": {
+        "drupal_internal__nid": 4298,
+        "drupal_internal__vid": 4298,
+        "langcode": "en",
+        "revision_timestamp": "2020-09-02T09:25:45+00:00",
+        "revision_log": null,
+        "status": true,
+        "title": "Eigenlijk niks over winkelgebieden",
+        "created": "2020-09-02T08:45:43+00:00",
+        "changed": "2020-09-03T09:49:05+00:00",
+        "promote": false,
+        "sticky": false,
+        "default_langcode": true,
+        "revision_translation_affected": true,
+        "path": { "alias": "", "pid": null, "langcode": "en" },
+        "body": null,
+        "field_content_link": {
+          "uri": "https://static.amsterdam.nl/winkelgebieden/",
+          "title": "",
+          "options": []
+        },
+        "field_intro": null,
+        "field_links": [],
+        "field_publication_date": "2020-09-03T12:00:00+02:00",
+        "field_short_title": null,
+        "field_slug": "dashboard-winkelgebieden",
+        "field_special_type": "dashboard",
+        "field_subtitle_default": false,
+        "field_subtitle_link": null,
+        "field_teaser": "Huurprijzen, leegstand en nog veel meer.",
+        "field_width": "narrow"
+      },
+      "relationships": {
+        "node_type": {
+          "data": { "type": "node_type--node_type", "id": "6f222202-459a-43c3-9789-ea752d7992db" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/123c7cb8-f759-4bbb-a292-68366f54885b/node_type?resourceVersion=id%3A4298"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/123c7cb8-f759-4bbb-a292-68366f54885b/relationships/node_type?resourceVersion=id%3A4298"
+            }
+          }
+        },
+        "revision_uid": {
+          "data": { "type": "user--user", "id": "3fde2192-a760-4852-841d-cba2c133d947" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/123c7cb8-f759-4bbb-a292-68366f54885b/revision_uid?resourceVersion=id%3A4298"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/123c7cb8-f759-4bbb-a292-68366f54885b/relationships/revision_uid?resourceVersion=id%3A4298"
+            }
+          }
+        },
+        "uid": {
+          "data": { "type": "user--user", "id": "3fde2192-a760-4852-841d-cba2c133d947" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/123c7cb8-f759-4bbb-a292-68366f54885b/uid?resourceVersion=id%3A4298"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/123c7cb8-f759-4bbb-a292-68366f54885b/relationships/uid?resourceVersion=id%3A4298"
+            }
+          }
+        },
+        "field_teaser_image": {
+          "data": { "type": "media--image", "id": "f31d9b6e-275b-4822-85ab-e913ac38cadd" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/123c7cb8-f759-4bbb-a292-68366f54885b/field_teaser_image?resourceVersion=id%3A4298"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/123c7cb8-f759-4bbb-a292-68366f54885b/relationships/field_teaser_image?resourceVersion=id%3A4298"
+            }
+          }
+        },
+        "field_themes": {
+          "data": [
+            { "type": "taxonomy_term--themes", "id": "7983b0fd-bbe4-4e0f-b3b4-458529a215b6" }
+          ],
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/123c7cb8-f759-4bbb-a292-68366f54885b/field_themes?resourceVersion=id%3A4298"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/123c7cb8-f759-4bbb-a292-68366f54885b/relationships/field_themes?resourceVersion=id%3A4298"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "node--article",
+      "id": "cfcbd7db-3310-4d85-9b41-6637a8248092",
+      "links": {
+        "self": {
+          "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092?resourceVersion=id%3A4402"
+        }
+      },
+      "attributes": {
+        "drupal_internal__nid": 4402,
+        "drupal_internal__vid": 4402,
+        "langcode": "en",
+        "revision_timestamp": "2021-01-18T17:17:52+00:00",
+        "revision_log": null,
+        "status": true,
+        "title": "20F Haarlem",
+        "created": "2021-01-18T17:00:23+00:00",
+        "changed": "2021-01-18T17:23:45+00:00",
+        "promote": false,
+        "sticky": false,
+        "default_langcode": true,
+        "revision_translation_affected": true,
+        "path": { "alias": "", "pid": null, "langcode": "en" },
+        "body": {
+          "value": "\u003Cp\u003EOp het platform is onder andere het ondergrondse rioolnetwerk van Amsterdam terug te vinden, maar ook bomen die in het beheer zijn bij de gemeente \u2013 waar mogelijk per boomsoort \u2013 en het maaiveld zijn weergegeven in \u003Ca href=\u0022https://3d.amsterdam.nl/web/index.html\u0022\u003E3D\u003C/a\u003E.\u003C/p\u003E\u0026#13;\n",
+          "format": "basic_html",
+          "processed": "\u003Cp\u003EOp het platform is onder andere het ondergrondse rioolnetwerk van Amsterdam terug te vinden, maar ook bomen die in het beheer zijn bij de gemeente \u2013 waar mogelijk per boomsoort \u2013 en het maaiveld zijn weergegeven in \u003Ca href=\u0022https://3d.amsterdam.nl/web/index.html\u0022\u003E3D\u003C/a\u003E.\u003C/p\u003E",
+          "summary": ""
+        },
+        "field_byline": "OIS",
+        "field_intro": "3D Amsterdam is een digitale kopie van Amsterdam in 3D. Het is een platform waarmee de stad interactief beleefd kan worden. Uiteindelijk moet het mogelijk worden om door middel van simulaties in de digitale wereld de impact van bepaalde ingrepen inzichtelijk te maken voordat ze daadwerkelijk worden uitgevoerd. ",
+        "field_language": "nl",
+        "field_links": [
+          {
+            "uri": "https://3d.amsterdam.nl/web/index.html",
+            "title": "3D Amsterdam",
+            "options": []
+          },
+          {
+            "uri": "https://data.amsterdam.nl/dossiers/dossier/ondergrond/58792cf6-8780-4edb-b456-cc9315598e76/",
+            "title": "Dossier ondergrond",
+            "options": []
+          }
+        ],
+        "field_publication_date": "2021-01-18T00:00:00+01:00",
+        "field_short_title": null,
+        "field_slug": "3D-Amsterdam",
+        "field_teaser": "3D Amsterdam is een digitale kopie van Amsterdam in 3D. Het is een platform waarmee de stad interactief beleefd kan worden. ",
+        "field_type": "content"
+      },
+      "relationships": {
+        "node_type": {
+          "data": { "type": "node_type--node_type", "id": "2d3a1aa7-a3dd-4a5a-b476-6044f5955f02" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/node_type?resourceVersion=id%3A4402"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/relationships/node_type?resourceVersion=id%3A4402"
+            }
+          }
+        },
+        "revision_uid": {
+          "data": { "type": "user--user", "id": "c37ef8dd-7f43-4e04-9bc4-120ed5acc87d" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/revision_uid?resourceVersion=id%3A4402"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/relationships/revision_uid?resourceVersion=id%3A4402"
+            }
+          }
+        },
+        "uid": {
+          "data": { "type": "user--user", "id": "c37ef8dd-7f43-4e04-9bc4-120ed5acc87d" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/uid?resourceVersion=id%3A4402"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/relationships/uid?resourceVersion=id%3A4402"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": null,
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/feeds_item?resourceVersion=id%3A4402"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/relationships/feeds_item?resourceVersion=id%3A4402"
+            }
+          }
+        },
+        "field_accordions": {
+          "data": [
+            {
+              "type": "paragraph--accordion",
+              "id": "a99a0d24-a37e-44ec-abc4-34ae63ac020c",
+              "meta": { "target_revision_id": 147 }
+            }
+          ],
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/field_accordions?resourceVersion=id%3A4402"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/relationships/field_accordions?resourceVersion=id%3A4402"
+            }
+          }
+        },
+        "field_cover_image": {
+          "data": { "type": "media--image", "id": "0b810ab7-35e5-4225-b2b6-03c671f58549" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/field_cover_image?resourceVersion=id%3A4402"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/relationships/field_cover_image?resourceVersion=id%3A4402"
+            }
+          }
+        },
+        "field_downloads": {
+          "data": [],
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/field_downloads?resourceVersion=id%3A4402"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/relationships/field_downloads?resourceVersion=id%3A4402"
+            }
+          }
+        },
+        "field_related": {
+          "data": [],
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/field_related?resourceVersion=id%3A4402"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/relationships/field_related?resourceVersion=id%3A4402"
+            }
+          }
+        },
+        "field_tags": {
+          "data": [],
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/field_tags?resourceVersion=id%3A4402"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/relationships/field_tags?resourceVersion=id%3A4402"
+            }
+          }
+        },
+        "field_teaser_image": {
+          "data": { "type": "media--image", "id": "166828f4-fe78-4586-b1d2-2ad23835da37" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/field_teaser_image?resourceVersion=id%3A4402"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/relationships/field_teaser_image?resourceVersion=id%3A4402"
+            }
+          }
+        },
+        "field_themes": {
+          "data": [
+            { "type": "taxonomy_term--themes", "id": "fd005730-8ee7-41fc-90ff-f49f02e54ef4" }
+          ],
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/field_themes?resourceVersion=id%3A4402"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/cfcbd7db-3310-4d85-9b41-6637a8248092/relationships/field_themes?resourceVersion=id%3A4402"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "node--special",
+      "id": "e6d25646-a296-4af9-8081-9fe454db2b02",
+      "links": {
+        "self": {
+          "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/e6d25646-a296-4af9-8081-9fe454db2b02?resourceVersion=id%3A4308"
+        }
+      },
+      "attributes": {
+        "drupal_internal__nid": 4308,
+        "drupal_internal__vid": 4308,
+        "langcode": "en",
+        "revision_timestamp": "2020-09-10T12:14:15+00:00",
+        "revision_log": null,
+        "status": true,
+        "title": "Dashboard: Gevolgen corona voor Amsterdam",
+        "created": "2020-09-10T12:13:25+00:00",
+        "changed": "2020-12-08T15:27:57+00:00",
+        "promote": false,
+        "sticky": false,
+        "default_langcode": true,
+        "revision_translation_affected": true,
+        "path": { "alias": "", "pid": null, "langcode": "en" },
+        "body": null,
+        "field_content_link": {
+          "uri": "https://static.amsterdam.nl/corona/",
+          "title": "",
+          "options": []
+        },
+        "field_intro": null,
+        "field_links": [],
+        "field_publication_date": "2020-12-01T14:00:00+01:00",
+        "field_short_title": null,
+        "field_slug": "dashboard-corona",
+        "field_special_type": "dashboard",
+        "field_subtitle_default": false,
+        "field_subtitle_link": null,
+        "field_teaser": "Welk effect heeft COVID-19 op verschillende domeinen van het maatschappelijk leven?",
+        "field_width": "narrow"
+      },
+      "relationships": {
+        "node_type": {
+          "data": { "type": "node_type--node_type", "id": "6f222202-459a-43c3-9789-ea752d7992db" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/e6d25646-a296-4af9-8081-9fe454db2b02/node_type?resourceVersion=id%3A4308"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/e6d25646-a296-4af9-8081-9fe454db2b02/relationships/node_type?resourceVersion=id%3A4308"
+            }
+          }
+        },
+        "revision_uid": {
+          "data": { "type": "user--user", "id": "3fde2192-a760-4852-841d-cba2c133d947" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/e6d25646-a296-4af9-8081-9fe454db2b02/revision_uid?resourceVersion=id%3A4308"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/e6d25646-a296-4af9-8081-9fe454db2b02/relationships/revision_uid?resourceVersion=id%3A4308"
+            }
+          }
+        },
+        "uid": {
+          "data": { "type": "user--user", "id": "3fde2192-a760-4852-841d-cba2c133d947" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/e6d25646-a296-4af9-8081-9fe454db2b02/uid?resourceVersion=id%3A4308"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/e6d25646-a296-4af9-8081-9fe454db2b02/relationships/uid?resourceVersion=id%3A4308"
+            }
+          }
+        },
+        "field_teaser_image": {
+          "data": { "type": "media--image", "id": "31190e82-c6f0-4f4f-8d97-b90245d053fe" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/e6d25646-a296-4af9-8081-9fe454db2b02/field_teaser_image?resourceVersion=id%3A4308"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/e6d25646-a296-4af9-8081-9fe454db2b02/relationships/field_teaser_image?resourceVersion=id%3A4308"
+            }
+          }
+        },
+        "field_themes": {
+          "data": [
+            { "type": "taxonomy_term--themes", "id": "fea0e529-6267-40b2-9bb3-c67d801e206f" },
+            { "type": "taxonomy_term--themes", "id": "7983b0fd-bbe4-4e0f-b3b4-458529a215b6" },
+            { "type": "taxonomy_term--themes", "id": "166a9cfb-68c1-498a-8b06-f84ace8f0690" },
+            { "type": "taxonomy_term--themes", "id": "8fb7de6d-0107-4995-9c8b-c3074b66da7d" },
+            { "type": "taxonomy_term--themes", "id": "07156c4b-fa8d-4505-bfc4-75cc997a9a93" },
+            { "type": "taxonomy_term--themes", "id": "38fc0e54-4ae0-44c9-9908-8b14798d0d15" },
+            { "type": "taxonomy_term--themes", "id": "f1e6cbf4-9e3d-47f0-a9f0-860508f448d9" },
+            { "type": "taxonomy_term--themes", "id": "ae301a36-58dd-47df-afd7-d82cac7308bf" }
+          ],
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/e6d25646-a296-4af9-8081-9fe454db2b02/field_themes?resourceVersion=id%3A4308"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/node/special/e6d25646-a296-4af9-8081-9fe454db2b02/relationships/field_themes?resourceVersion=id%3A4308"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "media--image",
+      "id": "f31d9b6e-275b-4822-85ab-e913ac38cadd",
+      "links": {
+        "self": {
+          "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/f31d9b6e-275b-4822-85ab-e913ac38cadd?resourceVersion=id%3A9274"
+        }
+      },
+      "attributes": {
+        "drupal_internal__mid": 9274,
+        "drupal_internal__vid": 9274,
+        "langcode": "en",
+        "revision_created": "2020-09-02T09:26:08+00:00",
+        "revision_log_message": null,
+        "status": true,
+        "name": "teaser-dashboard-winkelgebieden-39864-180911-javastraat-buurteconomie_HR-399.jpg",
+        "created": "2020-09-02T09:25:55+00:00",
+        "changed": "2020-09-02T09:25:55+00:00",
+        "default_langcode": true,
+        "revision_translation_affected": true,
+        "path": { "alias": "", "pid": null, "langcode": "en" },
+        "field_credit": null
+      },
+      "relationships": {
+        "bundle": {
+          "data": {
+            "type": "media_type--media_type",
+            "id": "566d1ca3-25d0-4d66-ac13-65a0651c973f"
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/f31d9b6e-275b-4822-85ab-e913ac38cadd/bundle?resourceVersion=id%3A9274"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/f31d9b6e-275b-4822-85ab-e913ac38cadd/relationships/bundle?resourceVersion=id%3A9274"
+            }
+          }
+        },
+        "revision_user": {
+          "data": null,
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/f31d9b6e-275b-4822-85ab-e913ac38cadd/revision_user?resourceVersion=id%3A9274"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/f31d9b6e-275b-4822-85ab-e913ac38cadd/relationships/revision_user?resourceVersion=id%3A9274"
+            }
+          }
+        },
+        "uid": {
+          "data": { "type": "user--user", "id": "3fde2192-a760-4852-841d-cba2c133d947" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/f31d9b6e-275b-4822-85ab-e913ac38cadd/uid?resourceVersion=id%3A9274"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/f31d9b6e-275b-4822-85ab-e913ac38cadd/relationships/uid?resourceVersion=id%3A9274"
+            }
+          }
+        },
+        "thumbnail": {
+          "data": {
+            "type": "file--file",
+            "id": "bfc96a0c-f51c-41f3-ab14-0b491731f97e",
+            "meta": {
+              "alt": "teaser dashboard winkelgebieden",
+              "title": "",
+              "width": 750,
+              "height": 750
+            }
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/f31d9b6e-275b-4822-85ab-e913ac38cadd/thumbnail?resourceVersion=id%3A9274"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/f31d9b6e-275b-4822-85ab-e913ac38cadd/relationships/thumbnail?resourceVersion=id%3A9274"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": null,
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/f31d9b6e-275b-4822-85ab-e913ac38cadd/feeds_item?resourceVersion=id%3A9274"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/f31d9b6e-275b-4822-85ab-e913ac38cadd/relationships/feeds_item?resourceVersion=id%3A9274"
+            }
+          }
+        },
+        "field_media_image": {
+          "data": {
+            "type": "file--file",
+            "id": "bfc96a0c-f51c-41f3-ab14-0b491731f97e",
+            "meta": {
+              "alt": "teaser dashboard winkelgebieden",
+              "title": "",
+              "width": 750,
+              "height": 750
+            }
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/f31d9b6e-275b-4822-85ab-e913ac38cadd/field_media_image?resourceVersion=id%3A9274"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/f31d9b6e-275b-4822-85ab-e913ac38cadd/relationships/field_media_image?resourceVersion=id%3A9274"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "media--image",
+      "id": "166828f4-fe78-4586-b1d2-2ad23835da37",
+      "links": {
+        "self": {
+          "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/166828f4-fe78-4586-b1d2-2ad23835da37?resourceVersion=id%3A9555"
+        }
+      },
+      "attributes": {
+        "drupal_internal__mid": 9555,
+        "drupal_internal__vid": 9555,
+        "langcode": "en",
+        "revision_created": "2021-01-18T17:18:19+00:00",
+        "revision_log_message": null,
+        "status": true,
+        "name": "3D_3.png",
+        "created": "2021-01-18T17:18:15+00:00",
+        "changed": "2021-01-18T17:18:15+00:00",
+        "default_langcode": true,
+        "revision_translation_affected": true,
+        "path": { "alias": "", "pid": null, "langcode": "en" },
+        "field_credit": null
+      },
+      "relationships": {
+        "bundle": {
+          "data": {
+            "type": "media_type--media_type",
+            "id": "566d1ca3-25d0-4d66-ac13-65a0651c973f"
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/166828f4-fe78-4586-b1d2-2ad23835da37/bundle?resourceVersion=id%3A9555"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/166828f4-fe78-4586-b1d2-2ad23835da37/relationships/bundle?resourceVersion=id%3A9555"
+            }
+          }
+        },
+        "revision_user": {
+          "data": null,
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/166828f4-fe78-4586-b1d2-2ad23835da37/revision_user?resourceVersion=id%3A9555"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/166828f4-fe78-4586-b1d2-2ad23835da37/relationships/revision_user?resourceVersion=id%3A9555"
+            }
+          }
+        },
+        "uid": {
+          "data": { "type": "user--user", "id": "c37ef8dd-7f43-4e04-9bc4-120ed5acc87d" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/166828f4-fe78-4586-b1d2-2ad23835da37/uid?resourceVersion=id%3A9555"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/166828f4-fe78-4586-b1d2-2ad23835da37/relationships/uid?resourceVersion=id%3A9555"
+            }
+          }
+        },
+        "thumbnail": {
+          "data": {
+            "type": "file--file",
+            "id": "9fbec9e7-9cb6-454e-930a-4b91653c8db2",
+            "meta": { "alt": "3D", "title": "", "width": 750, "height": 750 }
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/166828f4-fe78-4586-b1d2-2ad23835da37/thumbnail?resourceVersion=id%3A9555"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/166828f4-fe78-4586-b1d2-2ad23835da37/relationships/thumbnail?resourceVersion=id%3A9555"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": null,
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/166828f4-fe78-4586-b1d2-2ad23835da37/feeds_item?resourceVersion=id%3A9555"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/166828f4-fe78-4586-b1d2-2ad23835da37/relationships/feeds_item?resourceVersion=id%3A9555"
+            }
+          }
+        },
+        "field_media_image": {
+          "data": {
+            "type": "file--file",
+            "id": "9fbec9e7-9cb6-454e-930a-4b91653c8db2",
+            "meta": { "alt": "3D", "title": "", "width": 750, "height": 750 }
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/166828f4-fe78-4586-b1d2-2ad23835da37/field_media_image?resourceVersion=id%3A9555"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/166828f4-fe78-4586-b1d2-2ad23835da37/relationships/field_media_image?resourceVersion=id%3A9555"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "media--image",
+      "id": "31190e82-c6f0-4f4f-8d97-b90245d053fe",
+      "links": {
+        "self": {
+          "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/31190e82-c6f0-4f4f-8d97-b90245d053fe?resourceVersion=id%3A9513"
+        }
+      },
+      "attributes": {
+        "drupal_internal__mid": 9513,
+        "drupal_internal__vid": 9513,
+        "langcode": "en",
+        "revision_created": "2020-12-08T15:27:55+00:00",
+        "revision_log_message": null,
+        "status": true,
+        "name": "teaser-55764-Corona-10-20okt2020-e-v-eis.jpg",
+        "created": "2020-12-08T15:27:49+00:00",
+        "changed": "2020-12-08T15:27:49+00:00",
+        "default_langcode": true,
+        "revision_translation_affected": true,
+        "path": { "alias": "", "pid": null, "langcode": "en" },
+        "field_credit": null
+      },
+      "relationships": {
+        "bundle": {
+          "data": {
+            "type": "media_type--media_type",
+            "id": "566d1ca3-25d0-4d66-ac13-65a0651c973f"
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/31190e82-c6f0-4f4f-8d97-b90245d053fe/bundle?resourceVersion=id%3A9513"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/31190e82-c6f0-4f4f-8d97-b90245d053fe/relationships/bundle?resourceVersion=id%3A9513"
+            }
+          }
+        },
+        "revision_user": {
+          "data": null,
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/31190e82-c6f0-4f4f-8d97-b90245d053fe/revision_user?resourceVersion=id%3A9513"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/31190e82-c6f0-4f4f-8d97-b90245d053fe/relationships/revision_user?resourceVersion=id%3A9513"
+            }
+          }
+        },
+        "uid": {
+          "data": { "type": "user--user", "id": "3fde2192-a760-4852-841d-cba2c133d947" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/31190e82-c6f0-4f4f-8d97-b90245d053fe/uid?resourceVersion=id%3A9513"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/31190e82-c6f0-4f4f-8d97-b90245d053fe/relationships/uid?resourceVersion=id%3A9513"
+            }
+          }
+        },
+        "thumbnail": {
+          "data": {
+            "type": "file--file",
+            "id": "8f10f275-2fa9-4a6a-bad8-c23a73a5951d",
+            "meta": { "alt": "Teaser corona", "title": "", "width": null, "height": null }
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/31190e82-c6f0-4f4f-8d97-b90245d053fe/thumbnail?resourceVersion=id%3A9513"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/31190e82-c6f0-4f4f-8d97-b90245d053fe/relationships/thumbnail?resourceVersion=id%3A9513"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": null,
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/31190e82-c6f0-4f4f-8d97-b90245d053fe/feeds_item?resourceVersion=id%3A9513"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/31190e82-c6f0-4f4f-8d97-b90245d053fe/relationships/feeds_item?resourceVersion=id%3A9513"
+            }
+          }
+        },
+        "field_media_image": {
+          "data": {
+            "type": "file--file",
+            "id": "8f10f275-2fa9-4a6a-bad8-c23a73a5951d",
+            "meta": { "alt": "Teaser corona", "title": "", "width": 750, "height": 750 }
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/31190e82-c6f0-4f4f-8d97-b90245d053fe/field_media_image?resourceVersion=id%3A9513"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/31190e82-c6f0-4f4f-8d97-b90245d053fe/relationships/field_media_image?resourceVersion=id%3A9513"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "file--file",
+      "id": "bfc96a0c-f51c-41f3-ab14-0b491731f97e",
+      "links": {
+        "self": {
+          "href": "http://cms.data.amsterdam.nl/jsonapi/file/file/bfc96a0c-f51c-41f3-ab14-0b491731f97e"
+        }
+      },
+      "attributes": {
+        "drupal_internal__fid": 4938,
+        "langcode": "en",
+        "filename": "teaser-dashboard-winkelgebieden-39864-180911-javastraat-buurteconomie_HR-399.jpg",
+        "uri": {
+          "value": "public://images/teaser-dashboard-winkelgebieden-39864-180911-javastraat-buurteconomie_HR-399.jpg",
+          "url": "/sites/default/files/images/teaser-dashboard-winkelgebieden-39864-180911-javastraat-buurteconomie_HR-399.jpg"
+        },
+        "filemime": "image/jpeg",
+        "filesize": 585804,
+        "status": true,
+        "created": "2020-09-02T09:25:55+00:00",
+        "changed": "2020-09-02T09:26:08+00:00"
+      },
+      "relationships": {
+        "uid": {
+          "data": { "type": "user--user", "id": "3fde2192-a760-4852-841d-cba2c133d947" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/file/file/bfc96a0c-f51c-41f3-ab14-0b491731f97e/uid"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/file/file/bfc96a0c-f51c-41f3-ab14-0b491731f97e/relationships/uid"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "file--file",
+      "id": "9fbec9e7-9cb6-454e-930a-4b91653c8db2",
+      "links": {
+        "self": {
+          "href": "http://cms.data.amsterdam.nl/jsonapi/file/file/9fbec9e7-9cb6-454e-930a-4b91653c8db2"
+        }
+      },
+      "attributes": {
+        "drupal_internal__fid": 5372,
+        "langcode": "en",
+        "filename": "3D_3.png",
+        "uri": {
+          "value": "public://images/3D_3.png",
+          "url": "/sites/default/files/images/3D_3.png"
+        },
+        "filemime": "image/png",
+        "filesize": 613416,
+        "status": true,
+        "created": "2021-01-18T17:18:15+00:00",
+        "changed": "2021-01-18T17:18:19+00:00"
+      },
+      "relationships": {
+        "uid": {
+          "data": { "type": "user--user", "id": "c37ef8dd-7f43-4e04-9bc4-120ed5acc87d" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/file/file/9fbec9e7-9cb6-454e-930a-4b91653c8db2/uid"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/file/file/9fbec9e7-9cb6-454e-930a-4b91653c8db2/relationships/uid"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "file--file",
+      "id": "8f10f275-2fa9-4a6a-bad8-c23a73a5951d",
+      "links": {
+        "self": {
+          "href": "http://cms.data.amsterdam.nl/jsonapi/file/file/8f10f275-2fa9-4a6a-bad8-c23a73a5951d"
+        }
+      },
+      "attributes": {
+        "drupal_internal__fid": 5255,
+        "langcode": "en",
+        "filename": "teaser-55764-Corona-10-20okt2020-e-v-eis.jpg",
+        "uri": {
+          "value": "public://images/teaser-55764-Corona-10-20okt2020-e-v-eis.jpg",
+          "url": "/sites/default/files/images/teaser-55764-Corona-10-20okt2020-e-v-eis.jpg"
+        },
+        "filemime": "image/jpeg",
+        "filesize": 561685,
+        "status": true,
+        "created": "2020-12-08T15:27:49+00:00",
+        "changed": "2020-12-08T15:27:55+00:00"
+      },
+      "relationships": {
+        "uid": {
+          "data": { "type": "user--user", "id": "3fde2192-a760-4852-841d-cba2c133d947" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/file/file/8f10f275-2fa9-4a6a-bad8-c23a73a5951d/uid"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/file/file/8f10f275-2fa9-4a6a-bad8-c23a73a5951d/relationships/uid"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "links": {
+    "self": {
+      "href": "http://cms.data.amsterdam.nl/jsonapi/node/list/9f02e2cd-b74d-474c-b251-c96e8416979d?include=field_items.field_teaser_image.field_media_image\u0026sort=-created"
+    }
+  }
+}

@@ -1,24 +1,25 @@
-import { mocked } from 'ts-jest/utils'
 import { getBouwdossierById } from '.'
-import joinUrl from '../../../app/utils/joinUrl'
-import environment from '../../../environment'
-import { fetchWithToken } from '../../../shared/services/api/api'
-
-jest.mock('../../../shared/services/api/api')
-
-const mockedFetchWithToken = mocked(fetchWithToken, true)
 
 describe('getBouwdossierById', () => {
-  const response = [{ foo: 'bar' }]
+  const id = 'foobarbaz'
+
+  it('throws an error when request is made unauthorized', async () => {
+    globalThis.unsetAuthentication()
+
+    await expect(getBouwdossierById(id)).rejects.toThrow()
+  })
+
+  it('throws an error when request is made with invalid auth', async () => {
+    globalThis.setInvalidAuthentication()
+
+    await expect(getBouwdossierById(id)).rejects.toThrow()
+  })
 
   it('makes a request and returns the response', async () => {
-    mockedFetchWithToken.mockReturnValueOnce(Promise.resolve(response))
+    globalThis.setValidAuthentication()
 
-    const id = 'foobarbaz'
-    await expect(getBouwdossierById(id)).resolves.toEqual(response)
+    const result = await getBouwdossierById(id)
 
-    expect(mockedFetchWithToken).toHaveBeenCalledWith(
-      joinUrl([environment.API_ROOT, 'iiif-metadata', 'bouwdossier', id], true),
-    )
+    expect(result).not.toBeUndefined()
   })
 })

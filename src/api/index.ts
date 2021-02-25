@@ -39,13 +39,16 @@ import * as oplaadpunten from './vsd/oplaadpunten'
 import * as parkeerzonesUitzondering from './vsd/parkeerzones-uitzondering'
 import * as reclamebelasting from './vsd/reclamebelasting'
 import * as vastgoed from './vsd/vastgoed'
-import * as highlights from './cms/jsonapi/node'
+import * as highlights from './cms/jsonapi/node/list'
+import * as typeahead from './typeahead'
 
 type ApiConfig = {
-  singleFixture: any
+  singleFixture?: any
+  singleFixtureAuth?: any
   listFixture?: any
   path: string
   fixtureId: string | null
+  onlyAuthenticated?: boolean
 }
 
 function typeHelper<K extends PropertyKey>(obj: Record<K, ApiConfig>): Record<K, ApiConfig> {
@@ -95,5 +98,7 @@ const api = typeHelper({
   reclamebelasting,
   vastgoed,
   highlights,
+  typeahead,
 })
+
 export default api

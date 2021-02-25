@@ -1,56 +1,59 @@
-import { mocked } from 'ts-jest/utils'
-import joinUrl from '../../../app/utils/joinUrl'
-import environment from '../../../environment'
-import { fetchProxy } from '../../../shared/services/api/api'
+import { server, rest, MockedRequest } from '../../../../test/server'
+import { path, singleFixture } from '.'
 import { getPanoramaThumbnail } from './getPanoramaThumbnail'
 
-jest.mock('../../../shared/services/api/api')
-
-const mockedFetchProxy = mocked(fetchProxy, true)
+let request: MockedRequest | undefined
 
 describe('getPanoramaThumbnail', () => {
-  const apiUrl = joinUrl([environment.API_ROOT, 'panorama/thumbnail'])
-  const validResponse = {
-    pano_id: 'pano_id',
-    heading: 'heading',
-    url: 'url',
-  }
+  beforeEach(() => {
+    request = undefined
 
-  it('makes an api call and returns the correct response', async () => {
-    mockedFetchProxy.mockReturnValueOnce(Promise.resolve(validResponse))
+    server.use(
+      rest.get(new RegExp(`${path}*`), async (req, res, ctx) => {
+        const response = await res(ctx.status(200), ctx.json(singleFixture))
+        request = req
+        return response
+      }),
+    )
+  })
 
-    await expect(getPanoramaThumbnail({ lat: 123, lng: 321 })).resolves.toEqual({
-      pano_id: 'pano_id',
-      heading: 'heading',
-      url: 'url',
-    })
+  it('makes an api call and calls it with the correct params', async () => {
+    await getPanoramaThumbnail({ lat: 123, lng: 321 })
 
-    expect(mockedFetchProxy).toHaveBeenCalledWith(`${apiUrl}?lat=123&lon=321`)
+    expect(request?.url.toString()).toEqual(expect.stringContaining('?lat=123&lon=321'))
   })
 
   it('handles a faulty empty response by transforming it to null', async () => {
-    // This is a bug in the API we have to work around.
-    mockedFetchProxy.mockReturnValueOnce(Promise.resolve([]))
+    server.use(
+      rest.get('*', async (req, res, ctx) => {
+        const response = await res(ctx.status(200), ctx.json([]))
+        request = req
+        return response
+      }),
+    )
 
     await expect(getPanoramaThumbnail({ lat: 123, lng: 321 })).resolves.toEqual(null)
   })
 
   it('rejects when any errors occur', async () => {
-    const error = new Error('Error requesting a panoramic view')
-    mockedFetchProxy.mockReturnValueOnce(Promise.reject(error))
+    server.use(
+      rest.get('*', async (req, res, ctx) => {
+        const response = await res(ctx.status(500))
+        request = req
+        return response
+      }),
+    )
 
     await expect(
       getPanoramaThumbnail({
         lat: 123,
         lng: 321,
       }),
-    ).rejects.toEqual(error)
+    ).rejects.toThrow()
   })
 
-  it('adds all possible parameters to the request', () => {
-    mockedFetchProxy.mockReturnValueOnce(Promise.resolve(validResponse))
-
-    getPanoramaThumbnail(
+  it('adds all possible parameters to the request', async () => {
+    await getPanoramaThumbnail(
       { lat: 123, lng: 321 },
       {
         width: 100,
@@ -61,8 +64,10 @@ describe('getPanoramaThumbnail', () => {
       },
     )
 
-    expect(mockedFetchProxy).toHaveBeenCalledWith(
-      `${apiUrl}?lat=123&lon=321&width=100&fov=90&horizon=0.4&aspect=1.4&radius=180`,
+    expect(request?.url.toString()).toEqual(
+      expect.stringContaining(
+        '?lat=123&lon=321&width=100&fov=90&horizon=0.4&aspect=1.4&radius=180',
+      ),
     )
   })
 })

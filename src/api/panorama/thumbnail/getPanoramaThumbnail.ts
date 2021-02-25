@@ -87,7 +87,8 @@ export async function getPanoramaThumbnail(
   }
 
   const response = await fetchProxy<RawResponse>(
-    `${joinUrl([environment.API_ROOT, 'panorama/thumbnail'])}?${searchParams.toString()}`,
+    joinUrl([environment.API_ROOT, 'panorama/thumbnail']),
+    { searchParams },
   )
 
   return transformResponse(response)

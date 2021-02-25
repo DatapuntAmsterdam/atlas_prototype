@@ -1,0 +1,109 @@
+{
+  "jsonapi": {
+    "version": "1.0",
+    "meta": { "links": { "self": { "href": "http://jsonapi.org/format/1.0/" } } }
+  },
+  "data": {
+    "type": "node--special",
+    "id": "562f52d4-d78a-4d20-94fd-f708f2ba76f7",
+    "links": {
+      "self": {
+        "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/special/562f52d4-d78a-4d20-94fd-f708f2ba76f7?resourceVersion=id%3A23020"
+      }
+    },
+    "attributes": {
+      "drupal_internal__nid": 23012,
+      "drupal_internal__vid": 23020,
+      "langcode": "en",
+      "revision_timestamp": "2020-04-21T11:38:19+00:00",
+      "revision_log": null,
+      "status": true,
+      "title": "Dashboard kerncijfers economie",
+      "created": "2020-04-21T11:37:35+00:00",
+      "changed": "2020-04-23T07:44:37+00:00",
+      "promote": false,
+      "sticky": false,
+      "default_langcode": true,
+      "revision_translation_affected": true,
+      "path": { "alias": "", "pid": null, "langcode": "en" },
+      "body": null,
+      "field_content_link": {
+        "uri": "https://acc.static.amsterdam.nl/economie/",
+        "title": "",
+        "options": []
+      },
+      "field_intro": null,
+      "field_links": [],
+      "field_publication_date": "2020-04-21T12:00:00+02:00",
+      "field_short_title": null,
+      "field_slug": "dashboard-kerncijfers-economie",
+      "field_special_type": "dashboard",
+      "field_subtitle_default": false,
+      "field_subtitle_link": null,
+      "field_teaser": null,
+      "field_width": "narrow"
+    },
+    "relationships": {
+      "node_type": {
+        "data": { "type": "node_type--node_type", "id": "6f222202-459a-43c3-9789-ea752d7992db" },
+        "links": {
+          "related": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/special/562f52d4-d78a-4d20-94fd-f708f2ba76f7/node_type?resourceVersion=id%3A23020"
+          },
+          "self": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/special/562f52d4-d78a-4d20-94fd-f708f2ba76f7/relationships/node_type?resourceVersion=id%3A23020"
+          }
+        }
+      },
+      "revision_uid": {
+        "data": { "type": "user--user", "id": "44418b09-7bfb-43ef-a488-7a03211bf407" },
+        "links": {
+          "related": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/special/562f52d4-d78a-4d20-94fd-f708f2ba76f7/revision_uid?resourceVersion=id%3A23020"
+          },
+          "self": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/special/562f52d4-d78a-4d20-94fd-f708f2ba76f7/relationships/revision_uid?resourceVersion=id%3A23020"
+          }
+        }
+      },
+      "uid": {
+        "data": { "type": "user--user", "id": "44418b09-7bfb-43ef-a488-7a03211bf407" },
+        "links": {
+          "related": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/special/562f52d4-d78a-4d20-94fd-f708f2ba76f7/uid?resourceVersion=id%3A23020"
+          },
+          "self": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/special/562f52d4-d78a-4d20-94fd-f708f2ba76f7/relationships/uid?resourceVersion=id%3A23020"
+          }
+        }
+      },
+      "field_teaser_image": {
+        "data": { "type": "media--image", "id": "3f2a781a-e062-413a-9f2b-c8fe4b606b5f" },
+        "links": {
+          "related": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/special/562f52d4-d78a-4d20-94fd-f708f2ba76f7/field_teaser_image?resourceVersion=id%3A23020"
+          },
+          "self": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/special/562f52d4-d78a-4d20-94fd-f708f2ba76f7/relationships/field_teaser_image?resourceVersion=id%3A23020"
+          }
+        }
+      },
+      "field_themes": {
+        "data": [{ "type": "taxonomy_term--themes", "id": "7e681fa3-6776-4520-9f99-45e8d68b2400" }],
+        "links": {
+          "related": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/special/562f52d4-d78a-4d20-94fd-f708f2ba76f7/field_themes?resourceVersion=id%3A23020"
+          },
+          "self": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/special/562f52d4-d78a-4d20-94fd-f708f2ba76f7/relationships/field_themes?resourceVersion=id%3A23020"
+          }
+        }
+      }
+    }
+  },
+  "links": {
+    "self": {
+      "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/special/562f52d4-d78a-4d20-94fd-f708f2ba76f7"
+    }
+  }
+}

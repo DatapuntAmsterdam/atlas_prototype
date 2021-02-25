@@ -31,9 +31,10 @@ export const fixtureKeys = Object.keys(api) as FixtureKey[]
  * list: matches everything after the url and returns a list result fixture
  */
 export const apiFixtures = Object.entries(api).reduce<APIFixtures>((acc, [key, value]) => {
-  const singleAlias = `getSingle${key}`
-  const anyAlias = `getAny${key}`
-  const listAlias = `getList${key}`
+  const alias = `${key.charAt(0).toUpperCase()}${key.slice(1)}`
+  const singleAlias = `getSingle${alias}`
+  const anyAlias = `getAny${alias}`
+  const listAlias = `getList${alias}`
   const intercepts: Intercepts = [
     [
       'GET',

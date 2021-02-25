@@ -1,5 +1,5 @@
 import { ALERTS, DETAIL_PANEL } from '../support/selectors'
-import { apiFixtures, constructApiURLRegex, interceptApiFixtures } from '../support/api'
+import { apiFixtures, constructApiURLRegex } from '../support/api'
 
 const customIntercepts = {
   getNummeraanduidingByPand: 'getNummeraanduidingByPand',
@@ -46,8 +46,6 @@ describe('employee permissions', () => {
       statusCode: 401,
       body: null,
     })
-
-    interceptApiFixtures()
   })
 
   describe('BRK detail panels', () => {

@@ -21,3 +21,12 @@ import './map-commands'
 import './preview-panel-commands'
 import './routing-commands'
 import './search-commands'
+
+before(() => {
+  cy.window().then(() => {
+    // waiting for the Window object to become available; without it, intercepts cannot be set up
+    // eslint-disable-next-line
+    const { interceptApiFixtures } = require('../support/api')
+    interceptApiFixtures()
+  })
+})

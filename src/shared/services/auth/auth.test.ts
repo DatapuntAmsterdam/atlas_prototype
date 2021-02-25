@@ -77,7 +77,7 @@ describe('The auth service', () => {
 
       describe('receiving a successful callback from the auth service', () => {
         beforeEach(() => {
-          global.setValidAuthentication()
+          globalThis.setValidAuthentication()
         })
 
         it('throws an error when the state token received does not match the one saved', () => {
@@ -104,7 +104,7 @@ describe('The auth service', () => {
         })
 
         it('Deletes the sessionStorage when token is expired', () => {
-          global.setExpiredAuthentication()
+          globalThis.setExpiredAuthentication()
 
           initAuth()
 
@@ -133,7 +133,7 @@ describe('The auth service', () => {
 
     describe('Retrieving the return path', () => {
       it('returns the return path after initialized with a successful callback', () => {
-        global.setValidAuthentication()
+        globalThis.setValidAuthentication()
 
         const returnPath = 'http://localhost:3000/some-page'
         window.location.href = returnPath
@@ -171,21 +171,21 @@ describe('The auth service', () => {
 
     describe('getAuthHeaders', () => {
       it('returns an object without headers for invalid or missing tokens', () => {
-        global.unsetAuthentication()
+        globalThis.unsetAuthentication()
 
         expect(Object.keys(getAuthHeaders())).toHaveLength(0)
 
-        global.setInvalidAuthentication()
+        globalThis.setInvalidAuthentication()
 
         expect(Object.keys(getAuthHeaders())).toHaveLength(0)
 
-        global.setExpiredAuthentication()
+        globalThis.setExpiredAuthentication()
 
         expect(Object.keys(getAuthHeaders())).toHaveLength(0)
       })
 
       it('returns the headers', () => {
-        global.setValidAuthentication()
+        globalThis.setValidAuthentication()
 
         expect(Object.keys(getAuthHeaders())).toEqual(['Authorization'])
       })
@@ -193,26 +193,26 @@ describe('The auth service', () => {
 
     describe('getScopes', () => {
       it('returns an empty value for an missing token', () => {
-        global.unsetAuthentication()
+        globalThis.unsetAuthentication()
 
         expect(getScopes()).toEqual([])
       })
 
       it('returns an empty value for an invalid token', () => {
-        global.setInvalidAuthentication()
+        globalThis.setInvalidAuthentication()
 
         expect(getScopes()).toEqual([])
       })
 
       it('returns an empty value for an unparseable token', () => {
         const unparseableToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
-        global.setAuthenticationWithToken(unparseableToken)
+        globalThis.setAuthenticationWithToken(unparseableToken)
 
         expect(getScopes()).toEqual([])
       })
 
       it('returns the scopes', () => {
-        global.setAuthenticationWithToken(token)
+        globalThis.setAuthenticationWithToken(token)
 
         expect(getScopes()).toEqual(['foo', 'bar', 'baz'])
       })
@@ -220,26 +220,26 @@ describe('The auth service', () => {
 
     describe('getName', () => {
       it('returns an empty value for an missing token', () => {
-        global.unsetAuthentication()
+        globalThis.unsetAuthentication()
 
         expect(getName()).toEqual('')
       })
 
       it('returns an empty value for an invalid token', () => {
-        global.setInvalidAuthentication()
+        globalThis.setInvalidAuthentication()
 
         expect(getName()).toEqual('')
       })
 
       it('returns an empty value for an unparseable token', () => {
         const unparseableToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
-        global.setAuthenticationWithToken(unparseableToken)
+        globalThis.setAuthenticationWithToken(unparseableToken)
 
         expect(getName()).toEqual('')
       })
 
       it('returns the name', () => {
-        global.setAuthenticationWithToken(token)
+        globalThis.setAuthenticationWithToken(token)
 
         expect(getName()).toEqual('Henk')
       })
@@ -247,26 +247,26 @@ describe('The auth service', () => {
 
     describe('isAuthenticated', () => {
       it('returns false for expired token', () => {
-        global.setExpiredAuthentication()
+        globalThis.setExpiredAuthentication()
 
         expect(isAuthenticated()).toEqual(false)
       })
 
       it('returns false for invalid token', () => {
-        global.setInvalidAuthentication()
+        globalThis.setInvalidAuthentication()
 
         expect(isAuthenticated()).toEqual(false)
       })
 
       it('returns false for an unparseable token', () => {
         const unparseableToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
-        global.setAuthenticationWithToken(unparseableToken)
+        globalThis.setAuthenticationWithToken(unparseableToken)
 
         expect(isAuthenticated()).toEqual(false)
       })
 
       it('returns true for valid token', () => {
-        global.setValidAuthentication()
+        globalThis.setValidAuthentication()
 
         expect(isAuthenticated()).toEqual(true)
       })

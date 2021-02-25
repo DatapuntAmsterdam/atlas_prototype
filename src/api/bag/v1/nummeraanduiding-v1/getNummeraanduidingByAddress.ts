@@ -1,7 +1,8 @@
 import joinUrl from '../../../../app/utils/joinUrl'
 import environment from '../../../../environment'
-import { fetchWithoutToken } from '../../../../shared/services/api/api'
+import { fetchProxy } from '../../../../shared/services/api/api'
 import { List } from './types'
+import { path } from '.'
 
 /**
  * Retrieve nummeraanduiding
@@ -27,7 +28,7 @@ export const getNummeraanduidingByAddress = (
     searchParams.append('_fields', receiveFields)
   }
 
-  const url = joinUrl([environment.API_ROOT, 'v1/bag/nummeraanduiding'])
+  const url = joinUrl([environment.API_ROOT, path])
 
-  return fetchWithoutToken(`${url}?${searchParams.toString()}`)
+  return fetchProxy(url, { searchParams })
 }

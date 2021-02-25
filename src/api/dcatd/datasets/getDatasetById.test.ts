@@ -1,19 +1,29 @@
-import { mocked } from 'ts-jest/utils'
+import { server, rest, MockedRequest } from '../../../../test/server'
 import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
-import { fetchProxy } from '../../../shared/services/api/api'
+import { path, singleFixture } from '.'
 import { getDatasetById } from './getDatasetById'
 
-jest.mock('../../../shared/services/api/api')
-
-const mockedFetchProxy = mocked(fetchProxy, true)
+let request: MockedRequest | undefined
 
 describe('getDatasetById', () => {
+  beforeEach(() => {
+    request = undefined
+
+    server.use(
+      rest.get(new RegExp(`${path}*`), async (req, res, ctx) => {
+        const response = await res(ctx.status(200), ctx.json(singleFixture))
+        request = req
+        return response
+      }),
+    )
+  })
+
   it('makes an api call and returns the correct response', async () => {
     await getDatasetById('baz')
 
-    expect(mockedFetchProxy).toHaveBeenCalledWith(
-      joinUrl([environment.API_ROOT, 'dcatd/datasets/baz']),
+    expect(request?.url.toString()).toEqual(
+      expect.stringContaining(joinUrl([environment.API_ROOT, 'dcatd/datasets/baz'])),
     )
   })
 })

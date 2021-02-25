@@ -5,6 +5,7 @@ import {
   FOOTER_LINKS_HELP,
   FOOTER_LINK_PRIVACY,
 } from '../../src/shared/config/content-links'
+import { apiFixtures } from '../support/api'
 
 describe('Homepage module', () => {
   // const sizes: Cypress.ViewportPreset[] = ['iphone-x', 'ipad-2', 'macbook-15']
@@ -192,7 +193,11 @@ describe('Homepage module', () => {
       })
 
       it.only('Should check the highlight block', () => {
-        // cy.wait('@highlightsListFixture')
+        // overrriding default intercept
+        cy.intercept('&__type__=HIGHLIGHT', apiFixtures.highlights.listFixture).as(
+          'getListHighlights',
+        )
+        cy.wait('@getListHighlights')
 
         cy.get(HOMEPAGE.highlightBlock).scrollIntoView().and('be.visible')
         cy.get(HOMEPAGE.highlightCard).should('have.length', '3')

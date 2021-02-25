@@ -1,18 +1,19 @@
-import { mocked } from 'ts-jest/utils'
-import joinUrl from '../../../../app/utils/joinUrl'
-import environment from '../../../../environment'
-import { fetchWithoutToken } from '../../../../shared/services/api/api'
-import { listFixture, verblijfsobjectFieldFixture } from './index'
+import { server, rest, MockedRequest } from '../../../../../test/server'
+import { singleFixture, path } from '.'
 
 import { getNummeraanduidingByAddress } from './getNummeraanduidingByAddress'
 
-jest.mock('../../../../shared/services/api/api')
-
-const mockedFetchWithoutToken = mocked(fetchWithoutToken, true)
+let request: MockedRequest
 
 describe('getNummeraanduidingByAddress', () => {
   beforeEach(() => {
-    mockedFetchWithoutToken.mockReset()
+    server.use(
+      rest.get(new RegExp(`${path}*`), async (req, res, ctx) => {
+        const response = await res(ctx.status(200), ctx.json(singleFixture))
+        request = req
+        return response
+      }),
+    )
   })
 
   it('returns null', async () => {
@@ -26,37 +27,24 @@ describe('getNummeraanduidingByAddress', () => {
   })
 
   it('makes a request and returns the response', async () => {
-    mockedFetchWithoutToken.mockReturnValueOnce(Promise.resolve(listFixture))
-
     const queryParams = '?postcode=1016XX&huisnummer=0001'
+    const response = await getNummeraanduidingByAddress(queryParams)
 
-    await expect(getNummeraanduidingByAddress(queryParams)).resolves.toEqual(listFixture)
+    expect(request.url.toString()).toEqual(expect.stringContaining(queryParams))
 
-    expect(mockedFetchWithoutToken).toHaveBeenCalledWith(
-      expect.stringContaining(joinUrl([environment.API_ROOT, 'v1/bag/nummeraanduiding'])),
-    )
-
-    expect(mockedFetchWithoutToken).toHaveBeenCalledWith(
-      expect.stringContaining('postcode=1016XX&huisnummer=0001'),
-    )
+    expect(response).toEqual(singleFixture)
   })
 
   it('requests specific fields to receive', async () => {
-    mockedFetchWithoutToken.mockReturnValueOnce(Promise.resolve(verblijfsobjectFieldFixture))
-
     const queryParams = '?postcode=1099AA&huisnummer=1000'
     const receiveFields = 'verblijfsobjectId,someOther,FooBar'
 
-    await expect(getNummeraanduidingByAddress(queryParams, receiveFields)).resolves.toEqual(
-      verblijfsobjectFieldFixture,
-    )
+    await getNummeraanduidingByAddress(queryParams, receiveFields)
 
-    expect(mockedFetchWithoutToken).toHaveBeenCalledWith(
-      expect.stringContaining(joinUrl([environment.API_ROOT, 'v1/bag/nummeraanduiding'])),
-    )
+    expect(request.url.toString()).toEqual(expect.stringContaining(queryParams))
 
-    expect(mockedFetchWithoutToken).toHaveBeenCalledWith(
-      expect.stringContaining(`${queryParams}&_fields=${encodeURIComponent(receiveFields)}`),
+    expect(request.url.toString()).toEqual(
+      expect.stringContaining(encodeURIComponent(receiveFields)),
     )
   })
 })

@@ -1,6 +1,6 @@
 import joinUrl from '../../app/utils/joinUrl'
 import environment from '../../environment'
-import { fetchWithoutToken } from '../../shared/services/api/api'
+import { fetchProxy } from '../../shared/services/api/api'
 import { Metadata } from './types'
 
 /**
@@ -10,5 +10,5 @@ import { Metadata } from './types'
  */
 // eslint-disable-next-line import/prefer-default-export
 export async function getMetadata() {
-  return fetchWithoutToken<Metadata[]>(joinUrl([environment.API_ROOT, 'metadata']))
+  return fetchProxy<Metadata[]>(joinUrl([environment.API_ROOT, 'metadata']))
 }

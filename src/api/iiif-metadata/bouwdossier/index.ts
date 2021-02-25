@@ -4,8 +4,9 @@ import { Single, List } from './types'
 
 export const singleFixture = fixtureSingle as Single
 export const listFixture = fixtureList as List
-export const path = 'iiif-metadata/bouwdossier/'
+export const path = 'iiif-metadata/bouwdossier/.*'
 export const fixtureId = 'SA84102'
+export const onlyAuthenticated = true
 
 export * from './getBouwdossierById'
 export * from './types'

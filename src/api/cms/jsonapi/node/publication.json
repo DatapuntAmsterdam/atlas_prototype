@@ -1,0 +1,436 @@
+{
+  "jsonapi": {
+    "version": "1.0",
+    "meta": { "links": { "self": { "href": "http://jsonapi.org/format/1.0/" } } }
+  },
+  "data": {
+    "type": "node--publication",
+    "id": "e80750e5-63be-4782-832d-9b759a7a695d",
+    "links": {
+      "self": {
+        "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d?resourceVersion=id%3A23041"
+      }
+    },
+    "attributes": {
+      "drupal_internal__nid": 23033,
+      "drupal_internal__vid": 23041,
+      "langcode": "en",
+      "revision_timestamp": "2020-11-19T11:09:13+00:00",
+      "revision_log": null,
+      "status": true,
+      "title": "Test publicatie update drupal",
+      "created": "2020-11-19T11:09:13+00:00",
+      "changed": "2021-01-05T09:58:40+00:00",
+      "promote": false,
+      "sticky": false,
+      "default_langcode": true,
+      "revision_translation_affected": true,
+      "path": { "alias": "", "pid": null, "langcode": "en" },
+      "body": {
+        "value": "\u003Cp\u003EDe gebiedsanalyses vormen het jaarlijkse startpunt van de Amsterdamse gebiedscyclus. Iedere analyse beschrijft de toestand en ontwikkeling van \u00e9\u00e9n van de 22 gebieden in de stad. Daarbij wordt zowel gebruik gemaakt van statistieken en onderzoeksgegevens als de signalen uit de buurt die professionals in het gebied opvangen. De gebiedsanalyses dient als onderlegger voor de gebiedsagenda.\u003C/p\u003E\u0026#13;\n",
+        "format": "basic_html",
+        "processed": "\u003Cp\u003EDe gebiedsanalyses vormen het jaarlijkse startpunt van de Amsterdamse gebiedscyclus. Iedere analyse beschrijft de toestand en ontwikkeling van \u00e9\u00e9n van de 22 gebieden in de stad. Daarbij wordt zowel gebruik gemaakt van statistieken en onderzoeksgegevens als de signalen uit de buurt die professionals in het gebied opvangen. De gebiedsanalyses dient als onderlegger voor de gebiedsagenda.\u003C/p\u003E",
+        "summary": ""
+      },
+      "field_file_size": "1,09 MB",
+      "field_file_type": "pdf",
+      "field_intro": "De komst van de Noord/Zuidlijn, het vele stedelijk groen en de nabijheid van landelijk Noord maken Noord Oost in potentie een aantrekkelijk gebied om te wonen en werken. Door de aanwezigheid van relatief grote woningen tegen\u0026#13;\neen huur tot de huurtoeslaggrens is het gebied aantrekkelijk voor gezinnen met een laag inkomen. Dit staat in de \u0027Gebiedsanalyse 19 Noord Oost 2016\u0027.",
+      "field_publication_day": 19,
+      "field_publication_month": "11",
+      "field_publication_source": "Onderzoek, Informatie en Statistiek",
+      "field_publication_year": "2020",
+      "field_short_title": null,
+      "field_slug": "test-publicatie-update-drupal",
+      "field_teaser": "De komst van de Noord/Zuidlijn, het vele stedelijk groen en de nabijheid van landelijk Noord maken Noord Oost in potentie een aantrekkelijk gebied om te wonen en werken. Door de aanwezigheid van relatief grote woningen tegen\u0026#13;\neen huur tot de huurtoeslaggrens is het gebied aantrekkelijk voor gezinnen met een laag inkomen. Dit staat in de \u0027Gebiedsanalyse 19 Noord Oost 2016\u0027."
+    },
+    "relationships": {
+      "node_type": {
+        "data": { "type": "node_type--node_type", "id": "e3dedc05-1de6-4e25-b6dc-37197d73ad96" },
+        "links": {
+          "related": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/node_type?resourceVersion=id%3A23041"
+          },
+          "self": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/relationships/node_type?resourceVersion=id%3A23041"
+          }
+        }
+      },
+      "revision_uid": {
+        "data": { "type": "user--user", "id": "ec3fa35b-623a-4cfa-b6de-8781198afe8b" },
+        "links": {
+          "related": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/revision_uid?resourceVersion=id%3A23041"
+          },
+          "self": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/relationships/revision_uid?resourceVersion=id%3A23041"
+          }
+        }
+      },
+      "uid": {
+        "data": { "type": "user--user", "id": "ec3fa35b-623a-4cfa-b6de-8781198afe8b" },
+        "links": {
+          "related": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/uid?resourceVersion=id%3A23041"
+          },
+          "self": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/relationships/uid?resourceVersion=id%3A23041"
+          }
+        }
+      },
+      "feeds_item": {
+        "data": null,
+        "links": {
+          "related": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/feeds_item?resourceVersion=id%3A23041"
+          },
+          "self": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/relationships/feeds_item?resourceVersion=id%3A23041"
+          }
+        }
+      },
+      "field_cover_image": {
+        "data": { "type": "media--image", "id": "764c8dd1-ffa2-43f8-b3ef-c85931c1832e" },
+        "links": {
+          "related": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/field_cover_image?resourceVersion=id%3A23041"
+          },
+          "self": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/relationships/field_cover_image?resourceVersion=id%3A23041"
+          }
+        }
+      },
+      "field_file": {
+        "data": { "type": "media--file", "id": "1d874e1c-0622-4f5f-b4b8-b08149f86a0e" },
+        "links": {
+          "related": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/field_file?resourceVersion=id%3A23041"
+          },
+          "self": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/relationships/field_file?resourceVersion=id%3A23041"
+          }
+        }
+      },
+      "field_related": {
+        "data": [{ "type": "node--article", "id": "fc0c446f-9f00-46ad-a104-23810e713a5b" }],
+        "links": {
+          "related": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/field_related?resourceVersion=id%3A23041"
+          },
+          "self": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/relationships/field_related?resourceVersion=id%3A23041"
+          }
+        }
+      },
+      "field_teaser_image": {
+        "data": { "type": "media--image", "id": "88bbf0a4-b255-4472-a900-a30f1ff7a963" },
+        "links": {
+          "related": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/field_teaser_image?resourceVersion=id%3A23041"
+          },
+          "self": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/relationships/field_teaser_image?resourceVersion=id%3A23041"
+          }
+        }
+      },
+      "field_themes": {
+        "data": [
+          { "type": "taxonomy_term--themes", "id": "1c7b1d93-dda9-443c-ab68-7f469f4f4c5b" },
+          { "type": "taxonomy_term--themes", "id": "42324e7b-c780-48e7-b382-8dca8f517d2b" },
+          { "type": "taxonomy_term--themes", "id": "96771ed8-ffb6-48ac-abc3-20b131b7e1e6" }
+        ],
+        "links": {
+          "related": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/field_themes?resourceVersion=id%3A23041"
+          },
+          "self": {
+            "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d/relationships/field_themes?resourceVersion=id%3A23041"
+          }
+        }
+      }
+    }
+  },
+  "included": [
+    {
+      "type": "media--image",
+      "id": "764c8dd1-ffa2-43f8-b3ef-c85931c1832e",
+      "links": {
+        "self": {
+          "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/image/764c8dd1-ffa2-43f8-b3ef-c85931c1832e?resourceVersion=id%3A2217"
+        }
+      },
+      "attributes": {
+        "drupal_internal__mid": 2217,
+        "drupal_internal__vid": 2217,
+        "langcode": "en",
+        "revision_created": "2020-12-16T13:19:10+00:00",
+        "revision_log_message": null,
+        "status": true,
+        "name": "cover-rapport-leerlingenprognose-SBO-SO-2019-2020.jpg",
+        "created": "2020-12-16T13:19:05+00:00",
+        "changed": "2020-12-16T13:19:05+00:00",
+        "default_langcode": true,
+        "revision_translation_affected": true,
+        "path": { "alias": "", "pid": null, "langcode": "en" },
+        "field_credit": null
+      },
+      "relationships": {
+        "bundle": {
+          "data": {
+            "type": "media_type--media_type",
+            "id": "566d1ca3-25d0-4d66-ac13-65a0651c973f"
+          },
+          "links": {
+            "related": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/image/764c8dd1-ffa2-43f8-b3ef-c85931c1832e/bundle?resourceVersion=id%3A2217"
+            },
+            "self": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/image/764c8dd1-ffa2-43f8-b3ef-c85931c1832e/relationships/bundle?resourceVersion=id%3A2217"
+            }
+          }
+        },
+        "revision_user": {
+          "data": null,
+          "links": {
+            "related": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/image/764c8dd1-ffa2-43f8-b3ef-c85931c1832e/revision_user?resourceVersion=id%3A2217"
+            },
+            "self": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/image/764c8dd1-ffa2-43f8-b3ef-c85931c1832e/relationships/revision_user?resourceVersion=id%3A2217"
+            }
+          }
+        },
+        "uid": {
+          "data": { "type": "user--user", "id": "ec3fa35b-623a-4cfa-b6de-8781198afe8b" },
+          "links": {
+            "related": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/image/764c8dd1-ffa2-43f8-b3ef-c85931c1832e/uid?resourceVersion=id%3A2217"
+            },
+            "self": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/image/764c8dd1-ffa2-43f8-b3ef-c85931c1832e/relationships/uid?resourceVersion=id%3A2217"
+            }
+          }
+        },
+        "thumbnail": {
+          "data": {
+            "type": "file--file",
+            "id": "ebd39597-01e2-443f-a31d-18b263e0562c",
+            "meta": { "alt": "test", "title": "", "width": 1653, "height": 2339 }
+          },
+          "links": {
+            "related": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/image/764c8dd1-ffa2-43f8-b3ef-c85931c1832e/thumbnail?resourceVersion=id%3A2217"
+            },
+            "self": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/image/764c8dd1-ffa2-43f8-b3ef-c85931c1832e/relationships/thumbnail?resourceVersion=id%3A2217"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": null,
+          "links": {
+            "related": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/image/764c8dd1-ffa2-43f8-b3ef-c85931c1832e/feeds_item?resourceVersion=id%3A2217"
+            },
+            "self": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/image/764c8dd1-ffa2-43f8-b3ef-c85931c1832e/relationships/feeds_item?resourceVersion=id%3A2217"
+            }
+          }
+        },
+        "field_media_image": {
+          "data": {
+            "type": "file--file",
+            "id": "ebd39597-01e2-443f-a31d-18b263e0562c",
+            "meta": { "alt": "test", "title": "", "width": 1653, "height": 2339 }
+          },
+          "links": {
+            "related": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/image/764c8dd1-ffa2-43f8-b3ef-c85931c1832e/field_media_image?resourceVersion=id%3A2217"
+            },
+            "self": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/image/764c8dd1-ffa2-43f8-b3ef-c85931c1832e/relationships/field_media_image?resourceVersion=id%3A2217"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "file--file",
+      "id": "ebd39597-01e2-443f-a31d-18b263e0562c",
+      "links": {
+        "self": {
+          "href": "http://acc.cms.data.amsterdam.nl/jsonapi/file/file/ebd39597-01e2-443f-a31d-18b263e0562c"
+        }
+      },
+      "attributes": {
+        "drupal_internal__fid": 3136,
+        "langcode": "en",
+        "filename": "cover-rapport-leerlingenprognose-SBO-SO-2019-2020.jpg",
+        "uri": {
+          "value": "public://images/cover-rapport-leerlingenprognose-SBO-SO-2019-2020.jpg",
+          "url": "/sites/default/files/images/cover-rapport-leerlingenprognose-SBO-SO-2019-2020.jpg"
+        },
+        "filemime": "image/jpeg",
+        "filesize": 445720,
+        "status": true,
+        "created": "2020-12-16T13:19:05+00:00",
+        "changed": "2020-12-16T13:19:10+00:00"
+      },
+      "relationships": {
+        "uid": {
+          "data": { "type": "user--user", "id": "ec3fa35b-623a-4cfa-b6de-8781198afe8b" },
+          "links": {
+            "related": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/file/file/ebd39597-01e2-443f-a31d-18b263e0562c/uid"
+            },
+            "self": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/file/file/ebd39597-01e2-443f-a31d-18b263e0562c/relationships/uid"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "media--file",
+      "id": "1d874e1c-0622-4f5f-b4b8-b08149f86a0e",
+      "links": {
+        "self": {
+          "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/file/1d874e1c-0622-4f5f-b4b8-b08149f86a0e?resourceVersion=id%3A2193"
+        }
+      },
+      "attributes": {
+        "drupal_internal__mid": 2193,
+        "drupal_internal__vid": 2193,
+        "langcode": "en",
+        "revision_created": "2020-06-12T13:00:33+00:00",
+        "revision_log_message": null,
+        "status": true,
+        "name": "basispresentatie-data-informatie-120620.pdf",
+        "created": "2020-06-12T13:00:21+00:00",
+        "changed": "2020-06-12T13:00:21+00:00",
+        "default_langcode": true,
+        "revision_translation_affected": true,
+        "path": { "alias": "", "pid": null, "langcode": "en" }
+      },
+      "relationships": {
+        "bundle": {
+          "data": {
+            "type": "media_type--media_type",
+            "id": "62acafc5-7549-41f0-94ef-e0d0023c69d4"
+          },
+          "links": {
+            "related": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/file/1d874e1c-0622-4f5f-b4b8-b08149f86a0e/bundle?resourceVersion=id%3A2193"
+            },
+            "self": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/file/1d874e1c-0622-4f5f-b4b8-b08149f86a0e/relationships/bundle?resourceVersion=id%3A2193"
+            }
+          }
+        },
+        "revision_user": {
+          "data": null,
+          "links": {
+            "related": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/file/1d874e1c-0622-4f5f-b4b8-b08149f86a0e/revision_user?resourceVersion=id%3A2193"
+            },
+            "self": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/file/1d874e1c-0622-4f5f-b4b8-b08149f86a0e/relationships/revision_user?resourceVersion=id%3A2193"
+            }
+          }
+        },
+        "uid": {
+          "data": { "type": "user--user", "id": "44418b09-7bfb-43ef-a488-7a03211bf407" },
+          "links": {
+            "related": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/file/1d874e1c-0622-4f5f-b4b8-b08149f86a0e/uid?resourceVersion=id%3A2193"
+            },
+            "self": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/file/1d874e1c-0622-4f5f-b4b8-b08149f86a0e/relationships/uid?resourceVersion=id%3A2193"
+            }
+          }
+        },
+        "thumbnail": {
+          "data": {
+            "type": "file--file",
+            "id": "ffd99e13-53b1-420f-910d-02b0b776bad3",
+            "meta": { "alt": "", "title": "", "width": 180, "height": 180 }
+          },
+          "links": {
+            "related": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/file/1d874e1c-0622-4f5f-b4b8-b08149f86a0e/thumbnail?resourceVersion=id%3A2193"
+            },
+            "self": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/file/1d874e1c-0622-4f5f-b4b8-b08149f86a0e/relationships/thumbnail?resourceVersion=id%3A2193"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": null,
+          "links": {
+            "related": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/file/1d874e1c-0622-4f5f-b4b8-b08149f86a0e/feeds_item?resourceVersion=id%3A2193"
+            },
+            "self": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/file/1d874e1c-0622-4f5f-b4b8-b08149f86a0e/relationships/feeds_item?resourceVersion=id%3A2193"
+            }
+          }
+        },
+        "field_media_file": {
+          "data": {
+            "type": "file--file",
+            "id": "52b881af-e999-495c-aeef-3a94d6d15b93",
+            "meta": { "display": null, "description": "" }
+          },
+          "links": {
+            "related": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/file/1d874e1c-0622-4f5f-b4b8-b08149f86a0e/field_media_file?resourceVersion=id%3A2193"
+            },
+            "self": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/media/file/1d874e1c-0622-4f5f-b4b8-b08149f86a0e/relationships/field_media_file?resourceVersion=id%3A2193"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "file--file",
+      "id": "52b881af-e999-495c-aeef-3a94d6d15b93",
+      "links": {
+        "self": {
+          "href": "http://acc.cms.data.amsterdam.nl/jsonapi/file/file/52b881af-e999-495c-aeef-3a94d6d15b93"
+        }
+      },
+      "attributes": {
+        "drupal_internal__fid": 3106,
+        "langcode": "en",
+        "filename": "basispresentatie-data-informatie-120620.pdf",
+        "uri": {
+          "value": "public://2020-06/basispresentatie-data-informatie-120620.pdf",
+          "url": "/sites/default/files/2020-06/basispresentatie-data-informatie-120620.pdf"
+        },
+        "filemime": "application/pdf",
+        "filesize": 1578340,
+        "status": true,
+        "created": "2020-06-12T13:00:21+00:00",
+        "changed": "2020-06-12T13:00:33+00:00"
+      },
+      "relationships": {
+        "uid": {
+          "data": { "type": "user--user", "id": "44418b09-7bfb-43ef-a488-7a03211bf407" },
+          "links": {
+            "related": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/file/file/52b881af-e999-495c-aeef-3a94d6d15b93/uid"
+            },
+            "self": {
+              "href": "http://acc.cms.data.amsterdam.nl/jsonapi/file/file/52b881af-e999-495c-aeef-3a94d6d15b93/relationships/uid"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "links": {
+    "self": {
+      "href": "http://acc.cms.data.amsterdam.nl/jsonapi/node/publication/e80750e5-63be-4782-832d-9b759a7a695d?include=field_cover_image.field_media_image%2Cfield_file.field_media_file"
+    }
+  }
+}
