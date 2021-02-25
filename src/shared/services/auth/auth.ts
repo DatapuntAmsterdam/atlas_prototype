@@ -2,26 +2,7 @@ import isFeatureEnabled from '../../../app/utils/isFeatureEnabled'
 import * as authLegacy from './auth-legacy'
 import * as authKeycloak from './auth-keycloak'
 
-// All the scopes this City Daty frontend needs for communication with
-// the backend APIs
-
-// Catalogus (Dcatd) admin
-export const dcatdScopes = [
-  'CAT/R', // Redacteursrechten
-  'CAT/W', // Beheerdersrechten
-]
-
-export const SCOPES = {
-  'BRK/RS': 'BRK/RS',
-  'BRK/RSN': 'BRK/RSN',
-  'BRK/RO': 'BRK/RO',
-  'WKPB/RBDU': 'WKPB/RBDU',
-  'MON/RBC': 'MON/RBC',
-  'MON/RDM': 'MON/RDM',
-  'HR/R': 'HR/R',
-  'BD/R': 'BD/R',
-  'BD/X': 'BD/X',
-}
+export { SCOPES, dcatdScopes } from './auth-legacy'
 
 const useKeycloak = isFeatureEnabled('KEYCLOAK_AUTH')
 

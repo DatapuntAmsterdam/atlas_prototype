@@ -2,7 +2,6 @@ import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
 import queryStringParser from '../query-string-parser/query-string-parser'
 import stateTokenGenerator from '../state-token-generator/state-token-generator'
-import { dcatdScopes, SCOPES } from './auth'
 import parseAccessToken from './parseAccessToken'
 
 // A map of the error keys, that the OAuth2 authorization service can
@@ -27,6 +26,27 @@ const ERROR_MESSAGES = {
 // The parameters the OAuth2 authorization service will return on
 // success
 const AUTH_PARAMS = ['access_token', 'token_type', 'expires_in', 'state']
+
+// All the scopes this City Daty frontend needs for communication with
+// the backend APIs
+
+// Catalogus (Dcatd) admin
+export const dcatdScopes = [
+  'CAT/R', // Redacteursrechten
+  'CAT/W', // Beheerdersrechten
+]
+
+export const SCOPES = {
+  'BRK/RS': 'BRK/RS',
+  'BRK/RSN': 'BRK/RSN',
+  'BRK/RO': 'BRK/RO',
+  'WKPB/RBDU': 'WKPB/RBDU',
+  'MON/RBC': 'MON/RBC',
+  'MON/RDM': 'MON/RDM',
+  'HR/R': 'HR/R',
+  'BD/R': 'BD/R',
+  'BD/X': 'BD/X',
+}
 
 const scopes = [
   // Kadaster
