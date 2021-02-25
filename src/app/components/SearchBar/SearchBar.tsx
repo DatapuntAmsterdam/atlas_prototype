@@ -10,7 +10,7 @@ import {
 } from '@amsterdam/asc-ui'
 import { FunctionComponent, InputHTMLAttributes, useState } from 'react'
 import styled, { css } from 'styled-components'
-import CONSTANTS from '../../../shared/config/constants'
+import { BACKDROP_OPACITY } from '../../../shared/config/constants'
 import SearchBarFilter from '../SearchBarFilter'
 
 const Z_INDEX_OFFSET = 2 // Set a custom offset
@@ -123,7 +123,7 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({
       </SearchBarWrapper>
       {expanded && (
         <BackDrop
-          backdropOpacity={CONSTANTS.BACKDROP_OPACITY}
+          backdropOpacity={BACKDROP_OPACITY}
           data-testid="backDrop"
           onClick={onBlur}
           zIndexOffset={Z_INDEX_OFFSET}

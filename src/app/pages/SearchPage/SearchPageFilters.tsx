@@ -12,7 +12,7 @@ import {
 } from '@amsterdam/asc-ui'
 import { FunctionComponent, ReactElement } from 'react'
 import styled from 'styled-components'
-import CONSTANTS from '../../../shared/config/constants'
+import { BACKDROP_OPACITY } from '../../../shared/config/constants'
 import PageFilterBox from '../../components/PageFilterBox/PageFilterBox'
 import SearchFilter from '../../components/SearchFilter'
 import { Filter } from '../../models/filter'
@@ -125,7 +125,7 @@ const SearchPageFilters: FunctionComponent<SearchPageFiltersProps> = ({
         onClose={() => setShowFilter(false)}
         hideOverFlow={false}
         zIndexOffset={1}
-        backdropOpacity={CONSTANTS.BACKDROP_OPACITY}
+        backdropOpacity={BACKDROP_OPACITY}
       >
         <StyledTopBar>
           <Heading style={{ flexGrow: 1 }} as="h4">

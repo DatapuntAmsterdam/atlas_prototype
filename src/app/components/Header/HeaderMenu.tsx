@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import environment from '../../../environment'
-import CONSTANTS from '../../../shared/config/constants'
+import { BACKDROP_OPACITY } from '../../../shared/config/constants'
 import { HEADER_LINKS_ABOUT, HEADER_LINK_HELP } from '../../../shared/config/content-links'
 import { authenticateRequest, getUser } from '../../../shared/ducks/user/user'
 import { login, logout } from '../../../shared/services/auth/auth'
@@ -75,7 +75,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
       open={menuOpen}
       hasBackDrop
       onExpand={setMenuOpen}
-      backdropOpacity={CONSTANTS.BACKDROP_OPACITY}
+      backdropOpacity={BACKDROP_OPACITY}
     >
       <MenuFlyOut label="Onderdelen">
         {navigationLinks.map(({ id, title, to, testId }) => (

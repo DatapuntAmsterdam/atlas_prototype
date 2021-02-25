@@ -1,7 +1,7 @@
 import { Close } from '@amsterdam/asc-assets'
 import { Button, Divider, Heading, Modal, Paragraph, TopBar } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
-import CONSTANTS from '../../../shared/config/constants'
+import { BACKDROP_OPACITY } from '../../../shared/config/constants'
 import ModalBlock from './ModalBlock'
 import withModalBehaviour, { propTypes as modalPropTypes } from './withModalBehaviour'
 
@@ -12,7 +12,7 @@ const InfoModal = ({ open, handleClose, title, body }) => (
     open={open}
     onClose={handleClose}
     hideOverFlow={false}
-    backdropOpacity={CONSTANTS.BACKDROP_OPACITY}
+    backdropOpacity={BACKDROP_OPACITY}
   >
     <TopBar>
       <Heading style={{ flexGrow: 1 }} as="h4">

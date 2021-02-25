@@ -2,7 +2,7 @@ import { Close } from '@amsterdam/asc-assets'
 import { Button, Divider, Heading, Link, Modal, Paragraph, TopBar } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
 import { Link as RouterLink } from 'react-router-dom'
-import CONSTANTS from '../../../shared/config/constants'
+import { BACKDROP_OPACITY } from '../../../shared/config/constants'
 import { toHelpPage } from '../../links'
 import ModalBlock from './ModalBlock'
 import withModalBehaviour, { propTypes as modalPropTypes } from './withModalBehaviour'
@@ -46,7 +46,7 @@ const FeedbackModalComponent = ({
     open={open}
     onClose={handleClose}
     hideOverFlow={false}
-    backdropOpacity={CONSTANTS.BACKDROP_OPACITY}
+    backdropOpacity={BACKDROP_OPACITY}
   >
     <TopBar>
       <Heading as="h4">
