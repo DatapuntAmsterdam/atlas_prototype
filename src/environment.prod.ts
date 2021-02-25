@@ -5,6 +5,9 @@ const defaultEnvironment = {
   CMS_ROOT: 'https://cms.data.amsterdam.nl/',
   GRAPHQL_ENDPOINT: 'https://api.data.amsterdam.nl/cms_search/graphql/',
   ROOT: 'https://data.amsterdam.nl/',
+  KEYCLOAK_URL: 'https://iam.amsterdam.nl/auth',
+  KEYCLOAK_REALM: 'datapunt-ad',
+  KEYCLOAK_CLIENT: 'dataportaal',
 }
 
 type Environment = typeof defaultEnvironment

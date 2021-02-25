@@ -9,7 +9,7 @@ import {
   isAuthenticated,
   login,
   STATE_TOKEN,
-} from './auth'
+} from './auth-legacy'
 
 // valid token that has a 'sub' prop of value 'Henk' and a 'scopes' prop with value ['foo', 'bar', 'baz']
 const token =

@@ -5,6 +5,9 @@ const environment = {
   CMS_ROOT: 'https://acc.cms.data.amsterdam.nl/',
   GRAPHQL_ENDPOINT: 'https://acc.api.data.amsterdam.nl/cms_search/graphql/',
   ROOT: 'http://localhost:3000/',
+  KEYCLOAK_URL: 'https://iam.amsterdam.nl/auth',
+  KEYCLOAK_REALM: 'datapunt-ad-acc',
+  KEYCLOAK_CLIENT: 'dataportaal',
 }
 
 export default environment
