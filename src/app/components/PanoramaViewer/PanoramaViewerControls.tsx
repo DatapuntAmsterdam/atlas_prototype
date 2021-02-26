@@ -11,8 +11,8 @@ import Enlarge from './enlarge.svg'
 import PanoramaViewerMenu from './PanoramaViewerMenu'
 import Reduce from './reduce.svg'
 
-type Props = {
-  onClose: (boolean: boolean) => void
+export interface PanoramaViewerControlsProps {
+  onClose: () => void
   panoFullScreen: boolean
   panoImageDate?: string
 }
@@ -23,7 +23,11 @@ const ResizeButton = styled(ControlButton)`
   }
 `
 
-const PanoramaViewerControls: FunctionComponent<Props> = ({ children, onClose, panoImageDate }) => {
+const PanoramaViewerControls: FunctionComponent<PanoramaViewerControlsProps> = ({
+  children,
+  onClose,
+  panoImageDate,
+}) => {
   const { drawerPosition } = useContext(MapPanelContext)
   const { panoFullScreen, setPanoFullScreen } = useContext(MapContext)
   const [location] = useParam(locationParam)

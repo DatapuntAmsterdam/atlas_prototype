@@ -26,13 +26,7 @@ const RadioFilter: FunctionComponent<FilterProps> = ({
   return (
     <RadioGroup name={type}>
       <Label htmlFor={allControlId} label={formatAllOptionLabel(totalCount, hideCount)}>
-        <Radio
-          id={allControlId}
-          value=""
-          variant="primary"
-          checked={selection.length === 0}
-          onChange={onChange}
-        />
+        <Radio id={allControlId} value="" checked={selection.length === 0} onChange={onChange} />
       </Label>
       {options.map((option) => {
         const controlId = `${type}-${option.id}`
@@ -42,7 +36,6 @@ const RadioFilter: FunctionComponent<FilterProps> = ({
             <Radio
               id={controlId}
               value={option.id}
-              variant="primary"
               checked={selection.includes(option.id)}
               onChange={onChange}
             />

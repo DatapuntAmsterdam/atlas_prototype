@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 
-const IconButton = ({ title, icon, onClick, alignLeft, extraClass }) => (
+const IconButton = ({ title, icon, onClick, alignLeft }) => (
   <button
     type="button"
     title={title}
-    className={`icon-button icon-button${alignLeft ? '__left' : '__right'} ${extraClass}`}
+    className={`icon-button icon-button${alignLeft ? '__left' : '__right'}`}
     onClick={onClick}
   >
     <span
@@ -18,7 +18,6 @@ const IconButton = ({ title, icon, onClick, alignLeft, extraClass }) => (
 
 IconButton.defaultProps = {
   alignLeft: false,
-  extraClass: '',
 }
 
 IconButton.propTypes = {
@@ -26,7 +25,6 @@ IconButton.propTypes = {
   icon: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   alignLeft: PropTypes.bool,
-  extraClass: PropTypes.string,
 }
 
 export default IconButton
