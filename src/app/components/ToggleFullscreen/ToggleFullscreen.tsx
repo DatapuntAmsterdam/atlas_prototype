@@ -12,7 +12,7 @@ export interface ToggleFullscreenProps {
   onToggleFullscreen: () => void
 }
 
-export const StyledControlButton = styled(ControlButton)`
+export const StyledControlButton = styled(ControlButton)<{ alignLeft: boolean }>`
   position: absolute;
 
   top: ${themeSpacing(2)};
@@ -31,7 +31,7 @@ const ToggleFullscreen: FunctionComponent<ToggleFullscreenProps> = ({
   isFullscreen,
   title,
   onToggleFullscreen,
-  alignLeft,
+  alignLeft = false,
 }) => (
   <StyledControlButton
     variant="blank"
@@ -41,7 +41,6 @@ const ToggleFullscreen: FunctionComponent<ToggleFullscreenProps> = ({
     size={40}
     onClick={onToggleFullscreen}
     alignLeft={alignLeft}
-    extraClass="qa-toggle-fullscreen"
     className="qa-toggle-fullscreen"
   />
 )
