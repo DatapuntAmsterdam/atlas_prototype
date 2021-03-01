@@ -35,18 +35,9 @@ const StyledCardContainer = styled.div`
 
   // Makes sure the background of this component fills the entire screen width
   @media screen and ${breakpoint('max-width', 'tabletM')} {
-    padding-left: 0px;
-    padding-right: 0px;
-
-    &::before {
-      content: '';
-      position: absolute;
-      height: 100%;
-      width: calc(100vw - ${themeSpacing(2)});
-      left: -${themeSpacing(5)};
-      top: 0;
-      background-color: ${themeColor('support', 'valid')};
-    }
+    margin-right: -${themeSpacing(5)};
+    margin-left: -${themeSpacing(5)};
+    width: calc(100% + ${themeSpacing(10)});
   }
 `
 
