@@ -1,13 +1,5 @@
 import { ChevronDown } from '@amsterdam/asc-assets'
-import {
-  Checkbox,
-  Icon,
-  Label,
-  Paragraph,
-  styles,
-  themeColor,
-  themeSpacing,
-} from '@amsterdam/asc-ui'
+import { Checkbox, Icon, Label, styles, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
 import queryString from 'querystring'
@@ -35,7 +27,7 @@ const StyledCheckbox = styled(Checkbox)`
   margin-left: ${themeSpacing(-1)};
 `
 
-const NonSelectableLegendParagraph = styled(Paragraph)`
+const NonSelectableLegendParagraph = styled.p`
   margin-bottom: ${themeSpacing(2)};
 `
 
