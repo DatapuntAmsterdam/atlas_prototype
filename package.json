@@ -56,7 +56,7 @@
     "lodash.debounce": "^4.0.8",
     "lodash.defer": "^4.1.0",
     "lodash.isequal": "^4.5.0",
-    "marked": "^2.0.0",
+    "marked": "^2.0.1",
     "marzipano": "^0.10.1",
     "openseadragon": "2.4.2",
     "proj4": "2.7.0",
