@@ -1,4 +1,5 @@
-import { put, race, select, take, takeLatest } from 'redux-saga/effects'
+import { call, put, race, select, take, takeLatest } from 'redux-saga/effects'
+import { isFeatureEnabled, FEATURE_KEYCLOAK_AUTH } from '../../../app/features'
 import {
   authenticateFailed,
   AuthenticateUserReloadAction,
@@ -11,12 +12,18 @@ import {
   userCheckedAuthentication,
 } from '../../ducks/user/user'
 import * as auth from '../../services/auth/auth'
+import { initKeycloak } from '../../services/auth/auth-keycloak'
+
+const useKeycloak = isFeatureEnabled(FEATURE_KEYCLOAK_AUTH)
 
 export function* authenticateUser(
   action: AuthenticateUserRequestAction | AuthenticateUserReloadAction,
 ) {
-  const accessToken = auth.getAccessToken()
   const reload = action.type === AUTHENTICATE_USER_RELOAD
+  // We can't await promises in sagas, so let's hack this shit for now.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const authenticated = useKeycloak && reload ? yield call(initKeycloak) : false
+  const accessToken = auth.getAccessToken()
 
   if (accessToken) {
     yield put(authenticateUserSuccess(accessToken, auth.getName(), auth.getScopes(), reload))

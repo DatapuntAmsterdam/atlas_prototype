@@ -5,6 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { connectRoutes, Options as RoutingOptions } from 'redux-first-router'
 import restoreScroll from 'redux-first-router-restore-scroll'
 import createSagaMiddleware from 'redux-saga'
+import { isFeatureEnabled, FEATURE_KEYCLOAK_AUTH } from '../app/features'
 import routes from '../app/routes'
 import rootReducer from '../reducers/root'
 import rootSaga from '../root-saga'
@@ -59,11 +60,13 @@ const configureStore = (): { store: Store<any>; history: History<unknown> } => {
 
   sagaMiddleware.run(rootSaga)
 
-  try {
-    auth.initAuth()
-  } catch (error) {
-    // Todo: DP-6286 - Add sentry back, log to sentry
-    console.warn(error) // eslint-disable-line no-console
+  if (!isFeatureEnabled(FEATURE_KEYCLOAK_AUTH)) {
+    try {
+      auth.initAuth()
+    } catch (error) {
+      // Todo: DP-6286 - Add sentry back, log to sentry
+      console.warn(error) // eslint-disable-line no-console
+    }
   }
 
   const returnPath = auth.getReturnPath()

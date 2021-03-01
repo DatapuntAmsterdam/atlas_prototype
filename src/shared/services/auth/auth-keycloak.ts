@@ -12,19 +12,27 @@ export function getAccessToken() {
 }
 
 export function login() {
+  // eslint-disable-next-line @typescript-eslint/no-floating-promises
   keycloak.login()
 }
 
 export function logout() {
+  // eslint-disable-next-line @typescript-eslint/no-floating-promises
   keycloak.logout()
 }
 
-export function initAuth() {
-  keycloak.init({
+export async function initKeycloak() {
+  const authenticated = await keycloak.init({
     checkLoginIframe: false,
     pkceMethod: 'S256',
     onLoad: 'check-sso',
   })
+
+  if (authenticated) {
+    await keycloak.loadUserProfile()
+  }
+
+  return authenticated
 }
 
 export function getReturnPath() {
