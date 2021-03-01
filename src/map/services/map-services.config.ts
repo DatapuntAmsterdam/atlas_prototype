@@ -180,7 +180,7 @@ const getLinkListBlock = (
 const typeAddressDisplayFormatter = (result: PotentialApiResult) => {
   let extraInfo = ''
   if (result.type_adres && result.type_adres !== 'Hoofdadres') {
-    extraInfo = `${result?.type_adres} `
+    extraInfo = `(${result?.type_adres})`
   }
   if (result.situering_nummeraanduiding) {
     if (result.situering_nummeraanduiding === 'Actueel/Bij') {
@@ -659,6 +659,15 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           getBagDefinitionList(result),
           getLocationDefinitionListBlock(result, '2 / 1 / 3 / 1'),
           verblijfsobjectData ? getVerblijfsObjectBlock(verblijfsobjectData) : null,
+          verblijfsobjectData
+            ? getPaginatedListBlock(
+                GLOSSARY.DEFINITIONS.NUMMERAANDUIDING,
+                verblijfsobjectData?.adressen?.href,
+                {
+                  displayFormatter: typeAddressDisplayFormatter,
+                },
+              )
+            : null,
           getPaginatedListBlock(GLOSSARY.DEFINITIONS.PAND, verblijfsobjectData?.panden?.href),
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.VESTIGING,
