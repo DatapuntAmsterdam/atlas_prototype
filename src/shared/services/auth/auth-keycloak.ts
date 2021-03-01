@@ -20,15 +20,11 @@ export function logout() {
 }
 
 export function initAuth() {
-  keycloak
-    .init({
-      onLoad: 'check-sso',
-      silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
-      checkLoginIframe: false,
-      pkceMethod: 'S256',
-    })
-    .then((authenticated) => console.log('Authenticated?', authenticated))
-    .catch((error) => console.error(error))
+  keycloak.init({
+    checkLoginIframe: false,
+    pkceMethod: 'S256',
+    onLoad: 'check-sso',
+  })
 }
 
 export function getReturnPath() {
