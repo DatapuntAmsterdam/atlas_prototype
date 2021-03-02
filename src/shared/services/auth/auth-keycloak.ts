@@ -22,6 +22,8 @@ export function logout() {
 }
 
 export async function initKeycloak() {
+  // For more information about these options consult the documentation:
+  // https://www.keycloak.org/docs/latest/securing_apps/#_javascript_adapter
   const authenticated = await keycloak.init({
     checkLoginIframe: false,
     pkceMethod: 'S256',
