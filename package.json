@@ -28,7 +28,7 @@
   "dependencies": {
     "@amsterdam/arm-cluster": "^0.5.1",
     "@amsterdam/arm-core": "^0.5.1",
-    "@amsterdam/arm-draw": "^0.5.1",
+    "@amsterdam/arm-draw": "^0.5.2-alpha.20",
     "@amsterdam/arm-nontiled": "^0.5.1",
     "@amsterdam/asc-assets": "^0.28.0",
     "@amsterdam/asc-ui": "^0.28.0",
@@ -50,7 +50,7 @@
     "json-api-normalize": "1.1.5",
     "keycloak-js": "^12.0.3",
     "leaflet": "1.7.1",
-    "leaflet-draw": "1.0.0",
+    "leaflet-draw": "1.0.4",
     "leaflet-rotatedmarker": "0.2.0",
     "leaflet.markercluster": "1.4.1",
     "leaflet.nontiledlayer": "1.0.8",

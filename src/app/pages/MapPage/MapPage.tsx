@@ -14,9 +14,12 @@ import MapMarkers from './MapMarkers'
 import MapPanelContent from './MapPanelContent'
 import {
   centerParam,
+  drawToolOpenParam,
   locationParam,
   panoHeadingParam,
   panoPitchParam,
+  polygonParam,
+  polylineParam,
   zoomParam,
 } from './query-params'
 import { Overlay, SnapPoint } from './types'
@@ -69,6 +72,10 @@ const MapPage: FunctionComponent = () => {
   const [location] = useParam(locationParam)
   const [panoPitch] = useParam(panoPitchParam)
   const [panoHeading] = useParam(panoHeadingParam)
+  const [polygon] = useParam(polygonParam)
+  const [polyline] = useParam(polylineParam)
+  const [, setShowDrawTool] = useParam(drawToolOpenParam)
+
   // TODO: Import 'useMatchMedia' directly once this issue has been resolved: https://github.com/Amsterdam/amsterdam-styled-components/issues/1120
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
   const panoActive = panoHeading !== null && location !== null
@@ -80,6 +87,16 @@ const MapPage: FunctionComponent = () => {
       mapInstanceRef.current.invalidateSize()
     }
   }, [panoFullScreen, panoPitch, mapInstanceRef])
+
+  useEffect(() => {
+    mapInstanceRef.current?.setZoom(zoom)
+  }, [zoom])
+
+  useEffect(() => {
+    if (polygon || polyline) {
+      setShowDrawTool(true, 'replace')
+    }
+  }, [polygon, polyline])
 
   return (
     <MapView>

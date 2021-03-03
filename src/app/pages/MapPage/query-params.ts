@@ -83,6 +83,13 @@ export const locationParam: UrlParam<LatLngLiteral | null> = {
   encode: (value) => (value ? encodeLatLngLiteral(value) : null),
 }
 
+export const drawToolOpenParam: UrlParam<boolean> = {
+  name: 'drawToolOpen',
+  defaultValue: false,
+  decode: (value) => value === 'true',
+  encode: (value) => value.toString(),
+}
+
 export const mapLayersParam: UrlParam<string[]> = {
   name: 'lagen',
   defaultValue: [],

@@ -1,10 +1,9 @@
 import { LatLngLiteral } from 'leaflet'
-import { useContext, FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
 import PanoramaViewerMarker from '../../components/PanoramaViewer/PanoramaViewerMarker'
 import useParam from '../../utils/useParam'
 import MapSearchMarker from './map-search/MapSearchMarker'
-import MapContext from './MapContext'
-import { locationParam } from './query-params'
+import { drawToolOpenParam, locationParam } from './query-params'
 
 export interface MarkerProps {
   location: LatLngLiteral | null
@@ -17,7 +16,7 @@ export interface MapMarkersProps {
 
 const MapMarkers: FunctionComponent<MapMarkersProps> = ({ panoActive }) => {
   const [location, setLocation] = useParam(locationParam)
-  const { showDrawTool } = useContext(MapContext)
+  const [showDrawTool] = useParam(drawToolOpenParam)
 
   return (
     <>

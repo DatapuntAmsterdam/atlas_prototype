@@ -9,7 +9,7 @@ import DataSelectionContext from './draw/DataSelectionContext'
 import DrawResults from './draw/DrawResults'
 import LegendPanel from './legend/LegendPanel'
 import MapSearchResults from './map-search/MapSearchResults'
-import { locationParam } from './query-params'
+import { drawToolOpenParam, locationParam } from './query-params'
 import { Overlay } from './types'
 import { routing } from '../../routes'
 
@@ -23,7 +23,8 @@ const MapPanelContent: FunctionComponent<MapPanelContentProps> = ({
   currentOverlay,
 }) => {
   const [location] = useParam(locationParam)
-  const { showDrawTool, showDrawContent } = useContext(MapContext)
+  const { showDrawContent } = useContext(MapContext)
+  const [showDrawTool] = useParam(drawToolOpenParam)
   const { dataSelection } = useContext(DataSelectionContext)
   // TODO: Import 'useMatchMedia' directly once this issue has been resolved: https://github.com/Amsterdam/amsterdam-styled-components/issues/1120
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })

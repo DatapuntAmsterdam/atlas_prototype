@@ -6,7 +6,8 @@ import { DrawToolOpenButton } from '@amsterdam/arm-draw'
 import styled, { css } from 'styled-components'
 import BaseLayerToggle from './controls/BaseLayerToggle'
 import DrawTool from './draw/DrawTool'
-import MapContext from './MapContext'
+import { drawToolOpenParam } from './query-params'
+import useParam from '../../utils/useParam'
 
 type StyledViewerContainerProps = {
   left?: string
@@ -50,7 +51,7 @@ const MapControls: FunctionComponent<MapControlsProps> = ({
   panoActive,
   ...otherProps
 }) => {
-  const { showDrawTool, setShowDrawTool } = useContext(MapContext)
+  const [showDrawTool, setShowDrawTool] = useParam(drawToolOpenParam)
   const { drawerPosition, draggable } = useContext(MapPanelContext)
   const height = parseInt(drawerPosition, 10) < window.innerHeight / 2 ? '50%' : drawerPosition
 
@@ -77,7 +78,7 @@ const MapControls: FunctionComponent<MapControlsProps> = ({
                 {!showDrawTool && (
                   <DrawToolOpenButton
                     data-testid="drawtoolOpenButton"
-                    onClick={() => setShowDrawTool(true)}
+                    onClick={() => setShowDrawTool(true, 'replace')}
                   />
                 )}
                 {showDrawTool && <DrawTool setCurrentOverlay={setCurrentOverlay} />}
@@ -94,7 +95,7 @@ const MapControls: FunctionComponent<MapControlsProps> = ({
             <MapPanelLegendButton {...{ showDesktopVariant, currentOverlay, setCurrentOverlay }} />
           }
           bottomRight={
-            // TODO: make it possible to get and set the zoom level fromo the component
+            // TODO: make it possible to get and set the zoom level from the component
             <Zoom />
           }
           bottomLeft={
@@ -109,7 +110,7 @@ const MapControls: FunctionComponent<MapControlsProps> = ({
                   <DrawToolOpenButton
                     data-testid="drawtoolOpenButton"
                     onClick={() => {
-                      setShowDrawTool(true)
+                      setShowDrawTool(true, 'replace')
                     }}
                   />
                 )}

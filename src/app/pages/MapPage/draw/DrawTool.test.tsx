@@ -1,0 +1,10 @@
+describe('DrawTool', () => {
+  it('fetches the dataselection when drawing a polygon', () => {})
+  it('updates the URl query when user edited the polygon', () => {})
+  it('removes the dataselection and URL parameter when removing a polygon drawing', () => {})
+  it('removes the dataselection and URL parameters from all drawings when closing the draw tool', () => {})
+  it('removes the previous drawing when ending another drawing of the same type', () => {})
+  it('adds existing drawings from URL parameters on initial load', () => {})
+  it('shows the previous drawings when browser navigates back', () => {})
+  it('shows the next drawings when browser navigates forwards', () => {})
+})
