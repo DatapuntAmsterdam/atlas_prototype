@@ -368,27 +368,21 @@ export const SHORTLINKS = {
       },
     },
   },
-  ARTICLES: {
-    ECONOMY_DASHBOARD: {
-      from: {
-        id: {
-          acceptance: '562f52d4-d78a-4d20-94fd-f708f2ba76f7',
-          production: '3233adae-70ec-413f-90f2-c74a19ab1a34',
-        },
-        slug: {
-          acceptance: 'dashboard-kerncijfers-economie',
-          production: 'dashboard-economie-dashboard',
-        },
+}
+
+export const ARTICLE_REDIRECT_FRAGMENTS = {
+  ECONOMY_DASHBOARD: {
+    from: {
+      fragment: {
+        acceptance: 'dashboard-kerncijfers-economie/562f52d4-d78a-4d20-94fd-f708f2ba76f7',
+        production: 'dashboard-economie-dashboard/3233adae-70ec-413f-90f2-c74a19ab1a34',
       },
-      to: {
-        id: {
-          acceptance: '054e6a90-f02a-4805-b449-4a7849da38a9',
-          production: 'e6d25646-a296-4af9-8081-9fe454db2b02',
-        },
-        slug: {
-          acceptance: 'coronamonitor-dashboard',
-          production: 'dashboard-gevolgen-corona-voor-amsterdam-dashboard',
-        },
+    },
+    to: {
+      fragment: {
+        acceptance: 'coronamonitor-dashboard/054e6a90-f02a-4805-b449-4a7849da38a9',
+        production:
+          'dashboard-gevolgen-corona-voor-amsterdam-dashboard/e6d25646-a296-4af9-8081-9fe454db2b02',
       },
     },
   },
