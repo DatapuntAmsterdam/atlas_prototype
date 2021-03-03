@@ -155,6 +155,17 @@ export const shortUrls: Redirect[] = [
   },
 ]
 
+export const articleRedirectUrls: Redirect[] = [
+  {
+    from: `/specials/dashboard/${
+      SHORTLINKS.ARTICLES.ECONOMY_DASHBOARD.from.slug[environment.DEPLOY_ENV as Environment]
+    }/${SHORTLINKS.ARTICLES.ECONOMY_DASHBOARD.from.id[environment.DEPLOY_ENV as Environment]}`,
+    to: `/specials/dashboard/${
+      SHORTLINKS.ARTICLES.ECONOMY_DASHBOARD.to.slug[environment.DEPLOY_ENV as Environment]
+    }/${SHORTLINKS.ARTICLES.ECONOMY_DASHBOARD.to.id[environment.DEPLOY_ENV as Environment]}`,
+  },
+]
+
 export const articleUrls: Redirect[] = REDIRECTS_ARTICLES.map((item) => ({
   from: item.from,
   to: generatePath(routing.articleDetail.path, {
@@ -185,7 +196,14 @@ export const webHooks: Redirect[] = [
   },
 ]
 
-const REDIRECTS = [...legacyRoutes, ...shortUrls, ...articleUrls, ...overviewUrls, ...webHooks]
+const REDIRECTS = [
+  ...legacyRoutes,
+  ...shortUrls,
+  ...articleUrls,
+  ...articleRedirectUrls,
+  ...overviewUrls,
+  ...webHooks,
+]
 
 export default async function resolveRedirects() {
   const currentPath = normalizePath(
