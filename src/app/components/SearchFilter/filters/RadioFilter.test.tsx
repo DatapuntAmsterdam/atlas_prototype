@@ -22,7 +22,7 @@ describe('RadioFilter', () => {
     { id: 'last', label: 'Last', count: 0 },
   ]
 
-  it('should render an option to disable the filter and select it by default', () => {
+  it('renders an option to disable the filter and select it by default', () => {
     const { getByLabelText } = render(<RadioFilter {...defaultProps} />)
 
     const node = getByLabelText('Alles') as HTMLInputElement
@@ -33,7 +33,7 @@ describe('RadioFilter', () => {
     expect(node.checked).toEqual(true)
   })
 
-  it('should render a list of options without selection', () => {
+  it('renders a list of options without selection', () => {
     const props: FilterProps = { ...defaultProps, options }
     const { getByLabelText } = render(<RadioFilter {...props} />)
 
@@ -50,7 +50,7 @@ describe('RadioFilter', () => {
     })
   })
 
-  it('should render a list of options with selection', () => {
+  it('renders a list of options with selection', () => {
     const selection = ['second']
     const props: FilterProps = { ...defaultProps, options, selection }
     const { getByLabelText } = render(<RadioFilter {...props} />)
@@ -59,7 +59,7 @@ describe('RadioFilter', () => {
     expect(secondNode.checked).toEqual(true)
   })
 
-  it('should handle changes in selection', () => {
+  it('handles changes in selection', () => {
     const selection = ['first']
     const selectionChangeMock = jest.fn()
     const props: FilterProps = {
@@ -75,7 +75,7 @@ describe('RadioFilter', () => {
     expect(selectionChangeMock).toHaveBeenCalledWith(['last'])
   })
 
-  it('should handle changes in selection to the default', () => {
+  it('handles changes in selection to the default', () => {
     const selection = ['first']
     const selectionChangeMock = jest.fn()
     const props: FilterProps = {
@@ -89,5 +89,20 @@ describe('RadioFilter', () => {
     fireEvent.click(getByLabelText('Alles'))
 
     expect(selectionChangeMock).toHaveBeenCalledWith([])
+  })
+
+  it('shows the total count for the overview option if no selection is present', () => {
+    const props: FilterProps = { ...defaultProps, options, hideCount: false }
+    const { getByLabelText } = render(<RadioFilter {...props} />)
+
+    expect(getByLabelText('Alles (999)')).toBeDefined()
+  })
+
+  it('hides the total count for the overview option if a selection is present', () => {
+    const selection = ['first']
+    const props: FilterProps = { ...defaultProps, options, selection, hideCount: false }
+    const { getByLabelText } = render(<RadioFilter {...props} />)
+
+    expect(getByLabelText('Alles')).toBeDefined()
   })
 })
