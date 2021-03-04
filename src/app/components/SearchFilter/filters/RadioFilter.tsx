@@ -25,7 +25,10 @@ const RadioFilter: FunctionComponent<FilterProps> = ({
 
   return (
     <RadioGroup name={type}>
-      <Label htmlFor={allControlId} label={formatAllOptionLabel(totalCount, hideCount)}>
+      <Label
+        htmlFor={allControlId}
+        label={formatAllOptionLabel(totalCount, hideCount || selection.length > 0)}
+      >
         <Radio id={allControlId} value="" checked={selection.length === 0} onChange={onChange} />
       </Label>
       {options.map((option) => {
