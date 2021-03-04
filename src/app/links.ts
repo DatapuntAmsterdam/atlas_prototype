@@ -4,6 +4,7 @@ import environment from '../environment'
 import { HEADER_LINK_HELP } from '../shared/config/content-links'
 import { ViewMode } from '../shared/ducks/ui/ui'
 import parameters from '../store/parameters'
+import { fileNameParam, fileUrlParam } from './pages/ConstructionFilePage/query-params'
 import { routing } from './routes'
 
 export const toAddresses = (): LocationDescriptorObject => {
@@ -34,14 +35,19 @@ export const toCadastralObjects = (): LocationDescriptorObject => {
 
 export const toConstructionFile = (
   id: string,
-  fileName: string,
-  fileUrl: string,
+  fileName?: string,
+  fileUrl?: string,
 ): LocationDescriptorObject => {
   const pathname = generatePath(routing.constructionFile.path, { id })
-  const searchParams = new URLSearchParams({
-    [parameters.FILE]: fileName,
-    [parameters.FILE_URL]: fileUrl,
-  })
+  const searchParams = new URLSearchParams()
+
+  if (fileName) {
+    searchParams.set(fileNameParam.name, fileName)
+  }
+
+  if (fileUrl) {
+    searchParams.set(fileUrlParam.name, fileUrl)
+  }
 
   return { pathname, search: searchParams.toString() }
 }

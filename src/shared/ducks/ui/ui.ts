@@ -10,7 +10,6 @@ import {
   isHomepage,
   isPanoPage,
 } from '../../../store/redux-first-router/selectors'
-import { getFileName } from '../files/files'
 
 export const REDUCER_KEY = 'ui'
 
@@ -199,8 +198,7 @@ export const isPrintModeLandscape = createSelector(
   isPrintMode,
   isPanoPage,
   isMapPage,
-  getFileName,
   getViewMode,
-  (printMode, panoPageActive, mapPageActive, fileName, viewMode) =>
-    printMode && (panoPageActive || mapPageActive || !!fileName || viewMode === ViewMode.Map),
+  (printMode, panoPageActive, mapPageActive, viewMode) =>
+    printMode && (panoPageActive || mapPageActive || viewMode === ViewMode.Map),
 )

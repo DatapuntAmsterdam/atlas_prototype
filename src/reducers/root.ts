@@ -11,7 +11,6 @@ import DataSearchReducer, { DATA_SEARCH_REDUCER } from '../shared/ducks/data-sea
 import DataSelectionReducer, { DATA_SELECTION } from '../shared/ducks/data-selection/reducer'
 import DetailReducer, { DETAIL } from '../shared/ducks/detail/reducer'
 import errorMessageReducer, { REDUCER_KEY as ERROR } from '../shared/ducks/error/error-message'
-import filesReducer, { REDUCER_KEY as FILES } from '../shared/ducks/files/files'
 import FiltersReducer, { REDUCER_KEY as FILTER } from '../shared/ducks/filters/filters'
 import SelectionReducer, { REDUCER_KEY as SELECTION } from '../shared/ducks/selection/selection'
 import uiReducer, { REDUCER_KEY as UI } from '../shared/ducks/ui/ui'
@@ -40,7 +39,6 @@ const rootReducer = (routeReducer: any) => (oldState: any = {}, action: any) => 
     [DATA_SEARCH_REDUCER]: DataSearchReducer,
     [SELECTION]: SelectionReducer,
     [DATA_SELECTION]: DataSelectionReducer,
-    [FILES]: filesReducer,
     [SEARCH]: SearchPageReducer,
   })
 

@@ -1,14 +1,15 @@
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Alert, Column, Heading, Link, Row, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { FunctionComponent, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import styled, { css } from 'styled-components'
-import { Bestand, BouwdossierAccess } from '../../../api/iiif-metadata/bouwdossier'
-import { SCOPES } from '../../../shared/services/auth/auth'
-import getState from '../../../shared/services/redux/get-state'
-import { toConstructionFile } from '../../links'
-import ActionButton from '../ActionButton/ActionButton'
-import IIIFThumbnail from '../IIIFThumbnail/IIIFThumbnail'
+import { Document } from '../../../../../api/iiif-metadata/bouwdossier'
+import { getUserScopes } from '../../../../../shared/ducks/user/user'
+import { SCOPES } from '../../../../../shared/services/auth/auth'
+import ActionButton from '../../../../components/ActionButton/ActionButton'
+import IIIFThumbnail from '../../../../components/IIIFThumbnail/IIIFThumbnail'
+import { toConstructionFile } from '../../../../links'
 
 const StyledAlert = styled(Alert)`
   margin-bottom: ${themeSpacing(5)} !important;
@@ -19,10 +20,9 @@ const GalleryContainer = styled.div`
   padding: ${themeSpacing(5, 5, 10, 5)};
 `
 
-const StyledRow = styled(Row)`
+const StyledRow = styled(Row)<{ hasMarginBottom: boolean }>`
   justify-content: flex-start;
-  margin-bottom: ${({ hasMarginBottom }: { hasMarginBottom: boolean }) =>
-    hasMarginBottom ? themeSpacing(8) : 0};
+  margin-bottom: ${({ hasMarginBottom }) => (hasMarginBottom ? themeSpacing(8) : 0)};
 `
 
 const StyledColumn = styled(Column)`
@@ -30,13 +30,13 @@ const StyledColumn = styled(Column)`
   margin-bottom: ${themeSpacing(4)};
 `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(Link)<{ disabled: boolean }>`
   width: 100%;
   height: 100%;
   position: relative;
   display: inline-block;
 
-  ${({ disabled }: { disabled: boolean }) =>
+  ${({ disabled }) =>
     disabled &&
     css`
       cursor: no-drop;
@@ -61,28 +61,30 @@ const StyledLink = styled(Link)`
   }
 `
 
-type GalleryProps = {
-  allFiles: Bestand[]
-  id: string
-  access: BouwdossierAccess
-}
-
 const MAX_LENGTH = 6
 
-const Gallery: FunctionComponent<GalleryProps> = ({ allFiles, id, access, ...otherProps }) => {
-  const lessFiles = allFiles.slice(0, MAX_LENGTH)
-  const [files, setFiles] = useState(lessFiles)
+export interface DocumentGalleryProps {
+  fileId: string
+  document: Document
+}
 
-  const { scopes } = getState().user
+const DocumentGallery: FunctionComponent<DocumentGalleryProps> = ({
+  fileId,
+  document,
+  ...otherProps
+}) => {
+  const lessFiles = document.bestanden.slice(0, MAX_LENGTH)
+  const [files, setFiles] = useState(lessFiles)
+  const scopes = useSelector(getUserScopes)
 
   const hasRights = scopes.includes(SCOPES['BD/R'])
   const hasExtendedRights = scopes.includes(SCOPES['BD/X'])
 
-  const hasMore = allFiles.length > MAX_LENGTH
-  const restricted = access === 'RESTRICTED'
+  const hasMore = document.bestanden.length > MAX_LENGTH
+  const restricted = document.access === 'RESTRICTED'
 
   return (
-    <GalleryContainer key={id} data-testid={otherProps['data-testid']}>
+    <GalleryContainer {...otherProps}>
       {files.length ? (
         <>
           {!hasRights && !hasExtendedRights ? (
@@ -101,30 +103,30 @@ const Gallery: FunctionComponent<GalleryProps> = ({ allFiles, id, access, ...oth
           )}
 
           <StyledRow hasMarginBottom={hasMore} hasMargin={false} hasMaxWidth={false}>
-            {files.map(({ filename: fileName, url: fileUrl }) => {
+            {files.map((file) => {
               const disabled =
                 (!hasRights && !hasExtendedRights) || (restricted && !hasExtendedRights)
 
               return (
                 <StyledColumn
-                  key={fileName}
+                  key={file.url}
                   span={{ small: 1, medium: 2, big: 2, large: 2, xLarge: 2 }}
                 >
                   {/*
                   // @ts-ignore */}
                   <StyledLink
                     forwardedAs={disabled ? 'span' : RouterLink}
-                    to={toConstructionFile(id, fileName, fileUrl)}
-                    title={fileName}
+                    to={toConstructionFile(fileId, file.filename, file.url)}
+                    title={file.filename}
                     disabled={disabled}
                   >
                     <IIIFThumbnail
                       src={
                         disabled
                           ? '/assets/images/not_found_thumbnail.jpg' // use the default not found image when user has no rights
-                          : `${fileUrl}/square/180,180/0/default.jpg`
+                          : `${file.url}/square/180,180/0/default.jpg`
                       }
-                      title={fileName}
+                      title={file.filename}
                     />
                   </StyledLink>
                 </StyledColumn>
@@ -132,12 +134,12 @@ const Gallery: FunctionComponent<GalleryProps> = ({ allFiles, id, access, ...oth
             })}
           </StyledRow>
           {hasMore &&
-            (allFiles.length !== files.length ? (
+            (document.bestanden.length !== files.length ? (
               <ActionButton
                 fetching={false}
                 iconLeft={<Enlarge />}
-                onClick={() => setFiles(allFiles)}
-                label={`Toon alle (${allFiles.length})`}
+                onClick={() => setFiles(document.bestanden)}
+                label={`Toon alle (${document.bestanden.length})`}
               />
             ) : (
               <ActionButton
@@ -155,4 +157,4 @@ const Gallery: FunctionComponent<GalleryProps> = ({ allFiles, id, access, ...oth
   )
 }
 
-export default Gallery
+export default DocumentGallery

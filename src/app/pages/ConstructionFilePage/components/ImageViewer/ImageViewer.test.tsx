@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import withAppContext from '../../utils/withAppContext'
+import withAppContext from '../../../../utils/withAppContext'
 import ImageViewer, { IMAGE_VIEWER_TEST_ID } from './ImageViewer'
 
 jest.mock('openseadragon')
@@ -12,7 +12,6 @@ describe('ImageViewer', () => {
           fileName="filename"
           title="Some file"
           fileUrl="/somefile/url"
-          handleResetFile={() => {}}
           printMode={false}
         />,
       ),

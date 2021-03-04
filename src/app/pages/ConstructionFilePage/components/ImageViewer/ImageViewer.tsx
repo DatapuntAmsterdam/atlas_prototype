@@ -4,12 +4,14 @@ import { Button, themeColor } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import OpenSeadragon, { Viewer } from 'openseadragon'
 import { createRef, FunctionComponent, useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import styled, { css } from 'styled-components'
-import getState from '../../../shared/services/redux/get-state'
-import useDownload from '../../utils/useDownload'
-import { ConstructionFiles as ContextMenu } from '../ContextMenu'
-import ErrorMessage from '../ErrorMessage/ErrorMessage'
-import ViewerControls from '../ViewerControls/ViewerControls'
+import { isPrintMode } from '../../../../../shared/ducks/ui/ui'
+import getState from '../../../../../shared/services/redux/get-state'
+import { ConstructionFiles as ContextMenu } from '../../../../components/ContextMenu'
+import ErrorMessage from '../../../../components/ErrorMessage/ErrorMessage'
+import ViewerControls from '../../../../components/ViewerControls/ViewerControls'
+import useDownload from '../../../../utils/useDownload'
 
 const ImageViewerContainer = styled.div<{ printMode: boolean }>`
   background-color: ${themeColor('tint', 'level5')};
@@ -26,23 +28,22 @@ const ImageViewerContainer = styled.div<{ printMode: boolean }>`
     `}
 `
 
-type ImageViewerProps = {
-  fileName: string
-  title: string
-  fileUrl: string
-  handleResetFile: () => void
-  printMode: boolean
-}
-
 export const IMAGE_VIEWER_TEST_ID = 'imageViewer'
 
+export interface ImageViewerProps {
+  title: string
+  fileName: string
+  fileUrl: string
+  onClose: () => void
+}
+
 const ImageViewer: FunctionComponent<ImageViewerProps> = ({
-  handleResetFile,
+  title,
   fileName,
   fileUrl,
-  title,
-  printMode,
+  onClose,
 }) => {
+  const printMode = useSelector(isPrintMode)
   const viewerRef = createRef<HTMLDivElement>()
   const [viewerInstance, setViewerInstance] = useState<Viewer | null>(null)
   const [loading, setLoading] = useState(true)
@@ -123,7 +124,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
       size={32}
       icon={<Close />}
       iconSize={15}
-      onClick={handleResetFile}
+      onClick={onClose}
     />
   )
 

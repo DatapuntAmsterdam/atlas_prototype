@@ -1,12 +1,12 @@
 import cloneDeep from 'lodash.clonedeep'
-import { singleFixture as bouwdossierFixture } from '../../api/iiif-metadata/bouwdossier'
+import { singleFixture as bouwdossierFixture } from '../../../../api/iiif-metadata/bouwdossier'
 
-import getAddresses, { formatAddress } from './getAddresses'
+import formatAddresses, { formatAddress } from './formatAddresses'
 
-describe('getAddresses', () => {
+describe('formatAddresses', () => {
   it('returns a sorted list of addresses', () => {
     const { adressen } = cloneDeep(bouwdossierFixture)
-    const sortedAddresses = getAddresses(adressen)
+    const sortedAddresses = formatAddresses(adressen)
     const { verblijfsobjecten, verblijfsobjecten_label: verblijfsobjectenLabel } = adressen[0]
     const sortedVerblijfsobjectenLabels = verblijfsobjectenLabel.sort((a: string, b: string) =>
       a.localeCompare(b),
@@ -27,7 +27,7 @@ describe('getAddresses', () => {
     const { adressen } = cloneDeep(bouwdossierFixture)
     adressen[0].verblijfsobjecten_label = []
 
-    const sortedAddresses = getAddresses(adressen)
+    const sortedAddresses = formatAddresses(adressen)
 
     sortedAddresses.forEach((address) => {
       expect(address.label).toEqual(expect.stringContaining(adressen[0].straat))

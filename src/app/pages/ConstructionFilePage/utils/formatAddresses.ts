@@ -1,4 +1,4 @@
-import { Adres } from '../../api/iiif-metadata/bouwdossier'
+import { Adres } from '../../../../api/iiif-metadata/bouwdossier'
 
 /* eslint-disable camelcase */
 export const formatAddress = ({
@@ -28,13 +28,13 @@ export const formatAddress = ({
   return label.trim()
 }
 
-type AddressResult = {
+export interface AddressResult {
   id: string
   type: 'verblijfsobject'
   label: string
 }
 
-const getAddresses = (results: Adres[]) =>
+const formatAddresses = (results: Adres[]) =>
   results
     .reduce<AddressResult[]>(
       (reducedResults, adres) => [
@@ -55,4 +55,4 @@ const getAddresses = (results: Adres[]) =>
     )
     .sort((a, b) => a.label.localeCompare(b.label))
 
-export default getAddresses
+export default formatAddresses

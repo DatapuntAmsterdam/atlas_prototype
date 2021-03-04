@@ -18,8 +18,8 @@ const ActualityPage = lazy(
 const DatasetDetailPage = lazy(
   () => import(/* webpackChunkName: "DatasetDetailPage" */ './pages/DatasetDetailPage'),
 )
-const ConstructionFilesPage = lazy(
-  () => import(/* webpackChunkName: "ConstructionFilesPage" */ './pages/ConstructionFilesPage'),
+const ConstructionFilePage = lazy(
+  () => import(/* webpackChunkName: "ConstructionFilePage" */ './pages/ConstructionFilePage'),
 )
 const ArticleDetailPage = lazy(
   () => import(/* webpackChunkName: "ArticleDetailPage" */ './pages/ArticleDetailPage'),
@@ -147,7 +147,7 @@ const AppBody: FunctionComponent<AppBodyProps> = ({
                             <Route
                               path={routing.constructionFile.path}
                               exact
-                              component={ConstructionFilesPage}
+                              component={ConstructionFilePage}
                             />
                             <Route
                               path={routing.datasetDetail.path}

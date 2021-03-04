@@ -32,12 +32,6 @@ import { initialState as dataSelectionInitialState } from '../shared/ducks/data-
 import { DATA_SELECTION } from '../shared/ducks/data-selection/reducer'
 import { getDataSelectionPage, getGeometryFilter } from '../shared/ducks/data-selection/selectors'
 import {
-  initialState as filesInitialState,
-  REDUCER_KEY as FILES,
-  getFileName,
-  getFileUrl,
-} from '../shared/ducks/files/files'
-import {
   getFiltersWithoutShape,
   initialState as filterInitialState,
   REDUCER_KEY as FILTER,
@@ -236,30 +230,6 @@ export default paramsRegistry
         selector: getPanoramaPitch,
       },
       false,
-    )
-  })
-  .addParameter(PARAMETERS.FILE, (routes) => {
-    routes.add(
-      routing.constructionFile.type,
-      FILES,
-      'fileName',
-      {
-        defaultValue: filesInitialState.fileName,
-        selector: getFileName,
-      },
-      true,
-    )
-  })
-  .addParameter(PARAMETERS.FILE_URL, (routes) => {
-    routes.add(
-      routing.constructionFile.type,
-      FILES,
-      'fileUrl',
-      {
-        defaultValue: filesInitialState.fileUrl,
-        selector: getFileUrl,
-      },
-      true,
     )
   })
   .addParameter(PARAMETERS.FILTERS, (routes) => {
