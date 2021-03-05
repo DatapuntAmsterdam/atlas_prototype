@@ -1,10 +1,11 @@
 import { Alert, Paragraph, Row, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent, lazy } from 'react'
+import { FunctionComponent, lazy, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { getBouwdossierById } from '../../../api/iiif-metadata/bouwdossier'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import { toConstructionFile } from '../../links'
+import useDocumentTitle from '../../utils/useDocumentTitle'
 import useParam from '../../utils/useParam'
 import usePromise, { PromiseStatus } from '../../utils/usePromise'
 import FileDetails from './components/FileDetails'
@@ -25,12 +26,19 @@ interface ConstructionFilePageParams {
 
 const ConstructionFilePage: FunctionComponent = () => {
   const history = useHistory()
+  const { setDocumentTitle } = useDocumentTitle()
   const { id } = useParams<ConstructionFilePageParams>()
   const [fileName] = useParam(fileNameParam)
   const [fileUrl] = useParam(fileUrlParam)
   const result = usePromise(() => getBouwdossierById(id), [id])
 
-  // TODO: Add code to update site title, or move the imageviewer to a seperate route.
+  useEffect(() => {
+    if (fileName) {
+      setDocumentTitle('Bouwtekening')
+    } else {
+      setDocumentTitle(false)
+    }
+  }, [fileName])
 
   if (result.status === PromiseStatus.Pending) {
     return (
