@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@amsterdam/asc-ui'
 import { render, waitFor } from '@testing-library/react'
 import { createMemoryHistory, createPath } from 'history'
+import { Suspense } from 'react'
 import { Route, Router } from 'react-router-dom'
 import { mocked } from 'ts-jest/utils'
 import { getBouwdossierById, singleFixture } from '../../../api/iiif-metadata/bouwdossier'
@@ -102,7 +103,7 @@ describe('ConstructionFilePage', () => {
       initialEntries: [createPath(toConstructionFile('foo', 'file.png', 'path/to/file.png'))],
     })
 
-    const { getByTestId } = render(renderWithHistory(history))
+    const { getByTestId } = render(<Suspense fallback="">{renderWithHistory(history)}</Suspense>)
 
     await waitFor(() => expect(getByTestId('imageViewer')).toBeDefined())
   })
