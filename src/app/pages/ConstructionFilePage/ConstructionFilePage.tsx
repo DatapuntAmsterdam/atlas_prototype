@@ -43,14 +43,14 @@ const ConstructionFilePage: FunctionComponent = () => {
   if (result.status === PromiseStatus.Pending) {
     return (
       <StyledRow>
-        <LoadingSpinner />
+        <LoadingSpinner data-testid="loadingSpinner" />
       </StyledRow>
     )
   }
 
   if (result.status === PromiseStatus.Rejected) {
     return (
-      <Alert level="error">
+      <Alert level="error" data-testid="errorMessage">
         <Paragraph>
           Er kunnen door een technische storing helaas geen bouw- en omgevingsdossiers worden
           getoond. Probeer het later nog eens.

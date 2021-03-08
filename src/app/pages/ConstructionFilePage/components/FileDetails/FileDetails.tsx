@@ -39,7 +39,7 @@ export interface FileDetailsProps {
   file: Bouwdossier
 }
 
-const FileDetails: FunctionComponent<FileDetailsProps> = ({ fileId, file }) => {
+const FileDetails: FunctionComponent<FileDetailsProps> = ({ fileId, file, ...otherProps }) => {
   const addresses = useMemo(() => formatAddresses(file.adressen), [file.adressen])
   const sortedDocuments = useMemo(
     () =>
@@ -50,7 +50,7 @@ const FileDetails: FunctionComponent<FileDetailsProps> = ({ fileId, file }) => {
   )
 
   return (
-    <PageWrapper>
+    <PageWrapper {...otherProps}>
       <Header>
         <SubHeading forwardedAs="p">Bouw- en omgevingsdossiers</SubHeading>
         <Heading>{file.titel}</Heading>
