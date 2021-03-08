@@ -72,7 +72,7 @@
     "react-resize-detector": "6.6.0",
     "react-router-dom": "^5.2.0",
     "redux": "4.0.5",
-    "redux-devtools-extension": "^2.13.8",
+    "redux-devtools-extension": "^2.13.9",
     "redux-first-router": "2.1.5",
     "redux-first-router-link": "2.1.1",
     "redux-first-router-restore-scroll": "1.2.2",
