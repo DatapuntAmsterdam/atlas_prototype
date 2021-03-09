@@ -343,7 +343,6 @@ describe('UI selectors', () => {
       printMode: true,
       panoPageActive: false,
       mapPageActive: false,
-      fileName: '',
       viewMode: ViewMode.Map,
     }
 
@@ -352,7 +351,6 @@ describe('UI selectors', () => {
         printMode: true,
         panoPageActive: false,
         mapPageActive: false,
-        fileName: '',
         viewMode: ViewMode.Map,
       }
     })
@@ -363,7 +361,6 @@ describe('UI selectors', () => {
         mockParameters.printMode,
         mockParameters.panoPageActive,
         mockParameters.mapPageActive,
-        mockParameters.fileName,
         mockParameters.viewMode,
       )
       expect(selected).toEqual(false)
@@ -374,7 +371,6 @@ describe('UI selectors', () => {
         mockParameters.printMode,
         mockParameters.panoPageActive,
         mockParameters.mapPageActive,
-        mockParameters.fileName,
         mockParameters.viewMode,
       )
       expect(selected).toEqual(true)

@@ -69,32 +69,6 @@ Object {
       },
     },
   },
-  "bestand": Object {
-    "routes": Object {
-      "atlasRouter/CONSTRUCTION_FILE": Object {
-        "addHistory": true,
-        "decode": [Function],
-        "defaultValue": "",
-        "encode": [Function],
-        "reducerKey": "files",
-        "selector": [Function],
-        "stateKey": "fileName",
-      },
-    },
-  },
-  "bestandUrl": Object {
-    "routes": Object {
-      "atlasRouter/CONSTRUCTION_FILE": Object {
-        "addHistory": true,
-        "decode": [Function],
-        "defaultValue": "",
-        "encode": [Function],
-        "reducerKey": "files",
-        "selector": [Function],
-        "stateKey": "fileUrl",
-      },
-    },
-  },
   "categorie": Object {
     "routes": Object {
       "atlasRouter/DATA_SEARCH": Object {

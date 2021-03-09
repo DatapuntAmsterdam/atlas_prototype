@@ -6,11 +6,6 @@ Object {
   "dataSelection": "dataSelection",
   "detail": "detail",
   "error": "error",
-  "files": Object {
-    "fileName": "",
-    "fileUrl": "",
-    "type": "default",
-  },
   "filter": "filter",
   "location": "location",
   "map": "map",
