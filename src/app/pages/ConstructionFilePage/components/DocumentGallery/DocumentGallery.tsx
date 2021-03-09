@@ -1,6 +1,6 @@
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Alert, Column, Heading, Link, Row, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import styled, { css } from 'styled-components'
@@ -73,7 +73,7 @@ const DocumentGallery: FunctionComponent<DocumentGalleryProps> = ({
   document,
   ...otherProps
 }) => {
-  const lessFiles = document.bestanden.slice(0, MAX_LENGTH)
+  const lessFiles = useMemo(() => document.bestanden.slice(0, MAX_LENGTH), [document.bestanden])
   const [files, setFiles] = useState(lessFiles)
   const scopes = useSelector(getUserScopes)
 
@@ -88,14 +88,14 @@ const DocumentGallery: FunctionComponent<DocumentGalleryProps> = ({
       {files.length ? (
         <>
           {!hasRights && !hasExtendedRights ? (
-            <StyledAlert level="info" dismissible>
+            <StyledAlert level="info" dismissible data-testid="noRights">
               Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om bouw- en
               omgevingsdossiers te bekijken.
             </StyledAlert>
           ) : (
             restricted &&
             !hasExtendedRights && (
-              <StyledAlert level="info" dismissible>
+              <StyledAlert level="info" dismissible data-testid="noExtendedRights">
                 Medewerkers/ketenpartners van Gemeente Amsterdam met extra bevoegdheden kunnen
                 inloggen om alle bouw- en omgevingsdossiers te bekijken.
               </StyledAlert>
@@ -111,6 +111,7 @@ const DocumentGallery: FunctionComponent<DocumentGalleryProps> = ({
                 <StyledColumn
                   key={file.url}
                   span={{ small: 1, medium: 2, big: 2, large: 2, xLarge: 2 }}
+                  data-testid="fileResult"
                 >
                   {/*
                   // @ts-ignore */}
@@ -119,6 +120,7 @@ const DocumentGallery: FunctionComponent<DocumentGalleryProps> = ({
                     to={toConstructionFile(fileId, file.filename, file.url)}
                     title={file.filename}
                     disabled={disabled}
+                    data-testid="detailLink"
                   >
                     <IIIFThumbnail
                       src={
@@ -127,6 +129,7 @@ const DocumentGallery: FunctionComponent<DocumentGalleryProps> = ({
                           : `${file.url}/square/180,180/0/default.jpg`
                       }
                       title={file.filename}
+                      data-testid="thumbnail"
                     />
                   </StyledLink>
                 </StyledColumn>
@@ -140,6 +143,7 @@ const DocumentGallery: FunctionComponent<DocumentGalleryProps> = ({
                 iconLeft={<Enlarge />}
                 onClick={() => setFiles(document.bestanden)}
                 label={`Toon alle (${document.bestanden.length})`}
+                data-testid="showMore"
               />
             ) : (
               <ActionButton
@@ -147,11 +151,14 @@ const DocumentGallery: FunctionComponent<DocumentGalleryProps> = ({
                 iconLeft={<Minimise />}
                 onClick={() => setFiles(lessFiles)}
                 label="Minder tonen"
+                data-testid="showLess"
               />
             ))}
         </>
       ) : (
-        <Heading as="em">Geen bouwtekening(en) beschikbaar.</Heading>
+        <Heading as="em" data-testid="noResults">
+          Geen bouwtekening(en) beschikbaar.
+        </Heading>
       )}
     </GalleryContainer>
   )
