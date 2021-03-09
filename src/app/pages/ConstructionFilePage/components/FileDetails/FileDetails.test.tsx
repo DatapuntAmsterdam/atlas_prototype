@@ -1,16 +1,18 @@
 import { render, within } from '@testing-library/react'
 import { singleFixture as bouwdossierFixture } from '../../../../../api/iiif-metadata/bouwdossier'
 import withAppContext from '../../../../utils/withAppContext'
+import { DocumentGalleryProps } from '../DocumentGallery/DocumentGallery'
 import FileDetails from './FileDetails'
 
-jest.mock('../DocumentGallery', () => ({ allFiles, ...rest }: { allFiles: any }) => (
-  <div {...rest} />
-))
+jest.mock(
+  '../DocumentGallery',
+  () => ({ fileId, document, ...otherProps }: DocumentGalleryProps) => <div {...otherProps} />,
+)
 
 describe('FileDetails', () => {
   it('sets the title', () => {
     const { container, getByText } = render(
-      withAppContext(<FileDetails file={bouwdossierFixture} />),
+      withAppContext(<FileDetails fileId="SDC9999" file={bouwdossierFixture} />),
     )
     const h1 = container.querySelector('h1')
 
@@ -19,7 +21,9 @@ describe('FileDetails', () => {
   })
 
   it('renders a definition list', () => {
-    const { getByTestId } = render(withAppContext(<FileDetails file={bouwdossierFixture} />))
+    const { getByTestId } = render(
+      withAppContext(<FileDetails fileId="SDC9999" file={bouwdossierFixture} />),
+    )
 
     const definitionList = getByTestId('definitionList')
     const listElements = ['titel', 'datering', 'dossier_type', 'dossiernr', 'access']
@@ -34,7 +38,12 @@ describe('FileDetails', () => {
 
   it('renders olo_liaan_nummer', () => {
     const { getByTestId, queryByTestId, rerender } = render(
-      withAppContext(<FileDetails file={{ ...bouwdossierFixture, olo_liaan_nummer: undefined }} />),
+      withAppContext(
+        <FileDetails
+          fileId="SDC9999"
+          file={{ ...bouwdossierFixture, olo_liaan_nummer: undefined }}
+        />,
+      ),
     )
 
     expect(queryByTestId('oloLiaanNumber')).not.toBeInTheDocument()
@@ -42,14 +51,23 @@ describe('FileDetails', () => {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const olo_liaan_nummer = 1
 
-    rerender(withAppContext(<FileDetails file={{ ...bouwdossierFixture, olo_liaan_nummer }} />))
+    rerender(
+      withAppContext(
+        <FileDetails fileId="SDC9999" file={{ ...bouwdossierFixture, olo_liaan_nummer }} />,
+      ),
+    )
 
     expect(getByTestId('oloLiaanNumber')).toBeInTheDocument()
   })
 
   it('renders the subfiles', () => {
     const { getAllByTestId, getByTestId, getByText, rerender } = render(
-      withAppContext(<FileDetails file={{ ...bouwdossierFixture, olo_liaan_nummer: undefined }} />),
+      withAppContext(
+        <FileDetails
+          fileId="SDC9999"
+          file={{ ...bouwdossierFixture, olo_liaan_nummer: undefined }}
+        />,
+      ),
     )
 
     expect(getByTestId('DocumentsHeading')).toBeInTheDocument()
@@ -71,7 +89,11 @@ describe('FileDetails', () => {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const olo_liaan_nummer = 1
 
-    rerender(withAppContext(<FileDetails file={{ ...bouwdossierFixture, olo_liaan_nummer }} />))
+    rerender(
+      withAppContext(
+        <FileDetails fileId="SDC9999" file={{ ...bouwdossierFixture, olo_liaan_nummer }} />,
+      ),
+    )
 
     expect(getAllByTestId('oloLiaanNumberDocumentDescription')).toHaveLength(
       bouwdossierFixture.documenten.length,
@@ -80,12 +102,14 @@ describe('FileDetails', () => {
 
   it('renders the addresses', () => {
     const { queryByTestId, getByTestId, rerender } = render(
-      withAppContext(<FileDetails file={{ ...bouwdossierFixture, adressen: [] }} />),
+      withAppContext(
+        <FileDetails fileId="SDC9999" file={{ ...bouwdossierFixture, adressen: [] }} />,
+      ),
     )
 
     expect(queryByTestId('constructionFileAddresses')).not.toBeInTheDocument()
 
-    rerender(withAppContext(<FileDetails file={bouwdossierFixture} />))
+    rerender(withAppContext(<FileDetails fileId="SDC9999" file={bouwdossierFixture} />))
 
     expect(getByTestId('constructionFileAddresses')).toBeInTheDocument()
   })
