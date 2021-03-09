@@ -4,6 +4,7 @@ import ImageViewer, { IMAGE_VIEWER_TEST_ID } from './ImageViewer'
 
 jest.mock('openseadragon')
 
+// TODO: This file should really have a lot more tests.
 describe('ImageViewer', () => {
   it('should render without problems', () => {
     const { getByTestId } = render(
@@ -12,7 +13,7 @@ describe('ImageViewer', () => {
           fileName="filename"
           title="Some file"
           fileUrl="/somefile/url"
-          printMode={false}
+          onClose={() => {}}
         />,
       ),
     )
