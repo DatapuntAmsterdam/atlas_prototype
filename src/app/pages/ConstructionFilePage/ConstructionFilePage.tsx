@@ -33,11 +33,7 @@ const ConstructionFilePage: FunctionComponent = () => {
   const result = usePromise(() => getBouwdossierById(id), [id])
 
   useEffect(() => {
-    if (fileName) {
-      setDocumentTitle('Bouwtekening')
-    } else {
-      setDocumentTitle(false)
-    }
+    setDocumentTitle(fileName ? 'Bouwtekening' : false)
   }, [fileName])
 
   if (result.status === PromiseStatus.Pending) {
