@@ -31,6 +31,18 @@ const NonSelectableLegendParagraph = styled.p`
   margin-bottom: ${themeSpacing(2)};
 `
 
+const Notification = styled.div`
+  background-color: ${themeColor('primary')};
+  display: block;
+  margin: ${themeSpacing(3, 0)};
+  padding: ${themeSpacing(3)};
+  text-align: center;
+
+  & * {
+    color: white;
+  }
+`
+
 // We cannot use a button because of IE11
 const LayerButton = styled.div.attrs({
   role: 'button',
@@ -355,11 +367,9 @@ const MapLegend = ({
                       ) : null}
                     </div>
                     {!isAuthorised(mapLayer, user) && (
-                      <div className="map-legend__notification">
-                        <span>
-                          <LoginLink showChevron={false}>Zichtbaar na inloggen</LoginLink>
-                        </span>
-                      </div>
+                      <Notification>
+                        <LoginLink showChevron={false}>Zichtbaar na inloggen</LoginLink>
+                      </Notification>
                     )}
                     {isAuthorised(mapLayer, user) && layerIsChecked && !mapLayer.disabled && (
                       <ul className="map-legend__items">
