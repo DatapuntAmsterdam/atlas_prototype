@@ -1,5 +1,5 @@
 import { ChevronDown } from '@amsterdam/asc-assets'
-import { Checkbox, Icon, Label, styles, themeColor, themeSpacing } from '@amsterdam/asc-ui'
+import { Checkbox, Icon, Label, styles, themeColor, themeSpacing, Alert } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
 import queryString from 'querystring'
@@ -31,15 +31,12 @@ const NonSelectableLegendParagraph = styled.p`
   margin-bottom: ${themeSpacing(2)};
 `
 
-const Notification = styled.div`
-  background-color: ${themeColor('primary')};
-  display: block;
+const StyledAlert = styled(Alert)`
   margin: ${themeSpacing(3, 0)};
   padding: ${themeSpacing(3)};
-  text-align: center;
 
   & * {
-    color: white;
+    margin: 0 auto;
   }
 `
 
@@ -367,9 +364,9 @@ const MapLegend = ({
                       ) : null}
                     </div>
                     {!isAuthorised(mapLayer, user) && (
-                      <Notification>
+                      <StyledAlert level="info">
                         <LoginLink showChevron={false}>Zichtbaar na inloggen</LoginLink>
-                      </Notification>
+                      </StyledAlert>
                     )}
                     {isAuthorised(mapLayer, user) && layerIsChecked && !mapLayer.disabled && (
                       <ul className="map-legend__items">

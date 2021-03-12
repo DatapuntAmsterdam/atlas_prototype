@@ -189,7 +189,7 @@ export const MAP = {
   embedButton: '[data-test=embed-button]',
   iconMapMarker: '.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive',
   imageLayer: '.leaflet-overlay-pane > .leaflet-image-layer',
-  legendNotification: '[class*=MapLegend__Notification]',
+  legendNotification: '[class*=MapLegend__StyledAlert]',
   mapContainer: '.leaflet-container',
   mapDetailPanoramaHeader: '.map-detail-result__header-pano',
   mapDetailPanoramaHeaderImage: 'img.map-detail-result__header-pano',
