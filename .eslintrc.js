@@ -27,6 +27,7 @@ module.exports = {
     jasmine: true,
   },
   rules: {
+    'consistent-return': 'off',
     'import/no-cycle': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'no-console': 'error',

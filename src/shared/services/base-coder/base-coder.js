@@ -129,9 +129,7 @@ export default class BaseCoder {
    * @param {number} nDecimals
    * @returns {(string|string[])}
    */
-  // eslint-disable-next-line consistent-return
   encode(expression, nDecimals = 0) {
-    // eslint-disable-line consistent-return
     let expr = expression
     if (typeof expr === 'number') {
       if (nDecimals === 0 && !BaseCoder.isInt(expr)) {
@@ -165,9 +163,7 @@ export default class BaseCoder {
    * @param {number} nDecimals
    * @returns {number}
    */
-  // eslint-disable-next-line consistent-return
   decode(expression, nDecimals = 0) {
-    // eslint-disable-line consistent-return
     let expr = expression
     if (typeof expr === 'string') {
       let sign = 1
