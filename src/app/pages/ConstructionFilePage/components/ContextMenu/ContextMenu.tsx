@@ -1,22 +1,23 @@
 import { ChevronDown, Download, Ellipsis, Print } from '@amsterdam/asc-assets'
-import { ContextMenu, ContextMenuItem, Icon } from '@amsterdam/asc-ui'
+import { ContextMenu as AscContextMenu, ContextMenuItem, Icon } from '@amsterdam/asc-ui'
 import { FunctionComponent } from 'react'
 import { useDispatch } from 'react-redux'
-import { sharePage, showPrintMode } from '../../../../shared/ducks/ui/ui'
-import socialItems from '../socialItems'
+import { sharePage, showPrintMode } from '../../../../../shared/ducks/ui/ui'
+import socialItems from '../../../../components/ContextMenu/socialItems'
 
-type ConstructionFilesProps = {
+export interface ContextMenuProps {
   handleDownload: (imageUrl: string, size: string) => void
   fileUrl: string
   isImage: boolean
   downloadLoading: boolean
 }
 
-const ConstructionFiles: FunctionComponent<ConstructionFilesProps> = ({
+const ContextMenu: FunctionComponent<ContextMenuProps> = ({
   fileUrl,
   handleDownload,
   downloadLoading,
   isImage,
+  ...otherProps
 }) => {
   const dispatch = useDispatch()
 
@@ -24,7 +25,7 @@ const ConstructionFiles: FunctionComponent<ConstructionFilesProps> = ({
   const openPrintMode = () => dispatch(showPrintMode())
 
   return (
-    <ContextMenu
+    <AscContextMenu
       data-test="context-menu"
       tabIndex={0}
       title="Actiemenu"
@@ -35,6 +36,7 @@ const ConstructionFiles: FunctionComponent<ConstructionFilesProps> = ({
         </Icon>
       }
       position="bottom"
+      {...otherProps}
     >
       <ContextMenuItem
         role="button"
@@ -91,8 +93,8 @@ const ConstructionFiles: FunctionComponent<ConstructionFilesProps> = ({
         Download origineel
       </ContextMenuItem>
       {socialItems(openSharePage)}
-    </ContextMenu>
+    </AscContextMenu>
   )
 }
 
-export default ConstructionFiles
+export default ContextMenu
