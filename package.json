@@ -130,7 +130,7 @@
     "@types/webpack-bundle-analyzer": "^3.9.1",
     "@types/webpack-dev-server": "^3.11.1",
     "@types/webpack-env": "^1.16.0",
-    "@types/webpack-merge": "^4.1.5",
+    "@types/webpack-merge": "^5.0.0",
     "@types/workbox-webpack-plugin": "^5.1.5",
     "@typescript-eslint/eslint-plugin": "^4.15.0",
     "@typescript-eslint/parser": "^4.15.0",
