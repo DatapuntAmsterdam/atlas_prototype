@@ -211,7 +211,34 @@ describe('ImageViewer', () => {
     })
   })
 
-  it('renders the viewer controls when loading finishes', () => {
+  it('renders the viewer controls without zoom and context menu if the image cannot be opened', () => {
+    mockedOSDViewer.mockImplementation(
+      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
+        useEffect(() => {
+          onOpenFailed?.({} as ViewerEvent)
+        }, [])
+
+        return <div {...otherProps} />
+      },
+    )
+
+    const { getByTestId, queryByTestId } = render(
+      withAppContext(
+        <ImageViewer
+          fileName="filename.png"
+          title="Some file"
+          fileUrl="/somefile/url"
+          onClose={() => {}}
+        />,
+      ),
+    )
+
+    expect(getByTestId('viewerControls')).toBeDefined()
+    expect(queryByTestId('zoomControls')).toBeNull()
+    expect(queryByTestId('contextMenu')).toBeNull()
+  })
+
+  it('renders the viewer controls when the image is opened', () => {
     mockedOSDViewer.mockImplementation(
       ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
         useEffect(() => {
@@ -234,6 +261,8 @@ describe('ImageViewer', () => {
     )
 
     expect(getByTestId('viewerControls')).toBeDefined()
+    expect(getByTestId('zoomControls')).toBeDefined()
+    expect(getByTestId('contextMenu')).toBeDefined()
   })
 
   it('calls the onClose prop when the viewer is closed', () => {

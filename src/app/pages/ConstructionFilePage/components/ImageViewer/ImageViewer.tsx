@@ -8,11 +8,11 @@ import { useSelector } from 'react-redux'
 import styled, { css } from 'styled-components'
 import { isPrintMode } from '../../../../../shared/ducks/ui/ui'
 import { getAccessToken } from '../../../../../shared/services/auth/auth-legacy'
-import { ConstructionFiles as ContextMenu } from '../../../../components/ContextMenu'
 import ErrorMessage from '../../../../components/ErrorMessage/ErrorMessage'
 import useDownload from '../../../../utils/useDownload'
 import OSDViewer from '../OSDViewer'
 import ViewerControls from '../ViewerControls'
+import ContextMenu from '../ContextMenu'
 
 const ImageViewerContainer = styled(OSDViewer)<{ $printMode: boolean }>`
   background-color: ${themeColor('tint', 'level5')};
@@ -150,7 +150,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
           }
           bottomRightComponent={
             !error && (
-              <div>
+              <div data-testid="zoomControls">
                 <Button
                   type="button"
                   variant="blank"
@@ -179,6 +179,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
                 downloadLoading={downloadLoading}
                 fileUrl={fileUrl}
                 isImage={isImage}
+                data-testid="contextMenu"
               />
             )
           }
