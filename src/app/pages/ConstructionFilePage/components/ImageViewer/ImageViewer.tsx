@@ -2,33 +2,32 @@
 import { Close, Download, Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Button, themeColor } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import OpenSeadragon, { Viewer } from 'openseadragon'
-import { createRef, FunctionComponent, useEffect, useState } from 'react'
+import { Options, Viewer } from 'openseadragon'
+import { FunctionComponent, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled, { css } from 'styled-components'
 import { isPrintMode } from '../../../../../shared/ducks/ui/ui'
-import getState from '../../../../../shared/services/redux/get-state'
+import { getAccessToken } from '../../../../../shared/services/auth/auth-legacy'
 import { ConstructionFiles as ContextMenu } from '../../../../components/ContextMenu'
 import ErrorMessage from '../../../../components/ErrorMessage/ErrorMessage'
-import ViewerControls from '../../../../components/ViewerControls/ViewerControls'
 import useDownload from '../../../../utils/useDownload'
+import OSDViewer from '../OSDViewer'
+import ViewerControls from '../ViewerControls'
 
-const ImageViewerContainer = styled.div<{ printMode: boolean }>`
+const ImageViewerContainer = styled(OSDViewer)<{ $printMode: boolean }>`
   background-color: ${themeColor('tint', 'level5')};
   color: transparent; // Hides error messages as they can't be hidden programmatically
   height: 100%;
   width: 100%;
 
-  ${({ printMode }) =>
-    printMode &&
+  ${({ $printMode }) =>
+    $printMode &&
     css`
       height: calc(
         100vh - 188px
       ); // Height of the printheader as defined in Angular (to be deprecated)
     `}
 `
-
-export const IMAGE_VIEWER_TEST_ID = 'imageViewer'
 
 export interface ImageViewerProps {
   title: string
@@ -43,22 +42,15 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
   fileUrl,
   onClose,
 }) => {
+  const { trackEvent } = useMatomo()
+  const [downloadLoading, downloadFile] = useDownload()
   const printMode = useSelector(isPrintMode)
-  const viewerRef = createRef<HTMLDivElement>()
-  const [viewerInstance, setViewerInstance] = useState<Viewer | null>(null)
+  const accessToken = useSelector(getAccessToken)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
-  const [downloadLoading, downloadFile] = useDownload()
-  const { trackEvent } = useMatomo()
-
-  const { accessToken } = getState().user
-
-  const fileExtension = fileName.split('.').pop()
-  const isImage = !!fileExtension?.toLowerCase().match(/(jpg|jpeg|png|gif)/)
-
-  useEffect(() => {
-    const viewer = OpenSeadragon({
-      element: viewerRef.current || undefined,
+  const [viewer, setViewer] = useState<Viewer>()
+  const viewerOptions = useMemo<Options>(
+    () => ({
       preserveViewport: true,
       visibilityRatio: 1.0,
       minZoomLevel: 0,
@@ -71,44 +63,33 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
         authorization: `Bearer ${accessToken || ''}`,
       },
       tileSources: [`${fileUrl}/info.json`],
-    })
+    }),
+    [],
+  )
 
-    setViewerInstance(viewer)
+  const fileExtension = fileName.split('.').pop()
+  const isImage = !!fileExtension?.toLowerCase().match(/(jpg|jpeg|png|gif)/)
 
-    if (viewer)
-      viewer.addHandler('open', () => {
-        setLoading(false)
-      })
-
-    if (viewer)
-      viewer.addHandler('open-failed', () => {
-        setLoading(false)
-        setError(true)
-      })
-  }, [])
-
-  const zoomIn = () => {
-    if (viewerInstance) viewerInstance.viewport.zoomBy(1.5)
+  function zoomIn() {
+    viewer?.viewport.zoomBy(1.5)
   }
 
-  const zoomOut = () => {
-    const targetZoomLevel = viewerInstance?.viewport ? viewerInstance.viewport.getZoom() - 1 : 1
-    const newZoomLevel = targetZoomLevel < 1 ? 1 : targetZoomLevel
-
-    if (viewerInstance) viewerInstance.viewport.zoomTo(newZoomLevel)
+  function zoomOut() {
+    viewer?.viewport.zoomBy(0.5)
   }
 
-  const handleDownload = (imageUrl: string, size: string) => {
+  function handleDownload(imageUrl: string, size: string) {
     downloadFile(
       imageUrl,
       {
         method: 'get',
-        headers: new Headers({
+        headers: {
           Authorization: `Bearer ${accessToken}`,
-        }),
+        },
       },
       fileName,
     )
+
     trackEvent({
       category: 'download-bouwtekening',
       action: `bouwtekening-download-${size}`,
@@ -116,85 +97,94 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     })
   }
 
-  const CloseButton = () => (
-    <Button
-      type="button"
-      variant="blank"
-      title="Bestand sluiten"
-      size={32}
-      icon={<Close />}
-      iconSize={15}
-      onClick={onClose}
-    />
-  )
-
   return (
     <>
       <ImageViewerContainer
-        ref={viewerRef}
-        printMode={printMode}
-        data-testid={IMAGE_VIEWER_TEST_ID}
+        options={viewerOptions}
+        $printMode={printMode}
+        onInit={setViewer}
+        onOpen={() => setLoading(false)}
+        onOpenFailed={() => {
+          setLoading(false)
+          setError(true)
+        }}
+        data-testid="imageViewer"
       />
 
-      {!loading && !error ? (
-        <ViewerControls
-          metaData={[title, fileName]}
-          topRightComponent={<CloseButton />}
-          bottomRightComponent={
-            <div>
-              <Button
-                type="button"
-                variant="blank"
-                title="Inzoomen"
-                size={32}
-                iconSize={12}
-                onClick={zoomIn}
-                icon={<Enlarge />}
-              />
-              <Button
-                type="button"
-                variant="blank"
-                title="Uitzoomen"
-                size={32}
-                iconSize={12}
-                onClick={zoomOut}
-                icon={<Minimise />}
-              />
-            </div>
+      {error && (
+        <ErrorMessage
+          data-testid="errorMessage"
+          absolute
+          message={
+            isImage
+              ? 'Er is een fout opgetreden bij het laden van dit bestand.'
+              : 'Dit bestandsformaat kan niet worden weergegeven op deze pagina.'
           }
-          bottomLeftComponent={
-            <ContextMenu
-              handleDownload={handleDownload}
-              downloadLoading={downloadLoading}
-              fileUrl={fileUrl}
-              isImage={isImage}
-            />
+          buttonLabel={isImage ? 'Probeer opnieuw' : `Download bronbestand`}
+          buttonIcon={!isImage && <Download />}
+          buttonOnClick={
+            isImage
+              ? () => window.location.reload()
+              : () =>
+                  handleDownload(
+                    `${fileUrl}?source_file=true`, // If the file is not an image the source file should be downloadable
+                    'origineel',
+                  )
           }
         />
-      ) : !loading && error ? (
-        <>
-          <ErrorMessage
-            absolute
-            message={
-              isImage
-                ? 'Er is een fout opgetreden bij het laden van dit bestand.'
-                : 'Dit bestandsformaat kan niet worden weergegeven op deze pagina.'
-            }
-            buttonLabel={isImage ? 'Probeer opnieuw' : `Download bronbestand`}
-            buttonIcon={!isImage && <Download />}
-            buttonOnClick={
-              isImage
-                ? () => window.location.reload()
-                : () =>
-                    handleDownload(
-                      `${fileUrl}?source_file=true`, // If the file is not an image the source file should be downloadable
-                      'origineel',
-                    )
-            }
-          />
-          <ViewerControls metaData={[title, fileName]} topRightComponent={<CloseButton />} />
-        </>
-      ) : null}
+      )}
+
+      {!loading && (
+        <ViewerControls
+          metaData={[title, fileName]}
+          topRightComponent={
+            <Button
+              type="button"
+              variant="blank"
+              title="Bestand sluiten"
+              size={32}
+              icon={<Close />}
+              iconSize={15}
+              onClick={onClose}
+            />
+          }
+          bottomRightComponent={
+            !error && (
+              <div>
+                <Button
+                  type="button"
+                  variant="blank"
+                  title="Inzoomen"
+                  size={32}
+                  iconSize={12}
+                  onClick={zoomIn}
+                  icon={<Enlarge />}
+                />
+                <Button
+                  type="button"
+                  variant="blank"
+                  title="Uitzoomen"
+                  size={32}
+                  iconSize={12}
+                  onClick={zoomOut}
+                  icon={<Minimise />}
+                />
+              </div>
+            )
+          }
+          bottomLeftComponent={
+            !error && (
+              <ContextMenu
+                handleDownload={handleDownload}
+                downloadLoading={downloadLoading}
+                fileUrl={fileUrl}
+                isImage={isImage}
+              />
+            )
+          }
+          data-testid="viewerControls"
+        />
+      )}
     </>
   )
 }
