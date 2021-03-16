@@ -1,9 +1,8 @@
 import { fireEvent, render } from '@testing-library/react'
-import { mocked } from 'ts-jest/utils'
 import * as reactRedux from 'react-redux'
-import ContextMenu from './ContextMenu'
-import withAppContext from '../../../../utils/withAppContext'
 import { showPrintMode } from '../../../../../shared/ducks/ui/ui'
+import withAppContext from '../../../../utils/withAppContext'
+import ContextMenu from './ContextMenu'
 
 describe('ContextMenu', () => {
   const useDispatchMock = jest.spyOn(reactRedux, 'useDispatch')
