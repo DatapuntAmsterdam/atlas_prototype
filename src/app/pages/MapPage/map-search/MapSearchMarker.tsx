@@ -4,7 +4,6 @@ import { LeafletMouseEvent } from 'leaflet'
 import { useContext, useEffect, useRef, FunctionComponent } from 'react'
 import { generatePath, useHistory } from 'react-router-dom'
 import fetchNearestDetail from '../../../../map/services/nearest-detail/nearest-detail'
-import useMapCenterToMarker from '../../../utils/useMapCenterToMarker'
 import MapContext, { Overlay } from '../MapContext'
 import { MarkerProps } from '../MapMarkers'
 import { locationParam } from '../query-params'
@@ -16,8 +15,6 @@ const MapSearchMarker: FunctionComponent<MarkerProps> = ({ location }) => {
   const { legendLeafletLayers } = useContext(MapContext)
   const history = useHistory()
   const { buildQueryString } = useBuildQueryString()
-
-  useMapCenterToMarker(location)
 
   const { setPositionFromSnapPoint } = useContext(MapPanelContext)
 

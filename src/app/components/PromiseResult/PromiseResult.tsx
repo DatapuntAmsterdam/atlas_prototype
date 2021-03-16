@@ -4,7 +4,7 @@ import usePromise, {
   PromiseFactoryFn,
   PromiseFulfilledResult,
   PromiseStatus,
-} from '../../utils/usePromise'
+} from '@amsterdam/use-promise'
 import AuthAlert from '../Alerts/AuthAlert'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'

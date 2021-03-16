@@ -1,12 +1,11 @@
-import { MapPanelContext } from '@amsterdam/arm-core'
+import { ascDefaultTheme, themeColor } from '@amsterdam/asc-ui'
+import { useMapInstance } from '@amsterdam/react-maps'
 import {
   DrawTool as DrawToolComponent,
   ExtendedLayer,
   PolygonType,
   PolylineType,
 } from '@amsterdam/arm-draw'
-import { ascDefaultTheme, themeColor } from '@amsterdam/asc-ui'
-import { useMapInstance } from '@amsterdam/react-maps'
 import L, { LatLng, LatLngLiteral, Polygon } from 'leaflet'
 import {
   FunctionComponent,
@@ -19,9 +18,8 @@ import {
 } from 'react'
 import { useHistory } from 'react-router-dom'
 import useParam from '../../../utils/useParam'
-import MapContext from '../MapContext'
-import { PolyDrawing, polygonParam, polylineParam } from '../query-params'
-import { Overlay, SnapPoint } from '../types'
+import { drawToolOpenParam, PolyDrawing, polygonParam, polylineParam } from '../query-params'
+import { Overlay } from '../types'
 import DataSelectionContext from './DataSelectionContext'
 import { routing } from '../../../routes'
 import useBuildQueryString from '../../../utils/useBuildQueryString'
@@ -78,12 +76,9 @@ export interface DrawToolProps {
 }
 
 const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
-  const { setPositionFromSnapPoint } = useContext(MapPanelContext)
-  const { setShowDrawTool } = useContext(MapContext)
   const {
     fetchData,
     fetchMapVisualization,
-    dataSelection,
     mapVisualizations: mapVisualization,
     removeDataSelection,
   } = useContext(DataSelectionContext)
@@ -91,6 +86,7 @@ const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
 
   const [polygon, setPolygon] = useParam(polygonParam)
   const [polyline, setPolyline] = useParam(polylineParam)
+  const [drawtoolOpen] = useParam(drawToolOpenParam)
   const history = useHistory()
 
   const [initialDrawnItems, setInitialDrawnItems] = useState<ExtendedLayer[]>([])
@@ -105,84 +101,86 @@ const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
   const mapInstance = useMapInstance()
   const drawnItemsGroup = useMemo(() => new L.FeatureGroup(), [])
 
-  const getDrawingData = useCallback(async (layer: ExtendedLayer, distanceText: string) => {
+  const getDrawingData = useCallback((layer: ExtendedLayer, distanceText: string) => {
     if (layer instanceof Polygon) {
       const latLngs = layer.getLatLngs() as LatLng[][]
 
-      await fetchMapVisualization(latLngs, layer.id)
-      await fetchData(
-        latLngs,
-        layer.id,
-        {
-          size: 20,
-          page: 1,
-        },
-        {
-          layer,
-          distanceText,
-        },
-      )
+      Promise.all([
+        fetchMapVisualization(latLngs, layer.id),
+        fetchData(
+          latLngs,
+          layer.id,
+          {
+            size: 20,
+            page: 1,
+          },
+          {
+            layer,
+            distanceText,
+          },
+        ),
+      ])
+        .then(() => {})
+        .catch((error: string) => {
+          // eslint-disable-next-line no-console
+          console.error(`DrawTool: could not retrieve dataSelection with markers: ${error}`)
+        })
     }
   }, [])
 
-  const updateShapes = (shape: { polygon: PolyDrawing | null; polyline: PolyDrawing | null }) => {
-    const pushReplace = !polygon && shape.polygon ? 'push' : 'replace'
-
-    // If user removes all the drawings, close the drawtool
-    if (!shape.polygon && !shape.polyline) {
-      setShowDrawTool(false)
-    }
-
-    if (!shape.polygon) {
+  /**
+   * Update the state / URL with the current drawings
+   * @param shape
+   */
+  const updateShape = (shape: { polygon: PolyDrawing | null; polyline: PolyDrawing | null }) => {
+    if (shape.polygon || shape.polyline) {
+      setPolygon(shape.polygon)
+      setPolyline(shape.polyline, 'replace')
+    } else {
       history.push({
         pathname: routing.dataSearchGeo_TEMP.path,
-        search: buildQueryString(undefined, [polygonParam]),
-      })
-    } else {
-      history[pushReplace]({
-        pathname: routing.addresses_TEMP.path,
-        search: buildQueryString<any>([
-          [polygonParam, shape.polygon],
-          [polylineParam, shape.polyline],
-        ]),
+        search: buildQueryString(undefined, [polylineParam, polygonParam, drawToolOpenParam]),
       })
     }
-  }
-
-  const addOrEditShape = (layer: ExtendedLayer) => {
-    const updatedPolygon =
-      layer instanceof Polygon
-        ? { id: layer.id, polygon: getLayerCoordinates(layer) }
-        : polygonRef.current
-
-    const updatedPolyline =
-      layer instanceof Polygon
-        ? polylineRef.current
-        : { id: layer.id, polygon: getLayerCoordinates(layer) }
-
-    updateShapes({
-      polygon: updatedPolygon,
-      polyline: updatedPolyline,
-    })
   }
 
   /**
-   * Add tooltip, update the URL param and fetch the results
-   * @param e
+   * Add a tooltip showing the distance and fetch dataselection
+   * @param layer
    */
-  const editShape = useCallback(
-    async (e: L.DrawEvents.EditVertex) => {
-      const layer = e.poly as ExtendedLayer
+  const attachDataToLayer = (layer: ExtendedLayer) => {
+    const distanceText = getDistanceLabel(layer)
+    getDrawingData(layer, distanceText)
+    bindDistanceAndAreaToTooltip(layer, distanceText)
+  }
 
-      const distanceText = getDistanceLabel(layer)
-      bindDistanceAndAreaToTooltip(layer, distanceText)
+  /**
+   * Add a tooltip showing the distance, fetch dataselection and
+   * update the URL parameters
+   */
+  const updateDrawings = useCallback(
+    (layer: ExtendedLayer) => {
+      const updatedPolygon =
+        layer instanceof Polygon
+          ? { id: layer.id, polygon: getLayerCoordinates(layer) }
+          : polygonRef.current
 
-      addOrEditShape(layer)
+      const updatedPolyline =
+        layer instanceof Polygon
+          ? polylineRef.current
+          : { id: layer.id, polygon: getLayerCoordinates(layer) }
 
-      await getDrawingData(layer, distanceText)
+      updateShape({
+        polygon: updatedPolygon,
+        polyline: updatedPolyline,
+      })
     },
-    [getDrawingData],
+    [setPolygon, setPolyline],
   )
+
+  const onEditVertex = (e: L.DrawEvents.EditVertex) => {
+    updateDrawings(e.poly as ExtendedLayer)
+  }
 
   const onDeleteDrawing = useCallback(
     (deletedLayers: ExtendedLayer[]) => {
@@ -197,7 +195,7 @@ const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
 
       // remove the markerGroups.
       if (mapVisualization && deletedLayersIds.length) {
-        removeDataSelection(deletedLayersIds)
+        removeDataSelection()
       }
 
       if (deletedLayersBounds.length === 0) {
@@ -214,7 +212,7 @@ const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
           ? null
           : polylineRef.current
 
-      updateShapes({
+      updateShape({
         polygon: newPolygon,
         polyline: newPolyline,
       })
@@ -222,58 +220,60 @@ const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
     [mapVisualization, setPolygon, setPolyline],
   )
 
-  const handleOnDrawEnd = useCallback(
-    async (layer: ExtendedLayer) => {
-      const distanceText = getDistanceLabel(layer)
-      await getDrawingData(layer, distanceText)
-      bindDistanceAndAreaToTooltip(layer, distanceText)
-
-      addOrEditShape(layer)
-    },
-    [getDrawingData, setPolygon, setPolyline],
-  )
-
-  const fitToBounds = useCallback(() => {
-    const bounds = drawnItemsGroup.getBounds()
-
-    if (bounds.isValid()) {
-      mapInstance.fitBounds(bounds)
-    }
-  }, [drawnItemsGroup])
+  const onClose = () => {
+    removeDataSelection()
+    drawnItemsGroup.clearLayers()
+    history.push({
+      pathname: routing.dataSearchGeo_TEMP.path,
+      search: buildQueryString(undefined, [polylineParam, polygonParam, drawToolOpenParam]),
+    })
+  }
 
   useEffect(() => {
-    setInitialDrawnItems([
-      ...(polygon ? [createPolyLayer(polygon)] : []),
-      ...(polyline ? [createPolyLayer(polyline, true)] : []),
-    ])
-
-    fitToBounds()
-
-    mapInstance.on(L.Draw.Event.EDITVERTEX as any, editShape as any)
+    mapInstance.on(L.Draw.Event.EDITVERTEX as any, onEditVertex as any)
 
     return () => {
-      mapInstance.off(L.Draw.Event.EDITVERTEX as any, editShape as any)
+      mapInstance.off(L.Draw.Event.EDITVERTEX as any, onEditVertex as any)
     }
   }, [])
 
+  /**
+   * This effect will handle loading drawings from initial state and
+   * handle adding and removing drawings when navigating
+   */
   useEffect(() => {
-    if (dataSelection) {
-      setPositionFromSnapPoint(SnapPoint.Halfway)
+    const drawingsOnMap = drawnItemsGroup.getLayers().map(({ id }: any) => id)
+    const layersToAdd = [polygon?.id, polyline?.id]
+    const layersToRemove = drawingsOnMap.filter((id) => !layersToAdd.includes(id))
+
+    // Delete old drawings / layers
+    drawnItemsGroup.eachLayer((layer) => {
+      const typedLayer = layer as ExtendedLayer
+      if (layersToRemove.includes(typedLayer.id) && typedLayer instanceof Polygon) {
+        removeDataSelection()
+      }
+      drawnItemsGroup.removeLayer(typedLayer)
+    })
+
+    // Add layers if they don't exist on the map
+    const drawnItems: Array<PolylineType | PolygonType> = []
+    if (polygon) {
+      drawnItems.push(createPolyLayer(polygon))
     }
-  }, [dataSelection])
+    if (polyline) {
+      drawnItems.push(createPolyLayer(polyline, true))
+    }
+    if (drawnItems.length) {
+      setInitialDrawnItems(drawnItems)
+    }
+  }, [polygon, polyline, drawtoolOpen])
 
   return (
     <DrawToolComponent
-      onDrawEnd={handleOnDrawEnd}
+      onDrawEnd={updateDrawings}
+      onEndInitialItems={attachDataToLayer}
       onDelete={onDeleteDrawing}
-      isOpen
-      onClose={() => {
-        setShowDrawTool(false)
-        history.push({
-          pathname: routing.dataSearchGeo_TEMP.path,
-          search: buildQueryString(undefined, [polylineParam, polygonParam]),
-        })
-      }}
+      onClose={onClose}
       drawnItems={initialDrawnItems}
       onDrawStart={() => {
         setCurrentOverlay(Overlay.Results)

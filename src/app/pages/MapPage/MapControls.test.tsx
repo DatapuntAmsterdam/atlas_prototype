@@ -2,6 +2,20 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import MapControls from './MapControls'
 import withMapContext from '../../utils/withMapContext'
 
+const pushMock = jest.fn()
+const replaceMock = jest.fn()
+jest.mock('react-router-dom', () => ({
+  // @ts-ignore
+  ...jest.requireActual('react-router-dom'),
+  useLocation: () => ({
+    search: '?foo=bar',
+  }),
+  useHistory: () => ({
+    push: pushMock,
+    replace: replaceMock,
+  }),
+}))
+
 describe('MapControls', () => {
   const { rerender } = render(
     withMapContext(
@@ -50,8 +64,6 @@ describe('MapControls', () => {
   })
 
   it('should open the drawtool when clicking on drawtool button', () => {
-    const setShowDrawToolMock = jest.fn()
-
     const { getByTestId } = render(
       withMapContext(
         <MapControls
@@ -61,14 +73,11 @@ describe('MapControls', () => {
           isLoading={false}
           panoActive={false}
         />,
-        {
-          setShowDrawTool: setShowDrawToolMock,
-        },
       ),
     )
-    expect(setShowDrawToolMock).not.toHaveBeenCalled()
+    expect(replaceMock).not.toHaveBeenCalled()
     const openDrawtoolButton = getByTestId('drawtoolOpenButton')
     fireEvent.click(openDrawtoolButton)
-    expect(setShowDrawToolMock).toHaveBeenCalled()
+    expect(replaceMock).toHaveBeenCalled()
   })
 })

@@ -28,23 +28,22 @@ const useParam = <T>(urlParam: UrlParam<T>): [T, SetValueFn<T>] => {
 
   // We need a ref here so that React is properly notified of changes in the component hierarchy for rendering.
   const stateRef = useRef(state)
+  const locationRef = useRef(location)
 
   useEffect(() => {
     stateRef.current = state
   }, [stateRef, state])
 
+  useEffect(() => {
+    locationRef.current = location
+  }, [locationRef, location])
+
   const setValue = useCallback<SetValueFn<T>>((valueOrFn, method = 'push') => {
     const value = valueOrFn instanceof Function ? valueOrFn(stateRef.current) : valueOrFn
-    const newValue = value ? encodeParam(urlParam, value) : null
+    const newValue = value !== null ? encodeParam(urlParam, value) : null
     const newParams = buildParamQuery(urlParam, newValue)
 
-    if (location.pathname !== window.location.pathname) {
-      throw new Error(
-        `There's a mismatch between window.location and the location from the useLocation hook from react-router. This sometimes happens when calling the 'setValue' inside a non-react event-handler that is not updated. Please be sure the component is updated via react-router.
-        Tried to update parameter with key: "${urlParam.name}"`,
-      )
-    }
-    return history[method]({ ...location, search: newParams.toString() })
+    return history[method]({ ...locationRef.current, search: newParams.toString() })
   }, [])
 
   return [state, setValue]

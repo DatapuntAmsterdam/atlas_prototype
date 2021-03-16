@@ -16,7 +16,7 @@ type DataSelectionContextValues = {
     id: string,
     setState?: boolean,
   ) => Promise<MapVisualization | null>
-  removeDataSelection: (idToRemove: string[]) => void
+  removeDataSelection: () => void
   mapVisualizations: MapVisualization[]
   dataSelection: DataSelection[]
   type: DataSelectionType

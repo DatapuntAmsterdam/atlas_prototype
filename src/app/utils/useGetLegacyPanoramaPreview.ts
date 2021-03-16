@@ -1,13 +1,13 @@
 import { LatLngLiteral } from 'leaflet'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
+import usePromise, { PromiseStatus } from '@amsterdam/use-promise'
 import { getPanoramaThumbnail } from '../../api/panorama/thumbnail'
 import { toPanoramaAndPreserveQuery } from '../../store/redux-first-router/actions'
 import { getDetailLocation } from '../../store/redux-first-router/selectors'
 import { locationParam, panoHeadingParam, panoPitchParam } from '../pages/MapPage/query-params'
 import pickLinkComponent from './pickLinkComponent'
 import useBuildQueryString from './useBuildQueryString'
-import usePromise, { PromiseStatus } from './usePromise'
 
 const useGetLegacyPanoramaPreview = (
   location: (LatLngLiteral & { latitude: number; longitude: number }) | null,

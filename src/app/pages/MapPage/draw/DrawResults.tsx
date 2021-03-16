@@ -35,12 +35,11 @@ import LoginLink from '../../../components/Links/LoginLink/LoginLink'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
 import formatCount from '../../../utils/formatCount'
 import config, { AuthScope, DataSelectionType } from '../config'
-import MapContext from '../MapContext'
 import { Overlay } from '../types'
 import DataSelectionContext from './DataSelectionContext'
 import { routing } from '../../../routes'
 import useBuildQueryString from '../../../utils/useBuildQueryString'
-import { polygonParam, polylineParam } from '../query-params'
+import { drawToolOpenParam, polygonParam, polylineParam } from '../query-params'
 
 const ResultLink = styled(ReduxRouterLink)`
   width: 100%;
@@ -120,7 +119,6 @@ const DrawResults: FunctionComponent<DrawResultsProps> = ({ currentOverlay }) =>
     loadingIds,
     errorIds,
   } = useContext(DataSelectionContext)
-  const { setShowDrawTool } = useContext(MapContext)
   const userScopes = useSelector(getUserScopes)
   const { trackEvent } = useMatomo()
   const history = useHistory()
@@ -215,10 +213,9 @@ const DrawResults: FunctionComponent<DrawResultsProps> = ({ currentOverlay }) =>
       animate
       stackOrder={currentOverlay === Overlay.Results ? 2 : 1}
       onClose={() => {
-        setShowDrawTool(false)
         history.push({
           pathname: routing.dataSearchGeo_TEMP.path,
-          search: buildQueryString(undefined, [polylineParam, polygonParam]),
+          search: buildQueryString(undefined, [polylineParam, polygonParam, drawToolOpenParam]),
         })
       }}
     >

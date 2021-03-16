@@ -1,5 +1,5 @@
 import { ChevronDown } from '@amsterdam/asc-assets'
-import { Checkbox, Icon, Label, styles, themeColor, themeSpacing } from '@amsterdam/asc-ui'
+import { Checkbox, Icon, Label, styles, themeColor, themeSpacing, Alert } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
 import queryString from 'querystring'
@@ -29,6 +29,15 @@ const StyledCheckbox = styled(Checkbox)`
 
 const NonSelectableLegendParagraph = styled.p`
   margin-bottom: ${themeSpacing(2)};
+`
+
+const StyledAlert = styled(Alert)`
+  margin: ${themeSpacing(3, 0)};
+  padding: ${themeSpacing(3)};
+
+  & * {
+    margin: 0 auto;
+  }
 `
 
 // We cannot use a button because of IE11
@@ -355,11 +364,9 @@ const MapLegend = ({
                       ) : null}
                     </div>
                     {!isAuthorised(mapLayer, user) && (
-                      <div className="map-legend__notification">
-                        <span>
-                          <LoginLink showChevron={false}>Zichtbaar na inloggen</LoginLink>
-                        </span>
-                      </div>
+                      <StyledAlert level="info">
+                        <LoginLink showChevron={false}>Zichtbaar na inloggen</LoginLink>
+                      </StyledAlert>
                     )}
                     {isAuthorised(mapLayer, user) && layerIsChecked && !mapLayer.disabled && (
                       <ul className="map-legend__items">
