@@ -1,23 +1,23 @@
 import { ThemeProvider } from '@amsterdam/asc-ui'
 import { fireEvent, render } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
+import usePromise, { PromiseFulfilledResult, PromiseStatus } from '@amsterdam/use-promise'
 import { AuthError } from '../../../shared/services/api/customError'
-import usePromise, { PromiseFulfilledResult, PromiseStatus } from '../../utils/usePromise'
 import AuthAlert from '../Alerts/AuthAlert'
 import PromiseResult from './PromiseResult'
 import { LOADING_SPINNER_TEST_ID } from '../LoadingSpinner/LoadingSpinner'
 import { ERROR_MESSAGE_TEST_ID } from '../ErrorMessage/ErrorMessage'
 
+jest.mock('@amsterdam/use-promise')
 jest.mock('../Alerts/AuthAlert')
-jest.mock('../../utils/usePromise')
 
-const mockedAuthAlert = mocked(AuthAlert)
 const mockedUsePromise = mocked(usePromise)
+const mockedAuthAlert = mocked(AuthAlert)
 
 describe('PromiseResult', () => {
   beforeEach(() => {
-    mockedAuthAlert.mockClear()
     mockedUsePromise.mockClear()
+    mockedAuthAlert.mockClear()
   })
 
   it('passes the arguments to usePromise including the retry count', () => {

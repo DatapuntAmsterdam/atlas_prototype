@@ -4,13 +4,13 @@ import { FunctionComponent, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
+import usePromise, { PromiseStatus } from '@amsterdam/use-promise'
 import { FetchPanoramaOptions, getPanoramaThumbnail } from '../../../../api/panorama/thumbnail'
 import { toPanoramaAndPreserveQuery } from '../../../../store/redux-first-router/actions'
 import { getDetailLocation } from '../../../../store/redux-first-router/selectors'
 import { PANO_LAYERS } from '../../../components/PanoramaViewer/PanoramaViewer'
 import pickLinkComponent from '../../../utils/pickLinkComponent'
 import useBuildQueryString from '../../../utils/useBuildQueryString'
-import usePromise, { PromiseStatus } from '../../../utils/usePromise'
 import {
   locationParam,
   mapLayersParam,

@@ -4,13 +4,13 @@ import { FunctionComponent, lazy, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import usePromise, { PromiseStatus } from '@amsterdam/use-promise'
 import { Single as Bouwdossier, getBouwdossierById } from '../../../api/iiif-metadata/bouwdossier'
 import { getFileName, getFileUrl, resetFile } from '../../../shared/ducks/files/files'
 import { isPrintMode } from '../../../shared/ducks/ui/ui'
 import ConstructionFileDetail from '../../components/ConstructionFileDetail/ConstructionFileDetail'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import useDocumentTitle from '../../utils/useDocumentTitle'
-import usePromise, { PromiseStatus } from '../../utils/usePromise'
 
 const ImageViewer = lazy(
   () => import(/* webpackChunkName: "ImageViewer" */ '../../components/ImageViewer/ImageViewer'),
