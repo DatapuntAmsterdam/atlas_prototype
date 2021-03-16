@@ -50,30 +50,30 @@ const ContextMenu: FunctionComponent<ContextMenuProps> = ({
         Printen
       </ContextMenuItem>
       {isImage && (
-        <>
-          <ContextMenuItem
-            disabled={downloadLoading}
-            onClick={() => handleDownload(`${fileUrl}/full/800,/0/default.jpg`, 'klein')}
-            icon={
-              <Icon inline size={24} padding={4}>
-                <Download />
-              </Icon>
-            }
-          >
-            Download klein
-          </ContextMenuItem>
-          <ContextMenuItem
-            disabled={downloadLoading}
-            onClick={() => handleDownload(`${fileUrl}/full/1600,/0/default.jpg`, 'groot')}
-            icon={
-              <Icon inline size={24} padding={4}>
-                <Download />
-              </Icon>
-            }
-          >
-            Download groot
-          </ContextMenuItem>
-        </>
+        <ContextMenuItem
+          disabled={downloadLoading}
+          onClick={() => handleDownload(`${fileUrl}/full/800,/0/default.jpg`, 'klein')}
+          icon={
+            <Icon inline size={24} padding={4}>
+              <Download />
+            </Icon>
+          }
+        >
+          Download klein
+        </ContextMenuItem>
+      )}
+      {isImage && (
+        <ContextMenuItem
+          disabled={downloadLoading}
+          onClick={() => handleDownload(`${fileUrl}/full/1600,/0/default.jpg`, 'groot')}
+          icon={
+            <Icon inline size={24} padding={4}>
+              <Download />
+            </Icon>
+          }
+        >
+          Download groot
+        </ContextMenuItem>
       )}
       <ContextMenuItem
         disabled={downloadLoading}
