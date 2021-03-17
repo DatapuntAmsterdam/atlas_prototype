@@ -67,7 +67,7 @@ const ConstructionFilePage: FunctionComponent = () => {
           onClose={() => history.replace(toConstructionFile(fileId))}
         />
       )}
-      <FileDetails fileId={fileId} file={result.value} data-testid="fileDetails" />
+      {!fileName && <FileDetails fileId={fileId} file={result.value} data-testid="fileDetails" />}
     </>
   )
 }

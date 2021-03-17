@@ -88,14 +88,6 @@ describe('ConstructionFilePage', () => {
     await waitFor(() => expect(getByTestId('errorMessage')).toBeDefined())
   })
 
-  it('renders the file details', async () => {
-    mockedGetBouwdossierById.mockResolvedValue(singleFixture)
-
-    const { getByTestId } = render(renderWithHistory())
-
-    await waitFor(() => expect(getByTestId('fileDetails')).toBeDefined())
-  })
-
   it('renders the file viewer if a file is selected', async () => {
     mockedGetBouwdossierById.mockResolvedValue(singleFixture)
 
@@ -106,5 +98,25 @@ describe('ConstructionFilePage', () => {
     const { getByTestId } = render(<Suspense fallback="">{renderWithHistory(history)}</Suspense>)
 
     await waitFor(() => expect(getByTestId('imageViewer')).toBeDefined())
+  })
+
+  it('renders the file details', async () => {
+    mockedGetBouwdossierById.mockResolvedValue(singleFixture)
+
+    const { getByTestId } = render(renderWithHistory())
+
+    await waitFor(() => expect(getByTestId('fileDetails')).toBeDefined())
+  })
+
+  it('hides the file details if the image viewer is active', async () => {
+    mockedGetBouwdossierById.mockResolvedValue(singleFixture)
+
+    const history = createMemoryHistory({
+      initialEntries: [createPath(toConstructionFile('foo', 'file.png', 'path/to/file.png'))],
+    })
+
+    const { queryByTestId } = render(<Suspense fallback="">{renderWithHistory(history)}</Suspense>)
+
+    await waitFor(() => expect(queryByTestId('fileDetails')).toBeNull())
   })
 })

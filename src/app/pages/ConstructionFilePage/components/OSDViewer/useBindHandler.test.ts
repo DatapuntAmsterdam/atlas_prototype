@@ -12,6 +12,7 @@ describe('useBindHandler', () => {
     const mockAddHandler = jest.fn()
     const fakeViewer = ({
       addHandler: mockAddHandler,
+      removeHandler: () => {},
     } as unknown) as Viewer
 
     const { result } = renderHook(() => useBindHandler('open', fakeViewer))
@@ -25,6 +26,7 @@ describe('useBindHandler', () => {
     const mockAddHandler = jest.fn()
     const fakeViewer = ({
       addHandler: mockAddHandler,
+      removeHandler: () => {},
     } as unknown) as Viewer
 
     renderHook(() => useBindHandler('open', fakeViewer, handler))
