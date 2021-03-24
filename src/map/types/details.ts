@@ -108,9 +108,10 @@ export interface DetailResultItemPaginatedData extends DefaultDetailResultItem {
   toView: (data?: any) => DetailResultItem
 }
 
-export interface DetailResultItemLinkList extends DefaultDetailResultItem {
+export interface DetailResultItemLinkList<T = Link & { id?: string | null }>
+  extends DefaultDetailResultItem {
   type: DetailResultItemType.LinkList
-  links?: Array<Link & { id?: string | null }>
+  links?: Array<T>
 }
 
 export interface DetailResultItemBulletList extends DefaultDetailResultItem {

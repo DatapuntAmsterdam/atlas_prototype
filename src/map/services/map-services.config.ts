@@ -24,6 +24,7 @@ import {
   DetailResultNotification,
   ExtraApiResults,
   InfoBoxProps,
+  InternalLink,
   PotentialApiResult,
 } from '../types/details'
 import adressenNummeraanduiding from './adressen-nummeraanduiding/adressen-nummeraanduiding'
@@ -283,65 +284,78 @@ export const getLocationDefinitionListBlock = (result: any, gridArea: string): D
   }
 }
 
-const getShowInTableBlock = (filters: {
-  key: string
-  value?: string | null
-}): DetailResultItemLinkList[] => [
-  {
-    type: DetailResultItemType.LinkList,
-    title: GLOSSARY.DEFINITIONS.NUMMERAANDUIDING.plural,
-    infoBox: getInfoBox({
-      description: GLOSSARY.DEFINITIONS.NUMMERAANDUIDING.description,
-      url: GLOSSARY.DEFINITIONS.NUMMERAANDUIDING.url,
-      plural: GLOSSARY.DEFINITIONS.NUMMERAANDUIDING.plural,
-    }),
-    links: [
-      {
-        to: {
-          pathname: config[DataSelectionType.BAG].path,
-          search: `${PARAMETERS.VIEW}=volledig&${PARAMETERS.FILTERS}={"${filters.key}":"${filters.value}"}`,
+export const getShowInTableBlock = (
+  filters: {
+    key: string
+    value?: string | null
+  }[],
+): DetailResultItemLinkList<InternalLink>[] => {
+  const filterParamValue = JSON.stringify(
+    Object.fromEntries(filters.map(({ key, value }) => [key, value])),
+  )
+  const search = new URLSearchParams({
+    [PARAMETERS.VIEW]: 'volledig',
+    [PARAMETERS.FILTERS]: filterParamValue,
+  }).toString()
+  const title = 'In tabel weergeven'
+
+  return [
+    {
+      type: DetailResultItemType.LinkList,
+      title: GLOSSARY.DEFINITIONS.NUMMERAANDUIDING.plural,
+      infoBox: getInfoBox({
+        description: GLOSSARY.DEFINITIONS.NUMMERAANDUIDING.description,
+        url: GLOSSARY.DEFINITIONS.NUMMERAANDUIDING.url,
+        plural: GLOSSARY.DEFINITIONS.NUMMERAANDUIDING.plural,
+      }),
+      links: [
+        {
+          to: {
+            pathname: config[DataSelectionType.BAG].path,
+            search,
+          },
+          title,
         },
-        title: 'In tabel weergeven',
-      },
-    ],
-  },
-  {
-    type: DetailResultItemType.LinkList,
-    title: GLOSSARY.DEFINITIONS.VESTIGING.plural,
-    infoBox: getInfoBox({
-      description: GLOSSARY.DEFINITIONS.VESTIGING.description,
-      url: GLOSSARY.DEFINITIONS.VESTIGING.url,
-      plural: GLOSSARY.DEFINITIONS.VESTIGING.plural,
-    }),
-    links: [
-      {
-        to: {
-          pathname: config[DataSelectionType.HR].path,
-          search: `${PARAMETERS.VIEW}=volledig&${PARAMETERS.FILTERS}={"${filters.key}":"${filters.value}"}`,
+      ],
+    },
+    {
+      type: DetailResultItemType.LinkList,
+      title: GLOSSARY.DEFINITIONS.VESTIGING.plural,
+      infoBox: getInfoBox({
+        description: GLOSSARY.DEFINITIONS.VESTIGING.description,
+        url: GLOSSARY.DEFINITIONS.VESTIGING.url,
+        plural: GLOSSARY.DEFINITIONS.VESTIGING.plural,
+      }),
+      links: [
+        {
+          to: {
+            pathname: config[DataSelectionType.HR].path,
+            search,
+          },
+          title,
         },
-        title: 'In tabel weergeven',
-      },
-    ],
-  },
-  {
-    type: DetailResultItemType.LinkList,
-    title: GLOSSARY.DEFINITIONS.OBJECT.plural,
-    infoBox: getInfoBox({
-      description: GLOSSARY.DEFINITIONS.OBJECT.description,
-      url: GLOSSARY.DEFINITIONS.OBJECT.url,
-      plural: GLOSSARY.DEFINITIONS.OBJECT.plural,
-    }),
-    links: [
-      {
-        to: {
-          pathname: config[DataSelectionType.BRK].path,
-          search: `${PARAMETERS.VIEW}=volledig&${PARAMETERS.FILTERS}={"${filters.key}":"${filters.value}"}`,
+      ],
+    },
+    {
+      type: DetailResultItemType.LinkList,
+      title: GLOSSARY.DEFINITIONS.OBJECT.plural,
+      infoBox: getInfoBox({
+        description: GLOSSARY.DEFINITIONS.OBJECT.description,
+        url: GLOSSARY.DEFINITIONS.OBJECT.url,
+        plural: GLOSSARY.DEFINITIONS.OBJECT.plural,
+      }),
+      links: [
+        {
+          to: {
+            pathname: config[DataSelectionType.BRK].path,
+            search,
+          },
+          title,
         },
-        title: 'In tabel weergeven',
-      },
-    ],
-  },
-]
+      ],
+    },
+  ]
+}
 
 const gebiedInBeeldBlock: DetailResultItemLinkList = {
   type: DetailResultItemType.LinkList,
@@ -818,10 +832,13 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             { term: 'Omschrijving', description: result.omschrijving },
           ],
         },
-        ...getShowInTableBlock({
-          key: 'openbare_ruimte',
-          value: result.naam,
-        }),
+        ...getShowInTableBlock([
+          {
+            key: 'openbare_ruimte',
+            value: result.naam,
+          },
+          { key: 'woonplaats', value: result.woonplaats?._display },
+        ]),
       ],
     }),
   },
@@ -1280,10 +1297,12 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         },
         getLocationDefinitionListBlock(result, '2 / 1 / 3 / 2'),
         getPaginatedListBlock(GLOSSARY.DEFINITIONS.BOUWBLOK, result?.bouwblokken?.href),
-        ...getShowInTableBlock({
-          key: 'buurt_naam',
-          value: result.naam,
-        }),
+        ...getShowInTableBlock([
+          {
+            key: 'buurt_naam',
+            value: result.naam,
+          },
+        ]),
         gebiedInBeeldBlock,
       ],
     }),
@@ -1303,10 +1322,12 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             gridArea: '1 / 1 / 1 / 3',
           },
           getLocationDefinitionListBlock(result, '2 / 1 / 3 / 2'),
-          ...getShowInTableBlock({
-            key: 'ggw_naam',
-            value: result.naam,
-          }),
+          ...getShowInTableBlock([
+            {
+              key: 'ggw_naam',
+              value: result.naam,
+            },
+          ]),
           gebiedInBeeldBlock,
           getPaginatedListBlock(GLOSSARY.DEFINITIONS.BUURT, result?.buurten?.href),
         ],
@@ -1350,10 +1371,12 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           GLOSSARY.DEFINITIONS.GEBIEDSGERICHTWERKEN,
           result?.gebiedsgerichtwerken?.href,
         ),
-        ...getShowInTableBlock({
-          key: 'stadsdeel_naam',
-          value: result.naam,
-        }),
+        ...getShowInTableBlock([
+          {
+            key: 'stadsdeel_naam',
+            value: result.naam,
+          },
+        ]),
         gebiedInBeeldBlock,
       ],
     }),
@@ -1384,10 +1407,12 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           },
           getLocationDefinitionListBlock(result, '2 / 1 / 3 / 2'),
           getPaginatedListBlock(GLOSSARY.DEFINITIONS.BUURT, result?.buurten?.href),
-          ...getShowInTableBlock({
-            key: 'buurtcombinatie_naam',
-            value: result.naam,
-          }),
+          ...getShowInTableBlock([
+            {
+              key: 'buurtcombinatie_naam',
+              value: result.naam,
+            },
+          ]),
           gebiedInBeeldBlock,
         ],
       }
@@ -2289,7 +2314,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         items: [
           typedResult.openbareruimtes
             ? getPaginatedListBlock(
-                GLOSSARY.DEFINITIONS.WOONPLAATS,
+                GLOSSARY.DEFINITIONS.OPENBARERUIMTE,
                 `${typedResult.openbareruimtes.href}&_sort=naam&eindGeldigheid[isnull]=true`,
                 {
                   pageSize: 25,
