@@ -25,6 +25,10 @@ const DATA_SELECTION_CONFIG = {
           label: 'Stadsdeel',
         },
         {
+          slug: 'woonplaats',
+          label: 'Woonplaats',
+        },
+        {
           slug: 'ggw_naam',
           label: 'GGW-gebied',
         },
@@ -66,6 +70,10 @@ const DATA_SELECTION_CONFIG = {
           {
             label: 'Postcode',
             variables: ['postcode'],
+          },
+          {
+            label: 'Woonplaats',
+            variables: ['woonplaats'],
           },
           {
             label: 'Stadsdeel',
@@ -196,6 +204,10 @@ const DATA_SELECTION_CONFIG = {
           label: 'Stadsdeel',
         },
         {
+          slug: 'woonplaats',
+          label: 'Woonplaats',
+        },
+        {
           slug: 'ggw_naam',
           label: 'GGW-gebied',
         },
@@ -300,6 +312,10 @@ const DATA_SELECTION_CONFIG = {
         {
           slug: 'stadsdeel_naam',
           label: 'Stadsdeel',
+        },
+        {
+          slug: 'woonplaats',
+          label: 'Woonplaats',
         },
         {
           slug: 'ggw_naam',
