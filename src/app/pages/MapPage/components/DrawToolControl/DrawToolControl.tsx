@@ -1,4 +1,3 @@
-import React from 'react'
 import { DrawToolOpenButton } from '@amsterdam/arm-draw'
 import useParam from '../../../../utils/useParam'
 import { drawToolOpenParam } from '../../query-params'

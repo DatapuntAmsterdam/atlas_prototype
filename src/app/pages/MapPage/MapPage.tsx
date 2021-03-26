@@ -17,7 +17,7 @@ import {
   polylineParam,
   zoomParam,
 } from './query-params'
-import MapPanel from './components/MapPanel/MapPanel'
+import MapPanel from './components/MapPanel'
 import DataSelectionProvider from './components/DrawTool/DataSelectionProvider'
 
 const MapView = styled.div`

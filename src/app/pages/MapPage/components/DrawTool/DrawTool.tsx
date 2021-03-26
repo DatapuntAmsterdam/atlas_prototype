@@ -265,6 +265,7 @@ const DrawTool: FunctionComponent = () => {
 
   return (
     <DrawToolComponent
+      data-testid="drawTool"
       onDrawEnd={updateDrawings}
       onEndInitialItems={attachDataToLayer}
       onDelete={onDeleteDrawing}

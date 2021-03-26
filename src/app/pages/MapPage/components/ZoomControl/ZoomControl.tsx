@@ -1,7 +1,7 @@
+import { FunctionComponent } from 'react'
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Button } from '@amsterdam/asc-ui'
 import { useMapInstance } from '@amsterdam/react-maps'
-import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import Control from '../Control'
 

@@ -1,8 +1,8 @@
 import React, { useContext, useMemo } from 'react'
 import { DrawerControl } from '../DrawerOverlay'
 import LegendControl from '../LegendControl'
-import BaseLayerToggle from '../BaseLayerToggleControl/BaseLayerToggle'
-import DrawToolControl from '../DrawToolControl/DrawToolControl'
+import BaseLayerToggle from '../BaseLayerToggleControl'
+import DrawToolControl from '../DrawToolControl'
 import MapContext from '../../MapContext'
 import ZoomControl from '../ZoomControl'
 
