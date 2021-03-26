@@ -4,8 +4,9 @@ import ParamsRegistry from '../params-registry/paramRegistry'
 
 const preserveUrlParametersMiddleware = () => (next) => (action) => {
   let nextAction = action
+  const path = window.location.pathname
 
-  if (window.location.pathname.includes('kaart')) {
+  if (path.includes('kaart') && !path.includes('kaarten')) {
     return next(nextAction)
   }
   if (nextAction.meta && (nextAction.meta.preserve || nextAction.meta.additionalParams)) {

@@ -33,7 +33,20 @@ describe('Custom Redux Middleware', () => {
     expect(isRouterTypeMock).not.toHaveBeenCalled()
   })
 
-  it('should use the custom middleware when pathname does not includes "kaart"', () => {
+  it('should use the custom middleware when pathname includes "kaarten"', () => {
+    // @ts-ignore
+    window.location = {
+      pathname: '/kaarten/foo/bar',
+      search: '?foo=bar',
+    }
+
+    setQueriesFromStateMiddleware(mockStore)(jest.fn)(action)
+
+    expect(setQueriesFromStateMock).toHaveBeenCalled()
+    expect(isRouterTypeMock).toHaveBeenCalled()
+  })
+
+  it('should use the custom middleware when pathname does not include "kaart"', () => {
     // @ts-ignore
     window.location = {
       pathname: '/data/foo/bar',

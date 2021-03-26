@@ -44,7 +44,19 @@ describe('addMetaToRoutesMiddleware', () => {
     expect(isRouterTypeMock).not.toHaveBeenCalled()
   })
 
-  it('should use the custom middleware when pathname does not includes "kaart"', () => {
+  it('should use the custom middleware when pathname includes "kaarten"', () => {
+    // @ts-ignore
+    window.location = {
+      pathname: '/kaarten/foo/bar',
+      search: '?foo=bar',
+    }
+
+    addMetaToRoutesMiddleware(store)(nextMockAddMetaToRoutes)(actionMock)
+
+    expect(isRouterTypeMock).toHaveBeenCalled()
+  })
+
+  it('should use the custom middleware when pathname does not include "kaart"', () => {
     // @ts-ignore
     window.location = {
       pathname: '/data/foo/bar',
