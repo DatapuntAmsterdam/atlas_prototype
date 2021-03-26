@@ -14,9 +14,12 @@ export default function buildDetailUrl({
   id,
 }: BuildDetailUrlParams): LocationDescriptorObject {
   // TODO: AfterBeta: this statement can be removed
-  const route = window.location.pathname.includes('kaart')
-    ? routing.dataDetail_TEMP.path
-    : routing.dataDetail.path
+  const path = window.location.pathname
+
+  const route =
+    path.includes('kaart') && !path.includes('kaarten')
+      ? routing.dataDetail_TEMP.path
+      : routing.dataDetail.path
 
   return {
     pathname: generatePath(route, { type, subtype, id }),
