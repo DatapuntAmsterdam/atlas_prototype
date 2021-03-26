@@ -1,8 +1,8 @@
 import { fireEvent, render } from '@testing-library/react'
 import DrawResults from './DrawResults'
-import { Overlay } from '../types'
-import withMapContext from '../../../utils/withMapContext'
-import { routing } from '../../../routes'
+import { Overlay } from '../../types'
+import withMapContext from '../../../../utils/withMapContext'
+import { routing } from '../../../../routes'
 
 const pushMock = jest.fn()
 jest.mock('react-router-dom', () => ({

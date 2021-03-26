@@ -4,8 +4,8 @@ import { BaseIconOptions, GeoJSONOptions, Icon, Marker } from 'leaflet'
 import { useContext, useMemo, FunctionComponent } from 'react'
 import ICON_CONFIG from '../../../map/components/leaflet/services/icon-config.constant'
 import MAP_CONFIG from '../../../map/services/map.config'
-import DrawMapVisualization from './draw/DrawMapVisualization'
 import MapContext, { TmsOverlay, WmsOverlay } from './MapContext'
+import DrawMapVisualization from './components/DrawTool/DrawMapVisualization'
 
 const detailGeometryStyle = {
   color: 'red',

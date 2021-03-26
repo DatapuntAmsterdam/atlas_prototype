@@ -1,5 +1,6 @@
 import { ChevronRight } from '@amsterdam/asc-assets'
 import { Button, Icon, styles, themeColor, themeSpacing } from '@amsterdam/asc-ui'
+import { useResizeDetector } from 'react-resize-detector'
 import {
   Children,
   cloneElement,
@@ -16,7 +17,6 @@ import {
 } from 'react'
 import styled, { css } from 'styled-components'
 import useAnimationFrame from '../../../../utils/useAnimationFrame'
-import useObserveSize from '../../../../utils/useObserveSize'
 import Control from '../Control'
 import MapOverlay from '../MapOverlay'
 
@@ -46,14 +46,19 @@ const DrawerMapOverlay = styled(MapOverlay)`
   flex-direction: column;
 `
 
-const ControlsContainer = styled.div<{ mode: DeviceMode }>`
+interface ModeProp {
+  // prefixing mode with $ to prevent prop bleeding through to the DOM
+  $mode: DeviceMode
+}
+
+const ControlsContainer = styled.div<ModeProp>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: ${themeSpacing(4)};
 
-  ${({ mode }) =>
-    isDesktop(mode) &&
+  ${({ $mode }) =>
+    isDesktop($mode) &&
     css`
       flex-direction: column;
       height: 100%;
@@ -61,8 +66,8 @@ const ControlsContainer = styled.div<{ mode: DeviceMode }>`
 `
 
 const OtherControlsContainer = styled(ControlsContainer)`
-  ${({ mode }) =>
-    isDesktop(mode) &&
+  ${({ $mode }) =>
+    isDesktop($mode) &&
     css`
       margin-left: auto;
     `}
@@ -142,7 +147,7 @@ const HandleIcon = styled(ChevronRight)<{ isOpen: boolean }>`
     `}
 `
 
-const DrawerContainer = styled.div<{ mode: DeviceMode; animate: boolean }>`
+const DrawerContainer = styled.div<{ animate: boolean } & ModeProp>`
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -152,8 +157,8 @@ const DrawerContainer = styled.div<{ mode: DeviceMode; animate: boolean }>`
   left: 0;
   will-change: transform;
 
-  ${({ mode }) =>
-    isDesktop(mode) &&
+  ${({ $mode }) =>
+    isDesktop($mode) &&
     css`
       right: initial;
       left: initial;
@@ -167,15 +172,15 @@ const DrawerContainer = styled.div<{ mode: DeviceMode; animate: boolean }>`
     `}
 `
 
-const Drawer = styled.div<{ mode: DeviceMode }>`
+const Drawer = styled.div<ModeProp>`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   min-height: 0;
   pointer-events: all;
 
-  ${({ mode }) =>
-    isDesktop(mode) &&
+  ${({ $mode }) =>
+    isDesktop($mode) &&
     css`
       flex-direction: row-reverse;
     `}
@@ -213,6 +218,8 @@ export interface DrawerOverlayProps {
   onStateChange?: (state: DrawerState) => void
 }
 
+const CONTROLS_PADDING = 32
+
 const DrawerOverlay: FunctionComponent<DrawerOverlayProps> = ({
   children,
   controls,
@@ -227,19 +234,27 @@ const DrawerOverlay: FunctionComponent<DrawerOverlayProps> = ({
   const numChildren = Children.toArray(children).length
 
   const drawerContainerRef = useRef<HTMLDivElement>(null)
-  const drawerContainerSize = useObserveSize(drawerContainerRef)
-  const drawerContainerHeight = drawerContainerSize?.blockSize ?? 0
+  const drawerContainerSize = useResizeDetector({ targetRef: drawerContainerRef })
+  const drawerContainerHeight = drawerContainerSize.height ?? 0
 
   const lockedControlsRef = useRef<HTMLDivElement>(null)
-  const lockedControlsSize = useObserveSize(lockedControlsRef, 0, 16)
-  const lockedControlsWidth = lockedControlsSize?.inlineSize ?? 0
-  const lockedControlsHeight = lockedControlsSize?.blockSize ?? 0
+  const lockedControlsSize = useResizeDetector({ targetRef: lockedControlsRef })
+  const lockedControlsWidth = lockedControlsSize.width
+    ? lockedControlsSize.width + CONTROLS_PADDING
+    : 0
+  const lockedControlsHeight = lockedControlsSize.height
+    ? lockedControlsSize.height + CONTROLS_PADDING
+    : 0
 
   const drawerContentRef = useRef<HTMLDivElement>(null)
 
   const [activePanelElement, setActivePanelElement] = useState<Element | null>(null)
-  const activePanelSize = useObserveSize(activePanelElement)
-  const activePanelWidth = activePanelSize?.inlineSize ?? 0
+  const activePanelSize = useResizeDetector({
+    targetRef: {
+      current: activePanelElement,
+    },
+  })
+  const activePanelWidth = activePanelSize?.width ?? 0
 
   const DrawerHandle = isMobile(mode) ? DrawerHandleMobile : DrawerHandleDesktop
   const requestFrame = useAnimationFrame()
@@ -441,7 +456,7 @@ const DrawerOverlay: FunctionComponent<DrawerOverlayProps> = ({
   return (
     <DrawerMapOverlay>
       {otherControls.length > 0 && (
-        <OtherControlsContainer mode={mode}>
+        <OtherControlsContainer $mode={mode}>
           {otherControls.map((control) => (
             <Fragment key={control.id}>{control.node}</Fragment>
           ))}
@@ -449,17 +464,17 @@ const DrawerOverlay: FunctionComponent<DrawerOverlayProps> = ({
       )}
       <DrawerContainer
         ref={drawerContainerRef}
-        mode={mode}
+        $mode={mode}
         style={drawerContainerStyle}
         animate={!isDragging}
       >
-        <ControlsContainer ref={lockedControlsRef} mode={mode}>
+        <ControlsContainer ref={lockedControlsRef} $mode={mode}>
           {lockedControls.map((control) => (
             <Fragment key={control.id}>{control.node}</Fragment>
           ))}
         </ControlsContainer>
         <Drawer
-          mode={mode}
+          $mode={mode}
           onTouchStart={handleGestureStart}
           onTouchMove={handleGestureMove}
           onTouchEnd={handleGestureEnd}
@@ -468,7 +483,7 @@ const DrawerOverlay: FunctionComponent<DrawerOverlayProps> = ({
           <DrawerHandle
             type="button"
             variant="blank"
-            size={32}
+            size={CONTROLS_PADDING}
             title="Open paneel"
             onClick={handleToggle}
           >

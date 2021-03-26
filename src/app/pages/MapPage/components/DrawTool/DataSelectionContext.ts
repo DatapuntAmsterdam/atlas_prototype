@@ -1,6 +1,6 @@
 import { LatLng } from 'leaflet'
 import { createContext } from 'react'
-import { DataSelectionType } from '../config'
+import { DataSelectionType } from '../../config'
 import { DataSelection, MapData, MapVisualization, PaginationParams } from './DataSelectionProvider'
 
 type DataSelectionContextValues = {
@@ -26,7 +26,7 @@ type DataSelectionContextValues = {
   forbidden: boolean
 }
 
-export default createContext<DataSelectionContextValues>({
+export const dataSelectionInitialValue = {
   fetchData: () => {
     return {} as any
   },
@@ -41,4 +41,8 @@ export default createContext<DataSelectionContextValues>({
   setType: () => {},
   loadingIds: [],
   errorIds: [],
-})
+}
+
+const DataSelectionContext = createContext<DataSelectionContextValues>(dataSelectionInitialValue)
+
+export default DataSelectionContext

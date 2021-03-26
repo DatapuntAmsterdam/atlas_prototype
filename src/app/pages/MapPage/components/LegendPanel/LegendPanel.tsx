@@ -1,14 +1,13 @@
-import { MapPanelContent, MapPanelContentProps } from '@amsterdam/arm-core'
 import { FunctionComponent, useContext, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import MapPanel from '../../../../map/containers/panel/MapPanel'
-import { getUser } from '../../../../shared/ducks/user/user'
-import useParam from '../../../utils/useParam'
-import MapContext from '../MapContext'
-import { mapLayersParam, zoomParam } from '../query-params'
+import MapPanel from '../../../../../map/containers/panel/MapPanel'
+import { getUser } from '../../../../../shared/ducks/user/user'
+import useParam from '../../../../utils/useParam'
+import MapContext from '../../MapContext'
+import { mapLayersParam, zoomParam } from '../../query-params'
 
-const StyledMapPanelContent = styled(MapPanelContent)`
+const MapPanelContent = styled.div`
   overflow: hidden; // This can be removed if the new design for the legend is added
 
   .map-panel {
@@ -32,9 +31,7 @@ const StyledMapPanelContent = styled(MapPanelContent)`
   }
 `
 
-export type LegendPanelProps = Omit<MapPanelContentProps, 'title'>
-
-const LegendPanel: FunctionComponent<LegendPanelProps> = ({ ...otherProps }) => {
+const LegendPanel: FunctionComponent = () => {
   const { panelLayers } = useContext(MapContext)
   const user = useSelector(getUser)
   const [zoomLevel] = useParam(zoomParam)
@@ -46,7 +43,7 @@ const LegendPanel: FunctionComponent<LegendPanelProps> = ({ ...otherProps }) => 
 
   // TODO: Replace 'MapPanel' with something better.
   return (
-    <StyledMapPanelContent title="Legenda" {...otherProps}>
+    <MapPanelContent data-testid="legendPanel">
       {/* @ts-ignore */}
       <MapPanel
         panelLayers={panelLayers}
@@ -63,7 +60,7 @@ const LegendPanel: FunctionComponent<LegendPanelProps> = ({ ...otherProps }) => 
         zoomLevel={zoomLevel}
         user={user}
       />
-    </StyledMapPanelContent>
+    </MapPanelContent>
   )
 }
 

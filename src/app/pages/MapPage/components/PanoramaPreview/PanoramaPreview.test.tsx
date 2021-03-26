@@ -1,11 +1,11 @@
 import { rest } from 'msw'
 import { render, waitFor } from '@testing-library/react'
 import PanoramaPreview from './PanoramaPreview'
-import withAppContext from '../../../utils/withAppContext'
-import joinUrl from '../../../utils/joinUrl'
-import environment from '../../../../environment'
-import { server } from '../../../../../test/server'
-import { mapLayersParam, panoHeadingParam, panoPitchParam } from '../query-params'
+import withAppContext from '../../../../utils/withAppContext'
+import joinUrl from '../../../../utils/joinUrl'
+import environment from '../../../../../environment'
+import { server } from '../../../../../../test/server'
+import { mapLayersParam, panoHeadingParam, panoPitchParam } from '../../query-params'
 
 jest.mock('react-router-dom', () => ({
   // @ts-ignore

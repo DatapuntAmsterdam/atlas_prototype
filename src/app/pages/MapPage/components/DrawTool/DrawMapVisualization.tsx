@@ -1,8 +1,8 @@
 import { createClusterMarkers, MarkerClusterGroup } from '@amsterdam/arm-cluster'
 import { GeoJSON } from '@amsterdam/react-maps'
 import { useContext, FunctionComponent } from 'react'
-import geoJsonConfig from '../../../../map/components/leaflet/services/geo-json-config.constant'
-import { DataSelectionMapVisualizationType } from '../config'
+import geoJsonConfig from '../../../../../map/components/leaflet/services/geo-json-config.constant'
+import { DataSelectionMapVisualizationType } from '../../config'
 import DataSelectionContext from './DataSelectionContext'
 
 const DrawMapVisualization: FunctionComponent = () => {

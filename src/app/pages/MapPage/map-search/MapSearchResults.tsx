@@ -1,4 +1,3 @@
-import { MapPanelContent } from '@amsterdam/arm-core'
 import { Heading, Link, Paragraph, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
@@ -17,8 +16,7 @@ import ShowMore from '../../../components/ShowMore'
 import useParam from '../../../utils/useParam'
 import buildDetailUrl from '../detail/buildDetailUrl'
 import { locationParam } from '../query-params'
-import { Overlay } from '../types'
-import PanoramaPreview from './PanoramaPreview'
+import PanoramaPreview from '../components/PanoramaPreview/PanoramaPreview'
 
 const RESULT_LIMIT = 10
 
@@ -69,58 +67,45 @@ const StyledPanoramaPreview = styled(PanoramaPreview)`
 
 const EXCLUDED_RESULTS = 'vestigingen'
 
-export interface MapSearchPanelProps {
-  currentOverlay: Overlay
-}
-
-const MapSearchResults: FunctionComponent<MapSearchPanelProps> = ({ currentOverlay }) => {
+const MapSearchResults: FunctionComponent = () => {
   const user = useSelector(getUser)
-  const [location, setLocation] = useParam(locationParam)
+  const [location] = useParam(locationParam)
   const factory = () => mapSearch(user, location)
 
   return (
-    <MapPanelContent
-      title="Resultaten"
-      animate
-      stackOrder={currentOverlay === Overlay.Results ? 2 : 1}
-      onClose={() => {
-        setLocation(null)
-      }}
+    <PromiseResult
+      factory={factory}
+      deps={[location, user]}
+      errorMessage="Er is een fout opgetreden bij het laden van dit blok. Zorg dat er een locatie is opgegeven door op de kaart te klikken"
     >
-      <PromiseResult
-        factory={factory}
-        deps={[location, user]}
-        errorMessage="Er is een fout opgetreden bij het laden van dit blok. Zorg dat er een locatie is opgegeven door op de kaart te klikken"
-      >
-        {({ value }) => (
-          <>
-            <CoordinatesText>
-              <strong>Locatie:</strong> {value.location.lat}, {value.location.lng}
-            </CoordinatesText>
-            <StyledPanoramaPreview location={value.location} radius={180} aspect={2.5} />
-            {value.results.length === 0 ? (
-              <Message>Geen resultaten gevonden.</Message>
-            ) : (
-              value.results.map((category) => (
-                <CategoryBlock key={category.type}>
-                  <CategoryHeading as="h2">{formatCategoryTitle(category)}</CategoryHeading>
-                  {renderResultItems(category.results)}
-                  {category.subCategories.map((subCategory) => (
-                    <SubCategoryBlock key={category.type + subCategory.type}>
-                      <CategoryHeading as="h3">{formatCategoryTitle(subCategory)}</CategoryHeading>
-                      {renderResultItems(subCategory.results)}
-                    </SubCategoryBlock>
-                  ))}
-                </CategoryBlock>
-              ))
-            )}
-            {(!user.scopes.includes('HR/R') || !user.scopes.includes('BRK/RS')) && (
-              <StyledAuthAlert excludedResults={EXCLUDED_RESULTS} />
-            )}
-          </>
-        )}
-      </PromiseResult>
-    </MapPanelContent>
+      {({ value }) => (
+        <>
+          <CoordinatesText>
+            <strong>Locatie:</strong> {value.location.lat}, {value.location.lng}
+          </CoordinatesText>
+          <StyledPanoramaPreview location={value.location} radius={180} aspect={2.5} />
+          {value.results.length === 0 ? (
+            <Message>Geen resultaten gevonden.</Message>
+          ) : (
+            value.results.map((category) => (
+              <CategoryBlock key={category.type}>
+                <CategoryHeading as="h2">{formatCategoryTitle(category)}</CategoryHeading>
+                {renderResultItems(category.results)}
+                {category.subCategories.map((subCategory) => (
+                  <SubCategoryBlock key={category.type + subCategory.type}>
+                    <CategoryHeading as="h3">{formatCategoryTitle(subCategory)}</CategoryHeading>
+                    {renderResultItems(subCategory.results)}
+                  </SubCategoryBlock>
+                ))}
+              </CategoryBlock>
+            ))
+          )}
+          {(!user.scopes.includes('HR/R') || !user.scopes.includes('BRK/RS')) && (
+            <StyledAuthAlert excludedResults={EXCLUDED_RESULTS} />
+          )}
+        </>
+      )}
+    </PromiseResult>
   )
 }
 

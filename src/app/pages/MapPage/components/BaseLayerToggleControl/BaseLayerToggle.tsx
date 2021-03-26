@@ -1,8 +1,9 @@
 import { BaseLayerToggle as BaseLayerToggleComponent } from '@amsterdam/arm-core'
-import { useMemo, FunctionComponent } from 'react'
-import { getMapBaseLayers, MapBaseLayer } from '../../../../map/services'
-import useParam from '../../../utils/useParam'
-import { BaseLayer, baseLayerParam } from '../query-params'
+import React, { useMemo, FunctionComponent } from 'react'
+import { getMapBaseLayers, MapBaseLayer } from '../../../../../map/services'
+import useParam from '../../../../utils/useParam'
+import { BaseLayer, baseLayerParam } from '../../query-params'
+import Control from '../Control'
 
 const aerialLayers = getMapBaseLayers()
   .filter(({ category }) => category === 'aerial')
@@ -39,21 +40,23 @@ const BaseLayerToggle: FunctionComponent = () => {
   )
 
   return (
-    <BaseLayerToggleComponent
-      aerialLayers={aerialLayers}
-      topoLayers={topoLayers}
-      aerialDefaultIndex={aerialIndex}
-      topoDefaultIndex={topoIndex}
-      // @ts-ignore
-      activeLayer={
-        activeBaseLayer && aerialIds.indexOf(activeBaseLayer) > topoIds.indexOf(activeBaseLayer)
-          ? 'luchtfoto'
-          : 'topografie'
-      } // TODO: Should take the id instead of the type
-      onChangeLayer={(id) => {
-        setActiveBaseLayer(id as BaseLayer, 'replace')
-      }}
-    />
+    <Control data-testid="baselayerControl">
+      <BaseLayerToggleComponent
+        aerialLayers={aerialLayers}
+        topoLayers={topoLayers}
+        aerialDefaultIndex={aerialIndex}
+        topoDefaultIndex={topoIndex}
+        // @ts-ignore
+        activeLayer={
+          activeBaseLayer && aerialIds.indexOf(activeBaseLayer) > topoIds.indexOf(activeBaseLayer)
+            ? 'luchtfoto'
+            : 'topografie'
+        } // TODO: Should take the id instead of the type
+        onChangeLayer={(id) => {
+          setActiveBaseLayer(id as BaseLayer, 'replace')
+        }}
+      />
+    </Control>
   )
 }
 

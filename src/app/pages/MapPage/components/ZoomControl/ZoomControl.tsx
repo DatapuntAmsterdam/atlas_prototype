@@ -1,7 +1,7 @@
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Button } from '@amsterdam/asc-ui'
 import { useMapInstance } from '@amsterdam/react-maps'
-import { FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import Control from '../Control'
 
@@ -17,7 +17,7 @@ const ZoomControl: FunctionComponent = () => {
   const mapInstance = useMapInstance()
 
   return (
-    <Control>
+    <Control data-testid="zoomControls">
       <ZoomButton
         type="button"
         variant="blank"

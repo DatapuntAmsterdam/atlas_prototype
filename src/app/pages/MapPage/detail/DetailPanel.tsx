@@ -1,8 +1,7 @@
-import { MapPanelContent } from '@amsterdam/arm-core'
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Alert, Button, List, ListItem, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import { Fragment, FunctionComponent, useContext, useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import {
   fetchDetailData,
@@ -24,12 +23,9 @@ import AuthAlert from '../../../components/Alerts/AuthAlert'
 import AuthenticationWrapper from '../../../components/AuthenticationWrapper/AuthenticationWrapper'
 import PromiseResult from '../../../components/PromiseResult/PromiseResult'
 import Spacer from '../../../components/Spacer/Spacer'
-import { routing } from '../../../routes'
 import useAuthScope from '../../../utils/useAuthScope'
-import useBuildQueryString from '../../../utils/useBuildQueryString'
-import PanoramaPreview, { PreviewContainer } from '../map-search/PanoramaPreview'
+import PanoramaPreview, { PreviewContainer } from '../components/PanoramaPreview/PanoramaPreview'
 import MapContext from '../MapContext'
-import { panoFovParam, panoHeadingParam, panoPitchParam } from '../query-params'
 import DetailDefinitionList from './DetailDefinitionList'
 import DetailHeading from './DetailHeading'
 import DetailInfoBox from './DetailInfoBox'
@@ -111,8 +107,6 @@ const DetailPanel: FunctionComponent = () => {
   const { setDetailFeature } = useContext(MapContext)
   const { isUserAuthorized } = useAuthScope()
   const { type, subtype: subType, id } = useParams<DataDetailPageParams>()
-  const history = useHistory()
-  const { buildQueryString } = useBuildQueryString()
 
   async function getDetailData() {
     if (!type) {
@@ -162,23 +156,8 @@ const DetailPanel: FunctionComponent = () => {
     <PromiseResult factory={() => getDetailData()} deps={[]}>
       {({ value }) => (
         <>
-          <MapPanelContent
-            title={value?.data.subTitle || 'Detailweergave'}
-            subTitle={value?.data.title || ''}
-            onClose={() => {
-              history.push({
-                pathname: routing.dataSearchGeo.path,
-                search: buildQueryString([
-                  [panoPitchParam, null],
-                  [panoHeadingParam, null],
-                  [panoFovParam, null],
-                ]),
-              })
-            }}
-          >
-            {/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
-            <RenderDetails details={value} />
-          </MapPanelContent>
+          {/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
+          <RenderDetails details={value} />
         </>
       )}
     </PromiseResult>

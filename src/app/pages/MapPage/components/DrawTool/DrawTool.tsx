@@ -17,12 +17,11 @@ import {
   useState,
 } from 'react'
 import { useHistory } from 'react-router-dom'
-import useParam from '../../../utils/useParam'
-import { drawToolOpenParam, PolyDrawing, polygonParam, polylineParam } from '../query-params'
-import { Overlay } from '../types'
+import useParam from '../../../../utils/useParam'
+import { drawToolOpenParam, PolyDrawing, polygonParam, polylineParam } from '../../query-params'
 import DataSelectionContext from './DataSelectionContext'
-import { routing } from '../../../routes'
-import useBuildQueryString from '../../../utils/useBuildQueryString'
+import { routing } from '../../../../routes'
+import useBuildQueryString from '../../../../utils/useBuildQueryString'
 
 function getTotalDistance(latLngs: LatLng[]) {
   return latLngs.reduce(
@@ -71,11 +70,7 @@ const createPolyLayer = (drawing: PolyDrawing, line = false): PolylineType | Pol
   return polygon
 }
 
-export interface DrawToolProps {
-  setCurrentOverlay: (overlay: Overlay) => void
-}
-
-const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
+const DrawTool: FunctionComponent = () => {
   const {
     fetchData,
     fetchMapVisualization,
@@ -275,9 +270,6 @@ const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
       onDelete={onDeleteDrawing}
       onClose={onClose}
       drawnItems={initialDrawnItems}
-      onDrawStart={() => {
-        setCurrentOverlay(Overlay.Results)
-      }}
       drawnItemsGroup={drawnItemsGroup}
     />
   )

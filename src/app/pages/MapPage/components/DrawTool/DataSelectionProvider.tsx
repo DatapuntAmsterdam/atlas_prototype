@@ -5,9 +5,13 @@ import { LatLng, LatLngTuple } from 'leaflet'
 import { useCallback, useEffect, useState, FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
-import { getUserScopes } from '../../../../shared/ducks/user/user'
-import { fetchWithToken } from '../../../../shared/services/api/api'
-import config, { AuthScope, DataSelectionMapVisualizationType, DataSelectionType } from '../config'
+import { getUserScopes } from '../../../../../shared/ducks/user/user'
+import { fetchWithToken } from '../../../../../shared/services/api/api'
+import config, {
+  AuthScope,
+  DataSelectionMapVisualizationType,
+  DataSelectionType,
+} from '../../config'
 import DataSelectionContext from './DataSelectionContext'
 
 export interface MapData {

@@ -19,7 +19,7 @@ const LegendControl: FunctionComponent<LegendControlProps> = ({ showDesktopVaria
     : { icon: <MapLayers data-testid="mobileIcon" />, size: 32 }
 
   return (
-    <Control>
+    <Control data-testid="legendControl">
       <StyledButton
         type="button"
         variant="blank"

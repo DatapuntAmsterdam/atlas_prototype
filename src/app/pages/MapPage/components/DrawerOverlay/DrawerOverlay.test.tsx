@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
+import { useResizeDetector } from 'react-resize-detector'
 import withAppContext from '../../../../utils/withAppContext'
 import DrawerOverlay, { DeviceMode, isDesktop, isMobile } from './DrawerOverlay'
-import useObserveSize from '../../../../utils/useObserveSize'
 
-jest.mock('../../../../utils/useObserveSize')
+jest.mock('react-resize-detector')
 
 describe('isMobile', () => {
   it('detects a mobile device mode', () => {
@@ -18,11 +18,12 @@ describe('isDesktop', () => {
   })
 })
 
-const mockedUseObserveSize = mocked(useObserveSize)
+const mockedUseObserveSize = mocked(useResizeDetector)
 
 mockedUseObserveSize.mockReturnValue({
-  blockSize: 0,
-  inlineSize: 0,
+  height: 0,
+  width: 0,
+  ref: { current: null },
 })
 
 describe('DrawerOverlay', () => {

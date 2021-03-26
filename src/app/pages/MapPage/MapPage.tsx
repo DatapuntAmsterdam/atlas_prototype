@@ -1,17 +1,12 @@
-import { constants, Map as MapComponent, MapPanelProvider, useStateRef } from '@amsterdam/arm-core'
-import { PositionPerSnapPoint } from '@amsterdam/arm-core/es/components/MapPanel/constants'
-import { hooks } from '@amsterdam/asc-ui'
+import { constants, Map as MapComponent, useStateRef } from '@amsterdam/arm-core'
 import L from 'leaflet'
 import { FunctionComponent, useCallback, useContext, useEffect, useState } from 'react'
 import styled, { createGlobalStyle, css } from 'styled-components'
 import PanoramaViewer from '../../components/PanoramaViewer/PanoramaViewer'
 import useParam from '../../utils/useParam'
-import DataSelectionProvider from './draw/DataSelectionProvider'
 import LeafletLayers from './LeafletLayers'
 import MapContext from './MapContext'
-import MapControls from './MapControls'
 import MapMarkers from './MapMarkers'
-import MapPanelContent from './MapPanelContent'
 import {
   centerParam,
   drawToolOpenParam,
@@ -22,7 +17,8 @@ import {
   polylineParam,
   zoomParam,
 } from './query-params'
-import { Overlay, SnapPoint } from './types'
+import MapPanel from './components/MapPanel/MapPanel'
+import DataSelectionProvider from './components/DrawTool/DataSelectionProvider'
 
 const MapView = styled.div`
   height: 100%;
@@ -54,17 +50,10 @@ const GlobalStyle = createGlobalStyle<{
   }
 `
 
-export const MAP_PANEL_SNAP_POSITIONS: PositionPerSnapPoint = {
-  [SnapPoint.Full]: '480px',
-  [SnapPoint.Halfway]: '480px',
-  [SnapPoint.Closed]: '30px',
-}
-
 const { DEFAULT_AMSTERDAM_MAPS_OPTIONS } = constants
 
 const MapPage: FunctionComponent = () => {
-  const [isLoading, setIsLoading] = useState(false)
-  const [currentOverlay, setCurrentOverlay] = useState(Overlay.None)
+  const [loading, setIsLoading] = useState(false)
   const { panoFullScreen } = useContext(MapContext)
   const [, setMapInstance, mapInstanceRef] = useStateRef<L.Map | null>(null)
   const [center, setCenter] = useParam(centerParam)
@@ -76,8 +65,6 @@ const MapPage: FunctionComponent = () => {
   const [polyline] = useParam(polylineParam)
   const [, setShowDrawTool] = useParam(drawToolOpenParam)
 
-  // TODO: Import 'useMatchMedia' directly once this issue has been resolved: https://github.com/Amsterdam/amsterdam-styled-components/issues/1120
-  const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
   const panoActive = panoHeading !== null && location !== null
 
   // This is necessary to call, because we resize the map dynamically
@@ -129,30 +116,10 @@ const MapPage: FunctionComponent = () => {
       >
         <DataSelectionProvider>
           <LeafletLayers />
-          <MapPanelProvider
-            mapPanelSnapPositions={MAP_PANEL_SNAP_POSITIONS}
-            variant={showDesktopVariant ? 'panel' : 'drawer'}
-            initialPosition={SnapPoint.Closed}
-            topOffset={50}
-          >
-            {panoActive && <PanoramaViewer />}
-            <MapMarkers panoActive={panoActive} />
-            {!panoFullScreen ? (
-              <>
-                <MapControls
-                  setCurrentOverlay={setCurrentOverlay}
-                  currentOverlay={currentOverlay}
-                  showDesktopVariant={showDesktopVariant}
-                  isLoading={isLoading}
-                  panoActive={panoActive}
-                />
-                <MapPanelContent
-                  currentOverlay={currentOverlay}
-                  setCurrentOverlay={setCurrentOverlay}
-                />
-              </>
-            ) : null}
-          </MapPanelProvider>
+
+          {panoActive && <PanoramaViewer />}
+          <MapMarkers panoActive={panoActive} />
+          <MapPanel loading={loading} />
         </DataSelectionProvider>
       </MapComponent>
     </MapView>

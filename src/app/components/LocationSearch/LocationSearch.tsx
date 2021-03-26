@@ -12,7 +12,9 @@ import {
 import { getUser } from '../../../shared/ducks/user/user'
 import AuthScope from '../../../shared/services/api/authScope'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
-import PanoramaPreview, { PreviewContainer } from '../../pages/MapPage/map-search/PanoramaPreview'
+import PanoramaPreview, {
+  PreviewContainer,
+} from '../../pages/MapPage/components/PanoramaPreview/PanoramaPreview'
 import AuthAlert from '../Alerts/AuthAlert'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import ShareBar from '../ShareBar/ShareBar'

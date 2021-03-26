@@ -46,8 +46,6 @@ export interface MapState {
 export interface MapContextProps extends MapState {
   setDetailFeature: (feature: Feature | null) => void
   setShowDrawTool: (showDrawing: boolean) => void
-  getPanelLayers: () => void
-  getMapLayers: () => void
   setPanoFullScreen: (panoFullScreen: boolean) => void
 }
 
@@ -58,11 +56,9 @@ export const initialState: MapContextProps = {
   showDrawTool: false,
   showDrawContent: false,
   detailFeature: null,
+  panoFullScreen: false,
   setDetailFeature: () => {},
   setShowDrawTool: () => {},
-  getPanelLayers: () => {},
-  getMapLayers: () => {},
-  panoFullScreen: false,
   setPanoFullScreen: () => {},
 }
 

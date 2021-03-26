@@ -1,4 +1,4 @@
-import { Alert, Heading, hooks, Link } from '@amsterdam/asc-ui'
+import { Alert, Heading, Link } from '@amsterdam/asc-ui'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Feature } from 'geojson'
 import { FunctionComponent, useEffect, useMemo, useReducer, useState } from 'react'
@@ -53,12 +53,7 @@ const MapContainer: FunctionComponent = ({ children }) => {
   const showDrawContent = !!(polyline || polygon)
   const [showDrawTool, setShowDrawTool] = useState(showDrawContent)
   const [panoFullScreen, setPanoFullScreen] = useParam(panoFullScreenParam)
-  const [isMobile] = hooks.useMatchMedia({ maxBreakpoint: 'tabletM' })
   const user = useSelector(getUser)
-
-  useEffect(() => {
-    setPanoFullScreen(isMobile, 'replace')
-  }, [isMobile, setPanoFullScreen])
 
   const legendLeafletLayers = useMemo(
     () => buildLeafletLayers(activeMapLayers, state.mapLayers, user),
@@ -88,7 +83,7 @@ const MapContainer: FunctionComponent = ({ children }) => {
   }
 
   useEffect(() => {
-    Promise.all([getPanelLayers, getMapLayers])
+    Promise.all([getPanelLayers(), getMapLayers()])
       .then(() => {})
       .catch((error: string) => {
         // eslint-disable-next-line no-console
@@ -102,8 +97,6 @@ const MapContainer: FunctionComponent = ({ children }) => {
         ...state,
         legendLeafletLayers,
         setDetailFeature,
-        getPanelLayers,
-        getMapLayers,
         showDrawTool,
         setShowDrawTool,
         showDrawContent,
