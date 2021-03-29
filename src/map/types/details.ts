@@ -238,8 +238,13 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   pandidentificatie?: string | null
   indicatie_geconstateerd?: string | null
   aanduiding_in_onderzoek?: string | null
+  standplaatsidentificatie?: string | null
+  ligplaatsidentificatie?: string | null
   hoofdadres?: {
     landelijk_id?: string | null
+    _links?: {
+      self?: ApiLink
+    }
   }
   landelijk_id?: string | null
   biz_type?: string | null
@@ -487,5 +492,5 @@ export type ExtraApiResults = {
   brkData?: PotentialApiResult
   verblijfsobjectData?: PotentialApiResult
   rollaagImage?: string
-  garbageContainers?: PotentialApiResult[]
+  garbageContainers?: { _embedded: { bag_object_loopafstand: any[] } }
 }

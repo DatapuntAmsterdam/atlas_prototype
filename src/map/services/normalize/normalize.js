@@ -107,22 +107,18 @@ export const napPeilmerk = (result) => {
   return normalize(result, additionalFields)
 }
 
-export const adressenPand = async (result) => {
-  const garbageContainersResult = await fetchWithToken(
-    `${environment.API_ROOT}v1/huishoudelijkafval/bag_object_loopafstand/`,
-    {
-      format: 'json',
-      bagObjectType: 'pand',
-      bagObjectId: result?.pandidentificatie,
-    },
-  )
-  // eslint-disable-next-line no-underscore-dangle
-  const garbageContainers = garbageContainersResult?._embedded?.bag_object_loopafstand
+export const getGarbageContainers = async (id, type) =>
+  fetchWithToken(`${environment.API_ROOT}v1/huishoudelijkafval/bag_object_loopafstand/`, {
+    format: 'json',
+    bagObjectType: type,
+    bagObjectId: id,
+  })
+
+export const adressenPand = (result) => {
   const additionalFields = {
     statusLevel:
       result.status && !NORMAL_PAND_STATUSSES.includes(result.status) ? 'info' : undefined,
     isNevenadres: !result.hoofdadres,
-    garbageContainers,
     year:
       result.oorspronkelijk_bouwjaar !== `${YEAR_UNKNOWN}`
         ? result.oorspronkelijk_bouwjaar
