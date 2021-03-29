@@ -2,7 +2,7 @@ import { Alert, Paragraph, Row, themeSpacing } from '@amsterdam/asc-ui'
 import { FunctionComponent, lazy, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import usePromise, { PromiseStatus } from '@amsterdam/use-promise'
+import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
 import { getBouwdossierById } from '../../../api/iiif-metadata/bouwdossier'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import { toConstructionFile } from '../../links'
@@ -36,7 +36,7 @@ const ConstructionFilePage: FunctionComponent = () => {
     setDocumentTitle(fileName ? 'Bouwtekening' : false)
   }, [fileName])
 
-  if (result.status === PromiseStatus.Pending) {
+  if (isPending(result)) {
     return (
       <StyledRow>
         <LoadingSpinner data-testid="loadingSpinner" />
@@ -44,7 +44,7 @@ const ConstructionFilePage: FunctionComponent = () => {
     )
   }
 
-  if (result.status === PromiseStatus.Rejected) {
+  if (isRejected(result)) {
     return (
       <Alert level="error" data-testid="errorMessage">
         <Paragraph>

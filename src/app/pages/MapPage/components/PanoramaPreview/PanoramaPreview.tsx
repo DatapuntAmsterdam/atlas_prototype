@@ -1,16 +1,19 @@
 import { Link, perceivedLoading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
+import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
 import { LatLngLiteral } from 'leaflet'
 import { FunctionComponent, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
-import usePromise, { PromiseStatus } from '@amsterdam/use-promise'
 import { FetchPanoramaOptions, getPanoramaThumbnail } from '../../../../../api/panorama/thumbnail'
+import { ForbiddenError } from '../../../../../shared/services/api/customError'
 import { toPanoramaAndPreserveQuery } from '../../../../../store/redux-first-router/actions'
 import { getDetailLocation } from '../../../../../store/redux-first-router/selectors'
+import PanoAlert from '../../../../components/PanoAlert/PanoAlert'
 import { PANO_LAYERS } from '../../../../components/PanoramaViewer/PanoramaViewer'
 import pickLinkComponent from '../../../../utils/pickLinkComponent'
 import useBuildQueryString from '../../../../utils/useBuildQueryString'
+import useParam from '../../../../utils/useParam'
 import {
   locationParam,
   mapLayersParam,
@@ -19,9 +22,6 @@ import {
   panoPitchParam,
   zoomParam,
 } from '../../query-params'
-import useParam from '../../../../utils/useParam'
-import { ForbiddenError } from '../../../../../shared/services/api/customError'
-import PanoAlert from '../../../../components/PanoAlert/PanoAlert'
 
 export interface PanoramaPreviewProps extends FetchPanoramaOptions {
   location: LatLngLiteral
@@ -100,12 +100,13 @@ const PanoramaPreview: FunctionComponent<PanoramaPreviewProps> = ({
   ])
   const legacyReference = useSelector(getDetailLocation)
   const { buildQueryString } = useBuildQueryString()
-  if (result.status === PromiseStatus.Pending) {
+
+  if (isPending(result)) {
     return <PreviewSkeleton />
   }
 
-  if (result.status === PromiseStatus.Rejected) {
-    if (result.error instanceof ForbiddenError) {
+  if (isRejected(result)) {
+    if (result.reason instanceof ForbiddenError) {
       return <PanoAlert />
     }
     return <PreviewMessage>Kan panoramabeeld niet laden.</PreviewMessage>
