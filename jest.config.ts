@@ -1,4 +1,6 @@
-module.exports = {
+import { Config } from '@jest/types'
+
+const config: Config.InitialOptions = {
   preset: 'ts-jest/presets/js-with-ts',
   displayName: 'unit',
   rootDir: './',
@@ -36,3 +38,5 @@ module.exports = {
   testPathIgnorePatterns: ['/modules/', '/node_modules/', '/test/'],
   watchPathIgnorePatterns: ['/modules/'],
 }
+
+export default config
