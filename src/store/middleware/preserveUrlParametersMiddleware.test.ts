@@ -8,10 +8,9 @@ describe('logic of redux middleware for preserving url parameters', () => {
   const action = { type: 'some action', meta: { query: 'someQuery', preserve: true } }
 
   it('should skip when pathname includes "kaart"', () => {
-    const locationSpy = jest.spyOn(window, 'location', 'get').mockReturnValue({
-      ...window.location,
-      ...{ pathname: '/kaart' },
-    })
+    const locationSpy = jest
+      .spyOn(window, 'location', 'get')
+      .mockReturnValue({ pathname: '/kaart' } as Location)
 
     preserveUrlParametersMiddleware()(nextMockPreserveUrlParametersMiddleware)(action)
     expect(nextMockPreserveUrlParametersMiddleware).toHaveBeenCalledWith(action)
@@ -22,10 +21,9 @@ describe('logic of redux middleware for preserving url parameters', () => {
   })
 
   it('should use the custom middleware when pathname includes "kaarten"', () => {
-    const locationSpy = jest.spyOn(window, 'location', 'get').mockReturnValue({
-      ...window.location,
-      ...{ pathname: '/kaarten' },
-    })
+    const locationSpy = jest
+      .spyOn(window, 'location', 'get')
+      .mockReturnValue({ pathname: '/kaarten' } as Location)
 
     preserveUrlParametersMiddleware()(nextMockPreserveUrlParametersMiddleware)(action)
 

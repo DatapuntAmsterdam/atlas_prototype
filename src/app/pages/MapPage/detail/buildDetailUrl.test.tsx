@@ -2,10 +2,9 @@ import buildDetailUrl from './buildDetailUrl'
 
 describe('return detail panel path', () => {
   it('should return a path starting with "/kaart/" when pathname includes "kaart"', () => {
-    const locationSpy = jest.spyOn(window, 'location', 'get').mockReturnValue({
-      ...window.location,
-      ...{ pathname: '/kaart', search: '?foo=bar' },
-    })
+    const locationSpy = jest
+      .spyOn(window, 'location', 'get')
+      .mockReturnValue({ pathname: '/kaart', search: '?foo=bar' } as Location)
 
     const params = {
       type: 'foo',
@@ -22,10 +21,9 @@ describe('return detail panel path', () => {
   })
 
   it('should return a path starting with "/data/" when pathname includes "kaarten"', () => {
-    const locationSpy = jest.spyOn(window, 'location', 'get').mockReturnValue({
-      ...window.location,
-      ...{ pathname: '/kaarten' },
-    })
+    const locationSpy = jest
+      .spyOn(window, 'location', 'get')
+      .mockReturnValue({ pathname: '/kaarten' } as Location)
 
     const params = {
       type: 'foo',

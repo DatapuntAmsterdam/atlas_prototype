@@ -15,10 +15,9 @@ describe('logic of redux middleware for setting queries from state', () => {
   const action = { type: 'some action', meta: { query: 'someQuery', preserve: true } }
 
   it('should skip custom middleware when pathname includes "kaart"', () => {
-    const locationSpy = jest.spyOn(window, 'location', 'get').mockReturnValue({
-      ...window.location,
-      ...{ pathname: '/kaart' },
-    })
+    const locationSpy = jest
+      .spyOn(window, 'location', 'get')
+      .mockReturnValue({ pathname: '/kaart' } as Location)
 
     setQueriesFromStateMiddleware(mockStore)(jest.fn)(action)
 
@@ -29,10 +28,9 @@ describe('logic of redux middleware for setting queries from state', () => {
   })
 
   it('should use custom middleware when pathname includes "kaarten"', () => {
-    const locationSpy = jest.spyOn(window, 'location', 'get').mockReturnValue({
-      ...window.location,
-      ...{ pathname: '/kaarten' },
-    })
+    const locationSpy = jest
+      .spyOn(window, 'location', 'get')
+      .mockReturnValue({ pathname: '/kaarten', search: '?foo=bar' } as Location)
 
     setQueriesFromStateMiddleware(mockStore)(jest.fn)(action)
 
