@@ -1,7 +1,7 @@
 import { LatLngLiteral } from 'leaflet'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import usePromise, { PromiseStatus } from '@amsterdam/use-promise'
+import usePromise, { isFulfilled } from '@amsterdam/use-promise'
 import { getPanoramaThumbnail } from '../../api/panorama/thumbnail'
 import { toPanoramaAndPreserveQuery } from '../../store/redux-first-router/actions'
 import { getDetailLocation } from '../../store/redux-first-router/selectors'
@@ -35,7 +35,7 @@ const useGetLegacyPanoramaPreview = (
   )
   const { buildQueryString } = useBuildQueryString()
 
-  if (panoramaResult.status !== PromiseStatus.Fulfilled) {
+  if (!isFulfilled(panoramaResult)) {
     return {
       linkComponent: 'div',
       link: null,
@@ -43,12 +43,10 @@ const useGetLegacyPanoramaPreview = (
     }
   }
 
-  // @ts-ignore
-  const panoramaUrl = panoramaResult?.value?.url
-
+  const panoramaUrl = panoramaResult.value?.url
   const panoramaLink = buildQueryString<any>([
     [panoPitchParam, 0],
-    [panoHeadingParam, panoramaResult?.value?.heading],
+    [panoHeadingParam, panoramaResult.value?.heading],
     [locationParam, location],
   ])
   const link =
@@ -56,8 +54,8 @@ const useGetLegacyPanoramaPreview = (
       ? `${browserLocation.pathname}?${panoramaLink}`
       : toPanoramaAndPreserveQuery(
           // eslint-disable-next-line camelcase
-          panoramaResult?.value?.pano_id,
-          panoramaResult?.value?.heading,
+          panoramaResult.value?.pano_id,
+          panoramaResult.value?.heading,
           legacyReference,
         )
 

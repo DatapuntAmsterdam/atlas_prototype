@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { Alert, Paragraph } from '@amsterdam/asc-ui'
-import usePromise from '@amsterdam/use-promise'
+import usePromise, { isFulfilled, isRejected } from '@amsterdam/use-promise'
 import PanoramaContainer from './PanoramaContainer'
 import PanoAlert from '../../app/components/PanoAlert/PanoAlert'
 import { ERROR_MESSAGES, ErrorType } from '../../shared/ducks/error/error-message'
@@ -20,12 +20,12 @@ const PanoramaWrapper: FunctionComponent = () => {
     [],
   )
 
-  if (result.status === 'fulfilled') {
+  if (isFulfilled(result)) {
     return <PanoramaContainer />
   }
 
-  if (result.status === 'rejected') {
-    if (result.error instanceof ForbiddenError) {
+  if (isRejected(result)) {
+    if (result.reason instanceof ForbiddenError) {
       return <PanoAlert />
     }
 

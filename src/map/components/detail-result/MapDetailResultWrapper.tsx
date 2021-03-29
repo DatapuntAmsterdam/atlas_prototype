@@ -1,9 +1,9 @@
-import { Heading, Button, Link, themeSpacing, themeColor } from '@amsterdam/asc-ui'
+import { Button, Heading, Link, themeColor, themeSpacing } from '@amsterdam/asc-ui'
+import usePromise, { isRejected } from '@amsterdam/use-promise'
 import { LatLngLiteral } from 'leaflet'
 import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import usePromise from '@amsterdam/use-promise'
 import PanoAlert from '../../../app/components/PanoAlert/PanoAlert'
 import useGetLegacyPanoramaPreview from '../../../app/utils/useGetLegacyPanoramaPreview'
 import Maximize from '../../../shared/assets/icons/icon-maximize.svg'
@@ -80,7 +80,7 @@ const MapDetailResultWrapper: FunctionComponent<MapDetailResultWrapperProps> = (
           </StyledLink>
         </header>
       ) : (
-        result.status === 'rejected' && result.error instanceof ForbiddenError && <PanoAlert />
+        isRejected(result) && result.reason instanceof ForbiddenError && <PanoAlert />
       )}
       <div className="map-detail-result__scroll-wrapper">
         {!user.authenticated && (

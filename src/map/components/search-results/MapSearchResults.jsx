@@ -2,7 +2,7 @@ import { Alert, Button, Heading, Link, themeColor, themeSpacing } from '@amsterd
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import usePromise from '@amsterdam/use-promise'
+import usePromise, { isFulfilled, isRejected } from '@amsterdam/use-promise'
 import PanoAlert from '../../../app/components/PanoAlert/PanoAlert'
 import { getUser } from '../../../shared/ducks/user/user'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
@@ -59,7 +59,7 @@ const MapSearchResults = ({
 
   return (
     <section className="map-search-results">
-      {panoramaUrl && result.status === 'fulfilled' ? (
+      {panoramaUrl && isFulfilled(result) ? (
         <header
           className={`
           map-search-results__header
@@ -87,7 +87,7 @@ const MapSearchResults = ({
           </StyledLink>
         </header>
       ) : (
-        result.status === 'rejected' && result.error instanceof ForbiddenError && <PanoAlert />
+        isRejected(result) && result.reason instanceof ForbiddenError && <PanoAlert />
       )}
 
       <div className="map-search-results__scroll-wrapper">

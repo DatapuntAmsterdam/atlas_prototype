@@ -1,14 +1,10 @@
+import usePromise, { isFulfilled, isPending, PromiseFactoryFn } from '@amsterdam/use-promise'
 import { DependencyList, ReactElement, useState } from 'react'
 import styled from 'styled-components'
-import usePromise, {
-  PromiseFactoryFn,
-  PromiseFulfilledResult,
-  PromiseStatus,
-} from '@amsterdam/use-promise'
+import { AuthError } from '../../../shared/services/api/customError'
 import AuthAlert from '../Alerts/AuthAlert'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
-import { AuthError } from '../../../shared/services/api/customError'
 
 const StyledLoadingSpinner = styled(LoadingSpinner)`
   position: absolute;
@@ -33,20 +29,20 @@ const PromiseResult: <T>(props: PromiseResultProps<T>) => ReactElement | null = 
   const [retryCount, setRetryCount] = useState(0)
   const result = usePromise(factory, [...deps, retryCount])
 
-  if (result.status === PromiseStatus.Fulfilled) {
+  if (isFulfilled(result)) {
     return children(result)
   }
 
-  if (result.status === PromiseStatus.Pending) {
+  if (isPending(result)) {
     return <StyledLoadingSpinner />
   }
 
-  if (result.error instanceof AuthError) {
-    return <AuthAlert data-testid="auth-alert" excludedResults={result.error.message} />
+  if (result.reason instanceof AuthError) {
+    return <AuthAlert data-testid="auth-alert" excludedResults={result.reason.message} />
   }
 
   if (onError) {
-    onError(result.error)
+    onError(result.reason)
   }
 
   return (
