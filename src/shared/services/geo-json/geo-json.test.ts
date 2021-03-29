@@ -1,6 +1,6 @@
 import getCenter from './geo-json'
 
-describe('The geo json service', () => {
+describe('getCenter', () => {
   it('returns the coordinates of a point', () => {
     expect(getCenter({ type: 'Point', coordinates: [1, 2] })).toEqual({
       x: 1,
