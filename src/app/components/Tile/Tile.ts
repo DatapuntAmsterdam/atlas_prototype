@@ -1,6 +1,6 @@
 import { breakpoint, Link, perceivedLoading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import styled, { css } from 'styled-components'
-import environment from '../../../environment'
+import { NOT_FOUND_THUMBNAIL } from '../../../shared/config/constants'
 import getImageFromCms from '../../utils/getImageFromCms'
 import { SizeOnBreakpoint } from '../TileGrid/TileGridStyle'
 import TileLabel from './TileLabel'
@@ -32,7 +32,7 @@ const Tile = styled(Link)<TileProps>`
             ([brkPoint, size]: [any, any]) => css`
               background-image: url(${backgroundImage
                 ? getImageFromCms(backgroundImage, 400, 300)
-                : `${environment.ROOT}assets/images/not_found_thumbnail.jpg`});
+                : NOT_FOUND_THUMBNAIL});
               @media screen and ${breakpoint('min-width', brkPoint)} {
                 background-image: url(${backgroundImage
                   ? getImageFromCms(
@@ -40,7 +40,7 @@ const Tile = styled(Link)<TileProps>`
                       size[1] === 2 ? 600 : 300,
                       size[0] === 2 ? 600 : 300,
                     )
-                  : `${environment.ROOT}assets/images/not_found_thumbnail.jpg`});
+                  : NOT_FOUND_THUMBNAIL});
               }
             `,
           )}

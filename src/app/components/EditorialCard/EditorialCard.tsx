@@ -14,11 +14,10 @@ import {
 import { FunctionComponent } from 'react'
 import styled, { css } from 'styled-components'
 import { SpecialType } from '../../../shared/config/cms.config'
+import { NOT_FOUND_THUMBNAIL } from '../../../shared/config/constants'
 import getContentTypeLabel from '../../utils/getContentTypeLabel'
 import getImageFromCms, { Resize } from '../../utils/getImageFromCms'
 import { CMSResultItem } from '../../utils/useFromCMS'
-
-const notFoundImage = '/assets/images/not_found_thumbnail.jpg'
 
 const getImageSize = (image: string, resize: Resize, imageSize: number) => {
   const small = Math.round(imageSize * 0.5)
@@ -92,7 +91,11 @@ const CustomCardMedia: FunctionComponent<CardMediaProps> = ({
               imageIsVertical ? imageDimensions[1] : imageDimensions[0],
             )
           : {})}
-        src={image ? getImageFromCms(image, imageDimensions[0], imageDimensions[1]) : notFoundImage}
+        src={
+          image
+            ? getImageFromCms(image, imageDimensions[0], imageDimensions[1])
+            : NOT_FOUND_THUMBNAIL
+        }
         square
       />
     </StyledCardMedia>

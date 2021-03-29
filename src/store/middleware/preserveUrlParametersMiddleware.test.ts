@@ -1,38 +1,37 @@
-import preserveUrlParametersMiddleware from './preserveUrlParametersMiddleware'
+import { mocked } from 'ts-jest/utils'
 import paramsRegistry from '../params-registry'
+import isIgnoredPath from './isIgnoredPath'
+import preserveUrlParametersMiddleware from './preserveUrlParametersMiddleware'
 
-describe('logic of redux middleware for preserving url parameters', () => {
+jest.mock('./isIgnoredPath')
+
+const isIgnoredPathMock = mocked(isIgnoredPath)
+
+describe('preserveUrlParametersMiddleware', () => {
   const getParametersForRouteMock = jest.spyOn(paramsRegistry, 'getParametersForRoute')
-
   const nextMockPreserveUrlParametersMiddleware = jest.fn()
   const action = { type: 'some action', meta: { query: 'someQuery', preserve: true } }
 
-  it('should skip when pathname includes "kaart"', () => {
-    const locationSpy = jest
-      .spyOn(window, 'location', 'get')
-      .mockReturnValue({ pathname: '/kaart' } as Location)
+  beforeEach(() => {
+    isIgnoredPathMock.mockReturnValue(false)
+  })
+
+  afterEach(() => {
+    isIgnoredPathMock.mockClear()
+  })
+
+  it('skips ignored paths', () => {
+    isIgnoredPathMock.mockReturnValue(true)
 
     preserveUrlParametersMiddleware()(nextMockPreserveUrlParametersMiddleware)(action)
+
     expect(nextMockPreserveUrlParametersMiddleware).toHaveBeenCalledWith(action)
-
     expect(getParametersForRouteMock).not.toHaveBeenCalled()
-
-    locationSpy.mockRestore()
   })
 
-  it('should use the custom middleware when pathname includes "kaarten"', () => {
-    const locationSpy = jest
-      .spyOn(window, 'location', 'get')
-      .mockReturnValue({ pathname: '/kaarten' } as Location)
+  it('uses the middleware for other paths', () => {
+    isIgnoredPathMock.mockReturnValue(false)
 
-    preserveUrlParametersMiddleware()(nextMockPreserveUrlParametersMiddleware)(action)
-
-    expect(getParametersForRouteMock).toHaveBeenCalled()
-
-    locationSpy.mockRestore()
-  })
-
-  it('should use the custom middleware when pathname does not include "kaart"', () => {
     preserveUrlParametersMiddleware()(nextMockPreserveUrlParametersMiddleware)(action)
 
     expect(getParametersForRouteMock).toHaveBeenCalled()

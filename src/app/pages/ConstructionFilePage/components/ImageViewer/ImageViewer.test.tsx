@@ -1,16 +1,22 @@
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { readFileSync } from 'fs'
 import { Viewer, ViewerEvent } from 'openseadragon'
 import { useEffect } from 'react'
 import { mocked } from 'ts-jest/utils'
-import { getAccessToken } from '../../../../../shared/services/auth/auth-legacy'
+import path from 'path'
+import { rest, server } from '../../../../../../test/server'
+import environment from '../../../../../environment'
+import { getAccessToken } from '../../../../../shared/services/auth/auth'
+import joinUrl from '../../../../utils/joinUrl'
 import useDownload from '../../../../utils/useDownload'
 import withAppContext from '../../../../utils/withAppContext'
+import { AuthTokenProvider } from '../../AuthTokenContext'
 import OSDViewer from '../OSDViewer'
 import ImageViewer from './ImageViewer'
 
 jest.mock('@datapunt/matomo-tracker-react')
-jest.mock('../../../../../shared/services/auth/auth-legacy')
+jest.mock('../../../../../shared/services/auth/auth')
 jest.mock('../../../../utils/useDownload')
 jest.mock('../OSDViewer')
 
@@ -18,6 +24,10 @@ const mockedUseMatomo = mocked(useMatomo)
 const mockedGetAccessToken = mocked(getAccessToken)
 const mockedUseDownload = mocked(useDownload)
 const mockedOSDViewer = mocked(OSDViewer)
+
+const FILE_NAME = 'file.png'
+const FILE_URL = joinUrl([environment.IIIF_ROOT, FILE_NAME])
+const INFO_FILE_URL = joinUrl([FILE_URL, 'info.json'])
 
 describe('ImageViewer', () => {
   const IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif']
@@ -29,6 +39,14 @@ describe('ImageViewer', () => {
     mockedOSDViewer.mockImplementation(
       ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => <div {...otherProps} />,
     )
+
+    server.use(
+      rest.get(INFO_FILE_URL, (request, response, context) => {
+        const fakeFile = readFileSync(path.resolve(__dirname, './fakeinfofile.json'))
+
+        return response(context.json(JSON.parse(fakeFile.toString())))
+      }),
+    )
   })
 
   afterEach(() => {
@@ -38,118 +56,135 @@ describe('ImageViewer', () => {
     mockedOSDViewer.mockReset()
   })
 
-  it('renders the viewer', () => {
-    const { getByTestId } = render(
+  it('renders the viewer', async () => {
+    render(
       withAppContext(
-        <ImageViewer
-          fileName="filename"
-          title="Some file"
-          fileUrl="/somefile/url"
-          onClose={() => {}}
-        />,
-      ),
-    )
-
-    expect(getByTestId('imageViewer')).toBeDefined()
-  })
-
-  it('renders an error message if the image cannot be opened', () => {
-    mockedOSDViewer.mockImplementation(
-      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
-        useEffect(() => {
-          onOpenFailed?.({} as ViewerEvent)
-        }, [])
-
-        return <div {...otherProps} />
-      },
-    )
-
-    const { getByTestId } = render(
-      withAppContext(
-        <ImageViewer
-          fileName="filename"
-          title="Some file"
-          fileUrl="/somefile/url"
-          onClose={() => {}}
-        />,
-      ),
-    )
-
-    expect(getByTestId('errorMessage')).toBeDefined()
-  })
-
-  it('renders the correct error message if the file is an image', () => {
-    mockedOSDViewer.mockImplementation(
-      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
-        useEffect(() => {
-          onOpenFailed?.({} as ViewerEvent)
-        }, [])
-
-        return <div {...otherProps} />
-      },
-    )
-
-    const { getByText } = render(
-      withAppContext(
-        <ImageViewer
-          fileName="filename.png"
-          title="Some file"
-          fileUrl="/somefile/url"
-          onClose={() => {}}
-        />,
-      ),
-    )
-
-    expect(getByText('Er is een fout opgetreden bij het laden van dit bestand.')).toBeDefined()
-  })
-
-  it('renders the correct error message if the file is not an image', () => {
-    mockedOSDViewer.mockImplementation(
-      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
-        useEffect(() => {
-          onOpenFailed?.({} as ViewerEvent)
-        }, [])
-
-        return <div {...otherProps} />
-      },
-    )
-
-    const { getByText } = render(
-      withAppContext(
-        <ImageViewer
-          fileName="filename.foobar"
-          title="Some file"
-          fileUrl="/somefile/url"
-          onClose={() => {}}
-        />,
-      ),
-    )
-
-    expect(
-      getByText('Dit bestandsformaat kan niet worden weergegeven op deze pagina.'),
-    ).toBeDefined()
-  })
-
-  it('reloads the page if the error button is clicked when viewing an image', () => {
-    mockedOSDViewer.mockImplementation(
-      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
-        useEffect(() => {
-          onOpenFailed?.({} as ViewerEvent)
-        }, [])
-
-        return <div {...otherProps} />
-      },
-    )
-
-    IMAGE_EXTENSIONS.forEach((extension) => {
-      const { getByText, unmount } = render(
-        withAppContext(
+        <AuthTokenProvider>
           <ImageViewer
-            fileName={`filename.${extension}`}
+            fileName={FILE_NAME}
             title="Some file"
-            fileUrl="/somefile/url"
+            fileUrl={FILE_URL}
             onClose={() => {}}
-          />,
+          />
+        </AuthTokenProvider>,
+      ),
+    )
+
+    await waitFor(() => expect(screen.getByTestId('imageViewer')).toBeDefined())
+  })
+
+  it('renders an error message if the image cannot be opened', async () => {
+    mockedOSDViewer.mockImplementation(
+      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
+        useEffect(() => {
+          onOpenFailed?.({} as ViewerEvent)
+        }, [])
+
+        return <div {...otherProps} />
+      },
+    )
+
+    render(
+      withAppContext(
+        <AuthTokenProvider>
+          <ImageViewer
+            fileName={FILE_NAME}
+            title="Some file"
+            fileUrl={FILE_URL}
+            onClose={() => {}}
+          />
+        </AuthTokenProvider>,
+      ),
+    )
+
+    await waitFor(() => expect(screen.getByTestId('errorMessage')).toBeDefined())
+  })
+
+  it('renders the correct error message if the file is an image', async () => {
+    mockedOSDViewer.mockImplementation(
+      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
+        useEffect(() => {
+          onOpenFailed?.({} as ViewerEvent)
+        }, [])
+
+        return <div {...otherProps} />
+      },
+    )
+
+    render(
+      withAppContext(
+        <AuthTokenProvider>
+          <ImageViewer
+            fileName="filename.png"
+            title="Some file"
+            fileUrl={FILE_URL}
+            onClose={() => {}}
+          />
+        </AuthTokenProvider>,
+      ),
+    )
+
+    await waitFor(() =>
+      expect(
+        screen.getByText('Er is een fout opgetreden bij het laden van dit bestand.'),
+      ).toBeDefined(),
+    )
+  })
+
+  it('renders the correct error message if the file is not an image', async () => {
+    mockedOSDViewer.mockImplementation(
+      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
+        useEffect(() => {
+          onOpenFailed?.({} as ViewerEvent)
+        }, [])
+
+        return <div {...otherProps} />
+      },
+    )
+
+    render(
+      withAppContext(
+        <AuthTokenProvider>
+          <ImageViewer
+            fileName="filename.foobar"
+            title="Some file"
+            fileUrl={FILE_URL}
+            onClose={() => {}}
+          />
+        </AuthTokenProvider>,
+      ),
+    )
+
+    await waitFor(() =>
+      expect(
+        screen.getByText('Dit bestandsformaat kan niet worden weergegeven op deze pagina.'),
+      ).toBeDefined(),
+    )
+  })
+
+  it('reloads the page if the error button is clicked when viewing an image', async () => {
+    mockedOSDViewer.mockImplementation(
+      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
+        useEffect(() => {
+          onOpenFailed?.({} as ViewerEvent)
+        }, [])
+
+        return <div {...otherProps} />
+      },
+    )
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const extension of IMAGE_EXTENSIONS) {
+      const { unmount } = render(
+        withAppContext(
+          <AuthTokenProvider>
+            <ImageViewer
+              fileName={`filename.${extension}`}
+              title="Some file"
+              fileUrl={FILE_URL}
+              onClose={() => {}}
+            />
+          </AuthTokenProvider>,
         ),
       )
 
@@ -161,15 +196,16 @@ describe('ImageViewer', () => {
         value: { reload: reloadMock },
       })
 
-      fireEvent.click(getByText('Probeer opnieuw'))
+      // eslint-disable-next-line no-await-in-loop
+      await waitFor(() => fireEvent.click(screen.getByText('Probeer opnieuw')))
       expect(reloadMock).toHaveBeenCalled()
 
       window.location = originalLocation
       unmount()
-    })
+    }
   })
 
-  it('downloads the source file if the error button is clicked when viewing a file that is not an image', () => {
+  it('downloads the source file if the error button is clicked when viewing a file that is not an image', async () => {
     const mockedTrackEvent = jest.fn()
     const mockedDownloadFile = jest.fn()
 
@@ -185,18 +221,20 @@ describe('ImageViewer', () => {
       },
     )
 
-    const { getByText } = render(
+    render(
       withAppContext(
-        <ImageViewer
-          fileName="filename.foobar"
-          title="Some file"
-          fileUrl="/somefile/url/filename.foobar"
-          onClose={() => {}}
-        />,
+        <AuthTokenProvider>
+          <ImageViewer
+            fileName="filename.foobar"
+            title="Some file"
+            fileUrl="/somefile/url/filename.foobar"
+            onClose={() => {}}
+          />
+        </AuthTokenProvider>,
       ),
     )
 
-    fireEvent.click(getByText('Download bronbestand'))
+    await waitFor(() => fireEvent.click(screen.getByText('Download bronbestand')))
 
     expect(mockedDownloadFile).toHaveBeenCalledWith(
       `/somefile/url/filename.foobar?source_file=true`,
@@ -211,7 +249,7 @@ describe('ImageViewer', () => {
     })
   })
 
-  it('renders the viewer controls without zoom and context menu if the image cannot be opened', () => {
+  it('renders the viewer controls without zoom and context menu if the image cannot be opened', async () => {
     mockedOSDViewer.mockImplementation(
       ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
         useEffect(() => {
@@ -222,23 +260,27 @@ describe('ImageViewer', () => {
       },
     )
 
-    const { getByTestId, queryByTestId } = render(
+    render(
       withAppContext(
-        <ImageViewer
-          fileName="filename.png"
-          title="Some file"
-          fileUrl="/somefile/url"
-          onClose={() => {}}
-        />,
+        <AuthTokenProvider>
+          <ImageViewer
+            fileName="filename.png"
+            title="Some file"
+            fileUrl={FILE_URL}
+            onClose={() => {}}
+          />
+        </AuthTokenProvider>,
       ),
     )
 
-    expect(getByTestId('viewerControls')).toBeDefined()
-    expect(queryByTestId('zoomControls')).toBeNull()
-    expect(queryByTestId('contextMenu')).toBeNull()
+    await waitFor(() => {
+      expect(screen.getByTestId('viewerControls')).toBeDefined()
+      expect(screen.queryByTestId('zoomControls')).toBeNull()
+      expect(screen.queryByTestId('contextMenu')).toBeNull()
+    })
   })
 
-  it('renders the viewer controls when the image is opened', () => {
+  it('renders the viewer controls when the image is opened', async () => {
     mockedOSDViewer.mockImplementation(
       ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
         useEffect(() => {
@@ -249,23 +291,27 @@ describe('ImageViewer', () => {
       },
     )
 
-    const { getByTestId } = render(
+    render(
       withAppContext(
-        <ImageViewer
-          fileName="filename.png"
-          title="Some file"
-          fileUrl="/somefile/url"
-          onClose={() => {}}
-        />,
+        <AuthTokenProvider>
+          <ImageViewer
+            fileName="filename.png"
+            title="Some file"
+            fileUrl={FILE_URL}
+            onClose={() => {}}
+          />
+        </AuthTokenProvider>,
       ),
     )
 
-    expect(getByTestId('viewerControls')).toBeDefined()
-    expect(getByTestId('zoomControls')).toBeDefined()
-    expect(getByTestId('contextMenu')).toBeDefined()
+    await waitFor(() => {
+      expect(screen.getByTestId('viewerControls')).toBeDefined()
+      expect(screen.getByTestId('zoomControls')).toBeDefined()
+      expect(screen.getByTestId('contextMenu')).toBeDefined()
+    })
   })
 
-  it('calls the onClose prop when the viewer is closed', () => {
+  it('calls the onClose prop when the viewer is closed', async () => {
     mockedOSDViewer.mockImplementation(
       ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
         useEffect(() => {
@@ -277,22 +323,27 @@ describe('ImageViewer', () => {
     )
 
     const onClose = jest.fn()
-    const { getByTitle } = render(
+
+    render(
       withAppContext(
-        <ImageViewer
-          fileName="filename.png"
-          title="Some file"
-          fileUrl="/somefile/url"
-          onClose={onClose}
-        />,
+        <AuthTokenProvider>
+          <ImageViewer
+            fileName="filename.png"
+            title="Some file"
+            fileUrl={FILE_URL}
+            onClose={onClose}
+          />
+        </AuthTokenProvider>,
       ),
     )
 
-    fireEvent.click(getByTitle('Bestand sluiten'))
-    expect(onClose).toHaveBeenCalled()
+    await waitFor(() => {
+      fireEvent.click(screen.getByTitle('Bestand sluiten'))
+      expect(onClose).toHaveBeenCalled()
+    })
   })
 
-  it('zooms in if the zoom button is pressed', () => {
+  it('zooms in if the zoom button is pressed', async () => {
     const zoomBy = jest.fn()
 
     mockedOSDViewer.mockImplementation(
@@ -306,22 +357,26 @@ describe('ImageViewer', () => {
       },
     )
 
-    const { getByTitle } = render(
+    render(
       withAppContext(
-        <ImageViewer
-          fileName="filename.png"
-          title="Some file"
-          fileUrl="/somefile/url"
-          onClose={() => {}}
-        />,
+        <AuthTokenProvider>
+          <ImageViewer
+            fileName="filename.png"
+            title="Some file"
+            fileUrl={FILE_URL}
+            onClose={() => {}}
+          />
+        </AuthTokenProvider>,
       ),
     )
 
-    fireEvent.click(getByTitle('Inzoomen'))
-    expect(zoomBy).toHaveBeenCalledWith(1.5)
+    await waitFor(() => {
+      fireEvent.click(screen.getByTitle('Inzoomen'))
+      expect(zoomBy).toHaveBeenCalledWith(1.5)
+    })
   })
 
-  it('zooms out if the zoom button is pressed', () => {
+  it('zooms out if the zoom button is pressed', async () => {
     const zoomBy = jest.fn()
 
     mockedOSDViewer.mockImplementation(
@@ -335,18 +390,22 @@ describe('ImageViewer', () => {
       },
     )
 
-    const { getByTitle } = render(
+    render(
       withAppContext(
-        <ImageViewer
-          fileName="filename.png"
-          title="Some file"
-          fileUrl="/somefile/url"
-          onClose={() => {}}
-        />,
+        <AuthTokenProvider>
+          <ImageViewer
+            fileName="filename.png"
+            title="Some file"
+            fileUrl={FILE_URL}
+            onClose={() => {}}
+          />
+        </AuthTokenProvider>,
       ),
     )
 
-    fireEvent.click(getByTitle('Uitzoomen'))
-    expect(zoomBy).toHaveBeenCalledWith(0.5)
+    await waitFor(() => {
+      fireEvent.click(screen.getByTitle('Uitzoomen'))
+      expect(zoomBy).toHaveBeenCalledWith(0.5)
+    })
   })
 })

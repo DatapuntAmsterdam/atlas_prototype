@@ -1,7 +1,13 @@
+import { mocked } from 'ts-jest/utils'
 import addMetaToRoutesMiddleware from './addMetaToRoutesMiddleware'
 import paramsRegistry from '../params-registry'
+import isIgnoredPath from './isIgnoredPath'
 
-describe('logic of redux middleware for adding metadata to routes', () => {
+jest.mock('./isIgnoredPath')
+
+const isIgnoredPathMock = mocked(isIgnoredPath)
+
+describe('addMetaToRoutesMiddleware', () => {
   let next
   let isRouterTypeMock
   const store = {
@@ -22,35 +28,29 @@ describe('logic of redux middleware for adding metadata to routes', () => {
     next = jest.fn()
   })
 
+  beforeEach(() => {
+    isIgnoredPathMock.mockReturnValue(false)
+  })
+
+  afterEach(() => {
+    isIgnoredPathMock.mockClear()
+  })
+
   const nextMockAddMetaToRoutes = jest.fn()
   const actionMock = { type: 'some action', meta: { query: 'someQuery', preserve: true } }
 
-  it('should skip custom middleware when pathname includes "kaart"', () => {
-    const locationSpy = jest
-      .spyOn(window, 'location', 'get')
-      .mockReturnValue({ ...{ pathname: '/kaart' } })
+  it('skips ignored paths', () => {
+    isIgnoredPathMock.mockReturnValue(true)
 
     addMetaToRoutesMiddleware(store)(nextMockAddMetaToRoutes)(actionMock)
+
     expect(nextMockAddMetaToRoutes).toHaveBeenCalledWith(actionMock)
-
     expect(isRouterTypeMock).not.toHaveBeenCalled()
-
-    locationSpy.mockRestore()
   })
 
-  it('should use custom middleware when pathname includes "kaarten"', () => {
-    const locationSpy = jest
-      .spyOn(window, 'location', 'get')
-      .mockReturnValue({ ...{ pathname: '/kaarten' } })
+  it('handles normal paths', () => {
+    isIgnoredPathMock.mockReturnValue(false)
 
-    addMetaToRoutesMiddleware(store)(nextMockAddMetaToRoutes)(actionMock)
-
-    expect(isRouterTypeMock).toHaveBeenCalled()
-
-    locationSpy.mockRestore()
-  })
-
-  it('should use the custom middleware when pathname does not include "kaart"', () => {
     addMetaToRoutesMiddleware(store)(nextMockAddMetaToRoutes)(actionMock)
 
     expect(isRouterTypeMock).toHaveBeenCalled()

@@ -1,18 +1,21 @@
 /* eslint-disable no-nested-ternary */
 import { Close, Download, Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Button, themeColor } from '@amsterdam/asc-ui'
+import usePromise, { isFulfilled, isRejected } from '@amsterdam/use-promise'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { Options, Viewer } from 'openseadragon'
-import { FunctionComponent, useMemo, useState } from 'react'
+import { IIIFTileSource, Options, Viewer } from 'openseadragon'
+import { FunctionComponent, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled, { css } from 'styled-components'
 import { isPrintMode } from '../../../../../shared/ducks/ui/ui'
-import { getAccessToken } from '../../../../../shared/services/auth/auth-legacy'
+import { fetchWithToken } from '../../../../../shared/services/api/api'
+import { getAccessToken } from '../../../../../shared/services/auth/auth'
 import ErrorMessage from '../../../../components/ErrorMessage/ErrorMessage'
 import useDownload from '../../../../utils/useDownload'
+import { useAuthToken } from '../../AuthTokenContext'
+import ContextMenu from '../ContextMenu'
 import OSDViewer from '../OSDViewer'
 import ViewerControls from '../ViewerControls'
-import ContextMenu from '../ContextMenu'
 
 const ImageViewerContainer = styled(OSDViewer)<{ $printMode: boolean }>`
   background-color: ${themeColor('tint', 'level5')};
@@ -45,12 +48,29 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
   const { trackEvent } = useMatomo()
   const [downloadLoading, downloadFile] = useDownload()
   const printMode = useSelector(isPrintMode)
-  const accessToken = useSelector(getAccessToken)
+  const accessToken = getAccessToken()
+  const headers = accessToken.length > 0 ? { Authorization: `Bearer ${accessToken}` } : undefined
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [viewer, setViewer] = useState<Viewer>()
-  const viewerOptions = useMemo<Options>(
-    () => ({
+  const fileExtension = fileName.split('.').pop()
+  const isImage = !!fileExtension?.toLowerCase().match(/(jpg|jpeg|png|gif)/)
+  const token = useAuthToken()
+  const tokenQueryString = useMemo(
+    () => (token ? `?${new URLSearchParams({ auth: token }).toString()}` : ''),
+    [token],
+  )
+
+  async function fetchViewerOptions(): Promise<Options> {
+    const tileSourceOptions = await fetchWithToken(`${fileUrl}/info.json${tokenQueryString}`)
+    const tileSource = new IIIFTileSource(tileSourceOptions)
+
+    // Monkey patch the 'getTileUrl' method to return the URL including the token.
+    tileSource.getTileUrl = function getTileUrlWithToken(...args) {
+      return IIIFTileSource.prototype.getTileUrl.call(this, ...args) + tokenQueryString
+    }
+
+    return {
       preserveViewport: true,
       visibilityRatio: 1.0,
       minZoomLevel: 0,
@@ -59,16 +79,19 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
       showNavigationControl: false,
       showSequenceControl: false,
       loadTilesWithAjax: true,
-      ajaxHeaders: {
-        authorization: `Bearer ${accessToken || ''}`,
-      },
-      tileSources: [`${fileUrl}/info.json`],
-    }),
-    [],
-  )
+      ajaxHeaders: headers,
+      tileSources: [tileSource],
+    }
+  }
 
-  const fileExtension = fileName.split('.').pop()
-  const isImage = !!fileExtension?.toLowerCase().match(/(jpg|jpeg|png|gif)/)
+  const viewerOptions = usePromise(() => fetchViewerOptions(), [])
+
+  // Show an error if the viewer options could not be retrieved.
+  useEffect(() => {
+    if (isRejected(viewerOptions)) {
+      setError(true)
+    }
+  }, [viewerOptions.status])
 
   function zoomIn() {
     viewer?.viewport.zoomBy(1.5)
@@ -79,16 +102,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
   }
 
   function handleDownload(imageUrl: string, size: string) {
-    downloadFile(
-      imageUrl,
-      {
-        method: 'get',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-      fileName,
-    )
+    downloadFile(imageUrl + tokenQueryString, { method: 'get', headers }, fileName)
 
     trackEvent({
       category: 'download-bouwtekening',
@@ -99,17 +113,19 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
 
   return (
     <>
-      <ImageViewerContainer
-        options={viewerOptions}
-        $printMode={printMode}
-        onInit={setViewer}
-        onOpen={() => setLoading(false)}
-        onOpenFailed={() => {
-          setLoading(false)
-          setError(true)
-        }}
-        data-testid="imageViewer"
-      />
+      {isFulfilled(viewerOptions) && (
+        <ImageViewerContainer
+          options={viewerOptions.value}
+          $printMode={printMode}
+          onInit={setViewer}
+          onOpen={() => setLoading(false)}
+          onOpenFailed={() => {
+            setLoading(false)
+            setError(true)
+          }}
+          data-testid="imageViewer"
+        />
+      )}
 
       {error && (
         <ErrorMessage

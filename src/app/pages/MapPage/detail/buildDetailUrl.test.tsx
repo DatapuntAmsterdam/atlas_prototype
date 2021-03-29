@@ -1,40 +1,58 @@
+import { mocked } from 'ts-jest/utils'
+import isIgnoredPath from '../../../../store/middleware/isIgnoredPath'
 import buildDetailUrl from './buildDetailUrl'
 
-describe('return detail panel path', () => {
+jest.mock('../../../../store/middleware/isIgnoredPath')
+
+const isIgnoredPathMock = mocked(isIgnoredPath)
+
+describe('buildDetailUrl', () => {
   const params = {
     type: 'foo',
     subtype: 'bar',
     id: 'baz',
   }
 
-  it('should return a path starting with "/kaart/" when pathname includes "kaart"', () => {
+  beforeEach(() => {
+    isIgnoredPathMock.mockReturnValue(false)
+  })
+
+  afterEach(() => {
+    isIgnoredPathMock.mockClear()
+  })
+
+  it('generates a location descriptor for new routes', () => {
     const locationSpy = jest
       .spyOn(window, 'location', 'get')
-      .mockReturnValue({ pathname: '/kaart', search: '?foo=bar' } as Location)
+      .mockReturnValue({ pathname: '', search: '' } as Location)
 
-    const location = buildDetailUrl(params)
+    isIgnoredPathMock.mockReturnValue(true)
 
-    expect(location.pathname).toBe('/kaart/foo/bar/baz/')
-    expect(location.search).toBe('?foo=bar')
+    expect(buildDetailUrl(params).pathname).toBe('/kaart/foo/bar/baz/')
 
     locationSpy.mockRestore()
   })
 
-  it('should return a path starting with "/data/" when pathname includes "kaarten"', () => {
+  it('generates a location descriptor for legacy routes', () => {
     const locationSpy = jest
       .spyOn(window, 'location', 'get')
-      .mockReturnValue({ pathname: '/kaarten' } as Location)
+      .mockReturnValue({ pathname: '', search: '' } as Location)
 
-    const location = buildDetailUrl(params)
+    isIgnoredPathMock.mockReturnValue(false)
 
-    expect(location.pathname).toBe('/data/foo/bar/baz/')
+    expect(buildDetailUrl(params).pathname).toBe('/data/foo/bar/baz/')
 
     locationSpy.mockRestore()
   })
 
-  it('should return a path starting with "/data/" when pathname does not include "kaart"', () => {
-    const location = buildDetailUrl(params)
+  it('preserves the search query', () => {
+    const search = '?foo=bar'
+    const locationSpy = jest
+      .spyOn(window, 'location', 'get')
+      .mockReturnValue({ pathname: '', search } as Location)
 
-    expect(location.pathname).toBe('/data/foo/bar/baz/')
+    expect(buildDetailUrl(params).search).toBe(search)
+
+    locationSpy.mockRestore()
   })
 })

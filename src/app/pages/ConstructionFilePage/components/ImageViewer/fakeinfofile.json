@@ -1,0 +1,87 @@
+{
+  "@context": "http://iiif.io/api/image/2/context.json",
+  "@id": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-14428-SA00103094_00001.jpg",
+  "protocol": "http://iiif.io/api/image",
+  "width": 2857,
+  "height": 3612,
+  "sizes": [
+    {
+      "width": 89,
+      "height": 113
+    },
+    {
+      "width": 179,
+      "height": 226
+    },
+    {
+      "width": 357,
+      "height": 452
+    },
+    {
+      "width": 714,
+      "height": 903
+    },
+    {
+      "width": 1429,
+      "height": 1806
+    },
+    {
+      "width": 2857,
+      "height": 3612
+    }
+  ],
+  "tiles": [
+    {
+      "width": 512,
+      "height": 512,
+      "scaleFactors": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32
+      ]
+    }
+  ],
+  "profile": [
+    "http://iiif.io/api/image/2/level2.json",
+    {
+      "formats": [
+        "jpg",
+        "tif",
+        "gif",
+        "png"
+      ],
+      "maxArea": 400000000,
+      "qualities": [
+        "bitonal",
+        "default",
+        "gray",
+        "color"
+      ],
+      "supports": [
+        "regionByPx",
+        "sizeByW",
+        "sizeByWhListed",
+        "cors",
+        "regionSquare",
+        "sizeByDistortedWh",
+        "sizeAboveFull",
+        "canonicalLinkHeader",
+        "sizeByConfinedWh",
+        "sizeByPct",
+        "jsonldMediaType",
+        "regionByPct",
+        "rotationArbitrary",
+        "sizeByH",
+        "baseUriRedirect",
+        "rotationBy90s",
+        "profileLinkHeader",
+        "sizeByForcedWh",
+        "sizeByWh",
+        "mirroring"
+      ]
+    }
+  ]
+}

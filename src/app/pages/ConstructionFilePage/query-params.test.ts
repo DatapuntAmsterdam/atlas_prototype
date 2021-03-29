@@ -1,4 +1,14 @@
-import { fileNameParam, fileUrlParam } from './query-params'
+import { authTokenParam, fileNameParam, fileUrlParam } from './query-params'
+
+describe('authTokenParam', () => {
+  it('encodes the parameter', () => {
+    expect(authTokenParam.encode('foo')).toEqual('foo')
+  })
+
+  it('decodes the parameter', () => {
+    expect(authTokenParam.decode('foo')).toEqual('foo')
+  })
+})
 
 describe('fileNameParam', () => {
   it('encodes the parameter', () => {

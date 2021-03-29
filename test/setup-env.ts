@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { server } from './server'
 
 const globalThis: any = global

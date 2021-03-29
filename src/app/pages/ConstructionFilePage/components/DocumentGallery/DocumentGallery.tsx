@@ -5,11 +5,15 @@ import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import { Document } from '../../../../../api/iiif-metadata/bouwdossier'
+import { NOT_FOUND_THUMBNAIL } from '../../../../../shared/config/constants'
 import { getUserScopes } from '../../../../../shared/ducks/user/user'
 import { SCOPES } from '../../../../../shared/services/auth/auth'
 import ActionButton from '../../../../components/ActionButton/ActionButton'
-import IIIFThumbnail from '../../../../components/IIIFThumbnail/IIIFThumbnail'
 import { toConstructionFile } from '../../../../links'
+import { useAuthToken } from '../../AuthTokenContext'
+import IIIFThumbnail from '../IIIFThumbnail'
+import LinkButton from '../LinkButton'
+import LoginLinkButton from '../LoginLinkButton'
 
 const StyledAlert = styled(Alert)`
   margin-bottom: ${themeSpacing(5)} !important;
@@ -66,18 +70,25 @@ const MAX_LENGTH = 6
 export interface DocumentGalleryProps {
   fileId: string
   document: Document
+  onRequestLoginLink: () => void
 }
 
 const DocumentGallery: FunctionComponent<DocumentGalleryProps> = ({
   fileId,
   document,
+  onRequestLoginLink,
   ...otherProps
 }) => {
   const lessFiles = useMemo(() => document.bestanden.slice(0, MAX_LENGTH), [document.bestanden])
   const [files, setFiles] = useState(lessFiles)
   const scopes = useSelector(getUserScopes)
+  const token = useAuthToken()
+  const tokenQueryString = useMemo(
+    () => (token ? `?${new URLSearchParams({ auth: token }).toString()}` : ''),
+    [token],
+  )
 
-  const hasRights = scopes.includes(SCOPES['BD/R'])
+  const hasRights = scopes.includes(SCOPES['BD/R']) || !!token
   const hasExtendedRights = scopes.includes(SCOPES['BD/X'])
 
   const hasMore = document.bestanden.length > MAX_LENGTH
@@ -89,15 +100,25 @@ const DocumentGallery: FunctionComponent<DocumentGalleryProps> = ({
         <>
           {!hasRights && !hasExtendedRights ? (
             <StyledAlert level="info" dismissible data-testid="noRights">
-              Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om bouw- en
-              omgevingsdossiers te bekijken.
+              <div>
+                U kunt hier{' '}
+                <LinkButton type="button" onClick={onRequestLoginLink}>
+                  toegang aanvragen
+                </LinkButton>{' '}
+                om de om bouw- en omgevingsdossiers in te zien. Medewerkers/ketenpartners van
+                Gemeente Amsterdam kunnen <LoginLinkButton>inloggen</LoginLinkButton> om deze te
+                bekijken.
+              </div>
             </StyledAlert>
           ) : (
             restricted &&
             !hasExtendedRights && (
               <StyledAlert level="info" dismissible data-testid="noExtendedRights">
-                Medewerkers/ketenpartners van Gemeente Amsterdam met extra bevoegdheden kunnen
-                inloggen om alle bouw- en omgevingsdossiers te bekijken.
+                <div>
+                  Medewerkers/ketenpartners van Gemeente Amsterdam met extra bevoegdheden kunnen
+                  <LoginLinkButton>inloggen</LoginLinkButton> om alle bouw- en omgevingsdossiers te
+                  bekijken.
+                </div>
               </StyledAlert>
             )
           )}
@@ -125,8 +146,8 @@ const DocumentGallery: FunctionComponent<DocumentGalleryProps> = ({
                     <IIIFThumbnail
                       src={
                         disabled
-                          ? '/assets/images/not_found_thumbnail.jpg' // use the default not found image when user has no rights
-                          : `${file.url}/square/180,180/0/default.jpg`
+                          ? NOT_FOUND_THUMBNAIL // use the default not found image when user has no rights
+                          : `${file.url}/square/180,180/0/default.jpg${tokenQueryString}`
                       }
                       title={file.filename}
                       data-testid="thumbnail"

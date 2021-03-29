@@ -1,13 +1,13 @@
 import paramsRegistry from '../params-registry'
+import isIgnoredPath from './isIgnoredPath'
 
 let nrOfRoutesDispatched = 0
 
 const addMetaToRoutesMiddleware = ({ getState }) => (next) => (action) => {
-  const path = window.location.pathname
-
-  if (path.includes('kaart') && !path.includes('kaarten')) {
+  if (isIgnoredPath(window.location.pathname)) {
     return next(action)
   }
+
   if (paramsRegistry.isRouterType(action)) {
     if (getState().location.type !== action.type || action?.meta?.location?.kind === 'pop') {
       nrOfRoutesDispatched = 0

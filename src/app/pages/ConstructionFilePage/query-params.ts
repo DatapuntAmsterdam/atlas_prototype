@@ -1,5 +1,12 @@
 import { UrlParam } from '../../utils/useParam'
 
+export const authTokenParam: UrlParam<string | null> = {
+  name: 'auth',
+  defaultValue: null,
+  decode: (value) => value,
+  encode: (value) => value,
+}
+
 export const fileNameParam: UrlParam<string | null> = {
   name: 'bestand',
   defaultValue: null,

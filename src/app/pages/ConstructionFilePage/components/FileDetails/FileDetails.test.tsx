@@ -1,15 +1,35 @@
-import { render, within } from '@testing-library/react'
+import { fireEvent, render, within } from '@testing-library/react'
+import { mocked } from 'ts-jest/utils'
 import { singleFixture as bouwdossierFixture } from '../../../../../api/iiif-metadata/bouwdossier'
 import withAppContext from '../../../../utils/withAppContext'
-import { DocumentGalleryProps } from '../DocumentGallery/DocumentGallery'
+import DocumentGallery from '../DocumentGallery'
+import LoginLinkRequestModal from '../LoginLinkRequestModal'
 import FileDetails from './FileDetails'
 
-jest.mock(
-  '../DocumentGallery',
-  () => ({ fileId, document, ...otherProps }: DocumentGalleryProps) => <div {...otherProps} />,
-)
+jest.mock('../DocumentGallery')
+jest.mock('../LoginLinkRequestModal')
+
+const DocumentGalleryMock = mocked(DocumentGallery)
+const LoginLinkRequestModalMock = mocked(LoginLinkRequestModal)
 
 describe('FileDetails', () => {
+  beforeEach(() => {
+    DocumentGalleryMock.mockImplementation(
+      ({ fileId, document, onRequestLoginLink, ...otherProps }) => {
+        return <div {...otherProps} />
+      },
+    )
+
+    LoginLinkRequestModalMock.mockImplementation(({ onClose, ...otherProps }) => {
+      return <div {...otherProps} />
+    })
+  })
+
+  afterEach(() => {
+    DocumentGalleryMock.mockReset()
+    LoginLinkRequestModalMock.mockReset()
+  })
+
   it('sets the title', () => {
     const { container, getByText } = render(
       withAppContext(<FileDetails fileId="SDC9999" file={bouwdossierFixture} />),
@@ -112,5 +132,26 @@ describe('FileDetails', () => {
     rerender(withAppContext(<FileDetails fileId="SDC9999" file={bouwdossierFixture} />))
 
     expect(getByTestId('constructionFileAddresses')).toBeInTheDocument()
+  })
+
+  it('opens and closes the login link request modal', () => {
+    DocumentGalleryMock.mockImplementation(({ onRequestLoginLink }) => {
+      return <button data-testid="requestLoginLink" onClick={onRequestLoginLink} type="button" />
+    })
+
+    LoginLinkRequestModalMock.mockImplementation(({ onClose }) => {
+      return <button data-testid="closeModal" onClick={onClose} type="button" />
+    })
+
+    const { queryByTestId, getByTestId } = render(
+      withAppContext(<FileDetails fileId="SDC9999" file={bouwdossierFixture} />),
+    )
+
+    expect(queryByTestId('loginLinkRequestModal')).toBeNull()
+    fireEvent.click(getByTestId('requestLoginLink'))
+    expect(queryByTestId('loginLinkRequestModal')).toBeDefined()
+
+    fireEvent.click(getByTestId('closeModal'))
+    expect(queryByTestId('loginLinkRequestModal')).toBeNull()
   })
 })

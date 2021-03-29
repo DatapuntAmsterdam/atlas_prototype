@@ -1,7 +1,8 @@
 import { render } from '@testing-library/react'
-import EditorialCard from './EditorialCard'
-import getImageFromCms from '../../utils/getImageFromCms'
 import { CmsType, SpecialType } from '../../../shared/config/cms.config'
+import { NOT_FOUND_THUMBNAIL } from '../../../shared/config/constants'
+import getImageFromCms from '../../utils/getImageFromCms'
+import EditorialCard from './EditorialCard'
 
 jest.mock('../../utils/getImageFromCms')
 
@@ -47,7 +48,7 @@ describe('EditorialCard', () => {
 
     const image = container.querySelector('img')
 
-    expect(image?.getAttribute('src')).toBe('/assets/images/not_found_thumbnail.jpg')
+    expect(image?.getAttribute('src')).toBe(NOT_FOUND_THUMBNAIL)
   })
 
   it('should display a content type if enabled', () => {

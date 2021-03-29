@@ -4,12 +4,14 @@ import {
   Document,
   singleFixture as bouwdossierFixture,
 } from '../../../../../api/iiif-metadata/bouwdossier'
+import { NOT_FOUND_THUMBNAIL } from '../../../../../shared/config/constants'
 import * as userDuck from '../../../../../shared/ducks/user/user'
 import { SCOPES } from '../../../../../shared/services/auth/auth'
 import withAppContext from '../../../../utils/withAppContext'
+import AuthTokenContext, { AuthTokenProvider } from '../../AuthTokenContext'
 import DocumentGallery from './DocumentGallery'
 
-jest.mock('../../../../components/IIIFThumbnail/IIIFThumbnail', () => ({ ...props }) => (
+jest.mock('../IIIFThumbnail', () => ({ ...props }) => (
   // eslint-disable-next-line jsx-a11y/alt-text
   <img {...props} />
 ))
@@ -34,7 +36,16 @@ describe('DocumentGallery', () => {
 
   it('renders the gallery', () => {
     const { container } = render(
-      withAppContext(<DocumentGallery fileId="SDC9999" document={MOCK_DOCUMENT} />),
+      withAppContext(
+        <AuthTokenProvider>
+          <DocumentGallery
+            fileId="SDC9999"
+            document={MOCK_DOCUMENT}
+            onRequestLoginLink={() => {}}
+          />
+          ,
+        </AuthTokenProvider>,
+      ),
     )
 
     expect(container.firstChild).toBeDefined()
@@ -42,10 +53,39 @@ describe('DocumentGallery', () => {
 
   it('renders a message if the user has no rights', () => {
     const { getByTestId } = render(
-      withAppContext(<DocumentGallery fileId="SDC9999" document={MOCK_DOCUMENT} />),
+      withAppContext(
+        <AuthTokenProvider>
+          <DocumentGallery
+            fileId="SDC9999"
+            document={MOCK_DOCUMENT}
+            onRequestLoginLink={() => {}}
+          />
+          ,
+        </AuthTokenProvider>,
+      ),
     )
 
     expect(getByTestId('noRights')).toBeDefined()
+  })
+
+  it('triggers the onRequestLoginLink prop if a login link is requested', () => {
+    const onRequestLoginLinkMock = jest.fn()
+    const { getByText } = render(
+      withAppContext(
+        <AuthTokenProvider>
+          <DocumentGallery
+            fileId="SDC9999"
+            document={MOCK_DOCUMENT}
+            onRequestLoginLink={onRequestLoginLinkMock}
+          />
+          ,
+        </AuthTokenProvider>,
+      ),
+    )
+
+    fireEvent.click(getByText('toegang aanvragen'))
+
+    expect(onRequestLoginLinkMock).toBeCalled()
   })
 
   it('renders a message if the document is restricted and the user has no extended rights', () => {
@@ -53,7 +93,14 @@ describe('DocumentGallery', () => {
 
     const { getByTestId } = render(
       withAppContext(
-        <DocumentGallery fileId="SDC9999" document={{ ...MOCK_DOCUMENT, access: 'RESTRICTED' }} />,
+        <AuthTokenProvider>
+          <DocumentGallery
+            fileId="SDC9999"
+            document={{ ...MOCK_DOCUMENT, access: 'RESTRICTED' }}
+            onRequestLoginLink={() => {}}
+          />
+          ,
+        </AuthTokenProvider>,
       ),
     )
 
@@ -62,7 +109,16 @@ describe('DocumentGallery', () => {
 
   it('renders a disabled link if the user has no rights', () => {
     const { getAllByTestId } = render(
-      withAppContext(<DocumentGallery fileId="SDC9999" document={MOCK_DOCUMENT} />),
+      withAppContext(
+        <AuthTokenProvider>
+          <DocumentGallery
+            fileId="SDC9999"
+            document={MOCK_DOCUMENT}
+            onRequestLoginLink={() => {}}
+          />
+          ,
+        </AuthTokenProvider>,
+      ),
     )
 
     expect(getAllByTestId('detailLink')[0].tagName).toEqual('SPAN')
@@ -73,7 +129,13 @@ describe('DocumentGallery', () => {
 
     const { getAllByTestId } = render(
       withAppContext(
-        <DocumentGallery fileId="SDC9999" document={{ ...MOCK_DOCUMENT, access: 'RESTRICTED' }} />,
+        <AuthTokenProvider>
+          <DocumentGallery
+            fileId="SDC9999"
+            document={{ ...MOCK_DOCUMENT, access: 'RESTRICTED' }}
+            onRequestLoginLink={() => {}}
+          />
+        </AuthTokenProvider>,
       ),
     )
     expect(getAllByTestId('detailLink')[0].tagName).toEqual('SPAN')
@@ -83,7 +145,16 @@ describe('DocumentGallery', () => {
     getUserScopesSpy.mockReturnValue([SCOPES['BD/R']])
 
     const { getAllByTestId } = render(
-      withAppContext(<DocumentGallery fileId="SDC9999" document={MOCK_DOCUMENT} />),
+      withAppContext(
+        <AuthTokenProvider>
+          <DocumentGallery
+            fileId="SDC9999"
+            document={MOCK_DOCUMENT}
+            onRequestLoginLink={() => {}}
+          />
+          ,
+        </AuthTokenProvider>,
+      ),
     )
 
     expect(getAllByTestId('detailLink')[0].tagName).toEqual('A')
@@ -94,7 +165,13 @@ describe('DocumentGallery', () => {
 
     const { getAllByTestId } = render(
       withAppContext(
-        <DocumentGallery fileId="SDC9999" document={{ ...MOCK_DOCUMENT, access: 'RESTRICTED' }} />,
+        <AuthTokenProvider>
+          <DocumentGallery
+            fileId="SDC9999"
+            document={{ ...MOCK_DOCUMENT, access: 'RESTRICTED' }}
+            onRequestLoginLink={() => {}}
+          />
+        </AuthTokenProvider>,
       ),
     )
 
@@ -103,13 +180,19 @@ describe('DocumentGallery', () => {
 
   it('renders a placeholder image if the user has no rights', () => {
     const { getAllByTestId } = render(
-      withAppContext(<DocumentGallery fileId="SDC9999" document={MOCK_DOCUMENT} />),
+      withAppContext(
+        <AuthTokenProvider>
+          <DocumentGallery
+            fileId="SDC9999"
+            document={MOCK_DOCUMENT}
+            onRequestLoginLink={() => {}}
+          />
+          ,
+        </AuthTokenProvider>,
+      ),
     )
 
-    expect(getAllByTestId('thumbnail')[0]).toHaveAttribute(
-      'src',
-      expect.stringContaining('not_found_thumbnail.jpg'),
-    )
+    expect(getAllByTestId('thumbnail')[0]).toHaveAttribute('src', NOT_FOUND_THUMBNAIL)
   })
 
   it('renders a placeholder image if the document is restricted and the user has no extended rights', () => {
@@ -117,21 +200,32 @@ describe('DocumentGallery', () => {
 
     const { getAllByTestId } = render(
       withAppContext(
-        <DocumentGallery fileId="SDC9999" document={{ ...MOCK_DOCUMENT, access: 'RESTRICTED' }} />,
+        <AuthTokenProvider>
+          <DocumentGallery
+            fileId="SDC9999"
+            document={{ ...MOCK_DOCUMENT, access: 'RESTRICTED' }}
+            onRequestLoginLink={() => {}}
+          />
+        </AuthTokenProvider>,
       ),
     )
 
-    expect(getAllByTestId('thumbnail')[0]).toHaveAttribute(
-      'src',
-      expect.stringContaining('not_found_thumbnail.jpg'),
-    )
+    expect(getAllByTestId('thumbnail')[0]).toHaveAttribute('src', NOT_FOUND_THUMBNAIL)
   })
 
   it('renders a thumbnail image if the user has rights', () => {
     getUserScopesSpy.mockReturnValue([SCOPES['BD/R']])
 
     const { getAllByTestId } = render(
-      withAppContext(<DocumentGallery fileId="SDC9999" document={MOCK_DOCUMENT} />),
+      withAppContext(
+        <AuthTokenProvider>
+          <DocumentGallery
+            fileId="SDC9999"
+            document={MOCK_DOCUMENT}
+            onRequestLoginLink={() => {}}
+          />
+        </AuthTokenProvider>,
+      ),
     )
 
     expect(getAllByTestId('thumbnail')[0]).toHaveAttribute(
@@ -145,7 +239,13 @@ describe('DocumentGallery', () => {
 
     const { getAllByTestId } = render(
       withAppContext(
-        <DocumentGallery fileId="SDC9999" document={{ ...MOCK_DOCUMENT, access: 'RESTRICTED' }} />,
+        <AuthTokenProvider>
+          <DocumentGallery
+            fileId="SDC9999"
+            document={{ ...MOCK_DOCUMENT, access: 'RESTRICTED' }}
+            onRequestLoginLink={() => {}}
+          />
+        </AuthTokenProvider>,
       ),
     )
 
@@ -155,9 +255,38 @@ describe('DocumentGallery', () => {
     )
   })
 
+  it('renders a thumbnail image if the user is using a token from a login link', () => {
+    const MOCK_TOKEN = 'foobar'
+    const { getAllByTestId } = render(
+      withAppContext(
+        <AuthTokenContext.Provider value={{ token: MOCK_TOKEN }}>
+          <DocumentGallery
+            fileId="SDC9999"
+            document={MOCK_DOCUMENT}
+            onRequestLoginLink={() => {}}
+          />
+        </AuthTokenContext.Provider>,
+      ),
+    )
+
+    expect(getAllByTestId('thumbnail')[0]).toHaveAttribute(
+      'src',
+      expect.stringContaining(`?${new URLSearchParams({ auth: MOCK_TOKEN }).toString()}`),
+    )
+  })
+
   it('renders a maximum amount of results initially', () => {
     const { getAllByTestId } = render(
-      withAppContext(<DocumentGallery fileId="SDC9999" document={MOCK_DOCUMENT} />),
+      withAppContext(
+        <AuthTokenProvider>
+          <DocumentGallery
+            fileId="SDC9999"
+            document={MOCK_DOCUMENT}
+            onRequestLoginLink={() => {}}
+          />
+          ,
+        </AuthTokenProvider>,
+      ),
     )
 
     expect(getAllByTestId('fileResult')).toHaveLength(6)
@@ -165,7 +294,16 @@ describe('DocumentGallery', () => {
 
   it('toggles between all results and less results', () => {
     const { getAllByTestId, getByTestId } = render(
-      withAppContext(<DocumentGallery fileId="SDC9999" document={MOCK_DOCUMENT} />),
+      withAppContext(
+        <AuthTokenProvider>
+          <DocumentGallery
+            fileId="SDC9999"
+            document={MOCK_DOCUMENT}
+            onRequestLoginLink={() => {}}
+          />
+          ,
+        </AuthTokenProvider>,
+      ),
     )
 
     fireEvent.click(getByTestId('showMore'))
@@ -178,10 +316,13 @@ describe('DocumentGallery', () => {
   it('hides the button to show more results if there are not enough results', () => {
     const { queryByTestId } = render(
       withAppContext(
-        <DocumentGallery
-          fileId="SDC9999"
-          document={{ ...MOCK_DOCUMENT, bestanden: MOCK_FILES.slice(0, 6) }}
-        />,
+        <AuthTokenProvider>
+          <DocumentGallery
+            fileId="SDC9999"
+            document={{ ...MOCK_DOCUMENT, bestanden: MOCK_FILES.slice(0, 6) }}
+            onRequestLoginLink={() => {}}
+          />
+        </AuthTokenProvider>,
       ),
     )
 
@@ -191,7 +332,13 @@ describe('DocumentGallery', () => {
   it('renders a message if there are no results to show', () => {
     const { getByTestId, queryAllByTestId } = render(
       withAppContext(
-        <DocumentGallery fileId="SDC9999" document={{ ...MOCK_DOCUMENT, bestanden: [] }} />,
+        <AuthTokenProvider>
+          <DocumentGallery
+            fileId="SDC9999"
+            document={{ ...MOCK_DOCUMENT, bestanden: [] }}
+            onRequestLoginLink={() => {}}
+          />
+        </AuthTokenProvider>,
       ),
     )
 

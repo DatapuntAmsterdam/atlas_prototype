@@ -1,13 +1,14 @@
 import { Alert, Paragraph, Row, themeSpacing } from '@amsterdam/asc-ui'
+import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
 import { FunctionComponent, lazy, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
 import { getBouwdossierById } from '../../../api/iiif-metadata/bouwdossier'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import { toConstructionFile } from '../../links'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import useParam from '../../utils/useParam'
+import { AuthTokenProvider } from './AuthTokenContext'
 import FileDetails from './components/FileDetails'
 import { fileNameParam, fileUrlParam } from './query-params'
 
@@ -58,7 +59,7 @@ const ConstructionFilePage: FunctionComponent = () => {
   const fileId = `${result.value.stadsdeel}${result.value.dossiernr}`
 
   return (
-    <>
+    <AuthTokenProvider>
       {fileName && fileUrl && (
         <ImageViewer
           title={result.value.titel}
@@ -68,7 +69,7 @@ const ConstructionFilePage: FunctionComponent = () => {
         />
       )}
       {!fileName && <FileDetails fileId={fileId} file={result.value} data-testid="fileDetails" />}
-    </>
+    </AuthTokenProvider>
   )
 }
 
