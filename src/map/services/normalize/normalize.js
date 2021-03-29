@@ -107,11 +107,17 @@ export const napPeilmerk = (result) => {
   return normalize(result, additionalFields)
 }
 
-export const getGarbageContainers = async (id, type) =>
+export const getGarbageContainersByBagObject = async (id, type) =>
   fetchWithToken(`${environment.API_ROOT}v1/huishoudelijkafval/bag_object_loopafstand/`, {
     format: 'json',
     bagObjectType: type,
     bagObjectId: id,
+  })
+
+export const getGarbageContainersByAddress = async (id) =>
+  fetchWithToken(`${environment.API_ROOT}v1/huishoudelijkafval/adres_loopafstand/`, {
+    format: 'json',
+    adresseerbaarobjectId: id,
   })
 
 export const adressenPand = (result) => {

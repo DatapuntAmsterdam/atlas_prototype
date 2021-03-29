@@ -492,5 +492,5 @@ export type ExtraApiResults = {
   brkData?: PotentialApiResult
   verblijfsobjectData?: PotentialApiResult
   rollaagImage?: string
-  garbageContainers?: { _embedded: { bag_object_loopafstand: any[] } }
+  garbageContainers?: { _embedded: { bag_object_loopafstand: any[]; adres_loopafstand: any[] } }
 }

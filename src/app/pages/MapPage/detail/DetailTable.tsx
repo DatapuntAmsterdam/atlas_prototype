@@ -19,8 +19,8 @@ const DetailTable: FunctionComponent<DetailTableProps> = ({ item }) =>
       <Table>
         <thead>
           <TableRow header>
-            {item.headings.map((heading) => (
-              <TableHeader key={heading.key}>{heading.title}</TableHeader>
+            {item.headings.map(({ key, title }) => (
+              <TableHeader key={key}>{title}</TableHeader>
             ))}
           </TableRow>
         </thead>
@@ -28,8 +28,8 @@ const DetailTable: FunctionComponent<DetailTableProps> = ({ item }) =>
           {item.values?.map((value, index) => (
             // eslint-disable-next-line react/no-array-index-key
             <TableRow key={index}>
-              {item.headings.map((heading) => (
-                <TableData key={heading.key}>{value[heading.key]}</TableData>
+              {item.headings.map(({ key }) => (
+                <TableData key={key}>{value[key]}</TableData>
               ))}
             </TableRow>
           ))}

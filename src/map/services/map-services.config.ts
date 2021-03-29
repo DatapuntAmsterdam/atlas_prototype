@@ -38,7 +38,8 @@ import {
   evenementen,
   explosieven,
   formatSquareMetre,
-  getGarbageContainers,
+  getGarbageContainersByAddress,
+  getGarbageContainersByBagObject,
   grexProject,
   kadastraalObject,
   meetbout,
@@ -220,7 +221,9 @@ const getGarbageContainersDistanceTable = (
       { title: 'Type', key: 'fractieOmschrijving' },
       { title: 'Loopafstand (Meter)', key: 'loopafstand' },
     ],
-    values: garbageContainersResult?._embedded?.bag_object_loopafstand,
+    values:
+      garbageContainersResult?._embedded?.bag_object_loopafstand ??
+      garbageContainersResult?._embedded?.adres_loopafstand,
   }
 }
 
@@ -581,9 +584,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     normalization: async (result) => {
       const [nummeraanduidingData, garbageContainers] = await Promise.all([
         result?.hoofdadres?._links?.self?.href
-          ? fetchWithToken(result?.hoofdadres?._links?.self?.href)
+          ? fetchWithToken(result.hoofdadres._links.self.href)
           : null,
-        getGarbageContainers(result.ligplaatsidentificatie, 'ligplaats'),
+        getGarbageContainersByBagObject(result.ligplaatsidentificatie, 'ligplaats'),
       ])
       return {
         ...result,
@@ -658,10 +661,11 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     endpoint: 'bag/v1.1/nummeraanduiding',
     normalization: async (result) => {
       const resultWithVerblijfsobject = await adressenNummeraanduiding(result)
-      const garbageContainers = await getGarbageContainers(
-        resultWithVerblijfsobject.verblijfsobjectData.verblijfsobjectidentificatie,
-        'verblijfsobject',
+      const garbageContainers = await getGarbageContainersByAddress(
+        // @ts-ignore
+        result?.verblijfsobjectData?.verblijfsobjectidentificatie,
       )
+
       return {
         ...resultWithVerblijfsobject,
         garbageContainers,
@@ -765,9 +769,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     normalization: async (result) => {
       const [nummeraanduidingData, garbageContainers] = await Promise.all([
         result?.hoofdadres?._links?.self?.href
-          ? fetchWithToken(result?.hoofdadres?._links?.self?.href)
+          ? fetchWithToken(result.hoofdadres._links.self.href)
           : null,
-        getGarbageContainers(result.verblijfsobjectidentificatie, 'verblijfsobject'),
+        getGarbageContainersByAddress(result.verblijfsobjectidentificatie),
       ])
       return {
         ...adressenVerblijfsobject(result),
@@ -896,7 +900,10 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
   },
   [endpointTypes.adressenPand]: {
     normalization: async (result) => {
-      const garbageContainers = await getGarbageContainers(result.pandidentificatie, 'pand')
+      const garbageContainers = await getGarbageContainersByBagObject(
+        result.pandidentificatie,
+        'pand',
+      )
       return {
         ...adressenPand(result),
         garbageContainers,
@@ -964,9 +971,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     normalization: async (result) => {
       const [nummeraanduidingData, garbageContainers] = await Promise.all([
         result?.hoofdadres?._links?.self?.href
-          ? fetchWithToken(result?.hoofdadres?._links?.self?.href)
+          ? fetchWithToken(result.hoofdadres._links.self.href)
           : null,
-        getGarbageContainers(result.standplaatsidentificatie, 'standplaats'),
+        getGarbageContainersByBagObject(result.standplaatsidentificatie, 'standplaats'),
       ])
       return {
         ...result,
