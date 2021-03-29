@@ -152,6 +152,7 @@ exports[`LeafletContainer LeafletContainer snapshot should render correct 1`] = 
               "inverse": [Function],
               "k0": 0.9999079,
               "lat0": 0.9102967268932393,
+              "lat1": 0.9102967268932393,
               "long0": 0.09403203751960008,
               "names": Array [
                 "Stereographic_North_Pole",
@@ -445,6 +446,7 @@ exports[`LeafletContainer LeafletContainer snapshot should render different base
               "inverse": [Function],
               "k0": 0.9999079,
               "lat0": 0.9102967268932393,
+              "lat1": 0.9102967268932393,
               "long0": 0.09403203751960008,
               "names": Array [
                 "Stereographic_North_Pole",
