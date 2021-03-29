@@ -26,10 +26,9 @@ describe('logic of redux middleware for adding metadata to routes', () => {
   const actionMock = { type: 'some action', meta: { query: 'someQuery', preserve: true } }
 
   it('should skip custom middleware when pathname includes "kaart"', () => {
-    const locationSpy = jest.spyOn(window, 'location', 'get').mockReturnValue({
-      ...window.location,
-      ...{ pathname: '/kaart' },
-    })
+    const locationSpy = jest
+      .spyOn(window, 'location', 'get')
+      .mockReturnValue({ ...{ pathname: '/kaart' } })
 
     addMetaToRoutesMiddleware(store)(nextMockAddMetaToRoutes)(actionMock)
     expect(nextMockAddMetaToRoutes).toHaveBeenCalledWith(actionMock)
@@ -40,10 +39,9 @@ describe('logic of redux middleware for adding metadata to routes', () => {
   })
 
   it('should use custom middleware when pathname includes "kaarten"', () => {
-    const locationSpy = jest.spyOn(window, 'location', 'get').mockReturnValue({
-      ...window.location,
-      ...{ pathname: '/kaarten' },
-    })
+    const locationSpy = jest
+      .spyOn(window, 'location', 'get')
+      .mockReturnValue({ ...{ pathname: '/kaarten' } })
 
     addMetaToRoutesMiddleware(store)(nextMockAddMetaToRoutes)(actionMock)
 
