@@ -22,6 +22,7 @@ export function* authenticateUser(
   const reload = action.type === AUTHENTICATE_USER_RELOAD
   // We can't await promises in sagas, so let's hack this shit for now.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // @ts-ignore
   const authenticated = useKeycloak && reload ? yield call(initKeycloak) : false
   const accessToken = auth.getAccessToken()
 

@@ -16,9 +16,10 @@ function getCoordinates(
   }
 
   // We have to go deeper recursively; two levels for Polygons, three levels for MultiPolygons
-  // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  // @ts-ignore
   return coordinates.map(getCoordinates).reduce(
+    // @ts-ignore
     (accumulator: [][], values: LatLngBoundsLiteral) => [
       [...accumulator[0], ...values[0]],
       [...accumulator[1], ...values[1]],
