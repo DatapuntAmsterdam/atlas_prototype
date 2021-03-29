@@ -15,7 +15,7 @@ export interface DetailTableProps {
 
 const DetailTable: FunctionComponent<DetailTableProps> = ({ item }) =>
   item.values?.length ? (
-    <TableWrapper data-testid="detail-table">
+    <TableWrapper data-testid="detailTable">
       <Table>
         <thead>
           <TableRow header>
@@ -25,7 +25,7 @@ const DetailTable: FunctionComponent<DetailTableProps> = ({ item }) =>
           </TableRow>
         </thead>
         <tbody>
-          {item.values?.map((value, index) => (
+          {item.values.map((value, index) => (
             // eslint-disable-next-line react/no-array-index-key
             <TableRow key={index}>
               {item.headings.map(({ key }) => (

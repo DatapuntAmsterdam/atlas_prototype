@@ -91,7 +91,7 @@ export const DETAIL_PANEL = {
   panelSubject: '[class*="DetailPanel__Heading"] h1',
   panoramaPreview: '[data-testid="panoramaPreview"]',
   subHeader: '[data-testid="data-detail-subheading"]',
-  table: '[data-testid="detail-table"]',
+  table: '[data-testid="detailTable"]',
 }
 
 export const DRAWING = {
