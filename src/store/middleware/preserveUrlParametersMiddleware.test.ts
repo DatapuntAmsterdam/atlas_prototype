@@ -1,38 +1,38 @@
 import preserveUrlParametersMiddleware from './preserveUrlParametersMiddleware'
 import paramsRegistry from '../params-registry'
 
-Object.defineProperties(global, {
-  location: {
-    writable: true,
-    value: global.location,
-  },
-})
-
-describe('Custom Redux Middleware', () => {
+describe('logic of redux middleware for preserving url parameters', () => {
   const getParametersForRouteMock = jest.spyOn(paramsRegistry, 'getParametersForRoute')
 
   const nextMockPreserveUrlParametersMiddleware = jest.fn()
   const action = { type: 'some action', meta: { query: 'someQuery', preserve: true } }
 
   it('should skip when pathname includes "kaart"', () => {
-    // @ts-ignore
-    window.location = {
-      pathname: '/kaart/foo/bar',
-    }
+    const locationSpy = jest
+      .spyOn(window, 'location', 'get')
+      .mockReturnValue({ pathname: '/kaart' } as Location)
 
     preserveUrlParametersMiddleware()(nextMockPreserveUrlParametersMiddleware)(action)
     expect(nextMockPreserveUrlParametersMiddleware).toHaveBeenCalledWith(action)
 
     expect(getParametersForRouteMock).not.toHaveBeenCalled()
+
+    locationSpy.mockRestore()
   })
 
-  it('should use the custom middleware when pathname does not includes "kaart"', () => {
-    // @ts-ignore
-    window.location = {
-      pathname: '/data/foo/bar',
-      search: '?foo=bar',
-    }
+  it('should use the custom middleware when pathname includes "kaarten"', () => {
+    const locationSpy = jest
+      .spyOn(window, 'location', 'get')
+      .mockReturnValue({ pathname: '/kaarten' } as Location)
 
+    preserveUrlParametersMiddleware()(nextMockPreserveUrlParametersMiddleware)(action)
+
+    expect(getParametersForRouteMock).toHaveBeenCalled()
+
+    locationSpy.mockRestore()
+  })
+
+  it('should use the custom middleware when pathname does not include "kaart"', () => {
     preserveUrlParametersMiddleware()(nextMockPreserveUrlParametersMiddleware)(action)
 
     expect(getParametersForRouteMock).toHaveBeenCalled()

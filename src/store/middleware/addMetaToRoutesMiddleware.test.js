@@ -1,14 +1,7 @@
 import addMetaToRoutesMiddleware from './addMetaToRoutesMiddleware'
 import paramsRegistry from '../params-registry'
 
-Object.defineProperties(global, {
-  location: {
-    writable: true,
-    value: global.location,
-  },
-})
-
-describe('addMetaToRoutesMiddleware', () => {
+describe('logic of redux middleware for adding metadata to routes', () => {
   let next
   let isRouterTypeMock
   const store = {
@@ -32,25 +25,32 @@ describe('addMetaToRoutesMiddleware', () => {
   const nextMockAddMetaToRoutes = jest.fn()
   const actionMock = { type: 'some action', meta: { query: 'someQuery', preserve: true } }
 
-  it('should skip when pathname includes "kaart"', () => {
-    // @ts-ignore
-    window.location = {
-      pathname: '/kaart/foo/bar',
-    }
+  it('should skip custom middleware when pathname includes "kaart"', () => {
+    const locationSpy = jest
+      .spyOn(window, 'location', 'get')
+      .mockReturnValue({ ...{ pathname: '/kaart' } })
 
     addMetaToRoutesMiddleware(store)(nextMockAddMetaToRoutes)(actionMock)
     expect(nextMockAddMetaToRoutes).toHaveBeenCalledWith(actionMock)
 
     expect(isRouterTypeMock).not.toHaveBeenCalled()
+
+    locationSpy.mockRestore()
   })
 
-  it('should use the custom middleware when pathname does not includes "kaart"', () => {
-    // @ts-ignore
-    window.location = {
-      pathname: '/data/foo/bar',
-      search: '?foo=bar',
-    }
+  it('should use custom middleware when pathname includes "kaarten"', () => {
+    const locationSpy = jest
+      .spyOn(window, 'location', 'get')
+      .mockReturnValue({ ...{ pathname: '/kaarten' } })
 
+    addMetaToRoutesMiddleware(store)(nextMockAddMetaToRoutes)(actionMock)
+
+    expect(isRouterTypeMock).toHaveBeenCalled()
+
+    locationSpy.mockRestore()
+  })
+
+  it('should use the custom middleware when pathname does not include "kaart"', () => {
     addMetaToRoutesMiddleware(store)(nextMockAddMetaToRoutes)(actionMock)
 
     expect(isRouterTypeMock).toHaveBeenCalled()

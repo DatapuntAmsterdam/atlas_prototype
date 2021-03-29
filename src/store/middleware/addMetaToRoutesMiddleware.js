@@ -3,7 +3,9 @@ import paramsRegistry from '../params-registry'
 let nrOfRoutesDispatched = 0
 
 const addMetaToRoutesMiddleware = ({ getState }) => (next) => (action) => {
-  if (window.location.pathname.includes('kaart')) {
+  const path = window.location.pathname
+
+  if (path.includes('kaart') && !path.includes('kaarten')) {
     return next(action)
   }
   if (paramsRegistry.isRouterType(action)) {
