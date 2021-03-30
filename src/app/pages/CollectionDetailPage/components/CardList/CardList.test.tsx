@@ -1,11 +1,11 @@
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import { CmsType } from '../../../../../shared/config/cms.config'
+import { EDITORIAL_CARD_TEST_ID } from '../../../../components/EditorialCard/EditorialCard'
 import CardList from './CardList'
-import { EDITORIAL_CARD_TEST_ID } from '../EditorialCard/EditorialCard'
-import { CmsType } from '../../../shared/config/cms.config'
 
 describe('CardList', () => {
   it('should render EditorialCard components based on results', () => {
-    const { getAllByTestId } = render(
+    render(
       <CardList
         results={[
           // @ts-ignore
@@ -17,6 +17,6 @@ describe('CardList', () => {
         loading={false}
       />,
     )
-    expect(getAllByTestId(EDITORIAL_CARD_TEST_ID).length).toBe(2)
+    expect(screen.getAllByTestId(EDITORIAL_CARD_TEST_ID).length).toBe(2)
   })
 })

@@ -1,8 +1,8 @@
 import { Card, CardContent, Heading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import { CMSResultItem } from '../../utils/useFromCMS'
-import EditorialCard from '../EditorialCard'
+import { CMSResultItem } from '../../../../utils/useFromCMS'
+import EditorialCard from '../../../../components/EditorialCard'
 
 const StyledCard = styled(Card)`
   border-top: 2px solid;

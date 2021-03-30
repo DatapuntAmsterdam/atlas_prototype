@@ -2,8 +2,8 @@
 import { breakpoint, Column, Row, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import { CMSResultItem } from '../../utils/useFromCMS'
-import CardList from './CardList'
+import { CMSResultItem } from '../../../../utils/useFromCMS'
+import CardList from '../CardList'
 
 export type CMSCollectionList = { field_title: string; field_content: CMSResultItem[] }
 
@@ -39,12 +39,16 @@ const StyledColumn = styled(Column)`
   }
 `
 
-type Props = {
+export interface CardListBlockProps {
   results: CMSCollectionList[]
   loading: boolean
 }
 
-const CardListBlock: FunctionComponent<Props> = ({ results, loading, ...otherProps }) => (
+const CardListBlock: FunctionComponent<CardListBlockProps> = ({
+  results,
+  loading,
+  ...otherProps
+}) => (
   <StyledRow hasMargin={false} {...otherProps}>
     <StyledOuterColumn
       span={{
@@ -62,7 +66,7 @@ const CardListBlock: FunctionComponent<Props> = ({ results, loading, ...otherPro
             wrap
             span={{ small: 1, medium: 2, big: 3, large: 3, xLarge: 3 }}
           >
-            <CardList {...{ title, loading, results: field_content }} />
+            <CardList title={title} loading={loading} results={field_content} />
           </StyledColumn>
         ))}
       </StyledInnerRow>
