@@ -1,11 +1,21 @@
 import { fireEvent, render } from '@testing-library/react'
 import * as reactRedux from 'react-redux'
-import { showPrintMode } from '../../../../../shared/ducks/ui/ui'
+import { mocked } from 'ts-jest/utils'
+import { sharePage, showPrintMode } from '../../../../../shared/ducks/ui/ui'
+import socialItems from '../../../../components/ContextMenu/socialItems'
 import withAppContext from '../../../../utils/withAppContext'
 import ContextMenu from './ContextMenu'
 
+jest.mock('../../../../components/ContextMenu/socialItems')
+
+const socialItemsMock = mocked(socialItems)
+
 describe('ContextMenu', () => {
   const useDispatchMock = jest.spyOn(reactRedux, 'useDispatch')
+
+  beforeEach(() => {
+    socialItemsMock.mockReturnValue([])
+  })
 
   afterEach(() => {
     useDispatchMock.mockClear()
@@ -141,5 +151,28 @@ describe('ContextMenu', () => {
     fireEvent.click(getByText('Download origineel'))
 
     expect(handleDownloadMock).toHaveBeenCalledWith('test.png?source_file=true', 'origineel')
+  })
+
+  it('triggers the page share from the social items', () => {
+    const dispatchMock = jest.fn()
+
+    useDispatchMock.mockReturnValue(dispatchMock)
+    socialItemsMock.mockImplementation((shareFn: () => void) => {
+      shareFn()
+      return []
+    })
+
+    render(
+      withAppContext(
+        <ContextMenu
+          handleDownload={() => {}}
+          fileUrl="test.png"
+          isImage
+          downloadLoading={false}
+        />,
+      ),
+    )
+
+    expect(dispatchMock).toHaveBeenCalledWith(sharePage())
   })
 })

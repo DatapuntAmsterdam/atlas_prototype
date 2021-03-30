@@ -39,7 +39,6 @@ const ContextMenu: FunctionComponent<ContextMenuProps> = ({
       {...otherProps}
     >
       <ContextMenuItem
-        role="button"
         onClick={openPrintMode}
         icon={
           <Icon padding={4} inline size={24}>
