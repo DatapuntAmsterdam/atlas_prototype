@@ -7,16 +7,16 @@ import {
   themeSpacing,
 } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import cmsConfig from '../../shared/config/cms.config'
-import { toCollectionSearch } from '../../store/redux-first-router/actions'
-import ContentContainer from '../components/ContentContainer/ContentContainer'
-import AboutBlock from '../components/HomePage/AboutBlock'
-import EditorialBlock from '../components/HomePage/EditorialBlock'
-import HighlightBlock from '../components/HomePage/HighlightBlock'
-import NavigationBlock from '../components/HomePage/NavigationBlock'
-import OrganizationBlock from '../components/HomePage/OrganizationBlock'
-import ThemesBlock from '../components/HomePage/ThemesBlock'
-import ShareBar from '../components/ShareBar/ShareBar'
+import cmsConfig from '../../../shared/config/cms.config'
+import { toCollectionSearch } from '../../../store/redux-first-router/actions'
+import ContentContainer from '../../components/ContentContainer/ContentContainer'
+import AboutBlock from '../../components/HomePage/AboutBlock'
+import EditorialBlock from '../../components/HomePage/EditorialBlock'
+import HighlightBlock from '../../components/HomePage/HighlightBlock'
+import NavigationBlock from '../../components/HomePage/NavigationBlock'
+import OrganizationBlock from '../../components/HomePage/OrganizationBlock'
+import ThemesBlock from '../../components/HomePage/ThemesBlock'
+import ShareBar from '../../components/ShareBar/ShareBar'
 
 const HighlightColumn = styled(Column)`
   // aligns the HighlightsBlock with the NavigationBlock
@@ -27,7 +27,7 @@ const HighlightColumn = styled(Column)`
   }
 `
 
-const StyledRow = styled(Row)`
+const StyledRow = styled(Row)<{ fullWidth?: boolean }>`
   margin-bottom: ${themeSpacing(18)};
 
   @media screen and ${breakpoint('max-width', 'tabletM')} {
@@ -86,7 +86,7 @@ const HomePage = () => (
       </StyledRow>
       <StyledRow>
         <Column span={{ small: 1, medium: 2, big: 6, large: 12, xLarge: 12 }}>
-          <ShareBar hasPrintButton={false} />
+          <ShareBar />
         </Column>
       </StyledRow>
     </ContentContainer>
