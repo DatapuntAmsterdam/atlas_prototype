@@ -115,7 +115,7 @@ const DocumentGallery: FunctionComponent<DocumentGalleryProps> = ({
             !hasExtendedRights && (
               <StyledAlert level="info" dismissible data-testid="noExtendedRights">
                 <div>
-                  Medewerkers/ketenpartners van Gemeente Amsterdam met extra bevoegdheden kunnen
+                  Medewerkers/ketenpartners van Gemeente Amsterdam met extra bevoegdheden kunnen{' '}
                   <LoginLinkButton>inloggen</LoginLinkButton> om alle bouw- en omgevingsdossiers te
                   bekijken.
                 </div>
