@@ -1,9 +1,9 @@
 import { FunctionComponent, ReactElement } from 'react'
-import AuthScope from '../../../shared/services/api/authScope'
-import useAuthScope from '../../utils/useAuthScope'
-import AuthAlert, { AuthAlertProps } from '../Alerts/AuthAlert'
+import AuthScope from '../../../../../shared/services/api/authScope'
+import useAuthScope from '../../../../utils/useAuthScope'
+import AuthAlert, { AuthAlertProps } from '../../../../components/Alerts/AuthAlert'
 
-interface Props extends AuthAlertProps {
+export interface AuthenticationWrapperProps extends AuthAlertProps {
   authScopes?: AuthScope[]
   authScopeRequired?: boolean
   /**
@@ -13,7 +13,7 @@ interface Props extends AuthAlertProps {
   children: () => ReactElement | null
 }
 
-const AuthenticationWrapper: FunctionComponent<Props> = ({
+const AuthenticationWrapper: FunctionComponent<AuthenticationWrapperProps> = ({
   authScopes,
   excludedResults,
   authScopeRequired,
@@ -24,9 +24,11 @@ const AuthenticationWrapper: FunctionComponent<Props> = ({
   const { isUserAuthorized } = useAuthScope()
   const userIsAuthorized = isUserAuthorized(authScopes)
   const showAlert = !userIsAuthorized
-
-  const alert = showAlert && <AuthAlert {...{ specialAuthLevel, excludedResults }} />
   const result = (userIsAuthorized || !authScopeRequired) && children()
+  const alert = showAlert && (
+    <AuthAlert specialAuthLevel={specialAuthLevel} excludedResults={excludedResults} />
+  )
+
   return (
     <>
       {alertFirst ? alert : result}
