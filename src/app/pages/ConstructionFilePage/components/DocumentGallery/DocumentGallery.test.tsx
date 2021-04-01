@@ -68,7 +68,8 @@ describe('DocumentGallery', () => {
     expect(getByTestId('noRights')).toBeDefined()
   })
 
-  it('triggers the onRequestLoginLink prop if a login link is requested', () => {
+  // TODO: Restore this when we can safely enable the login link again.
+  it.skip('triggers the onRequestLoginLink prop if a login link is requested', () => {
     const onRequestLoginLinkMock = jest.fn()
     const { getByText } = render(
       withAppContext(

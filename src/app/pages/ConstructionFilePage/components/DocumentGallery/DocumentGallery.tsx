@@ -101,12 +101,8 @@ const DocumentGallery: FunctionComponent<DocumentGalleryProps> = ({
           {!hasRights && !hasExtendedRights ? (
             <StyledAlert level="info" dismissible data-testid="noRights">
               <div>
-                U kunt hier{' '}
-                <LinkButton type="button" onClick={onRequestLoginLink}>
-                  toegang aanvragen
-                </LinkButton>{' '}
-                om de om bouw- en omgevingsdossiers in te zien. Medewerkers/ketenpartners van
-                Gemeente Amsterdam kunnen <LoginLinkButton>inloggen</LoginLinkButton> om deze te
+                Medewerkers/ketenpartners van Gemeente Amsterdam kunnen{' '}
+                <LoginLinkButton>inloggen</LoginLinkButton> om bouw- en omgevingsdossiers te
                 bekijken.
               </div>
             </StyledAlert>
