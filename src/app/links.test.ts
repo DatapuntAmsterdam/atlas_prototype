@@ -5,7 +5,7 @@ import {
   toAddresses,
   toArticleDetail,
   toCadastralObjects,
-  toConstructionFile,
+  toConstructionDossier,
   toEstablishments,
   toHelpPage,
   toHome,
@@ -42,12 +42,12 @@ describe('toCadastralObjects', () => {
   })
 })
 
-describe('toConstructionFile', () => {
+describe('toConstructionDossier', () => {
   it('creates a location descriptor', () => {
     const id = '123456'
 
-    expect(toConstructionFile(id, 'file.ext', 'http://foo.bar')).toEqual({
-      pathname: generatePath(routing.constructionFile.path, { id }),
+    expect(toConstructionDossier(id, 'file.ext', 'http://foo.bar')).toEqual({
+      pathname: generatePath(routing.constructionDossier.path, { id }),
       search: 'bestand=file.ext&bestandUrl=http%3A%2F%2Ffoo.bar',
     })
   })

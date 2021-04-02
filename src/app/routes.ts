@@ -94,12 +94,12 @@ export const routing = typeHelper({
     type: `${ROUTER_NAMESPACE}/${PAGES.PANORAMA}`,
     page: PAGES.PANORAMA,
   },
-  constructionFile: {
+  constructionDossier: {
     title: 'Bouwdossier',
     path: `/${MAIN_PATHS.DATA}/bouwdossiers/bouwdossier/:id/`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.CONSTRUCTION_FILE}`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.CONSTRUCTION_DOSSIER}`,
     useHooks: true, // indicate to skip legacy documentHead and piwik middleware
-    page: PAGES.CONSTRUCTION_FILE,
+    page: PAGES.CONSTRUCTION_DOSSIER,
   },
   actuality: {
     title: 'Actualiteit',

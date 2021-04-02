@@ -662,7 +662,7 @@ describe('employee permissions', () => {
 
       cy.wait('@getBouwdossier')
 
-      cy.get(DETAIL_PANEL.constructionFileSubheading)
+      cy.get(DETAIL_PANEL.constructionDossierSubheading)
         .eq(0)
         .should('have.text', 'Bouw- en omgevingsdossiers')
         .and('be.visible')
@@ -685,7 +685,7 @@ describe('employee permissions', () => {
         .should('contain', 'Deelgoedkeuringen, tekeningen')
         .and('be.visible')
 
-      cy.get(DETAIL_PANEL.constructionFileSubheading)
+      cy.get(DETAIL_PANEL.constructionDossierSubheading)
         .eq(4)
         .should('have.text', 'Adressen')
         .and('be.visible')

@@ -6,7 +6,7 @@ import { Single as Bouwdossier } from '../../../../../api/iiif-metadata/bouwdoss
 import { toDataDetail } from '../../../../../store/redux-first-router/actions'
 import DefinitionList, { DefinitionListItem } from '../../../../components/DefinitionList'
 import formatAddresses from '../../utils/formatAddresses'
-import DocumentGallery from '../DocumentGallery'
+import FilesGallery from '../FilesGallery'
 import LoginLinkRequestModal from '../LoginLinkRequestModal'
 
 const ContentBlock = styled.div`
@@ -35,12 +35,16 @@ const StyledDefinitionListItem = styled(DefinitionListItem)`
   padding-left: ${themeSpacing(5)}; // Align the terms on the left with the page content
 `
 
-export interface FileDetailsProps {
-  fileId: string
+export interface DossierDetailsProps {
+  dossierId: string
   file: Bouwdossier
 }
 
-const FileDetails: FunctionComponent<FileDetailsProps> = ({ fileId, file, ...otherProps }) => {
+const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
+  dossierId,
+  file,
+  ...otherProps
+}) => {
   const [showLoginLinkRequestModal, setShowLoginLinkRequestModal] = useState(false)
   const addresses = useMemo(() => formatAddresses(file.adressen), [file.adressen])
   const sortedDocuments = useMemo(
@@ -108,9 +112,9 @@ const FileDetails: FunctionComponent<FileDetailsProps> = ({ fileId, file, ...oth
                 )}
               </StyledDefinitionList>
             )}
-            <DocumentGallery
+            <FilesGallery
               data-testid="filesGallery"
-              fileId={fileId}
+              dossierId={dossierId}
               document={document}
               onRequestLoginLink={() => setShowLoginLinkRequestModal(true)}
             />
@@ -118,7 +122,7 @@ const FileDetails: FunctionComponent<FileDetailsProps> = ({ fileId, file, ...oth
         ))}
 
         {addresses.length && (
-          <ContentBlock data-testid="constructionFileAddresses">
+          <ContentBlock data-testid="constructionDossierAddresses">
             <SubHeading forwardedAs="h3">Adressen</SubHeading>
             <List>
               {addresses.map((address) => (
@@ -136,4 +140,4 @@ const FileDetails: FunctionComponent<FileDetailsProps> = ({ fileId, file, ...oth
   )
 }
 
-export default FileDetails
+export default DossierDetails

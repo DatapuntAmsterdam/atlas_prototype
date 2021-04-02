@@ -18,8 +18,8 @@ const ActualityPage = lazy(
 const DatasetDetailPage = lazy(
   () => import(/* webpackChunkName: "DatasetDetailPage" */ './pages/DatasetDetailPage'),
 )
-const ConstructionFilePage = lazy(
-  () => import(/* webpackChunkName: "ConstructionFilePage" */ './pages/ConstructionFilePage'),
+const ConstructionDossierPage = lazy(
+  () => import(/* webpackChunkName: "ConstructionDossierPage" */ './pages/ConstructionDossierPage'),
 )
 const ArticleDetailPage = lazy(
   () => import(/* webpackChunkName: "ArticleDetailPage" */ './pages/ArticleDetailPage'),
@@ -145,9 +145,9 @@ const AppBody: FunctionComponent<AppBodyProps> = ({
                         <div className="u-row u-full-height">
                           <Switch>
                             <Route
-                              path={routing.constructionFile.path}
+                              path={routing.constructionDossier.path}
                               exact
-                              component={ConstructionFilePage}
+                              component={ConstructionDossierPage}
                             />
                             <Route
                               path={routing.datasetDetail.path}

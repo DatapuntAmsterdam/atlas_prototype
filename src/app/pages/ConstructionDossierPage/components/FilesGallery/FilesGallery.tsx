@@ -9,10 +9,9 @@ import { NOT_FOUND_THUMBNAIL } from '../../../../../shared/config/constants'
 import { getUserScopes } from '../../../../../shared/ducks/user/user'
 import { SCOPES } from '../../../../../shared/services/auth/auth'
 import ActionButton from '../../../../components/ActionButton'
-import { toConstructionFile } from '../../../../links'
+import { toConstructionDossier } from '../../../../links'
 import { useAuthToken } from '../../AuthTokenContext'
 import IIIFThumbnail from '../IIIFThumbnail'
-import LinkButton from '../LinkButton'
 import LoginLinkButton from '../LoginLinkButton'
 
 const StyledAlert = styled(Alert)`
@@ -67,14 +66,14 @@ const StyledLink = styled(Link)<{ disabled: boolean }>`
 
 const MAX_LENGTH = 6
 
-export interface DocumentGalleryProps {
-  fileId: string
+export interface FilesGalleryProps {
+  dossierId: string
   document: Document
   onRequestLoginLink: () => void
 }
 
-const DocumentGallery: FunctionComponent<DocumentGalleryProps> = ({
-  fileId,
+const FilesGallery: FunctionComponent<FilesGalleryProps> = ({
+  dossierId,
   document,
   onRequestLoginLink,
   ...otherProps
@@ -134,7 +133,7 @@ const DocumentGallery: FunctionComponent<DocumentGalleryProps> = ({
                   // @ts-ignore */}
                   <StyledLink
                     forwardedAs={disabled ? 'span' : RouterLink}
-                    to={toConstructionFile(fileId, file.filename, file.url)}
+                    to={toConstructionDossier(dossierId, file.filename, file.url)}
                     title={file.filename}
                     disabled={disabled}
                     data-testid="detailLink"
@@ -181,4 +180,4 @@ const DocumentGallery: FunctionComponent<DocumentGalleryProps> = ({
   )
 }
 
-export default DocumentGallery
+export default FilesGallery

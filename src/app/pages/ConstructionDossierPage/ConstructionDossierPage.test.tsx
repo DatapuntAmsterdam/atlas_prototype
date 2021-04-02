@@ -5,10 +5,10 @@ import { Suspense } from 'react'
 import { Route, Router } from 'react-router-dom'
 import { mocked } from 'ts-jest/utils'
 import { getBouwdossierById, singleFixture } from '../../../api/iiif-metadata/bouwdossier'
-import { toConstructionFile } from '../../links'
+import { toConstructionDossier } from '../../links'
 import { routing } from '../../routes'
 import useDocumentTitle from '../../utils/useDocumentTitle'
-import ConstructionFilePage from './ConstructionFilePage'
+import ConstructionDossierPage from './ConstructionDossierPage'
 
 jest.mock('../../../api/iiif-metadata/bouwdossier')
 jest.mock('../../utils/useDocumentTitle')
@@ -18,20 +18,20 @@ const mockedGetBouwdossierById = mocked(getBouwdossierById)
 const mockedUseDocumentTitle = mocked(useDocumentTitle)
 
 const defaultHistory = createMemoryHistory({
-  initialEntries: [createPath(toConstructionFile('foo'))],
+  initialEntries: [createPath(toConstructionDossier('foo'))],
 })
 
 function renderWithHistory(history = defaultHistory) {
   return (
     <Router history={history}>
       <ThemeProvider>
-        <Route path={routing.constructionFile.path} exact component={ConstructionFilePage} />
+        <Route path={routing.constructionDossier.path} exact component={ConstructionDossierPage} />
       </ThemeProvider>
     </Router>
   )
 }
 
-describe('ConstructionFilePage', () => {
+describe('ConstructionDossierPage', () => {
   beforeEach(() => {
     mockedGetBouwdossierById.mockReturnValue(new Promise(() => {}))
 
@@ -61,14 +61,14 @@ describe('ConstructionFilePage', () => {
     })
 
     const history = createMemoryHistory({
-      initialEntries: [createPath(toConstructionFile('foo'))],
+      initialEntries: [createPath(toConstructionDossier('foo'))],
     })
 
     const { rerender } = render(renderWithHistory(history))
 
     expect(mockedSetDocumentTitle).toHaveBeenCalledWith(false)
 
-    history.push(toConstructionFile('foo', 'somefile.png'))
+    history.push(toConstructionDossier('foo', 'somefile.png'))
     rerender(renderWithHistory(history))
 
     expect(mockedSetDocumentTitle).toHaveBeenCalledWith('Bouwtekening')
@@ -92,7 +92,7 @@ describe('ConstructionFilePage', () => {
     mockedGetBouwdossierById.mockResolvedValue(singleFixture)
 
     const history = createMemoryHistory({
-      initialEntries: [createPath(toConstructionFile('foo', 'file.png', 'path/to/file.png'))],
+      initialEntries: [createPath(toConstructionDossier('foo', 'file.png', 'path/to/file.png'))],
     })
 
     const { getByTestId } = render(<Suspense fallback="">{renderWithHistory(history)}</Suspense>)
@@ -112,7 +112,7 @@ describe('ConstructionFilePage', () => {
     mockedGetBouwdossierById.mockResolvedValue(singleFixture)
 
     const history = createMemoryHistory({
-      initialEntries: [createPath(toConstructionFile('foo', 'file.png', 'path/to/file.png'))],
+      initialEntries: [createPath(toConstructionDossier('foo', 'file.png', 'path/to/file.png'))],
     })
 
     const { queryByTestId } = render(<Suspense fallback="">{renderWithHistory(history)}</Suspense>)

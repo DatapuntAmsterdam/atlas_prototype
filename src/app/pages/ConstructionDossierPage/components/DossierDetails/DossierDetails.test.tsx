@@ -2,20 +2,20 @@ import { fireEvent, render, within } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 import { singleFixture as bouwdossierFixture } from '../../../../../api/iiif-metadata/bouwdossier'
 import withAppContext from '../../../../utils/withAppContext'
-import DocumentGallery from '../DocumentGallery'
+import FilesGallery from '../FilesGallery'
 import LoginLinkRequestModal from '../LoginLinkRequestModal'
-import FileDetails from './FileDetails'
+import DossierDetails from './DossierDetails'
 
-jest.mock('../DocumentGallery')
+jest.mock('../FilesGallery')
 jest.mock('../LoginLinkRequestModal')
 
-const DocumentGalleryMock = mocked(DocumentGallery)
+const FilesGalleryMock = mocked(FilesGallery)
 const LoginLinkRequestModalMock = mocked(LoginLinkRequestModal)
 
-describe('FileDetails', () => {
+describe('DossierDetails', () => {
   beforeEach(() => {
-    DocumentGalleryMock.mockImplementation(
-      ({ fileId, document, onRequestLoginLink, ...otherProps }) => {
+    FilesGalleryMock.mockImplementation(
+      ({ dossierId, document, onRequestLoginLink, ...otherProps }) => {
         return <div {...otherProps} />
       },
     )
@@ -26,13 +26,13 @@ describe('FileDetails', () => {
   })
 
   afterEach(() => {
-    DocumentGalleryMock.mockReset()
+    FilesGalleryMock.mockReset()
     LoginLinkRequestModalMock.mockReset()
   })
 
   it('sets the title', () => {
     const { container, getByText } = render(
-      withAppContext(<FileDetails fileId="SDC9999" file={bouwdossierFixture} />),
+      withAppContext(<DossierDetails dossierId="SDC9999" file={bouwdossierFixture} />),
     )
     const h1 = container.querySelector('h1')
 
@@ -42,7 +42,7 @@ describe('FileDetails', () => {
 
   it('renders a definition list', () => {
     const { getByTestId } = render(
-      withAppContext(<FileDetails fileId="SDC9999" file={bouwdossierFixture} />),
+      withAppContext(<DossierDetails dossierId="SDC9999" file={bouwdossierFixture} />),
     )
 
     const definitionList = getByTestId('definitionList')
@@ -59,8 +59,8 @@ describe('FileDetails', () => {
   it('renders olo_liaan_nummer', () => {
     const { getByTestId, queryByTestId, rerender } = render(
       withAppContext(
-        <FileDetails
-          fileId="SDC9999"
+        <DossierDetails
+          dossierId="SDC9999"
           file={{ ...bouwdossierFixture, olo_liaan_nummer: undefined }}
         />,
       ),
@@ -73,7 +73,7 @@ describe('FileDetails', () => {
 
     rerender(
       withAppContext(
-        <FileDetails fileId="SDC9999" file={{ ...bouwdossierFixture, olo_liaan_nummer }} />,
+        <DossierDetails dossierId="SDC9999" file={{ ...bouwdossierFixture, olo_liaan_nummer }} />,
       ),
     )
 
@@ -83,8 +83,8 @@ describe('FileDetails', () => {
   it('renders the subfiles', () => {
     const { getAllByTestId, getByTestId, getByText, rerender } = render(
       withAppContext(
-        <FileDetails
-          fileId="SDC9999"
+        <DossierDetails
+          dossierId="SDC9999"
           file={{ ...bouwdossierFixture, olo_liaan_nummer: undefined }}
         />,
       ),
@@ -111,7 +111,7 @@ describe('FileDetails', () => {
 
     rerender(
       withAppContext(
-        <FileDetails fileId="SDC9999" file={{ ...bouwdossierFixture, olo_liaan_nummer }} />,
+        <DossierDetails dossierId="SDC9999" file={{ ...bouwdossierFixture, olo_liaan_nummer }} />,
       ),
     )
 
@@ -123,19 +123,19 @@ describe('FileDetails', () => {
   it('renders the addresses', () => {
     const { queryByTestId, getByTestId, rerender } = render(
       withAppContext(
-        <FileDetails fileId="SDC9999" file={{ ...bouwdossierFixture, adressen: [] }} />,
+        <DossierDetails dossierId="SDC9999" file={{ ...bouwdossierFixture, adressen: [] }} />,
       ),
     )
 
-    expect(queryByTestId('constructionFileAddresses')).not.toBeInTheDocument()
+    expect(queryByTestId('constructionDossierAddresses')).not.toBeInTheDocument()
 
-    rerender(withAppContext(<FileDetails fileId="SDC9999" file={bouwdossierFixture} />))
+    rerender(withAppContext(<DossierDetails dossierId="SDC9999" file={bouwdossierFixture} />))
 
-    expect(getByTestId('constructionFileAddresses')).toBeInTheDocument()
+    expect(getByTestId('constructionDossierAddresses')).toBeInTheDocument()
   })
 
   it('opens and closes the login link request modal', () => {
-    DocumentGalleryMock.mockImplementation(({ onRequestLoginLink }) => {
+    FilesGalleryMock.mockImplementation(({ onRequestLoginLink }) => {
       return <button data-testid="requestLoginLink" onClick={onRequestLoginLink} type="button" />
     })
 
@@ -144,7 +144,7 @@ describe('FileDetails', () => {
     })
 
     const { queryByTestId, getByTestId } = render(
-      withAppContext(<FileDetails fileId="SDC9999" file={bouwdossierFixture} />),
+      withAppContext(<DossierDetails dossierId="SDC9999" file={bouwdossierFixture} />),
     )
 
     expect(queryByTestId('loginLinkRequestModal')).toBeNull()

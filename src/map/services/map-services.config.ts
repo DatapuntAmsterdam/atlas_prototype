@@ -78,7 +78,7 @@ export const endpointTypes = {
   bedrijfsinvesteringszone: 'vsd/biz/',
   bekendmakingen: 'vsd/bekendmakingen/',
   bouwstroompunten: 'bouwstroompunten/bouwstroompunten',
-  constructionFiles: 'iiif-metadata/bouwdossier/',
+  constructionDossiers: 'iiif-metadata/bouwdossier/',
   covid19Alcohol: 'v1/covid_19/alcoholverkoopverbod/',
   covid19Mooring: 'v1/covid_19/aanlegverbod/',
   covid19Artist: 'v1/covid_19/straatartiestverbod/',

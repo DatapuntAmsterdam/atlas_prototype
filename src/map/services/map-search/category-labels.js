@@ -19,7 +19,7 @@ const categoryLabels = {
     singular: 'Bouwstroompunt',
     plural: 'Bouwstroompunten',
   },
-  constructionFiles: {
+  constructionDossiers: {
     singular: 'Bouw- en omgevingsdossier',
     plural: 'Bouw- en omgevingsdossiers',
   },

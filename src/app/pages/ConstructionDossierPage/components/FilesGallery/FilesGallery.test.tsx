@@ -9,7 +9,7 @@ import * as userDuck from '../../../../../shared/ducks/user/user'
 import { SCOPES } from '../../../../../shared/services/auth/auth'
 import withAppContext from '../../../../utils/withAppContext'
 import AuthTokenContext, { AuthTokenProvider } from '../../AuthTokenContext'
-import DocumentGallery from './DocumentGallery'
+import FilesGallery from './FilesGallery'
 
 jest.mock('../IIIFThumbnail', () => ({ ...props }) => (
   // eslint-disable-next-line jsx-a11y/alt-text
@@ -25,7 +25,7 @@ const MOCK_FILES: Bestand[] = Array.from({ length: 10 }).map((_, index) => ({
 
 const MOCK_DOCUMENT: Document = { ...bouwdossierFixture.documenten[0], bestanden: MOCK_FILES }
 
-describe('DocumentGallery', () => {
+describe('FilesGallery', () => {
   beforeEach(() => {
     getUserScopesSpy.mockReturnValue([])
   })
@@ -38,8 +38,8 @@ describe('DocumentGallery', () => {
     const { container } = render(
       withAppContext(
         <AuthTokenProvider>
-          <DocumentGallery
-            fileId="SDC9999"
+          <FilesGallery
+            dossierId="SDC9999"
             document={MOCK_DOCUMENT}
             onRequestLoginLink={() => {}}
           />
@@ -55,8 +55,8 @@ describe('DocumentGallery', () => {
     const { getByTestId } = render(
       withAppContext(
         <AuthTokenProvider>
-          <DocumentGallery
-            fileId="SDC9999"
+          <FilesGallery
+            dossierId="SDC9999"
             document={MOCK_DOCUMENT}
             onRequestLoginLink={() => {}}
           />
@@ -74,8 +74,8 @@ describe('DocumentGallery', () => {
     const { getByText } = render(
       withAppContext(
         <AuthTokenProvider>
-          <DocumentGallery
-            fileId="SDC9999"
+          <FilesGallery
+            dossierId="SDC9999"
             document={MOCK_DOCUMENT}
             onRequestLoginLink={onRequestLoginLinkMock}
           />
@@ -95,8 +95,8 @@ describe('DocumentGallery', () => {
     const { getByTestId } = render(
       withAppContext(
         <AuthTokenProvider>
-          <DocumentGallery
-            fileId="SDC9999"
+          <FilesGallery
+            dossierId="SDC9999"
             document={{ ...MOCK_DOCUMENT, access: 'RESTRICTED' }}
             onRequestLoginLink={() => {}}
           />
@@ -112,8 +112,8 @@ describe('DocumentGallery', () => {
     const { getAllByTestId } = render(
       withAppContext(
         <AuthTokenProvider>
-          <DocumentGallery
-            fileId="SDC9999"
+          <FilesGallery
+            dossierId="SDC9999"
             document={MOCK_DOCUMENT}
             onRequestLoginLink={() => {}}
           />
@@ -131,8 +131,8 @@ describe('DocumentGallery', () => {
     const { getAllByTestId } = render(
       withAppContext(
         <AuthTokenProvider>
-          <DocumentGallery
-            fileId="SDC9999"
+          <FilesGallery
+            dossierId="SDC9999"
             document={{ ...MOCK_DOCUMENT, access: 'RESTRICTED' }}
             onRequestLoginLink={() => {}}
           />
@@ -148,8 +148,8 @@ describe('DocumentGallery', () => {
     const { getAllByTestId } = render(
       withAppContext(
         <AuthTokenProvider>
-          <DocumentGallery
-            fileId="SDC9999"
+          <FilesGallery
+            dossierId="SDC9999"
             document={MOCK_DOCUMENT}
             onRequestLoginLink={() => {}}
           />
@@ -167,8 +167,8 @@ describe('DocumentGallery', () => {
     const { getAllByTestId } = render(
       withAppContext(
         <AuthTokenProvider>
-          <DocumentGallery
-            fileId="SDC9999"
+          <FilesGallery
+            dossierId="SDC9999"
             document={{ ...MOCK_DOCUMENT, access: 'RESTRICTED' }}
             onRequestLoginLink={() => {}}
           />
@@ -183,8 +183,8 @@ describe('DocumentGallery', () => {
     const { getAllByTestId } = render(
       withAppContext(
         <AuthTokenProvider>
-          <DocumentGallery
-            fileId="SDC9999"
+          <FilesGallery
+            dossierId="SDC9999"
             document={MOCK_DOCUMENT}
             onRequestLoginLink={() => {}}
           />
@@ -202,8 +202,8 @@ describe('DocumentGallery', () => {
     const { getAllByTestId } = render(
       withAppContext(
         <AuthTokenProvider>
-          <DocumentGallery
-            fileId="SDC9999"
+          <FilesGallery
+            dossierId="SDC9999"
             document={{ ...MOCK_DOCUMENT, access: 'RESTRICTED' }}
             onRequestLoginLink={() => {}}
           />
@@ -220,8 +220,8 @@ describe('DocumentGallery', () => {
     const { getAllByTestId } = render(
       withAppContext(
         <AuthTokenProvider>
-          <DocumentGallery
-            fileId="SDC9999"
+          <FilesGallery
+            dossierId="SDC9999"
             document={MOCK_DOCUMENT}
             onRequestLoginLink={() => {}}
           />
@@ -241,8 +241,8 @@ describe('DocumentGallery', () => {
     const { getAllByTestId } = render(
       withAppContext(
         <AuthTokenProvider>
-          <DocumentGallery
-            fileId="SDC9999"
+          <FilesGallery
+            dossierId="SDC9999"
             document={{ ...MOCK_DOCUMENT, access: 'RESTRICTED' }}
             onRequestLoginLink={() => {}}
           />
@@ -261,8 +261,8 @@ describe('DocumentGallery', () => {
     const { getAllByTestId } = render(
       withAppContext(
         <AuthTokenContext.Provider value={{ token: MOCK_TOKEN }}>
-          <DocumentGallery
-            fileId="SDC9999"
+          <FilesGallery
+            dossierId="SDC9999"
             document={MOCK_DOCUMENT}
             onRequestLoginLink={() => {}}
           />
@@ -280,8 +280,8 @@ describe('DocumentGallery', () => {
     const { getAllByTestId } = render(
       withAppContext(
         <AuthTokenProvider>
-          <DocumentGallery
-            fileId="SDC9999"
+          <FilesGallery
+            dossierId="SDC9999"
             document={MOCK_DOCUMENT}
             onRequestLoginLink={() => {}}
           />
@@ -297,8 +297,8 @@ describe('DocumentGallery', () => {
     const { getAllByTestId, getByTestId } = render(
       withAppContext(
         <AuthTokenProvider>
-          <DocumentGallery
-            fileId="SDC9999"
+          <FilesGallery
+            dossierId="SDC9999"
             document={MOCK_DOCUMENT}
             onRequestLoginLink={() => {}}
           />
@@ -318,8 +318,8 @@ describe('DocumentGallery', () => {
     const { queryByTestId } = render(
       withAppContext(
         <AuthTokenProvider>
-          <DocumentGallery
-            fileId="SDC9999"
+          <FilesGallery
+            dossierId="SDC9999"
             document={{ ...MOCK_DOCUMENT, bestanden: MOCK_FILES.slice(0, 6) }}
             onRequestLoginLink={() => {}}
           />
@@ -334,8 +334,8 @@ describe('DocumentGallery', () => {
     const { getByTestId, queryAllByTestId } = render(
       withAppContext(
         <AuthTokenProvider>
-          <DocumentGallery
-            fileId="SDC9999"
+          <FilesGallery
+            dossierId="SDC9999"
             document={{ ...MOCK_DOCUMENT, bestanden: [] }}
             onRequestLoginLink={() => {}}
           />

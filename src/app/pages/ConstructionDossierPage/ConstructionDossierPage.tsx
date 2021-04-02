@@ -5,11 +5,11 @@ import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { getBouwdossierById } from '../../../api/iiif-metadata/bouwdossier'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
-import { toConstructionFile } from '../../links'
+import { toConstructionDossier } from '../../links'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import useParam from '../../utils/useParam'
 import { AuthTokenProvider } from './AuthTokenContext'
-import FileDetails from './components/FileDetails'
+import DossierDetails from './components/DossierDetails'
 import { fileNameParam, fileUrlParam } from './query-params'
 
 const ImageViewer = lazy(
@@ -21,14 +21,14 @@ const StyledRow = styled(Row)`
   margin: ${themeSpacing(5)};
 `
 
-interface ConstructionFilePageParams {
+interface ConstructionDossierPageParams {
   id: string
 }
 
-const ConstructionFilePage: FunctionComponent = () => {
+const ConstructionDossierPage: FunctionComponent = () => {
   const history = useHistory()
   const { setDocumentTitle } = useDocumentTitle()
-  const { id } = useParams<ConstructionFilePageParams>()
+  const { id } = useParams<ConstructionDossierPageParams>()
   const [fileName] = useParam(fileNameParam)
   const [fileUrl] = useParam(fileUrlParam)
   const result = usePromise(() => getBouwdossierById(id), [id])
@@ -56,7 +56,7 @@ const ConstructionFilePage: FunctionComponent = () => {
     )
   }
 
-  const fileId = `${result.value.stadsdeel}${result.value.dossiernr}`
+  const dossierId = `${result.value.stadsdeel}${result.value.dossiernr}`
 
   return (
     <AuthTokenProvider>
@@ -65,12 +65,14 @@ const ConstructionFilePage: FunctionComponent = () => {
           title={result.value.titel}
           fileName={fileName}
           fileUrl={fileUrl}
-          onClose={() => history.replace(toConstructionFile(fileId))}
+          onClose={() => history.replace(toConstructionDossier(dossierId))}
         />
       )}
-      {!fileName && <FileDetails fileId={fileId} file={result.value} data-testid="fileDetails" />}
+      {!fileName && (
+        <DossierDetails dossierId={dossierId} file={result.value} data-testid="fileDetails" />
+      )}
     </AuthTokenProvider>
   )
 }
 
-export default ConstructionFilePage
+export default ConstructionDossierPage
