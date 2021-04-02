@@ -69,7 +69,7 @@ const ConstructionDossierPage: FunctionComponent = () => {
         />
       )}
       {!fileName && (
-        <DossierDetails dossierId={dossierId} file={result.value} data-testid="fileDetails" />
+        <DossierDetails dossierId={dossierId} file={result.value} data-testid="dossierDetails" />
       )}
     </AuthTokenProvider>
   )

@@ -105,7 +105,7 @@ describe('ConstructionDossierPage', () => {
 
     const { getByTestId } = render(renderWithHistory())
 
-    await waitFor(() => expect(getByTestId('fileDetails')).toBeDefined())
+    await waitFor(() => expect(getByTestId('dossierDetails')).toBeDefined())
   })
 
   it('hides the file details if the image viewer is active', async () => {
@@ -117,6 +117,6 @@ describe('ConstructionDossierPage', () => {
 
     const { queryByTestId } = render(<Suspense fallback="">{renderWithHistory(history)}</Suspense>)
 
-    await waitFor(() => expect(queryByTestId('fileDetails')).toBeNull())
+    await waitFor(() => expect(queryByTestId('dossierDetails')).toBeNull())
   })
 })
