@@ -37,7 +37,7 @@
     "@babel/runtime-corejs3": "^7.13.10",
     "@datapunt/matomo-tracker-js": "^0.4.0",
     "@datapunt/matomo-tracker-react": "^0.4.0",
-    "@sentry/browser": "6.1.0",
+    "@sentry/browser": "6.2.5",
     "@turf/turf": "^6.3.0",
     "body-scroll-lock": "^3.1.5",
     "classnames": "2.2.6",
