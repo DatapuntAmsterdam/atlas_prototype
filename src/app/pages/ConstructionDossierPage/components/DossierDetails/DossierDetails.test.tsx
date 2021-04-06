@@ -14,11 +14,9 @@ const LoginLinkRequestModalMock = mocked(LoginLinkRequestModal)
 
 describe('DossierDetails', () => {
   beforeEach(() => {
-    FilesGalleryMock.mockImplementation(
-      ({ dossierId, document, onRequestLoginLink, ...otherProps }) => {
-        return <div {...otherProps} />
-      },
-    )
+    FilesGalleryMock.mockImplementation(({ dossierId, document, ...otherProps }) => {
+      return <div {...otherProps} />
+    })
 
     LoginLinkRequestModalMock.mockImplementation(({ onClose, ...otherProps }) => {
       return <div {...otherProps} />
