@@ -32,7 +32,7 @@ describe('DossierDetails', () => {
 
   it('sets the title', () => {
     const { container, getByText } = render(
-      withAppContext(<DossierDetails dossierId="SDC9999" file={bouwdossierFixture} />),
+      withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />),
     )
     const h1 = container.querySelector('h1')
 
@@ -42,7 +42,7 @@ describe('DossierDetails', () => {
 
   it('renders a definition list', () => {
     const { getByTestId } = render(
-      withAppContext(<DossierDetails dossierId="SDC9999" file={bouwdossierFixture} />),
+      withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />),
     )
 
     const definitionList = getByTestId('definitionList')
@@ -61,7 +61,7 @@ describe('DossierDetails', () => {
       withAppContext(
         <DossierDetails
           dossierId="SDC9999"
-          file={{ ...bouwdossierFixture, olo_liaan_nummer: undefined }}
+          dossier={{ ...bouwdossierFixture, olo_liaan_nummer: undefined }}
         />,
       ),
     )
@@ -73,7 +73,10 @@ describe('DossierDetails', () => {
 
     rerender(
       withAppContext(
-        <DossierDetails dossierId="SDC9999" file={{ ...bouwdossierFixture, olo_liaan_nummer }} />,
+        <DossierDetails
+          dossierId="SDC9999"
+          dossier={{ ...bouwdossierFixture, olo_liaan_nummer }}
+        />,
       ),
     )
 
@@ -85,7 +88,7 @@ describe('DossierDetails', () => {
       withAppContext(
         <DossierDetails
           dossierId="SDC9999"
-          file={{ ...bouwdossierFixture, olo_liaan_nummer: undefined }}
+          dossier={{ ...bouwdossierFixture, olo_liaan_nummer: undefined }}
         />,
       ),
     )
@@ -111,7 +114,10 @@ describe('DossierDetails', () => {
 
     rerender(
       withAppContext(
-        <DossierDetails dossierId="SDC9999" file={{ ...bouwdossierFixture, olo_liaan_nummer }} />,
+        <DossierDetails
+          dossierId="SDC9999"
+          dossier={{ ...bouwdossierFixture, olo_liaan_nummer }}
+        />,
       ),
     )
 
@@ -123,13 +129,13 @@ describe('DossierDetails', () => {
   it('renders the addresses', () => {
     const { queryByTestId, getByTestId, rerender } = render(
       withAppContext(
-        <DossierDetails dossierId="SDC9999" file={{ ...bouwdossierFixture, adressen: [] }} />,
+        <DossierDetails dossierId="SDC9999" dossier={{ ...bouwdossierFixture, adressen: [] }} />,
       ),
     )
 
     expect(queryByTestId('constructionDossierAddresses')).not.toBeInTheDocument()
 
-    rerender(withAppContext(<DossierDetails dossierId="SDC9999" file={bouwdossierFixture} />))
+    rerender(withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />))
 
     expect(getByTestId('constructionDossierAddresses')).toBeInTheDocument()
   })
@@ -144,7 +150,7 @@ describe('DossierDetails', () => {
     })
 
     const { queryByTestId, getByTestId } = render(
-      withAppContext(<DossierDetails dossierId="SDC9999" file={bouwdossierFixture} />),
+      withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />),
     )
 
     expect(queryByTestId('loginLinkRequestModal')).toBeNull()

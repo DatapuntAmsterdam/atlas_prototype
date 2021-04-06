@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import requestLoginLink from '../../../../../api/iiif/requestLoginLink'
 import LoadingSpinner from '../../../../components/LoadingSpinner/LoadingSpinner'
-import ButtonBar from './ButtonBar'
+import ButtonBar from '../ButtonBar'
 
 const LoadingText = styled(Paragraph)`
   text-align: center;

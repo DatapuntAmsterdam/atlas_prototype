@@ -12,7 +12,7 @@ import {
 } from '@amsterdam/asc-ui'
 import { FormEvent, FunctionComponent, useState } from 'react'
 import styled from 'styled-components'
-import ButtonBar from './ButtonBar'
+import ButtonBar from '../ButtonBar'
 import LoginLinkRequestFlow from './LoginLinkRequestFlow'
 
 const ModalBody = styled.div`

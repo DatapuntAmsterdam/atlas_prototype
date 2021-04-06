@@ -1,27 +1,14 @@
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
-import { Alert, Column, Heading, Link, Row, themeColor, themeSpacing } from '@amsterdam/asc-ui'
+import { Checkbox, Column, Link, Row, themeSpacing } from '@amsterdam/asc-ui'
 import { FunctionComponent, useMemo, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import styled, { css } from 'styled-components'
-import { Document } from '../../../../../api/iiif-metadata/bouwdossier'
+import { Bestand, Document } from '../../../../../api/iiif-metadata/bouwdossier'
 import { NOT_FOUND_THUMBNAIL } from '../../../../../shared/config/constants'
-import { getUserScopes } from '../../../../../shared/ducks/user/user'
-import { SCOPES } from '../../../../../shared/services/auth/auth'
 import ActionButton from '../../../../components/ActionButton'
 import { toConstructionDossier } from '../../../../links'
 import { useAuthToken } from '../../AuthTokenContext'
 import IIIFThumbnail from '../IIIFThumbnail'
-import LoginLinkButton from '../LoginLinkButton'
-
-const StyledAlert = styled(Alert)`
-  margin-bottom: ${themeSpacing(5)} !important;
-`
-
-const GalleryContainer = styled.div`
-  border-bottom: 1px solid ${themeColor('tint', 'level3')};
-  padding: ${themeSpacing(5, 5, 10, 5)};
-`
 
 const StyledRow = styled(Row)<{ hasMarginBottom: boolean }>`
   justify-content: flex-start;
@@ -31,11 +18,13 @@ const StyledRow = styled(Row)<{ hasMarginBottom: boolean }>`
 const StyledColumn = styled(Column)`
   margin-right: ${themeSpacing(4)};
   margin-bottom: ${themeSpacing(4)};
+  position: relative;
 `
 
 const StyledLink = styled(Link)<{ disabled: boolean }>`
   width: 100%;
   height: 100%;
+  padding: 0;
   position: relative;
   display: inline-block;
 
@@ -64,119 +53,105 @@ const StyledLink = styled(Link)<{ disabled: boolean }>`
   }
 `
 
+const StyledCheckbox = styled(Checkbox)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: ${themeSpacing(3)};
+`
+
 const MAX_LENGTH = 6
 
 export interface FilesGalleryProps {
   dossierId: string
   document: Document
-  onRequestLoginLink: () => void
+  selectedFiles: Bestand[]
+  onFileSelectionChange: (files: Bestand[]) => void
+  disabled: boolean
 }
 
 const FilesGallery: FunctionComponent<FilesGalleryProps> = ({
   dossierId,
   document,
-  onRequestLoginLink,
-  ...otherProps
+  selectedFiles,
+  onFileSelectionChange,
+  disabled,
 }) => {
   const lessFiles = useMemo(() => document.bestanden.slice(0, MAX_LENGTH), [document.bestanden])
   const [files, setFiles] = useState(lessFiles)
-  const scopes = useSelector(getUserScopes)
+  const hasMore = document.bestanden.length > MAX_LENGTH
   const token = useAuthToken()
   const tokenQueryString = useMemo(
     () => (token ? `?${new URLSearchParams({ auth: token }).toString()}` : ''),
     [token],
   )
 
-  const hasRights = scopes.includes(SCOPES['BD/R']) || !!token
-  const hasExtendedRights = scopes.includes(SCOPES['BD/X'])
-
-  const hasMore = document.bestanden.length > MAX_LENGTH
-  const restricted = document.access === 'RESTRICTED'
+  function toggleFile(file: Bestand) {
+    if (selectedFiles.includes(file)) {
+      onFileSelectionChange(selectedFiles.filter((selectedFile) => selectedFile.url !== file.url))
+    } else {
+      onFileSelectionChange([...selectedFiles, file])
+    }
+  }
 
   return (
-    <GalleryContainer {...otherProps}>
-      {files.length ? (
-        <>
-          {!hasRights && !hasExtendedRights ? (
-            <StyledAlert level="info" dismissible data-testid="noRights">
-              <div>
-                Medewerkers/ketenpartners van Gemeente Amsterdam kunnen{' '}
-                <LoginLinkButton>inloggen</LoginLinkButton> om bouw- en omgevingsdossiers te
-                bekijken.
-              </div>
-            </StyledAlert>
-          ) : (
-            restricted &&
-            !hasExtendedRights && (
-              <StyledAlert level="info" dismissible data-testid="noExtendedRights">
-                <div>
-                  Medewerkers/ketenpartners van Gemeente Amsterdam met extra bevoegdheden kunnen{' '}
-                  <LoginLinkButton>inloggen</LoginLinkButton> om alle bouw- en omgevingsdossiers te
-                  bekijken.
-                </div>
-              </StyledAlert>
-            )
-          )}
-
-          <StyledRow hasMarginBottom={hasMore} hasMargin={false} hasMaxWidth={false}>
-            {files.map((file) => {
-              const disabled =
-                (!hasRights && !hasExtendedRights) || (restricted && !hasExtendedRights)
-
-              return (
-                <StyledColumn
-                  key={file.url}
-                  span={{ small: 1, medium: 2, big: 2, large: 2, xLarge: 2 }}
-                  data-testid="fileResult"
-                >
-                  {/*
-                  // @ts-ignore */}
-                  <StyledLink
-                    forwardedAs={disabled ? 'span' : RouterLink}
-                    to={toConstructionDossier(dossierId, file.filename, file.url)}
-                    title={file.filename}
-                    disabled={disabled}
-                    data-testid="detailLink"
-                  >
-                    <IIIFThumbnail
-                      src={
-                        disabled
-                          ? NOT_FOUND_THUMBNAIL // use the default not found image when user has no rights
-                          : `${file.url}/square/180,180/0/default.jpg${tokenQueryString}`
-                      }
-                      title={file.filename}
-                      data-testid="thumbnail"
-                    />
-                  </StyledLink>
-                </StyledColumn>
-              )
-            })}
-          </StyledRow>
-          {hasMore &&
-            (document.bestanden.length !== files.length ? (
-              <ActionButton
-                fetching={false}
-                iconLeft={<Enlarge />}
-                onClick={() => setFiles(document.bestanden)}
-                label={`Toon alle (${document.bestanden.length})`}
-                data-testid="showMore"
-              />
-            ) : (
-              <ActionButton
-                fetching={false}
-                iconLeft={<Minimise />}
-                onClick={() => setFiles(lessFiles)}
-                label="Minder tonen"
-                data-testid="showLess"
-              />
-            ))}
-        </>
-      ) : (
-        <Heading as="em" data-testid="noResults">
-          Geen bouwtekening(en) beschikbaar.
-        </Heading>
-      )}
-    </GalleryContainer>
+    <>
+      <StyledRow hasMarginBottom={hasMore} hasMargin={false} hasMaxWidth={false}>
+        {files.map((file) => {
+          return (
+            <StyledColumn
+              key={file.url}
+              span={{ small: 1, medium: 2, big: 2, large: 2, xLarge: 2 }}
+              data-testid="fileResult"
+            >
+              {/* @ts-ignore */}
+              <StyledLink
+                forwardedAs={disabled ? 'span' : RouterLink}
+                to={toConstructionDossier(dossierId, file.filename, file.url)}
+                title={file.filename}
+                disabled={disabled}
+                data-testid="detailLink"
+              >
+                <IIIFThumbnail
+                  src={
+                    disabled
+                      ? NOT_FOUND_THUMBNAIL // use the default not found image when user has no rights
+                      : `${file.url}/square/180,180/0/default.jpg${tokenQueryString}`
+                  }
+                  title={file.filename}
+                  data-testid="thumbnail"
+                />
+              </StyledLink>
+              {!disabled && (
+                <StyledCheckbox
+                  data-testid="fileToggle"
+                  checked={selectedFiles.includes(file)}
+                  onChange={() => toggleFile(file)}
+                />
+              )}
+            </StyledColumn>
+          )
+        })}
+      </StyledRow>
+      {hasMore &&
+        (document.bestanden.length !== files.length ? (
+          <ActionButton
+            fetching={false}
+            iconLeft={<Enlarge />}
+            onClick={() => setFiles(document.bestanden)}
+            label={`Toon alle (${document.bestanden.length})`}
+            data-testid="showMore"
+          />
+        ) : (
+          <ActionButton
+            fetching={false}
+            iconLeft={<Minimise />}
+            onClick={() => setFiles(lessFiles)}
+            label="Minder tonen"
+            data-testid="showLess"
+          />
+        ))}
+    </>
   )
 }
 
