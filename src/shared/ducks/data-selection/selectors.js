@@ -64,9 +64,6 @@ export const getShapeFilter = createSelector(getDataSelection, (dataSelection) =
 })
 
 export const getFilters = createSelector(getDataSelectionResult, (result) => result.filters || [])
-export const getGeomarkersShape = createSelector(getGeometryFiltersMarkers, (markers) =>
-  JSON.stringify(markers.map(([lat, lng]) => [lng, lat])),
-)
 export const areMarkersLoading = createSelector(
   getDataSelection,
   (dataSelection) => dataSelection.loadingMarkers,

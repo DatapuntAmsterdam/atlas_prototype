@@ -319,15 +319,6 @@ Object {
   },
   "filters": Object {
     "routes": Object {
-      "atlasRouter/ADDRESSES": Object {
-        "addHistory": true,
-        "decode": [Function],
-        "defaultValue": Object {},
-        "encode": [Function],
-        "reducerKey": "filter",
-        "selector": [Function],
-        "stateKey": "filters",
-      },
       "atlasRouter/ARTICLE_SEARCH": Object {
         "addHistory": true,
         "decode": [Function],
@@ -336,15 +327,6 @@ Object {
         "reducerKey": "search",
         "selector": [Function],
         "stateKey": "activeFilters",
-      },
-      "atlasRouter/CADASTRAL_OBJECTS": Object {
-        "addHistory": true,
-        "decode": [Function],
-        "defaultValue": Object {},
-        "encode": [Function],
-        "reducerKey": "filter",
-        "selector": [Function],
-        "stateKey": "filters",
       },
       "atlasRouter/COLLECTION_SEARCH": Object {
         "addHistory": true,
@@ -372,15 +354,6 @@ Object {
         "reducerKey": "search",
         "selector": [Function],
         "stateKey": "activeFilters",
-      },
-      "atlasRouter/ESTABLISHMENTS": Object {
-        "addHistory": true,
-        "decode": [Function],
-        "defaultValue": Object {},
-        "encode": [Function],
-        "reducerKey": "filter",
-        "selector": [Function],
-        "stateKey": "filters",
       },
       "atlasRouter/MAP_SEARCH": Object {
         "addHistory": true,

@@ -1,16 +1,19 @@
 import environment from '../../../environment'
 import { fetchWithToken } from '../api/api'
 import generateId from '../state-token-generator/state-token-generator'
-import { query as DSQuery } from './data-selection-api-data-selection'
+import { BoundingBox, FilterObject } from '../../../app/components/DataSelection/types'
+import { LegacyDataSelectionConfigType } from './data-selection-config'
 
-export function query(config, view, activeFilters, page, search, geometryFilter) {
-  return DSQuery(config, view, activeFilters, page, search, geometryFilter)
-}
-
-export function getMarkers(config, activeFilters, zoomLevel, boundingBox) {
+function getBrkMarkers(
+  signal: AbortSignal,
+  config: LegacyDataSelectionConfigType,
+  activeFilters: FilterObject,
+  zoomLevel: number,
+  boundingBox: BoundingBox,
+) {
   const params = {
     ...activeFilters,
-    zoom: zoomLevel,
+    zoom: zoomLevel.toString(),
     bbox: JSON.stringify({
       _northEast: {
         lat: boundingBox.northEast[0],
@@ -23,7 +26,11 @@ export function getMarkers(config, activeFilters, zoomLevel, boundingBox) {
     }),
   }
   return boundingBox
-    ? fetchWithToken(`${environment.API_ROOT}${config.ENDPOINT_MARKERS}`, params).then((data) => ({
+    ? fetchWithToken(
+        `${environment.API_ROOT}${config.ENDPOINT_MARKERS ?? ''}`,
+        params,
+        signal,
+      ).then((data) => ({
         geoJsons: [
           data.eigenpercelen && {
             geoJson: data.eigenpercelen,
@@ -49,7 +56,7 @@ export function getMarkers(config, activeFilters, zoomLevel, boundingBox) {
             type: 'dataSelectionBounds',
           },
         ].filter((item) => item),
-        markers: data.appartementen.map((appartement) => ({
+        markers: data.appartementen.map((appartement: any) => ({
           iconData: {
             zoomLevel,
             count: appartement.aantal,
@@ -61,7 +68,4 @@ export function getMarkers(config, activeFilters, zoomLevel, boundingBox) {
     : Promise.resolve([])
 }
 
-export default {
-  query,
-  getMarkers,
-}
+export default getBrkMarkers

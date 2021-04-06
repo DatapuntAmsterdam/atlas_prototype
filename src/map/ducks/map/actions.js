@@ -5,7 +5,6 @@ import {
   MAP_CLEAR,
   MAP_EMPTY_GEOMETRY,
   MAP_END_DRAWING,
-  MAP_LOADING,
   MAP_PAN,
   MAP_SET_DRAWING_MODE,
   MAP_UPDATE_SHAPE,
@@ -82,8 +81,6 @@ export const updateBoundingBox = (payload) => ({
   type: MAP_BOUNDING_BOX,
   payload,
 })
-
-export const mapLoadingAction = (payload) => ({ type: MAP_LOADING, payload })
 
 export const toggleEmbedButtonAction = () => ({
   type: TOGGLE_MAP_EMBED,

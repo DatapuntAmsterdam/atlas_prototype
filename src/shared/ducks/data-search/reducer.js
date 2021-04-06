@@ -6,7 +6,6 @@ import {
   initialState,
   REDUCER_KEY,
 } from './constants'
-import { FETCH_DATA_SELECTION_REQUEST } from '../data-selection/constants'
 import paramsRegistry from '../../../store/params-registry'
 
 export { REDUCER_KEY as DATA_SEARCH_REDUCER }
@@ -50,11 +49,6 @@ export default function reducer(state = initialState, action) {
         ...enrichedState,
         isLoading: false,
         error: action.payload,
-      }
-
-    case FETCH_DATA_SELECTION_REQUEST:
-      return {
-        ...enrichedState,
       }
 
     default:

@@ -8,8 +8,6 @@ Object {
   "SET_MAP_CLICK_LOCATION": [Function],
   "TOGGLE_MAP_EMBED": [Function],
   "atlasRouter/DATA_DETAIL": [Function],
-  "filter/ADD_FILTER": [Function],
-  "filter/REMOVE_FILTER": [Function],
   "header/CLOSE_MODAL": [Function],
   "header/REPORT_FEEDBACK_REQUEST": [Function],
   "header/REPORT_PROBLEM_REQUEST": [Function],

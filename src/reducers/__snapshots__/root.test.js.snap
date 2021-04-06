@@ -6,7 +6,6 @@ Object {
   "dataSelection": "dataSelection",
   "detail": "detail",
   "error": "error",
-  "filter": "filter",
   "location": "location",
   "map": "map",
   "mapDetail": "mapDetail",

@@ -19,7 +19,6 @@ exports[`Templates should render without failing 3`] = `<div />`;
 exports[`Templates should render without failing 4`] = `
 <span
   className="c-handelsnaam c-handelsnaam__failliet"
-  title="{{vm.variables[1].value}}"
 >
   foo
 </span>

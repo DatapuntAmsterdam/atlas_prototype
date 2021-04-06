@@ -1,12 +1,72 @@
-import brkApi from './data-selection-api-brk'
-import dataSelectionApi from './data-selection-api-data-selection'
-import dcatApi from './data-selection-api-dcatd'
 import { routing } from '../../../app/routes'
+import { BoundingBox, FilterObject } from '../../../app/components/DataSelection/types'
+import getBrkMarkers from './getBrkMarkers'
+import getMarkers from './getMarkers'
 
-const DATA_SELECTION_CONFIG = {
+export type LegacyDataSelectionConfigType = {
+  CUSTOM_API: {
+    getMarkers: (
+      signal: AbortSignal,
+      config: LegacyDataSelectionConfigType,
+      activeAttributeFilters: FilterObject,
+      zoomLevel?: number,
+      boundingBox?: BoundingBox,
+    ) => Promise<any>
+  }
+  AUTH_SCOPE?: string
+  PATH?: string
+  MAX_AVAILABLE_PAGES?: number
+  MAX_ITEMS_PER_PAGE?: number
+  MAX_NUMBER_OF_CLUSTERED_MARKERS: number
+  ENDPOINT_PREVIEW:
+    | string
+    | {
+        TABLE: string
+        LIST: string
+      }
+  ENDPOINT_MARKERS: string
+  ENDPOINT_EXPORT: string
+  ENDPOINT_DETAIL: string
+  ENDPOINT_EXPORT_PARAM?: string
+  PRIMARY_KEY: 'vestiging_id' | 'landelijk_id' | 'kadastraal_object_id'
+  TITLE: string
+  TITLE_TAB: string
+  SHOW_NUMBER_OF_RECORDS: boolean
+  SHOW_FILTER_OPTION_COUNTS?: boolean
+  SORT_FILTERS: boolean
+  FILTERS: Array<{
+    slug: string
+    label: string
+    order?: string[]
+    info_url?: string
+    formatter?: string
+  }>
+  CONTENT: {
+    TABLE: Array<{
+      label: string
+      variables: string[]
+      template?: string
+      formatter?: string
+    }>
+    LIST: Array<{
+      variables: string[]
+      formatter?: string
+    }>
+  }
+}
+
+const DATA_SELECTION_CONFIG: {
+  datasets: {
+    bag: LegacyDataSelectionConfigType
+    brk: LegacyDataSelectionConfigType
+    hr: LegacyDataSelectionConfigType
+  }
+} = {
   datasets: {
     bag: {
-      CUSTOM_API: dataSelectionApi,
+      CUSTOM_API: {
+        getMarkers,
+      },
       PATH: routing.addresses.path,
       MAX_AVAILABLE_PAGES: 100,
       MAX_NUMBER_OF_CLUSTERED_MARKERS: 10000,
@@ -80,7 +140,7 @@ const DATA_SELECTION_CONFIG = {
             variables: ['stadsdeel_naam'],
           },
           {
-            label: '-code',
+            label: 'Stadsdeel-code',
             variables: ['stadsdeel_code'],
           },
           {
@@ -88,7 +148,7 @@ const DATA_SELECTION_CONFIG = {
             variables: ['ggw_naam'],
           },
           {
-            label: '-code',
+            label: 'GGW-code',
             variables: ['ggw_code'],
           },
           {
@@ -96,7 +156,7 @@ const DATA_SELECTION_CONFIG = {
             variables: ['buurtcombinatie_naam'],
           },
           {
-            label: '-code',
+            label: 'Wijk-code',
             variables: ['buurtcombinatie_code'],
           },
           {
@@ -104,7 +164,7 @@ const DATA_SELECTION_CONFIG = {
             variables: ['buurt_naam'],
           },
           {
-            label: '-code',
+            label: 'Buurt-code',
             variables: ['buurt_code'],
           },
         ],
@@ -131,41 +191,20 @@ const DATA_SELECTION_CONFIG = {
             formatter: 'verblijfsobjectGevormd',
           },
         ],
-        MAP: [
-          {
-            variables: [
-              '_openbare_ruimte_naam',
-              'huisnummer',
-              'huisletter',
-              'huisnummer_toevoeging',
-            ],
-            formatter: 'bagAddress',
-          },
-          {
-            variables: ['ligplaats_id', 'standplaats_id'],
-            formatter: 'nummeraanduidingType',
-          },
-          {
-            variables: ['hoofdadres'],
-            formatter: 'nevenadres',
-          },
-          {
-            variables: ['status_id'],
-            formatter: 'verblijfsobjectGevormd',
-          },
-        ],
       },
     },
     brk: {
       AUTH_SCOPE: 'BRK/RSN',
-      CUSTOM_API: brkApi,
+      CUSTOM_API: {
+        // @ts-ignore
+        getMarkers: getBrkMarkers,
+      },
       PATH: routing.cadastralObjects.path,
       MAX_AVAILABLE_PAGES: 100,
       MAX_NUMBER_OF_CLUSTERED_MARKERS: Infinity,
       ENDPOINT_PREVIEW: {
         TABLE: 'dataselectie/brk/',
         LIST: 'dataselectie/brk/kot/',
-        MAP: 'dataselectie/brk/kot/',
       },
       ENDPOINT_MARKERS: 'dataselectie/brk/geolocation/',
       ENDPOINT_EXPORT: 'dataselectie/brk/export/',
@@ -265,11 +304,12 @@ const DATA_SELECTION_CONFIG = {
           },
         ],
         LIST: [{ variables: ['aanduiding'] }],
-        MAP: [{ variables: ['aanduiding'] }],
       },
     },
     hr: {
-      CUSTOM_API: dataSelectionApi,
+      CUSTOM_API: {
+        getMarkers,
+      },
       AUTH_SCOPE: 'HR/R',
       PATH: routing.establishments.path,
       MAX_AVAILABLE_PAGES: 100,
@@ -370,54 +410,6 @@ const DATA_SELECTION_CONFIG = {
             variables: ['handelsnaam'],
           },
         ],
-        MAP: [
-          {
-            variables: ['handelsnaam'],
-          },
-        ],
-      },
-    },
-    dcatd: {
-      MAX_ITEMS_PER_PAGE: 100,
-      CUSTOM_API: dcatApi,
-      ENDPOINT_METADATA: 'dcatd/openapi',
-      ENDPOINT_PREVIEW: 'dcatd/datasets',
-      ENDPOINT_DETAIL: 'dcatd/datasets',
-      TITLE: 'Catalogus',
-      TITLE_TAB: 'Catalogus',
-      SHOW_NUMBER_OF_RECORDS: true,
-      PRIMARY_KEY: 'dct:identifier',
-      SHOW_FILTER_OPTION_COUNTS: false,
-      SORT_FILTERS: true,
-      FILTERS: [
-        {
-          slug: 'status',
-          label: 'Status',
-        },
-        {
-          slug: 'groups',
-          label: "Thema's",
-        },
-        {
-          slug: 'owners',
-          label: 'Eigenaar',
-        },
-        {
-          slug: 'distributionTypes',
-          label: 'Verschijningsvorm',
-        },
-        {
-          slug: 'serviceTypes',
-          label: 'API/Service formaten',
-        },
-        {
-          slug: 'formats',
-          label: 'Bestandsformaten',
-          formatter: 'lowercase',
-        },
-      ],
-      CONTENT: {
-        CATALOG: [],
       },
     },
   },

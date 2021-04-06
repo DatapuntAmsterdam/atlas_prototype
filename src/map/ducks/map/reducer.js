@@ -17,7 +17,6 @@ import {
   TOGGLE_MAP_OVERLAY_VISIBILITY,
   MAP_PAN,
   MAP_BOUNDING_BOX,
-  MAP_LOADING,
   PANORAMA,
   initialState,
   REDUCER_KEY,
@@ -83,7 +82,7 @@ export default function MapReducer(state = initialState, action) {
         drawingMode: drawToolConfig.DRAWING_MODE.NONE,
         // eslint-disable-next-line no-nested-ternary
         geometry: has2Markers ? polygon.markers : moreThan2Markers ? [] : enrichedState.geometry,
-        isLoading: true,
+        isLoading: false,
       }
 
     case SET_MAP_BASE_LAYER:
@@ -149,12 +148,6 @@ export default function MapReducer(state = initialState, action) {
         shapeMarkers: initialState.shapeMarkers,
         shapeDistanceTxt: initialState.shapeDistanceTxt,
         shapeAreaTxt: initialState.shapeAreaTxt,
-      }
-
-    case MAP_LOADING:
-      return {
-        ...enrichedState,
-        isLoading: action.payload,
       }
 
     default:

@@ -2,7 +2,6 @@ import {
   mapClear,
   mapEmptyGeometry,
   mapEndDrawing,
-  mapLoadingAction,
   mapSetDrawingMode,
   mapUpdateShape,
   setMapBaseLayer,
@@ -31,13 +30,6 @@ describe('Map Reducer', () => {
       shapeMarkers: initialState.shapeMarkers,
       shapeDistanceTxt: initialState.shapeDistanceTxt,
       shapeAreaTxt: initialState.shapeAreaTxt,
-    })
-  })
-
-  it('should set the map loading status when dispatching mapLoadingAction', () => {
-    expect(reducer(initialState, mapLoadingAction(true))).toEqual({
-      ...initialState,
-      isLoading: true,
     })
   })
 

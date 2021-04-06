@@ -1,9 +1,6 @@
 import PAGES from '../../../app/pages'
 import { shouldResetState } from '../../../store/redux-first-router/actions'
 import {
-  FETCH_DATA_SELECTION_FAILURE,
-  FETCH_DATA_SELECTION_REQUEST,
-  FETCH_DATA_SELECTION_SUCCESS,
   FETCH_MARKERS_FAILURE,
   FETCH_MARKERS_REQUEST,
   FETCH_MARKERS_SUCCESS,
@@ -11,8 +8,6 @@ import {
   REDUCER_KEY,
   REMOVE_GEOMETRY_FILTER,
   RESET_DATA_SELECTION,
-  ROUTE_DATASET_MAPPER,
-  SET_DATASET,
   SET_GEOMETRY_FILTER,
   SET_PAGE,
 } from './constants'
@@ -30,7 +25,6 @@ export default function reducer(state = initialState, action) {
   const enrichedState = {
     ...state,
     ...paramsRegistry.getStateFromQueries(REDUCER_KEY, action),
-    ...(ROUTE_DATASET_MAPPER[action.type] ? { dataset: ROUTE_DATASET_MAPPER[action.type] } : {}),
   }
 
   switch (action.type) {
@@ -46,35 +40,6 @@ export default function reducer(state = initialState, action) {
       return {
         ...enrichedState,
         loadingMarkers: true,
-      }
-
-    case FETCH_DATA_SELECTION_REQUEST:
-      return {
-        ...enrichedState,
-        dataset: action.payload.dataset,
-        page: action.payload.page,
-        isLoading: true,
-      }
-
-    case FETCH_DATA_SELECTION_SUCCESS: {
-      return {
-        ...enrichedState,
-        isLoading: false,
-        markers: [],
-        errorMessage: '',
-        authError: false,
-        ...action.payload,
-      }
-    }
-
-    case FETCH_DATA_SELECTION_FAILURE:
-      return {
-        ...enrichedState,
-        isLoading: false,
-        authError: action.payload === 'Unauthorized',
-        errorMessage: action.payload,
-        result: {},
-        markers: [],
       }
 
     case FETCH_MARKERS_FAILURE:
@@ -93,12 +58,6 @@ export default function reducer(state = initialState, action) {
         markers: action.payload,
       }
 
-    case SET_DATASET:
-      return {
-        ...enrichedState,
-        dataset: action.payload,
-      }
-
     case SET_GEOMETRY_FILTER: {
       const { markers, distanceTxt, areaTxt } = action.payload
       return {
@@ -114,6 +73,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...enrichedState,
         geometryFilter: {},
+        markers: [],
       }
 
     case SET_PAGE:

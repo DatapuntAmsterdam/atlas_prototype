@@ -1,5 +1,4 @@
 import { ROUTER_NAMESPACE, routing } from '../../app/routes'
-import { DATASET_ROUTE_MAPPER } from '../../shared/ducks/data-selection/constants'
 import { ViewMode } from '../../shared/ducks/ui/ui'
 import PARAMETERS from '../parameters'
 
@@ -212,22 +211,6 @@ export const toCollectionDetail = (id, slug = '') => ({
     id,
     slug,
   },
-})
-
-export const toDatasetPage = (dataset) => ({
-  type: DATASET_ROUTE_MAPPER[dataset],
-})
-export const toDatasetsTableWithFilter = (datasetType, filter) => ({
-  type: datasetType,
-  meta: {
-    additionalParams: {
-      ...(filter ? { [PARAMETERS.FILTERS]: filter } : {}),
-      [PARAMETERS.VIEW]: ViewMode.Full,
-    },
-  },
-})
-export const toNotFoundPage = () => ({
-  type: routing.niet_gevonden.type,
 })
 
 export const toPublicationSearch = toSearchOfType(routing.publicationSearch.type)

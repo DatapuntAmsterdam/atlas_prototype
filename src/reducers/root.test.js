@@ -8,7 +8,6 @@ import * as DataSearchReducer from '../shared/ducks/data-search/reducer'
 import * as DataSelectionReducer from '../shared/ducks/data-selection/reducer'
 import * as DetailReducer from '../shared/ducks/detail/reducer'
 import * as ErrorMessageReducer from '../shared/ducks/error/error-message'
-import * as FiltersReducer from '../shared/ducks/filters/filters'
 import * as SelectionReducer from '../shared/ducks/selection/selection'
 import * as UiReducer from '../shared/ducks/ui/ui'
 import * as UserReducer from '../shared/ducks/user/user'
@@ -28,7 +27,6 @@ describe('the root reducer', () => {
   PanoramaReducer.default = () => 'panorama'
   DataSearchReducer.default = () => 'dataSearch'
   SelectionReducer.default = () => 'selection'
-  FiltersReducer.default = () => 'filter'
 
   it('combines many reducers', () => {
     const state = {}

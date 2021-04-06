@@ -38,7 +38,6 @@ FileType.propTypes = {
 
 const HandelsNaam = ({ variables }) => (
   <span
-    title="{{vm.variables[1].value}}"
     className={`c-handelsnaam ${
       variables[1] && variables[1].value ? 'c-handelsnaam__failliet' : ''
     }`}

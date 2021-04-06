@@ -9,6 +9,7 @@ import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
 import { FeedbackModal } from './components/Modal'
 import NotificationAlert from './components/NotificationAlert/NotificationAlert'
 import { mapSearchPagePaths, mapSplitPagePaths, routing } from './routes'
+import { DataSelectionProvider } from './components/DataSelection/DataSelectionContext'
 
 const HomePage = lazy(() => import(/* webpackChunkName: "HomePage" */ './pages/HomePage'))
 const ActualityPage = lazy(
@@ -111,56 +112,48 @@ const AppBody: FunctionComponent<AppBodyProps> = ({
       ) : (
         <>
           <Suspense fallback={<StyledLoadingSpinner />}>
-            <Switch>
-              <Route
-                path={[
-                  routing.data_TEMP.path,
-                  routing.dataSearchGeo_TEMP.path,
-                  routing.dataDetail_TEMP.path,
-                  routing.panorama_TEMP.path,
-                  routing.addresses_TEMP.path,
-                  routing.establishments_TEMP.path,
-                  routing.cadastralObjects_TEMP.path,
-                ]}
-              >
-                <MapContainer />
-              </Route>
-              <Route>
-                <>
-                  <Helmet>
-                    {/* The viewport must be reset for "old" pages that don't incorporate the grid.
+            <DataSelectionProvider>
+              <Switch>
+                <Route path={[routing.data_TEMP.path]}>
+                  <MapContainer />
+                </Route>
+                <Route>
+                  <>
+                    <Helmet>
+                      {/* The viewport must be reset for "old" pages that don't incorporate the grid.
         1024 is an arbirtrary number as the browser doesn't actually care about the exact number,
         but only needs to know it's significantly bigger than the actual viewport */}
-                    <meta name="viewport" content="width=1024, user-scalable=yes" />
-                  </Helmet>
-                  <div className={`c-dashboard__body ${bodyClasses}`}>
-                    <NotificationAlert />
-                    {visibilityError && <ErrorAlert />}
-                    {embedPreviewMode ? (
-                      <EmbedIframeComponent />
-                    ) : (
-                      <div className="u-grid u-full-height u-overflow--y-auto">
-                        <div className="u-row u-full-height">
-                          <Switch>
-                            <Route
-                              path={routing.constructionDossier.path}
-                              exact
-                              component={ConstructionDossierPage}
-                            />
-                            <Route
-                              path={routing.datasetDetail.path}
-                              exact
-                              component={DatasetDetailPage}
-                            />
-                            <Route path={mapSplitPagePaths} component={MapSplitPage} />
-                          </Switch>
+                      <meta name="viewport" content="width=1024, user-scalable=yes" />
+                    </Helmet>
+                    <div className={`c-dashboard__body ${bodyClasses}`}>
+                      <NotificationAlert />
+                      {visibilityError && <ErrorAlert />}
+                      {embedPreviewMode ? (
+                        <EmbedIframeComponent />
+                      ) : (
+                        <div className="u-grid u-full-height u-overflow--y-auto">
+                          <div className="u-row u-full-height">
+                            <Switch>
+                              <Route
+                                path={routing.constructionDossier.path}
+                                exact
+                                component={ConstructionDossierPage}
+                              />
+                              <Route
+                                path={routing.datasetDetail.path}
+                                exact
+                                component={DatasetDetailPage}
+                              />
+                              <Route path={mapSplitPagePaths} component={MapSplitPage} />
+                            </Switch>
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
-                </>
-              </Route>
-            </Switch>
+                      )}
+                    </div>
+                  </>
+                </Route>
+              </Switch>
+            </DataSelectionProvider>
             <FeedbackModal id="feedbackModal" />
           </Suspense>
         </>

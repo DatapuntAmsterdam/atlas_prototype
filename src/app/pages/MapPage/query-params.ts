@@ -246,11 +246,26 @@ export const panoFullScreenParam: UrlParam<boolean> = {
   encode: (value) => value.toString(),
 }
 
-type View = 'volledig' | 'kaart' | 'gesplitst'
+export enum ViewMode {
+  Map = 'kaart',
+  Split = 'gesplitst',
+  Full = 'volledig',
+}
 
-export const viewParam: UrlParam<View> = {
+export const viewParam: UrlParam<ViewMode> = {
   name: 'modus',
-  defaultValue: 'gesplitst',
-  decode: (value) => value as View,
+  defaultValue: ViewMode.Split,
+  decode: (value) => value as ViewMode,
   encode: (value) => value,
+}
+
+export type DataSelectionFilters = {
+  [key: string]: string
+}
+
+export const dataSelectionFiltersParam: UrlParam<DataSelectionFilters | null> = {
+  name: 'filters',
+  defaultValue: null,
+  decode: (value) => JSON.parse(value),
+  encode: (value) => JSON.stringify(value),
 }

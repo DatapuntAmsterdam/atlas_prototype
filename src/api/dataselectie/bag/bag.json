@@ -1,0 +1,2425 @@
+{
+  "aggs_list": {
+    "buurt_naam": {
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 0,
+      "buckets": [
+        {
+          "key": "AMC",
+          "doc_count": 40
+        },
+        {
+          "key": "Aalsmeerwegbuurt Oost",
+          "doc_count": 1320
+        },
+        {
+          "key": "Aalsmeerwegbuurt West",
+          "doc_count": 1514
+        },
+        {
+          "key": "Afrikahaven",
+          "doc_count": 111
+        },
+        {
+          "key": "Alexanderplein e.o.",
+          "doc_count": 257
+        },
+        {
+          "key": "Alfa-driehoek",
+          "doc_count": 131
+        },
+        {
+          "key": "Amerikahaven",
+          "doc_count": 229
+        },
+        {
+          "key": "Amstel III deel A/B Noord",
+          "doc_count": 1239
+        },
+        {
+          "key": "Amstel III deel A/B Zuid",
+          "doc_count": 2441
+        },
+        {
+          "key": "Amstel III deel C/D Noord",
+          "doc_count": 518
+        },
+        {
+          "key": "Amstel III deel C/D Zuid",
+          "doc_count": 82
+        },
+        {
+          "key": "Amstelglorie",
+          "doc_count": 35
+        },
+        {
+          "key": "Amstelkwartier Noord",
+          "doc_count": 1961
+        },
+        {
+          "key": "Amstelkwartier West",
+          "doc_count": 762
+        },
+        {
+          "key": "Amstelkwartier Zuid",
+          "doc_count": 167
+        },
+        {
+          "key": "Amstelpark",
+          "doc_count": 28
+        },
+        {
+          "key": "Amstelveldbuurt",
+          "doc_count": 1212
+        },
+        {
+          "key": "Amsterdamse Bos",
+          "doc_count": 113
+        },
+        {
+          "key": "Amsterdamse Poort",
+          "doc_count": 1514
+        },
+        {
+          "key": "Andreasterrein",
+          "doc_count": 536
+        },
+        {
+          "key": "Anjeliersbuurt Noord",
+          "doc_count": 1578
+        },
+        {
+          "key": "Anjeliersbuurt Zuid",
+          "doc_count": 2214
+        },
+        {
+          "key": "Architectenbuurt",
+          "doc_count": 1017
+        },
+        {
+          "key": "BG-terrein e.o.",
+          "doc_count": 549
+        },
+        {
+          "key": "Baanakkerspark Noord",
+          "doc_count": 432
+        },
+        {
+          "key": "Baanakkerspark Zuid",
+          "doc_count": 344
+        },
+        {
+          "key": "Balboaplein e.o.",
+          "doc_count": 1830
+        },
+        {
+          "key": "Banne Noordoost",
+          "doc_count": 1472
+        },
+        {
+          "key": "Banne Noordwest",
+          "doc_count": 1133
+        },
+        {
+          "key": "Banne Zuidoost",
+          "doc_count": 2105
+        },
+        {
+          "key": "Banne Zuidwest",
+          "doc_count": 1811
+        },
+        {
+          "key": "Banpleinbuurt",
+          "doc_count": 399
+        },
+        {
+          "key": "Beatrixpark",
+          "doc_count": 2
+        },
+        {
+          "key": "Bedrijvencentrum Osdorp",
+          "doc_count": 184
+        },
+        {
+          "key": "Bedrijvencentrum Westerkwartier",
+          "doc_count": 150
+        },
+        {
+          "key": "Bedrijvengebied Cruquiusweg",
+          "doc_count": 1514
+        },
+        {
+          "key": "Bedrijvengebied Veelaan",
+          "doc_count": 188
+        },
+        {
+          "key": "Bedrijvengebied Zeeburgerkade",
+          "doc_count": 241
+        },
+        {
+          "key": "Bedrijvenpark Lutkemeer",
+          "doc_count": 89
+        },
+        {
+          "key": "Bedrijventerrein Hamerstraat",
+          "doc_count": 491
+        },
+        {
+          "key": "Bedrijventerrein Landlust",
+          "doc_count": 450
+        },
+        {
+          "key": "Bedrijventerrein Nieuwendammerdijk",
+          "doc_count": 80
+        },
+        {
+          "key": "Bedrijventerrein Schinkel",
+          "doc_count": 346
+        },
+        {
+          "key": "Bedrijventerrein Sloterdijk I",
+          "doc_count": 267
+        },
+        {
+          "key": "Beethovenbuurt",
+          "doc_count": 642
+        },
+        {
+          "key": "Begijnhofbuurt",
+          "doc_count": 642
+        },
+        {
+          "key": "Belgiëplein e.o.",
+          "doc_count": 726
+        },
+        {
+          "key": "Bellamybuurt Noord",
+          "doc_count": 1534
+        },
+        {
+          "key": "Bellamybuurt Zuid",
+          "doc_count": 2828
+        },
+        {
+          "key": "Bertelmanpleinbuurt",
+          "doc_count": 655
+        },
+        {
+          "key": "Betondorp",
+          "doc_count": 2018
+        },
+        {
+          "key": "Bijlmermuseum Noord",
+          "doc_count": 1126
+        },
+        {
+          "key": "Bijlmermuseum Zuid",
+          "doc_count": 1425
+        },
+        {
+          "key": "Blauwe Zand",
+          "doc_count": 979
+        },
+        {
+          "key": "Bloemenbuurt Noord",
+          "doc_count": 1259
+        },
+        {
+          "key": "Bloemenbuurt Zuid",
+          "doc_count": 1265
+        },
+        {
+          "key": "Bloemgrachtbuurt",
+          "doc_count": 2294
+        },
+        {
+          "key": "Borgerbuurt",
+          "doc_count": 1851
+        },
+        {
+          "key": "Borneo",
+          "doc_count": 1212
+        },
+        {
+          "key": "Bosleeuw",
+          "doc_count": 2892
+        },
+        {
+          "key": "Bretten Oost",
+          "doc_count": 11
+        },
+        {
+          "key": "Bretten West",
+          "doc_count": 1
+        },
+        {
+          "key": "Buiksloterbreek",
+          "doc_count": 188
+        },
+        {
+          "key": "Buiksloterdijk Oost",
+          "doc_count": 55
+        },
+        {
+          "key": "Buiksloterdijk West",
+          "doc_count": 60
+        },
+        {
+          "key": "Buiksloterham",
+          "doc_count": 1294
+        },
+        {
+          "key": "Buikslotermeer Noord",
+          "doc_count": 1552
+        },
+        {
+          "key": "Buikslotermeerplein",
+          "doc_count": 1042
+        },
+        {
+          "key": "Buitenveldert Midden Zuid",
+          "doc_count": 2638
+        },
+        {
+          "key": "Buitenveldert Oost Midden",
+          "doc_count": 2164
+        },
+        {
+          "key": "Buitenveldert West Midden",
+          "doc_count": 562
+        },
+        {
+          "key": "Buitenveldert Zuidoost",
+          "doc_count": 2710
+        },
+        {
+          "key": "Buitenveldert Zuidwest",
+          "doc_count": 3095
+        },
+        {
+          "key": "Burgemeester Tellegenbuurt Oost",
+          "doc_count": 1696
+        },
+        {
+          "key": "Burgemeester Tellegenbuurt West",
+          "doc_count": 1335
+        },
+        {
+          "key": "Burgwallen Oost",
+          "doc_count": 1465
+        },
+        {
+          "key": "Buurt 10",
+          "doc_count": 933
+        },
+        {
+          "key": "Buurt 2",
+          "doc_count": 1554
+        },
+        {
+          "key": "Buurt 3",
+          "doc_count": 3064
+        },
+        {
+          "key": "Buurt 4 Oost",
+          "doc_count": 1747
+        },
+        {
+          "key": "Buurt 5 Noord",
+          "doc_count": 1545
+        },
+        {
+          "key": "Buurt 5 Zuid",
+          "doc_count": 1902
+        },
+        {
+          "key": "Buurt 6",
+          "doc_count": 1440
+        },
+        {
+          "key": "Buurt 7",
+          "doc_count": 1055
+        },
+        {
+          "key": "Buurt 8",
+          "doc_count": 1828
+        },
+        {
+          "key": "Buurt 9",
+          "doc_count": 2341
+        },
+        {
+          "key": "Buyskade e.o.",
+          "doc_count": 1924
+        },
+        {
+          "key": "Calandlaan/Lelylaan",
+          "doc_count": 672
+        },
+        {
+          "key": "Centrumeiland",
+          "doc_count": 278
+        },
+        {
+          "key": "Circus/Kermisbuurt",
+          "doc_count": 657
+        },
+        {
+          "key": "Coenhaven/Mercuriushaven",
+          "doc_count": 612
+        },
+        {
+          "key": "Columbusplein e.o.",
+          "doc_count": 2055
+        },
+        {
+          "key": "Concertgebouwbuurt",
+          "doc_count": 1187
+        },
+        {
+          "key": "Cornelis Douwesterrein",
+          "doc_count": 278
+        },
+        {
+          "key": "Cornelis Schuytbuurt",
+          "doc_count": 1714
+        },
+        {
+          "key": "Cornelis Troostbuurt",
+          "doc_count": 2355
+        },
+        {
+          "key": "Cremerbuurt Oost",
+          "doc_count": 1432
+        },
+        {
+          "key": "Cremerbuurt West",
+          "doc_count": 3648
+        },
+        {
+          "key": "Czaar Peterbuurt",
+          "doc_count": 1671
+        },
+        {
+          "key": "D-buurt",
+          "doc_count": 1734
+        },
+        {
+          "key": "Da Costabuurt Noord",
+          "doc_count": 3109
+        },
+        {
+          "key": "Da Costabuurt Zuid",
+          "doc_count": 1643
+        },
+        {
+          "key": "Dapperbuurt Noord",
+          "doc_count": 2664
+        },
+        {
+          "key": "Dapperbuurt Zuid",
+          "doc_count": 2335
+        },
+        {
+          "key": "De Aker Oost",
+          "doc_count": 2173
+        },
+        {
+          "key": "De Aker West",
+          "doc_count": 1789
+        },
+        {
+          "key": "De Bongerd",
+          "doc_count": 876
+        },
+        {
+          "key": "De Eenhoorn",
+          "doc_count": 1802
+        },
+        {
+          "key": "De Heining",
+          "doc_count": 112
+        },
+        {
+          "key": "De Kleine Wereld",
+          "doc_count": 1617
+        },
+        {
+          "key": "De Klenckebuurt",
+          "doc_count": 421
+        },
+        {
+          "key": "De Omval",
+          "doc_count": 503
+        },
+        {
+          "key": "De Punt",
+          "doc_count": 2996
+        },
+        {
+          "key": "De Wester Quartier",
+          "doc_count": 918
+        },
+        {
+          "key": "De Wetbuurt",
+          "doc_count": 911
+        },
+        {
+          "key": "De Wittenbuurt Noord",
+          "doc_count": 881
+        },
+        {
+          "key": "De Wittenbuurt Zuid",
+          "doc_count": 573
+        },
+        {
+          "key": "Delflandpleinbuurt Oost",
+          "doc_count": 1416
+        },
+        {
+          "key": "Delflandpleinbuurt West",
+          "doc_count": 3193
+        },
+        {
+          "key": "Den Texbuurt",
+          "doc_count": 709
+        },
+        {
+          "key": "Diamantbuurt",
+          "doc_count": 1788
+        },
+        {
+          "key": "Diepenbrockbuurt",
+          "doc_count": 361
+        },
+        {
+          "key": "Don Bosco",
+          "doc_count": 1134
+        },
+        {
+          "key": "Dorp Driemond",
+          "doc_count": 680
+        },
+        {
+          "key": "Dorp Sloten",
+          "doc_count": 472
+        },
+        {
+          "key": "Drieburg",
+          "doc_count": 10
+        },
+        {
+          "key": "Driehoekbuurt",
+          "doc_count": 2125
+        },
+        {
+          "key": "Duivelseiland",
+          "doc_count": 949
+        },
+        {
+          "key": "Durgerdam",
+          "doc_count": 235
+        },
+        {
+          "key": "E-buurt",
+          "doc_count": 698
+        },
+        {
+          "key": "Ecowijk",
+          "doc_count": 628
+        },
+        {
+          "key": "Eendrachtspark",
+          "doc_count": 174
+        },
+        {
+          "key": "Elandsgrachtbuurt",
+          "doc_count": 3542
+        },
+        {
+          "key": "Elzenhagen Noord",
+          "doc_count": 1592
+        },
+        {
+          "key": "Elzenhagen Zuid",
+          "doc_count": 1251
+        },
+        {
+          "key": "Emanuel van Meterenbuurt",
+          "doc_count": 1170
+        },
+        {
+          "key": "Entrepot-Noordwest",
+          "doc_count": 789
+        },
+        {
+          "key": "Erasmusparkbuurt Oost",
+          "doc_count": 908
+        },
+        {
+          "key": "Erasmusparkbuurt West",
+          "doc_count": 2297
+        },
+        {
+          "key": "F-buurt",
+          "doc_count": 2048
+        },
+        {
+          "key": "Fannius Scholtenbuurt",
+          "doc_count": 2475
+        },
+        {
+          "key": "Felix Meritisbuurt",
+          "doc_count": 1949
+        },
+        {
+          "key": "Filips van Almondekwartier",
+          "doc_count": 637
+        },
+        {
+          "key": "Flevopark",
+          "doc_count": 20
+        },
+        {
+          "key": "Frankendael",
+          "doc_count": 21
+        },
+        {
+          "key": "Frans Halsbuurt",
+          "doc_count": 1894
+        },
+        {
+          "key": "Frederik Hendrikbuurt Noord",
+          "doc_count": 2396
+        },
+        {
+          "key": "Frederik Hendrikbuurt Zuidoost",
+          "doc_count": 2210
+        },
+        {
+          "key": "Frederik Hendrikbuurt Zuidwest",
+          "doc_count": 910
+        },
+        {
+          "key": "Frederikspleinbuurt",
+          "doc_count": 704
+        },
+        {
+          "key": "G-buurt Noord",
+          "doc_count": 968
+        },
+        {
+          "key": "G-buurt Oost",
+          "doc_count": 1893
+        },
+        {
+          "key": "G-buurt West",
+          "doc_count": 1612
+        },
+        {
+          "key": "Gaasperdam Noord",
+          "doc_count": 1022
+        },
+        {
+          "key": "Gaasperdam Zuid",
+          "doc_count": 924
+        },
+        {
+          "key": "Gaasperpark",
+          "doc_count": 21
+        },
+        {
+          "key": "Gaasperplas",
+          "doc_count": 29
+        },
+        {
+          "key": "Gein Noordoost",
+          "doc_count": 1264
+        },
+        {
+          "key": "Gein Noordwest",
+          "doc_count": 1612
+        },
+        {
+          "key": "Gein Zuidoost",
+          "doc_count": 1563
+        },
+        {
+          "key": "Gein Zuidwest",
+          "doc_count": 762
+        },
+        {
+          "key": "Gelderlandpleinbuurt",
+          "doc_count": 3356
+        },
+        {
+          "key": "Gerard Doubuurt",
+          "doc_count": 1526
+        },
+        {
+          "key": "Geuzenhofbuurt",
+          "doc_count": 1096
+        },
+        {
+          "key": "Gibraltarbuurt",
+          "doc_count": 2415
+        },
+        {
+          "key": "Gooise Kant",
+          "doc_count": 236
+        },
+        {
+          "key": "Gouden Bocht",
+          "doc_count": 189
+        },
+        {
+          "key": "Groenmarktkadebuurt",
+          "doc_count": 238
+        },
+        {
+          "key": "Grunder/Koningshoef",
+          "doc_count": 652
+        },
+        {
+          "key": "Haarlemmerbuurt Oost",
+          "doc_count": 1296
+        },
+        {
+          "key": "Haarlemmerbuurt West",
+          "doc_count": 1840
+        },
+        {
+          "key": "Hakfort/Huigenbos",
+          "doc_count": 1166
+        },
+        {
+          "key": "Harmoniehofbuurt",
+          "doc_count": 916
+        },
+        {
+          "key": "Haveneiland Noord",
+          "doc_count": 1249
+        },
+        {
+          "key": "Haveneiland Noordoost",
+          "doc_count": 2497
+        },
+        {
+          "key": "Haveneiland Noordwest",
+          "doc_count": 1528
+        },
+        {
+          "key": "Haveneiland Oost",
+          "doc_count": 2299
+        },
+        {
+          "key": "Haveneiland Zuidwest/Rieteiland West",
+          "doc_count": 1038
+        },
+        {
+          "key": "Helmersbuurt Oost",
+          "doc_count": 1569
+        },
+        {
+          "key": "Hemelrijk",
+          "doc_count": 618
+        },
+        {
+          "key": "Hemonybuurt",
+          "doc_count": 1699
+        },
+        {
+          "key": "Hercules Seghersbuurt",
+          "doc_count": 1869
+        },
+        {
+          "key": "Het Funen",
+          "doc_count": 648
+        },
+        {
+          "key": "Hiltonbuurt",
+          "doc_count": 51
+        },
+        {
+          "key": "Hoge Dijk",
+          "doc_count": 30
+        },
+        {
+          "key": "Holendrecht Oost",
+          "doc_count": 1100
+        },
+        {
+          "key": "Holendrecht West",
+          "doc_count": 1423
+        },
+        {
+          "key": "Holysloot",
+          "doc_count": 137
+        },
+        {
+          "key": "Hondecoeterbuurt",
+          "doc_count": 1226
+        },
+        {
+          "key": "Hoofdcentrum Zuidoost",
+          "doc_count": 369
+        },
+        {
+          "key": "Hoptille",
+          "doc_count": 1236
+        },
+        {
+          "key": "Houthavens Oost",
+          "doc_count": 439
+        },
+        {
+          "key": "Houthavens West",
+          "doc_count": 2066
+        },
+        {
+          "key": "Huntum",
+          "doc_count": 143
+        },
+        {
+          "key": "IJplein e.o.",
+          "doc_count": 1477
+        },
+        {
+          "key": "IJsbaanpad e.o.",
+          "doc_count": 209
+        },
+        {
+          "key": "IJselbuurt Oost",
+          "doc_count": 1606
+        },
+        {
+          "key": "IJselbuurt West",
+          "doc_count": 1567
+        },
+        {
+          "key": "Jacob Geelbuurt",
+          "doc_count": 1609
+        },
+        {
+          "key": "Jacques Veltmanbuurt",
+          "doc_count": 2281
+        },
+        {
+          "key": "Jan Maijenbuurt",
+          "doc_count": 1383
+        },
+        {
+          "key": "Java-eiland",
+          "doc_count": 1662
+        },
+        {
+          "key": "Johan Jongkindbuurt",
+          "doc_count": 405
+        },
+        {
+          "key": "Johannnes Vermeerbuurt",
+          "doc_count": 942
+        },
+        {
+          "key": "John Franklinbuurt",
+          "doc_count": 1184
+        },
+        {
+          "key": "Julianapark",
+          "doc_count": 927
+        },
+        {
+          "key": "K-buurt Midden",
+          "doc_count": 1281
+        },
+        {
+          "key": "K-buurt Zuidoost",
+          "doc_count": 459
+        },
+        {
+          "key": "K-buurt Zuidwest",
+          "doc_count": 505
+        },
+        {
+          "key": "KNSM-eiland",
+          "doc_count": 1587
+        },
+        {
+          "key": "Kadijken",
+          "doc_count": 1930
+        },
+        {
+          "key": "Kadoelen",
+          "doc_count": 981
+        },
+        {
+          "key": "Kalverdriehoek",
+          "doc_count": 478
+        },
+        {
+          "key": "Kantershof",
+          "doc_count": 1076
+        },
+        {
+          "key": "Kattenburg",
+          "doc_count": 813
+        },
+        {
+          "key": "Kazernebuurt",
+          "doc_count": 632
+        },
+        {
+          "key": "Kelbergen",
+          "doc_count": 392
+        },
+        {
+          "key": "Kolenkitbuurt Noord",
+          "doc_count": 1977
+        },
+        {
+          "key": "Kolenkitbuurt Zuid",
+          "doc_count": 1144
+        },
+        {
+          "key": "Koningin Wilhelminaplein",
+          "doc_count": 1835
+        },
+        {
+          "key": "Kop Zeedijk",
+          "doc_count": 1101
+        },
+        {
+          "key": "Kop Zuidas",
+          "doc_count": 622
+        },
+        {
+          "key": "Kortenaerkwartier",
+          "doc_count": 1157
+        },
+        {
+          "key": "Kortvoort",
+          "doc_count": 1642
+        },
+        {
+          "key": "Kromme Mijdrechtbuurt",
+          "doc_count": 1611
+        },
+        {
+          "key": "L-buurt",
+          "doc_count": 1683
+        },
+        {
+          "key": "Laan van Spartaan",
+          "doc_count": 1583
+        },
+        {
+          "key": "Landelijk gebied Driemond",
+          "doc_count": 47
+        },
+        {
+          "key": "Landlust Noord",
+          "doc_count": 1296
+        },
+        {
+          "key": "Landlust Zuid",
+          "doc_count": 2384
+        },
+        {
+          "key": "Langestraat e.o.",
+          "doc_count": 1445
+        },
+        {
+          "key": "Lastage",
+          "doc_count": 837
+        },
+        {
+          "key": "Legmeerpleinbuurt",
+          "doc_count": 1000
+        },
+        {
+          "key": "Leidsebuurt Noordoost",
+          "doc_count": 1008
+        },
+        {
+          "key": "Leidsebuurt Noordwest",
+          "doc_count": 274
+        },
+        {
+          "key": "Leidsebuurt Zuidoost",
+          "doc_count": 305
+        },
+        {
+          "key": "Leidsebuurt Zuidwest",
+          "doc_count": 138
+        },
+        {
+          "key": "Leidsegracht Noord",
+          "doc_count": 576
+        },
+        {
+          "key": "Leidsegracht Zuid",
+          "doc_count": 627
+        },
+        {
+          "key": "Leliegracht e.o.",
+          "doc_count": 1506
+        },
+        {
+          "key": "Linnaeusparkbuurt",
+          "doc_count": 1395
+        },
+        {
+          "key": "Lizzy Ansinghbuurt",
+          "doc_count": 1535
+        },
+        {
+          "key": "Loenermark",
+          "doc_count": 1128
+        },
+        {
+          "key": "Lootsbuurt",
+          "doc_count": 1403
+        },
+        {
+          "key": "Louis Chrispijnbuurt",
+          "doc_count": 1800
+        },
+        {
+          "key": "Lucas/Andreasziekenhuis e.o.",
+          "doc_count": 295
+        },
+        {
+          "key": "Marathonbuurt Oost",
+          "doc_count": 911
+        },
+        {
+          "key": "Marathonbuurt West",
+          "doc_count": 1564
+        },
+        {
+          "key": "Marcanti",
+          "doc_count": 640
+        },
+        {
+          "key": "Marine-Etablissement",
+          "doc_count": 45
+        },
+        {
+          "key": "Marjoleinterrein",
+          "doc_count": 147
+        },
+        {
+          "key": "Markengouw Midden",
+          "doc_count": 1514
+        },
+        {
+          "key": "Markengouw Zuid",
+          "doc_count": 957
+        },
+        {
+          "key": "Markthallen",
+          "doc_count": 112
+        },
+        {
+          "key": "Marnixbuurt Midden",
+          "doc_count": 142
+        },
+        {
+          "key": "Marnixbuurt Noord",
+          "doc_count": 1040
+        },
+        {
+          "key": "Marnixbuurt Zuid",
+          "doc_count": 565
+        },
+        {
+          "key": "Medisch Centrum Slotervaart",
+          "doc_count": 304
+        },
+        {
+          "key": "Meer en Oever",
+          "doc_count": 1652
+        },
+        {
+          "key": "Mercatorpark",
+          "doc_count": 20
+        },
+        {
+          "key": "Middelveldsche Akerpolder",
+          "doc_count": 1580
+        },
+        {
+          "key": "Middeneiland Zuidwest",
+          "doc_count": 1
+        },
+        {
+          "key": "Middenmeer Noord",
+          "doc_count": 1252
+        },
+        {
+          "key": "Middenmeer Zuid",
+          "doc_count": 2423
+        },
+        {
+          "key": "Minervabuurt Midden",
+          "doc_count": 1165
+        },
+        {
+          "key": "Minervabuurt Noord",
+          "doc_count": 659
+        },
+        {
+          "key": "Minervabuurt Zuid",
+          "doc_count": 1307
+        },
+        {
+          "key": "Molenwijk",
+          "doc_count": 1461
+        },
+        {
+          "key": "Museumplein",
+          "doc_count": 31
+        },
+        {
+          "key": "NDSM terrein",
+          "doc_count": 3311
+        },
+        {
+          "key": "Nelson Mandelapark",
+          "doc_count": 9
+        },
+        {
+          "key": "Nes e.o.",
+          "doc_count": 458
+        },
+        {
+          "key": "Nieuw Sloten Noordoost",
+          "doc_count": 1380
+        },
+        {
+          "key": "Nieuw Sloten Noordwest",
+          "doc_count": 1241
+        },
+        {
+          "key": "Nieuw Sloten Zuidoost",
+          "doc_count": 916
+        },
+        {
+          "key": "Nieuw Sloten Zuidwest",
+          "doc_count": 859
+        },
+        {
+          "key": "Nieuwe Diep/Diemerpark",
+          "doc_count": 54
+        },
+        {
+          "key": "Nieuwe Kerk e.o.",
+          "doc_count": 857
+        },
+        {
+          "key": "Nieuwe Meer",
+          "doc_count": 119
+        },
+        {
+          "key": "Nieuwe Oosterbegraafplaats",
+          "doc_count": 13
+        },
+        {
+          "key": "Nieuwendammerdijk Oost",
+          "doc_count": 150
+        },
+        {
+          "key": "Nieuwendammerdijk West",
+          "doc_count": 419
+        },
+        {
+          "key": "Nieuwendammerdijk Zuid",
+          "doc_count": 2
+        },
+        {
+          "key": "Nieuwendijk Noord",
+          "doc_count": 535
+        },
+        {
+          "key": "Nieuwmarkt",
+          "doc_count": 1213
+        },
+        {
+          "key": "Nintemanterrein",
+          "doc_count": 40
+        },
+        {
+          "key": "Noorder IJplas",
+          "doc_count": 68
+        },
+        {
+          "key": "Noorderstrook Oost",
+          "doc_count": 9
+        },
+        {
+          "key": "Noorderstrook West",
+          "doc_count": 10
+        },
+        {
+          "key": "Noordoever Sloterplas",
+          "doc_count": 1735
+        },
+        {
+          "key": "Noordoostkwadrant Indische buurt",
+          "doc_count": 3246
+        },
+        {
+          "key": "Noordwestkwadrant Indische buurt Noord",
+          "doc_count": 2503
+        },
+        {
+          "key": "Noordwestkwadrant Indische buurt Zuid",
+          "doc_count": 2595
+        },
+        {
+          "key": "Olympisch Stadion e.o.",
+          "doc_count": 1324
+        },
+        {
+          "key": "Ookmeer",
+          "doc_count": 30
+        },
+        {
+          "key": "Oostelijke Handelskade",
+          "doc_count": 1069
+        },
+        {
+          "key": "Oostenburg",
+          "doc_count": 2340
+        },
+        {
+          "key": "Oosterdokseiland",
+          "doc_count": 487
+        },
+        {
+          "key": "Oosterpark",
+          "doc_count": 121
+        },
+        {
+          "key": "Oosterparkbuurt Noordwest",
+          "doc_count": 2445
+        },
+        {
+          "key": "Oosterparkbuurt Zuidoost",
+          "doc_count": 2224
+        },
+        {
+          "key": "Oosterparkbuurt Zuidwest",
+          "doc_count": 1931
+        },
+        {
+          "key": "Oostoever Sloterplas",
+          "doc_count": 1093
+        },
+        {
+          "key": "Oostpoort",
+          "doc_count": 1136
+        },
+        {
+          "key": "Oostzanerdijk",
+          "doc_count": 235
+        },
+        {
+          "key": "Orteliusbuurt Midden",
+          "doc_count": 1166
+        },
+        {
+          "key": "Orteliusbuurt Noord",
+          "doc_count": 795
+        },
+        {
+          "key": "Orteliusbuurt Zuid",
+          "doc_count": 1113
+        },
+        {
+          "key": "Osdorp Midden Noord",
+          "doc_count": 1371
+        },
+        {
+          "key": "Osdorp Midden Zuid",
+          "doc_count": 1519
+        },
+        {
+          "key": "Osdorp Zuidoost",
+          "doc_count": 2213
+        },
+        {
+          "key": "Osdorper Binnenpolder",
+          "doc_count": 92
+        },
+        {
+          "key": "Osdorper Bovenpolder",
+          "doc_count": 436
+        },
+        {
+          "key": "Osdorpplein e.o.",
+          "doc_count": 2655
+        },
+        {
+          "key": "Oude Kerk e.o.",
+          "doc_count": 881
+        },
+        {
+          "key": "Overamstel",
+          "doc_count": 16
+        },
+        {
+          "key": "Overbraker Binnenpolder",
+          "doc_count": 16
+        },
+        {
+          "key": "Overhoeks",
+          "doc_count": 2368
+        },
+        {
+          "key": "Overtoomse Veld Noord",
+          "doc_count": 2685
+        },
+        {
+          "key": "Overtoomse Veld Zuid",
+          "doc_count": 2509
+        },
+        {
+          "key": "P.C. Hooftbuurt",
+          "doc_count": 765
+        },
+        {
+          "key": "Papaverweg e.o.",
+          "doc_count": 1156
+        },
+        {
+          "key": "Paramariboplein e.o.",
+          "doc_count": 2117
+        },
+        {
+          "key": "Park Haagseweg",
+          "doc_count": 440
+        },
+        {
+          "key": "Park de Meer",
+          "doc_count": 720
+        },
+        {
+          "key": "Parooldriehoek",
+          "doc_count": 131
+        },
+        {
+          "key": "Passeerdersgrachtbuurt",
+          "doc_count": 746
+        },
+        {
+          "key": "Petroleumhaven",
+          "doc_count": 104
+        },
+        {
+          "key": "Pieter van der Doesbuurt",
+          "doc_count": 1059
+        },
+        {
+          "key": "Plan van Gool",
+          "doc_count": 1426
+        },
+        {
+          "key": "Planciusbuurt Noord",
+          "doc_count": 257
+        },
+        {
+          "key": "Planciusbuurt Zuid",
+          "doc_count": 153
+        },
+        {
+          "key": "Postjeskade e.o.",
+          "doc_count": 1718
+        },
+        {
+          "key": "Prinses Irenebuurt",
+          "doc_count": 985
+        },
+        {
+          "key": "RAI",
+          "doc_count": 32
+        },
+        {
+          "key": "RI Oost terrein",
+          "doc_count": 2620
+        },
+        {
+          "key": "Ransdorp",
+          "doc_count": 148
+        },
+        {
+          "key": "Rapenburg",
+          "doc_count": 777
+        },
+        {
+          "key": "Rechte H-buurt",
+          "doc_count": 1313
+        },
+        {
+          "key": "Reguliersbuurt",
+          "doc_count": 501
+        },
+        {
+          "key": "Reigersbos Midden",
+          "doc_count": 1166
+        },
+        {
+          "key": "Reigersbos Noord",
+          "doc_count": 1857
+        },
+        {
+          "key": "Reigersbos Zuid",
+          "doc_count": 1100
+        },
+        {
+          "key": "Rembrandtpark Noord",
+          "doc_count": 377
+        },
+        {
+          "key": "Rembrandtpark Zuid",
+          "doc_count": 460
+        },
+        {
+          "key": "Rembrandtpleinbuurt",
+          "doc_count": 506
+        },
+        {
+          "key": "Riekerhaven",
+          "doc_count": 548
+        },
+        {
+          "key": "Riekerpolder",
+          "doc_count": 512
+        },
+        {
+          "key": "Rieteiland Oost",
+          "doc_count": 95
+        },
+        {
+          "key": "Rietlanden",
+          "doc_count": 1421
+        },
+        {
+          "key": "Rijnbuurt Midden",
+          "doc_count": 1302
+        },
+        {
+          "key": "Rijnbuurt Oost",
+          "doc_count": 1593
+        },
+        {
+          "key": "Rijnbuurt West",
+          "doc_count": 1088
+        },
+        {
+          "key": "Robert Scottbuurt Oost",
+          "doc_count": 972
+        },
+        {
+          "key": "Robert Scottbuurt West",
+          "doc_count": 1555
+        },
+        {
+          "key": "Rode Kruisbuurt",
+          "doc_count": 141
+        },
+        {
+          "key": "Sarphatiparkbuurt",
+          "doc_count": 3840
+        },
+        {
+          "key": "Sarphatistrook",
+          "doc_count": 1367
+        },
+        {
+          "key": "Scheepvaarthuisbuurt",
+          "doc_count": 460
+        },
+        {
+          "key": "Scheldebuurt Midden",
+          "doc_count": 1633
+        },
+        {
+          "key": "Scheldebuurt Oost",
+          "doc_count": 1262
+        },
+        {
+          "key": "Scheldebuurt West",
+          "doc_count": 2395
+        },
+        {
+          "key": "Schellingwoude Noord",
+          "doc_count": 7
+        },
+        {
+          "key": "Schellingwoude Oost",
+          "doc_count": 271
+        },
+        {
+          "key": "Schellingwoude West",
+          "doc_count": 35
+        },
+        {
+          "key": "Schinkelbuurt Noord",
+          "doc_count": 1608
+        },
+        {
+          "key": "Schinkelbuurt Zuid",
+          "doc_count": 1077
+        },
+        {
+          "key": "Schipluidenbuurt",
+          "doc_count": 1188
+        },
+        {
+          "key": "Science Park Noord",
+          "doc_count": 1883
+        },
+        {
+          "key": "Science Park Zuid",
+          "doc_count": 298
+        },
+        {
+          "key": "Sloterdijk II",
+          "doc_count": 153
+        },
+        {
+          "key": "Sloterdijk III Oost",
+          "doc_count": 139
+        },
+        {
+          "key": "Sloterdijk III West",
+          "doc_count": 672
+        },
+        {
+          "key": "Slotermeer Zuid",
+          "doc_count": 2021
+        },
+        {
+          "key": "Sloterpark",
+          "doc_count": 41
+        },
+        {
+          "key": "Sloterweg e.o.",
+          "doc_count": 153
+        },
+        {
+          "key": "Spaarndammerbuurt Midden",
+          "doc_count": 881
+        },
+        {
+          "key": "Spaarndammerbuurt Noordoost",
+          "doc_count": 1674
+        },
+        {
+          "key": "Spaarndammerbuurt Noordwest",
+          "doc_count": 1096
+        },
+        {
+          "key": "Spaarndammerbuurt Zuidoost",
+          "doc_count": 654
+        },
+        {
+          "key": "Spaarndammerbuurt Zuidwest",
+          "doc_count": 1136
+        },
+        {
+          "key": "Spiegelbuurt",
+          "doc_count": 824
+        },
+        {
+          "key": "Sporenburg",
+          "doc_count": 1211
+        },
+        {
+          "key": "Sportpark Middenmeer Noord",
+          "doc_count": 260
+        },
+        {
+          "key": "Sportpark Middenmeer Zuid",
+          "doc_count": 215
+        },
+        {
+          "key": "Sportpark Voorland",
+          "doc_count": 5
+        },
+        {
+          "key": "Spuistraat Noord",
+          "doc_count": 799
+        },
+        {
+          "key": "Spuistraat Zuid",
+          "doc_count": 844
+        },
+        {
+          "key": "Staalmanbuurt",
+          "doc_count": 1635
+        },
+        {
+          "key": "Staatsliedenbuurt Noordoost",
+          "doc_count": 781
+        },
+        {
+          "key": "Stationsplein e.o.",
+          "doc_count": 182
+        },
+        {
+          "key": "Steigereiland Noord",
+          "doc_count": 1149
+        },
+        {
+          "key": "Steigereiland Zuid",
+          "doc_count": 1077
+        },
+        {
+          "key": "Surinamepleinbuurt",
+          "doc_count": 913
+        },
+        {
+          "key": "Swammerdambuurt",
+          "doc_count": 1238
+        },
+        {
+          "key": "Teleport",
+          "doc_count": 1591
+        },
+        {
+          "key": "Terrasdorp",
+          "doc_count": 2206
+        },
+        {
+          "key": "Transvaalbuurt Oost",
+          "doc_count": 2728
+        },
+        {
+          "key": "Transvaalbuurt West",
+          "doc_count": 2211
+        },
+        {
+          "key": "Trompbuurt",
+          "doc_count": 1722
+        },
+        {
+          "key": "Tuindorp Amstelstation",
+          "doc_count": 493
+        },
+        {
+          "key": "Tuindorp Frankendael",
+          "doc_count": 1664
+        },
+        {
+          "key": "Tuindorp Nieuwendam Oost",
+          "doc_count": 1324
+        },
+        {
+          "key": "Tuindorp Nieuwendam West",
+          "doc_count": 552
+        },
+        {
+          "key": "Tuindorp Oostzaan Oost",
+          "doc_count": 2073
+        },
+        {
+          "key": "Tuindorp Oostzaan West",
+          "doc_count": 667
+        },
+        {
+          "key": "Twiske Oost",
+          "doc_count": 445
+        },
+        {
+          "key": "Twiske West",
+          "doc_count": 999
+        },
+        {
+          "key": "Uilenburg",
+          "doc_count": 921
+        },
+        {
+          "key": "Utrechtsebuurt Zuid",
+          "doc_count": 974
+        },
+        {
+          "key": "VU-kwartier",
+          "doc_count": 160
+        },
+        {
+          "key": "Valeriusbuurt Oost",
+          "doc_count": 803
+        },
+        {
+          "key": "Valeriusbuurt West",
+          "doc_count": 1331
+        },
+        {
+          "key": "Valkenburg",
+          "doc_count": 956
+        },
+        {
+          "key": "Van Brakelkwartier",
+          "doc_count": 495
+        },
+        {
+          "key": "Van Loonbuurt",
+          "doc_count": 1136
+        },
+        {
+          "key": "Van Tuyllbuurt",
+          "doc_count": 2434
+        },
+        {
+          "key": "Van der Helstpleinbuurt",
+          "doc_count": 2664
+        },
+        {
+          "key": "Van der Kunbuurt",
+          "doc_count": 290
+        },
+        {
+          "key": "Van der Pekbuurt",
+          "doc_count": 2700
+        },
+        {
+          "key": "Veluwebuurt",
+          "doc_count": 1106
+        },
+        {
+          "key": "Venserpolder Oost",
+          "doc_count": 1751
+        },
+        {
+          "key": "Venserpolder West",
+          "doc_count": 2855
+        },
+        {
+          "key": "Vervoerscentrum",
+          "doc_count": 101
+        },
+        {
+          "key": "Vivaldi",
+          "doc_count": 1214
+        },
+        {
+          "key": "Vliegenbos",
+          "doc_count": 124
+        },
+        {
+          "key": "Vogelbuurt Noord",
+          "doc_count": 695
+        },
+        {
+          "key": "Vogelbuurt Zuid",
+          "doc_count": 2103
+        },
+        {
+          "key": "Vogeltjeswei",
+          "doc_count": 253
+        },
+        {
+          "key": "Vondelpark Oost",
+          "doc_count": 6
+        },
+        {
+          "key": "Vondelpark West",
+          "doc_count": 2
+        },
+        {
+          "key": "Vondelparkbuurt Midden",
+          "doc_count": 493
+        },
+        {
+          "key": "Vondelparkbuurt Oost",
+          "doc_count": 683
+        },
+        {
+          "key": "Vondelparkbuurt West",
+          "doc_count": 1346
+        },
+        {
+          "key": "WG-terrein",
+          "doc_count": 2300
+        },
+        {
+          "key": "Walvisbuurt",
+          "doc_count": 554
+        },
+        {
+          "key": "Waterloopleinbuurt",
+          "doc_count": 706
+        },
+        {
+          "key": "Weesperbuurt",
+          "doc_count": 2113
+        },
+        {
+          "key": "Weespertrekvaart",
+          "doc_count": 1353
+        },
+        {
+          "key": "Weesperzijde Midden/Zuid",
+          "doc_count": 1981
+        },
+        {
+          "key": "Werengouw Midden",
+          "doc_count": 2572
+        },
+        {
+          "key": "Werengouw Zuid",
+          "doc_count": 731
+        },
+        {
+          "key": "Westelijke eilanden",
+          "doc_count": 2023
+        },
+        {
+          "key": "Westerdokseiland",
+          "doc_count": 1204
+        },
+        {
+          "key": "Westergasfabriek",
+          "doc_count": 78
+        },
+        {
+          "key": "Westerstaatsman",
+          "doc_count": 1849
+        },
+        {
+          "key": "Westhaven Noord",
+          "doc_count": 208
+        },
+        {
+          "key": "Westhaven Zuid",
+          "doc_count": 101
+        },
+        {
+          "key": "Westlandgrachtbuurt",
+          "doc_count": 2129
+        },
+        {
+          "key": "Weteringbuurt",
+          "doc_count": 1853
+        },
+        {
+          "key": "Wielingenbuurt",
+          "doc_count": 1520
+        },
+        {
+          "key": "Wildeman",
+          "doc_count": 2779
+        },
+        {
+          "key": "Willemsparkbuurt Noord",
+          "doc_count": 949
+        },
+        {
+          "key": "Willibrordusbuurt",
+          "doc_count": 1978
+        },
+        {
+          "key": "Wittenburg",
+          "doc_count": 1394
+        },
+        {
+          "key": "Woon- en Groengebied Sloterdijk",
+          "doc_count": 975
+        },
+        {
+          "key": "Zaagpoortbuurt",
+          "doc_count": 749
+        },
+        {
+          "key": "Zamenhofstraat e.o.",
+          "doc_count": 101
+        },
+        {
+          "key": "Zeeburgerdijk Oost",
+          "doc_count": 214
+        },
+        {
+          "key": "Zeeburgereiland Noordoost",
+          "doc_count": 32
+        },
+        {
+          "key": "Zeeburgereiland Noordwest",
+          "doc_count": 14
+        },
+        {
+          "key": "Zeeburgereiland Zuidoost",
+          "doc_count": 463
+        },
+        {
+          "key": "Zeeburgereiland Zuidwest",
+          "doc_count": 172
+        },
+        {
+          "key": "Zeeheldenbuurt",
+          "doc_count": 1178
+        },
+        {
+          "key": "Zorgvlied",
+          "doc_count": 25
+        },
+        {
+          "key": "Zuidas Noord",
+          "doc_count": 905
+        },
+        {
+          "key": "Zuidas Zuid",
+          "doc_count": 2031
+        },
+        {
+          "key": "Zuiderhof",
+          "doc_count": 54
+        },
+        {
+          "key": "Zuiderkerkbuurt",
+          "doc_count": 1273
+        },
+        {
+          "key": "Zuidoostkwadrant Indische buurt",
+          "doc_count": 1897
+        },
+        {
+          "key": "Zuidwestkwadrant Indische buurt",
+          "doc_count": 2046
+        },
+        {
+          "key": "Zuidwestkwadrant Osdorp Noord",
+          "doc_count": 1374
+        },
+        {
+          "key": "Zuidwestkwadrant Osdorp Zuid",
+          "doc_count": 2651
+        },
+        {
+          "key": "Zunderdorp",
+          "doc_count": 228
+        },
+        {
+          "key": "Zwarte Gouw",
+          "doc_count": 34
+        },
+        {
+          "key": "de Plantage",
+          "doc_count": 1591
+        }
+      ],
+      "doc_count": 476
+    },
+    "woonplaats": {
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 0,
+      "buckets": [
+        {
+          "key": "Amsterdam",
+          "doc_count": 528311
+        },
+        {
+          "key": "Weesp",
+          "doc_count": 12579
+        }
+      ],
+      "doc_count": 2
+    },
+    "buurtcombinatie_naam": {
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 0,
+      "buckets": [
+        {
+          "key": "Amstel III/Bullewijk",
+          "doc_count": 4719
+        },
+        {
+          "key": "Apollobuurt",
+          "doc_count": 4185
+        },
+        {
+          "key": "Banne Buiksloot",
+          "doc_count": 6856
+        },
+        {
+          "key": "Bedrijventerrein Sloterdijk",
+          "doc_count": 2679
+        },
+        {
+          "key": "Betondorp",
+          "doc_count": 2041
+        },
+        {
+          "key": "Bijlmer Centrum (D,F,H)",
+          "doc_count": 14022
+        },
+        {
+          "key": "Bijlmer Oost (E,G,K)",
+          "doc_count": 13965
+        },
+        {
+          "key": "Buikslotermeer",
+          "doc_count": 6906
+        },
+        {
+          "key": "Buitenveldert-Oost",
+          "doc_count": 5323
+        },
+        {
+          "key": "Buitenveldert-West",
+          "doc_count": 9818
+        },
+        {
+          "key": "Burgwallen-Nieuwe Zijde",
+          "doc_count": 4955
+        },
+        {
+          "key": "Burgwallen-Oude Zijde",
+          "doc_count": 4454
+        },
+        {
+          "key": "Centrale Markt",
+          "doc_count": 1530
+        },
+        {
+          "key": "Chassébuurt",
+          "doc_count": 3207
+        },
+        {
+          "key": "Da Costabuurt",
+          "doc_count": 3109
+        },
+        {
+          "key": "Dapperbuurt",
+          "doc_count": 6135
+        },
+        {
+          "key": "De Kolenkit",
+          "doc_count": 6259
+        },
+        {
+          "key": "De Punt",
+          "doc_count": 3180
+        },
+        {
+          "key": "De Weteringschans",
+          "doc_count": 5965
+        },
+        {
+          "key": "Driemond",
+          "doc_count": 727
+        },
+        {
+          "key": "Eendracht",
+          "doc_count": 1025
+        },
+        {
+          "key": "Elzenhagen",
+          "doc_count": 2883
+        },
+        {
+          "key": "Erasmuspark",
+          "doc_count": 3269
+        },
+        {
+          "key": "Frankendael",
+          "doc_count": 7242
+        },
+        {
+          "key": "Frederik Hendrikbuurt",
+          "doc_count": 5516
+        },
+        {
+          "key": "Gein",
+          "doc_count": 5201
+        },
+        {
+          "key": "Geuzenbuurt",
+          "doc_count": 3877
+        },
+        {
+          "key": "Geuzenveld",
+          "doc_count": 6838
+        },
+        {
+          "key": "Grachtengordel-West",
+          "doc_count": 5476
+        },
+        {
+          "key": "Grachtengordel-Zuid",
+          "doc_count": 4995
+        },
+        {
+          "key": "Haarlemmerbuurt",
+          "doc_count": 6773
+        },
+        {
+          "key": "Helmersbuurt",
+          "doc_count": 5301
+        },
+        {
+          "key": "Holendrecht/Reigersbos",
+          "doc_count": 8592
+        },
+        {
+          "key": "Hoofddorppleinbuurt",
+          "doc_count": 7222
+        },
+        {
+          "key": "Hoofdweg e.o.",
+          "doc_count": 6164
+        },
+        {
+          "key": "Houthavens",
+          "doc_count": 2505
+        },
+        {
+          "key": "IJburg Oost",
+          "doc_count": 279
+        },
+        {
+          "key": "IJburg West",
+          "doc_count": 7289
+        },
+        {
+          "key": "IJburg Zuid",
+          "doc_count": 3643
+        },
+        {
+          "key": "IJplein/Vogelbuurt",
+          "doc_count": 4399
+        },
+        {
+          "key": "IJselbuurt",
+          "doc_count": 3173
+        },
+        {
+          "key": "Indische Buurt Oost",
+          "doc_count": 5377
+        },
+        {
+          "key": "Indische Buurt West",
+          "doc_count": 7144
+        },
+        {
+          "key": "Jordaan",
+          "doc_count": 15233
+        },
+        {
+          "key": "Kadoelen",
+          "doc_count": 1426
+        },
+        {
+          "key": "Kinkerbuurt",
+          "doc_count": 4362
+        },
+        {
+          "key": "Landlust",
+          "doc_count": 10345
+        },
+        {
+          "key": "Lutkemeer/Ookmeer",
+          "doc_count": 555
+        },
+        {
+          "key": "Middelveldsche Akerpolder",
+          "doc_count": 5542
+        },
+        {
+          "key": "Middenmeer",
+          "doc_count": 8451
+        },
+        {
+          "key": "Museumkwartier",
+          "doc_count": 8135
+        },
+        {
+          "key": "Nellestein",
+          "doc_count": 1733
+        },
+        {
+          "key": "Nieuwe Pijp",
+          "doc_count": 8532
+        },
+        {
+          "key": "Nieuwendammerdijk/Buiksloterdijk",
+          "doc_count": 686
+        },
+        {
+          "key": "Nieuwmarkt/Lastage",
+          "doc_count": 7630
+        },
+        {
+          "key": "Noordelijke IJ-oevers Oost",
+          "doc_count": 672
+        },
+        {
+          "key": "Noordelijke IJ-oevers West",
+          "doc_count": 8407
+        },
+        {
+          "key": "Omval/Overamstel",
+          "doc_count": 4797
+        },
+        {
+          "key": "Oostelijk Havengebied",
+          "doc_count": 11911
+        },
+        {
+          "key": "Oostelijke Eilanden/Kadijken",
+          "doc_count": 9473
+        },
+        {
+          "key": "Oosterparkbuurt",
+          "doc_count": 6721
+        },
+        {
+          "key": "Oostzanerwerf",
+          "doc_count": 3974
+        },
+        {
+          "key": "Osdorp-Midden",
+          "doc_count": 6915
+        },
+        {
+          "key": "Osdorp-Oost",
+          "doc_count": 9971
+        },
+        {
+          "key": "Oude Pijp",
+          "doc_count": 10828
+        },
+        {
+          "key": "Overtoomse Sluis",
+          "doc_count": 4994
+        },
+        {
+          "key": "Overtoomse Veld",
+          "doc_count": 6731
+        },
+        {
+          "key": "Prinses Irenebuurt e.o.",
+          "doc_count": 987
+        },
+        {
+          "key": "Rijnbuurt",
+          "doc_count": 5619
+        },
+        {
+          "key": "Scheldebuurt",
+          "doc_count": 8538
+        },
+        {
+          "key": "Schinkelbuurt",
+          "doc_count": 2685
+        },
+        {
+          "key": "Sloter-/Riekerpolder",
+          "doc_count": 6818
+        },
+        {
+          "key": "Sloterdijk",
+          "doc_count": 1242
+        },
+        {
+          "key": "Slotermeer-Noordoost",
+          "doc_count": 4618
+        },
+        {
+          "key": "Slotermeer-Zuidwest",
+          "doc_count": 8991
+        },
+        {
+          "key": "Slotervaart Noord",
+          "doc_count": 3872
+        },
+        {
+          "key": "Slotervaart Zuid",
+          "doc_count": 6020
+        },
+        {
+          "key": "Spaarndammer- en Zeeheldenbuurt",
+          "doc_count": 6713
+        },
+        {
+          "key": "Staatsliedenbuurt",
+          "doc_count": 8483
+        },
+        {
+          "key": "Stadionbuurt",
+          "doc_count": 7097
+        },
+        {
+          "key": "Transvaalbuurt",
+          "doc_count": 4939
+        },
+        {
+          "key": "Tuindorp Buiksloot",
+          "doc_count": 979
+        },
+        {
+          "key": "Tuindorp Nieuwendam",
+          "doc_count": 1876
+        },
+        {
+          "key": "Tuindorp Oostzaan",
+          "doc_count": 5822
+        },
+        {
+          "key": "Van Galenbuurt",
+          "doc_count": 3382
+        },
+        {
+          "key": "Van Lennepbuurt",
+          "doc_count": 4897
+        },
+        {
+          "key": "Volewijck",
+          "doc_count": 5224
+        },
+        {
+          "key": "Vondelbuurt",
+          "doc_count": 1176
+        },
+        {
+          "key": "Waterland",
+          "doc_count": 1114
+        },
+        {
+          "key": "Waterlandpleinbuurt",
+          "doc_count": 6550
+        },
+        {
+          "key": "Weesperbuurt/Plantage",
+          "doc_count": 5328
+        },
+        {
+          "key": "Weesperzijde",
+          "doc_count": 3350
+        },
+        {
+          "key": "Westelijk Havengebied",
+          "doc_count": 1597
+        },
+        {
+          "key": "Westindische Buurt",
+          "doc_count": 3835
+        },
+        {
+          "key": "Westlandgracht",
+          "doc_count": 8716
+        },
+        {
+          "key": "Willemspark",
+          "doc_count": 3085
+        },
+        {
+          "key": "Zeeburgereiland/Nieuwe Diep",
+          "doc_count": 3355
+        },
+        {
+          "key": "Zuid Pijp",
+          "doc_count": 4819
+        },
+        {
+          "key": "Zuidas",
+          "doc_count": 4342
+        }
+      ],
+      "doc_count": 99
+    }
+  },
+  "object_list": [
+    {
+      "nummeraanduiding_id": "0363200000261100",
+      "naam": "'s-Gravelandse Veer",
+      "woonplaats": "Amsterdam",
+      "huisnummer": 1,
+      "huisletter": "",
+      "huisnummer_toevoeging": "",
+      "postcode": "1011KM",
+      "_openbare_ruimte_naam": "'s-Gravelandse Veer",
+      "buurt_naam": "Zuiderkerkbuurt",
+      "buurtcombinatie_naam": "Nieuwmarkt/Lastage",
+      "status": "Verblijfsobject in gebruik",
+      "stadsdeel_code": "A",
+      "stadsdeel_naam": "Centrum",
+      "openbare_ruimte_landelijk_id": "0363300000005904",
+      "landelijk_id": "0363200000261100",
+      "type_adres": "Hoofdadres",
+      "centroid": [
+        4.896289333302037,
+        52.36780280607008
+      ],
+      "ggw_code": "DX02",
+      "ggw_naam": "Centrum-Oost",
+      "buurt_code": "A04h",
+      "buurtcombinatie_code": "A04",
+      "type_desc": "Verblijfsobject",
+      "verblijfsobject": "0363010000802188",
+      "oppervlakte": 109,
+      "bouwblok": "YD36",
+      "gebruik": "Woning",
+      "aantal_kamers": 2,
+      "bouwlagen": 4,
+      "eigendomsverhouding": "Huur",
+      "geconstateerd": "Nee",
+      "in_onderzoek": "Nee",
+      "gebruiksdoel": "woonfunctie",
+      "toegang": "",
+      "panden": "0363100012177786",
+      "pandnaam": "",
+      "bouwjaar": "onbekend",
+      "type_woonobject": "Eén woning",
+      "ligging": "Tussengebouw"
+    },
+    {
+      "nummeraanduiding_id": "0363200000261101",
+      "naam": "'s-Gravelandse Veer",
+      "woonplaats": "Amsterdam",
+      "huisnummer": 2,
+      "huisletter": "",
+      "huisnummer_toevoeging": "",
+      "postcode": "1011KM",
+      "_openbare_ruimte_naam": "'s-Gravelandse Veer",
+      "buurt_naam": "Zuiderkerkbuurt",
+      "buurtcombinatie_naam": "Nieuwmarkt/Lastage",
+      "status": "Verblijfsobject in gebruik",
+      "stadsdeel_code": "A",
+      "stadsdeel_naam": "Centrum",
+      "openbare_ruimte_landelijk_id": "0363300000005904",
+      "landelijk_id": "0363200000261101",
+      "type_adres": "Hoofdadres",
+      "centroid": [
+        4.896377426204386,
+        52.36780317129975
+      ],
+      "ggw_code": "DX02",
+      "ggw_naam": "Centrum-Oost",
+      "buurt_code": "A04h",
+      "buurtcombinatie_code": "A04",
+      "type_desc": "Verblijfsobject",
+      "verblijfsobject": "0363010000802189",
+      "oppervlakte": 48,
+      "bouwblok": "YD36",
+      "gebruik": "",
+      "verdieping_toegang": 0,
+      "bouwlagen": 1,
+      "hoogste_bouwlaag": 0,
+      "laagste_bouwlaag": 0,
+      "eigendomsverhouding": "Eigendom",
+      "geconstateerd": "Nee",
+      "in_onderzoek": "Nee",
+      "gebruiksdoel": "bijeenkomstfunctie",
+      "toegang": "Begane grond",
+      "panden": "0363100012177788",
+      "pandnaam": "",
+      "bouwjaar": "onbekend",
+      "type_woonobject": "Eén woning",
+      "ligging": "Tussengebouw"
+    }
+  ],
+  "object_count": 540890,
+  "page_count": 5409
+}

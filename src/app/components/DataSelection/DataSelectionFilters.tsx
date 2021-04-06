@@ -1,32 +1,12 @@
-import { FunctionComponent, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { FunctionComponent, useMemo, useState } from 'react'
 import { Button, Heading, Link, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
-import { addFilter as addFilterAction } from '../../../shared/ducks/filters/filters'
-import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
 import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
 import Metadata from '../../../shared/assets/icons/metadata.svg'
-
-export type Filter = {
-  options: Array<{ id: string; label: string; count: number }>
-  slug: string
-  label: string
-  // eslint-disable-next-line camelcase
-  info_url: string
-  numberOfOptions: number
-}
-
-export type ActiveFilter = {
-  // eslint-disable-next-line camelcase
-  sbi_code?: string
-}
-
-type Props = {
-  availableFilters: Filter[]
-  activeFilters: ActiveFilter
-  dataset: string
-}
+import { useDataSelection } from './DataSelectionContext'
+import { AvailableFilter } from './types'
+import useLegacyDataselectionConfig from './useLegacyDataselectionConfig'
 
 const StyledHeading = styled(Heading)`
   display: flex;
@@ -49,21 +29,25 @@ const ShowMoreButton = styled(Button)`
 
 // Note, this component has been migrated from legacy angularJS code
 // Todo: this can be removed when we implement the new interactive table
-const DataSelectionFilters: FunctionComponent<Props> = ({
-  availableFilters,
-  activeFilters,
-  dataset,
-}) => {
+const DataSelectionFilters: FunctionComponent = () => {
   const [expandedFilters, setExpandedFilters] = useState<string[]>([])
-  const dispatch = useDispatch()
+  const { addFilter, activeFilters, availableFilters } = useDataSelection()
+  const { currentDatasetConfig } = useLegacyDataselectionConfig()
+
+  const filteredAvailableFilters = useMemo(() => {
+    if (!activeFilters.length) {
+      return []
+    }
+    return availableFilters.filter(({ slug }) => activeFilters.find(({ key }) => key === slug))
+  }, [activeFilters, availableFilters])
 
   const showMoreThreshold = 10
 
   const isFilterOptionActive = (filterSlug: string, id: string, label: string) => {
-    return activeFilters[filterSlug] === label || activeFilters[filterSlug] === id
+    return filteredAvailableFilters.find(({ slug }) => slug === label || slug === id)
   }
 
-  const hasInactiveFilterOptions = (filter: Filter) => {
+  const hasInactiveFilterOptions = (filter: AvailableFilter) => {
     return (
       !filter.options.some((option) =>
         isFilterOptionActive(filter.slug, option.id, option.label),
@@ -82,7 +66,7 @@ const DataSelectionFilters: FunctionComponent<Props> = ({
     )
   }
 
-  const nrHiddenOptions = (filter: Filter) => {
+  const nrHiddenOptions = (filter: AvailableFilter) => {
     return filter.numberOfOptions - filter.options.length
   }
 
@@ -108,17 +92,23 @@ const DataSelectionFilters: FunctionComponent<Props> = ({
     return availableFilters.filter((filter) => filter.slug === filterSlug)
   }
 
-  const showOptionCounts = DATA_SELECTION_CONFIG.datasets[dataset].SHOW_FILTER_OPTION_COUNTS
-  const activeFilterSlugs = Object.keys(activeFilters)
+  if (!currentDatasetConfig) {
+    return null
+  }
 
+  const showOptionCounts = currentDatasetConfig.SHOW_FILTER_OPTION_COUNTS
+  const activeFilterSlugs = filteredAvailableFilters.map(({ slug }) => slug)
   return (
-    <div className="qa-available-filters c-data-selection-available-filters">
+    <div
+      className="qa-available-filters c-data-selection-available-filters"
+      data-testid="dataSelectionAvailableFilters"
+    >
       <>
         {availableFilters.map(
           (filter) =>
             !activeFilterSlugs.includes(filter.slug) &&
             hasInactiveFilterOptions(filter) && (
-              <div className="c-data-selection-available-filters__category">
+              <div className="c-data-selection-available-filters__category" key={filter.slug}>
                 <StyledHeading as="h3">
                   <span>{filter.label}</span>
                   {filter.info_url && (
@@ -140,7 +130,7 @@ const DataSelectionFilters: FunctionComponent<Props> = ({
                 </StyledHeading>
 
                 <ul>
-                  {[...filter.options]
+                  {filter.options
                     .slice(
                       0,
                       isExpandedFilter(filter.slug) ? filter.options.length : showMoreThreshold,
@@ -151,13 +141,11 @@ const DataSelectionFilters: FunctionComponent<Props> = ({
                           inList
                           type="button"
                           forwardedAs="button"
-                          onClick={() =>
-                            dispatch(
-                              addFilterAction({
-                                [filter.slug]: option.id,
-                              }),
-                            )
-                          }
+                          onClick={() => {
+                            addFilter({
+                              [filter.slug]: option.id,
+                            })
+                          }}
                         >
                           <span className="c-data-selection-available-filters__item-label">
                             <span className="qa-option-label">{option.label || '(geen)'}</span>

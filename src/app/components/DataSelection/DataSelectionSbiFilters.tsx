@@ -1,16 +1,9 @@
 import { FunctionComponent, useCallback, useMemo, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Button, Link, themeSpacing } from '@amsterdam/asc-ui'
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
-import { addFilter, removeFilter } from '../../../shared/ducks/filters/filters'
-import { ActiveFilter, Filter } from './DataSelectionFilters'
 import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
-
-type Props = {
-  availableFilters: Filter[]
-  activeFilters: ActiveFilter
-}
+import { useDataSelection } from './DataSelectionContext'
 
 const StyledLink = styled(Link)`
   background-color: transparent;
@@ -23,12 +16,10 @@ const ShowMoreButton = styled(Button)`
 
 // Note, this component has been migrated from legacy angularJS code
 // Todo: this can be removed when we implement the new interactive table
-const DataSelectionSbiFilters: FunctionComponent<Props> = ({ availableFilters, activeFilters }) => {
-  const dispatch = useDispatch()
+const DataSelectionSbiFilters: FunctionComponent = () => {
+  const { removeFilter, addFilter, availableFilters } = useDataSelection()
   const [isExpanded, setIsExpanded] = useState(false)
-  const [sbiCode, setSbiCode] = useState(
-    activeFilters && activeFilters.sbi_code && activeFilters.sbi_code.replace(/['[\]]/g, ''),
-  )
+  const [sbiCodeInput, setSbiCodeInput] = useState('')
   const sbiLevelFilters = availableFilters.filter((filter) => filter.slug.startsWith('sbi_l'))
   const numberOfOptions = sbiLevelFilters.reduce(
     (total, amount) => total + amount.numberOfOptions,
@@ -67,16 +58,14 @@ const DataSelectionSbiFilters: FunctionComponent<Props> = ({ availableFilters, a
         .join(', ')
 
       if (value === '') {
-        dispatch(removeFilter(filterSlug))
+        removeFilter(filterSlug)
       } else {
-        dispatch(
-          addFilter({
-            [filterSlug]: `[${formattedValue}]`,
-          }),
-        )
+        addFilter({
+          [filterSlug]: `[${formattedValue}]`,
+        })
       }
     },
-    [dispatch, addFilter, sbiCode],
+    [addFilter, sbiCodeInput],
   )
 
   const clickFilter = (string: string) => {
@@ -105,12 +94,20 @@ const DataSelectionSbiFilters: FunctionComponent<Props> = ({ availableFilters, a
       <div className="c-sbi-filter__category">
         <h2 className="c-sbi-filter__category-label qa-category-header">SBI-code</h2>
 
-        <form className="c-sbi-filter__form" onSubmit={() => addOrRemoveFilter(sbiCode)}>
+        <form
+          className="c-sbi-filter__form"
+          onSubmit={(e) => {
+            e.preventDefault()
+            addFilter({
+              sbi_code: sbiCodeInput,
+            })
+          }}
+        >
           <input
             className="c-sbi-filter__input qa-sbi-filter-form-input"
-            value={sbiCode}
+            value={sbiCodeInput}
             onChange={(e) => {
-              setSbiCode(e.target.value)
+              setSbiCodeInput(e.target.value)
             }}
             placeholder="Codes bijv.: 221, 01, 38211"
           />

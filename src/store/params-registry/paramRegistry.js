@@ -3,6 +3,7 @@ import PAGES from '../../app/pages'
 import { ROUTER_NAMESPACE } from '../../app/routes'
 import getState from '../../shared/services/redux/get-state'
 import PARAMETERS from '../parameters'
+import { dataSelectionFiltersParam, polygonParam } from '../../app/pages/MapPage/query-params'
 
 /**
  * ParamsRegistry manages the relations between url parameters, reducers and routes.
@@ -224,7 +225,23 @@ class ParamsRegistry {
       return acc
     }, {})
 
-    const orderedQuery = ParamsRegistry.orderQuery(query)
+    const otherQueries = new URLSearchParams(window.location.search)
+
+    /**
+     * Temporary fix to keep legacy redux working with parameters that are set outside of redux.
+     * Parameters not set in queryParameters.js will be added here
+     */
+    const newParams = [polygonParam.name, dataSelectionFiltersParam.name]
+    const extraQueries = []
+    otherQueries.forEach((value, key) => {
+      if (value && !query[key] && newParams.includes(key)) {
+        extraQueries.push([key, value])
+      }
+    })
+    const orderedQuery = ParamsRegistry.orderQuery({
+      ...query,
+      ...Object.fromEntries(extraQueries),
+    })
     const searchQuery = queryString.stringify(orderedQuery)
 
     if (typeof window !== 'undefined') {
@@ -312,46 +329,6 @@ class ParamsRegistry {
           }
         : acc
     }, {})
-  }
-
-  /**
-   * Set the param to the location in the history object
-   * @param param
-   * @param value
-   * @param replace
-   * @returns void
-   */
-  setParam(param, value, replace = false) {
-    if (typeof window === 'undefined') {
-      return
-    }
-    const url = new URL(window.location.href)
-
-    // Get the route from the redux state
-    const { type: routeType } = getState().location
-    const { encode, defaultValue } =
-      (this.queryParamResult[param] && this.queryParamResult[param].routes[routeType]) || {}
-
-    // Encode the value if needed
-    const paramValue = encode ? encode(value) : value
-
-    // Make sure the parameter is not updated when equal to current or default value
-    if (paramValue === url.searchParams.get(param)) {
-      return
-    }
-
-    if (paramValue && paramValue !== defaultValue) {
-      url.searchParams.set(param, paramValue)
-    } else {
-      url.searchParams.delete(param)
-    }
-
-    // Set the action
-    const action = replace ? 'replace' : 'push'
-
-    // use the history object from the param registry
-    // https://github.com/ReactTraining/history/blob/v4/docs/GettingStarted.md
-    this.historyObject[action](url.pathname + url.search)
   }
 
   /**

@@ -31,11 +31,7 @@ import { getDataSearchLocation, getSearchCategory } from '../shared/ducks/data-s
 import { initialState as dataSelectionInitialState } from '../shared/ducks/data-selection/constants'
 import { DATA_SELECTION } from '../shared/ducks/data-selection/reducer'
 import { getDataSelectionPage, getGeometryFilter } from '../shared/ducks/data-selection/selectors'
-import {
-  getFiltersWithoutShape,
-  initialState as filterInitialState,
-  REDUCER_KEY as FILTER,
-} from '../shared/ducks/filters/filters'
+
 import {
   getViewMode,
   initialState as uiInitialState,
@@ -233,43 +229,29 @@ export default paramsRegistry
     )
   })
   .addParameter(PARAMETERS.FILTERS, (routes) => {
-    routes
-      .add([...routesWithDataSelection], FILTER, 'filters', {
-        defaultValue: filterInitialState.filters,
-        decode: (val) => {
-          try {
-            return JSON.parse(val)
-          } catch (e) {
-            return filterInitialState.filters
-          }
-        },
-        selector: getFiltersWithoutShape,
-        encode: (selectorResult = {}) =>
-          Object.keys(selectorResult).length ? JSON.stringify(selectorResult) : undefined,
-      })
-      .add(routesWithSearch, SEARCH_REDUCER, 'activeFilters', {
-        selector: getActiveFilters,
-        defaultValue: [],
-        decode: (val) =>
-          val
-            ? val.split('|').map((encodedFilters) => {
-                const [type, filters] = encodedFilters.split(';')
-                const decodedFilters = filters.split('.')
+    routes.add(routesWithSearch, SEARCH_REDUCER, 'activeFilters', {
+      selector: getActiveFilters,
+      defaultValue: [],
+      decode: (val) =>
+        val
+          ? val.split('|').map((encodedFilters) => {
+              const [type, filters] = encodedFilters.split(';')
+              const decodedFilters = filters.split('.')
 
-                return {
-                  type,
-                  values: decodedFilters,
-                }
-              })
-            : [],
-        encode: (selectorResult = {}) =>
-          selectorResult
-            .map(({ type, values }) => {
-              const encodedFilters = Array.isArray(values) ? values.join('.') : values
-              return `${type};${encodedFilters}`
+              return {
+                type,
+                values: decodedFilters,
+              }
             })
-            .join('|'),
-      })
+          : [],
+      encode: (selectorResult = {}) =>
+        selectorResult
+          .map(({ type, values }) => {
+            const encodedFilters = Array.isArray(values) ? values.join('.') : values
+            return `${type};${encodedFilters}`
+          })
+          .join('|'),
+    })
   })
   .addParameter(PARAMETERS.DETAIL_REFERENCE, (routes) => {
     routes.add(

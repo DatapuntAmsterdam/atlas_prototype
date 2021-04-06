@@ -120,13 +120,6 @@ export const userCheckedAuthentication = createSelector(
 export const userIsAuthenticated = createSelector(getUser, (user) => user.authenticated)
 
 /**
- * Get the user's access token from the store.
- *
- * @param state The root state of the store.
- */
-export const getUserToken = createSelector(getUser, (user) => user.accessToken)
-
-/**
  * Get the user's authenticated scopes from the store. This determines which parts of the application the user can use and which API calls are allowed.
  *
  * @param state The root state of the store.

@@ -19,7 +19,6 @@ import {
   SET_PANORAMA_TAGS,
 } from '../../../panorama/ducks/constants'
 import { getLabelObjectByTags } from '../../../panorama/ducks/selectors'
-import { ADD_FILTER, REMOVE_FILTER } from '../../../shared/ducks/filters/filters'
 import {
   getViewMode,
   HIDE_EMBED_PREVIEW,
@@ -35,12 +34,7 @@ import {
   AUTHENTICATE_USER_SUCCESS,
 } from '../../../shared/ducks/user/user'
 import PARAMETERS from '../../parameters'
-import {
-  getPage,
-  isDataSelectionPage,
-  isDatasetPage,
-  isPanoPage,
-} from '../../redux-first-router/selectors'
+import { getPage, isPanoPage } from '../../redux-first-router/selectors'
 
 export const TRACK_ACTION_NAVIGATION = 'navigation'
 export const TRACK_CATEGORY_AUTO_SUGGEST = 'auto-suggest'
@@ -213,33 +207,6 @@ const trackEvents = {
     'ingelogd',
     tracking,
   ],
-  // FILTERS
-  // ADD FILTER -> "datasets" / "dataselectie"
-  [ADD_FILTER]: ({ tracking, state }) => {
-    // eslint-disable-next-line no-nested-ternary
-    const page = isDataSelectionPage(state)
-      ? 'dataselectie-tabel'
-      : isDatasetPage(state)
-      ? 'datasets'
-      : null
-
-    return page
-      ? [MATOMO_CONSTANTS.TRACK_EVENT, 'filter', `${page}-filter`, Object.keys(tracking)[0]]
-      : []
-  },
-  // REMOVE FILTER -> "datasets" / "dataselectie"
-  [REMOVE_FILTER]: ({ tracking, state }) => {
-    // eslint-disable-next-line no-nested-ternary
-    const page = isDataSelectionPage(state)
-      ? 'dataselectie'
-      : isDatasetPage(state)
-      ? 'dataset'
-      : null
-
-    return page
-      ? [MATOMO_CONSTANTS.TRACK_EVENT, 'filter', `${page}-tabel-filter-verwijder`, tracking]
-      : []
-  },
   // PANORAMA
   // PANORAMA -> TOGGLE "missionType" / "missionYear"
   [SET_PANORAMA_TAGS]: function trackPanoramaTags({ tracking }) {
