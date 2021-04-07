@@ -12,6 +12,7 @@ describe('employee permissions', () => {
     cy.logout()
   })
   describe('BRK detail panels', () => {
+    // Test data contains sensitive information, use a fixture to solve this
     it.skip('1. Should show a "natural person" with "Zakelijke rechten"', () => {
       cy.intercept('**/brk/subject/*').as('getSubject')
       cy.visit('data/brk/subject/idNL.KAD.Persoon.171720901')
@@ -25,7 +26,7 @@ describe('employee permissions', () => {
       cy.contains('Eigendom (recht van) (1').should('be.visible')
       cy.checkInfoBoxes(['Kadastra', 'Zakelijke rechten'])
     })
-
+    // Test data contains sensitive information, use a fixture to solve this
     it.skip('2. Should show a "non-natural subject" with "Zakelijke rechten"', () => {
       cy.intercept('**/brk/subject/*').as('getSubject')
       cy.visit('data/brk/subject/idNL.KAD.Persoon.423186718')

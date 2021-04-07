@@ -12,6 +12,7 @@ describe('employee permissions', () => {
     cy.logout()
   })
   describe('BRK detail panels', () => {
+    // Test data contains sensitive information, use a fixture to solve this
     it.skip('1. Should show a "natural person" but not the "Zakelijke rechten"', () => {
       cy.intercept('**/brk/subject/**').as('getSubject')
       cy.visit('data/brk/subject/idNL.KAD.Persoon.171720901')
@@ -24,6 +25,7 @@ describe('employee permissions', () => {
       cy.get(DETAIL_PANEL.definitionList).should('not.contain', 'Statutaire zetel')
       cy.checkInfoBoxes(['Kadastra', 'Zakelijke rechten'])
     })
+    // Test data contains sensitive information, use a fixture to solve this
     it.skip('2. Should show a "non-natural subject" with "Zakelijke rechten"', () => {
       cy.intercept('**/brk/subject/**').as('getSubject')
       cy.visit('data/brk/subject/idNL.KAD.Persoon.423186718')
@@ -374,8 +376,8 @@ describe('employee permissions', () => {
 
       cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
     })
+    // Skipped because data is not stable. Solution is to use fixture data.
     it.skip('2. Should show a "bekendmaking"', () => {
-      // Skipped because data is not stable. Solution is to use fixture data.
       cy.intercept('/vsd/bekendmakingen/4115/').as('getBekendmaking')
       cy.intercept('**/panorama/thumbnail?**').as('getPanorama')
 
@@ -652,6 +654,7 @@ describe('employee permissions', () => {
 
       cy.get(DETAIL_PANEL.subHeader).eq(0).should('have.text', 'Regimes').and('be.visible')
     })
+    // Test fails, needs investigation and should be fixed 
     it.skip('6. Should show a "bouwdossier"', () => {
       cy.intercept('**/iiif-metadata/bouwdossier/*').as('getBouwdossier')
 
