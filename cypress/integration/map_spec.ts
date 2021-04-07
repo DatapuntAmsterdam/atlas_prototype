@@ -44,6 +44,7 @@ describe('map module', () => {
 
   describe('user should be able to interact with the map', () => {
     it('should show results based on the interaction with the map', () => {
+      cy.intercept('**/panorama/thumbnail?*').as('getPanorama')
       const svgMapPath = '/assets/images/map/'
       cy.defineGeoSearchRoutes()
       cy.defineAddressDetailRoutes()
@@ -89,7 +90,8 @@ describe('map module', () => {
 
       // click on the button inside the panel balloon thingy, and expect the large right column to
       // become visible
-      cy.get(MAP.buttonEnlarge).should('exist').scrollIntoView().click()
+      cy.get(MAP.buttonEnlarge).should('exist').click()
+
       cy.get(ADDRESS_PAGE.resultsPanel).should('be.visible')
 
       cy.waitForAdressDetail()
@@ -97,7 +99,7 @@ describe('map module', () => {
       cy.get(DETAIL_PANEL.heading).contains('Beursplein 15')
       cy.get(DETAIL_PANEL.main).get('dl').contains('1012JW')
       cy.wait('@getPanorama')
-      cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
+      cy.get(COMPONENTS.panoramaPreview).should('be.visible')
     })
   })
 
@@ -179,7 +181,7 @@ describe('map module', () => {
       // Check if layers exists
       cy.get(MAP.imageLayer).should('have.length', 4)
 
-      cy.get(MAP_LAYERS.checkboxOZKadastralePerceelsgrenzen).click({ force: true })
+      cy.get(MAP_LAYERS.checkboxOZKadastralePerceelsgrenzen).uncheck({ force: true })
       cy.get(MAP.mapOverlayPane).children().should('not.exist')
       cy.get(MAP_LAYERS.checkboxOZKadastralePerceelsgrenzen).click({ force: true })
 

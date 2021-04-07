@@ -25,7 +25,7 @@ describe('embed module', () => {
       `${routing.data.path}?${VIEW}=kaart&embed=true=true&${LAYERS}=themtaxi-bgt%3A1%7Cthemtaxi-tar%3A1%7Cthemtaxi-pvrts%3A1%7Cthemtaxi-mzt%3A1%7Cthemtaxi-oovtig%3A1%7Cthemtaxi-vezips%3A1%7Cthemtaxi-slpnb%3A1%7Cthemtaxi-slpb%3A1%7Cthemtaxi-nlpnb%3A1%7Cthemtaxi-nlpb%3A1&${LEGEND}=true`,
     )
     cy.get(HEADER.root).should('not.exist')
-    cy.get(MAP.embedButton).contains('data.amsterdam.nl').should('exist').and('be.visible')
+    cy.get(MAP.embedButton).contains('data.amsterdam.nl').should('be.visible')
     cy.get(MAP.imageLayer).should('exist')
     cy.get(MAP.mapLegend).should('be.visible')
     cy.get('[type=checkbox]').should('have.length', 12).and('be.checked')

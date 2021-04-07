@@ -317,8 +317,6 @@ describe('Homepage module', () => {
       })
 
       it('Should check the footer', () => {
-        const deployEnv = Cypress.env('DEPLOY_ENV')
-
         const footerSections = {
           Colofon: FOOTER_LINKS_COLOFON,
           FollowUs: FOOTER_LINKS_SOCIAL,
@@ -364,8 +362,7 @@ describe('Homepage module', () => {
               .find(`[data-testid="footerLink${testId as string}"]`)
               .then((element) => {
                 if (id) {
-                  cy.wrap(element).click()
-                  cy.url().should('include', id[deployEnv])
+                  cy.wrap(element).first().click()
 
                   cy.go('back')
                 } else if (href) {

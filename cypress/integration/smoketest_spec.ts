@@ -181,16 +181,18 @@ describe('Smoketest', () => {
       cy.intercept('**/typeahead?q=dam+1*').as('getResults')
       cy.intercept('**/gebieden/buurt/?buurtcombinatie=3630012052036*').as('getBuurtCombinatie')
 
-      // Search for an address
       cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
-      cy.get(DATA_SEARCH.input).focus().type('Dam 1')
+      cy.get(DATA_SEARCH.autoSuggest).type('Dam 1', { delay: 80 })
       cy.wait('@getResults')
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
+      cy.wait(500)
+
       cy.get(
         '[href*="/data/bag/verblijfsobject/id0363010003761571/?modus=gesplitst&term=Dam+1"]',
       ).click()
       cy.waitForAdressDetail()
       cy.contains('Burgwallen-Oude Zijde').click()
-      cy.url().should('contain', '/data/gebieden/buurtcombinatie/id3630012052036/')
+      cy.url().should('contain', '/data/gebieden/buurtcombinatie/3630012052036/')
 
       // Open vestigingen table, should see vestigingen
       cy.get(ADDRESS_PAGE.linkTable, { timeout: 40000 })

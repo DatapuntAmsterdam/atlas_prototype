@@ -1,11 +1,12 @@
 {
   "baseUrl": "http://localhost:3000",
-  "defaultCommandTimeout": 3000,
+  "defaultCommandTimeout": 8000,
   "projectId": "k3sms4",
-  "requestTimeout": 3000,
+  "requestTimeout": 8000,
   "retries": {
     "runMode": 1,
     "openMode": 0
   },
-  "video": false
+  "video": false,
+  "watchForFileChanges": false
 }

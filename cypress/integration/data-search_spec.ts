@@ -1,4 +1,4 @@
-import { DETAIL_PANEL, DATA_SEARCH, MAP } from '../support/selectors'
+import { ALERTS, DETAIL_PANEL, DATA_SEARCH, MAP } from '../support/selectors'
 
 describe('Search data', () => {
   describe('Autosuggest', () => {
@@ -184,7 +184,7 @@ describe('Search data', () => {
       cy.wait('@getMonumenten')
       cy.wait('@getNummeraanduidingen')
       cy.wait('@getVestigingen')
-      // cy.wait('@getPanorama')
+      cy.wait('@getPanorama')
 
       cy.get(DATA_SEARCH.infoNotification).should('not.exist')
       cy.get('h2').contains('Vestigingen').should('be.visible')

@@ -39,7 +39,7 @@ describe('Kadastrale objecten/subjecten', () => {
         cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker')
 
         cy.wait('@getResults')
-        cy.get(DATA_SEARCH.autoSuggestTip).should('exist').and('be.visible')
+        cy.get(DATA_SEARCH.autoSuggestTip).should('be.visible')
         cy.get(DATA_SEARCH.autoSuggestHeader).should('not.contain', 'Kadastrale subjecten')
       })
 
@@ -85,7 +85,7 @@ describe('Kadastrale objecten/subjecten', () => {
       })
 
       it('should show the table with results', () => {
-        cy.get(DATA_SELECTION_TABLE.content).should('exist').and('be.visible')
+        cy.get(DATA_SELECTION_TABLE.content).should('be.visible')
       })
     })
 
@@ -99,7 +99,7 @@ describe('Kadastrale objecten/subjecten', () => {
 
         cy.wait('@getBrkObject')
         cy.wait('@getBrkObjectExpand')
-        cy.get(DETAIL_PANEL.main).should('exist').and('be.visible')
+        cy.get(DETAIL_PANEL.main).should('be.visible')
       })
     })
 
@@ -118,10 +118,7 @@ describe('Kadastrale objecten/subjecten', () => {
           .should('exist')
           .click()
 
-        cy.get('[data-testid="activeFiltersItem"]')
-          .contains(selectedFilter)
-          .should('exist')
-          .and('be.visible')
+        cy.get('[data-testid="activeFiltersItem"]').contains(selectedFilter).should('be.visible')
       })
     })
 
@@ -134,7 +131,7 @@ describe('Kadastrale objecten/subjecten', () => {
         cy.wait('@getBrkObject')
 
         // the cursor should be rendered inside the leaflet map
-        cy.get(MAP.mapSelectedObject).should('exist').and('be.visible')
+        cy.get(MAP.mapSelectedObject).should('be.visible')
       })
     })
 

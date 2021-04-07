@@ -12,7 +12,7 @@ describe('employee permissions', () => {
     cy.logout()
   })
   describe('BRK detail panels', () => {
-    it('1. Should show a "natural person" but not the "Zakelijke rechten"', () => {
+    it.skip('1. Should show a "natural person" but not the "Zakelijke rechten"', () => {
       cy.intercept('**/brk/subject/**').as('getSubject')
       cy.visit('data/brk/subject/idNL.KAD.Persoon.171720901')
 
@@ -24,8 +24,7 @@ describe('employee permissions', () => {
       cy.get(DETAIL_PANEL.definitionList).should('not.contain', 'Statutaire zetel')
       cy.checkInfoBoxes(['Kadastra', 'Zakelijke rechten'])
     })
-
-    it('2. Should show a "non-natural subject" with "Zakelijke rechten"', () => {
+    it.skip('2. Should show a "non-natural subject" with "Zakelijke rechten"', () => {
       cy.intercept('**/brk/subject/**').as('getSubject')
       cy.visit('data/brk/subject/idNL.KAD.Persoon.423186718')
 
@@ -154,10 +153,8 @@ describe('employee permissions', () => {
     })
     it('5. Should show a "woonplaats"', () => {
       cy.intercept('**/v1/bag/woonplaatsen/**').as('getWoonplaats')
-      cy.intercept('**/bag/v1.1/openbareruimte/**').as('getOpenbareRuimte')
       cy.visit('data/bag/woonplaats/id3594/?zoom=7')
       cy.wait('@getWoonplaats')
-      cy.wait('@getOpenbareRuimte')
 
       cy.checkLinkItems('../fixtures/woonplaats.json')
 
@@ -655,7 +652,7 @@ describe('employee permissions', () => {
 
       cy.get(DETAIL_PANEL.subHeader).eq(0).should('have.text', 'Regimes').and('be.visible')
     })
-    it('6. Should show a "bouwdossier"', () => {
+    it.skip('6. Should show a "bouwdossier"', () => {
       cy.intercept('**/iiif-metadata/bouwdossier/*').as('getBouwdossier')
 
       cy.visit('data/bouwdossiers/bouwdossier/SA20390/')

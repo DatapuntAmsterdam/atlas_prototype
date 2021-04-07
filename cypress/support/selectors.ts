@@ -12,7 +12,7 @@ export const ALERTS = {
   MONUMENTEN:
     'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer te informatie te vinden over: type, architect en opdrachtgever, bouwjaar, oorspronkelijke functie, beschrijving en redengevende omschrijving.',
   VESTIGINGEN:
-    'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer te informatie te vinden over: Vestigingen.',
+    'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer te informatie te vinden over: vestigingen.',
 }
 
 export const ADDRESS_PAGE = {
@@ -23,7 +23,7 @@ export const ADDRESS_PAGE = {
   iconMapMarker: '.leaflet-marker-icon',
   linkTable: '[class*="DetailLinkList__LinkList"]',
   mapContainer: '.qa-map-container',
-  resultsList: 'ul.o-list',
+  resultsList: '.qa-data-grid',
   resultsPanel: '.qa-dashboard__column--right',
   tabKadastraleObjecten: '#tab-brk',
 }
@@ -178,7 +178,7 @@ export const LINKS = {
 }
 
 export const MAP = {
-  buttonEnlarge: '[data-testid="showFullDetails"]',
+  buttonEnlarge: '[data-testid=mapPreviewMaximize]',
   contextMenu: '[data-test=context-menu]',
   contextMenuItemEmbed: '[data-test=context-menu-embed]',
   buttonDropDownLuchtfoto: '.map-type__select--aerial > .select-button__icon-wrapper',
@@ -200,7 +200,7 @@ export const MAP = {
   mapLegendLayer: '.map-legend__map-layer',
   mapLegendItemButton: '[class*=MapLegend__LayerButton]',
   mapLegendItems: '.map-legend__items',
-  mapMaximize: '.rc-icon-button',
+  mapMaximize: '[class*="ToggleFullscreen"]',
   mapOverlayPane: '.leaflet-overlay-pane',
   mapPanel: '.map-panel',
   mapPanelHandle: '[data-testid="mapPanel"]',
@@ -221,10 +221,15 @@ export const MAP = {
 export const MAP_LAYERS = {
   checkboxAfvalcontainers: '[aria-label="Afvalcontainers"]',
   checkboxAfvalRestafval: '#afvlc-wlorst',
+  checkboxAfvalRestafvalLoopafstand: '#afvlc-lpfstndrest',
   checkboxAfvalPapier: '#afvlc-wloppr',
+  checkboxAfvalPapierLoopafstand: '#afvlc-lpfstndpapier',
   checkboxAfvalGlas: '#afvlc-wlogls',
+  checkboxAfvalGlasLoopafstand: '#afvlc-lpfstndglas',
   checkboxAfvalPlastic: '#afvlc-wlopls',
+  checkboxAfvalPlasticLoopafstand: '#afvlc-lpfstndplastic',
   checkboxAfvalTextiel: '#afvlc-wlotxtl',
+  checkboxAfvalTextielLoopafstand: '#afvlc-lpfstndtextiel',
   checkboxAfvalGFE: '#afvlc-wlokca',
   checkboxAfvalBrood: '#afvlc-wlobrood',
   checkboxAfvalPMD: '#afvlc-wlopmd',
@@ -286,6 +291,7 @@ export const MAP_LAYERS = {
   checkboxGIGebiedsgerichtWerkenGebied: '#gebind-ggwg',
   checkboxGIGebiedsgerichtWerkenPraktijkgebied: '#gebind-ggwpg',
   checkboxGIGrootstedelijkeGebieden: '#gebind-ggr',
+  checkboxGIGebiedBouwblokWoning: '#gebind-gbw',
   checkboxGIRegieGemeenteAmsterdam: '#gebind-ggra',
   checkboxGIRegieOmgevingsdienst: '#gebind-ggro',
   checkboxGeluidszones: '[aria-label="Geluidszones"]',
@@ -353,6 +359,9 @@ export const MAP_LAYERS = {
   checkboxOZGemeentelijkeBeperkingen: '#onrzk-gembep',
   checkboxOZPandenOuderDan1960: '#onrzk-lood',
   checkboxOZPandenNaarBouwjaar: '#onrzk-bwjr',
+  checkboxOZBAGPandSloop: '#onrzk-bps',
+  checkboxOZStrategischeRuimtes: '#onrzk-strtr',
+  checkboxOZWoningbouwplannen: '#onrzk-wngbpln',
   checkboxOVNet: '[aria-label="OV-net"]',
   checkboxOVNetSpoorlijnen: '#ov-sprln',
   checkBoxPanoramabeelden: '[aria-label="Panoramabeelden"]',
@@ -440,7 +449,7 @@ export const MAP_LAYERS = {
 }
 
 export const PANORAMA = {
-  buttonClosePanorama: '.c-panorama > .icon-button__right > .rc-icon-button',
+  buttonClosePanorama: '[class*="PanoramaContainer__StyledControlButton"]',
   homepage: '.c-homepage',
   markerPane: '.leaflet-marker-pane',
   statusBarCoordinates: '.c-panorama-status-bar__coordinates',
@@ -456,6 +465,7 @@ export const PRINT = {
 
 export const TABLES = {
   activeFilters: '[data-testid="activeFilters"]',
+  activeFilterItem: '[data-testid=activeFiltersItem]',
   filterCategories: '.c-data-selection-available-filters__category',
   filterItem: '.c-data-selection-available-filters__item',
   filterLabel: '.qa-option-label',

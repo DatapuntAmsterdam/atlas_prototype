@@ -17,12 +17,13 @@ describe('addresses module', () => {
     cy.hidePopup()
 
     cy.visit('/data/bag/adressen/?modus=volledig')
-    cy.get(ADDRESS_PAGE.dataSelection).should('exist').and('be.visible')
+    cy.get(ADDRESS_PAGE.dataSelection).should('be.visible')
+    cy.get(TABLES.filterPanel).should('be.visible')
   })
 
   describe('user should see the addresses table in full mode', () => {
     it('should open the address catalogus', () => {
-      cy.get(HEADINGS.dataSelectionHeading).contains('Adressen').should('exist').and('be.visible')
+      cy.get(HEADINGS.dataSelectionHeading).contains('Adressen').should('be.visible')
 
       cy.get(ADDRESS_PAGE.mapContainer).should('not.exist')
     })
@@ -45,12 +46,7 @@ describe('addresses module', () => {
           cy.wait('@getResults')
 
           // the filter should be added to the active filters (stadsdeel)
-          cy.get(TABLES.activeFilterItem)
-            .find('span')
-            .contains(selectedFilter)
-            .should('exist')
-            .scrollIntoView()
-            .and('be.visible')
+          cy.get(TABLES.activeFilterItem).contains(selectedFilter).and('be.visible')
 
           // get the position of the category in the th's of the table
           cy.get(`${DATA_SELECTION_TABLE.head} ${DATA_SELECTION_TABLE.cell}`).each(
@@ -62,8 +58,7 @@ describe('addresses module', () => {
                 cy.get(DATA_SELECTION_TABLE.row)
                   .find(`${DATA_SELECTION_TABLE.cell}:nth-child(${index + 1})`)
                   .contains(selectedFilter)
-                  .should('exist')
-                  .and('be.visible')
+                  .should('be.visible')
               }
             },
           )
@@ -91,21 +86,15 @@ describe('addresses module', () => {
 
               cy.waitForAdressDetail()
 
-              cy.get(DETAIL_PANEL.main).should('exist').and('be.visible')
+              cy.get(DETAIL_PANEL.main).should('be.visible')
 
               cy.get('dt')
                 .contains(selectedGroup)
-                .should('exist')
                 // element can be hidden from view in the detail panel
                 .scrollIntoView()
                 .and('be.visible')
 
-              cy.get('dt')
-                .siblings('dd')
-                .first()
-                .contains(selectedValue)
-                .should('exist')
-                .and('be.visible')
+              cy.get('dt').siblings('dd').first().contains(selectedValue).and('be.visible')
             })
         })
     })
@@ -121,23 +110,15 @@ describe('addresses module', () => {
               // click on the firstItem to open address preview panel
               cy.get(`${DATA_SELECTION_TABLE.body} ${DATA_SELECTION_TABLE.row}`).first().click()
               // the detail view should exist
-              cy.get(DETAIL_PANEL.main).should('exist').and('be.visible')
-              // the map view maximize button should exist
-              cy.get(ADDRESS_PAGE.buttonMaximizeMap).should('exist')
+              cy.get(DETAIL_PANEL.main).should('be.visible')
               // click on the maximize button to open the map view
-              cy.get(ADDRESS_PAGE.buttonMaximizeMap).first().click()
+              cy.get(ADDRESS_PAGE.buttonMaximizeMap).should('be.visible').click()
 
               cy.wait('@getNummeraanduiding')
               cy.wait('@getVerblijfsobject')
 
               // the preview panel should exist
-              cy.get(MAP.mapPreviewPanel).should('exist').and('be.visible')
-
-              // panorama login requirement alert is shown
-              cy.get('[data-testid="panoAlert"]').should('exist').and('be.visible')
-
-              // the show more button should exist and be visible
-              cy.get(ADDRESS_PAGE.buttonShowMore).should('exist').scrollIntoView().and('be.visible')
+              cy.get(MAP.mapPreviewPanel).should('be.visible')
             })
         })
     })
@@ -153,16 +134,15 @@ describe('addresses module', () => {
       cy.waitForAdressDetail()
 
       // the cursor should still be rendered inside the leaflet map
-      cy.get(ADDRESS_PAGE.iconMapMarker).should('exist').and('be.visible')
+      cy.get(ADDRESS_PAGE.iconMapMarker).should('be.visible')
     })
   })
 
-  describe('user should be be able to filter on an area', () => {
+  describe('user should be able to filter on an area', () => {
     it('should show the addresses and map when selected', () => {
       cy.intercept('**/dataselectie/bag/geolocation/**').as('getGeoResults')
 
       let totalCount: number
-
       // Get the number in the title before filtering
       cy.get(HEADINGS.dataSelectionHeading).then((title) => {
         totalCount = getCountFromHeader(title.text())
@@ -174,27 +154,27 @@ describe('addresses module', () => {
 
       // Expect the number in the title after filtering to be smaller than the number before
       // filtering
+      cy.get(TABLES.filterPanel).should('be.visible')
       cy.get(HEADINGS.dataSelectionHeading).then((title) => {
         const filteredCount = getCountFromHeader(title.text())
         expect(filteredCount).to.be.below(totalCount)
       })
 
-      // click on "kaart weergeven"
       cy.contains('Kaart weergeven').click()
       cy.wait('@getGeoResults')
 
       // map should be visible now
-      cy.get(ADDRESS_PAGE.mapContainer).should('exist').and('be.visible')
+      cy.get(ADDRESS_PAGE.mapContainer).should('be.visible')
       // , with large right column
-      cy.get(ADDRESS_PAGE.resultsPanel).should('exist').and('be.visible')
+      cy.get(ADDRESS_PAGE.resultsPanel).should('be.visible')
       // count the number of cluster icons on the map
       cy.get(ADDRESS_PAGE.iconCluster).then((items) => {
         expect(items.length).to.gte(1)
       })
       // list should be visible in right column
-      cy.get(ADDRESS_PAGE.resultsList).should('exist').and('be.visible')
+      cy.get(ADDRESS_PAGE.resultsList).should('be.visible')
       // active filter should show
-      cy.get(TABLES.activeFilterItem).contains('AMC').should('exist').and('be.visible')
+      cy.get(TABLES.activeFilterItem).contains('AMC').should('be.visible')
     })
   })
 })
@@ -234,17 +214,11 @@ describe('open address', () => {
 
     cy.wait('@getResults')
     cy.get(DATA_SEARCH.autoSuggestDropdown).contains('Ad Windighof 2').click({ force: true })
-    cy.wait('@getVerblijfsobject')
+    cy.waitForAdressDetail()
 
-    // Rendering after this request takes some time on server
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(500)
-    cy.get(ADDRESS_PAGE.resultsPanel).should('exist').and('be.visible')
-    cy.get(ADDRESS_PAGE.resultsPanel).get(DETAIL_PANEL.heading).contains('Ad Windighof 2')
-    cy.get(ADDRESS_PAGE.resultsPanel).get('dl').contains('1087HE')
-
-    // cy.wait('@getPanorama')
-    // cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
+    cy.get(ADDRESS_PAGE.resultsPanel).should('be.visible')
+    cy.get(DETAIL_PANEL.heading).contains('Ad Windighof 2')
+    cy.get(ADDRESS_PAGE.resultsPanel).get('dl').contains('1087HE').should('be.visible')
 
     cy.get(MAP.mapZoomIn).click()
     cy.get(MAP.mapZoomIn).click()
@@ -252,6 +226,6 @@ describe('open address', () => {
 
     // check that the address is open in right column
     cy.waitForGeoSearch()
-    cy.get(GEO_SEARCH.listItem).contains('Ad Windighof 2').should('exist').and('be.visible')
+    cy.get(GEO_SEARCH.listItem).contains('Ad Windighof 2').should('be.visible')
   })
 })

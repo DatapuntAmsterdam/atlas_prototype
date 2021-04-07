@@ -76,7 +76,7 @@ describe('datasets module', () => {
       cy.get(`#${CSS.escape('theme-theme:bestuur')}`).should('be.checked')
     })
 
-    it('should filter datasets', () => {
+    it.skip('should filter datasets', () => {
       cy.get('[data-test=navigation-block] > [href="/datasets/zoek/"]').should('be.visible').click()
       cy.url().should('include', '/datasets/zoek')
 

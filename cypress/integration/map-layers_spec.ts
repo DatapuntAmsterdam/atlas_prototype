@@ -24,6 +24,9 @@ describe('Check if all map layers are visible when selected', () => {
     cy.checkMapLayer('Gemeentelijk eigendom', MAP_LAYERS.checkboxOZGemeentelijkEigendom, 18)
     cy.checkMapLayer('Panden ouder dan 1960', MAP_LAYERS.checkboxOZPandenOuderDan1960, 19)
     cy.checkMapLayer('Panden naar bouwjaar', MAP_LAYERS.checkboxOZPandenNaarBouwjaar, 20)
+    cy.checkMapLayer('BAG pand en sloopstatus', MAP_LAYERS.checkboxOZBAGPandSloop, 21)
+    cy.checkMapLayer('Strategische ruimtes', MAP_LAYERS.checkboxOZStrategischeRuimtes, 22)
+    cy.checkMapLayer('Woningbouwplannen', MAP_LAYERS.checkboxOZWoningbouwplannen, 23)
 
     cy.get(MAP_LAYERS.checkboxOnroerendeZaken).uncheck().should('not.be.checked')
     cy.get(MAP.imageLayer).should('not.exist')
@@ -40,8 +43,9 @@ describe('Check if all map layers are visible when selected', () => {
     cy.checkMapLayer(
       'Grootstedelijke gebieden, projecten en belangen',
       MAP_LAYERS.checkboxGIGrootstedelijkeGebieden,
-      8,
+      10,
     )
+    cy.checkMapLayer('Gebied, bouwblok en woningen', MAP_LAYERS.checkboxGIGebiedBouwblokWoning, 11)
     cy.get(MAP_LAYERS.checkboxGebiedsindeling).uncheck().should('not.be.checked')
     cy.get(MAP.imageLayer).should('not.exist')
   })
@@ -224,11 +228,32 @@ describe('Check if all map layers are visible when selected', () => {
     cy.checkMapLayerCategory('Afvalcontainers')
 
     cy.checkMapLayer('Restafval', MAP_LAYERS.checkboxAfvalRestafval, 1)
-    cy.checkMapLayer('Papier', MAP_LAYERS.checkboxAfvalPapier, 2)
-    cy.checkMapLayer('Glas', MAP_LAYERS.checkboxAfvalGlas, 3)
-    cy.checkMapLayer('Plastic', MAP_LAYERS.checkboxAfvalPlastic, 4)
-    cy.checkMapLayer('Textiel', MAP_LAYERS.checkboxAfvalTextiel, 5)
-    cy.checkMapLayer('GFE', MAP_LAYERS.checkboxAfvalGFE, 6)
+    cy.checkMapLayer(
+      'Loopafstand tot restafvalcontainer',
+      MAP_LAYERS.checkboxAfvalRestafvalLoopafstand,
+      8,
+    )
+    cy.checkMapLayer('Papier', MAP_LAYERS.checkboxAfvalPapier, 9)
+    cy.checkMapLayer(
+      'Loopafstand tot papiercontainer',
+      MAP_LAYERS.checkboxAfvalPapierLoopafstand,
+      16,
+    )
+    cy.checkMapLayer('Glas', MAP_LAYERS.checkboxAfvalGlas, 17)
+    cy.checkMapLayer('Loopafstand tot glascontainer', MAP_LAYERS.checkboxAfvalGlasLoopafstand, 24)
+    cy.checkMapLayer('Plastic', MAP_LAYERS.checkboxAfvalPlastic, 25)
+    cy.checkMapLayer(
+      'Loopafstand tot plasticcontainer',
+      MAP_LAYERS.checkboxAfvalPlasticLoopafstand,
+      32,
+    )
+    cy.checkMapLayer('Textiel', MAP_LAYERS.checkboxAfvalTextiel, 33)
+    cy.checkMapLayer(
+      'Loopafstand tot textielcontainer',
+      MAP_LAYERS.checkboxAfvalTextielLoopafstand,
+      40,
+    )
+    cy.checkMapLayer('GFE', MAP_LAYERS.checkboxAfvalGFE, 41)
 
     cy.get(MAP_LAYERS.checkboxAfvalcontainers).uncheck().should('not.be.checked')
     cy.get(MAP.imageLayer).should('not.exist')
