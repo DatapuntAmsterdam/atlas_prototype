@@ -73,7 +73,7 @@ const RequestDownloadModal: FunctionComponent<RequestDownloadModalProps> = ({ fi
           <>
             <Paragraph data-testid="successMessage">
               Uw downloadlink wordt voorbereid. Zodra deze klaar is ontvangt u een email met
-              downloadlink. Dit kin bij hoge drukte even duren. Controleer ook uw spambox.
+              downloadlink. Dit kan bij hoge drukte even duren. Controleer ook uw spambox.
               <br />
               De downloadlink is 7 dagen geldig.
             </Paragraph>

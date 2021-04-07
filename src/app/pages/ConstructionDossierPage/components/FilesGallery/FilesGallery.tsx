@@ -58,6 +58,13 @@ const StyledCheckbox = styled(Checkbox)`
   top: 0;
   right: 0;
   padding: ${themeSpacing(3)};
+
+  // Todo: fix in ASC
+  input {
+    opacity: 0;
+    left: 12px;
+    top: 12px;
+  }
 `
 
 const MAX_LENGTH = 6
