@@ -1,3 +1,4 @@
+// eslint-disable-next-line prettier/prettier
 export { } // indicate that this is a module
 
 declare global {
