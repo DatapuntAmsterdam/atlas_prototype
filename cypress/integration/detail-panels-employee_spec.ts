@@ -654,7 +654,7 @@ describe('employee permissions', () => {
 
       cy.get(DETAIL_PANEL.subHeader).eq(0).should('have.text', 'Regimes').and('be.visible')
     })
-    // Test fails, needs investigation and should be fixed 
+    // Test fails, needs investigation and should be fixed
     it.skip('6. Should show a "bouwdossier"', () => {
       cy.intercept('**/iiif-metadata/bouwdossier/*').as('getBouwdossier')
 

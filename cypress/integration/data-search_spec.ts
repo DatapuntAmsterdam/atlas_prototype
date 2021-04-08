@@ -1,4 +1,4 @@
-import { ALERTS, DETAIL_PANEL, DATA_SEARCH, MAP } from '../support/selectors'
+import { DETAIL_PANEL, DATA_SEARCH, MAP } from '../support/selectors'
 
 describe('Search data', () => {
   describe('Autosuggest', () => {
