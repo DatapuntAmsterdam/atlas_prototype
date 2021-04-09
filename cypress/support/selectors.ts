@@ -17,13 +17,13 @@ export const ALERTS = {
 
 export const ADDRESS_PAGE = {
   buttonMaximizeMap: '[aria-label="Kaart vergroten"]',
-  buttonShowMore: '.map-search-results__button',
+  buttonShowFullDetails: '[data-testid="showFullDetails"]',
   dataSelection: '.c-data-selection',
   iconCluster: '.o-highlight-cluster',
   iconMapMarker: '.leaflet-marker-icon',
   linkTable: '[class*="DetailLinkList__LinkList"]',
   mapContainer: '.qa-map-container',
-  resultsList: '.qa-data-grid',
+  resultsList: '[data-testid="dataSelectionList"]',
   resultsPanel: '.qa-dashboard__column--right',
   tabKadastraleObjecten: '#tab-brk',
 }

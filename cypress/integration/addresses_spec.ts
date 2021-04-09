@@ -143,6 +143,8 @@ describe('addresses module', () => {
       cy.intercept('**/dataselectie/bag/geolocation/**').as('getGeoResults')
 
       let totalCount: number
+      cy.wait('@getResults')
+
       // Get the number in the title before filtering
       cy.get(HEADINGS.dataSelectionHeading).then((title) => {
         totalCount = getCountFromHeader(title.text())
@@ -174,7 +176,7 @@ describe('addresses module', () => {
       // list should be visible in right column
       cy.get(ADDRESS_PAGE.resultsList).should('be.visible')
       // active filter should show
-      cy.get(TABLES.activeFilterItem).contains('AMC').should('be.visible')
+      cy.get(TABLES.activeFilters).find('button').contains('AMC').should('exist').and('be.visible')
     })
   })
 })
