@@ -17,10 +17,10 @@ const config: Config.InitialOptions = {
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
-      statements: 73.79,
-      branches: 50.35,
-      lines: 73.27,
-      functions: 60.29,
+      statements: 73.78,
+      branches: 50.33,
+      lines: 73.24,
+      functions: 60.26,
     },
   },
   coverageReporters: process.env.CI ? ['text'] : ['lcov'],
