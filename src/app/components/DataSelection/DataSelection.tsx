@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import { Alert, Container, Heading, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import classNames from 'classnames'
 import { useSelector } from 'react-redux'
@@ -56,8 +55,7 @@ const DataSelectionContent: FunctionComponent = () => {
   if (isRejected(result)) {
     if (result.reason instanceof AuthError) {
       return (
-        // @ts-ignore
-        <Alert level="info" compact dismissible>
+        <Alert level="info" dismissible>
           <Paragraph>{result.reason.message}</Paragraph>
           <LoginLink />
         </Alert>
@@ -65,8 +63,7 @@ const DataSelectionContent: FunctionComponent = () => {
     }
 
     return (
-      // @ts-ignore
-      <Alert level="warning" compact dismissible>
+      <Alert level="warning" dismissible>
         {result.reason.message}
       </Alert>
     )
@@ -85,13 +82,11 @@ const DataSelectionContent: FunctionComponent = () => {
     <>
       <DataSelectionActiveFilters />
 
-      {!totalResults ? (
+      {!totalResults && (
         <>
           <Paragraph>Geen resultaten van deze soort</Paragraph>
           <Paragraph>Tip: verwijder een of meer criteria</Paragraph>
         </>
-      ) : (
-        ''
       )}
 
       <div className="u-grid qa-data-grid">
@@ -109,8 +104,7 @@ const DataSelectionContent: FunctionComponent = () => {
             })}
           >
             {messageMaxPages && (
-              // @ts-ignore
-              <StyledAlert level="info" compact dismissible>
+              <StyledAlert level="info" dismissible>
                 <Heading forwardedAs="h3">Deze pagina kan niet worden getoond</Heading>
                 <Paragraph>{messageMaxPages}</Paragraph>
                 <Paragraph>
@@ -120,8 +114,7 @@ const DataSelectionContent: FunctionComponent = () => {
               </StyledAlert>
             )}
             {messageClusteredMarkers && (
-              // @ts-ignore
-              <StyledAlert level="info" compact>
+              <StyledAlert level="info">
                 <Paragraph>{messageClusteredMarkers}</Paragraph>
                 <Paragraph>
                   Tip: Bekijk de lijst resultaten in kleinere delen. Dit kan door een voor een
@@ -134,12 +127,7 @@ const DataSelectionContent: FunctionComponent = () => {
               <div>
                 {view === ViewMode.Full && <DataSelectionTable content={data} />}
                 {view === ViewMode.Split && <DataSelectionList content={data} />}
-                <LegacyPagination
-                  {...{
-                    currentPage: page,
-                    numberOfPages,
-                  }}
-                />
+                <LegacyPagination currentPage={page} numberOfPages={numberOfPages} />
                 {view === ViewMode.Full && (
                   <div className="u-row">
                     <div className="u-col-sm--12">
