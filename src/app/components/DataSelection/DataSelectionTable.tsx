@@ -14,8 +14,12 @@ const TableRowLink = styled(Link)`
   height: 100%;
 `
 
-const DataSelectionTable: FunctionComponent<{ content: Data }> = ({ content }) =>
-  content.body && content.body.length > 0 ? (
+export interface DataSelectionTableProps {
+  content: Data
+}
+
+const DataSelectionTable: FunctionComponent<DataSelectionTableProps> = ({ content }) =>
+  content.body.length > 0 ? (
     <table className="c-ds-table" data-testid="dataSelectionTable">
       <thead className="c-ds-table__head">
         <tr className="c-ds-table__row c-ds-table__row--link">
@@ -33,13 +37,12 @@ const DataSelectionTable: FunctionComponent<{ content: Data }> = ({ content }) =
             className="c-ds-table__row c-ds-table__row--link qa-table-link"
             data-testid="dataSelectionTableRow"
           >
-            {row.content.map((variables, j) => (
+            {row.content.map((variables, index) => (
               <td key={variables[0].id} className="c-ds-table__cell">
-                {/* @ts-ignore */}
                 <DataSelectionFormatter
                   variables={variables}
-                  formatter={content.formatters[j]}
-                  template={content.templates[j]}
+                  formatter={content.formatters[index]}
+                  template={content.templates[index]}
                 />
               </td>
             ))}

@@ -11,17 +11,16 @@ const StyledListItem = styled.li`
   margin-bottom: ${themeSpacing(2)};
 `
 
-const DataSelectionList: FunctionComponent<{
+export interface DataSelectionListProps {
   content: Data
-}> = ({ content }) => (
+}
+
+const DataSelectionList: FunctionComponent<DataSelectionListProps> = ({ content }) => (
   <ul data-testid="dataSelectionList">
     {content.body.map((row) => (
       <StyledListItem key={row.id}>
         <Link as={RouterLink} to={buildDetailUrl(getDetailPageData(row.detailEndpoint))} inList>
-          {/*
-          // @ts-ignore */}
           <DataSelectionFormatter
-            // @ts-ignore
             variables={row.content[0]}
             formatter={content.formatters[0]}
             useInline
@@ -31,11 +30,9 @@ const DataSelectionList: FunctionComponent<{
         {row.content.map(
           (variables, i) =>
             i !== 0 && (
-              // @ts-ignore
               <DataSelectionFormatter
                 // eslint-disable-next-line react/no-array-index-key
                 key={i}
-                // @ts-ignore
                 variables={variables}
                 formatter={content.formatters[i]}
                 useInline

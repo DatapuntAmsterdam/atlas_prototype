@@ -1,5 +1,7 @@
+import { LatLngTuple } from 'leaflet'
 import { ObjectDetail } from '../../../api/dataselectie/bag/types'
 import { Links } from '../../../api/types'
+import { FormatterType, TemplateType } from './DataSelectionFormatter/DataSelectionFormatter'
 
 export enum DatasetType {
   Bag = 'bag',
@@ -12,22 +14,23 @@ export enum LegacyDataSelectionViewTypes {
   Table = 'TABLE',
 }
 
-export type FilterObject = {
+export interface FilterObject {
   [key: string]: string
 }
 
-export type ActiveFilter = {
+export interface ActiveFilter {
   key: string
   value: string
   label: string
 }
-export type AvailableFilterOption = {
+
+export interface AvailableFilterOption {
   count: number
   id: string
   label: string
 }
 
-export type AvailableFilter = {
+export interface AvailableFilter {
   label: string
   numberOfOptions: number
   slug: string
@@ -36,19 +39,30 @@ export type AvailableFilter = {
   info_url?: string
 }
 
-export type BoundingBox = {
-  southWest: [number, number]
-  northEast: [number, number]
+export interface BoundingBox {
+  southWest: LatLngTuple
+  northEast: LatLngTuple
 }
 
-export type Data = {
-  head: Array<null | string>
-  body: {
-    id: string
-    detailEndpoint: string | null
-    content: { id: string; value: string; key: string }[][]
-  }[]
-  formatters: Array<null | string>
-  templates: Array<null | string>
+export interface Data {
+  head: (null | string)[]
+  body: DataBody[]
+  formatters: (FormatterType | null)[]
+  templates: (TemplateType | null)[]
 }
-export type ObjectDetailWithLink = ObjectDetail & { _links: Links }
+
+export interface DataBody {
+  id: string
+  detailEndpoint: string | null
+  content: DataBodyContent[][]
+}
+
+export interface DataBodyContent {
+  id: string
+  value: string
+  key: string
+}
+
+export interface ObjectDetailWithLink extends ObjectDetail {
+  _links: Links
+}
