@@ -126,4 +126,5 @@ export const initialState = {
   isLoading: true,
   detailReference: [],
   pageReference: '',
+  error: null,
 }

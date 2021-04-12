@@ -50,16 +50,12 @@ const MapSearchResults = ({
       showMore: category.results.length > resultLimit,
     }))
 
-  const { panoramaUrl, link, linkComponent } = useGetLegacyPanoramaPreview(location)
-  const result = usePromise(
-    // A small response that will only be available on gov. network
-    () => fetchProxy('https://acc.api.data.amsterdam.nl/brk/?format=json'),
-    [],
-  )
+  const { panoramaUrl, link, linkComponent, error, loading } = useGetLegacyPanoramaPreview(location)
 
   return (
     <section className="map-search-results">
-      {panoramaUrl && isFulfilled(result) ? (
+      {/* eslint-disable-next-line no-nested-ternary */}
+      {!error && loading ? (
         <header
           className={`
           map-search-results__header
@@ -86,9 +82,9 @@ const MapSearchResults = ({
             </div>
           </StyledLink>
         </header>
-      ) : (
-        isRejected(result) && result.reason instanceof ForbiddenError && <PanoAlert />
-      )}
+      ) : error instanceof ForbiddenError ? (
+        <PanoAlert />
+      ) : null}
 
       <div className="map-search-results__scroll-wrapper">
         {!user.authenticated && (

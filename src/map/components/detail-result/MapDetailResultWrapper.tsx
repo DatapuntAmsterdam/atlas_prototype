@@ -1,5 +1,4 @@
 import { Button, Heading, Link, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import usePromise, { isRejected } from '@amsterdam/use-promise'
 import { LatLngLiteral } from 'leaflet'
 import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
@@ -9,7 +8,6 @@ import useGetLegacyPanoramaPreview from '../../../app/utils/useGetLegacyPanorama
 import Maximize from '../../../shared/assets/icons/icon-maximize.svg'
 import { isEmbedded } from '../../../shared/ducks/ui/ui'
 import { getUser } from '../../../shared/ducks/user/user'
-import { fetchProxy } from '../../../shared/services/api/api'
 import { ForbiddenError } from '../../../shared/services/api/customError'
 
 export interface MapDetailResultWrapperProps {
@@ -43,18 +41,16 @@ const MapDetailResultWrapper: FunctionComponent<MapDetailResultWrapperProps> = (
   onMaximize,
   location,
 }) => {
-  const { panoramaUrl, link, linkComponent } = useGetLegacyPanoramaPreview(location as any)
+  const { panoramaUrl, link, linkComponent, error, loading } = useGetLegacyPanoramaPreview(
+    location as any,
+  )
   const isEmbed = useSelector(isEmbedded)
   const user = useSelector(getUser)
 
-  const result = usePromise(
-    // A small response that will only be available on gov. network
-    () => fetchProxy('https://acc.api.data.amsterdam.nl/brk/?format=json'),
-    [],
-  )
   return (
     <section className="map-detail-result">
-      {panoramaUrl && result.status === 'fulfilled' ? (
+      {/* eslint-disable-next-line no-nested-ternary */}
+      {!error && !loading ? (
         <header
           className={`
       map-detail-result__header
@@ -79,9 +75,9 @@ const MapDetailResultWrapper: FunctionComponent<MapDetailResultWrapperProps> = (
             </div>
           </StyledLink>
         </header>
-      ) : (
-        isRejected(result) && result.reason instanceof ForbiddenError && <PanoAlert />
-      )}
+      ) : error instanceof ForbiddenError ? (
+        <PanoAlert />
+      ) : null}
       <div className="map-detail-result__scroll-wrapper">
         {!user.authenticated && (
           <Header>

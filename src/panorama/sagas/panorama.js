@@ -52,9 +52,7 @@ export function* handlePanoramaRequest(fn, input, tags) {
     }
     yield put(fetchPanoramaSuccess({ ...panoramaData, tags }))
   } catch (error) {
-    if (!(error instanceof ForbiddenError)) {
-      yield put(fetchPanoramaError(error))
-    }
+    yield put(fetchPanoramaError(error))
   }
 }
 

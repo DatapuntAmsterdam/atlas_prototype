@@ -59,6 +59,7 @@ export default function reducer(state = initialState, action) {
         ...enrichedState,
         isLoading: false,
         isError: true, // TODO: refactor, show error
+        error: action.payload,
       }
 
     case SET_PANORAMA_ORIENTATION:

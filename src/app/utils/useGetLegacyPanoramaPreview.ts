@@ -1,7 +1,8 @@
 import { LatLngLiteral } from 'leaflet'
 import { useSelector } from 'react-redux'
+import { AnyAction } from 'redux'
 import { useLocation } from 'react-router-dom'
-import usePromise, { isFulfilled } from '@amsterdam/use-promise'
+import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
 import { getPanoramaThumbnail } from '../../api/panorama/thumbnail'
 import { toPanoramaAndPreserveQuery } from '../../store/redux-first-router/actions'
 import { getDetailLocation } from '../../store/redux-first-router/selectors'
@@ -11,7 +12,13 @@ import useBuildQueryString from './useBuildQueryString'
 
 const useGetLegacyPanoramaPreview = (
   location: (LatLngLiteral & { latitude: number; longitude: number }) | null,
-) => {
+): {
+  linkComponent: any
+  link: AnyAction | string | null
+  loading: boolean
+  error: any | null
+  panoramaUrl?: string
+} => {
   const legacyReference = useSelector(getDetailLocation)
   const browserLocation = useLocation()
   const panoramaResult = usePromise(
@@ -40,6 +47,8 @@ const useGetLegacyPanoramaPreview = (
       linkComponent: 'div',
       link: null,
       panoramaUrl: '',
+      error: isRejected(panoramaResult) ? panoramaResult.reason : null,
+      loading: isPending(panoramaResult),
     }
   }
 
@@ -63,6 +72,8 @@ const useGetLegacyPanoramaPreview = (
     linkComponent: pickLinkComponent(link),
     link,
     panoramaUrl,
+    error: null,
+    loading: false,
   }
 }
 

@@ -1,5 +1,4 @@
 import { testSaga } from 'redux-saga-test-plan'
-import { FETCH_PANORAMA_ERROR } from '../../../panorama/ducks/constants'
 import { FETCH_GEO_SEARCH_RESULTS_FAILURE } from '../../ducks/data-search/constants'
 import {
   FETCH_DATA_SELECTION_FAILURE,
@@ -16,12 +15,7 @@ describe('watchErrors', () => {
     testSaga(watchErrors)
       .next()
       .takeLatestEffect(
-        [
-          FETCH_MARKERS_FAILURE,
-          FETCH_GEO_SEARCH_RESULTS_FAILURE,
-          FETCH_PANORAMA_ERROR,
-          FETCH_DETAIL_FAILURE,
-        ],
+        [FETCH_MARKERS_FAILURE, FETCH_GEO_SEARCH_RESULTS_FAILURE, FETCH_DETAIL_FAILURE],
         setErrorsEffect,
       )
       .next(action)

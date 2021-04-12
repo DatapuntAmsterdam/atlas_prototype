@@ -11,9 +11,10 @@ jest.mock('react-redux', () => ({
   useSelector: jest.fn(() => []),
 }))
 jest.mock('../../../app/utils/useGetLegacyPanoramaPreview', () => () => ({
-  panoramaUrl: '/foo',
+  panoramaUrl: '',
   link: '/link',
   linkComponent: null,
+  error: true,
 }))
 describe('MapDetailResultWrapper', () => {
   it('should render everything', () => {
