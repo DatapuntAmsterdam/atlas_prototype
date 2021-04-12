@@ -1,13 +1,13 @@
 import { appendFileSync, readdirSync, writeFile } from 'fs'
 import { exec } from 'child_process'
 
-type FileResult = {
+interface FileResult {
   name: string
   path: string
   apiName: string | null
 }
 
-type DirectoryResult = {
+interface DirectoryResult {
   results: Array<DirectoryResult | FileResult>
   path: string
   group: string

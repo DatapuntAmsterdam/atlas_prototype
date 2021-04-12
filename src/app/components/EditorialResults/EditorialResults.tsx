@@ -34,7 +34,7 @@ const EditorialCardContainer = styled(CardContainer)`
   padding: 0;
 `
 
-type EditorialResultsProps = {
+export interface EditorialResultsProps {
   query: string
   results: CMSResultItem[]
   loading: boolean

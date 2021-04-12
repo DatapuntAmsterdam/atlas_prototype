@@ -8,7 +8,7 @@ import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-
 import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
 import Metadata from '../../../shared/assets/icons/metadata.svg'
 
-export type Filter = {
+export interface Filter {
   options: Array<{ id: string; label: string; count: number }>
   slug: string
   label: string
@@ -17,12 +17,12 @@ export type Filter = {
   numberOfOptions: number
 }
 
-export type ActiveFilter = {
+export interface ActiveFilter {
   // eslint-disable-next-line camelcase
   sbi_code?: string
 }
 
-type Props = {
+export interface DataSelectionFiltersProps {
   availableFilters: Filter[]
   activeFilters: ActiveFilter
   dataset: string
@@ -49,7 +49,7 @@ const ShowMoreButton = styled(Button)`
 
 // Note, this component has been migrated from legacy angularJS code
 // Todo: this can be removed when we implement the new interactive table
-const DataSelectionFilters: FunctionComponent<Props> = ({
+const DataSelectionFilters: FunctionComponent<DataSelectionFiltersProps> = ({
   availableFilters,
   activeFilters,
   dataset,

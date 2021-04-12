@@ -3,7 +3,7 @@ import { useQuery } from 'urql'
 import { ErrorExtensions } from '../../models/graphql'
 import { ActiveFilter } from './SearchPageDucks'
 
-type Variables = {
+interface Variables {
   q: string
   page: number | null
   sort?: { field: string; order: string }

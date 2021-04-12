@@ -15,12 +15,15 @@ enum DatasetType {
   Hr = 'hr',
 }
 
-type Props = {
+export interface DataSelectionDownloadButtonProps {
   dataset: DatasetType
   activeFilters: any
 }
 
-const DataSelectionDownloadButton: FunctionComponent<Props> = ({ dataset, activeFilters }) => {
+const DataSelectionDownloadButton: FunctionComponent<DataSelectionDownloadButtonProps> = ({
+  dataset,
+  activeFilters,
+}) => {
   const geometryFilter = useSelector(getGeometryFilter)
   const { trackEvent } = useMatomo()
   const filterParams = []

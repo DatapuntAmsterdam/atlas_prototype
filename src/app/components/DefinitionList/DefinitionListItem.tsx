@@ -2,10 +2,6 @@ import { breakpoint, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 
-type Props = {
-  term: string
-}
-
 const DefinitionListItemWrapper = styled.div`
   display: flex;
   padding: ${themeSpacing(2)} 0;
@@ -32,7 +28,15 @@ const DefinitionListDescription = styled.dd`
   width: 70%;
 `
 
-const DefinitionListItem: FunctionComponent<Props> = ({ term, children, ...otherProps }) => (
+export interface DefinitionListItemProps {
+  term: string
+}
+
+const DefinitionListItem: FunctionComponent<DefinitionListItemProps> = ({
+  term,
+  children,
+  ...otherProps
+}) => (
   <DefinitionListItemWrapper {...otherProps}>
     <DefinitionListTerm>{term}</DefinitionListTerm>
     <DefinitionListDescription>{children}</DefinitionListDescription>

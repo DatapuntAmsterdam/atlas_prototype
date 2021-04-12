@@ -98,7 +98,7 @@ const META = {
   },
 }
 
-export type Definition = {
+export interface Definition {
   singular: string
   plural: string
   description?: string | null

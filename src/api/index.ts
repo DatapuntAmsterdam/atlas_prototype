@@ -40,7 +40,7 @@ import * as parkeerzonesUitzondering from './vsd/parkeerzones-uitzondering'
 import * as reclamebelasting from './vsd/reclamebelasting'
 import * as vastgoed from './vsd/vastgoed'
 
-type ApiConfig = {
+interface ApiConfig {
   singleFixture: any
   listFixture?: any
   path: string

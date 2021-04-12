@@ -10,7 +10,7 @@ const StyledList = styled(List)`
   margin-bottom: 0;
 `
 
-export type CategoryResult = {
+export interface CategoryResult {
   count: number
   authScope: AuthScope
   warning?: string
@@ -25,12 +25,15 @@ export type CategoryResult = {
   results: Result[]
 }
 
-type Props = {
+export interface LocationSearchListProps {
   categoryResults?: CategoryResult
   limit: number
 }
 
-const LocationSearchList: FunctionComponent<Props> = ({ categoryResults, limit }) => {
+const LocationSearchList: FunctionComponent<LocationSearchListProps> = ({
+  categoryResults,
+  limit,
+}) => {
   const results: Result[] =
     categoryResults?.results?.map((result) => ({
       ...result,

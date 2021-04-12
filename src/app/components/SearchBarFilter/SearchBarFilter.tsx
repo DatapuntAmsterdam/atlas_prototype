@@ -12,7 +12,7 @@ const StyledSelect = styled(Select)`
   border-right: none;
 `
 
-type SearchBarFilterOptions = {
+interface SearchBarFilterOptions {
   type: SearchCategory
   label: string
 }
@@ -24,14 +24,14 @@ const AVAILABLE_FILTERS: Array<SearchBarFilterOptions> = Object.values(SEARCH_PA
   }),
 )
 
-type Props = {
+export interface SearchBarFilterProps {
   value: string
   setValue: (value: string) => void
 }
 
 export const LOCAL_STORAGE_KEY = 'search_filters'
 
-const SearchBarFilter: FunctionComponent<Props> = ({ value, setValue }) => {
+const SearchBarFilter: FunctionComponent<SearchBarFilterProps> = ({ value, setValue }) => {
   function onSetSearchCategory(e: ChangeEvent<HTMLSelectElement>) {
     e.preventDefault()
     e.stopPropagation()

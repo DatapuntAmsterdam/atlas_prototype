@@ -6,7 +6,10 @@ import { MapLayer, MapLayerType } from '../index'
 import MAP_CONFIG from '../map.config'
 
 // TODO: Replace this type with the 'LatLng' type from Leaflet.
-type Location = { latitude: number; longitude: number }
+interface Location {
+  latitude: number
+  longitude: number
+}
 
 const generateParams = (layer: MapLayer, location: Location, zoom: number) => ({
   ...layer.detailParams,

@@ -41,6 +41,7 @@ module.exports = {
     '@typescript-eslint/no-unsafe-assignment': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-use-before-define': ['error', { functions: false }],
+    '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
 
     'react-hooks/exhaustive-deps': 'off',
     'react/jsx-props-no-spreading': 'off',

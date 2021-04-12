@@ -3,7 +3,7 @@ import { createContext } from 'react'
 import { DataSelectionType } from '../../config'
 import { DataSelection, MapData, MapVisualization, PaginationParams } from './DataSelectionProvider'
 
-type DataSelectionContextValues = {
+interface DataSelectionContextValues {
   fetchData: (
     latLngs: LatLng[][],
     id: string,

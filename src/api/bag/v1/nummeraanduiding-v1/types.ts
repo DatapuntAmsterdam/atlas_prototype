@@ -1,16 +1,16 @@
 import { Links } from '../../../types'
 
-export type List = {
+export interface List {
   _embedded: Embedded
   _links: Links
   page: Page
 }
 
-export type Embedded = {
+export interface Embedded {
   nummeraanduiding: Nummeraanduiding[]
 }
 
-export type Nummeraanduiding = {
+export interface Nummeraanduiding {
   beginGeldigheid?: string
   bron?: string | null
   bronId?: string | null
@@ -39,7 +39,7 @@ export type Nummeraanduiding = {
   vervallen?: number | null
 }
 
-export type Page = {
+export interface Page {
   number: number
   size: number
   totalElements: number

@@ -8,19 +8,22 @@ import Previous from '../../../shared/assets/icons/previous.svg'
 import Next from '../../../shared/assets/icons/next.svg'
 import Last from '../../../shared/assets/icons/last.svg'
 
-type Props = {
-  numberOfPages: number
-  currentPage: number
-}
-
 const PaginationButton = styled(Button)`
   &:last-of-type {
     margin-left: ${themeSpacing(1)};
   }
 `
 
+export interface LegacyPaginationProps {
+  numberOfPages: number
+  currentPage: number
+}
+
 // Todo: replace with pagination component
-const LegacyPagination: FunctionComponent<Props> = ({ numberOfPages, currentPage: curPage }) => {
+const LegacyPagination: FunctionComponent<LegacyPaginationProps> = ({
+  numberOfPages,
+  currentPage: curPage,
+}) => {
   const [currentPage, setCurrentPage] = useState(curPage)
   const isFirstPage = currentPage === 1
   const isLastPage = currentPage === numberOfPages

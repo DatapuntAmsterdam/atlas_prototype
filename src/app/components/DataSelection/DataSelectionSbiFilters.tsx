@@ -7,11 +7,6 @@ import { addFilter, removeFilter } from '../../../shared/ducks/filters/filters'
 import { ActiveFilter, Filter } from './DataSelectionFilters'
 import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
 
-type Props = {
-  availableFilters: Filter[]
-  activeFilters: ActiveFilter
-}
-
 const StyledLink = styled(Link)`
   background-color: transparent;
   text-align: left;
@@ -21,9 +16,17 @@ const ShowMoreButton = styled(Button)`
   margin-top: ${themeSpacing(2)};
 `
 
+export interface DataSelectionSbiFiltersProps {
+  availableFilters: Filter[]
+  activeFilters: ActiveFilter
+}
+
 // Note, this component has been migrated from legacy angularJS code
 // Todo: this can be removed when we implement the new interactive table
-const DataSelectionSbiFilters: FunctionComponent<Props> = ({ availableFilters, activeFilters }) => {
+const DataSelectionSbiFilters: FunctionComponent<DataSelectionSbiFiltersProps> = ({
+  availableFilters,
+  activeFilters,
+}) => {
   const dispatch = useDispatch()
   const [isExpanded, setIsExpanded] = useState(false)
   const [sbiCode, setSbiCode] = useState(

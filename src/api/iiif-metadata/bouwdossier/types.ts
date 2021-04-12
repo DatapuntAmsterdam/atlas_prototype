@@ -4,12 +4,12 @@ import { Links } from '../../types'
 export type BouwdossierStatus = 'Aanvraag' | 'Behandeling'
 export type BouwdossierAccess = 'RESTRICTED' | 'PUBLIC'
 
-export type Bestand = {
+export interface Bestand {
   filename: string
   url: string
 }
 
-export type Document = {
+export interface Document {
   access: BouwdossierAccess
   barcode: string | null
   bestanden: Bestand[]
@@ -18,7 +18,7 @@ export type Document = {
   subdossier_titel: string | null
 }
 
-export type Adres = {
+export interface Adres {
   huisnummer_letter?: string | null
   huisnummer_toevoeging?: string | null
   huisnummer_tot?: number | null
@@ -33,7 +33,7 @@ export type Adres = {
   verblijfsobjecten: string[]
 }
 
-export type Single = {
+export interface Single {
   access: BouwdossierAccess
   activiteiten: string[]
   adressen: Adres[]

@@ -27,7 +27,7 @@ const StyledHeading = styled(Heading)`
   margin: ${themeSpacing(3, 0, 6)};
 `
 
-type CardListProps = {
+export interface CardListProps {
   title: string
   results: CMSResultItem[]
   loading: boolean

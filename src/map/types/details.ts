@@ -143,7 +143,9 @@ export interface DetailResultItemTableHeading extends DefaultDetailResultItem {
   key: string
 }
 
-export type DetailResultItemTableValue = { [key: string]: any }
+export interface DetailResultItemTableValue {
+  [key: string]: any
+}
 
 interface ApiDescription {
   omschrijving?: string
@@ -487,7 +489,7 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   monumentcoordinaten?: Point
 }
 
-export type ExtraApiResults = {
+export interface ExtraApiResults {
   nummeraanduidingData?: PotentialApiResult
   brkData?: PotentialApiResult
   verblijfsobjectData?: PotentialApiResult

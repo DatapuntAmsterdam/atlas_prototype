@@ -93,7 +93,7 @@ const Wrapper = styled.div<LegacyLayout>`
     `}
 `
 
-type LegacyLayout = {
+interface LegacyLayout {
   legacyLayout?: boolean
 }
 

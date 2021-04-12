@@ -17,14 +17,14 @@ const StyledHeading = styled(Heading)`
   margin-bottom: ${themeSpacing(4)};
 `
 
-type Props = {
+export interface CollectionTileGridProps {
   results: CMSResultItem[]
   loading: boolean
   title?: string
   description?: string
 }
 
-type Template = {
+interface Template {
   3: [SizeOnBreakpoint, SizeOnBreakpoint, SizeOnBreakpoint]
   4: [SizeOnBreakpoint, SizeOnBreakpoint, SizeOnBreakpoint, SizeOnBreakpoint]
   5: [SizeOnBreakpoint, SizeOnBreakpoint, SizeOnBreakpoint, SizeOnBreakpoint, SizeOnBreakpoint]
@@ -70,7 +70,12 @@ const GRID_ITEM_TEMPLATE: Template = {
 
 const GRID_TEMPLATE: SizeOnBreakpoint = { mobileL: [1, 1], tabletM: [1, 4], laptop: [1, 5] }
 
-const CollectionTileGrid: FunctionComponent<Props> = ({ results, loading, title, description }) => (
+const CollectionTileGrid: FunctionComponent<CollectionTileGridProps> = ({
+  results,
+  loading,
+  title,
+  description,
+}) => (
   <TileGrid grid={GRID_TEMPLATE}>
     <TileGridItem span={{ mobileL: [2, 2] }}>
       <Tile as="div" isLoading={loading}>

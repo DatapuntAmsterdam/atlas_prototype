@@ -21,12 +21,12 @@ const ViewerInfoBarStyle = styled.div`
   }
 `
 
-type Props = {
+export interface ViewerInfoBarProps {
   location: LatLngLiteral
   date?: string
 }
 
-const ViewerInfoBar: FunctionComponent<Props> = ({ location, date }) => {
+const ViewerInfoBar: FunctionComponent<ViewerInfoBarProps> = ({ location, date }) => {
   const { x: rdX, y: rdY } = useMemo(() => wgs84ToRd(location), [location])
   const formattedDate = useMemo(
     () =>
