@@ -2,14 +2,12 @@ import { Alert, Button, Heading, Link, themeColor, themeSpacing } from '@amsterd
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import usePromise, { isFulfilled, isRejected } from '@amsterdam/use-promise'
 import PanoAlert from '../../../app/components/PanoAlert/PanoAlert'
 import { getUser } from '../../../shared/ducks/user/user'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
 import MapSearchResultsCategory from './map-search-results-category/MapSearchResultsCategory'
 import useGetLegacyPanoramaPreview from '../../../app/utils/useGetLegacyPanoramaPreview'
 import Maximize from '../../../shared/assets/icons/icon-maximize.svg'
-import { fetchProxy } from '../../../shared/services/api/api'
 import { ForbiddenError } from '../../../shared/services/api/customError'
 
 const StyledLink = styled(Link)`

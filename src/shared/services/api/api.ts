@@ -11,9 +11,6 @@ export type UrlParams = URLSearchParams | { [key: string]: string }
 
 const getAccessToken = () => getState()?.user?.accessToken
 
-export const fetchWithoutToken = <T = any>(uri: string): Promise<T> =>
-  fetch(uri).then((response) => response.json())
-
 const handleErrors = (response: Response, reloadOnUnauthorized = false) => {
   if (response.status >= 400 && response.status <= 401 && reloadOnUnauthorized) {
     logout()
@@ -37,6 +34,11 @@ const handleErrors = (response: Response, reloadOnUnauthorized = false) => {
 
   return response
 }
+
+export const fetchWithoutToken = <T = any>(uri: string): Promise<T> =>
+  fetch(uri)
+    .then((response) => handleErrors(response))
+    .then((response) => response.json())
 
 // TODO: Change parameters of fetchWithToken to match regular Fetch API.
 export const fetchWithToken = <T = any>(

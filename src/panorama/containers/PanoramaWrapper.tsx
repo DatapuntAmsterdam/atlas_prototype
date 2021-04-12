@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react'
 import { Alert, Paragraph } from '@amsterdam/asc-ui'
+import { useSelector } from 'react-redux'
 import PanoramaContainer from './PanoramaContainer'
 import PanoAlert from '../../app/components/PanoAlert/PanoAlert'
 import { ERROR_MESSAGES, ErrorType } from '../../shared/ducks/error/error-message'
 import { ForbiddenError } from '../../shared/services/api/customError'
-import { useSelector } from 'react-redux'
 import { getPanoramaError } from '../ducks/selectors'
 
 /**
