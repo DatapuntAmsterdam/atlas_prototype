@@ -30,11 +30,13 @@ const NestedResult = styled.div`
   }
 `
 
-type Props = {
+export interface LocationSearchResultsProps {
   searchResults: Array<CategoryResult>
 }
 
-const LocationSearchResults: FunctionComponent<Props> = ({ searchResults }) => {
+const LocationSearchResults: FunctionComponent<LocationSearchResultsProps> = ({
+  searchResults,
+}) => {
   const dispatch = useDispatch()
   const userScopes = useSelector(getUserScopes)
   const numberOfResults = useSelector(getNumberOfResults)

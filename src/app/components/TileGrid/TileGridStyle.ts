@@ -6,11 +6,11 @@ const GAP = ascDefaultTheme.spacing * 6
 type Size = [number, number]
 export type SizeOnBreakpoint = { [key in keyof Partial<Theme.BreakpointsInterface>]: Size }
 
-export type Props = {
+export interface TileGridProps {
   grid?: SizeOnBreakpoint
 }
 
-type TileGridItemProps = {
+export interface TileGridItemProps {
   span?: SizeOnBreakpoint
 }
 
@@ -48,7 +48,7 @@ export const TileGridItem = styled.div<TileGridItemProps>`
   }
 `
 
-export default styled.div<Props>`
+export default styled.div<TileGridProps>`
   // Begin IE 11 rules
   display: flex;
   flex-wrap: wrap;

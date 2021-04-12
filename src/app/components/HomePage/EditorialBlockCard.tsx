@@ -41,7 +41,7 @@ const StyledLink = styled(Link)`
   }
 `
 
-type StyledCardProps = {
+interface StyledCardProps {
   showError?: boolean
 }
 

@@ -19,7 +19,7 @@ export interface MapData {
   distanceText: string
 }
 
-export type DataSelection = {
+export interface DataSelection {
   id: string
   result: DataSelectionResult
   totalCount: number
@@ -59,7 +59,7 @@ export type DataSelectionResult = Array<{
   marker?: Marker
 }>
 
-export type DataSelectionResponse = {
+export interface DataSelectionResponse {
   totalCount: number
   results: DataSelectionResult
 }

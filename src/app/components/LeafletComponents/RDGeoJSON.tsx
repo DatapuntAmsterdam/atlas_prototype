@@ -1,13 +1,12 @@
 import { RDGeoJSON as RDGeoJSONComponent } from '@amsterdam/arm-core'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Geometry } from 'geojson'
 import { FunctionComponent } from 'react'
 
-type Props = {
+export interface RDGeoJSONProps {
   geometry: Geometry
 }
 
-const RDGeoJSON: FunctionComponent<Props> = ({ geometry }) => {
+const RDGeoJSON: FunctionComponent<RDGeoJSONProps> = ({ geometry }) => {
   // @ts-ignore
   return <RDGeoJSONComponent args={geometry} />
 }

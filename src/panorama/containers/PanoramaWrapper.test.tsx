@@ -1,12 +1,22 @@
 import { render } from '@testing-library/react'
+import * as reactRedux from 'react-redux'
 import PanoramaWrapper from './PanoramaWrapper'
-import * as api from '../../shared/services/api/api'
+import { ForbiddenError } from '../../shared/services/api/customError'
+import withAppContext from '../../app/utils/withAppContext'
+
+jest.mock('react-redux', () => ({
+  // @ts-ignore
+  ...jest.requireActual('react-redux'),
+  useSelector: jest.fn(),
+}))
 
 describe('PanoramaWrapper', () => {
-  it('should try to make a request to an acceptance API to check if user is on a secured network', () => {
-    const fetchWithoutTokenMock = jest.spyOn(api, 'fetchWithoutToken')
-    render(<PanoramaWrapper />)
-
-    expect(fetchWithoutTokenMock).toHaveBeenCalledTimes(1)
+  it('should not render the PanoramaContainer when error is set', () => {
+    const errorSelectorMock = jest
+      .spyOn(reactRedux, 'useSelector')
+      .mockImplementation(() => new ForbiddenError(403, 'forbidden'))
+    const { queryByTestId } = render(withAppContext(<PanoramaWrapper />))
+    expect(errorSelectorMock).toHaveBeenCalledTimes(1)
+    expect(queryByTestId('panoramaContainer')).toBeNull()
   })
 })

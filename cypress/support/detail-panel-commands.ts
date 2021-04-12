@@ -20,7 +20,7 @@ declare global {
   }
 }
 
-type DefinitionList = {
+interface DefinitionList {
   [key: string]: {
     items: {
       [key: string]: string
@@ -28,7 +28,7 @@ type DefinitionList = {
   }
 }
 
-type ListItem = {
+interface ListItem {
   definitionLists: DefinitionList
 }
 

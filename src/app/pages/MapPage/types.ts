@@ -12,7 +12,7 @@ export enum Overlay {
   None,
 }
 
-export type MarkerGroup = {
+export interface MarkerGroup {
   id: string
   markers: LatLngTuple[]
 }

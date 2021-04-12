@@ -28,6 +28,7 @@ export const getPanoramaMarkers = createSelector(
 )
 
 export const getPanoramaPitch = getStateOfKey('pitch')
+export const getPanoramaError = getStateOfKey('error')
 export const getDetailReference = getStateOfKey('detailReference')
 export const getPageReference = getStateOfKey('pageReference')
 export const getPanoramaTags = getStateOfKey('tags')

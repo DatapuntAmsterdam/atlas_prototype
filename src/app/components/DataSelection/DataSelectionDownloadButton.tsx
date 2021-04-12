@@ -10,12 +10,15 @@ import { getAccessToken } from '../../../shared/services/auth/auth'
 import { getGeometryFilter } from '../../../shared/ducks/data-selection/selectors'
 import { ActiveFilter, DatasetType } from './types'
 
-type Props = {
+export interface DataSelectionDownloadButtonProps {
   dataset: DatasetType
   activeFilters: ActiveFilter[]
 }
 
-const DataSelectionDownloadButton: FunctionComponent<Props> = ({ dataset, activeFilters }) => {
+const DataSelectionDownloadButton: FunctionComponent<DataSelectionDownloadButtonProps> = ({
+  dataset,
+  activeFilters,
+}) => {
   const geometryFilter = useSelector(getGeometryFilter)
   const { trackEvent } = useMatomo()
   const filterParams = []

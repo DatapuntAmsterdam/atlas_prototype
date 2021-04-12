@@ -11,7 +11,7 @@ const ExtraInfo = styled.span`
   font-weight: 400;
 `
 
-export type Result = {
+export interface Result {
   label?: string
   subtype?: string
   subtypeLabel?: string
@@ -45,7 +45,7 @@ const getExtraInfo = (result: Result) => {
   return extraInfo
 }
 
-type Props = {
+interface Props {
   result: Result
   category?: {
     slug?: unknown

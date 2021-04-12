@@ -20,7 +20,7 @@ const StyledCardListBlock = styled(CardListBlock)`
   margin-bottom: ${themeSpacing(12)};
 `
 
-type CollectionResult = {
+interface CollectionResult {
   title?: string
   field_intro?: string
   field_link?: {

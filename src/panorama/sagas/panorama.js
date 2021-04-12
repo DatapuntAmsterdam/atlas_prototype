@@ -2,7 +2,6 @@ import { all, call, put, select, takeLatest } from 'redux-saga/effects'
 import { closeMapPanel, mapClear, toggleMapOverlay } from '../../map/ducks/map/actions'
 import { getMapCenter } from '../../map/ducks/map/selectors'
 import { getViewMode, ViewMode } from '../../shared/ducks/ui/ui'
-import { ForbiddenError } from '../../shared/services/api/customError'
 import PARAMETERS from '../../store/parameters'
 import { toPanorama } from '../../store/redux-first-router/actions'
 import { getLocationPayload } from '../../store/redux-first-router/selectors'
@@ -52,9 +51,7 @@ export function* handlePanoramaRequest(fn, input, tags) {
     }
     yield put(fetchPanoramaSuccess({ ...panoramaData, tags }))
   } catch (error) {
-    if (!(error instanceof ForbiddenError)) {
-      yield put(fetchPanoramaError(error))
-    }
+    yield put(fetchPanoramaError(error))
   }
 }
 

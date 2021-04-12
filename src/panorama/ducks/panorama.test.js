@@ -27,6 +27,7 @@ describe('Panorama Reducer', () => {
       image: null,
       isLoading: true,
       detailReference: [],
+      error: null,
       pageReference: '',
       location: null,
       targetLocation: null,

@@ -7,13 +7,13 @@ import { CmsType, SpecialType } from '../../shared/config/cms.config'
 import { fetchWithToken } from '../../shared/services/api/api'
 import cmsJsonApiNormalizer from '../../shared/services/cms/cms-json-api-normalizer'
 
-export type CMSConfig = {
+export interface CMSConfig {
   endpoint: (id?: string) => string
   fields?: Array<string>
 }
 
 // More fields should be added to this type when other CMS content pages are migrated to TypeScript
-export type CMSResultItem = {
+export interface CMSResultItem {
   linkProps?: {
     to?: To | LocationDescriptorObject
     forwardedAs?: never
@@ -39,7 +39,7 @@ export type CMSResultItem = {
   } | null
 }
 
-export type CMSResults<T> = {
+export interface CMSResults<T> {
   loading: boolean
   fetchData: (endpoint?: string) => T | undefined
   error: boolean

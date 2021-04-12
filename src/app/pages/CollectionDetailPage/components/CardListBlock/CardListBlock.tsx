@@ -5,7 +5,10 @@ import styled from 'styled-components'
 import { CMSResultItem } from '../../../../utils/useFromCMS'
 import CardList from '../CardList'
 
-export type CMSCollectionList = { field_title: string; field_content: CMSResultItem[] }
+export interface CMSCollectionList {
+  field_title: string
+  field_content: CMSResultItem[]
+}
 
 const StyledRow = styled(Row)`
   width: 100%;

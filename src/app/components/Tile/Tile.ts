@@ -5,7 +5,7 @@ import getImageFromCms from '../../utils/getImageFromCms'
 import { SizeOnBreakpoint } from '../TileGrid/TileGridStyle'
 import TileLabel from './TileLabel'
 
-type TileProps = {
+export interface TileProps {
   backgroundImage?: string
   isLoading?: boolean
   span?: SizeOnBreakpoint

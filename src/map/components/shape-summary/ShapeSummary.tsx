@@ -2,14 +2,17 @@ import { Button } from '@amsterdam/asc-ui'
 import { Close } from '@amsterdam/asc-assets'
 import { FunctionComponent, MouseEvent as ReactMouseEvent } from 'react'
 
-type Props = {
+export interface ShapeSummaryProps {
   shapeDistanceTxt: string
   onClearDrawing: (
     event: ReactMouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>,
   ) => void
 }
 
-const ShapeSummary: FunctionComponent<Props> = ({ shapeDistanceTxt, onClearDrawing }) => (
+const ShapeSummary: FunctionComponent<ShapeSummaryProps> = ({
+  shapeDistanceTxt,
+  onClearDrawing,
+}) => (
   <div className="shape-summary">
     <span className="shape-summary__label" aria-label={`Lijn: ${shapeDistanceTxt}`}>
       Lijn:

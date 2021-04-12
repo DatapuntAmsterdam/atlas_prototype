@@ -2,14 +2,12 @@ import { Alert, Button, Heading, Link, themeColor, themeSpacing } from '@amsterd
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import usePromise, { isFulfilled, isRejected } from '@amsterdam/use-promise'
 import PanoAlert from '../../../app/components/PanoAlert/PanoAlert'
 import { getUser } from '../../../shared/ducks/user/user'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
 import MapSearchResultsCategory from './map-search-results-category/MapSearchResultsCategory'
 import useGetLegacyPanoramaPreview from '../../../app/utils/useGetLegacyPanoramaPreview'
 import Maximize from '../../../shared/assets/icons/icon-maximize.svg'
-import { fetchProxy } from '../../../shared/services/api/api'
 import { ForbiddenError } from '../../../shared/services/api/customError'
 
 const StyledLink = styled(Link)`
@@ -50,16 +48,12 @@ const MapSearchResults = ({
       showMore: category.results.length > resultLimit,
     }))
 
-  const { panoramaUrl, link, linkComponent } = useGetLegacyPanoramaPreview(location)
-  const result = usePromise(
-    // A small response that will only be available on gov. network
-    () => fetchProxy('https://acc.api.data.amsterdam.nl/brk/?format=json'),
-    [],
-  )
+  const { panoramaUrl, link, linkComponent, error, loading } = useGetLegacyPanoramaPreview(location)
 
   return (
     <section className="map-search-results">
-      {panoramaUrl && isFulfilled(result) ? (
+      {/* eslint-disable-next-line no-nested-ternary */}
+      {!error && loading ? (
         <header
           className={`
           map-search-results__header
@@ -86,9 +80,9 @@ const MapSearchResults = ({
             </div>
           </StyledLink>
         </header>
-      ) : (
-        isRejected(result) && result.reason instanceof ForbiddenError && <PanoAlert />
-      )}
+      ) : error instanceof ForbiddenError ? (
+        <PanoAlert />
+      ) : null}
 
       <div className="map-search-results__scroll-wrapper">
         {!user.authenticated && (

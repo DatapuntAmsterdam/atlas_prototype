@@ -6,12 +6,12 @@ import styled, { css } from 'styled-components'
 import { hasPrintMode, isPrintMode, sharePage, showPrintMode } from '../../../shared/ducks/ui/ui'
 import getShareUrl from '../../../shared/services/share-url/share-url'
 
-type Props = {
+export interface ShareBarProps {
   hideInPrintMode?: boolean
   topSpacing?: number
 }
 
-const ShareBarContainer = styled.div<Props>`
+const ShareBarContainer = styled.div<ShareBarProps>`
   display: flex;
   ${({ topSpacing }) =>
     topSpacing &&
@@ -24,7 +24,7 @@ const ShareBarContainer = styled.div<Props>`
   }
 `
 
-const ShareBar: FunctionComponent<Props> = ({ hideInPrintMode, ...otherProps }) => {
+const ShareBar: FunctionComponent<ShareBarProps> = ({ hideInPrintMode, ...otherProps }) => {
   const dispatch = useDispatch()
 
   const handlePageShare = useCallback(
