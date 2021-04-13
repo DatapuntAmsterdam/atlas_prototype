@@ -1,4 +1,4 @@
-export type ObjectDetail = {
+export interface ObjectDetail {
   dataset?: string
   kvk_nummer?: string
   nummeraanduiding_id: string

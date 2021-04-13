@@ -3,7 +3,7 @@ import { BoundingBox, FilterObject } from '../../../app/components/DataSelection
 import getBrkMarkers from './getBrkMarkers'
 import getMarkers from './getMarkers'
 
-export type LegacyDataSelectionConfigType = {
+export interface LegacyDataSelectionConfigType {
   CUSTOM_API: {
     getMarkers: (
       signal: AbortSignal,

@@ -84,7 +84,7 @@ describe('Map Reducer', () => {
       ...initialState,
       drawingMode: 'none',
       geometry: [],
-      isLoading: true,
+      isLoading: false,
     })
 
     expect(
@@ -100,7 +100,7 @@ describe('Map Reducer', () => {
       ...initialState,
       drawingMode: 'none',
       geometry: [{}, {}],
-      isLoading: true,
+      isLoading: false,
     })
   })
 

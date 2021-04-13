@@ -14,17 +14,11 @@ jest.mock('../FilesGallery')
 const FilesGalleryMock = mocked(FilesGallery)
 const getUserScopesMock = jest.spyOn(userDuck, 'getUserScopes')
 
-const MOCK_TOKEN = 'faketoken'
 const documentFixture = dossierFixture.documenten[0]
 
 const wrapper: FunctionComponent = ({ children }) =>
   withAppContext(
     <AuthTokenContext.Provider value={{ token: null }}>{children}</AuthTokenContext.Provider>,
-  )
-
-const wrapperWithToken: FunctionComponent = ({ children }) =>
-  withAppContext(
-    <AuthTokenContext.Provider value={{ token: MOCK_TOKEN }}>{children}</AuthTokenContext.Provider>,
   )
 
 describe('DocumentDetails', () => {

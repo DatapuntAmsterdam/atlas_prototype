@@ -259,7 +259,7 @@ export const viewParam: UrlParam<ViewMode> = {
   encode: (value) => value,
 }
 
-export type DataSelectionFilters = {
+export interface DataSelectionFilters {
   [key: string]: string
 }
 
