@@ -2,10 +2,10 @@ import { Column, Row } from '@amsterdam/asc-ui'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import cmsConfig, { SpecialType } from '../../../shared/config/cms.config'
-import { toSpecialDetail } from '../../../store/redux-first-router/actions'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
 import IFrame from '../../components/IFrame/IFrame'
+import { toSpecialDetail } from '../../links'
 import useFromCMS from '../../utils/useFromCMS'
 import Animation from './specials/Animation'
 
@@ -20,11 +20,10 @@ const SpecialDetailPage = () => {
   const { field_content_link: contentLink, slug, specialType, title, field_language: lang } =
     results || {}
   const documentTitle = title && `Special: ${title}`
-
-  const linkAction = toSpecialDetail(id, specialType, slug)
+  const link = toSpecialDetail(id, specialType, slug)
 
   return (
-    <EditorialPage {...{ documentTitle, linkAction, lang, error, loading }}>
+    <EditorialPage {...{ documentTitle, link, lang, error, loading }}>
       <Row>
         <ContentContainer>
           {specialType === SpecialType.Animation && (

@@ -196,23 +196,6 @@ export const toDatasetDetail = (payload) => ({
   },
 })
 
-export const toSpecialDetail = (id, type = '', slug = '') => ({
-  type: routing.specialDetail.type,
-  payload: {
-    id,
-    type,
-    slug,
-  },
-})
-
-export const toCollectionDetail = (id, slug = '') => ({
-  type: routing.collectionDetail.type,
-  payload: {
-    id,
-    slug,
-  },
-})
-
 export const toPublicationSearch = toSearchOfType(routing.publicationSearch.type)
 export const toArticleSearch = toSearchOfType(routing.articleSearch.type)
 export const toSpecialSearch = toSearchOfType(routing.specialSearch.type)

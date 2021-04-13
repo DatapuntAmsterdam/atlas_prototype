@@ -4,10 +4,8 @@ import { LocationDescriptorObject } from 'history'
 import { FunctionComponent, useEffect, useMemo } from 'react'
 import { Helmet } from 'react-helmet'
 import { useHistory } from 'react-router-dom'
-import { To } from 'redux-first-router-link'
 import styled from 'styled-components'
 import environment from '../../../environment'
-import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'
 import { routing } from '../../routes'
 import getImageFromCms from '../../utils/getImageFromCms'
 import useDocumentTitle from '../../utils/useDocumentTitle'
@@ -22,8 +20,6 @@ const BodyStyle = styled.div`
 export interface EditorialPageProps {
   documentTitle?: string
   loading: boolean
-  // TODO: Remove 'linkAction' when it is no longer used.
-  linkAction?: To
   link?: LocationDescriptorObject
   description?: string
   image?: string
@@ -37,7 +33,6 @@ const EditorialPage: FunctionComponent<EditorialPageProps> = ({
   documentTitle,
   loading,
   link,
-  linkAction,
   description,
   image,
   title,
@@ -61,18 +56,7 @@ const EditorialPage: FunctionComponent<EditorialPageProps> = ({
     }
   }, [error])
 
-  const path = useMemo(() => {
-    if (link) {
-      return history.createHref(link)
-    }
-
-    if (linkAction) {
-      return linkAttributesFromAction(linkAction).href as string
-    }
-
-    return null
-  }, [link, linkAction])
-
+  const path = useMemo(() => (link ? history.createHref(link) : null), [link])
   const canonicalUrl = path ? `${environment.ROOT}${path.substr(1)}` : null
   const ogImage = typeof image === 'string' && getImageFromCms(image, 600, 300)
 

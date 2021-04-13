@@ -33,6 +33,10 @@ export const toCadastralObjects = (): LocationDescriptorObject => {
   }
 }
 
+export const toCollectionDetail = (id: string, slug: string): LocationDescriptorObject => ({
+  pathname: generatePath(routing.collectionDetail.path, { id, slug }),
+})
+
 export const toConstructionDossier = (
   id: string,
   fileName?: string,
@@ -72,4 +76,12 @@ export const toHome = (): LocationDescriptorObject => ({
 
 export const toPublicationDetail = (id: string, slug: string): LocationDescriptorObject => ({
   pathname: generatePath(routing.publicationDetail.path, { id, slug }),
+})
+
+export const toSpecialDetail = (
+  id: string,
+  type: string,
+  slug: string,
+): LocationDescriptorObject => ({
+  pathname: generatePath(routing.specialDetail.path, { id, type, slug }),
 })

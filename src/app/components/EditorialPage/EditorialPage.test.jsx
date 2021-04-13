@@ -1,11 +1,13 @@
-import { mount, shallow } from 'enzyme'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import EditorialPage from './EditorialPage'
-import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'
-import useDocumentTitle from '../../utils/useDocumentTitle'
+import { mount, shallow } from 'enzyme'
 import environment from '../../../environment'
+import useDocumentTitle from '../../utils/useDocumentTitle'
+import EditorialPage from './EditorialPage'
 
-jest.mock('../../../shared/services/link-attributes-from-action/linkAttributesFromAction')
+jest.mock('react-router-dom', () => ({
+  useHistory: () => ({ createHref: ({ pathname }) => pathname }),
+}))
+
 jest.mock('../../utils/useDocumentTitle')
 jest.mock('@datapunt/matomo-tracker-react')
 
@@ -15,15 +17,13 @@ describe('EditorialPage', () => {
   const mockTrackPageView = jest.fn()
 
   beforeEach(() => {
-    linkAttributesFromAction.mockImplementation(() => ({
-      href: '/this.is.alink',
-    }))
     useDocumentTitle.mockImplementation(() => ({
       setDocumentTitle: mockSetDocumentTitle,
     }))
+
     useMatomo.mockImplementation(() => ({ trackPageView: mockTrackPageView }))
 
-    component = shallow(<EditorialPage linkAction={{}} />).dive()
+    component = shallow(<EditorialPage link={{ pathname: '/this.is.alink' }} />).dive()
   })
 
   afterEach(() => {
@@ -36,14 +36,14 @@ describe('EditorialPage', () => {
     expect(component.find('LoadingIndicator')).toBeTruthy()
   })
 
-  it('should set the canonical title', () => {
+  it('should set the canonical url', () => {
     const link = component.find('link')
     expect(link).toBeTruthy()
     expect(link.props().href).toBe(`${environment.ROOT}this.is.alink`)
   })
 
   it('should set the document title and send to analytics', () => {
-    component = mount(<EditorialPage linkAction={{}} documentTitle="" />)
+    component = mount(<EditorialPage documentTitle="" />)
 
     expect(mockSetDocumentTitle).not.toHaveBeenCalled()
     expect(mockTrackPageView).not.toHaveBeenCalled()

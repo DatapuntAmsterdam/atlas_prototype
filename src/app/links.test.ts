@@ -5,11 +5,13 @@ import {
   toAddresses,
   toArticleDetail,
   toCadastralObjects,
+  toCollectionDetail,
   toConstructionDossier,
   toEstablishments,
   toHelpPage,
   toHome,
   toPublicationDetail,
+  toSpecialDetail,
 } from './links'
 import { routing } from './routes'
 
@@ -38,6 +40,17 @@ describe('toCadastralObjects', () => {
     expect(toCadastralObjects()).toEqual({
       pathname: routing.cadastralObjects.path,
       search: 'modus=volledig',
+    })
+  })
+})
+
+describe('toCollectionDetail', () => {
+  const id = '123456'
+  const slug = 'hello-world'
+
+  it('creates a location descriptor', () => {
+    expect(toCollectionDetail(id, slug)).toEqual({
+      pathname: generatePath(routing.collectionDetail.path, { id, slug }),
     })
   })
 })
@@ -88,6 +101,18 @@ describe('toPublicationDetail', () => {
   it('creates a location descriptor', () => {
     expect(toPublicationDetail(id, slug)).toEqual({
       pathname: generatePath(routing.publicationDetail.path, { id, slug }),
+    })
+  })
+})
+
+describe('toSpecialDetail', () => {
+  const id = '123456'
+  const type = 'foo'
+  const slug = 'hello-world'
+
+  it('creates a location descriptor', () => {
+    expect(toSpecialDetail(id, type, slug)).toEqual({
+      pathname: generatePath(routing.specialDetail.path, { id, type, slug }),
     })
   })
 })

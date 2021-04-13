@@ -1,11 +1,15 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { toArticleDetail, toPublicationDetail } from '../../app/links'
+import { Link as RouterLink } from 'react-router-dom'
+import {
+  toArticleDetail,
+  toCollectionDetail,
+  toPublicationDetail,
+  toSpecialDetail,
+} from '../../app/links'
 import formatDate from '../../app/utils/formatDate'
-import pickLinkComponent from '../../app/utils/pickLinkComponent'
 import toSlug from '../../app/utils/toSlug'
 import { CmsType } from '../../shared/config/cms.config'
 import { reformatJSONApiResults } from '../../shared/services/cms/cms-json-api-normalizer'
-import { toCollectionDetail, toSpecialDetail } from '../../store/redux-first-router/actions'
 
 export const EDITORIAL_DETAIL_ACTIONS = {
   [CmsType.Article]: toArticleDetail,
@@ -78,7 +82,7 @@ export const getLinkProps = ({ type, id, field_link, field_special_type, title }
     }
   }
 
-  let linkProps = { to, forwardedAs: pickLinkComponent(to) }
+  let linkProps = { to, forwardedAs: RouterLink }
   const externalUrl = field_link?.uri ? cleanupDrupalUri(field_link?.uri) : null
 
   linkProps = externalUrl ? { href: externalUrl, forwardedAs: 'a' } : linkProps

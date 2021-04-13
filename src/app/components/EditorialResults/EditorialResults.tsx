@@ -1,6 +1,7 @@
 import { CardContainer } from '@amsterdam/asc-ui'
 import { GraphQLFormattedError } from 'graphql'
 import { FunctionComponent, memo } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { EDITORIAL_DETAIL_ACTIONS } from '../../../normalizations/cms/normalizeCMSResults'
 import { CmsType } from '../../../shared/config/cms.config'
@@ -13,13 +14,12 @@ import {
 import getErrorsForPath from '../../utils/getErrorsForPath'
 import getLoadingErrors from '../../utils/getLoadingErrors'
 import getUnauthorizedLabels from '../../utils/getUnauthorizedLabels'
-import pickLinkComponent from '../../utils/pickLinkComponent'
+import { CMSResultItem } from '../../utils/useFromCMS'
 import AuthAlert from '../Alerts/AuthAlert'
 import EditorialCard from '../EditorialCard'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import NoSearchResults from '../NoSearchResults'
-import { CMSResultItem } from '../../utils/useFromCMS'
 
 const EDITORIAL_OVERVIEW_ACTIONS = {
   [CmsType.Article]: toArticleSearch,
@@ -101,7 +101,7 @@ const EditorialResults: FunctionComponent<EditorialResultsProps> = ({
               return (
                 <EditorialCard
                   // @ts-ignore
-                  forwardedAs={pickLinkComponent(to)}
+                  forwardedAs={RouterLink}
                   type={type}
                   specialType={specialType}
                   key={id}

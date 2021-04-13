@@ -1,5 +1,4 @@
-import { toArticleDetail } from '../../app/links'
-import { toSpecialDetail } from '../../store/redux-first-router/actions'
+import { toArticleDetail, toSpecialDetail } from '../../app/links'
 import { CmsType } from '../../shared/config/cms.config'
 import normalizeCMSResults, {
   getLinkProps,
@@ -8,7 +7,6 @@ import normalizeCMSResults, {
 } from './normalizeCMSResults'
 
 jest.mock('../../app/links')
-jest.mock('../../store/redux-first-router/actions')
 
 toArticleDetail.mockImplementation((id, slug) => `${id}/${slug}`)
 toSpecialDetail.mockImplementation((id, slug) => `${id}/${slug}`)
