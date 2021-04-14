@@ -8,7 +8,11 @@ import normalizeCMSResults, {
 
 jest.mock('../../app/links')
 
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 toArticleDetail.mockImplementation((id, slug) => `${id}/${slug}`)
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 toSpecialDetail.mockImplementation((id, slug) => `${id}/${slug}`)
 
 describe('normalizeCMSResults', () => {
@@ -55,6 +59,7 @@ describe('normalizeCMSResults', () => {
         field_publication_year,
       })
 
+      // @ts-ignore
       expect(localeDate).toEqual(new Date(Date.UTC(field_publication_year)))
       expect(localeDateFormatted).toEqual(`1-1-${field_publication_year}`)
     })
@@ -63,23 +68,21 @@ describe('normalizeCMSResults', () => {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       const field_publication_year = '2020'
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      const field_publication_month = 12
+      const field_publication_month = '12'
       const { localeDate, localeDateFormatted } = getLocaleFormattedDate({
         field_publication_year,
         field_publication_month,
       })
 
-      expect(localeDate).toEqual(
-        new Date(Date.UTC(field_publication_year, field_publication_month - 1)),
-      )
+      expect(localeDate).toEqual(new Date(Date.UTC(2020, 12 - 1)))
       expect(localeDateFormatted).toEqual(`1-${field_publication_month}-${field_publication_year}`)
     })
 
     it('returns an object with dates from field_publication_year, field_publication_month and field_publication_day', () => {
       /* eslint-disable @typescript-eslint/naming-convention */
-      const field_publication_year = 2020
-      const field_publication_month = 10
-      const field_publication_day = 31
+      const field_publication_year = '2020'
+      const field_publication_month = '10'
+      const field_publication_day = '31'
       /* eslint-enable @typescript-eslint/naming-convention */
       const { localeDate, localeDateFormatted } = getLocaleFormattedDate({
         field_publication_year,
@@ -87,11 +90,7 @@ describe('normalizeCMSResults', () => {
         field_publication_day,
       })
 
-      expect(localeDate).toEqual(
-        new Date(
-          Date.UTC(field_publication_year, field_publication_month - 1, field_publication_day),
-        ),
-      )
+      expect(localeDate).toEqual(new Date(Date.UTC(2020, 10 - 1, 31)))
       expect(localeDateFormatted).toEqual(
         `${field_publication_day}-${field_publication_month}-${field_publication_year}`,
       )
@@ -99,9 +98,9 @@ describe('normalizeCMSResults', () => {
 
     it('returns an object with dates from field_publication_year, field_publication_month and field_publication_day 1', () => {
       /* eslint-disable @typescript-eslint/naming-convention */
-      const field_publication_year = 2020
-      const field_publication_month = 1
-      const field_publication_day = 1
+      const field_publication_year = '2020'
+      const field_publication_month = '1'
+      const field_publication_day = '1'
       /* eslint-enable @typescript-eslint/naming-convention */
       const { localeDate, localeDateFormatted } = getLocaleFormattedDate({
         field_publication_year,
@@ -109,11 +108,7 @@ describe('normalizeCMSResults', () => {
         field_publication_day,
       })
 
-      expect(localeDate).toEqual(
-        new Date(
-          Date.UTC(field_publication_year, field_publication_month - 1, field_publication_day),
-        ),
-      )
+      expect(localeDate).toEqual(new Date(Date.UTC(2020, 1 - 1, 1)))
       expect(localeDateFormatted).toEqual(
         `${field_publication_day}-${field_publication_month}-${field_publication_year}`,
       )
@@ -132,6 +127,7 @@ describe('normalizeCMSResults', () => {
     media_image_url: 'media_image_url',
 
     short_title: 'short_title',
+    field_short_title: 'short_title',
     field_teaser: 'field_teaser',
     intro: 'intro',
     field_special_type: 'field_special_type',
@@ -279,19 +275,10 @@ describe('normalizeCMSResults', () => {
 
     it('normalizes the data when it is an array', () => {
       expect(normalizeCMSResults([input])).toMatchObject([output])
-
-      expect(normalizeCMSResults({ results: [input] })).toMatchObject([output])
     })
 
     it('normalizes the data when it is NOT an array', () => {
       expect(normalizeCMSResults(input)).toMatchObject(output)
-    })
-
-    it('normalizes the data when it is an array with links to other data', () => {
-      expect(normalizeCMSResults({ results: [{ ...input }], _links: [] })).toMatchObject({
-        data: [output],
-        links: [],
-      })
     })
   })
 })

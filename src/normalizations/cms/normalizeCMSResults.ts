@@ -10,6 +10,7 @@ import formatDate from '../../app/utils/formatDate'
 import toSlug from '../../app/utils/toSlug'
 import { CmsType } from '../../shared/config/cms.config'
 import { reformatJSONApiResults } from '../../shared/services/cms/cms-json-api-normalizer'
+import { FieldLink, NormalizedFieldItems, NormalizedResult } from './types'
 
 export const EDITORIAL_DETAIL_ACTIONS = {
   [CmsType.Article]: toArticleDetail,
@@ -24,17 +25,18 @@ export const EDITORIAL_FIELD_TYPE_VALUES = {
 }
 
 // Drupal JSONapi encodes `&` in URLs, which React can't handle https://github.com/facebook/react/issues/6873#issuecomment-227906893
-const cleanupDrupalUri = (uri) => uri.replace(/&amp;/g, '&')
+const cleanupDrupalUri = (uri: string) => uri.replace(/&amp;/g, '&')
 
 export const getLocaleFormattedDate = ({
   field_publication_date,
   field_publication_day,
   field_publication_year,
   field_publication_month,
-} = {}) => {
-  const year = parseInt(field_publication_year, 10)
-  const yearIsValidNumber = Number.isNaN(year) === false
-  const hasPossibleValidDate = field_publication_date?.length > 0 || yearIsValidNumber
+}: Partial<NormalizedResult> = {}) => {
+  const year = field_publication_year && parseInt(field_publication_year, 10)
+  const yearIsValidNumber = year && !Number.isNaN(year)
+  const hasPossibleValidDate =
+    (field_publication_date && field_publication_date?.length > 0) ?? yearIsValidNumber
 
   if (!hasPossibleValidDate) {
     return {
@@ -50,29 +52,33 @@ export const getLocaleFormattedDate = ({
     }
   }
 
-  const day = parseInt(field_publication_day, 10)
-  const monthIndex = parseInt(field_publication_month, 10)
-  const monthIsValidNumber = Number.isNaN(monthIndex) === false
-  const dayIsValidNumber = Number.isNaN(day) === false
+  const day = field_publication_day && parseInt(field_publication_day, 10)
+  const monthIndex = field_publication_month && parseInt(field_publication_month, 10)
+  const dayIsValidNumber = !Number.isNaN(day)
 
   const dateParts = [
     year,
-    monthIsValidNumber && Math.max(0, monthIndex - 1),
+    monthIndex && !Number.isNaN(monthIndex) && Math.max(0, monthIndex - 1),
     dayIsValidNumber && day,
   ].filter(Number.isFinite)
 
+  // @ts-ignore
   const localeDate = new Date(Date.UTC(...dateParts))
 
   return {
     localeDate,
+    // @ts-ignore
     localeDateFormatted: formatDate(localeDate, false),
   }
 }
 
-export const getLinkProps = ({ type, id, field_link, field_special_type, title }, slug) => {
+export const getLinkProps = (
+  { type, id, field_link, field_special_type, title }: NormalizedResult,
+  slug: string,
+) => {
   let to = {}
 
-  if (EDITORIAL_DETAIL_ACTIONS[type]) {
+  if (type && EDITORIAL_DETAIL_ACTIONS[type]) {
     const nodeAnchorPropsFn = EDITORIAL_DETAIL_ACTIONS[type]
 
     if (type === CmsType.Special) {
@@ -85,7 +91,9 @@ export const getLinkProps = ({ type, id, field_link, field_special_type, title }
   let linkProps = { to, forwardedAs: RouterLink }
   const externalUrl = field_link?.uri ? cleanupDrupalUri(field_link?.uri) : null
 
+  // @ts-ignore
   linkProps = externalUrl ? { href: externalUrl, forwardedAs: 'a' } : linkProps
+  // @ts-ignore
   linkProps = { ...linkProps, title } // Add the title attribute by default
 
   return {
@@ -94,7 +102,7 @@ export const getLinkProps = ({ type, id, field_link, field_special_type, title }
   }
 }
 
-export const normalizeObject = (data) => {
+export const normalizeObject = (data: NormalizedResult): NormalizedFieldItems => {
   const {
     id,
     title,
@@ -125,20 +133,21 @@ export const normalizeObject = (data) => {
   // Construct the file url when the type is PUBLICATION
   let fileUrl
   if (isPublicationType) {
-    const { url } = field_file ? field_file.field_media_file.uri : {}
-    fileUrl = url
+    fileUrl = field_file?.field_media_file?.uri?.url
   }
 
-  let related = []
-  if (field_related) {
-    const reformattedRelatedResults = reformatJSONApiResults({ field_items: field_related })
+  let related: NormalizedFieldItems[] | never[] = []
+  if (field_related && !(field_related instanceof Array)) {
+    const reformattedRelatedResults = reformatJSONApiResults(field_related)
 
-    related = reformattedRelatedResults.map((dataItem) => normalizeObject(dataItem, type))
+    if (reformattedRelatedResults instanceof Array) {
+      related = reformattedRelatedResults.map((dataItem) => normalizeObject(dataItem))
+    }
   }
 
-  let links = []
+  let links: FieldLink[] = []
   if (field_links) {
-    links = field_links.map((link) => ({ ...link, uri: cleanupDrupalUri(link.uri) }))
+    links = field_links.map((link) => ({ ...link, uri: cleanupDrupalUri(link.uri) } as FieldLink))
   }
 
   return {
@@ -166,20 +175,10 @@ export const normalizeObject = (data) => {
   }
 }
 
-const normalizeCMSResults = (data) => {
+const normalizeCMSResults = (data: NormalizedResult | NormalizedResult[]) => {
   // The data can be in the form of an array when used on the homepage or an overview page
-  if (data.results || (data && data.length)) {
-    const dataArray = data.results || data
-
-    // Return different format when the data include links to other endpoints
-    // eslint-disable-next-line no-underscore-dangle
-    return data._links
-      ? {
-          data: dataArray.map((dataItem) => normalizeObject(dataItem)),
-          // eslint-disable-next-line no-underscore-dangle
-          links: data._links,
-        }
-      : dataArray.map((dataItem) => normalizeObject(dataItem))
+  if (data instanceof Array) {
+    return data.map((dataItem) => normalizeObject(dataItem))
   }
 
   // Format just a single data object

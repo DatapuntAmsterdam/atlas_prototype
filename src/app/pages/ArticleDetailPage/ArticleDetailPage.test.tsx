@@ -1,12 +1,13 @@
 import { ThemeProvider } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { mount, shallow } from 'enzyme'
 import { mocked } from 'ts-jest/utils'
 import cmsConfig from '../../../shared/config/cms.config'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import useFromCMS from '../../utils/useFromCMS'
 import ArticleDetailPage from './ArticleDetailPage'
+import { render } from '@testing-library/react'
+import { LOADING_SPINNER_TEST_ID } from '../../components/LoadingSpinner/LoadingSpinner'
 
 jest.mock('../../utils/useFromCMS')
 jest.mock('../../utils/useDocumentTitle')
@@ -43,14 +44,14 @@ describe('ArticleDetailPage', () => {
     mockedUseFromCMS.mockImplementation(
       () =>
         ({
+          fetchData: jest.fn(),
           loading: true,
         } as any),
     )
 
-    const component = shallow(<ArticleDetailPage />)
+    const { getByTestId } = render(<ArticleDetailPage />)
 
-    const editorialPage = component.find(EditorialPage).at(0)
-    expect(editorialPage.props().loading).toBeTruthy()
+    expect(getByTestId(LOADING_SPINNER_TEST_ID)).toBeDefined()
   })
 
   it('should call the fetchData function when the component mounts', () => {
@@ -62,7 +63,7 @@ describe('ArticleDetailPage', () => {
         } as any),
     )
 
-    mount(
+    render(
       <ThemeProvider>
         <ArticleDetailPage />
       </ThemeProvider>,

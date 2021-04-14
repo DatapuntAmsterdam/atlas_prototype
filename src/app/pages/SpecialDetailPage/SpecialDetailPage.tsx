@@ -8,17 +8,43 @@ import IFrame from '../../components/IFrame/IFrame'
 import { toSpecialDetail } from '../../links'
 import useFromCMS from '../../utils/useFromCMS'
 import Animation from './specials/Animation'
+import { DoubleNormalizedResults } from '../../../normalizations/cms/types'
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 
 const SpecialDetailPage = () => {
-  const { id } = useParams()
-  const { fetchData, results, loading, error } = useFromCMS(cmsConfig.SPECIAL, id)
+  const { id } = useParams<{ id: string }>()
+  const { fetchData, results, loading, error } = useFromCMS<DoubleNormalizedResults>(
+    cmsConfig.SPECIAL,
+    id,
+  )
 
   useEffect(() => {
     fetchData()
   }, [id])
 
-  const { field_content_link: contentLink, slug, specialType, title, field_language: lang } =
-    results || {}
+  if (loading) {
+    return <LoadingSpinner />
+  }
+
+  if (!results || !results.specialType || !results.slug) {
+    return (
+      <ErrorMessage
+        absolute
+        message="Er is een fout opgetreden bij het laden van deze pagina."
+        buttonLabel="Probeer opnieuw"
+        buttonOnClick={fetchData}
+      />
+    )
+  }
+
+  const {
+    field_content_link: contentLink,
+    slug,
+    specialType,
+    title,
+    field_language: lang,
+  } = results
   const documentTitle = title && `Special: ${title}`
   const link = toSpecialDetail(id, specialType, slug)
 

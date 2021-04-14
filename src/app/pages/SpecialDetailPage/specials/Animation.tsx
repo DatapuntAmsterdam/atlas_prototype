@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react'
 import {
   Column,
   CustomHTMLBlock,
@@ -12,6 +13,7 @@ import {
 import styled from 'styled-components'
 import ShareBar from '../../../components/ShareBar/ShareBar'
 import Video from '../../../components/Video/Video'
+import { DoubleNormalizedResults } from '../../../../normalizations/cms/types'
 
 const StyledColumn = styled(Column)`
   margin-bottom: ${themeSpacing(5)};
@@ -29,7 +31,13 @@ const StyledLink = styled(Link)`
   margin-bottom: ${themeSpacing(4)};
 `
 
-const Animation = ({ contentLink, title, results }) => {
+const Animation: FunctionComponent<{
+  results: DoubleNormalizedResults
+  contentLink?: {
+    uri: string
+  }
+  title: string
+}> = ({ contentLink, title, results }) => {
   const {
     body,
     field_intro: intro,
@@ -54,7 +62,9 @@ const Animation = ({ contentLink, title, results }) => {
         >
           <EditorialContent>
             <Heading>{title}</Heading>
-            <EditorialMetaList fields={[{ id: 1, label: localeDateFormatted }]} />
+            {localeDateFormatted && (
+              <EditorialMetaList fields={[{ id: 1, label: localeDateFormatted }]} />
+            )}
           </EditorialContent>
         </Column>
 

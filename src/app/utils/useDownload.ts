@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import fileSaver from 'file-saver'
 
-function useDownload(): [boolean, (url: string, options: RequestInit, fileName?: string) => void] {
+function useDownload(): [boolean, (url: string, options?: RequestInit, fileName?: string) => void] {
   const [loading, setLoading] = useState(false)
 
   function downloadFile(url: string, options = {}, fileName = '') {

@@ -6,10 +6,13 @@ import normalizeCMSResults from '../../normalizations/cms/normalizeCMSResults'
 import { CmsType, SpecialType } from '../../shared/config/cms.config'
 import { fetchWithToken } from '../../shared/services/api/api'
 import cmsJsonApiNormalizer from '../../shared/services/cms/cms-json-api-normalizer'
+import { Single } from '../../api/cms/article'
+import { DoubleNormalizedResults, NormalizedFieldItems } from '../../normalizations/cms/types'
 
 export interface CMSConfig {
-  endpoint: (id?: string) => string
-  fields?: Array<string>
+  endpoint(id?: string): string
+  endpoint(id: string): string
+  fields: Array<string>
 }
 
 // More fields should be added to this type when other CMS content pages are migrated to TypeScript
@@ -39,18 +42,11 @@ export interface CMSResultItem {
   } | null
 }
 
-export interface CMSResults<T> {
-  loading: boolean
-  fetchData: (endpoint?: string) => T | undefined
-  error: boolean
-  results?: T
-}
-
-function useFromCMS<T = CMSResultItem[]>(
+function useFromCMS<T = Single | DoubleNormalizedResults | NormalizedFieldItems[]>(
   config: CMSConfig,
   id?: string,
   normalizeFromJSONApi = true,
-): CMSResults<T> {
+) {
   const [results, setResults] = useState<T>()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -67,27 +63,27 @@ function useFromCMS<T = CMSResultItem[]>(
 
     const { fields } = config
 
-    fetchWithToken(endpoint)
+    fetchWithToken<Single>(endpoint)
       .then((data) => {
-        let result = data
+        let result: any = data
         if (normalizeFromJSONApi) {
-          result = cmsJsonApiNormalizer(data, fields)
-        }
-
-        // Todo: Need to refactor this when we really know what types and fields to expect from the CMS
-        // This if-statement is an "exeption" for the CollectionDetail pages.
-        if (result.field_blocks && result.field_items) {
-          result = {
-            ...result,
-            // @ts-ignore
-            field_blocks: result.field_blocks.map(({ field_content, ...otherFields }) => ({
-              ...otherFields,
-              field_content: normalizeCMSResults(field_content),
-            })),
-            field_items: normalizeCMSResults(result.field_items),
+          const tempResult = cmsJsonApiNormalizer(data, fields)
+          // Todo: Need to refactor this when we really know what types and fields to expect from the CMS
+          // This if-statement is an "exeption" for the CollectionDetail pages.
+          if (!(tempResult instanceof Array) && tempResult.field_blocks && tempResult.field_items) {
+            result = {
+              ...tempResult,
+              // @ts-ignore
+              field_blocks: tempResult.field_blocks.map(({ field_content, ...otherFields }) => ({
+                ...otherFields,
+                field_content: normalizeCMSResults(field_content),
+              })),
+              field_items: normalizeCMSResults(tempResult.field_items),
+            } as DoubleNormalizedResults
+          } else {
+            // NormalizedFieldItems[]
+            result = normalizeCMSResults(tempResult) as NormalizedFieldItems[]
           }
-        } else {
-          result = normalizeCMSResults(result)
         }
 
         setResults(result)

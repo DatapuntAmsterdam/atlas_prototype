@@ -1,11 +1,14 @@
 /* eslint-disable camelcase */
+// @ts-ignore
 import normalize from 'json-api-normalize'
+import { Single } from '../../../api/cms/article'
+import { NormalizedResult } from '../../../normalizations/cms/types'
 
-export const getType = (type) => type && type.replace('node--', '')
+export const getType = (type?: string) => type && type.replace('node--', '')
 
-const getNormalizedItem = (item, extraData = {}) =>
+const getNormalizedItem = (item: NormalizedResult, extraData = {}): NormalizedResult => {
   // Make sure the correct fields have data here to be used by normalizeCMSResults()
-  ({
+  return {
     ...extraData,
     ...item,
     type: getType(item.type),
@@ -17,9 +20,10 @@ const getNormalizedItem = (item, extraData = {}) =>
     teaser_url: item.field_teaser_image
       ? item.field_teaser_image.field_media_image.uri.url
       : item.teaser_url,
-  })
+  }
+}
 
-export const reformatJSONApiResults = (normalizedData) => {
+export const reformatJSONApiResults = (normalizedData: NormalizedResult) => {
   // In case of a Drupal collection resource the returned data will include several objects that need to be normalized
   if (normalizedData.field_items && !normalizedData.field_blocks) {
     return normalizedData.field_items.map((item) => getNormalizedItem(item, normalizedData))
@@ -32,7 +36,10 @@ export const reformatJSONApiResults = (normalizedData) => {
       ...normalizedData,
       field_blocks: normalizedData.field_blocks.map((fieldBlock) => ({
         ...fieldBlock,
-        field_content: fieldBlock.field_content.map((item) => getNormalizedItem(item)),
+        field_content:
+          fieldBlock.field_content instanceof Array
+            ? fieldBlock.field_content.map((item) => getNormalizedItem(item))
+            : fieldBlock.field_content,
       })),
       field_items: normalizedData.field_items.map((item) => getNormalizedItem(item)),
     }
@@ -42,7 +49,7 @@ export const reformatJSONApiResults = (normalizedData) => {
   return getNormalizedItem(normalizedData)
 }
 
-const cmsJsonApiNormalizer = (data, fields) => {
+const cmsJsonApiNormalizer = (data: Single, fields: string[]) => {
   const normalizedData = removeEmptyContent(
     normalize(data).get(['id', 'title', 'body', 'created', 'type', ...fields]),
   )
@@ -52,7 +59,7 @@ const cmsJsonApiNormalizer = (data, fields) => {
    */
   const sortedItems = data?.data?.relationships?.field_items?.data ?? []
 
-  if (normalizedData?.field_items?.length && sortedItems.length) {
+  if (normalizedData?.field_items?.length && sortedItems instanceof Array) {
     const fieldItems = [...normalizedData.field_items].sort(
       (a, b) =>
         sortedItems.indexOf(sortedItems.filter(({ id }) => a.id === id)[0]) -
@@ -68,7 +75,7 @@ const cmsJsonApiNormalizer = (data, fields) => {
   return reformatJSONApiResults(normalizedData)
 }
 
-function removeEmptyContent(data) {
+function removeEmptyContent(data: NormalizedResult) {
   return {
     ...data,
     ...(data.field_blocks

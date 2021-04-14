@@ -1,9 +1,9 @@
-import { shallow } from 'enzyme'
+import { render } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
-import EditorialPage from '../../components/EditorialPage/EditorialPage'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import useFromCMS from '../../utils/useFromCMS'
 import SpecialDetailPage from './SpecialDetailPage'
+import { LOADING_SPINNER_TEST_ID } from '../../components/LoadingSpinner/LoadingSpinner'
 
 jest.mock('../../links')
 jest.mock('../../utils/useFromCMS')
@@ -26,7 +26,7 @@ describe('SpecialDetailPage', () => {
     jest.resetAllMocks()
   })
 
-  it('should set the loading prop on the blog container', () => {
+  it('should show a loading spinner', () => {
     mockedUseFromCMS.mockImplementation(
       () =>
         ({
@@ -34,9 +34,8 @@ describe('SpecialDetailPage', () => {
         } as any),
     )
 
-    const component = shallow(<SpecialDetailPage />)
+    const { getByTestId } = render(<SpecialDetailPage />)
 
-    const editorialPage = component.find(EditorialPage).at(0)
-    expect(editorialPage.props().loading).toBeTruthy()
+    expect(getByTestId(LOADING_SPINNER_TEST_ID)).toBeDefined()
   })
 })

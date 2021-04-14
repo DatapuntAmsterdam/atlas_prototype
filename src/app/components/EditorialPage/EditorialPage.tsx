@@ -20,7 +20,7 @@ const BodyStyle = styled.div`
 export interface EditorialPageProps {
   documentTitle?: string
   loading: boolean
-  link?: LocationDescriptorObject
+  link?: LocationDescriptorObject | null
   description?: string
   image?: string
   title?: string

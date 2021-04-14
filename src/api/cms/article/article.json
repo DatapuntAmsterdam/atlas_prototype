@@ -1,0 +1,421 @@
+{
+  "jsonapi": {
+    "version": "1.0",
+    "meta": {
+      "links": {
+        "self": {
+          "href": "http://jsonapi.org/format/1.0/"
+        }
+      }
+    }
+  },
+  "data": {
+    "type": "node--article",
+    "id": "52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc",
+    "links": {
+      "self": {
+        "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc?resourceVersion=id%3A4432"
+      }
+    },
+    "attributes": {
+      "drupal_internal__nid": 4432,
+      "drupal_internal__vid": 4432,
+      "langcode": "en",
+      "revision_timestamp": "2021-04-08T12:18:13+00:00",
+      "revision_log": null,
+      "status": true,
+      "title": "Amsterdam-Amstelland minder veilig in 2020",
+      "created": "2021-04-08T12:05:56+00:00",
+      "changed": "2021-04-08T12:33:12+00:00",
+      "promote": false,
+      "sticky": false,
+      "default_langcode": true,
+      "revision_translation_affected": true,
+      "path": {
+        "alias": "",
+        "pid": null,
+        "langcode": "en"
+      },
+      "body": {
+        "value": "<h4>Minder criminaliteit</h4>&#13;\n&#13;\n<p>De afname van de indexscore voor criminaliteit (in 2019 84 en in 2020 79) zien we in beide onderliggende elementen terug. De High Impact criminaliteit (delicten met een grote invloed op het slachtoffer, zoals geweld) neemt af van 91 naar 87. De score voor veel voorkomende criminaliteit (ook wel High Volume criminaliteit genoemd) neemt zelfs nog iets sterker af: van 78 naar 71. Beide soorten tellen even zwaar mee in de score van de criminaliteitsindex. Met minder mensen op straat en meer mensen thuis - vanwege corona - is die afname te herleiden tot minder criminaliteit in de openbare ruimte en minder woninginbraken.</p>&#13;\n&#13;\n<h4>Ervaren overlast en onveiligheidsbeleving toegenomen</h4>&#13;\n&#13;\n<p>Men ervaart in vergelijking met 2019 meer overlast (van 94 naar 108). De score is voor het eerst hoger dan in het basisjaar 2014 (100). De toegenomen score van de overlastindex zien we in even sterke mate terug in beide onderliggende elementen. De verloederingsscore stijgt van 86 naar 99, terwijl die voor personenoverlast toeneemt van 103 naar 116 (de hoogste score sinds 2014; beide onderdelen tellen even zwaar mee in de overlastscore).</p>&#13;\n&#13;\n<p>Ook de score voor de onveiligheidsbelevingsindex is gestegen (van 92 naar 98). De inschatting om slachtoffer te worden van criminaliteit blijft vrijwel gelijk (100 ten opzichte van 99 in 2019), maar de onveiligheidsgevoelens nemen toe van 89 naar 96. Hetzelfde geldt voor het vermijden van bepaalde plekken omdat men zich daar onveilig voelt (van 87 naar 97). Mogelijk ervaren mensen doordat ze veel vaker thuis zijn meer overlast in de buurt (de meldingen bij de politie, zoals jeugdoverlast en geluidshinder zijn substantieel toegenomen) en voelen ze zich ook onveiliger.</p>&#13;\n&#13;\n<h4>De regionale veiligheidsindex</h4>&#13;\n&#13;\n<p>De index brengt drie keer per jaar de veiligheid van 109 wijken in de regio Amsterdam-Amstelland in kaart. De regio Amsterdam-Amstelland bestaat uit de volgende gemeenten:</p>&#13;\n&#13;\n<ul><li>Amsterdam</li>&#13;\n\t<li>Aalsmeer</li>&#13;\n\t<li>Amstelveen</li>&#13;\n\t<li>Diemen</li>&#13;\n\t<li>Ouder-Amstel</li>&#13;\n\t<li>Uithoorn</li>&#13;\n</ul><p>De veiligheidsindex bestaat uit drie delen:</p>&#13;\n&#13;\n<ol><li>criminaliteit</li>&#13;\n\t<li>overlast</li>&#13;\n\t<li>onveiligheidsbeleving</li>&#13;\n</ol><p>De index voegt informatie samen en zorgt voor eenheid in de vele veiligheidscijfers. Zo zijn alle wijken in de regio door middel van één cijfer met elkaar te vergelijken. Deze publicatie van de veiligheidsindex over het jaar 2020 is voorlopig de laatste. In 2021 zal een nieuwe reeks starten nadat het instrument herzien en herijkt is.</p>&#13;\n&#13;\n<p>Weten hoe veilig uw buurt is? Bekijk en vergelijk in het <a href=\"https://data.amsterdam.nl/specials/dashboard/hoe-veilig-is-mijn-buurt/d6006969-9d2a-413d-80a4-308932ed36f8/\">dashboard van de Veiligheidsindex</a> uw buurt met andere buurten en voorgaande perioden.</p>&#13;\n",
+        "format": "full_html",
+        "processed": "<h4>Minder criminaliteit</h4>\n\n<p>De afname van de indexscore voor criminaliteit (in 2019 84 en in 2020 79) zien we in beide onderliggende elementen terug. De High Impact criminaliteit (delicten met een grote invloed op het slachtoffer, zoals geweld) neemt af van 91 naar 87. De score voor veel voorkomende criminaliteit (ook wel High Volume criminaliteit genoemd) neemt zelfs nog iets sterker af: van 78 naar 71. Beide soorten tellen even zwaar mee in de score van de criminaliteitsindex. Met minder mensen op straat en meer mensen thuis - vanwege corona - is die afname te herleiden tot minder criminaliteit in de openbare ruimte en minder woninginbraken.</p>\n\n<h4>Ervaren overlast en onveiligheidsbeleving toegenomen</h4>\n\n<p>Men ervaart in vergelijking met 2019 meer overlast (van 94 naar 108). De score is voor het eerst hoger dan in het basisjaar 2014 (100). De toegenomen score van de overlastindex zien we in even sterke mate terug in beide onderliggende elementen. De verloederingsscore stijgt van 86 naar 99, terwijl die voor personenoverlast toeneemt van 103 naar 116 (de hoogste score sinds 2014; beide onderdelen tellen even zwaar mee in de overlastscore).</p>\n\n<p>Ook de score voor de onveiligheidsbelevingsindex is gestegen (van 92 naar 98). De inschatting om slachtoffer te worden van criminaliteit blijft vrijwel gelijk (100 ten opzichte van 99 in 2019), maar de onveiligheidsgevoelens nemen toe van 89 naar 96. Hetzelfde geldt voor het vermijden van bepaalde plekken omdat men zich daar onveilig voelt (van 87 naar 97). Mogelijk ervaren mensen doordat ze veel vaker thuis zijn meer overlast in de buurt (de meldingen bij de politie, zoals jeugdoverlast en geluidshinder zijn substantieel toegenomen) en voelen ze zich ook onveiliger.</p>\n\n<h4>De regionale veiligheidsindex</h4>\n\n<p>De index brengt drie keer per jaar de veiligheid van 109 wijken in de regio Amsterdam-Amstelland in kaart. De regio Amsterdam-Amstelland bestaat uit de volgende gemeenten:</p>\n\n<ul><li>Amsterdam</li>\n\t<li>Aalsmeer</li>\n\t<li>Amstelveen</li>\n\t<li>Diemen</li>\n\t<li>Ouder-Amstel</li>\n\t<li>Uithoorn</li>\n</ul><p>De veiligheidsindex bestaat uit drie delen:</p>\n\n<ol><li>criminaliteit</li>\n\t<li>overlast</li>\n\t<li>onveiligheidsbeleving</li>\n</ol><p>De index voegt informatie samen en zorgt voor eenheid in de vele veiligheidscijfers. Zo zijn alle wijken in de regio door middel van één cijfer met elkaar te vergelijken. Deze publicatie van de veiligheidsindex over het jaar 2020 is voorlopig de laatste. In 2021 zal een nieuwe reeks starten nadat het instrument herzien en herijkt is.</p>\n\n<p>Weten hoe veilig uw buurt is? Bekijk en vergelijk in het <a href=\"https://data.amsterdam.nl/specials/dashboard/hoe-veilig-is-mijn-buurt/d6006969-9d2a-413d-80a4-308932ed36f8/\">dashboard van de Veiligheidsindex</a> uw buurt met andere buurten en voorgaande perioden.</p>\n",
+        "summary": ""
+      },
+      "field_byline": "OIS",
+      "field_intro": "In de regio Amsterdam-Amstelland is het in 2020 iets minder veilig dan het jaar ervoor. Dit blijkt uit de uitkomsten van de negentiende meting van de regionale veiligheidsindex Amsterdam-Amstelland die op 7 april verscheen. De totale indexscore is vergeleken met 2019 gestegen van 90 naar 95. Kijken we naar de deelindexen dan blijkt dat de criminaliteitsscore in coronajaar 2020 verder afneemt, maar dat de overlast en de onveiligheidsbeleving juist toenemen. Dat beeld zien we in veel wijken terug.",
+      "field_language": "nl",
+      "field_links": [
+        {
+          "uri": "https://data.amsterdam.nl/specials/dashboard/hoe-veilig-is-mijn-buurt/d6006969-9d2a-413d-80a4-308932ed36f8/",
+          "title": "Hoe veilig is mijn buurt?",
+          "options": []
+        }
+      ],
+      "field_publication_date": "2021-04-08T14:15:00+02:00",
+      "field_short_title": "Veiligheid in 2020 afgenomen",
+      "field_slug": "veiligheid-in-2020-afgenomen",
+      "field_teaser": "In de regio Amsterdam-Amstelland is het in 2020 iets minder veilig dan het jaar ervoor. Dit blijkt uit de uitkomsten van de negentiende meting van de regionale veiligheidsindex Amsterdam-Amstelland.",
+      "field_type": "content"
+    },
+    "relationships": {
+      "node_type": {
+        "data": {
+          "type": "node_type--node_type",
+          "id": "2d3a1aa7-a3dd-4a5a-b476-6044f5955f02"
+        },
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/node_type?resourceVersion=id%3A4432"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/relationships/node_type?resourceVersion=id%3A4432"
+          }
+        }
+      },
+      "revision_uid": {
+        "data": {
+          "type": "user--user",
+          "id": "528ad455-9bb5-46d2-88d9-1c07b6d45e04"
+        },
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/revision_uid?resourceVersion=id%3A4432"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/relationships/revision_uid?resourceVersion=id%3A4432"
+          }
+        }
+      },
+      "uid": {
+        "data": {
+          "type": "user--user",
+          "id": "528ad455-9bb5-46d2-88d9-1c07b6d45e04"
+        },
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/uid?resourceVersion=id%3A4432"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/relationships/uid?resourceVersion=id%3A4432"
+          }
+        }
+      },
+      "feeds_item": {
+        "data": null,
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/feeds_item?resourceVersion=id%3A4432"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/relationships/feeds_item?resourceVersion=id%3A4432"
+          }
+        }
+      },
+      "field_accordions": {
+        "data": [
+          {
+            "type": "paragraph--accordion",
+            "id": "fe358add-91df-463a-892b-ac206e8f9dc0",
+            "meta": {
+              "target_revision_id": 157
+            }
+          }
+        ],
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/field_accordions?resourceVersion=id%3A4432"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/relationships/field_accordions?resourceVersion=id%3A4432"
+          }
+        }
+      },
+      "field_cover_image": {
+        "data": {
+          "type": "media--image",
+          "id": "4595a1c2-71e6-474b-8687-eb9ab5c29510"
+        },
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/field_cover_image?resourceVersion=id%3A4432"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/relationships/field_cover_image?resourceVersion=id%3A4432"
+          }
+        }
+      },
+      "field_downloads": {
+        "data": [],
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/field_downloads?resourceVersion=id%3A4432"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/relationships/field_downloads?resourceVersion=id%3A4432"
+          }
+        }
+      },
+      "field_related": {
+        "data": [],
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/field_related?resourceVersion=id%3A4432"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/relationships/field_related?resourceVersion=id%3A4432"
+          }
+        }
+      },
+      "field_tags": {
+        "data": [],
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/field_tags?resourceVersion=id%3A4432"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/relationships/field_tags?resourceVersion=id%3A4432"
+          }
+        }
+      },
+      "field_teaser_image": {
+        "data": {
+          "type": "media--image",
+          "id": "1fe41853-6314-435c-af29-55c4aff0e6c7"
+        },
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/field_teaser_image?resourceVersion=id%3A4432"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/relationships/field_teaser_image?resourceVersion=id%3A4432"
+          }
+        }
+      },
+      "field_themes": {
+        "data": [
+          {
+            "type": "taxonomy_term--themes",
+            "id": "8fb7de6d-0107-4995-9c8b-c3074b66da7d"
+          }
+        ],
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/field_themes?resourceVersion=id%3A4432"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc/relationships/field_themes?resourceVersion=id%3A4432"
+          }
+        }
+      }
+    }
+  },
+  "included": [
+    {
+      "type": "paragraph--accordion",
+      "id": "fe358add-91df-463a-892b-ac206e8f9dc0",
+      "links": {
+        "self": {
+          "href": "http://cms.data.amsterdam.nl/jsonapi/paragraph/accordion/fe358add-91df-463a-892b-ac206e8f9dc0"
+        }
+      },
+      "attributes": {
+        "drupal_internal__id": 157,
+        "drupal_internal__revision_id": 157,
+        "langcode": "en",
+        "status": true,
+        "created": "2021-04-08T12:18:13+00:00",
+        "parent_id": "4432",
+        "parent_type": "node",
+        "parent_field_name": "field_accordions",
+        "behavior_settings": "Array",
+        "default_langcode": true,
+        "revision_translation_affected": true,
+        "field_accordion_content": null,
+        "field_accordion_intro": null,
+        "field_accordion_label": null,
+        "field_accordion_title": null
+      },
+      "relationships": {
+        "paragraph_type": {
+          "data": {
+            "type": "paragraphs_type--paragraphs_type",
+            "id": "04fd50ee-dc1e-4094-b0cd-156b9f2bc6e7"
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/paragraph/accordion/fe358add-91df-463a-892b-ac206e8f9dc0/paragraph_type"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/paragraph/accordion/fe358add-91df-463a-892b-ac206e8f9dc0/relationships/paragraph_type"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "media--image",
+      "id": "4595a1c2-71e6-474b-8687-eb9ab5c29510",
+      "links": {
+        "self": {
+          "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/4595a1c2-71e6-474b-8687-eb9ab5c29510?resourceVersion=id%3A9658"
+        }
+      },
+      "attributes": {
+        "drupal_internal__mid": 9658,
+        "drupal_internal__vid": 9658,
+        "langcode": "en",
+        "revision_created": "2021-04-08T12:27:31+00:00",
+        "revision_log_message": null,
+        "status": true,
+        "name": "26168-047_bikerboa-s_28sep2016_E_v_Eis.jpg",
+        "created": "2021-04-08T12:27:18+00:00",
+        "changed": "2021-04-08T12:27:18+00:00",
+        "default_langcode": true,
+        "revision_translation_affected": true,
+        "path": {
+          "alias": "",
+          "pid": null,
+          "langcode": "en"
+        },
+        "field_credit": null
+      },
+      "relationships": {
+        "bundle": {
+          "data": {
+            "type": "media_type--media_type",
+            "id": "566d1ca3-25d0-4d66-ac13-65a0651c973f"
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/4595a1c2-71e6-474b-8687-eb9ab5c29510/bundle?resourceVersion=id%3A9658"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/4595a1c2-71e6-474b-8687-eb9ab5c29510/relationships/bundle?resourceVersion=id%3A9658"
+            }
+          }
+        },
+        "revision_user": {
+          "data": null,
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/4595a1c2-71e6-474b-8687-eb9ab5c29510/revision_user?resourceVersion=id%3A9658"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/4595a1c2-71e6-474b-8687-eb9ab5c29510/relationships/revision_user?resourceVersion=id%3A9658"
+            }
+          }
+        },
+        "uid": {
+          "data": {
+            "type": "user--user",
+            "id": "528ad455-9bb5-46d2-88d9-1c07b6d45e04"
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/4595a1c2-71e6-474b-8687-eb9ab5c29510/uid?resourceVersion=id%3A9658"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/4595a1c2-71e6-474b-8687-eb9ab5c29510/relationships/uid?resourceVersion=id%3A9658"
+            }
+          }
+        },
+        "thumbnail": {
+          "data": {
+            "type": "file--file",
+            "id": "d6c9fe20-2ebf-41dd-b54e-749eba3df700",
+            "meta": {
+              "alt": "Medewerkers van handhaving en toezicht op de fiets  ",
+              "title": "",
+              "width": 1280,
+              "height": 594
+            }
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/4595a1c2-71e6-474b-8687-eb9ab5c29510/thumbnail?resourceVersion=id%3A9658"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/4595a1c2-71e6-474b-8687-eb9ab5c29510/relationships/thumbnail?resourceVersion=id%3A9658"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": null,
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/4595a1c2-71e6-474b-8687-eb9ab5c29510/feeds_item?resourceVersion=id%3A9658"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/4595a1c2-71e6-474b-8687-eb9ab5c29510/relationships/feeds_item?resourceVersion=id%3A9658"
+            }
+          }
+        },
+        "field_media_image": {
+          "data": {
+            "type": "file--file",
+            "id": "d6c9fe20-2ebf-41dd-b54e-749eba3df700",
+            "meta": {
+              "alt": "Medewerkers van handhaving en toezicht op de fiets  ",
+              "title": "",
+              "width": 1280,
+              "height": 594
+            }
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/4595a1c2-71e6-474b-8687-eb9ab5c29510/field_media_image?resourceVersion=id%3A9658"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/4595a1c2-71e6-474b-8687-eb9ab5c29510/relationships/field_media_image?resourceVersion=id%3A9658"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "file--file",
+      "id": "d6c9fe20-2ebf-41dd-b54e-749eba3df700",
+      "links": {
+        "self": {
+          "href": "http://cms.data.amsterdam.nl/jsonapi/file/file/d6c9fe20-2ebf-41dd-b54e-749eba3df700"
+        }
+      },
+      "attributes": {
+        "drupal_internal__fid": 5571,
+        "langcode": "en",
+        "filename": "26168-047_bikerboa-s_28sep2016_E_v_Eis.jpg",
+        "uri": {
+          "value": "public://images/26168-047_bikerboa-s_28sep2016_E_v_Eis.jpg",
+          "url": "/sites/default/files/images/26168-047_bikerboa-s_28sep2016_E_v_Eis.jpg"
+        },
+        "filemime": "image/jpeg",
+        "filesize": 785059,
+        "status": true,
+        "created": "2021-04-08T12:27:18+00:00",
+        "changed": "2021-04-08T12:27:31+00:00"
+      },
+      "relationships": {
+        "uid": {
+          "data": {
+            "type": "user--user",
+            "id": "528ad455-9bb5-46d2-88d9-1c07b6d45e04"
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/file/file/d6c9fe20-2ebf-41dd-b54e-749eba3df700/uid"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/file/file/d6c9fe20-2ebf-41dd-b54e-749eba3df700/relationships/uid"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "links": {
+    "self": {
+      "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/52f920f0-ebc4-4ddb-ade1-c5889ac0c0cc?include=field_accordions%2Cfield_cover_image.field_media_image%2Cfield_related.field_teaser_image.field_media_image%2Cfield_downloads.field_file.field_media_file"
+    }
+  }
+}

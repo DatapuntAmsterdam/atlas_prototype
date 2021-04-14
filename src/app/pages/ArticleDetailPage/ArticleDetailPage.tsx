@@ -20,7 +20,7 @@ import {
   Typography,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { Fragment, useEffect, useMemo } from 'react'
+import { Fragment, FunctionComponent, useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import environment from '../../../environment'
@@ -35,6 +35,8 @@ import { toArticleDetail } from '../../links'
 import getImageFromCms from '../../utils/getImageFromCms'
 import useDownload from '../../utils/useDownload'
 import useFromCMS from '../../utils/useFromCMS'
+import { DoubleNormalizedResults } from '../../../normalizations/cms/types'
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 
 const ListItemContent = styled.div`
   display: flex;
@@ -66,7 +68,7 @@ const DownloadLink = styled(Link).attrs({
   }
 `
 
-const StyledHeading = styled(Heading)`
+const StyledHeading = styled(Heading)<{ isContentType: boolean }>`
   ${({ isContentType }) =>
     isContentType &&
     css`
@@ -78,20 +80,20 @@ const StyledAccordionHeading = styled(Heading)`
   margin-top: ${themeSpacing(7)};
 `
 
-const StyledContentContainer = styled(ContentContainer)`
+const StyledContentContainer = styled(ContentContainer)<{ hasImage: boolean }>`
   ${({ hasImage }) =>
     hasImage &&
     css`
       @media screen and ${breakpoint('max-width', 'tabletM')} {
-        margin-top: 0px;
+        margin-top: 0;
       }
     `}
 `
 
 const StyledRow = styled(Row)`
   @media screen and ${breakpoint('max-width', 'tabletM')} {
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 0;
+    padding-right: 0;
   }
 `
 
@@ -118,14 +120,53 @@ const StyledLoadingSpinner = styled(LoadingSpinner)`
   margin-left: ${themeSpacing(2)};
 `
 
-const ArticleDetailPage = () => {
-  const { id } = useParams()
-  const { fetchData, results, loading, error } = useFromCMS(cmsConfig.ARTICLE, id)
+const ArticleDetailPage: FunctionComponent = () => {
+  const { id } = useParams<{ id: string }>()
+  const { fetchData, results, loading, error } = useFromCMS<DoubleNormalizedResults>(
+    cmsConfig.ARTICLE,
+    id,
+  )
   const [downloadLoading, downloadFile] = useDownload()
+
+  const result = results
 
   useEffect(() => {
     fetchData()
   }, [id])
+
+  const image = useMemo(
+    () => (result?.coverImage ? getImageFromCms(result?.coverImage, 1200, 600) : null),
+    [result],
+  )
+
+  const { trackEvent } = useMatomo()
+
+  const documentTitle = result?.title && `Artikel: ${result?.title}`
+  const link = useMemo(() => (result?.slug ? toArticleDetail(result?.id, result?.slug) : null), [
+    result,
+  ])
+
+  const normalizedDownloads = useMemo(
+    () => result?.field_downloads && normalizeDownloadsObject(result?.field_downloads),
+    [result],
+  )
+
+  const isContentType = result?.field_type === EDITORIAL_FIELD_TYPE_VALUES.CONTENT
+
+  if (loading) {
+    return <LoadingSpinner />
+  }
+
+  if (!result) {
+    return (
+      <ErrorMessage
+        absolute
+        message="Er is een fout opgetreden bij het laden van deze pagina."
+        buttonLabel="Probeer opnieuw"
+        buttonOnClick={fetchData}
+      />
+    )
+  }
 
   const {
     title,
@@ -133,28 +174,12 @@ const ArticleDetailPage = () => {
     localeDateFormatted,
     body,
     coverImage,
-    field_downloads: downloads,
     links,
     field_byline: byline,
     field_accordions: accordions,
-    slug,
     intro,
-    field_type: articleType,
     field_language: lang,
-  } = results || {}
-
-  const image = useMemo(() => (coverImage ? getImageFromCms(coverImage, 1200, 600) : null), [
-    coverImage,
-  ])
-
-  const { trackEvent } = useMatomo()
-
-  const documentTitle = title && `Artikel: ${title}`
-  const link = useMemo(() => (slug ? toArticleDetail(id, slug) : null), [slug, id])
-
-  const normalizedDownloads = useMemo(() => normalizeDownloadsObject(downloads), [downloads])
-
-  const isContentType = articleType === EDITORIAL_FIELD_TYPE_VALUES.CONTENT
+  } = result
 
   return (
     <EditorialPage
@@ -170,6 +195,8 @@ const ArticleDetailPage = () => {
       {!loading && (
         <StyledRow>
           <StyledContentContainer hasImage={!!image}>
+            {/*
+            // @ts-ignore */}
             <Article image={image}>
               <Row>
                 <EditorialContent>
@@ -185,12 +212,14 @@ const ArticleDetailPage = () => {
                         </StyledHeading>
                         {isContentType && (
                           <EditorialMetaList
+                            // @ts-ignore
                             dateTime={localeDate}
                             dateFormatted={localeDateFormatted}
+                            // @ts-ignore
                             fields={byline && [{ id: 1, label: byline }]}
                           />
                         )}
-                        <Paragraph strong dangerouslySetInnerHTML={{ __html: intro }} />
+                        {intro && <Paragraph strong dangerouslySetInnerHTML={{ __html: intro }} />}
                         {typeof body === 'string' && (
                           <CustomHTMLBlock body={body.replace('http://', 'https://')} />
                         )}
