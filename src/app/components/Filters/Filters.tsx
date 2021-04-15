@@ -1,7 +1,8 @@
 import formatDate from '../../utils/formatDate'
+import { ObjectDetail } from '../../../api/dataselectie/bag/types'
 
-export const aggregateFilter = (input) => {
-  const result = input.reduce((aggregation, value) => {
+export const aggregateFilter = (input: (string | undefined)[]) => {
+  const result = input.reduce<Array<{ name?: string; count: number }>>((aggregation, value) => {
     const counter = aggregation.find((item) => item.name === value)
 
     if (counter) {
@@ -25,17 +26,22 @@ export const aggregateFilter = (input) => {
   })
 }
 
-export const alignRightFilter = (input) => `<div class='u-align--right'>${input}</div>`
+export const alignRightFilter = (input: string) => `<div class='u-align--right'>${input}</div>`
 
-export const bagAddressFilter = (input) => {
-  const nummer = input.huisnummer + input.huisletter
+export const bagAddressFilter = (
+  input: Pick<
+    ObjectDetail,
+    'huisnummer' | 'huisletter' | 'huisnummer_toevoeging' | '_openbare_ruimte_naam'
+  >,
+) => {
+  const nummer = `${input.huisnummer}${input.huisletter}`
   const fullNummer = nummer + (input.huisnummer_toevoeging ? `-${input.huisnummer_toevoeging}` : '')
 
   // eslint-disable-next-line no-underscore-dangle
   return `${input._openbare_ruimte_naam} ${fullNummer}`
 }
 
-export const dateFilter = (input) => {
+export const dateFilter = (input?: string) => {
   if (!input) {
     return ''
   }
@@ -49,13 +55,15 @@ export const dateFilter = (input) => {
 
 // Only return the address to form the label. The `non_mailing`
 // indicatie will be used in the template as a condition however.
-export const hrBezoekAdresFilter = (input) => input.bezoekadres_volledig_adres
+export const hrBezoekAdresFilter = (input: { bezoekadres_volledig_adres: string }) =>
+  input.bezoekadres_volledig_adres
 
-export const modificationDateFilter = (input) => {
+export const modificationDateFilter = (input: Date | string) => {
   if (typeof input === 'string') {
     const last = new Date(input)
     const now = new Date(Date.now())
 
+    // @ts-ignore
     let ago = now - last
     const daysToMiliseconds = 1000 * 60 * 60 * 24
 
@@ -64,9 +72,11 @@ export const modificationDateFilter = (input) => {
     // eslint-disable-next-line no-restricted-globals
     if (ago >= 2 * length) {
       ago = Math.floor(ago / daysToMiliseconds)
+      // @ts-ignore
       // eslint-disable-next-line no-nested-ternary
       ago = ago === 0 ? 'vandaag' : ago === 1 ? 'gisteren' : `${ago} dagen geleden`
     } else {
+      // @ts-ignore
       ago = 'in de toekomst'
     }
 
@@ -75,13 +85,16 @@ export const modificationDateFilter = (input) => {
   return input
 }
 
-export const nevenadresFilter = (hoofdadres) => {
+export const nevenadresFilter = (hoofdadres: string | boolean) => {
   const isNevenadres = String(hoofdadres).toLowerCase() === 'false'
 
   return isNevenadres ? '(nevenadres)' : ''
 }
 
-export const nummerAanduidingTypeFilter = (input) => {
+export const nummerAanduidingTypeFilter = (input: {
+  ligplaats_id?: string
+  standplaats_id?: string
+}) => {
   let type
 
   if (input.ligplaats_id) {
@@ -93,7 +106,7 @@ export const nummerAanduidingTypeFilter = (input) => {
   return type ? `(${type})` : ''
 }
 
-export const truncateHtmlAsTextFilter = (input, maxLength = 250) => {
+export const truncateHtmlAsTextFilter = (input?: any, maxLength = 250) => {
   const ELLIPSES = '...'
   const TRAILING_WHITESPACE = /\s+$/
 
@@ -118,16 +131,16 @@ export const truncateHtmlAsTextFilter = (input, maxLength = 250) => {
   return input
 }
 
-export const verblijfsObjectGevormdFilter = (statusId) => {
+export const verblijfsObjectGevormdFilter = (statusId: string) => {
   const VERBLIJFSOBJECT_GEVORMD = 18
   const isVerblijfsobjectGevormd = Number(statusId) === VERBLIJFSOBJECT_GEVORMD
 
   return isVerblijfsobjectGevormd ? '(verblijfsobject gevormd)' : ''
 }
 
-export const zipCodeFilter = (input) => {
+export const zipCodeFilter = (input?: string | null) => {
   // Only touch valid Dutch zip codes, leave all other input unchanged
-  if (input && input.match(/^[1-9][0-9]{3}[a-zA-Z]{2}$/)) {
+  if (input && /^[1-9][0-9]{3}[a-zA-Z]{2}$/.exec(input)) {
     return `${input.substr(0, 4)} ${input.substr(4, 2).toUpperCase()}`
   }
   return input

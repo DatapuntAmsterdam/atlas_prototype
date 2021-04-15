@@ -17,7 +17,7 @@ import PageFilterBox from '../../components/PageFilterBox/PageFilterBox'
 import SearchFilter from '../../components/SearchFilter'
 import { Filter } from '../../models/filter'
 
-interface SearchPageFiltersProps {
+export interface SearchPageFiltersProps {
   filters: Filter[]
   totalCount: number
   hideCount: boolean
@@ -25,7 +25,7 @@ interface SearchPageFiltersProps {
   query: string
   currentPage: string
   showFilter: boolean
-  fetching?: boolean
+  fetching: boolean
 }
 
 const FilterColumn = styled(Column)`

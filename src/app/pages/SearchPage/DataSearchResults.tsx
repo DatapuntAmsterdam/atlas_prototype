@@ -9,27 +9,19 @@ import { ErrorExtensions } from '../../models/graphql'
 import getErrorsForPath from '../../utils/getErrorsForPath'
 import getLoadingErrors from '../../utils/getLoadingErrors'
 import getUnauthorizedLabels from '../../utils/getUnauthorizedLabels'
+import { DataIconType } from '../../components/DataCard/DataIcon'
+import { DataResult } from './types'
 
 const CardWrapper = styled.div<{ compact: boolean }>`
   width: 100%;
   margin-bottom: ${({ compact }) => (compact ? themeSpacing(2) : themeSpacing(8))};
 `
 
-// TODO: Generate these types from the GraphQL API.
-interface DataResult {
-  endpoint: string
-  id: string
-  label: string
-  subtype: string
-  type: string
-  __typename: 'DataResult'
-}
-
 interface CombinedDataResult {
   count: number
   label: string
   results: DataResult[]
-  type: string
+  type: DataIconType
   __typename: 'CombinedDataResult'
 }
 
@@ -70,7 +62,7 @@ const DataSearchResults: FunctionComponent<DataSearchResultsProps> = ({
 
         return (result.results && result.results.length > 0) || hasLoadingError ? (
           <CardWrapper key={result.type} compact={compact}>
-            <Card {...{ ...result, withPagination, hasLoadingError: !!hasLoadingError }} />
+            <Card {...{ ...result, withPagination, hasLoadingError }} />
           </CardWrapper>
         ) : null
       })}

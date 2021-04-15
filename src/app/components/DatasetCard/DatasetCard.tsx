@@ -10,6 +10,8 @@ import {
 } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
 import pickLinkComponent from '../../utils/pickLinkComponent'
+import { FunctionComponent } from 'react'
+import { To } from 'redux-first-router-link'
 
 const StyledHeading = styled(Heading)`
   border-bottom: 2px solid transparent;
@@ -66,7 +68,17 @@ const StyledTag = styled(Tag)`
   margin-right: ${themeSpacing(1)};
 `
 
-const DatasetCard = ({
+interface DatasetCardProps {
+  id: string
+  shortTitle: string
+  teaser: string
+  lastModified: string
+  modified: string
+  distributionTypes: string[]
+  to: To
+}
+
+const DatasetCard: FunctionComponent<DatasetCardProps & Partial<HTMLAnchorElement>> = ({
   id,
   shortTitle,
   teaser,
@@ -95,7 +107,7 @@ const DatasetCard = ({
         </div>
 
         <div>
-          <MetaText as="time" data-test="metaText" datetime={modified}>
+          <MetaText as="time" data-test="metaText" dateTime={modified}>
             {lastModified}
           </MetaText>
         </div>

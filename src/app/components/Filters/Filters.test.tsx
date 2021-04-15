@@ -89,12 +89,6 @@ describe('Filters', () => {
     })
   })
   describe('align-right filter', () => {
-    it('wraps a div with class u-align-right around the input (String)', () => {
-      const output = alignRightFilter('some text')
-
-      expect(output).toMatchSnapshot()
-    })
-
     it('uses single quotes around attribute values', () => {
       // Bugfix tg-2333; Firefox 38 (used on ADW) can't use ng-bind-html in combination with
       // double quotes
@@ -146,21 +140,25 @@ describe('Filters', () => {
   describe('date filter', () => {
     it('returns empty string when date is unknown', () => {
       const output = dateFilter()
+      // @ts-ignore
       const formatDateMock = formatDate.mockImplementationOnce(() => '01-02-2018')
 
       expect(formatDateMock).not.toHaveBeenCalled()
       expect(output).toBe('')
 
+      // @ts-ignore
       formatDate.mockClear()
     })
 
     it('returns the date in dutch format', () => {
       const output = dateFilter('2018-02-01')
+      // @ts-ignore
       const formatDateMock = formatDate.mockImplementationOnce(() => '01-02-2018')
 
       expect(formatDateMock).toHaveBeenCalled()
       expect(output).toBe('01-02-2018')
 
+      // @ts-ignore
       formatDate.mockClear()
     })
   })
@@ -184,7 +182,7 @@ describe('Filters', () => {
     })
   })
   describe('modification date filter', () => {
-    let dateNowSpy
+    let dateNowSpy: any
 
     beforeAll(() => {
       // Lock Time
@@ -194,10 +192,6 @@ describe('Filters', () => {
     afterAll(() => {
       // Unlock Time
       dateNowSpy.mockRestore()
-    })
-
-    it('expects an object with two dates as input', () => {
-      expect(modificationDateFilter()).toBeUndefined()
     })
 
     it('shows the time as since created: today / 0 days', () => {
@@ -262,7 +256,7 @@ describe('Filters', () => {
 
     it('caps the resulting text to a maximum of 250 characters', () => {
       for (let i = MAX_LENGTH - 25; i < MAX_LENGTH + 25; i += 1) {
-        expect(truncateHtmlAsTextFilter('a'.repeat(i)).length).toBe(
+        expect(truncateHtmlAsTextFilter('a'.repeat(i))?.length).toBe(
           i <= MAX_LENGTH ? i : MAX_LENGTH,
         )
       }
@@ -283,12 +277,12 @@ describe('Filters', () => {
     })
 
     it('caps the text on the last space, if a space is available', () => {
-      expect(truncateHtmlAsTextFilter('a'.repeat(MAX_LENGTH - 50) + ' '.repeat(75)).length).toEqual(
-        MAX_LENGTH - 50,
-      )
+      expect(
+        truncateHtmlAsTextFilter('a'.repeat(MAX_LENGTH - 50) + ' '.repeat(75))?.length,
+      ).toEqual(MAX_LENGTH - 50)
       expect(
         truncateHtmlAsTextFilter('a'.repeat(MAX_LENGTH - 50) + ' '.repeat(25) + 'a'.repeat(50))
-          .length,
+          ?.length,
       ).toEqual(MAX_LENGTH - 50 + ELLIPSES.length)
     })
 

@@ -12,18 +12,22 @@ jest.mock('../../utils/useDocumentTitle')
 jest.mock('@datapunt/matomo-tracker-react')
 
 describe('EditorialPage', () => {
-  let component
+  let component: any
   const mockSetDocumentTitle = jest.fn()
   const mockTrackPageView = jest.fn()
 
   beforeEach(() => {
+    // @ts-ignore
     useDocumentTitle.mockImplementation(() => ({
       setDocumentTitle: mockSetDocumentTitle,
     }))
 
+    // @ts-ignore
     useMatomo.mockImplementation(() => ({ trackPageView: mockTrackPageView }))
 
-    component = shallow(<EditorialPage link={{ pathname: '/this.is.alink' }} />).dive()
+    component = shallow(
+      <EditorialPage loading={false} error={false} link={{ pathname: '/this.is.alink' }} />,
+    ).dive()
   })
 
   afterEach(() => {
@@ -43,7 +47,7 @@ describe('EditorialPage', () => {
   })
 
   it('should set the document title and send to analytics', () => {
-    component = mount(<EditorialPage documentTitle="" />)
+    component = mount(<EditorialPage loading={false} error={false} documentTitle="" />)
 
     expect(mockSetDocumentTitle).not.toHaveBeenCalled()
     expect(mockTrackPageView).not.toHaveBeenCalled()

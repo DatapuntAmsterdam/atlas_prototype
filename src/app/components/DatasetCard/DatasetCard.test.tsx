@@ -3,6 +3,8 @@ import DatasetCard from './DatasetCard'
 
 describe('DatasetCard', () => {
   const mockDatasetItem = {
+    id: '1',
+    to: {},
     shortTitle: 'title',
     teaser: 'the teaser text',
     modified: 'modified',
@@ -29,7 +31,7 @@ describe('DatasetCard', () => {
     const metaText = component.find("[data-test='metaText']").at(0)
 
     expect(metaText.exists()).toBeTruthy()
-    expect(metaText.props().datetime).toBe(mockDatasetItem.modified)
+    expect(metaText.props().dateTime).toBe(mockDatasetItem.modified)
     expect(metaText.props().children).toBe(mockDatasetItem.lastModified)
   })
 

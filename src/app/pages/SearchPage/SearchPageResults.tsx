@@ -10,16 +10,18 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import { memo } from 'react'
+import { FunctionComponent, memo } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import PARAMETERS from '../../../store/parameters'
 import PAGES from '../../pages'
 import formatCount from '../../utils/formatCount'
-import SEARCH_PAGE_CONFIG, { EDITORIAL_SEARCH_PAGES } from './config'
+import SEARCH_PAGE_CONFIG, { EDITORIAL_SEARCH_PAGES, SearchConfig } from './config'
 import SearchResultsOverview from './SearchResultsOverview'
 import { SearchResultsOverviewSkeleton, SearchResultsSkeleton } from './SearchResultsSkeleton'
 import SearchSort from './SearchSort'
+import { EditorialResultsProps } from '../../components/EditorialResults/EditorialResults'
+import { SearchPageFiltersProps } from './SearchPageFilters'
 
 const StyledHeading = styled(Heading)`
   margin-bottom: ${themeSpacing(4)};
@@ -88,7 +90,18 @@ const StyledCompactPager = styled(CompactPager)`
   width: 100%;
 `
 
-const SearchPageResults = ({
+interface SearchPageResultsProps extends EditorialResultsProps, SearchPageFiltersProps {
+  sort: string
+  page: number
+  pageInfo: {
+    hasLimitedResults: string
+    hasNextPage: string
+    totalPages: number
+  }
+  hasQuery: string
+}
+
+const SearchPageResults: FunctionComponent<SearchPageResultsProps> = ({
   query,
   errors,
   fetching,
@@ -104,13 +117,13 @@ const SearchPageResults = ({
 }) => {
   const dispatch = useDispatch()
   const allResultsPageActive = currentPage === PAGES.SEARCH
-  const pageConfig = SEARCH_PAGE_CONFIG[currentPage]
+  const pageConfig = SEARCH_PAGE_CONFIG[currentPage] as SearchConfig
 
   if (!pageConfig) {
     return null
   }
 
-  const formatTitle = (label, count = null) => {
+  const formatTitle = (label: string, count: number | null = null) => {
     // Handle an empty result.
     if (count === 0) {
       return hasQuery ? `Geen resultaten met '${query}'` : 'Geen resultaten'

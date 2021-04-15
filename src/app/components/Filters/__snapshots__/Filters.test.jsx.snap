@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Filters align-right filter wraps a div with class u-align-right around the input (String) 1`] = `"<div class='u-align--right'>some text</div>"`;

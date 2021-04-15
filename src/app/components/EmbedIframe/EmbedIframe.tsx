@@ -1,6 +1,7 @@
+import { FunctionComponent } from 'react'
 import { getIframeUrl } from '../../../shared/services/embed-url/embed-url'
 
-const EmbedIframeComponent = () => (
+const EmbedIframeComponent: FunctionComponent = () => (
   <iframe
     title="Grote kaart - Data en informatie - Amsterdam"
     id="atlas-iframe-map"

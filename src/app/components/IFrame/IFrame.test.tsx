@@ -8,11 +8,12 @@ describe('IFrame', () => {
   const contentLink = { uri: 'https://this.is/a-link/this-is-a-slug' }
   const title = 'title'
 
-  let component
+  let component: any
 
   beforeEach(() => {
     component = shallow(<IFrame contentLink={contentLink} title={title} />)
 
+    // @ts-ignore
     setIframeSize.mockImplementation(() => {})
   })
 

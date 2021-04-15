@@ -30,7 +30,7 @@ const StyledIcon = styled(Icon)`
 
 interface SearchHeadingProps {
   label: string
-  icon: JSX.Element
+  icon?: JSX.Element
 }
 
 const SearchHeading: FunctionComponent<SearchHeadingProps> = ({ label, icon }) => (

@@ -9,13 +9,14 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import { Fragment } from 'react'
+import { Fragment, FunctionComponent } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import { ViewMode } from '../../../shared/ducks/ui/ui'
 import { toDataSearchType, toDetailFromEndpoint } from '../../../store/redux-first-router/actions'
 import formatCount from '../../utils/formatCount'
-import DataIcon from './DataIcon'
+import DataIcon, { DataIconType } from './DataIcon'
+import { DataResult } from '../../pages/SearchPage/types'
 
 const StyledLink = styled(Link)`
   cursor: pointer;
@@ -68,7 +69,20 @@ const ParagraphWrapper = styled.div`
   max-width: 800px;
 `
 
-const DataCard = ({ type, label, count, results, ...otherProps }) => (
+interface DataCardProps {
+  type: DataIconType
+  label: string
+  count: number
+  results: DataResult[]
+}
+
+const DataCard: FunctionComponent<DataCardProps> = ({
+  type,
+  label,
+  count,
+  results,
+  ...otherProps
+}) => (
   <StyledCard key={type} horizontal {...otherProps}>
     <StyledCardMedia>
       <StyledIcon>

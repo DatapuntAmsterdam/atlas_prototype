@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react'
 import { CmsType } from '../../../shared/config/cms.config'
 import {
   toArticleSearch,
@@ -22,14 +23,25 @@ import {
   publicationSearchQuery,
   searchQuery,
   specialSearchQuery,
+  // @ts-ignore
 } from './documents.graphql'
 import MapSearchResults from './MapSearchResults'
 import { SearchType } from './constants'
 
 export const DEFAULT_LIMIT = 10
 
+export interface SearchConfig {
+  resolver: any
+  query: string
+  to: any
+  path: string
+  label: string
+  type: CmsType | SearchType
+  component?: any
+  hideOverviewHeading: boolean
+}
 // This object is used to define the sort order of the search page
-const SEARCH_TYPES_CONFIG = {
+const SEARCH_TYPES_CONFIG: { [key: string]: SearchConfig } = {
   [routing.collectionSearch.page]: {
     resolver: 'collectionSearch',
     query: collectionSearchQuery,

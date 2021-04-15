@@ -2,7 +2,7 @@ import setIframeSize from './setIframeSize'
 
 describe('setIframeSize', () => {
   const mockHandleResize = jest.fn()
-  const map = {}
+  const map: any = {}
 
   beforeEach(() => {
     window.addEventListener = jest.fn((event, cb) => {

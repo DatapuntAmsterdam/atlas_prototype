@@ -142,4 +142,4 @@ const EditorialResults: FunctionComponent<EditorialResultsProps> = ({
   )
 }
 
-export default memo(EditorialResults, () => false)
+export default EditorialResults

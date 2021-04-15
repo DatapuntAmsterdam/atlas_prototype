@@ -1,9 +1,10 @@
 import { FilterOption } from '@amsterdam/asc-ui'
-import { memo } from 'react'
+import { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import { useQuery } from 'urql'
 import PARAMETERS from '../../../store/parameters'
 import SEARCH_PAGE_CONFIG from '../../pages/SearchPage/config'
+// @ts-ignore
 import { totalCountSearch } from '../../pages/SearchPage/documents.graphql'
 import { routing } from '../../routes'
 import formatCount from '../../utils/formatCount'
@@ -11,7 +12,12 @@ import FilterBox from '../FilterBox'
 
 const ACTIVE_LINK_PROPS = { active: true, as: 'div' }
 
-export default memo(({ currentPage, query }) => {
+interface PageFilterBoxProps {
+  currentPage: string
+  query: string
+}
+
+const PageFilterBox: FunctionComponent<PageFilterBoxProps> = ({ currentPage, query }) => {
   const [{ data }] = useQuery({
     query: totalCountSearch,
     variables: {
@@ -26,17 +32,18 @@ export default memo(({ currentPage, query }) => {
 
   const AVAILABLE_FILTERS = Object.keys(SEARCH_PAGE_CONFIG)
 
-  let totalCount
+  let totalCount: number
 
   const FILTERS = AVAILABLE_FILTERS.map((filterPage) => {
     let count
 
     if (data) {
+      // @ts-ignore
       const filterPageData = data[SEARCH_PAGE_CONFIG[filterPage].resolver]
 
       if (filterPageData) {
         try {
-          count = filterPageData.totalCount
+          count = filterPageData.totalCount as number
           totalCount = (totalCount || 0) + count
         } catch (e) {
           // Todo: error handling
@@ -79,4 +86,6 @@ export default memo(({ currentPage, query }) => {
       </ul>
     </FilterBox>
   )
-})
+}
+
+export default PageFilterBox

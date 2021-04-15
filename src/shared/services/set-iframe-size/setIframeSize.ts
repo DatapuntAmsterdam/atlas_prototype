@@ -1,4 +1,6 @@
-function setIframeSize(handleResize) {
+import { Dispatch, SetStateAction } from 'react'
+
+function setIframeSize(handleResize: Dispatch<SetStateAction<string>>) {
   window.addEventListener(
     'message',
     (e) => {
