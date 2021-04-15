@@ -232,7 +232,7 @@ const EditorialCard: FunctionComponent<EditorialCardProps> = ({
   highlighted = false,
   ...otherProps
 }) => {
-  if (!type || !(type in CmsType)) {
+  if (!type) {
     return null
   }
   const contentTypeLabel = getContentTypeLabel(type as CmsType, specialType)

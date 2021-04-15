@@ -36,7 +36,7 @@ const CollectionDetailPage: FunctionComponent = () => {
 
   useEffect(() => {
     if (isFulfilled(result)) {
-      setDocumentTitle(`Dossier: ${result.value.title}`)
+      setDocumentTitle(`Dossier: ${result.value.title ?? ''}`)
     }
   }, [result])
 
@@ -67,7 +67,8 @@ const CollectionDetailPage: FunctionComponent = () => {
           }}
         />
         <StyledCardListBlock
-          {...{ results: isFulfilled(result) ? listResults : undefined, loading }}
+          results={isFulfilled(result) ? listResults : undefined}
+          loading={loading}
         />
         {isFulfilled(result) && result.value.field_link?.uri && (
           <Link inList href={result.value.field_link?.uri} title={result.value.field_link?.title}>

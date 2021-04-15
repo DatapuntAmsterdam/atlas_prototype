@@ -6,16 +6,19 @@ import { DoubleNormalizedResults, NormalizedFieldItems } from '../../normalizati
 
 const fetchSingleFromCms = (endpoint: string, fields: string[]) =>
   fetchWithToken<Single>(endpoint).then((data) => {
-    const tempResult = cmsJsonApiNormalizer(data, fields)
+    const normalizedResults = normalizeCMSResults(
+      cmsJsonApiNormalizer(data, fields),
+    ) as NormalizedFieldItems
     return {
-      ...tempResult,
+      ...normalizedResults,
       // @ts-ignore
-      field_blocks: tempResult.field_blocks?.map(({ field_content, ...otherFields }) => ({
+      field_blocks: normalizedResults.field_blocks?.map(({ field_content, ...otherFields }) => ({
         ...otherFields,
         field_content: normalizeCMSResults(field_content),
       })),
       // @ts-ignore
-      field_items: tempResult.field_items && normalizeCMSResults(tempResult.field_items),
+      field_items:
+        normalizedResults.field_items && normalizeCMSResults(normalizedResults.field_items),
     } as DoubleNormalizedResults
   })
 
