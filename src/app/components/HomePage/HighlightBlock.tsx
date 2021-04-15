@@ -1,16 +1,17 @@
 import { breakpoint, styles, themeSpacing } from '@amsterdam/asc-ui'
-import { useEffect } from 'react'
+import { useState } from 'react'
 import RouterLink from 'redux-first-router-link'
+import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
 import styled from 'styled-components'
 import cmsConfig from '../../../shared/config/cms.config'
 import { toArticleSearch } from '../../../store/redux-first-router/actions'
 import getImageFromCms from '../../utils/getImageFromCms'
-import useFromCMS from '../../utils/useFromCMS'
 import ErrorMessage, { ErrorBackgroundCSS } from '../ErrorMessage/ErrorMessage'
 import HighlightCard from './HighlightCard'
 import OverviewLink from './OverviewLink'
+import { fetchListFromCms } from '../../utils/fetchFromCms'
 
-const HighlightBlockStyle = styled.div`
+const HighlightBlockStyle = styled.div<{ showError: boolean }>`
   position: relative;
   width: 100%;
 
@@ -72,61 +73,65 @@ const ImageCardWrapperSmall = styled.div`
 `
 
 const HighlightBlock = () => {
-  const { results, fetchData, loading, error } = useFromCMS(cmsConfig.HOME_HIGHLIGHT)
+  const [retryCount, setRetryCount] = useState(0)
 
-  useEffect(() => {
-    fetchData()
-  }, [])
+  const result = usePromise(
+    () => fetchListFromCms(cmsConfig.HOME_HIGHLIGHT.endpoint(), cmsConfig.HOME_HIGHLIGHT.fields),
+    [retryCount],
+  )
+
+  const loading = isPending(result)
+  const error = isRejected(result)
 
   return (
     <>
-      <HighlightBlockStyle showError={error} data-test="highlight-block">
-        {error && (
+      <HighlightBlockStyle showError={isRejected(result)} data-test="highlight-block">
+        {isRejected(result) && (
           <ErrorMessage
             absolute
             message="Er is een fout opgetreden bij het laden van dit blok."
             buttonLabel="Probeer opnieuw"
-            buttonOnClick={fetchData}
+            buttonOnClick={() => setRetryCount(retryCount + 1)}
           />
         )}
         <HighlightBlockInnerStyle>
           <ImageCardWrapperLarge>
+            {/*
+            // @ts-ignore */}
             <HighlightCard
               loading={loading}
               showError={error}
-              {...(results && results[0])}
+              {...(isFulfilled(result) && result.value[0])}
               teaserImage={
-                (results &&
-                  results[0] &&
-                  results[0].teaserImage &&
-                  getImageFromCms(results[0].teaserImage, 900, 900)) ||
-                null
+                isFulfilled(result) && result.value[0]?.teaserImage
+                  ? getImageFromCms(result.value[0].teaserImage, 900, 900)
+                  : null
               }
               styleAs="h2"
             />
           </ImageCardWrapperLarge>
           <ImageCardWrapperSmall>
-            {results?.length
-              ? results
+            {isFulfilled(result) && result.value.length
+              ? result.value
                   .slice(1)
-                  .map((result) => (
+                  .map(({ id, teaserImage, title, linkProps }) => (
                     <HighlightCard
-                      key={result.id}
-                      loading={loading}
-                      showError={error}
-                      {...result}
-                      teaserImage={
-                        result.teaserImage ? getImageFromCms(result.teaserImage, 500, 500) : null
-                      }
+                      key={id}
+                      linkProps={linkProps}
+                      loading={false}
+                      showError={false}
+                      title={title}
+                      teaserImage={teaserImage ? getImageFromCms(teaserImage, 500, 500) : null}
                     />
                   ))
               : null}
-            {(error || loading) && (
-              <>
-                <HighlightCard key={0} loading={loading} showError={error} />
-                <HighlightCard key={1} loading={loading} showError={error} />
-              </>
-            )}
+            {error ||
+              (loading && (
+                <>
+                  <HighlightCard title="" key={0} loading={loading} showError={error} />
+                  <HighlightCard title="" key={1} loading={loading} showError={error} />
+                </>
+              ))}
           </ImageCardWrapperSmall>
         </HighlightBlockInnerStyle>
       </HighlightBlockStyle>

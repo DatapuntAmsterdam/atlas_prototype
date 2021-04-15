@@ -1,36 +1,28 @@
-import { ThemeProvider } from '@amsterdam/asc-ui'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { mount, shallow } from 'enzyme'
 import { mocked } from 'ts-jest/utils'
-import cmsConfig from '../../../shared/config/cms.config'
-import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'
-import DocumentCover from '../../components/DocumentCover/DocumentCover'
-import EditorialPage from '../../components/EditorialPage/EditorialPage'
-import useDocumentTitle from '../../utils/useDocumentTitle'
+import usePromise from '@amsterdam/use-promise'
+import { fireEvent, render } from '@testing-library/react'
 import useDownload from '../../utils/useDownload'
-import useFromCMS, { CMSConfig } from '../../utils/useFromCMS'
 import PublicationDetailPage from './PublicationDetailPage'
+import withAppContext from '../../utils/withAppContext'
+import { LOADING_SPINNER_TEST_ID } from '../../components/LoadingSpinner/LoadingSpinner'
 
-jest.mock('../../../shared/services/link-attributes-from-action/linkAttributesFromAction')
-jest.mock('../../utils/useDocumentTitle')
 jest.mock('../../utils/useDownload')
-jest.mock('../../utils/useFromCMS')
-jest.mock('@datapunt/matomo-tracker-react')
 
-jest.mock('react-router-dom', () => ({
-  useParams: () => ({ id: 'foo' }),
-  useHistory: () => ({ createHref: () => '' }),
-}))
-
-const mockedLinkAttributesFromAction = mocked(linkAttributesFromAction, true)
-const mockedUseDocumentTitle = mocked(useDocumentTitle, true)
 const mockedUseDownload = mocked(useDownload, true)
-const mockedUseFromCMS = mocked(useFromCMS, true)
-const mockedUseMatomo = mocked(useMatomo, true)
+
+jest.mock('@amsterdam/use-promise', () => {
+  const originalModule = jest.requireActual('@amsterdam/use-promise')
+
+  return {
+    __esModule: true,
+    ...originalModule,
+    default: jest.fn(),
+  }
+})
+
+const mockedUsePromise = mocked(usePromise)
 
 describe('PublicationDetailPage', () => {
-  const href = 'https://this.is/a-link/this-is-a-slug'
-  const fetchDataMock = jest.fn()
   const mockDownloadFile = jest.fn()
   const mockData = {
     fetchData: jest.fn(),
@@ -53,66 +45,24 @@ describe('PublicationDetailPage', () => {
   }
 
   beforeEach(() => {
-    mockedLinkAttributesFromAction.mockImplementation(() => ({ href } as any))
-    mockedUseMatomo.mockImplementation(
-      () =>
-        ({
-          trackPageView: jest.fn(),
-          trackEvent: jest.fn(),
-          href,
-        } as any),
-    )
-    mockedUseDocumentTitle.mockImplementation(
-      () =>
-        ({
-          setDocumentTitle: jest.fn(),
-          href,
-        } as any),
-    )
     mockedUseDownload.mockImplementation(() => [false, mockDownloadFile])
   })
 
   it('should render the spinner when the request is loading', () => {
-    mockedUseFromCMS.mockImplementation(
-      () =>
-        ({
-          loading: true,
-        } as any),
-    )
+    mockedUsePromise.mockReturnValue({ status: 'pending' })
 
-    const component = shallow(<PublicationDetailPage />)
+    const { getByTestId } = render(withAppContext(<PublicationDetailPage />))
 
-    const editorialPage = component.find(EditorialPage).at(0)
-    expect(editorialPage.props().loading).toBeTruthy()
-  })
-
-  it('should call the fetchData function when the component mounts', () => {
-    mockedUseFromCMS.mockImplementation(
-      () =>
-        ({
-          loading: true,
-          fetchData: fetchDataMock,
-        } as any),
-    )
-
-    mount(
-      <ThemeProvider>
-        <PublicationDetailPage />
-      </ThemeProvider>,
-    )
-
-    expect(mockedUseFromCMS).toHaveBeenCalledWith(cmsConfig.PUBLICATION as CMSConfig, 'foo')
-    expect(fetchDataMock).toHaveBeenCalled()
+    expect(getByTestId(LOADING_SPINNER_TEST_ID)).toBeDefined()
   })
 
   it('should call the useDownload hook when user tries to download publication', () => {
-    mockedUseFromCMS.mockImplementation(() => mockData as any)
-    const component = shallow(<PublicationDetailPage />)
-    const documentCover = component.find(DocumentCover)
+    mockedUsePromise.mockReturnValue({ status: 'fulfilled', value: mockData })
+    const { getByTestId } = render(withAppContext(<PublicationDetailPage />))
 
-    expect(documentCover.exists()).toBeTruthy()
+    expect(getByTestId('documentCover')).toBeDefined()
 
-    documentCover.simulate('click')
+    fireEvent.click(getByTestId('documentCover').querySelector('button') as Element)
 
     expect(mockDownloadFile).toHaveBeenCalled()
   })

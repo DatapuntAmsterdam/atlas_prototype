@@ -2,12 +2,12 @@
 import { breakpoint, Column, Row, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import { CMSResultItem } from '../../../../utils/useFromCMS'
 import CardList from '../CardList'
+import { NormalizedFieldItems } from '../../../../../normalizations/cms/types'
 
 export interface CMSCollectionList {
   field_title: string
-  field_content: CMSResultItem[]
+  field_content: NormalizedFieldItems[]
 }
 
 const StyledRow = styled(Row)`
@@ -33,17 +33,17 @@ const StyledColumn = styled(Column)`
 
   @media screen and ${breakpoint('max-width', 'laptop')} {
     :nth-child(even) {
-      margin-right: 0px;
+      margin-right: 0;
     } // There are only two CardList components on this breakpoint
   }
 
   @media screen and ${breakpoint('max-width', 'tabletM')} {
-    margin-right: 0px;
+    margin-right: 0;
   }
 `
 
 export interface CardListBlockProps {
-  results: CMSCollectionList[]
+  results?: CMSCollectionList[]
   loading: boolean
 }
 
@@ -63,15 +63,16 @@ const CardListBlock: FunctionComponent<CardListBlockProps> = ({
       }}
     >
       <StyledInnerRow halign="flex-start" hasMargin={false}>
-        {results.map(({ field_title: title, field_content }) => (
-          <StyledColumn
-            key={title}
-            wrap
-            span={{ small: 1, medium: 2, big: 3, large: 3, xLarge: 3 }}
-          >
-            <CardList title={title} loading={loading} results={field_content} />
-          </StyledColumn>
-        ))}
+        {results &&
+          results.map(({ field_title: title, field_content }) => (
+            <StyledColumn
+              key={title}
+              wrap
+              span={{ small: 1, medium: 2, big: 3, large: 3, xLarge: 3 }}
+            >
+              <CardList title={title} loading={loading} results={field_content} />
+            </StyledColumn>
+          ))}
       </StyledInnerRow>
     </StyledOuterColumn>
   </StyledRow>

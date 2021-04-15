@@ -36,7 +36,7 @@ const Animation: FunctionComponent<{
   contentLink?: {
     uri: string
   }
-  title: string
+  title?: string
 }> = ({ contentLink, title, results }) => {
   const {
     body,

@@ -1,89 +1,81 @@
 /* eslint-disable camelcase */
 import { Link, Row, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent, useEffect } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
 import styled from 'styled-components'
 import cmsConfig from '../../../shared/config/cms.config'
-import CardListBlock, { CMSCollectionList } from './components/CardListBlock'
+import CardListBlock from './components/CardListBlock'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import useDocumentTitle from '../../utils/useDocumentTitle'
-import useFromCMS, { CMSConfig, CMSResultItem } from '../../utils/useFromCMS'
 import CollectionTileGrid from './CollectionTileGrid'
+import { fetchSingleFromCms } from '../../utils/fetchFromCms'
 
-const StyledRow = styled(Row)`
-  // To center the ErrorMessage
-  justify-content: center;
-`
 const StyledCardListBlock = styled(CardListBlock)`
   margin-top: ${themeSpacing(12)};
   margin-bottom: ${themeSpacing(12)};
 `
 
-interface CollectionResult {
-  title?: string
-  field_intro?: string
-  field_link?: {
-    uri?: string
-    title?: string
-  }
-  field_blocks: CMSCollectionList[]
-  field_items: CMSResultItem[]
-}
-
-interface CollectionDetailPageParams {
-  id: string
-}
-
 const CollectionDetailPage: FunctionComponent = () => {
-  const { id } = useParams<CollectionDetailPageParams>()
+  const { id } = useParams<{
+    id: string
+  }>()
+  const [retryCount, setRetryCount] = useState(0)
+
   const { setDocumentTitle } = useDocumentTitle()
-  const { results, fetchData, loading, error } = useFromCMS<CollectionResult>(
-    cmsConfig.CMS_COLLECTION_DETAIL as CMSConfig,
-    id,
+
+  const result = usePromise(
+    () =>
+      fetchSingleFromCms(
+        cmsConfig.CMS_COLLECTION_DETAIL.endpoint(id),
+        cmsConfig.CMS_COLLECTION_DETAIL.fields,
+      ),
+    [id, retryCount],
   )
 
   useEffect(() => {
-    fetchData()
-  }, [id])
-
-  useEffect(() => {
-    if (results?.title) {
-      setDocumentTitle(`Dossier: ${results.title}`)
+    if (isFulfilled(result)) {
+      setDocumentTitle(`Dossier: ${result.value.title}`)
     }
-  }, [results])
+  }, [result])
 
-  const listResults = results?.field_blocks ?? []
-  const tileResults = results?.field_items ?? []
+  if (isRejected(result)) {
+    return (
+      <ErrorMessage
+        absolute
+        message="Er is een fout opgetreden bij het laden van deze pagina."
+        buttonLabel="Probeer opnieuw"
+        buttonOnClick={() => setRetryCount(retryCount + 1)}
+      />
+    )
+  }
+
+  const listResults = isFulfilled(result) ? result.value.field_blocks : []
+  const tileResults = isFulfilled(result) ? result.value.field_items : []
+  const loading = isPending(result)
+
   return (
     <ContentContainer>
-      {error ? (
-        <StyledRow>
-          <ErrorMessage
-            message="Er is een fout opgetreden bij het laden van dit blok."
-            buttonLabel="Probeer opnieuw"
-            buttonOnClick={fetchData}
-          />
-        </StyledRow>
-      ) : (
-        <Row>
-          <CollectionTileGrid
-            {...{
-              results: tileResults,
-              loading,
-              title: results?.title,
-              description: results?.field_intro,
-            }}
-          />
-          <StyledCardListBlock {...{ results: listResults, loading }} />
-          {results?.field_link?.uri && (
-            <Link inList href={results?.field_link?.uri} title={results?.field_link?.title}>
-              {results?.field_link?.title ??
-                (results?.title ? `Meer over ${results?.title}` : 'Lees meer')}
-            </Link>
-          )}
-        </Row>
-      )}
+      <Row>
+        <CollectionTileGrid
+          {...{
+            results: tileResults,
+            loading,
+            title: isFulfilled(result) ? result.value.title : '',
+            description: isFulfilled(result) ? result.value.field_intro : '',
+          }}
+        />
+        <StyledCardListBlock
+          {...{ results: isFulfilled(result) ? listResults : undefined, loading }}
+        />
+        {isFulfilled(result) && result.value.field_link?.uri && (
+          <Link inList href={result.value.field_link?.uri} title={result.value.field_link?.title}>
+            {result.value.field_link?.title ??
+              (result.value.title ? `Meer over ${result.value.title}` : 'Lees meer')}
+          </Link>
+        )}
+      </Row>
     </ContentContainer>
   )
 }

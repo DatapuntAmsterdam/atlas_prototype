@@ -8,7 +8,7 @@ import {
 } from '../../app/links'
 import formatDate from '../../app/utils/formatDate'
 import toSlug from '../../app/utils/toSlug'
-import { CmsType } from '../../shared/config/cms.config'
+import { CmsType, SpecialType } from '../../shared/config/cms.config'
 import { FieldLink, NormalizedFieldItems, NormalizedResult } from './types'
 
 export const EDITORIAL_DETAIL_ACTIONS = {
@@ -151,7 +151,7 @@ export const normalizeObject = (data: NormalizedResult): NormalizedFieldItems =>
     shortTitle: short_title,
     teaser: field_teaser,
     intro,
-    specialType: field_special_type,
+    specialType: field_special_type as SpecialType,
     fileUrl,
     localeDate,
     localeDateFormatted,
@@ -164,13 +164,11 @@ export const normalizeObject = (data: NormalizedResult): NormalizedFieldItems =>
 }
 
 const normalizeCMSResults = (data: NormalizedResult | NormalizedResult[]) => {
-  // The data can be in the form of an array when used on the homepage or an overview page
-  if (data instanceof Array) {
-    return data.map((dataItem) => normalizeObject(dataItem))
-  }
-
-  // Format just a single data object
-  return normalizeObject(data)
+  return data instanceof Array
+    ? // The data can be in the form of an array when used on the homepage or an overview page
+      data.map((dataItem) => normalizeObject(dataItem))
+    : // Format just a single data object
+      normalizeObject(data)
 }
 
 export default normalizeCMSResults

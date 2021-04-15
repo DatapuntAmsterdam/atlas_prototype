@@ -73,7 +73,7 @@ const Footer: FunctionComponent = () => (
               <FooterLinks links={FOOTER_LINKS_HELP}>
                 <ListItem>
                   {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                  <Link darkBackground type="button" as={Button} inList onClick={openFeedbackForm}>
+                  <Link $darkBackground type="button" as={Button} inList onClick={openFeedbackForm}>
                     Feedback geven
                   </Link>
                 </ListItem>

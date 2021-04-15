@@ -1,5 +1,7 @@
 import { breakpoint, Link, themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
+import { FunctionComponent } from 'react'
+import { NormalizedFieldItems } from '../../../normalizations/cms/types'
 
 const StyledLink = styled(Link)`
   margin-top: ${themeSpacing(4)};
@@ -10,7 +12,14 @@ const StyledLink = styled(Link)`
   }
 `
 
-const OverviewLink = ({ label, linkProps }) => (
+interface OverviewLinkProps extends Pick<NormalizedFieldItems, 'linkProps'> {
+  label: string
+}
+
+const OverviewLink: FunctionComponent<OverviewLinkProps & Partial<HTMLAnchorElement>> = ({
+  label,
+  linkProps,
+}) => (
   <StyledLink tabIndex={0} inList {...linkProps}>
     {label}
   </StyledLink>

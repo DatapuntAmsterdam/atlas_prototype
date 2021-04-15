@@ -1,9 +1,10 @@
+import { FunctionComponent } from 'react'
 import { Card, CardContent, Heading, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
-import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import OverviewLink from './OverviewLink'
+import { NormalizedFieldItems } from '../../../normalizations/cms/types'
 
-const StyledCard = styled(Card)`
+const StyledCard = styled(Card)<{ isLoading: boolean }>`
   border-top: 2px solid;
   align-items: flex-start;
   height: 100%;
@@ -11,11 +12,11 @@ const StyledCard = styled(Card)`
 
   // Override the margin-bottom of the Card component when used in a CardContainer
   && {
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 
-  ${({ loading }) =>
-    !loading &&
+  ${({ isLoading }) =>
+    !isLoading &&
     css`
       background-color: inherit;
     `}
@@ -42,11 +43,24 @@ const StyledParagraph = styled(Paragraph)`
   }
 `
 
-const OrganizationCard = ({ loading, title, shortTitle, teaser, intro, linkProps }) => (
+interface OrganizationCardProps
+  extends Pick<NormalizedFieldItems, 'shortTitle' | 'title' | 'teaser' | 'intro' | 'linkProps'> {
+  loading: boolean
+}
+
+const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
+  loading,
+  title,
+  shortTitle,
+  teaser,
+  intro,
+  linkProps,
+}) => (
   <StyledCard isLoading={loading}>
     <StyledCardContent>
       <StyledHeading forwardedAs="h3">{shortTitle || title}</StyledHeading>
-      <StyledParagraph dangerouslySetInnerHTML={{ __html: teaser || intro }} />
+      {teaser ||
+        (intro && <StyledParagraph dangerouslySetInnerHTML={{ __html: teaser || intro }} />)}
 
       <div>
         <OverviewLink
@@ -60,25 +74,5 @@ const OrganizationCard = ({ loading, title, shortTitle, teaser, intro, linkProps
     </StyledCardContent>
   </StyledCard>
 )
-
-OrganizationCard.defaultProps = {
-  loading: false,
-  shortTitle: '',
-  title: '',
-  field_link: {},
-  teaser: '',
-  intro: '',
-  to: {},
-}
-
-OrganizationCard.propTypes = {
-  loading: PropTypes.bool,
-  field_link: PropTypes.shape({}),
-  title: PropTypes.string,
-  shortTitle: PropTypes.string,
-  teaser: PropTypes.string,
-  intro: PropTypes.string,
-  to: PropTypes.shape({}),
-}
 
 export default OrganizationCard

@@ -8,19 +8,20 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import { useEffect } from 'react'
+import { FunctionComponent, useState } from 'react'
 import styled from 'styled-components'
+import usePromise, { isFulfilled, isRejected } from '@amsterdam/use-promise'
 import cmsConfig from '../../../shared/config/cms.config'
-import useFromCMS from '../../utils/useFromCMS'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import OrganizationCard from './OrganizationCard'
+import { fetchListFromCms } from '../../utils/fetchFromCms'
 
 const StyledCardContainer = styled(CardContainer)`
   background-color: ${themeColor('tint', 'level2')};
   padding: ${themeSpacing(8, 4)};
 `
 
-const StyledRow = styled(Row)`
+const StyledRow = styled(Row)<{ showError: boolean }>`
   ${({ showError }) => showError && `justify-content: center;`}
 
   @media screen and ${breakpoint('max-width', 'laptop')} {
@@ -44,12 +45,14 @@ const StyledHeading = styled(Heading)`
   }
 `
 
-const OrganizationBlock = () => {
-  const { results, fetchData, loading, error } = useFromCMS(cmsConfig.HOME_ORGANIZATION)
+const OrganizationBlock: FunctionComponent = () => {
+  const [retryCount, setRetryCount] = useState(0)
 
-  useEffect(() => {
-    fetchData()
-  }, [])
+  const result = usePromise(
+    () =>
+      fetchListFromCms(cmsConfig.HOME_ORGANIZATION.endpoint(), cmsConfig.HOME_ORGANIZATION.fields),
+    [retryCount],
+  )
 
   return (
     <StyledCardContainer data-test="organization-block">
@@ -58,22 +61,22 @@ const OrganizationBlock = () => {
           Onderzoek, Informatie en Statistiek
         </StyledHeading>
       </Row>
-      <StyledRow hasMargin={false} showError={error}>
-        {error && (
+      <StyledRow hasMargin={false} showError={isRejected(result)}>
+        {isRejected(result) && (
           <ErrorMessage
             message="Er is een fout opgetreden bij het laden van dit blok."
             buttonLabel="Probeer opnieuw"
-            buttonOnClick={fetchData}
+            buttonOnClick={() => setRetryCount(retryCount + 1)}
           />
         )}
-        {results?.length
-          ? results.map((result) => (
+        {isFulfilled(result) && result.value.length
+          ? result.value.map((field) => (
               <Column
-                key={result.key}
+                key={field.key}
                 wrap
                 span={{ small: 1, medium: 1, big: 3, large: 3, xLarge: 3 }}
               >
-                <OrganizationCard loading={loading} {...result} />
+                <OrganizationCard loading={false} {...field} />
               </Column>
             ))
           : null}

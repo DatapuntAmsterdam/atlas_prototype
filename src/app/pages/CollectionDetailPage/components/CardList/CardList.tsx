@@ -1,8 +1,8 @@
 import { Card, CardContent, Heading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import { CMSResultItem } from '../../../../utils/useFromCMS'
 import EditorialCard from '../../../../components/EditorialCard'
+import { NormalizedFieldItems } from '../../../../../normalizations/cms/types'
 
 const StyledCard = styled(Card)`
   border-top: 2px solid;
@@ -12,7 +12,7 @@ const StyledCard = styled(Card)`
   background-color: ${themeColor('tint', 'level2')};
   // Override the margin-bottom of the Card component when used in a CardContainer
   & {
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 `
 
@@ -29,7 +29,7 @@ const StyledHeading = styled(Heading)`
 
 export interface CardListProps {
   title: string
-  results: CMSResultItem[]
+  results: NormalizedFieldItems[]
   loading: boolean
 }
 

@@ -1,75 +1,44 @@
-import { ThemeProvider } from '@amsterdam/asc-ui'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { mocked } from 'ts-jest/utils'
-import cmsConfig from '../../../shared/config/cms.config'
-import EditorialPage from '../../components/EditorialPage/EditorialPage'
-import useDocumentTitle from '../../utils/useDocumentTitle'
-import useFromCMS from '../../utils/useFromCMS'
-import ArticleDetailPage from './ArticleDetailPage'
 import { render } from '@testing-library/react'
+import { mocked } from 'ts-jest/utils'
+import usePromise from '@amsterdam/use-promise'
+import ArticleDetailPage from './ArticleDetailPage'
 import { LOADING_SPINNER_TEST_ID } from '../../components/LoadingSpinner/LoadingSpinner'
+import withAppContext from '../../utils/withAppContext'
+import { ERROR_MESSAGE_TEST_ID } from '../../components/ErrorMessage/ErrorMessage'
 
-jest.mock('../../utils/useFromCMS')
-jest.mock('../../utils/useDocumentTitle')
-jest.mock('@datapunt/matomo-tracker-react')
-jest.mock('react-router-dom', () => ({
-  useParams: () => ({ id: 'foo' }),
-  useHistory: () => ({ createHref: () => '' }),
-}))
+jest.mock('@amsterdam/use-promise', () => {
+  const originalModule = jest.requireActual('@amsterdam/use-promise')
 
-const mockedUseFromCMS = mocked(useFromCMS, true)
-const mockedUseDocumentTitle = mocked(useDocumentTitle, true)
-const mockedUseMatomo = mocked(useMatomo, true)
+  return {
+    __esModule: true,
+    ...originalModule,
+    default: jest.fn(),
+  }
+})
+
+const mockedUsePromise = mocked(usePromise)
 
 describe('ArticleDetailPage', () => {
-  const href = 'https://this.is/a-link/this-is-a-slug'
-  const fetchDataMock = jest.fn()
-
-  beforeEach(() => {
-    mockedUseDocumentTitle.mockImplementation(
-      () =>
-        ({
-          setDocumentTitle: jest.fn(),
-          href,
-        } as any),
-    )
-    mockedUseMatomo.mockImplementation(() => ({ trackPageView: jest.fn(), href } as any))
-  })
-
   afterEach(() => {
     jest.resetAllMocks()
   })
 
   it('should render the spinner when the request is loading', () => {
-    mockedUseFromCMS.mockImplementation(
-      () =>
-        ({
-          fetchData: jest.fn(),
-          loading: true,
-        } as any),
-    )
+    mockedUsePromise.mockReturnValue({ status: 'pending' })
 
-    const { getByTestId } = render(<ArticleDetailPage />)
+    const { getByTestId } = render(withAppContext(<ArticleDetailPage />))
 
     expect(getByTestId(LOADING_SPINNER_TEST_ID)).toBeDefined()
   })
 
-  it('should call the fetchData function when the component mounts', () => {
-    mockedUseFromCMS.mockImplementation(
-      () =>
-        ({
-          loading: true,
-          fetchData: fetchDataMock,
-        } as any),
-    )
+  it('should render an error alert', () => {
+    mockedUsePromise.mockReturnValue({
+      status: 'rejected',
+      reason: new Error('Whoopsie'),
+    })
 
-    render(
-      <ThemeProvider>
-        <ArticleDetailPage />
-      </ThemeProvider>,
-    )
+    const { getByTestId } = render(withAppContext(<ArticleDetailPage />))
 
-    expect(useFromCMS).toHaveBeenCalledWith(cmsConfig.ARTICLE, 'foo')
-    expect(fetchDataMock).toHaveBeenCalled()
+    expect(getByTestId(ERROR_MESSAGE_TEST_ID)).toBeDefined()
   })
 })

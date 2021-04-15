@@ -63,7 +63,7 @@ const DocumentCover: FunctionComponent<DocumentCoverProps> = ({
   )
 
   return (
-    <DocumentCoverStyle {...otherProps}>
+    <DocumentCoverStyle {...otherProps} data-testid="documentCover">
       <DocumentCoverContentStyle>
         <StyledImage
           data-testid="image"

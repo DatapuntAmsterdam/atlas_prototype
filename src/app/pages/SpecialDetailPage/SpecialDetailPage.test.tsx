@@ -1,41 +1,44 @@
 import { render } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
-import useDocumentTitle from '../../utils/useDocumentTitle'
-import useFromCMS from '../../utils/useFromCMS'
+import usePromise from '@amsterdam/use-promise'
 import SpecialDetailPage from './SpecialDetailPage'
 import { LOADING_SPINNER_TEST_ID } from '../../components/LoadingSpinner/LoadingSpinner'
+import withAppContext from '../../utils/withAppContext'
+import { ERROR_MESSAGE_TEST_ID } from '../../components/ErrorMessage/ErrorMessage'
 
-jest.mock('../../links')
-jest.mock('../../utils/useFromCMS')
-jest.mock('../../../shared/services/set-iframe-size/setIframeSize')
-jest.mock('../../../shared/services/link-attributes-from-action/linkAttributesFromAction')
-jest.mock('../../utils/useDocumentTitle')
-jest.mock('react-router-dom', () => ({
-  useParams: () => ({ id: 'foo' }),
-}))
+jest.mock('@amsterdam/use-promise', () => {
+  const originalModule = jest.requireActual('@amsterdam/use-promise')
 
-const mockedUseFromCMS = mocked(useFromCMS)
-const mockedUseDocumentTitle = mocked(useDocumentTitle)
+  return {
+    __esModule: true,
+    ...originalModule,
+    default: jest.fn(),
+  }
+})
+
+const mockedUsePromise = mocked(usePromise)
 
 describe('SpecialDetailPage', () => {
   beforeEach(() => {
-    mockedUseDocumentTitle.mockImplementation(() => ({ setDocumentTitle: jest.fn() } as any))
-  })
-
-  afterEach(() => {
-    jest.resetAllMocks()
+    mockedUsePromise.mockClear()
   })
 
   it('should show a loading spinner', () => {
-    mockedUseFromCMS.mockImplementation(
-      () =>
-        ({
-          loading: true,
-        } as any),
-    )
+    mockedUsePromise.mockReturnValue({ status: 'pending' })
 
-    const { getByTestId } = render(<SpecialDetailPage />)
+    const { getByTestId } = render(withAppContext(<SpecialDetailPage />))
 
     expect(getByTestId(LOADING_SPINNER_TEST_ID)).toBeDefined()
+  })
+
+  it('should render an error alert', () => {
+    mockedUsePromise.mockReturnValue({
+      status: 'rejected',
+      reason: new Error('Whoopsie'),
+    })
+
+    const { getByTestId } = render(withAppContext(<SpecialDetailPage />))
+
+    expect(getByTestId(ERROR_MESSAGE_TEST_ID)).toBeDefined()
   })
 })

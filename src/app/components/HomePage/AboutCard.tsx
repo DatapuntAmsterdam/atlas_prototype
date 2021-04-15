@@ -8,8 +8,9 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { FunctionComponent } from 'react'
+import { NormalizedFieldItems } from '../../../normalizations/cms/types'
 
 const StyledCard = styled(Card)`
   width: 100%;
@@ -42,33 +43,27 @@ const StyledLink = styled(Link)`
   }
 `
 
-const AboutCard = ({ loading, shortTitle, title, teaser, intro, linkProps }) => (
+interface AboutCardProps
+  extends Pick<NormalizedFieldItems, 'shortTitle' | 'title' | 'teaser' | 'intro' | 'linkProps'> {
+  loading: boolean
+}
+
+const AboutCard: FunctionComponent<AboutCardProps> = ({
+  loading,
+  shortTitle,
+  title,
+  teaser,
+  intro,
+  linkProps,
+}) => (
   <StyledLink {...linkProps} variant="blank">
     <StyledCard backgroundColor="level2" shadow isLoading={loading}>
       <StyledCardContent>
         <Heading as="h3">{shortTitle || title}</Heading>
-        <Paragraph dangerouslySetInnerHTML={{ __html: teaser || intro }} />
+        {teaser || (intro && <Paragraph dangerouslySetInnerHTML={{ __html: teaser || intro }} />)}
       </StyledCardContent>
     </StyledCard>
   </StyledLink>
 )
-
-AboutCard.defaultProps = {
-  loading: false,
-  shortTitle: '',
-  title: '',
-  teaser: '',
-  intro: '',
-  to: null,
-}
-
-AboutCard.propTypes = {
-  loading: PropTypes.bool,
-  title: PropTypes.string,
-  shortTitle: PropTypes.string,
-  teaser: PropTypes.string,
-  intro: PropTypes.string,
-  to: PropTypes.shape({}),
-}
 
 export default AboutCard

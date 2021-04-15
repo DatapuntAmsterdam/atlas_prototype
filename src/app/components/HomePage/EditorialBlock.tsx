@@ -1,14 +1,15 @@
 import { breakpoint, CardContainer, Column, Row, styles, themeColor } from '@amsterdam/asc-ui'
-import { useEffect } from 'react'
+import { FunctionComponent, useState } from 'react'
 import styled from 'styled-components'
+import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
 import pickLinkComponent from '../../utils/pickLinkComponent'
-import useFromCMS from '../../utils/useFromCMS'
 import ErrorMessage, { ErrorBackgroundCSS } from '../ErrorMessage/ErrorMessage'
 import BlockHeading from './BlockHeading'
 import EditorialBlockCard from './EditorialBlockCard'
 import OverviewLink from './OverviewLink'
+import { fetchListFromCms } from '../../utils/fetchFromCms'
 
-const CardRow = styled.div`
+const CardRow = styled.div<{ showError: boolean }>`
   ${({ showError }) => showError && ErrorBackgroundCSS}
 
   /* Add border-top to first row of cards when three Cards are shown */
@@ -31,18 +32,37 @@ const CardRow = styled.div`
   }
 `
 
-const EditorialBlock = ({ title, list, showMoreProps = {}, showContentType = false }) => {
-  const { results, fetchData, loading, error } = useFromCMS(list)
+interface CMSConfig {
+  endpoint(id?: string): string
+  endpoint(id: string): string
+  fields: Array<string>
+}
 
-  useEffect(() => {
-    fetchData()
-  }, [])
+interface EditorialBlockProps {
+  title: string
+  list: CMSConfig
+  showContentType?: boolean
+  showMoreProps?: any
+}
 
-  const specials =
-    results ||
-    Array(6)
-      .fill(null)
-      .map((x, i) => i)
+const EditorialBlock: FunctionComponent<EditorialBlockProps> = ({
+  title,
+  list,
+  showMoreProps = {},
+  showContentType = false,
+}) => {
+  const [retryCount, setRetryCount] = useState(0)
+
+  const result = usePromise(() => fetchListFromCms(list.endpoint(), list.fields), [retryCount])
+
+  const specials = isFulfilled(result)
+    ? result.value
+    : Array(6)
+        .fill(null)
+        .map((x, i) => i)
+
+  const error = isRejected(result)
+  const loading = isPending(result)
 
   return (
     <CardContainer data-test="special-block">
@@ -59,28 +79,51 @@ const EditorialBlock = ({ title, list, showMoreProps = {}, showContentType = fal
             absolute
             message="Er is een fout opgetreden bij het laden van dit blok."
             buttonLabel="Probeer opnieuw"
-            buttonOnClick={fetchData}
+            buttonOnClick={() => setRetryCount(retryCount + 1)}
           />
         )}
         <Row hasMargin={false}>
           {specials.length
-            ? specials.map((special, index) => (
-                <Column
-                  key={special.key || index}
-                  wrap
-                  span={{ small: 1, medium: 2, big: 3, large: 4, xLarge: 4 }}
-                >
-                  <EditorialBlockCard
-                    loading={loading}
-                    showError={error}
-                    {...special}
-                    showContentType={showContentType}
-                  />
-                </Column>
-              ))
+            ? specials.map(
+                (
+                  {
+                    key,
+                    shortTitle,
+                    title: specialTitle,
+                    specialType,
+                    teaser,
+                    intro,
+                    teaserImage,
+                    linkProps,
+                    type,
+                  }: any,
+                  index: number,
+                ) => (
+                  <Column
+                    key={key || index}
+                    wrap
+                    span={{ small: 1, medium: 2, big: 3, large: 4, xLarge: 4 }}
+                  >
+                    <EditorialBlockCard
+                      loading={loading}
+                      showError={error}
+                      shortTitle={shortTitle}
+                      title={specialTitle}
+                      specialType={specialType}
+                      teaser={teaser}
+                      intro={intro}
+                      teaserImage={teaserImage}
+                      linkProps={linkProps}
+                      type={type}
+                      showContentType={showContentType}
+                    />
+                  </Column>
+                ),
+              )
             : null}
           {/* Todo: temporary fix for 2 or 5 items. hasMargin messes up the grid so columns don't have gutters, so we need to use justify-content="space-between" (default) in the row */}
           {(specials.length === 2 || specials.length === 5) && (
+            // @ts-ignore
             <Column key="filler" wrap span={{ small: 1, medium: 2, big: 3, large: 4, xLarge: 4 }} />
           )}
         </Row>

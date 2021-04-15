@@ -1,4 +1,7 @@
 // @ts-ignore
+import { CmsType, SpecialType } from '../../shared/config/cms.config'
+
+// @ts-ignore
 export interface DoubleNormalizedResults extends NormalizedFieldItems {
   field_blocks?: Array<{
     field_content: NormalizedFieldItems[]
@@ -34,6 +37,9 @@ export interface NormalizedResult {
   field_downloads?: FieldDownload[]
   field_publication_year?: string
   field_publication_month?: string
+  field_file_size?: string
+  field_file_type?: string
+  field_publication_source?: string
   field_subtitle_link?: {
     uri: string
   }
@@ -67,17 +73,13 @@ export interface NormalizedResult {
 
 export interface NormalizedFieldItems extends Partial<NormalizedResult> {
   key: any
-  id: string
-  title: string
-  type?: string
   body?: any
   teaserImage?: string
   coverImage?: string
   imageIsVertical: boolean
   shortTitle?: string
   teaser?: string
-  intro?: string
-  specialType?: string
+  specialType?: SpecialType
   fileUrl?: string
   localeDate: Date | string
   localeDateFormatted?: string

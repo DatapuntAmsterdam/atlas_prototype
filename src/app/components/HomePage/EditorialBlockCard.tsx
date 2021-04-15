@@ -14,7 +14,8 @@ import { FunctionComponent } from 'react'
 import styled, { css } from 'styled-components'
 import getContentTypeLabel from '../../utils/getContentTypeLabel'
 import getImageFromCms from '../../utils/getImageFromCms'
-import { CMSResultItem } from '../../utils/useFromCMS'
+import { NormalizedFieldItems } from '../../../normalizations/cms/types'
+import { CmsType } from '../../../shared/config/cms.config'
 
 const StyledHeading = styled(Heading)`
   margin-bottom: ${themeSpacing(2)};
@@ -79,11 +80,20 @@ const ContentType = styled(Paragraph)`
 `
 
 const EditorialBlockCard: FunctionComponent<
-  CMSResultItem &
+  Pick<
+    NormalizedFieldItems,
+    | 'shortTitle'
+    | 'title'
+    | 'specialType'
+    | 'teaser'
+    | 'intro'
+    | 'teaserImage'
+    | 'linkProps'
+    | 'type'
+  > &
     StyledCardProps & {
       loading?: boolean
       showContentType?: boolean
-      intro?: string
     }
 > = ({
   loading = false,
@@ -98,7 +108,8 @@ const EditorialBlockCard: FunctionComponent<
   type,
   showContentType,
 }) => {
-  const contentTypeLabel = type && specialType ? getContentTypeLabel(type, specialType) : null
+  const contentTypeLabel =
+    type && specialType ? getContentTypeLabel(type as CmsType, specialType) : null
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { title: unusedTitle, ...linkPropsWithoutTitle } = linkProps || {}

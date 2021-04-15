@@ -152,7 +152,6 @@ describe('normalizeCMSResults', () => {
     localeDateFormatted: '',
     slug: input.title,
     to: {},
-    related: [],
   }
 
   describe('getLinkProps', () => {
