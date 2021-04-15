@@ -9,7 +9,6 @@ import {
 import formatDate from '../../app/utils/formatDate'
 import toSlug from '../../app/utils/toSlug'
 import { CmsType } from '../../shared/config/cms.config'
-import { reformatJSONApiResults } from '../../shared/services/cms/cms-json-api-normalizer'
 import { FieldLink, NormalizedFieldItems, NormalizedResult } from './types'
 
 export const EDITORIAL_DETAIL_ACTIONS = {
@@ -116,7 +115,6 @@ export const normalizeObject = (data: NormalizedResult): NormalizedFieldItems =>
     field_file,
     media_image_url,
     field_links,
-    field_related,
     ...otherFields
   } = data
 
@@ -134,15 +132,6 @@ export const normalizeObject = (data: NormalizedResult): NormalizedFieldItems =>
   let fileUrl
   if (isPublicationType) {
     fileUrl = field_file?.field_media_file?.uri?.url
-  }
-
-  let related: NormalizedFieldItems[] | never[] = []
-  if (field_related && !(field_related instanceof Array)) {
-    const reformattedRelatedResults = reformatJSONApiResults(field_related)
-
-    if (reformattedRelatedResults instanceof Array) {
-      related = reformattedRelatedResults.map((dataItem) => normalizeObject(dataItem))
-    }
   }
 
   let links: FieldLink[] = []
@@ -169,7 +158,6 @@ export const normalizeObject = (data: NormalizedResult): NormalizedFieldItems =>
     slug,
     to,
     linkProps,
-    related,
     links,
     ...otherFields,
   }

@@ -226,32 +226,6 @@ describe('normalizeCMSResults', () => {
       })
     })
 
-    it('sets the "related" prop', () => {
-      const related = {
-        id: 'id',
-        teaserImage: 'teaserImage',
-        shortTitle: 'shortTitle',
-      }
-
-      expect(
-        normalizeObject({
-          ...input,
-          field_related: [{ ...input, ...related }],
-        }),
-      ).toMatchObject({
-        related: [
-          {
-            ...output,
-            id: related.id,
-            intro: undefined,
-            key: related.id,
-            shortTitle: related.shortTitle,
-            teaserImage: related.teaserImage,
-          },
-        ],
-      })
-    })
-
     it('sets the links prop', () => {
       // eslint-disable-next-line camelcase,@typescript-eslint/naming-convention
       const field_links = [
