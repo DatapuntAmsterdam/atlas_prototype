@@ -61,7 +61,7 @@ const AboutCard: FunctionComponent<AboutCardProps> = ({
     <StyledCard backgroundColor="level2" shadow isLoading={loading}>
       <StyledCardContent>
         <Heading as="h3">{shortTitle ?? title}</Heading>
-        <Paragraph dangerouslySetInnerHTML={{ __html: teaser ?? intro ?? '' }} />)
+        <Paragraph dangerouslySetInnerHTML={{ __html: teaser ?? intro ?? '' }} />
       </StyledCardContent>
     </StyledCard>
   </StyledLink>
