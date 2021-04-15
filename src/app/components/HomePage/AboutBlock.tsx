@@ -99,17 +99,16 @@ const AboutBlock: FunctionComponent = () => {
                 buttonOnClick={() => setRetryCount(retryCount + 1)}
               />
             )}
-            {isFulfilled(resultAboutData) && resultAboutData.value.length
-              ? resultAboutData.value.map((aboutData, index) => (
-                  <StyledCardColumn
-                    wrap
-                    key={aboutData.key || index}
-                    span={{ small: 1, medium: 2, big: 3, large: 3, xLarge: 3 }}
-                  >
-                    <AboutCard loading={isPending(resultAboutData)} {...aboutData} />
-                  </StyledCardColumn>
-                ))
-              : null}
+            {isFulfilled(resultAboutData) &&
+              resultAboutData.value.map((aboutData, index) => (
+                <StyledCardColumn
+                  wrap
+                  key={aboutData.key || index}
+                  span={{ small: 1, medium: 2, big: 3, large: 3, xLarge: 3 }}
+                >
+                  <AboutCard loading={isPending(resultAboutData)} {...aboutData} />
+                </StyledCardColumn>
+              ))}
           </StyledRow>
         </StyledColumn>
         <StyledColumn span={{ small: 1, medium: 2, big: 6, large: 6, xLarge: 6 }}>
@@ -125,17 +124,16 @@ const AboutBlock: FunctionComponent = () => {
                 buttonOnClick={() => setRetryCount(retryCount + 1)}
               />
             )}
-            {isFulfilled(resultAbout) && resultAbout.value.length
-              ? resultAbout.value.map((about, index) => (
-                  <StyledCardColumn
-                    wrap
-                    key={about.key || index}
-                    span={{ small: 1, medium: 2, big: 3, large: 3, xLarge: 3 }}
-                  >
-                    <AboutCard loading={isPending(resultAbout)} {...about} />
-                  </StyledCardColumn>
-                ))
-              : null}
+            {isFulfilled(resultAbout) &&
+              resultAbout.value.map((about, index) => (
+                <StyledCardColumn
+                  wrap
+                  key={about.key || index}
+                  span={{ small: 1, medium: 2, big: 3, large: 3, xLarge: 3 }}
+                >
+                  <AboutCard loading={isPending(resultAbout)} {...about} />
+                </StyledCardColumn>
+              ))}
           </StyledRow>
         </StyledColumn>
       </Row>
