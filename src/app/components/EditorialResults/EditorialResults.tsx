@@ -14,12 +14,12 @@ import {
 import getErrorsForPath from '../../utils/getErrorsForPath'
 import getLoadingErrors from '../../utils/getLoadingErrors'
 import getUnauthorizedLabels from '../../utils/getUnauthorizedLabels'
-import { CMSResultItem } from '../../utils/useFromCMS'
 import AuthAlert from '../Alerts/AuthAlert'
 import EditorialCard from '../EditorialCard'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import NoSearchResults from '../NoSearchResults'
+import { NormalizedFieldItems } from '../../../normalizations/cms/types'
 
 const EDITORIAL_OVERVIEW_ACTIONS = {
   [CmsType.Article]: toArticleSearch,
@@ -36,7 +36,7 @@ const EditorialCardContainer = styled(CardContainer)`
 
 export interface EditorialResultsProps {
   query: string
-  results: CMSResultItem[]
+  results: NormalizedFieldItems[]
   loading: boolean
   label: string
   errors: GraphQLFormattedError<any>[]

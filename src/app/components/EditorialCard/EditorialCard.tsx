@@ -13,11 +13,11 @@ import {
 } from '@amsterdam/asc-ui'
 import { FunctionComponent } from 'react'
 import styled, { css } from 'styled-components'
-import { SpecialType } from '../../../shared/config/cms.config'
+import { CmsType, SpecialType } from '../../../shared/config/cms.config'
 import { NOT_FOUND_THUMBNAIL } from '../../../shared/config/constants'
 import getContentTypeLabel from '../../utils/getContentTypeLabel'
 import getImageFromCms, { Resize } from '../../utils/getImageFromCms'
-import { CMSResultItem } from '../../utils/useFromCMS'
+import { NormalizedFieldItems } from '../../../normalizations/cms/types'
 
 const getImageSize = (image: string, resize: Resize, imageSize: number) => {
   const small = Math.round(imageSize * 0.5)
@@ -206,7 +206,7 @@ const MetaText = styled(Paragraph)`
 `
 
 interface EditorialCardProps
-  extends Pick<Partial<CMSResultItem>, 'title' | 'specialType' | 'type' | 'teaser'> {
+  extends Pick<Partial<NormalizedFieldItems>, 'title' | 'specialType' | 'type' | 'teaser'> {
   date?: string
   image?: string | null
   imageDimensions?: [number, number]
@@ -232,10 +232,10 @@ const EditorialCard: FunctionComponent<EditorialCardProps> = ({
   highlighted = false,
   ...otherProps
 }) => {
-  if (!type) {
+  if (!type || !(type in CmsType)) {
     return null
   }
-  const contentTypeLabel = getContentTypeLabel(type, specialType)
+  const contentTypeLabel = getContentTypeLabel(type as CmsType, specialType)
 
   return (
     // Don't use the title attribute here, as we already use a heading that can be read by screen readers

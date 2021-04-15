@@ -76,18 +76,20 @@ export interface NormalizedFieldItems extends Partial<NormalizedResult> {
   body?: any
   teaserImage?: string
   coverImage?: string
-  imageIsVertical: boolean
+  imageIsVertical?: boolean
   shortTitle?: string
   teaser?: string
-  specialType?: SpecialType
+  specialType?: SpecialType | null
   fileUrl?: string
-  localeDate: Date | string
+  localeDate?: Date | string
   localeDateFormatted?: string
-  slug?: string
+  slug?: string | null
   to?: any
   linkProps?: any
   related?: NormalizedFieldItems[]
   links?: FieldLink[]
+  dateLocale?: string
+  label?: string
 }
 
 interface FieldTeaserImage {
