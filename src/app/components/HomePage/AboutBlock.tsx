@@ -3,9 +3,9 @@ import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-p
 import { FunctionComponent, useState } from 'react'
 import styled, { css } from 'styled-components'
 import cmsConfig from '../../../shared/config/cms.config'
+import { fetchListFromCms } from '../../utils/fetchFromCms'
 import ErrorMessage, { ErrorBackgroundCSS } from '../ErrorMessage/ErrorMessage'
 import AboutCard from './AboutCard'
-import { fetchListFromCms } from '../../utils/fetchFromCms'
 
 const AboutBlockStyle = styled.div`
   width: 100%;
@@ -73,6 +73,7 @@ const StyledHeading = styled(Heading)`
 const AboutBlock: FunctionComponent = () => {
   const [retryCount, setRetryCount] = useState(0)
 
+  // TODO: Combine these Promises using something like Promise.all()
   const resultAbout = usePromise(
     () => fetchListFromCms(cmsConfig.HOME_ABOUT.endpoint(), cmsConfig.HOME_ABOUT.fields),
     [retryCount],
@@ -83,6 +84,7 @@ const AboutBlock: FunctionComponent = () => {
     [retryCount],
   )
 
+  // TODO: There is now no loading state when both Promises are pending, we need to add one.
   return (
     <AboutBlockStyle data-test="about-block">
       <Row hasMargin={false}>
@@ -106,6 +108,9 @@ const AboutBlock: FunctionComponent = () => {
                   key={aboutData.key || index}
                   span={{ small: 1, medium: 2, big: 3, large: 3, xLarge: 3 }}
                 >
+                  {
+                    // TODO: Props should not be spread here, but instead be passed as a single value.
+                  }
                   <AboutCard loading={isPending(resultAbout)} {...aboutData} />
                 </StyledCardColumn>
               ))}
@@ -131,6 +136,9 @@ const AboutBlock: FunctionComponent = () => {
                   key={about.key || index}
                   span={{ small: 1, medium: 2, big: 3, large: 3, xLarge: 3 }}
                 >
+                  {
+                    // TODO: Props should not be spread here, but instead be passed as a single value.
+                  }
                   <AboutCard loading={isPending(resultAboutData)} {...about} />
                 </StyledCardColumn>
               ))}
