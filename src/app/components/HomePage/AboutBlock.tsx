@@ -106,7 +106,7 @@ const AboutBlock: FunctionComponent = () => {
                   key={aboutData.key || index}
                   span={{ small: 1, medium: 2, big: 3, large: 3, xLarge: 3 }}
                 >
-                  <AboutCard loading={isPending(resultAboutData)} {...aboutData} />
+                  <AboutCard loading={isPending(resultAbout)} {...aboutData} />
                 </StyledCardColumn>
               ))}
           </StyledRow>
@@ -131,7 +131,7 @@ const AboutBlock: FunctionComponent = () => {
                   key={about.key || index}
                   span={{ small: 1, medium: 2, big: 3, large: 3, xLarge: 3 }}
                 >
-                  <AboutCard loading={isPending(resultAbout)} {...about} />
+                  <AboutCard loading={isPending(resultAboutData)} {...about} />
                 </StyledCardColumn>
               ))}
           </StyledRow>
