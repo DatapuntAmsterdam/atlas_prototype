@@ -1,6 +1,7 @@
 import { Column, Row } from '@amsterdam/asc-ui'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
 import cmsConfig, { SpecialType } from '../../../shared/config/cms.config'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
@@ -9,7 +10,6 @@ import { toSpecialDetail } from '../../links'
 import Animation from './specials/Animation'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
-import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
 import { fetchSingleFromCms } from '../../utils/fetchFromCms'
 
 const SpecialDetailPage = () => {

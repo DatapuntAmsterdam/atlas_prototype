@@ -66,7 +66,7 @@ const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
         <OverviewLink
           linkProps={{
             ...linkProps,
-            title: `Lees meer over ${shortTitle || title}`, // More descriptive title attribute (A11Y)
+            title: `Lees meer over ${shortTitle ?? title ?? ''}`, // More descriptive title attribute (A11Y)
           }}
           label="Lees meer"
         />
