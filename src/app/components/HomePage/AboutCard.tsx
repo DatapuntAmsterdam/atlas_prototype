@@ -8,8 +8,8 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import styled from 'styled-components'
 import { FunctionComponent } from 'react'
+import styled from 'styled-components'
 import { NormalizedFieldItems } from '../../../normalizations/cms/types'
 
 const StyledCard = styled(Card)`
@@ -43,6 +43,7 @@ const StyledLink = styled(Link)`
   }
 `
 
+// TODO: Instead of picking props and spreading them the data should be passed as a single prop.
 interface AboutCardProps
   extends Pick<NormalizedFieldItems, 'shortTitle' | 'title' | 'teaser' | 'intro' | 'linkProps'> {
   loading: boolean
@@ -59,8 +60,8 @@ const AboutCard: FunctionComponent<AboutCardProps> = ({
   <StyledLink {...linkProps} variant="blank">
     <StyledCard backgroundColor="level2" shadow isLoading={loading}>
       <StyledCardContent>
-        <Heading as="h3">{shortTitle || title}</Heading>
-        {teaser || (intro && <Paragraph dangerouslySetInnerHTML={{ __html: teaser || intro }} />)}
+        <Heading as="h3">{shortTitle ?? title}</Heading>
+        <Paragraph dangerouslySetInnerHTML={{ __html: teaser ?? intro ?? '' }} />)
       </StyledCardContent>
     </StyledCard>
   </StyledLink>
