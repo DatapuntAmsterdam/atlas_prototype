@@ -1,6 +1,9 @@
 import { shallow } from 'enzyme'
-import IFrame from './IFrame'
+import { mocked } from 'ts-jest/utils'
 import setIframeSize from '../../../shared/services/set-iframe-size/setIframeSize'
+import IFrame from './IFrame'
+
+const setIframeSizeMock = mocked(setIframeSize)
 
 jest.mock('../../../shared/services/set-iframe-size/setIframeSize')
 
@@ -13,8 +16,7 @@ describe('IFrame', () => {
   beforeEach(() => {
     component = shallow(<IFrame contentLink={contentLink} title={title} />)
 
-    // @ts-ignore
-    setIframeSize.mockImplementation(() => {})
+    setIframeSizeMock.mockImplementation(() => {})
   })
 
   afterEach(() => {
