@@ -65,7 +65,7 @@ const SearchResultsOverview: FunctionComponent<SearchResultsOverviewProps> = ({
           const hasResults = resultItemTotalCount > 0
 
           return hasResults || (hasErrors && !hasNoMatchingFilters) ? (
-            <ResultItem key={type}>
+            <ResultItem key={type} data-testid="searchResultItem">
               {!hideOverviewHeading && (
                 <SearchHeading
                   label={`${label}${

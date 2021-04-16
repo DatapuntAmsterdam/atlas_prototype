@@ -5,6 +5,7 @@ import useDocumentTitle from '../../utils/useDocumentTitle'
 import EditorialPage from './EditorialPage'
 
 jest.mock('react-router-dom', () => ({
+  // @ts-ignore
   useHistory: () => ({ createHref: ({ pathname }) => pathname }),
 }))
 
