@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 import setIframeSize from '../../../shared/services/set-iframe-size/setIframeSize'
 import IFrame from './IFrame'
@@ -11,33 +11,26 @@ describe('IFrame', () => {
   const contentLink = { uri: 'https://this.is/a-link/this-is-a-slug' }
   const title = 'title'
 
-  let component: any
-
   beforeEach(() => {
-    component = shallow(<IFrame contentLink={contentLink} title={title} />)
-
     setIframeSizeMock.mockImplementation(() => {})
   })
 
   afterEach(() => {
-    jest.resetAllMocks()
+    setIframeSizeMock.mockReset()
   })
 
-  it('should mount the iframe when there are results', () => {
-    const iframe = component.find('iframe').at(0)
-    expect(iframe.exists()).toBeTruthy()
+  it('mounts the iframe when there are results', () => {
+    render(<IFrame contentLink={contentLink} title={title} />)
+    expect(screen.getByTitle(title)).toBeInTheDocument()
   })
 
-  it('should call the setIframeSize function', () => {
-    const iframe = component.find('iframe').at(0)
-    expect(iframe.exists()).toBeTruthy()
+  it('calls the setIframeSize function', () => {
+    const { unmount } = render(<IFrame contentLink={contentLink} title={title} />)
 
-    iframe.simulate('load')
-
+    fireEvent.load(screen.getByTitle(title))
     expect(setIframeSize).toHaveBeenCalled()
 
-    component.unmount()
-
+    unmount()
     expect(setIframeSize).not.toHaveBeenCalledTimes(2)
   })
 })
