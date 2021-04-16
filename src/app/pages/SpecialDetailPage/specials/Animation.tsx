@@ -12,7 +12,7 @@ import {
 } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
 import ShareBar from '../../../components/ShareBar/ShareBar'
-import { DoubleNormalizedResults } from '../../../../normalizations/cms/types'
+import { ContentLink, DoubleNormalizedResults } from '../../../../normalizations/cms/types'
 
 const StyledColumn = styled(Column)`
   margin-bottom: ${themeSpacing(5)};
@@ -58,9 +58,7 @@ const StyledVideo = styled.video`
 
 const Animation: FunctionComponent<{
   results: DoubleNormalizedResults
-  contentLink?: {
-    uri: string
-  }
+  contentLink?: ContentLink
   title?: string
 }> = ({ contentLink, title, results }) => {
   const {

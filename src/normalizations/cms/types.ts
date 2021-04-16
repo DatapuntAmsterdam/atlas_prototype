@@ -64,11 +64,13 @@ export interface NormalizedResult {
   field_type?: string
   field_language?: any
   short_title?: string
-  field_content_link?: {
-    uri: string
-  }
+  field_content_link?: ContentLink
   type?: string
   intro?: string
+}
+
+export interface ContentLink {
+  uri: string
 }
 
 export interface NormalizedFieldItems extends Partial<NormalizedResult> {

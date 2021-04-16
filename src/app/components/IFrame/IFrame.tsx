@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect, FunctionComponent } from 'react'
+import { FunctionComponent, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
+import { ContentLink } from '../../../normalizations/cms/types'
 import setIframeSize from '../../../shared/services/set-iframe-size/setIframeSize'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
@@ -13,10 +14,8 @@ const IFrameContainer = styled.div`
   }
 `
 
-interface IFrameProps {
-  contentLink: {
-    uri: string
-  }
+export interface IFrameProps {
+  contentLink: ContentLink
   title?: string
 }
 
