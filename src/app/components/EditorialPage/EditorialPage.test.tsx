@@ -1,16 +1,19 @@
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { mount, shallow } from 'enzyme'
+import { History } from 'history'
+import { useHistory } from 'react-router-dom'
+import { mocked } from 'ts-jest/utils'
 import environment from '../../../environment'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import EditorialPage from './EditorialPage'
 
-jest.mock('react-router-dom', () => ({
-  // @ts-ignore
-  useHistory: () => ({ createHref: ({ pathname }) => pathname }),
-}))
-
-jest.mock('../../utils/useDocumentTitle')
 jest.mock('@datapunt/matomo-tracker-react')
+jest.mock('react-router-dom')
+jest.mock('../../utils/useDocumentTitle')
+
+const useMatomoMock = mocked(useMatomo)
+const useHistoryMock = mocked(useHistory)
+const useDocumentTitleMock = mocked(useDocumentTitle)
 
 describe('EditorialPage', () => {
   let component: any
@@ -18,13 +21,18 @@ describe('EditorialPage', () => {
   const mockTrackPageView = jest.fn()
 
   beforeEach(() => {
-    // @ts-ignore
-    useDocumentTitle.mockImplementation(() => ({
-      setDocumentTitle: mockSetDocumentTitle,
-    }))
+    useMatomoMock.mockReturnValue(({ trackPageView: mockTrackPageView } as unknown) as ReturnType<
+      typeof useMatomo
+    >)
 
-    // @ts-ignore
-    useMatomo.mockImplementation(() => ({ trackPageView: mockTrackPageView }))
+    useHistoryMock.mockReturnValue(({
+      createHref: ({ pathname }) => pathname,
+    } as unknown) as History)
+
+    useDocumentTitleMock.mockReturnValue({
+      documentTitle: '',
+      setDocumentTitle: mockSetDocumentTitle,
+    })
 
     component = shallow(
       <EditorialPage loading={false} error={false} link={{ pathname: '/this.is.alink' }} />,
