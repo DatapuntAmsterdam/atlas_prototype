@@ -12,7 +12,6 @@ import {
 } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
 import ShareBar from '../../../components/ShareBar/ShareBar'
-import Video from '../../../components/Video/Video'
 import { DoubleNormalizedResults } from '../../../../normalizations/cms/types'
 
 const StyledColumn = styled(Column)`
@@ -29,6 +28,32 @@ const StyledColumn = styled(Column)`
 const StyledLink = styled(Link)`
   display: flex;
   margin-bottom: ${themeSpacing(4)};
+`
+
+const StyledVideo = styled.video`
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+
+  video {
+    // turn off play controls in iOS: needs vendor prefixes
+    // sass-lint:disable no-vendor-prefixes
+    // sass-lint:selector-pseudo-element-no-unknown
+    ::-webkit-media-controls-panel {
+      -webkit-appearance: none;
+      display: none !important;
+    }
+
+    ::-webkit-media-controls-play-button {
+      -webkit-appearance: none;
+      display: none !important;
+    }
+
+    ::-webkit-media-controls-start-playback-button {
+      -webkit-appearance: none;
+      display: none !important;
+    }
+  }
 `
 
 const Animation: FunctionComponent<{
@@ -70,11 +95,9 @@ const Animation: FunctionComponent<{
 
         <StyledColumn span={{ small: 1, medium: 4, big: 3, large: 6, xLarge: 6 }}>
           {contentLink && contentLink.uri && (
-            <Video
-              src={contentLink.uri}
-              type="video/mp4" // For now it's assumed the videos are always in MP4 format
-              showControls
-            >
+            // eslint-disable-next-line jsx-a11y/media-has-caption
+            <StyledVideo crossOrigin="anonymous" preload="metadata" muted={false} controls>
+              <source src={contentLink.uri} type="video/mp4" />
               {subtitleUri && (
                 <track
                   default={!!enableSubtitleByDefault}
@@ -84,7 +107,7 @@ const Animation: FunctionComponent<{
                   label="Dutch"
                 />
               )}
-            </Video>
+            </StyledVideo>
           )}
         </StyledColumn>
         <Column span={{ small: 1, medium: 4, big: 3, large: 6, xLarge: 6 }}>

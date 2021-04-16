@@ -17,7 +17,7 @@ interface IFrameProps {
   contentLink: {
     uri: string
   }
-  title: string
+  title?: string
 }
 
 const IFrame: FunctionComponent<IFrameProps> = ({ contentLink, title }) => {
