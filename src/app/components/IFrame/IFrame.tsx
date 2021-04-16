@@ -50,17 +50,15 @@ const IFrame: FunctionComponent<IFrameProps> = ({ contentLink, title }) => {
   return (
     <IFrameContainer>
       {iframeLoading && <LoadingSpinner />}
-      {contentLink && contentLink.uri && (
-        <iframe
-          src={contentLink.uri}
-          title={title}
-          ref={iframeRef}
-          onLoad={iframeLoaded}
-          width="100%"
-          height={iframeHeight}
-          frameBorder="0"
-        />
-      )}
+      <iframe
+        src={contentLink.uri}
+        title={title}
+        ref={iframeRef}
+        onLoad={iframeLoaded}
+        width="100%"
+        height={iframeHeight}
+        frameBorder="0"
+      />
     </IFrameContainer>
   )
 }
