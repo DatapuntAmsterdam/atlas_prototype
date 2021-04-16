@@ -6,6 +6,7 @@ describe('fetchApiSpecification', () => {
       accessToken: '',
     },
   }
+  // @ts-ignore
   global.reduxStore = {
     getState: () => state,
   }

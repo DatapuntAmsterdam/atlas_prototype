@@ -1,6 +1,5 @@
 import { logout, getAuthHeaders } from '../auth/auth'
 import getState from '../redux/get-state'
-import SHARED_CONFIG from '../shared-config/shared-config'
 import { AuthError, ForbiddenError, NotFoundError } from './customError'
 
 interface FetchOptions extends RequestInit {
@@ -50,7 +49,7 @@ export const fetchWithToken = <T = any>(
   const requestHeaders = headers ?? new Headers()
 
   if (token?.length > 0) {
-    requestHeaders.set('Authorization', SHARED_CONFIG.AUTH_HEADER_PREFIX + token)
+    requestHeaders.set('Authorization', `Bearer ${token}`)
   }
 
   const options: RequestInit = {

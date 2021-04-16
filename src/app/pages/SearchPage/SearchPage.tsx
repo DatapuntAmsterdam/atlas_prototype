@@ -100,20 +100,18 @@ const SearchPage = () => {
           />
 
           <SearchPageResults
-            {...{
-              hasQuery,
-              query,
-              errors,
-              fetching: initialLoading,
-              totalCount,
-              results,
-              currentPage,
-              isOverviewPage: isAllResultsPage(currentPage),
-              sort,
-              page,
-              setShowFilter,
-              pageInfo,
-            }}
+            hasQuery={hasQuery}
+            query={query}
+            errors={errors}
+            loading={initialLoading}
+            totalCount={totalCount}
+            results={results}
+            currentPage={currentPage}
+            isOverviewPage={isAllResultsPage(currentPage)}
+            sort={sort}
+            page={page}
+            setShowFilter={setShowFilter}
+            pageInfo={pageInfo}
           />
         </Row>
       </ContentContainer>

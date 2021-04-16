@@ -1,11 +1,18 @@
+import { FunctionComponent } from 'react'
 import { Close } from '@amsterdam/asc-assets'
 import { Button, Divider, Heading, Modal, Paragraph, TopBar } from '@amsterdam/asc-ui'
-import PropTypes from 'prop-types'
 import CONSTANTS from '../../../shared/config/constants'
 import ModalBlock from './ModalBlock'
-import withModalBehaviour, { propTypes as modalPropTypes } from './withModalBehaviour'
+import withModalBehaviour from './withModalBehaviour'
 
-const InfoModal = ({ open, handleClose, title, body }) => (
+interface InfoModalProps {
+  handleClose(): void
+  open: boolean
+  title: string
+  body: string
+}
+
+const InfoModal: FunctionComponent<InfoModalProps> = ({ open, handleClose, title, body }) => (
   <Modal
     aria-labelledby="feedback"
     aria-describedby="feedback"
@@ -26,11 +33,5 @@ const InfoModal = ({ open, handleClose, title, body }) => (
     </ModalBlock>
   </Modal>
 )
-
-InfoModal.propTypes = {
-  title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
-  ...modalPropTypes,
-}
 
 export default withModalBehaviour(InfoModal)

@@ -1,11 +1,11 @@
+import { FunctionComponent, MouseEventHandler } from 'react'
 import { Close } from '@amsterdam/asc-assets'
 import { Button, Divider, Heading, Link, Modal, Paragraph, TopBar } from '@amsterdam/asc-ui'
-import PropTypes from 'prop-types'
 import { Link as RouterLink } from 'react-router-dom'
 import CONSTANTS from '../../../shared/config/constants'
 import { toHelpPage } from '../../links'
 import ModalBlock from './ModalBlock'
-import withModalBehaviour, { propTypes as modalPropTypes } from './withModalBehaviour'
+import withModalBehaviour from './withModalBehaviour'
 
 export const openFeedbackForm = () => {
   const openFeedbackFormEvent = new CustomEvent('openForm_feedbackModal')
@@ -14,7 +14,7 @@ export const openFeedbackForm = () => {
 
 const FEEDBACK_RECIPIENT = 'terugmelding.basisinformatie@amsterdam.nl'
 const FEEDBACK_SUBJECT = 'Terugmelding data.amsterdam.nl'
-const FEEDBACK_BODY = (location) => `Onjuistheid terugmelden voor de pagina: ${location}\n
+const FEEDBACK_BODY = (location: string) => `Onjuistheid terugmelden voor de pagina: ${location}\n
   Beschrijf zo volledig mogelijk van welk onjuist gegeven je een melding wilt maken:
   - Welk gegeven is kennelijk onjuist of ontbreekt?
   - Weet je wat het wel zou moeten zijn?
@@ -24,17 +24,24 @@ const FEEDBACK_BODY = (location) => `Onjuistheid terugmelden voor de pagina: ${l
 
 const QUESTION_RECIPIENT = 'datapunt@amsterdam.nl'
 const QUESTION_SUBJECT = 'Probleem melden of suggestie voor data.amsterdam.nl'
-const QUESTION_BODY = (location) => `
+const QUESTION_BODY = (location: string) => `
   Beschrijf zo volledig mogelijk waar je tegenaan loopt:
   - Om welke pagina gaat het? (bijvoorbeeld: ${location})
   - Om welk onderdeel van de pagina gaat het?
   - Wat zie je op het scherm als je een probleem ondervindt?
   - Heb je een suggestie hoe het anders zou kunnen?
   `
-const getMailtoLink = (recipient, subject, body) =>
+const getMailtoLink = (recipient: string, subject: string, body: string) =>
   `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
 
-const FeedbackModalComponent = ({
+interface FeedbackModalProps {
+  reportFeedbackAction: MouseEventHandler<HTMLElement>
+  reportProblemAction: MouseEventHandler<HTMLElement>
+  handleClose(): void
+  open: boolean
+}
+
+const FeedbackModalComponent: FunctionComponent<FeedbackModalProps> = ({
   open,
   handleClose,
   reportFeedbackAction,
@@ -124,11 +131,5 @@ const FeedbackModalComponent = ({
     </ModalBlock>
   </Modal>
 )
-
-FeedbackModalComponent.propTypes = {
-  reportFeedbackAction: PropTypes.func.isRequired,
-  reportProblemAction: PropTypes.func.isRequired,
-  ...modalPropTypes,
-}
 
 export default withModalBehaviour(FeedbackModalComponent)

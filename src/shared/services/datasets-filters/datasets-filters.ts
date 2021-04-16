@@ -18,13 +18,13 @@ function getOptions(propertyType: { enum: string[]; enumNames: string[] }): Data
   })
 }
 
-export function toDatasetFilters(data: any) {
+function toDatasetFilters(data: any) {
   const dcatDocProperties = data.components.schemas['dcat-dataset'].properties
   const themaProperties = dcatDocProperties['dcat:theme'].items
   const distributionProperties = dcatDocProperties['dcat:distribution'].items.properties
   const ownerProperties = dcatDocProperties['ams:owner'].examples
 
-  const datasetsFilters = {
+  return {
     statusTypes: getOptions(dcatDocProperties['ams:status']),
     groupTypes: getOptions(themaProperties),
     formatTypes: getOptions(distributionProperties['dcat:mediaType']),
@@ -41,8 +41,6 @@ export function toDatasetFilters(data: any) {
     languages: getOptions(dcatDocProperties['dct:language']),
     distributionTypes: getOptions(distributionProperties['ams:distributionType']),
   }
-
-  return datasetsFilters
 }
 
 export default async function getDatasetFilters() {

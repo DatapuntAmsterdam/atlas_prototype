@@ -10,7 +10,7 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import { FunctionComponent, memo } from 'react'
+import { FunctionComponent } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import PARAMETERS from '../../../store/parameters'
@@ -90,21 +90,24 @@ const StyledCompactPager = styled(CompactPager)`
   width: 100%;
 `
 
-interface SearchPageResultsProps extends EditorialResultsProps, SearchPageFiltersProps {
-  sort: string
+interface SearchPageResultsProps
+  extends Pick<EditorialResultsProps, 'query' | 'errors' | 'loading' | 'results'>,
+    Pick<SearchPageFiltersProps, 'setShowFilter' | 'totalCount' | 'currentPage'> {
+  sort: string | null
   page: number
   pageInfo: {
     hasLimitedResults: string
     hasNextPage: string
     totalPages: number
   }
-  hasQuery: string
+  hasQuery: boolean
+  isOverviewPage: boolean
 }
 
 const SearchPageResults: FunctionComponent<SearchPageResultsProps> = ({
   query,
   errors,
-  fetching,
+  loading,
   totalCount,
   results,
   currentPage,
@@ -148,28 +151,28 @@ const SearchPageResults: FunctionComponent<SearchPageResultsProps> = ({
       push={{ small: 0, medium: 0, big: 0, large: 1, xLarge: 1 }}
     >
       <StyledHeading role="status">
-        {formatTitle(pageConfig.label, !fetching ? totalCount : null)}
+        {formatTitle(pageConfig.label, !loading ? totalCount : null)}
       </StyledHeading>
       <FilterWrapper>
-        <FilterButton variant="primary" onClick={() => setShowFilter(true)} disabled={fetching}>
+        <FilterButton variant="primary" onClick={() => setShowFilter(true)} disabled={loading}>
           Filteren
         </FilterButton>
         {EDITORIAL_SEARCH_PAGES.includes(currentPage) && (
           <>
-            <SearchSort isOverviewPage={isOverviewPage} sort={sort} disabled={fetching} />
+            <SearchSort isOverviewPage={isOverviewPage} sort={sort} disabled={loading} />
             <StyledDivider />
           </>
         )}
       </FilterWrapper>
-      {fetching && (
+      {loading && (
         <ResultWrapper>
           {allResultsPageActive ? <SearchResultsOverviewSkeleton /> : <SearchResultsSkeleton />}
         </ResultWrapper>
       )}
-      {!fetching && (
+      {!loading && (
         <ResultWrapper>
           {allResultsPageActive ? (
-            <SearchResultsOverview {...{ query, totalCount, results, errors, loading: fetching }} />
+            <SearchResultsOverview {...{ query, totalCount, results, errors, loading }} />
           ) : (
             <SearchResultsWrapper>
               <ResultsComponent
@@ -179,7 +182,7 @@ const SearchPageResults: FunctionComponent<SearchPageResultsProps> = ({
                   results,
                   errors,
                   withPagination: pageInfo,
-                  loading: fetching,
+                  loading,
                   isOverviewPage,
                   label: pageConfig.label,
                   type: pageConfig.type,
@@ -225,4 +228,4 @@ const SearchPageResults: FunctionComponent<SearchPageResultsProps> = ({
   )
 }
 
-export default memo(SearchPageResults)
+export default SearchPageResults

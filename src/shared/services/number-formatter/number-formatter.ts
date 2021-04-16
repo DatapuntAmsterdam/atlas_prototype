@@ -7,7 +7,7 @@
  * @param {Number} precision Number of required decimal places.
  * @returns {string} The Dutch decimal string.
  */
-export default function formatNumber(number, precision = 3) {
+export default function formatNumber(number: number, precision = 3) {
   // TODO: add thousands separator
   const decimals = 10 ** precision
   const rounded = Math.round(number * decimals) / decimals
