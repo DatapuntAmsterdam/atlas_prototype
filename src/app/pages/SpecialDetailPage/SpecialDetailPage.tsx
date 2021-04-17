@@ -5,7 +5,7 @@ import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-p
 import cmsConfig, { SpecialType } from '../../../shared/config/cms.config'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
-import IFrame from '../../components/IFrame/IFrame'
+import IFrame from './components/IFrame'
 import { toSpecialDetail } from '../../links'
 import Animation from './specials/Animation'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
@@ -60,7 +60,7 @@ const SpecialDetailPage = () => {
           {(specialType === SpecialType.Dashboard || specialType === SpecialType.Story) &&
             contentLink && (
               <Column wrap span={{ small: 12, medium: 12, big: 12, large: 12, xLarge: 12 }}>
-                <IFrame contentLink={contentLink} title={title} />
+                <IFrame src={contentLink.uri} title={title} />
               </Column>
             )}
         </ContentContainer>
