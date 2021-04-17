@@ -14,14 +14,14 @@ jest.mock('../../components/PanoramaViewer/PanoramaViewer', () => () => (
 ))
 
 jest.mock('@amsterdam/arm-core', () => ({
-  // @ts-ignore
   ...jest.requireActual('@amsterdam/arm-core'),
+  // @ts-ignore
   Map: ({ children }) => <div>{children}</div>,
 }))
 
 jest.mock('react-router-dom', () => ({
-  // @ts-ignore
   ...jest.requireActual('react-router-dom'),
+  // @ts-ignore
   useLocation: () => ({
     search: 'heading=10&locatie=12.12,3.21',
   }),
