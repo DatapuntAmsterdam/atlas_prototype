@@ -1,4 +1,3 @@
-import { FunctionComponent } from 'react'
 import {
   Column,
   CustomHTMLBlock,
@@ -10,9 +9,10 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import ShareBar from '../../../components/ShareBar/ShareBar'
-import { ContentLink, DoubleNormalizedResults } from '../../../../normalizations/cms/types'
+import { ContentLink, DoubleNormalizedResults } from '../../../../../normalizations/cms/types'
+import ShareBar from '../../../../components/ShareBar/ShareBar'
 
 const StyledColumn = styled(Column)`
   margin-bottom: ${themeSpacing(5)};

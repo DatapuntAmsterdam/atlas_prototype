@@ -1,3 +1,1 @@
-import SpecialDetailPage from './SpecialDetailPage'
-
-export default SpecialDetailPage
+export { default } from './SpecialDetailPage'
