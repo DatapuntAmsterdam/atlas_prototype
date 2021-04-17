@@ -1,14 +1,15 @@
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { mount, shallow } from 'enzyme'
 import { History } from 'history'
-import { useHistory } from 'react-router-dom'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useHistory } from 'react-router'
 import { mocked } from 'ts-jest/utils'
 import environment from '../../../environment'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import EditorialPage from './EditorialPage'
 
 jest.mock('@datapunt/matomo-tracker-react')
-jest.mock('react-router-dom')
+jest.mock('react-router')
 jest.mock('../../utils/useDocumentTitle')
 
 const useMatomoMock = mocked(useMatomo)
@@ -16,7 +17,6 @@ const useHistoryMock = mocked(useHistory)
 const useDocumentTitleMock = mocked(useDocumentTitle)
 
 describe('EditorialPage', () => {
-  let component: any
   const mockSetDocumentTitle = jest.fn()
   const mockTrackPageView = jest.fn()
 
@@ -25,38 +25,37 @@ describe('EditorialPage', () => {
       typeof useMatomo
     >)
 
-    useHistoryMock.mockReturnValue(({
+    useHistoryMock.mockReturnValue({
       createHref: ({ pathname }) => pathname,
-    } as unknown) as History)
+    } as History)
 
     useDocumentTitleMock.mockReturnValue({
       documentTitle: '',
       setDocumentTitle: mockSetDocumentTitle,
     })
-
-    component = shallow(
-      <EditorialPage loading={false} error={false} link={{ pathname: '/this.is.alink' }} />,
-    ).dive()
   })
 
   afterEach(() => {
-    jest.resetAllMocks()
+    useMatomoMock.mockReset()
+    useHistoryMock.mockReset()
+    useDocumentTitleMock.mockReset()
   })
 
   it('should display the loading indicator', () => {
-    component.setProps({ loading: true })
-
+    const component = shallow(<EditorialPage loading error={false} />).dive()
     expect(component.find('LoadingIndicator')).toBeTruthy()
   })
 
   it('should set the canonical url', () => {
-    const link = component.find('link')
-    expect(link).toBeTruthy()
-    expect(link.props().href).toBe(`${environment.ROOT}this.is.alink`)
+    const component = shallow(
+      <EditorialPage loading={false} error={false} link={{ pathname: '/this.is.alink' }} />,
+    ).dive()
+
+    expect(component.find('link').props().href).toBe(`${environment.ROOT}this.is.alink`)
   })
 
   it('should set the document title and send to analytics', () => {
-    component = mount(<EditorialPage loading={false} error={false} documentTitle="" />)
+    const component = mount(<EditorialPage loading={false} error={false} documentTitle="" />)
 
     expect(mockSetDocumentTitle).not.toHaveBeenCalled()
     expect(mockTrackPageView).not.toHaveBeenCalled()
