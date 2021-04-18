@@ -1,10 +1,13 @@
 import { render } from '@testing-library/react'
+import { mocked } from 'ts-jest/utils'
 import { CmsType, SpecialType } from '../../../shared/config/cms.config'
 import { NOT_FOUND_THUMBNAIL } from '../../../shared/config/constants'
 import getImageFromCms from '../../utils/getImageFromCms'
 import EditorialCard from './EditorialCard'
 
 jest.mock('../../utils/getImageFromCms')
+
+const getImageFromCmsMock = mocked(getImageFromCms)
 
 describe('EditorialCard', () => {
   const mockDataItem = {
@@ -16,8 +19,11 @@ describe('EditorialCard', () => {
   }
 
   beforeEach(() => {
-    // @ts-ignore
-    getImageFromCms.mockImplementation(() => 'image.jpg')
+    getImageFromCmsMock.mockImplementation(() => 'image.jpg')
+  })
+
+  afterEach(() => {
+    getImageFromCmsMock.mockReset()
   })
 
   it('should display a cover image', () => {
@@ -28,8 +34,8 @@ describe('EditorialCard', () => {
     expect(image?.getAttribute('src')).toBe('image.jpg')
   })
 
-  it('should not render when type is null', () => {
-    const { container } = render(<EditorialCard {...mockDataItem} type={null} />)
+  it('should not render when type is omitted', () => {
+    const { container } = render(<EditorialCard {...mockDataItem} type={undefined} />)
 
     expect(container.firstChild).toBeNull()
   })
