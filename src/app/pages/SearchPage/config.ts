@@ -1,4 +1,6 @@
-import { FunctionComponent } from 'react'
+import { ReactComponentLike } from 'prop-types'
+import { ComponentType, ReactNode } from 'react'
+import { To } from 'redux-first-router-link'
 import { CmsType } from '../../../shared/config/cms.config'
 import {
   toArticleSearch,
@@ -12,6 +14,7 @@ import {
 } from '../../../store/redux-first-router/actions'
 import EditorialResults from '../../components/EditorialResults'
 import { routing } from '../../routes'
+import { SearchType } from './constants'
 import DataSearchResults from './DataSearchResults'
 import DatasetSearchResults from './DatasetSearchResults'
 import {
@@ -26,20 +29,20 @@ import {
   // @ts-ignore
 } from './documents.graphql'
 import MapSearchResults from './MapSearchResults'
-import { SearchType } from './constants'
 
 export const DEFAULT_LIMIT = 10
 
 export interface SearchConfig {
   resolver: any
   query: string
-  to: any
+  to: (additionalParams?: any, skipSaga?: boolean, forceSaga?: boolean, preserve?: boolean) => To
   path: string
   label: string
   type: CmsType | SearchType
   component?: any
   hideOverviewHeading: boolean
 }
+
 // This object is used to define the sort order of the search page
 const SEARCH_TYPES_CONFIG: { [key: string]: SearchConfig } = {
   [routing.collectionSearch.page]: {

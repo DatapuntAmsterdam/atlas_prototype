@@ -1,5 +1,5 @@
 import { BaseLayerToggle as BaseLayerToggleComponent } from '@amsterdam/arm-core'
-import React, { useMemo, FunctionComponent } from 'react'
+import { FunctionComponent, useMemo } from 'react'
 import { getMapBaseLayers, MapBaseLayer } from '../../../../../map/services'
 import useParam from '../../../../utils/useParam'
 import { BaseLayer, baseLayerParam } from '../../query-params'

@@ -1,9 +1,9 @@
-import React, { useContext, useMemo } from 'react'
-import { DrawerControl } from '../DrawerOverlay'
-import LegendControl from '../LegendControl'
-import BaseLayerToggle from '../BaseLayerToggleControl'
-import DrawToolControl from '../DrawToolControl'
+import { useContext, useMemo } from 'react'
 import MapContext from '../../MapContext'
+import BaseLayerToggle from '../BaseLayerToggleControl'
+import { DrawerControl } from '../DrawerOverlay'
+import DrawToolControl from '../DrawToolControl'
+import LegendControl from '../LegendControl'
 import ZoomControl from '../ZoomControl'
 
 // Todo: consider moving onOpenLegend to a higher context

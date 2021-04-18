@@ -1,5 +1,5 @@
 import { Heading, hooks, themeSpacing } from '@amsterdam/asc-ui'
-import React, { FunctionComponent, useCallback, useMemo, useState } from 'react'
+import { FunctionComponent, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { Route, Switch, useHistory, useLocation, matchPath } from 'react-router-dom'
 import { DrawerPanelHeader, LargeDrawerPanel, SmallDrawerPanel } from '../DrawerPanel'
