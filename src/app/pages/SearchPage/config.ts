@@ -1,5 +1,3 @@
-import { ReactComponentLike } from 'prop-types'
-import { ComponentType, ReactNode } from 'react'
 import { To } from 'redux-first-router-link'
 import { CmsType } from '../../../shared/config/cms.config'
 import {

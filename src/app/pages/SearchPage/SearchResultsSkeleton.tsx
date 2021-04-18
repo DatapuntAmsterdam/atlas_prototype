@@ -1,8 +1,8 @@
 import { Card, CardContainer, themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
+import { FunctionComponent } from 'react'
 import SearchHeading from '../../components/SearchHeading/SearchHeading'
 import SEARCH_PAGE_CONFIG from './config'
-import { FunctionComponent } from 'react'
 
 const MAX_ITEMS = 5
 

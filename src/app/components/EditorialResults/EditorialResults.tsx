@@ -1,9 +1,10 @@
 import { CardContainer } from '@amsterdam/asc-ui'
 import { GraphQLFormattedError } from 'graphql'
-import { FunctionComponent, memo } from 'react'
+import { FunctionComponent } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { EDITORIAL_DETAIL_ACTIONS } from '../../../normalizations/cms/normalizeCMSResults'
+import { NormalizedFieldItems } from '../../../normalizations/cms/types'
 import { CmsType } from '../../../shared/config/cms.config'
 import {
   toArticleSearch,
@@ -19,7 +20,6 @@ import EditorialCard from '../EditorialCard'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import NoSearchResults from '../NoSearchResults'
-import { NormalizedFieldItems } from '../../../normalizations/cms/types'
 
 const EDITORIAL_OVERVIEW_ACTIONS = {
   [CmsType.Article]: toArticleSearch,

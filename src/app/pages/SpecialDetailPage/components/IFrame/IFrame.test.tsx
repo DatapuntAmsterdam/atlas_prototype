@@ -1,6 +1,4 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { nextTick } from 'process'
-import { promisify } from 'util'
 import IFrame from './IFrame'
 
 describe('IFrame', () => {
