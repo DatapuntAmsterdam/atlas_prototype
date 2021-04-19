@@ -100,7 +100,7 @@
     "@types/copy-webpack-plugin": "^6.4.0",
     "@types/cssnano": "^4.0.0",
     "@types/enzyme": "^3.10.7",
-    "@types/file-saver": "^2.0.1",
+    "@types/file-saver": "^2.0.2",
     "@types/geojson": "^7946.0.7",
     "@types/isomorphic-fetch": "0.0.35",
     "@types/jest": "^26.0.20",
