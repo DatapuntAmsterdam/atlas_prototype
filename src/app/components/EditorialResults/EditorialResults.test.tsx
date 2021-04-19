@@ -71,30 +71,6 @@ describe('EditorialResults', () => {
     expect(queryAllByTestId('editorialCard')).toHaveLength(2)
   })
 
-  // This test could probably be deleted if all files concerning the Editorial part of the app are fully typed.
-  it('should render no cards if slug or type is missing from result', () => {
-    const props = {
-      query: '',
-      label: 'Label',
-      loading: false,
-      isOverviewPage: false,
-      type: CmsType.Article,
-      errors: [],
-    }
-    const { queryAllByTestId, rerender } = render(
-      withAppContext(<EditorialResults {...props} results={[{ ...result, slug: null }]} />),
-    )
-
-    expect(queryAllByTestId('editorialCard')).toEqual([])
-
-    rerender(
-      withAppContext(
-        <EditorialResults {...props} results={[{ ...result, type: CmsType.Article }]} />,
-      ),
-    )
-    expect(queryAllByTestId('editorialCard')).toEqual([])
-  })
-
   it('should render AuthAlert', () => {
     const props = {
       query: '',

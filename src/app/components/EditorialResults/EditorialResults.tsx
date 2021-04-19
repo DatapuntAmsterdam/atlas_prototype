@@ -20,6 +20,7 @@ import EditorialCard from '../EditorialCard'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import NoSearchResults from '../NoSearchResults'
+import { NormalizedFieldItems } from '../../../normalizations/cms/types'
 
 const EDITORIAL_OVERVIEW_ACTIONS = {
   [CmsType.Article]: toArticleSearch,

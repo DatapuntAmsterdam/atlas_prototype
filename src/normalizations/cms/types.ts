@@ -1,4 +1,3 @@
-// @ts-ignore
 import { SpecialType } from '../../shared/config/cms.config'
 
 // @ts-ignore

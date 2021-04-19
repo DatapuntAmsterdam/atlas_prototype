@@ -31,7 +31,7 @@ export async function initKeycloak() {
   })
 
   if (authenticated) {
-    await keycloak.loadUserProfile()
+    await keycloak.loadUserInfo()
   }
 
   return authenticated
@@ -49,7 +49,18 @@ export function getScopes() {
 }
 
 export function getName() {
-  return keycloak.profile?.firstName ?? ''
+  if (!keycloak.userInfo) {
+    return ''
+  }
+
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const { given_name } = keycloak.userInfo as any
+
+  if (typeof given_name === 'string') {
+    return given_name
+  }
+
+  return ''
 }
 
 export const getAuthHeaders = () => {
