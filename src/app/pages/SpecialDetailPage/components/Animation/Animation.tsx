@@ -10,25 +10,20 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import ShareBar from '../../../components/ShareBar/ShareBar'
-import { ContentLink, DoubleNormalizedResults } from '../../../../../normalizations/cms/types'
+import { DoubleNormalizedResults } from '../../../../../normalizations/cms/types'
+import ShareBar from '../../../../components/ShareBar/ShareBar'
 
 const StyledColumn = styled(Column)`
   margin-bottom: ${themeSpacing(5)};
   align-self: flex-start;
-
-  // The video tag is target through the column as the Video component is using a complex SASS setup, this can be changed if that component gets refactored in the future
-  & video {
-    max-width: 100%;
-    border: 1px solid ${themeColor('tint', 'level3')};
-  }
 `
 
 const StyledLink = styled(Link)`
   display: flex;
   margin-bottom: ${themeSpacing(4)};
+  max-width: 100%;
+  border: 1px solid ${themeColor('tint', 'level3')};
 `
 
 const StyledVideo = styled.video`
@@ -59,9 +54,9 @@ const StyledVideo = styled.video`
 
 const Animation: FunctionComponent<{
   results: DoubleNormalizedResults
-  contentLink?: ContentLink
+  src?: string
   title?: string
-}> = ({ contentLink, title, results }) => {
+}> = ({ src, title, results }) => {
   const {
     body,
     field_intro: intro,
@@ -93,10 +88,10 @@ const Animation: FunctionComponent<{
         </Column>
 
         <StyledColumn span={{ small: 1, medium: 4, big: 3, large: 6, xLarge: 6 }}>
-          {contentLink && contentLink.uri && (
+          {src && (
             // eslint-disable-next-line jsx-a11y/media-has-caption
             <StyledVideo crossOrigin="anonymous" preload="metadata" muted={false} controls>
-              <source src={contentLink.uri} type="video/mp4" />
+              <source src={src} type="video/mp4" />
               {subtitleUri && (
                 <track
                   default={!!enableSubtitleByDefault}

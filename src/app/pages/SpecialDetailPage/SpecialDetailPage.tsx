@@ -55,7 +55,7 @@ const SpecialDetailPage = () => {
       <Row>
         <ContentContainer>
           {specialType === SpecialType.Animation && (
-            <Animation contentLink={contentLink} title={title} results={result.value} />
+            <Animation src={contentLink?.uri} title={title} results={result.value} />
           )}
           {(specialType === SpecialType.Dashboard || specialType === SpecialType.Story) &&
             contentLink && (

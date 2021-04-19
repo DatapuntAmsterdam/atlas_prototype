@@ -22,7 +22,13 @@ export interface SearchLinkProps {
 }
 
 const SearchLink: FunctionComponent<SearchLinkProps> = ({ to, label, title = '' }) => (
-  <StyledLink inList forwardedAs={pickLinkComponent(to)} to={to} title={title || label}>
+  <StyledLink
+    data-testid="searchLink"
+    inList
+    forwardedAs={pickLinkComponent(to)}
+    to={to}
+    title={title || label}
+  >
     {label}
   </StyledLink>
 )

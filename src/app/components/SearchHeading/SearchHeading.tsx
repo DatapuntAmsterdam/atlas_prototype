@@ -36,7 +36,7 @@ interface SearchHeadingProps {
 const SearchHeading: FunctionComponent<SearchHeadingProps> = ({ label, icon }) => (
   <>
     <Divider />
-    <StyledHeading forwardedAs="h2">
+    <StyledHeading forwardedAs="h2" data-testid="searchHeading">
       {icon && <StyledIcon>{icon}</StyledIcon>}
       {label}
     </StyledHeading>
