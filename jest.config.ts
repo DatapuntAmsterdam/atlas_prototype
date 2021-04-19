@@ -27,12 +27,12 @@ const config: Config.InitialOptions = {
   moduleNameMapper: {
     '^.+\\.(css|scss)$': 'identity-obj-proxy',
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      '<rootDir>/test/file-mock.js',
-    '\\.(svg)$': '<rootDir>/test/file-svg-mock.js',
+      '<rootDir>/test/file-mock.ts',
+    '\\.(svg)$': '<rootDir>/test/file-svg-mock.ts',
   },
   setupFiles: ['./test/setup-jest.ts'],
   snapshotSerializers: ['enzyme-to-json/serializer'],
-  setupFilesAfterEnv: ['./test/mocks.js', './test/setup-env.ts'],
+  setupFilesAfterEnv: ['./test/mocks.ts', './test/setup-env.ts'],
   testURL: 'http://localhost:3000/',
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/modules/', '/node_modules/', '/test/'],
