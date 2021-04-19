@@ -11,7 +11,7 @@ jest.mock('react-resize-detector', () => ({
 
 const mockPush = jest.fn()
 let currentPath = '/kaart/bag/foo/bar' // detail page
-
+let search = '?locatie=123,123'
 jest.mock('react-router-dom', () => ({
   // @ts-ignore
   ...jest.requireActual('react-router-dom'),
@@ -20,7 +20,7 @@ jest.mock('react-router-dom', () => ({
   }),
   useLocation: () => ({
     pathname: currentPath,
-    search: '?locatie=123,123',
+    search,
   }),
 }))
 
@@ -84,5 +84,61 @@ describe('MapPanel', () => {
     fireEvent.click(closeButton)
 
     expect(mockPush).toBeCalledWith({ pathname: '/kaart/geozoek/', search: '' })
+  })
+
+  it("should not show the panel when location isn't set on geosearch page", () => {
+    currentPath = '/kaart/geozoek/'
+    search = ''
+
+    const { queryByTestId } = render(withMapContext(<MapPanel loading={false} />))
+
+    expect(queryByTestId('drawerPanel')).toBeNull()
+  })
+
+  it('should show the panel when location is set on geosearch page', () => {
+    currentPath = '/kaart/geozoek/'
+    search = '?locatie=123,123'
+
+    const { queryByTestId } = render(withMapContext(<MapPanel loading={false} />))
+
+    expect(queryByTestId('drawerPanel')).not.toBeNull()
+  })
+
+  it("should not show the panel when polygon isn't set on dataselection pages (adressen, vestigingen and kadastrale objecten)", () => {
+    currentPath = '/kaart/bag/adressen/'
+    search = ''
+
+    const { queryByTestId, rerender } = render(withMapContext(<MapPanel loading={false} />))
+    expect(queryByTestId('drawerPanel')).toBeNull()
+
+    currentPath = '/kaart/hr/vestigingen/'
+    rerender(withMapContext(<MapPanel loading={false} />))
+    expect(queryByTestId('drawerPanel')).toBeNull()
+
+    currentPath = '/kaart/brk/kadastrale-objecten/'
+    rerender(withMapContext(<MapPanel loading={false} />))
+    expect(queryByTestId('drawerPanel')).toBeNull()
+  })
+
+  it('should show the panel when polygon is set on dataselection pages (adressen, vestigingen and kadastrale objecten)', () => {
+    currentPath = '/kaart/bag/adressen/'
+    search = `?geo=${JSON.stringify({
+      id: 123,
+      polygon: [
+        [123, 123],
+        [321, 321],
+      ],
+    })}`
+
+    const { queryByTestId, rerender } = render(withMapContext(<MapPanel loading={false} />))
+    expect(queryByTestId('drawerPanel')).not.toBeNull()
+
+    currentPath = '/kaart/hr/vestigingen/'
+    rerender(withMapContext(<MapPanel loading={false} />))
+    expect(queryByTestId('drawerPanel')).not.toBeNull()
+
+    currentPath = '/kaart/brk/kadastrale-objecten/'
+    rerender(withMapContext(<MapPanel loading={false} />))
+    expect(queryByTestId('drawerPanel')).not.toBeNull()
   })
 })

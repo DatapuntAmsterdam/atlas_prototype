@@ -1,5 +1,5 @@
 import { Heading, hooks, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent, useCallback, useMemo, useState } from 'react'
+import { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { Route, Switch, useHistory, useLocation, matchPath } from 'react-router-dom'
 import { DrawerPanelHeader, LargeDrawerPanel, SmallDrawerPanel } from '../DrawerPanel'
@@ -11,7 +11,13 @@ import DetailPanel from '../../detail/DetailPanel'
 import LoadingSpinner from '../../../../components/LoadingSpinner/LoadingSpinner'
 import LegendPanel from '../LegendPanel/LegendPanel'
 import useMapControls from './useMapControls'
-import { locationParam, panoFovParam, panoHeadingParam, panoPitchParam } from '../../query-params'
+import {
+  locationParam,
+  panoFovParam,
+  panoHeadingParam,
+  panoPitchParam,
+  polygonParam,
+} from '../../query-params'
 import useBuildQueryString from '../../../../utils/useBuildQueryString'
 import DrawResults from '../DrawTool/DrawResults'
 import useParam from '../../../../utils/useParam'
@@ -37,6 +43,7 @@ const MapPanel: FunctionComponent<MapPanelProps> = ({ loading }) => {
   const [legendActive, setLegendActive] = useState(false)
   const [drawerState, setDrawerState] = useState(DrawerState.Closed)
   const [locationParameter, setLocationParameter] = useParam(locationParam)
+  const [polygon] = useParam(polygonParam)
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
   const history = useHistory()
   const location = useLocation()
@@ -51,6 +58,12 @@ const MapPanel: FunctionComponent<MapPanelProps> = ({ loading }) => {
   const onCloseLegend = () => {
     setLegendActive(false)
   }
+
+  useEffect(() => {
+    if (locationParameter || polygon) {
+      setDrawerState(DrawerState.Open)
+    }
+  }, [locationParameter, polygon])
 
   const onClosePanel = useCallback(() => {
     if (matchPath(location.pathname, routing.dataSearchGeo_TEMP.path)) {
@@ -79,7 +92,11 @@ const MapPanel: FunctionComponent<MapPanelProps> = ({ loading }) => {
       // Do not show content panel when legend is active
       legendActive ||
       // Also geosearch-page always needs a location parameter
-      (matchPath(location.pathname, routing.dataSearchGeo_TEMP.path) && !locationParameter)
+      (matchPath(location.pathname, routing.dataSearchGeo_TEMP.path) && !locationParameter) ||
+      ((matchPath(location.pathname, routing.addresses_TEMP.path) ||
+        matchPath(location.pathname, routing.establishments_TEMP.path) ||
+        matchPath(location.pathname, routing.cadastralObjects_TEMP.path)) &&
+        !polygon)
     ) {
       return false
     }
