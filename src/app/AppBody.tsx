@@ -113,44 +113,43 @@ const AppBody: FunctionComponent<AppBodyProps> = ({
         <>
           <Suspense fallback={<StyledLoadingSpinner />}>
             <DataSelectionProvider>
+              <Helmet>
+                {/* The viewport must be reset for "old" pages that don't incorporate the grid.
+        1024 is an arbirtrary number as the browser doesn't actually care about the exact number,
+        but only needs to know it's significantly bigger than the actual viewport */}
+                <meta name="viewport" content="width=1024, user-scalable=yes" />
+              </Helmet>
               <Switch>
                 <Route path={[routing.data_TEMP.path]}>
+                  {/* When the mobile map panel is working properly we can disable the meta rule up defined above */}
                   <MapContainer />
                 </Route>
                 <Route>
-                  <>
-                    <Helmet>
-                      {/* The viewport must be reset for "old" pages that don't incorporate the grid.
-        1024 is an arbirtrary number as the browser doesn't actually care about the exact number,
-        but only needs to know it's significantly bigger than the actual viewport */}
-                      <meta name="viewport" content="width=1024, user-scalable=yes" />
-                    </Helmet>
-                    <div className={`c-dashboard__body ${bodyClasses}`}>
-                      <NotificationAlert />
-                      {visibilityError && <ErrorAlert />}
-                      {embedPreviewMode ? (
-                        <EmbedIframeComponent />
-                      ) : (
-                        <div className="u-grid u-full-height u-overflow--y-auto">
-                          <div className="u-row u-full-height">
-                            <Switch>
-                              <Route
-                                path={routing.constructionDossier.path}
-                                exact
-                                component={ConstructionDossierPage}
-                              />
-                              <Route
-                                path={routing.datasetDetail.path}
-                                exact
-                                component={DatasetDetailPage}
-                              />
-                              <Route path={mapSplitPagePaths} component={MapSplitPage} />
-                            </Switch>
-                          </div>
+                  <div className={`c-dashboard__body ${bodyClasses}`}>
+                    <NotificationAlert />
+                    {visibilityError && <ErrorAlert />}
+                    {embedPreviewMode ? (
+                      <EmbedIframeComponent />
+                    ) : (
+                      <div className="u-grid u-full-height u-overflow--y-auto">
+                        <div className="u-row u-full-height">
+                          <Switch>
+                            <Route
+                              path={routing.constructionDossier.path}
+                              exact
+                              component={ConstructionDossierPage}
+                            />
+                            <Route
+                              path={routing.datasetDetail.path}
+                              exact
+                              component={DatasetDetailPage}
+                            />
+                            <Route path={mapSplitPagePaths} component={MapSplitPage} />
+                          </Switch>
                         </div>
-                      )}
-                    </div>
-                  </>
+                      </div>
+                    )}
+                  </div>
                 </Route>
               </Switch>
             </DataSelectionProvider>
