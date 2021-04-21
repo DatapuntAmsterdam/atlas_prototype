@@ -1,5 +1,6 @@
 import { fireEvent, render } from '@testing-library/react'
 import MapPanel from './MapPanel'
+import 'jest-styled-components'
 import withMapContext from '../../../../utils/withMapContext'
 
 jest.mock('react-resize-detector', () => ({
@@ -30,7 +31,9 @@ describe('MapPanel', () => {
   })
 
   it('should open and close the legend panel', () => {
-    const { getByTestId, queryByTestId } = render(withMapContext(<MapPanel loading={false} />))
+    const { queryAllByTestId, getByTestId, queryByTestId } = render(
+      withMapContext(<MapPanel loading={false} />),
+    )
 
     const legendControlButton = getByTestId('legendControl').querySelector('button')
 
@@ -38,10 +41,10 @@ describe('MapPanel', () => {
 
     // Open
     fireEvent.click(legendControlButton as Element)
-    expect(getByTestId('legendPanel')).toBeDefined()
+    expect(getByTestId('legendPanel')).not.toBeNull()
 
     // Close
-    const closeButton = getByTestId('closePanelButton')
+    const closeButton = queryAllByTestId('closePanelButton')[1]
     fireEvent.click(closeButton)
     expect(queryByTestId('legendPanel')).toBeNull()
   })
@@ -110,26 +113,13 @@ describe('MapPanel', () => {
     expect(mockPush).toBeCalledWith({ pathname: '/kaart/geozoek/', search: 'locatie=123%2C123' })
   })
 
-  it('should remove the location parameter and navigate to /kaart when closing geosearch panel', () => {
-    currentPath = '/kaart/geozoek/'
-
-    const { getByTestId, queryByTestId } = render(withMapContext(<MapPanel loading={false} />))
-
-    expect(queryByTestId('drawerPanel')).toBeDefined()
-
-    const closeButton = getByTestId('closePanelButton')
-    fireEvent.click(closeButton)
-
-    expect(mockPush).toBeCalledWith({ pathname: '/kaart/', search: '' })
-  })
-
   it("should not show the panel when location isn't set on geosearch page", () => {
     currentPath = '/kaart/geozoek/'
     search = ''
 
-    const { queryByTestId } = render(withMapContext(<MapPanel loading={false} />))
+    const { getByTestId } = render(withMapContext(<MapPanel loading={false} />))
 
-    expect(queryByTestId('drawerPanel')).toBeNull()
+    expect(getByTestId('drawerPanel')).toHaveStyleRule('display', 'none')
   })
 
   it('should show the panel when location is set on geosearch page', () => {
@@ -145,16 +135,16 @@ describe('MapPanel', () => {
     currentPath = '/kaart/bag/adressen/'
     search = ''
 
-    const { queryByTestId, rerender } = render(withMapContext(<MapPanel loading={false} />))
-    expect(queryByTestId('drawerPanel')).toBeNull()
+    const { getByTestId, rerender } = render(withMapContext(<MapPanel loading={false} />))
+    expect(getByTestId('drawerPanel')).toHaveStyleRule('display', 'none')
 
     currentPath = '/kaart/hr/vestigingen/'
     rerender(withMapContext(<MapPanel loading={false} />))
-    expect(queryByTestId('drawerPanel')).toBeNull()
+    expect(getByTestId('drawerPanel')).toHaveStyleRule('display', 'none')
 
     currentPath = '/kaart/brk/kadastrale-objecten/'
     rerender(withMapContext(<MapPanel loading={false} />))
-    expect(queryByTestId('drawerPanel')).toBeNull()
+    expect(getByTestId('drawerPanel')).toHaveStyleRule('display', 'none')
   })
 
   it('should show the panel when polygon is set on dataselection pages (adressen, vestigingen and kadastrale objecten)', () => {
