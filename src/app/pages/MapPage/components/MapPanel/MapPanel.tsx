@@ -35,6 +35,10 @@ const DrawerContainer = styled.div`
   padding: ${themeSpacing(0, 4)};
 `
 
+const StyledLargeDrawerPanel = styled(LargeDrawerPanel)<{ show: boolean }>`
+  display: ${({ show }) => (show ? 'block' : 'none')};
+`
+
 interface MapPanelProps {
   loading: boolean
 }
@@ -107,10 +111,6 @@ const MapPanel: FunctionComponent<MapPanelProps> = ({ loading }) => {
 
   const controls = useMapControls(showDesktopVariant, onOpenLegend)
 
-  const DrawerPanel = useMemo(() => (legendActive ? SmallDrawerPanel : LargeDrawerPanel), [
-    legendActive,
-  ])
-
   const showContentPanel = useMemo(() => {
     if (
       // Do not show content panel when legend is active
@@ -141,34 +141,32 @@ const MapPanel: FunctionComponent<MapPanelProps> = ({ loading }) => {
         state={drawerState}
         onStateChange={(state) => setDrawerState(state)}
       >
-        {showContentPanel && (
-          <DrawerPanel data-testid="drawerPanel">
-            <DrawerPanelHeader onClose={onClosePanel}>
-              <TitleHeading styleAs="h1">Resultaten</TitleHeading>
-            </DrawerPanelHeader>
-            <DrawerContainer>
-              {loading && <LoadingSpinner />}
-              <Switch>
-                <Route path={[routing.dataSearchGeo_TEMP.path, routing.panorama_TEMP.path]}>
-                  <MapSearchResults />
-                </Route>
-                <Route path={[routing.dataDetail_TEMP.path]}>
-                  <DetailPanel />
-                </Route>
-                <Route
-                  path={[
-                    routing.addresses_TEMP.path,
-                    routing.establishments_TEMP.path,
-                    routing.cadastralObjects_TEMP.path,
-                  ]}
-                  exact
-                >
-                  <DrawResults currentOverlay={Overlay.Results} />
-                </Route>
-              </Switch>
-            </DrawerContainer>
-          </DrawerPanel>
-        )}
+        <StyledLargeDrawerPanel data-testid="drawerPanel" show={showContentPanel}>
+          <DrawerPanelHeader onClose={!dataSearchGeoMatch ? onClosePanel : undefined}>
+            <TitleHeading styleAs="h1">Resultaten</TitleHeading>
+          </DrawerPanelHeader>
+          <DrawerContainer>
+            {loading && <LoadingSpinner />}
+            <Switch>
+              <Route path={[routing.dataSearchGeo_TEMP.path, routing.panorama_TEMP.path]}>
+                <MapSearchResults />
+              </Route>
+              <Route path={[routing.dataDetail_TEMP.path]}>
+                <DetailPanel />
+              </Route>
+              <Route
+                path={[
+                  routing.addresses_TEMP.path,
+                  routing.establishments_TEMP.path,
+                  routing.cadastralObjects_TEMP.path,
+                ]}
+                exact
+              >
+                <DrawResults currentOverlay={Overlay.Results} />
+              </Route>
+            </Switch>
+          </DrawerContainer>
+        </StyledLargeDrawerPanel>
         {legendActive && (
           <SmallDrawerPanel data-testid="drawerPanel">
             <DrawerPanelHeader onClose={onCloseLegend}>
