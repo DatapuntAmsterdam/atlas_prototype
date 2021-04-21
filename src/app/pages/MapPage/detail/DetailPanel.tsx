@@ -10,7 +10,6 @@ import {
   toMapDetails,
 } from '../../../../map/services/map'
 import {
-  DetailInfo,
   DetailResultItem,
   DetailResultItemGroupedItems,
   DetailResultItemPaginatedData,
@@ -22,6 +21,7 @@ import { AuthError } from '../../../../shared/services/api/customError'
 import AuthAlert from '../../../components/Alerts/AuthAlert'
 import PromiseResult from '../../../components/PromiseResult/PromiseResult'
 import Spacer from '../../../components/Spacer/Spacer'
+import { DataDetailParams } from '../../../links'
 import useAuthScope from '../../../utils/useAuthScope'
 import AuthenticationWrapper from '../components/AuthenticationWrapper'
 import PanoramaPreview, { PreviewContainer } from '../components/PanoramaPreview/PanoramaPreview'
@@ -97,16 +97,10 @@ interface LegacyLayout {
   legacyLayout?: boolean
 }
 
-// TODO: 'subType' should be replaced with the 'subType' property on 'DetailInfo'
-// This should happen when the old Angular and Redux Router code has been deleted.
-export interface DataDetailPageParams extends Omit<DetailInfo, 'subType'> {
-  subtype: string
-}
-
 const DetailPanel: FunctionComponent = () => {
   const { setDetailFeature } = useContext(MapContext)
   const { isUserAuthorized } = useAuthScope()
-  const { type, subtype: subType, id } = useParams<DataDetailPageParams>()
+  const { type, subtype: subType, id } = useParams<DataDetailParams>()
 
   async function getDetailData() {
     if (!type) {
@@ -125,7 +119,7 @@ const DetailPanel: FunctionComponent = () => {
       return Promise.reject(error)
     }
 
-    const data = await fetchDetailData(serviceDefinition, id as string)
+    const data = await fetchDetailData(serviceDefinition, id)
     const details = await toMapDetails(serviceDefinition, data, { id, type, subType })
 
     if (details.geometry) {
