@@ -5,7 +5,7 @@ import { HEADER_LINK_HELP } from '../shared/config/content-links'
 import { ViewMode } from '../shared/ducks/ui/ui'
 import parameters from '../store/parameters'
 import { fileNameParam, fileUrlParam } from './pages/ConstructionDossierPage/query-params'
-import { routing } from './routes'
+import { MAIN_PATHS, routing } from './routes'
 
 export const toAddresses = (): LocationDescriptorObject => {
   const searchParams = new URLSearchParams({
@@ -54,6 +54,22 @@ export const toConstructionDossier = (
   }
 
   return { pathname, search: searchParams.toString() }
+}
+
+export interface DataDetailParams {
+  type: string
+  subtype: string
+  id: string
+}
+
+export const toDataDetail = ({ type, subtype, id }: DataDetailParams): LocationDescriptorObject => {
+  const path = window.location.pathname.includes(MAIN_PATHS.MAP)
+    ? routing.dataDetail_TEMP.path
+    : routing.dataDetail.path
+
+  return {
+    pathname: generatePath(path, { type, subtype, id }),
+  }
 }
 
 export const toEstablishments = (): LocationDescriptorObject => {

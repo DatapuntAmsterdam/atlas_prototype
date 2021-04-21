@@ -7,6 +7,7 @@ import {
   toCadastralObjects,
   toCollectionDetail,
   toConstructionDossier,
+  toDataDetail,
   toEstablishments,
   toHelpPage,
   toHome,
@@ -63,6 +64,30 @@ describe('toConstructionDossier', () => {
       pathname: generatePath(routing.constructionDossier.path, { id }),
       search: 'bestand=file.ext&bestandUrl=http%3A%2F%2Ffoo.bar',
     })
+  })
+})
+
+describe('toDataDetail', () => {
+  const type = 'foo'
+  const subtype = 'bar'
+  const id = '123456'
+
+  it('creates a location descriptor', () => {
+    expect(toDataDetail({ type, subtype, id })).toEqual({
+      pathname: generatePath(routing.dataDetail.path, { type, subtype, id }),
+    })
+  })
+
+  it('creates a location descriptor for the new map', () => {
+    const locationSpy = jest
+      .spyOn(window, 'location', 'get')
+      .mockReturnValue({ pathname: '/kaart/some/path', search: '' } as Location)
+
+    expect(toDataDetail({ type, subtype, id })).toEqual({
+      pathname: generatePath(routing.dataDetail_TEMP.path, { type, subtype, id }),
+    })
+
+    locationSpy.mockRestore()
   })
 })
 

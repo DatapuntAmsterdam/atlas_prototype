@@ -1,15 +1,16 @@
 import { MapPanelContext, Marker as ARMMarker } from '@amsterdam/arm-core'
 import { useMapEvents } from '@amsterdam/react-maps'
 import { LeafletMouseEvent } from 'leaflet'
-import { useContext, useEffect, useRef, FunctionComponent } from 'react'
-import { generatePath, useHistory } from 'react-router-dom'
+import { FunctionComponent, useContext, useEffect, useRef } from 'react'
+import { useHistory } from 'react-router-dom'
 import fetchNearestDetail from '../../../../map/services/nearest-detail/nearest-detail'
+import { toDataDetail } from '../../../links'
+import { routing } from '../../../routes'
+import useBuildQueryString from '../../../utils/useBuildQueryString'
 import MapContext, { Overlay } from '../MapContext'
 import { MarkerProps } from '../MapMarkers'
 import { locationParam } from '../query-params'
 import { SnapPoint } from '../types'
-import { routing } from '../../../routes'
-import useBuildQueryString from '../../../utils/useBuildQueryString'
 
 const MapSearchMarker: FunctionComponent<MarkerProps> = ({ location }) => {
   const { legendLeafletLayers } = useContext(MapContext)
@@ -39,11 +40,7 @@ const MapSearchMarker: FunctionComponent<MarkerProps> = ({ location }) => {
     if (nearestDetail) {
       const { type, subType, id } = nearestDetail
       history.push({
-        pathname: generatePath(routing.dataDetail_TEMP.path, {
-          type,
-          subtype: subType ?? '',
-          id,
-        }),
+        ...toDataDetail({ type, subtype: subType ?? '', id }),
         search: window.location.search,
       })
     } else {
