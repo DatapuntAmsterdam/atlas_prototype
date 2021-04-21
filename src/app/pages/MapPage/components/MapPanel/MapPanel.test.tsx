@@ -46,6 +46,42 @@ describe('MapPanel', () => {
     expect(queryByTestId('legendPanel')).toBeNull()
   })
 
+  it('should close the legend panel when navigating to a detail panel', () => {
+    const { getByTestId, queryByTestId, rerender } = render(
+      withMapContext(<MapPanel loading={false} />),
+    )
+
+    const legendControlButton = getByTestId('legendControl').querySelector('button')
+
+    // Open
+    fireEvent.click(legendControlButton as Element)
+    expect(getByTestId('legendPanel')).toBeDefined()
+
+    // Close
+    currentPath = '/kaart/parkeervakken/parkeervakken/120876487667/'
+    rerender(withMapContext(<MapPanel loading={false} />))
+
+    expect(queryByTestId('legendPanel')).toBeNull()
+  })
+
+  it('should close the legend panel when navigating to a geo search', () => {
+    const { getByTestId, queryByTestId, rerender } = render(
+      withMapContext(<MapPanel loading={false} />),
+    )
+
+    const legendControlButton = getByTestId('legendControl').querySelector('button')
+
+    // Open
+    fireEvent.click(legendControlButton as Element)
+    expect(getByTestId('legendPanel')).toBeDefined()
+
+    // Close
+    currentPath = '/kaart/geozoek/'
+    rerender(withMapContext(<MapPanel loading={false} />))
+
+    expect(queryByTestId('legendPanel')).toBeNull()
+  })
+
   it('should show the right map controls when panorama is not in full screen mode', () => {
     const { queryByTestId } = render(withMapContext(<MapPanel loading={false} />))
 
@@ -65,6 +101,7 @@ describe('MapPanel', () => {
   })
 
   it('should navigate to geosearch page when closing detail panel', () => {
+    currentPath = '/kaart/bag/foo/bar'
     const { getByTestId } = render(withMapContext(<MapPanel loading={false} />))
 
     const closeButton = getByTestId('closePanelButton')

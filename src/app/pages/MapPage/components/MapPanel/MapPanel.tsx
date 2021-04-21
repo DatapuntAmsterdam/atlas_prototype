@@ -49,6 +49,17 @@ const MapPanel: FunctionComponent<MapPanelProps> = ({ loading }) => {
   const location = useLocation()
   const { buildQueryString } = useBuildQueryString()
   const mode = showDesktopVariant ? DeviceMode.Desktop : DeviceMode.Mobile
+  // TODO: Replace this logic with 'useRouteMatch()' when the following PR has been released:
+  // https://github.com/ReactTraining/react-router/pull/7822
+  const dataDetailMatch = useMemo(
+    () => matchPath(location.pathname, routing.dataDetail_TEMP.path),
+    [location.pathname, routing.dataDetail_TEMP.path],
+  )
+
+  const dataSearchGeoMatch = useMemo(
+    () => matchPath(location.pathname, routing.dataSearchGeo_TEMP.path),
+    [location.pathname, routing.dataSearchGeo_TEMP.path],
+  )
 
   const onOpenLegend = () => {
     setLegendActive(true)
@@ -65,14 +76,24 @@ const MapPanel: FunctionComponent<MapPanelProps> = ({ loading }) => {
     }
   }, [locationParameter, polygon])
 
+  // Hide the legend when any of the following events occur:
+  // - The user selects an item on the map, navigating to a detail panel.
+  // - The user selects a point on the map, navigating to a geo search panel.
+  useEffect(() => {
+    if (dataDetailMatch || dataSearchGeoMatch) {
+      setLegendActive(false)
+    }
+  }, [dataDetailMatch, dataSearchGeoMatch])
+
   const onClosePanel = useCallback(() => {
-    if (matchPath(location.pathname, routing.dataSearchGeo_TEMP.path)) {
+    if (dataSearchGeoMatch) {
       history.push({
         pathname: routing.data_TEMP.path,
         search: buildQueryString(undefined, [locationParam]),
       })
     }
-    if (matchPath(location.pathname, routing.dataDetail_TEMP.path)) {
+
+    if (dataDetailMatch) {
       history.push({
         pathname: routing.dataSearchGeo_TEMP.path,
         search: buildQueryString([
@@ -99,7 +120,7 @@ const MapPanel: FunctionComponent<MapPanelProps> = ({ loading }) => {
         path: routing.data_TEMP.path,
         exact: true,
       }) ||
-      (matchPath(location.pathname, routing.dataSearchGeo_TEMP.path) && !locationParameter) ||
+      (dataSearchGeoMatch && !locationParameter) ||
       ((matchPath(location.pathname, routing.addresses_TEMP.path) ||
         matchPath(location.pathname, routing.establishments_TEMP.path) ||
         matchPath(location.pathname, routing.cadastralObjects_TEMP.path)) &&
