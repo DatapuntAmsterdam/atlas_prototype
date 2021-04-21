@@ -8,8 +8,8 @@ import { drawToolOpenParam, locationParam } from './query-params'
 import { routing } from '../../routes'
 
 export interface MarkerProps {
-  location: LatLngLiteral | null
-  setLocation?: (location: LatLngLiteral) => void
+  position: LatLngLiteral | null
+  setPosition?: (location: LatLngLiteral) => void
 }
 
 export interface MapMarkersProps {
@@ -21,20 +21,21 @@ const MapMarkers: FunctionComponent<MapMarkersProps> = ({ panoActive }) => {
   const location = useLocation()
   const [showDrawTool] = useParam(drawToolOpenParam)
 
-  const showSearchMarker = useMemo(
+  const renderSearchMarker = useMemo(
     () =>
       !panoActive &&
       !showDrawTool &&
-      (matchPath(location.pathname, { path: routing.dataSearchGeo_TEMP.path, exact: true }) ||
+      (matchPath(location.pathname, { path: routing.dataDetail_TEMP.path, exact: true }) ||
+        matchPath(location.pathname, { path: routing.dataSearchGeo_TEMP.path, exact: true }) ||
         matchPath(location.pathname, { path: routing.data_TEMP.path, exact: true })),
     [location, panoActive, showDrawTool],
   )
 
   return (
     <>
-      {showSearchMarker && <MapSearchMarker location={locationParameter} />}
+      {renderSearchMarker && <MapSearchMarker position={locationParameter} />}
       {panoActive && (
-        <PanoramaViewerMarker location={locationParameter} setLocation={setLocationParameter} />
+        <PanoramaViewerMarker position={locationParameter} setPosition={setLocationParameter} />
       )}
     </>
   )

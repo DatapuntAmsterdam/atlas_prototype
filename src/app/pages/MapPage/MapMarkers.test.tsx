@@ -19,22 +19,20 @@ jest.mock('../../components/PanoramaViewer/PanoramaViewerMarker', () => () => (
 jest.mock('./map-search/MapSearchMarker', () => () => <div data-testid="searchMarker" />)
 
 describe('MapMarkers', () => {
-  it('should show the search marker when on /kaart/geozoek or /kaart', () => {
+  it('should render the search marker when on /kaart, /kaart/geozoek and detail page', () => {
     const { getByTestId, rerender } = render(withMapContext(<MapMarkers panoActive={false} />))
     expect(getByTestId('searchMarker')).not.toBeNull()
 
     currentPath = '/kaart/geozoek'
     rerender(withMapContext(<MapMarkers panoActive={false} />))
     expect(getByTestId('searchMarker')).not.toBeNull()
+
+    currentPath = '/kaart/bag/buurt/123'
+    rerender(withMapContext(<MapMarkers panoActive={false} />))
+    expect(getByTestId('searchMarker')).not.toBeNull()
   })
 
-  it('should not show the search marker on detail page', () => {
-    currentPath = '/kaart/bag/pand/123'
-    const { queryByTestId } = render(withMapContext(<MapMarkers panoActive={false} />))
-    expect(queryByTestId('searchMarker')).toBeNull()
-  })
-
-  it('should not show the search marker, but the panorama marker when panoramaviewer is active', () => {
+  it('should not render the search marker, but the panorama marker when panoramaviewer is active', () => {
     currentPath = '/kaart/geozoek'
     const { getByTestId, queryByTestId } = render(withMapContext(<MapMarkers panoActive />))
     expect(getByTestId('panoramaMarker')).not.toBeNull()

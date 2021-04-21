@@ -65,7 +65,6 @@ export default function buildLeafletLayers(
       if (!layer) {
         return null
       }
-
       const legendLayers = (layer.legendItems ?? [])
         // eslint-disable-next-line no-underscore-dangle
         .map((legendItem) => (legendItem.__typename === 'MapLayer' ? legendItem.id : null))

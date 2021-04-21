@@ -147,7 +147,7 @@ const DetailPanel: FunctionComponent = () => {
   }, [])
 
   return (
-    <PromiseResult factory={() => getDetailData()} deps={[]}>
+    <PromiseResult factory={() => getDetailData()} deps={[type, subType, id]}>
       {({ value }) => (
         <>
           {/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}

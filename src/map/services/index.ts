@@ -113,6 +113,7 @@ export async function getMapLayers() {
         url
         params
         layers
+        minZoom
         external
         detailUrl
         detailParams {

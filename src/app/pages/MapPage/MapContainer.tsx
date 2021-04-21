@@ -75,7 +75,6 @@ const MapContainer: FunctionComponent = ({ children }) => {
 
   async function getMapLayers() {
     const mapLayers = await fetchMapLayers()
-
     dispatch({
       type: 'setMapLayers',
       payload: mapLayers,
