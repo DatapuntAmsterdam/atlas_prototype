@@ -79,11 +79,12 @@ const MapPanel: FunctionComponent<MapPanelProps> = ({ loading }) => {
   // Hide the legend when any of the following events occur:
   // - The user selects an item on the map, navigating to a detail panel.
   // - The user selects a point on the map, navigating to a geo search panel.
+  // - The users moves the point on the map, whilst already having the geo search panel open.
   useEffect(() => {
     if (dataDetailMatch || dataSearchGeoMatch) {
       setLegendActive(false)
     }
-  }, [dataDetailMatch, dataSearchGeoMatch])
+  }, [dataDetailMatch, dataSearchGeoMatch, locationParameter])
 
   const onClosePanel = useCallback(() => {
     if (dataSearchGeoMatch) {
