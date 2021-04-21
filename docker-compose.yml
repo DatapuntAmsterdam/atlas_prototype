@@ -20,5 +20,5 @@ services:
       - GRAPHQL_ENDPOINT=https://api.data.amsterdam.nl/cms_search/graphql/
       - ROOT=http://localhost:3000/
       - KEYCLOAK_URL=https://iam.amsterdam.nl/auth
-      - KEYCLOAK_REALM=datapunt-ad
+      - KEYCLOAK_REALM=datapunt-ad-b
       - KEYCLOAK_CLIENT=dataportaal
