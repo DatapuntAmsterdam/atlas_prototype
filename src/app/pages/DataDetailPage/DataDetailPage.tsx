@@ -4,8 +4,9 @@ import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import PromiseResult from '../../components/PromiseResult/PromiseResult'
 import ShareBar from '../../components/ShareBar/ShareBar'
+import { DataDetailParams } from '../../links'
 import DetailInfoBox from '../MapPage/detail/DetailInfoBox'
-import { DataDetailPageParams, HeadingWrapper, RenderDetails } from '../MapPage/detail/DetailPanel'
+import { HeadingWrapper, RenderDetails } from '../MapPage/detail/DetailPanel'
 import useDataDetail from './useDataDetail'
 
 const DetailWrapper = styled(Container)`
@@ -23,7 +24,7 @@ const DetailType = styled.strong`
 
 const DataDetailPage: FunctionComponent = () => {
   const getDetailData = useDataDetail()
-  const { id: rawId, subtype: subType, type } = useParams<DataDetailPageParams>()
+  const { id: rawId, subtype: subType, type } = useParams<DataDetailParams>()
 
   if (!rawId || !subType || !type) {
     return null
