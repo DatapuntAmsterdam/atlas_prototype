@@ -3,15 +3,15 @@ import { LeafletMouseEvent } from 'leaflet'
 import { FunctionComponent, useContext } from 'react'
 import { matchPath, useHistory, useLocation } from 'react-router-dom'
 import fetchNearestDetail from '../../../../map/services/nearest-detail/nearest-detail'
+import { toDataDetail } from '../../../links'
+import { routing } from '../../../routes'
+import useBuildQueryString from '../../../utils/useBuildQueryString'
+import useLeafletEvent from '../../../utils/useLeafletEvent'
+import useParam from '../../../utils/useParam'
 import MapContext from '../MapContext'
 import { MarkerProps } from '../MapMarkers'
 import { locationParam, zoomParam } from '../query-params'
 import { SnapPoint } from '../types'
-import { toDataDetail } from '../../../links'
-import { routing } from '../../../routes'
-import useBuildQueryString from '../../../utils/useBuildQueryString'
-import useParam from '../../../utils/useParam'
-import useLeafletMapEventHandler from '../../../utils/useLeafletMapEventHandler'
 
 const MapSearchMarker: FunctionComponent<MarkerProps> = ({ position }) => {
   const { legendLeafletLayers } = useContext(MapContext)
@@ -51,12 +51,12 @@ const MapSearchMarker: FunctionComponent<MarkerProps> = ({ position }) => {
     }
   }
 
-  useLeafletMapEventHandler(
-    {
-      click: async (event) => {
-        setPositionFromSnapPoint(SnapPoint.Halfway)
-        await handleMapClick(event)
-      },
+  useLeafletEvent(
+    'click',
+    (event) => {
+      setPositionFromSnapPoint(SnapPoint.Halfway)
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      handleMapClick(event)
     },
     [location, legendLeafletLayers],
   )

@@ -4,9 +4,9 @@ import 'leaflet-rotatedmarker'
 import { FunctionComponent, useEffect, useState } from 'react'
 import { MarkerProps } from '../../pages/MapPage/MapMarkers'
 import { panoHeadingParam } from '../../pages/MapPage/query-params'
+import useLeafletEvent from '../../utils/useLeafletEvent'
 import useMapCenterToMarker from '../../utils/useMapCenterToMarker'
 import useParam from '../../utils/useParam'
-import useLeafletMapEventHandler from '../../utils/useLeafletMapEventHandler'
 
 const orientationIcon = new Icon({
   iconUrl: '/assets/images/map/panorama-orientation.svg',
@@ -27,12 +27,7 @@ const PanoramaViewerMarker: FunctionComponent<MarkerProps> = ({ position, setPos
   // TODO: be able to give a x & y offset (when MapPanel is open)
   useMapCenterToMarker(position)
 
-  useLeafletMapEventHandler(
-    {
-      click: ({ latlng }) => setPosition && setPosition(latlng),
-    },
-    [],
-  )
+  useLeafletEvent('click', ({ latlng }) => setPosition?.(latlng), [])
 
   useEffect(() => {
     if (orientationMarker && panoHeading) {
