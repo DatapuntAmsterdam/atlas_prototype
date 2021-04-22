@@ -18,7 +18,7 @@ export interface DrawerPanelHeaderProps {
 
 const DrawerPanelHeader: FunctionComponent<DrawerPanelHeaderProps> = ({ children, onClose }) => (
   <HeaderContainer>
-    <>{children}</>
+    <div>{children}</div>
     {onClose && (
       <CloseButton
         data-testid="closePanelButton"

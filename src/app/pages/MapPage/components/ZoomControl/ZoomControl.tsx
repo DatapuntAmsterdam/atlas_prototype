@@ -13,11 +13,16 @@ const ZoomButton = styled(Button)`
   }
 `
 
+const StyledControl = styled(Control)`
+  order: 3;
+  align-self: flex-end;
+`
+
 const ZoomControl: FunctionComponent = () => {
   const mapInstance = useMapInstance()
 
   return (
-    <Control data-testid="zoomControls">
+    <StyledControl data-testid="zoomControls">
       <ZoomButton
         type="button"
         variant="blank"
@@ -36,7 +41,7 @@ const ZoomControl: FunctionComponent = () => {
         onClick={() => mapInstance.zoomOut()}
         icon={<Minimise />}
       />
-    </Control>
+    </StyledControl>
   )
 }
 

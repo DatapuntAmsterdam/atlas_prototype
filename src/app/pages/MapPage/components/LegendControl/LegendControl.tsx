@@ -13,13 +13,17 @@ const StyledButton = styled(Button)`
   min-width: inherit;
 `
 
+const StyledControl = styled(Control)`
+  align-self: flex-start;
+`
+
 const LegendControl: FunctionComponent<LegendControlProps> = ({ showDesktopVariant, onClick }) => {
   const iconProps = showDesktopVariant
     ? { iconLeft: <MapLayers data-testid="desktopIcon" /> }
     : { icon: <MapLayers data-testid="mobileIcon" />, size: 32 }
 
   return (
-    <Control data-testid="legendControl">
+    <StyledControl data-testid="legendControl">
       <StyledButton
         type="button"
         variant="blank"
@@ -30,7 +34,7 @@ const LegendControl: FunctionComponent<LegendControlProps> = ({ showDesktopVaria
       >
         Legenda
       </StyledButton>
-    </Control>
+    </StyledControl>
   )
 }
 

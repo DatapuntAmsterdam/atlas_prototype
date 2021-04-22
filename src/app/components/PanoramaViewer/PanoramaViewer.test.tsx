@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import PanoramaViewer from './PanoramaViewer'
 
 const mockPush = jest.fn()
@@ -36,17 +36,9 @@ jest.mock('marzipano', () => ({
 }))
 
 describe('PanoramaViewer', () => {
-  it('should update (history.push) the URL by remove panorama-related parameters and layers', async () => {
-    const { findByTestId } = render(<PanoramaViewer />)
+  it('render', () => {
+    const { container } = render(<PanoramaViewer />)
 
-    const closeButton = await findByTestId('panoramaViewerCloseButton')
-    expect(mockPush).not.toHaveBeenCalled()
-
-    fireEvent.click(closeButton)
-
-    expect(mockPush).toHaveBeenCalledWith({
-      pathname: 'some-url/',
-      search: 'randomParam=%22should-stay%22',
-    })
+    expect(container.firstChild).toBeDefined()
   })
 })

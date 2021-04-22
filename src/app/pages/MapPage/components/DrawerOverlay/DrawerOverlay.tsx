@@ -122,7 +122,7 @@ const DrawerHandleDesktop = styled(Button)`
   width: ${HANDLE_SIZE_DESKTOP - 20}px;
   height: 100%;
   position: relative;
-  margin-right: ${themeSpacing(5)};
+  margin-right: ${themeSpacing(9)};
 
   & > ${styles.IconStyle} {
     opacity: 0;

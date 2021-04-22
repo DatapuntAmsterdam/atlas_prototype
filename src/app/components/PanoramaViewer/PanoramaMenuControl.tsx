@@ -9,6 +9,7 @@ import { getStreetViewUrl } from '../../../panorama/services/panorama-api/panora
 import Clock from '../../../shared/assets/icons/Clock.svg'
 import { locationParam, panoHeadingParam, panoTagParam } from '../../pages/MapPage/query-params'
 import useParam from '../../utils/useParam'
+import Control from '../../pages/MapPage/components/Control'
 
 export const getLabel = (id: string): string =>
   PANO_LABELS.find(({ id: labelId }) => labelId === id)?.label || PANO_LABELS[0].label
@@ -40,7 +41,12 @@ const ContextMenuButton = styled(ControlButton)`
   height: 44px; // To match the other buttons
 `
 
-const PanoramaViewerMenu: FunctionComponent = () => {
+const StyledControl = styled(Control)`
+  order: 2;
+  transform: translateY(-${themeSpacing(10)});
+`
+
+const PanoramaMenuControl: FunctionComponent = () => {
   const [location] = useParam(locationParam)
   const [panoHeading] = useParam(panoHeadingParam)
   const [panoTag, setPanoTag] = useParam(panoTagParam)
@@ -59,50 +65,53 @@ const PanoramaViewerMenu: FunctionComponent = () => {
   }
 
   return (
-    // @ts-ignore
-    <StyledContextMenu
-      arrowIcon={<ChevronDown />}
-      icon={
-        <Icon padding={4} inline size={24}>
-          <Clock />
-        </Icon>
-      }
-      label={getLabel(panoTag)}
-      position="bottom"
-      variant="blank"
-      forwardedAs={ContextMenuButton}
-    >
-      {PANO_LABELS.map(({ id, label }, index) => (
-        <StyledContextMenuItem
-          key={id}
-          divider={index === PANO_LABELS.length - 1}
-          role="button"
-          onClick={() => setPanoTag(id)}
-          icon={
-            panoTag === id ? (
-              <CheckmarkIcon inline size={12}>
-                <Checkmark />
-              </CheckmarkIcon>
-            ) : null
-          }
-        >
-          {label}
-        </StyledContextMenuItem>
-      ))}
-      <ContextMenuItem
-        key="google-street-view"
-        role="button"
-        onClick={handleOpenPanoramaExternal}
+    <StyledControl data-testid="panoramaViewerMenu">
+      {/*
+      // @ts-ignore */}
+      <StyledContextMenu
+        arrowIcon={<ChevronDown />}
         icon={
           <Icon padding={4} inline size={24}>
-            <ExternalLink />
+            <Clock />
           </Icon>
         }
+        label={getLabel(panoTag)}
+        position="bottom"
+        variant="blank"
+        forwardedAs={ContextMenuButton}
       >
-        Google Street View
-      </ContextMenuItem>
-    </StyledContextMenu>
+        {PANO_LABELS.map(({ id, label }, index) => (
+          <StyledContextMenuItem
+            key={id}
+            divider={index === PANO_LABELS.length - 1}
+            role="button"
+            onClick={() => setPanoTag(id)}
+            icon={
+              panoTag === id ? (
+                <CheckmarkIcon inline size={12}>
+                  <Checkmark />
+                </CheckmarkIcon>
+              ) : null
+            }
+          >
+            {label}
+          </StyledContextMenuItem>
+        ))}
+        <ContextMenuItem
+          key="google-street-view"
+          role="button"
+          onClick={handleOpenPanoramaExternal}
+          icon={
+            <Icon padding={4} inline size={24}>
+              <ExternalLink />
+            </Icon>
+          }
+        >
+          Google Street View
+        </ContextMenuItem>
+      </StyledContextMenu>
+    </StyledControl>
   )
 }
 
-export default PanoramaViewerMenu
+export default PanoramaMenuControl

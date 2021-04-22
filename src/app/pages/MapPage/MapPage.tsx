@@ -1,6 +1,6 @@
 import { constants, Map as MapComponent, useStateRef } from '@amsterdam/arm-core'
 import L from 'leaflet'
-import { FunctionComponent, useCallback, useContext, useEffect, useState } from 'react'
+import { FunctionComponent, useCallback, useContext, useEffect } from 'react'
 import styled, { createGlobalStyle, css } from 'styled-components'
 import PanoramaViewer from '../../components/PanoramaViewer/PanoramaViewer'
 import useParam from '../../utils/useParam'
@@ -53,7 +53,6 @@ const GlobalStyle = createGlobalStyle<{
 const { DEFAULT_AMSTERDAM_MAPS_OPTIONS } = constants
 
 const MapPage: FunctionComponent = () => {
-  const [loading, setIsLoading] = useState(false)
   const { panoFullScreen } = useContext(MapContext)
   const [, setMapInstance, mapInstanceRef] = useStateRef<L.Map | null>(null)
   const [center, setCenter] = useParam(centerParam)
@@ -106,12 +105,6 @@ const MapPage: FunctionComponent = () => {
               setCenter(mapInstanceRef.current.getCenter(), 'replace')
             }
           }, [mapInstanceRef, setCenter]),
-          loading: useCallback(() => {
-            setIsLoading(true)
-          }, [setIsLoading]),
-          load: useCallback(() => {
-            setIsLoading(false)
-          }, [setIsLoading]),
         }}
       >
         <DataSelectionProvider>
@@ -119,7 +112,7 @@ const MapPage: FunctionComponent = () => {
 
           {panoActive && <PanoramaViewer />}
           <MapMarkers panoActive={panoActive} />
-          <MapPanel loading={loading} />
+          <MapPanel />
         </DataSelectionProvider>
       </MapComponent>
     </MapView>
