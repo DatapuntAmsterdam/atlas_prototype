@@ -126,7 +126,7 @@ const PublicationDetailPage = () => {
               <Column span={{ small: 1, medium: 4, big: 3, large: 6, xLarge: 6 }}>
                 <EditorialContent>
                   {intro && <Paragraph strong dangerouslySetInnerHTML={{ __html: intro }} />}
-                  {body && <CustomHTMLBlock body={body.value} />}
+                  {body && <CustomHTMLBlock body={body.value ?? body} />}
                 </EditorialContent>
               </Column>
             </Column>
