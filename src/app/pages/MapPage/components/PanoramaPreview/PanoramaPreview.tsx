@@ -51,7 +51,8 @@ const PreviewLink = styled(Link)`
 `
 
 const PreviewSkeleton = styled.div`
-  height: 100%;
+  height: 160px;
+  max-width: 400px;
   ${perceivedLoading()}
 `
 

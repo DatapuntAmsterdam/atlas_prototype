@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Feature } from 'geojson'
 import { TileLayerOptions, WMSOptions } from 'leaflet'
-import { createContext } from 'react'
+import { createContext, Dispatch, SetStateAction, useContext } from 'react'
 import { MapCollection, MapLayer } from '../../../map/services'
 
 export interface WmsOverlay {
@@ -37,30 +37,31 @@ export interface MapState {
   showDrawContent: boolean
   panoFullScreen: boolean
   panoImageDate: string | null
+  panelHeader: { type?: string | null; title?: string | null }
 }
+
+type Action<T extends keyof MapState> = Dispatch<SetStateAction<MapState[T]>>
 
 export interface MapContextProps extends MapState {
-  setDetailFeature: (feature: Feature | null) => void
-  setShowDrawTool: (showDrawing: boolean) => void
-  setPanoFullScreen: (panoFullScreen: boolean) => void
-  setPanoImageDate: (panoImageDate: string | null) => void
+  setDetailFeature: Action<'detailFeature'>
+  setShowDrawTool: Action<'showDrawTool'>
+  setPanoFullScreen: Action<'panoFullScreen'>
+  setPanoImageDate: Action<'panoImageDate'>
+  setPanelHeader: Action<'panelHeader'>
 }
 
-export const initialState: MapContextProps = {
-  panelLayers: [],
-  mapLayers: [],
-  legendLeafletLayers: [],
-  showDrawTool: false,
-  showDrawContent: false,
-  detailFeature: null,
-  panoFullScreen: false,
-  panoImageDate: null,
-  setDetailFeature: () => {},
-  setShowDrawTool: () => {},
-  setPanoFullScreen: () => {},
-  setPanoImageDate: () => {},
-}
+const MapContext = createContext<MapContextProps | null>(null)
 
-const MapContext = createContext<MapContextProps>(initialState)
+export function useMapContext() {
+  const context = useContext(MapContext)
+
+  if (!context) {
+    throw new Error(
+      'No provider found for MapContext, make sure you include MapContainer in your component hierarchy.',
+    )
+  }
+
+  return context
+}
 
 export default MapContext

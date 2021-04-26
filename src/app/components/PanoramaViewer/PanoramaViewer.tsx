@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useContext, useEffect, useRef } from 'react'
+import { FunctionComponent, useCallback, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { PANO_LABELS } from '../../../panorama/ducks/constants'
 import { loadScene } from '../../../panorama/services/marzipano/marzipano'
@@ -16,7 +16,7 @@ import {
 } from '../../pages/MapPage/query-params'
 import useMarzipano from '../../utils/useMarzipano'
 import useParam from '../../utils/useParam'
-import MapContext from '../../pages/MapPage/MapContext'
+import { useMapContext } from '../../pages/MapPage/MapContext'
 
 const MarzipanoView = styled.div`
   height: 100%;
@@ -40,7 +40,7 @@ export const PANO_LAYERS = [
 
 const PanoramaViewer: FunctionComponent = () => {
   const ref = useRef<HTMLDivElement>(null)
-  const { setPanoImageDate } = useContext(MapContext)
+  const { setPanoImageDate } = useMapContext()
   const [panoPitch, setPanoPitch] = useParam(panoPitchParam)
   const [panoHeading, setPanoHeading] = useParam(panoHeadingParam)
   const [panoFov, setPanoFov] = useParam(panoFovParam)

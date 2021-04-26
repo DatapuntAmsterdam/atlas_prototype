@@ -1,7 +1,26 @@
 import { ReactNode } from 'react'
 import { Map as MapComponent } from '@amsterdam/arm-core'
-import MapContext, { initialState, MapContextProps } from '../pages/MapPage/MapContext'
+import MapContext, { MapContextProps } from '../pages/MapPage/MapContext'
 import withAppContext from './withAppContext'
+
+const initialState: MapContextProps = {
+  panelLayers: [],
+  mapLayers: [],
+  legendLeafletLayers: [],
+  showDrawTool: false,
+  showDrawContent: false,
+  detailFeature: null,
+  panoFullScreen: false,
+  panoImageDate: null,
+  panelHeader: {
+    title: 'Resultaten',
+  },
+  setDetailFeature: () => {},
+  setShowDrawTool: () => {},
+  setPanoFullScreen: () => {},
+  setPanoImageDate: () => {},
+  setPanelHeader: () => {},
+}
 
 const withMapContext = (component: ReactNode, mapContextProps?: Partial<MapContextProps>) =>
   withAppContext(

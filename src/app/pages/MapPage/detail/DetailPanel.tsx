@@ -1,8 +1,9 @@
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Alert, Button, List, ListItem, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
-import { Fragment, FunctionComponent, useContext, useEffect, useState } from 'react'
+import { Fragment, FunctionComponent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled, { css } from 'styled-components'
+import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
 import {
   fetchDetailData,
   getServiceDefinition,
@@ -25,12 +26,14 @@ import { DataDetailParams } from '../../../links'
 import useAuthScope from '../../../utils/useAuthScope'
 import AuthenticationWrapper from '../components/AuthenticationWrapper'
 import PanoramaPreview, { PreviewContainer } from '../components/PanoramaPreview/PanoramaPreview'
-import MapContext from '../MapContext'
+import { useMapContext } from '../MapContext'
 import DetailDefinitionList from './DetailDefinitionList'
 import DetailHeading from './DetailHeading'
 import DetailInfoBox from './DetailInfoBox'
 import DetailLinkList from './DetailLinkList'
 import DetailTable from './DetailTable'
+import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
+import useAsyncMapPanelHeader from '../utils/useAsyncMapPanelHeader'
 
 const Message = styled(Paragraph)`
   margin: ${themeSpacing(4)} 0;
@@ -98,7 +101,7 @@ interface LegacyLayout {
 }
 
 const DetailPanel: FunctionComponent = () => {
-  const { setDetailFeature } = useContext(MapContext)
+  const { setDetailFeature } = useMapContext()
   const { isUserAuthorized } = useAuthScope()
   const { type, subtype: subType, id } = useParams<DataDetailParams>()
 
@@ -146,16 +149,30 @@ const DetailPanel: FunctionComponent = () => {
     }
   }, [])
 
-  return (
-    <PromiseResult factory={() => getDetailData()} deps={[type, subType, id]}>
-      {({ value }) => (
-        <>
-          {/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
-          <RenderDetails details={value} />
-        </>
-      )}
-    </PromiseResult>
+  const results = usePromise(() => getDetailData(), [type, subType, id])
+  useAsyncMapPanelHeader(
+    results,
+    isFulfilled(results) ? results.value?.data?.subTitle : null,
+    isFulfilled(results) ? results.value?.data.title : null,
   )
+
+  if (isRejected(results)) {
+    return (
+      <Alert level="error" data-testid="errorMessage">
+        <Paragraph>
+          Er kunnen door een technische storing helaas geen gegevens worden getoond. Probeer het
+          later nog eens.
+        </Paragraph>
+      </Alert>
+    )
+  }
+
+  if (isPending(results)) {
+    return <LoadingSpinner />
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  return <RenderDetails details={results.value} />
 }
 
 interface GroupedItemsProps {

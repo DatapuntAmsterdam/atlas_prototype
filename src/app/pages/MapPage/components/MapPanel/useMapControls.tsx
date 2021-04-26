@@ -1,5 +1,5 @@
-import { useContext, useMemo } from 'react'
-import MapContext from '../../MapContext'
+import { useMemo } from 'react'
+import { useMapContext } from '../../MapContext'
 import BaseLayerToggle from '../BaseLayerToggleControl'
 import DrawToolControl from '../DrawToolControl'
 import { DrawerControl } from '../DrawerOverlay/DrawerOverlay'
@@ -8,14 +8,14 @@ import ZoomControl from '../ZoomControl'
 import useParam from '../../../../utils/useParam'
 import { locationParam, panoHeadingParam } from '../../query-params'
 import {
-  PanoramaMenuControl,
   PanoramaControl,
+  PanoramaMenuControl,
   PanoramaViewerInfoBar,
 } from '../../../../components/PanoramaViewer'
 
 // Todo: consider moving onOpenLegend to a higher context
 const useMapControls = (showDesktopVariant: boolean, onOpenLegend: () => void) => {
-  const { panoFullScreen } = useContext(MapContext)
+  const { panoFullScreen } = useMapContext()
   const [panoHeading] = useParam(panoHeadingParam)
   const [location] = useParam(locationParam)
   const panoActive = panoHeading !== null && location !== null

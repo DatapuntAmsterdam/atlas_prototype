@@ -1,11 +1,11 @@
-import React, { useCallback, useContext, useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { ControlButton } from '@amsterdam/arm-core'
 import { Close } from '@amsterdam/asc-assets'
 import styled from 'styled-components'
 import { breakpoint } from '@amsterdam/asc-ui'
 import { useHistory, useLocation } from 'react-router-dom'
 import Reduce from './reduce.svg'
-import MapContext from '../../pages/MapPage/MapContext'
+import { useMapContext } from '../../pages/MapPage/MapContext'
 import Enlarge from './enlarge.svg'
 import {
   mapLayersParam,
@@ -32,7 +32,7 @@ const StyledControl = styled(Control)`
 `
 
 const PanoramaControl = () => {
-  const { panoFullScreen, setPanoFullScreen } = useContext(MapContext)
+  const { panoFullScreen, setPanoFullScreen } = useMapContext()
   const history = useHistory()
   const browserLocation = useLocation()
   const { buildQueryString } = useBuildQueryString()

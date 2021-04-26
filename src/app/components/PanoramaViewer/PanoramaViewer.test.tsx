@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react'
 import PanoramaViewer from './PanoramaViewer'
+import withMapContext from '../../utils/withMapContext'
 
 const mockPush = jest.fn()
 
@@ -37,7 +38,7 @@ jest.mock('marzipano', () => ({
 
 describe('PanoramaViewer', () => {
   it('render', () => {
-    const { container } = render(<PanoramaViewer />)
+    const { container } = render(withMapContext(<PanoramaViewer />))
 
     expect(container.firstChild).toBeDefined()
   })

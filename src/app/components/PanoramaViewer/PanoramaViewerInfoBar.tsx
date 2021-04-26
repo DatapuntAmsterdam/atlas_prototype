@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import React, { FunctionComponent, useContext } from 'react'
+import React, { FunctionComponent } from 'react'
 import ViewerInfoBar from '../ViewerInfoBar/ViewerInfoBar'
 import useParam from '../../utils/useParam'
 import { locationParam } from '../../pages/MapPage/query-params'
 import Control from '../../pages/MapPage/components/Control'
-import MapContext from '../../pages/MapPage/MapContext'
+import { useMapContext } from '../../pages/MapPage/MapContext'
 
 const StyledControl = styled(Control)`
   order: 2;
@@ -14,7 +14,7 @@ const StyledControl = styled(Control)`
 
 const PanoramaViewerInfoBar: FunctionComponent = () => {
   const [location] = useParam(locationParam)
-  const { panoImageDate } = useContext(MapContext)
+  const { panoImageDate } = useMapContext()
   return location && panoImageDate ? (
     <StyledControl>
       <ViewerInfoBar date={panoImageDate} location={location} />

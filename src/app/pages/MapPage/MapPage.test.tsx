@@ -4,8 +4,7 @@
 import { PropsWithChildren } from 'react'
 import { render } from '@testing-library/react'
 import MapPage from './MapPage'
-import MapContext, { initialState } from './MapContext'
-import withAppContext from '../../utils/withAppContext'
+import withMapContext from '../../utils/withMapContext'
 
 jest.mock('./MapMarkers', () => () => <div data-testid="mapMarkers" />)
 jest.mock('./components/MapPanel/MapPanel', () => () => <div data-testid="mapPanel" />)
@@ -30,13 +29,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('MapPage', () => {
   it('should show the PanoramaViewer when panoHeading and locatie parameters are set', async () => {
-    const { findByTestId } = render(
-      withAppContext(
-        <MapContext.Provider value={initialState}>
-          <MapPage />
-        </MapContext.Provider>,
-      ),
-    )
+    const { findByTestId } = render(withMapContext(<MapPage />))
 
     const component = await findByTestId('panoramaViewer')
     expect(component).toBeDefined()

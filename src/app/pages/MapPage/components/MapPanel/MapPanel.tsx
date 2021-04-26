@@ -13,6 +13,7 @@ import useMapControls from './useMapControls'
 import { locationParam, polygonParam } from '../../query-params'
 import DrawResults from '../DrawTool/DrawResults'
 import useParam from '../../../../utils/useParam'
+import { useMapContext } from '../../MapContext'
 
 const TitleHeading = styled(Heading)`
   margin: 0;
@@ -33,6 +34,7 @@ const StyledLargeDrawerPanel = styled(LargeDrawerPanel)<{ show: boolean }>`
 `
 
 const MapPanel: FunctionComponent = () => {
+  const { panelHeader } = useMapContext()
   const [legendActive, setLegendActive] = useState(false)
   const [drawerState, setDrawerState] = useState(DrawerState.Closed)
   const [locationParameter] = useParam(locationParam)
@@ -110,8 +112,8 @@ const MapPanel: FunctionComponent = () => {
         {showContentPanel && (
           <StyledLargeDrawerPanel data-testid="drawerPanel" show={!legendActive}>
             <DrawerPanelHeader>
-              <SubtitleHeading as="h6">Een kaartpaneel</SubtitleHeading>
-              <TitleHeading styleAs="h2">Resultaten</TitleHeading>
+              {panelHeader.type && <SubtitleHeading as="h6">{panelHeader.type}</SubtitleHeading>}
+              <TitleHeading styleAs="h2">{panelHeader.title}</TitleHeading>
             </DrawerPanelHeader>
             <DrawerContainer>
               <Switch>

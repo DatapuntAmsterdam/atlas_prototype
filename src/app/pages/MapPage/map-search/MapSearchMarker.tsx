@@ -8,13 +8,13 @@ import { routing } from '../../../routes'
 import useBuildQueryString from '../../../utils/useBuildQueryString'
 import useLeafletEvent from '../../../utils/useLeafletEvent'
 import useParam from '../../../utils/useParam'
-import MapContext from '../MapContext'
+import { useMapContext } from '../MapContext'
 import { MarkerProps } from '../MapMarkers'
 import { locationParam, zoomParam } from '../query-params'
 import { SnapPoint } from '../types'
 
 const MapSearchMarker: FunctionComponent<MarkerProps> = ({ position }) => {
-  const { legendLeafletLayers } = useContext(MapContext)
+  const { legendLeafletLayers } = useMapContext()
   const [zoom] = useParam(zoomParam)
   const location = useLocation()
   const history = useHistory()

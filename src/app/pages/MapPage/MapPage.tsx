@@ -1,11 +1,11 @@
 import { constants, Map as MapComponent, useStateRef } from '@amsterdam/arm-core'
 import L from 'leaflet'
-import { FunctionComponent, useCallback, useContext, useEffect } from 'react'
+import { FunctionComponent, useCallback, useEffect } from 'react'
 import styled, { createGlobalStyle, css } from 'styled-components'
 import PanoramaViewer from '../../components/PanoramaViewer/PanoramaViewer'
 import useParam from '../../utils/useParam'
 import LeafletLayers from './LeafletLayers'
-import MapContext from './MapContext'
+import { useMapContext } from './MapContext'
 import MapMarkers from './MapMarkers'
 import {
   centerParam,
@@ -53,7 +53,7 @@ const GlobalStyle = createGlobalStyle<{
 const { DEFAULT_AMSTERDAM_MAPS_OPTIONS } = constants
 
 const MapPage: FunctionComponent = () => {
-  const { panoFullScreen } = useContext(MapContext)
+  const { panoFullScreen } = useMapContext()
   const [, setMapInstance, mapInstanceRef] = useStateRef<L.Map | null>(null)
   const [center, setCenter] = useParam(centerParam)
   const [zoom, setZoom] = useParam(zoomParam)
