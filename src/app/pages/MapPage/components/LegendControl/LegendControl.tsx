@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { FunctionComponent } from 'react'
 import Control from '../Control'
 
-export interface LegendControlProps {
+interface LegendControlProps {
   showDesktopVariant: boolean
   onClick: () => void
 }

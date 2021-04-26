@@ -1,1 +1,1 @@
-export { default, LegendControlProps } from './LegendControl'
+export { default } from './LegendControl'

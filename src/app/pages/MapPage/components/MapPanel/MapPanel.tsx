@@ -1,4 +1,4 @@
-import { Heading, hooks, themeSpacing } from '@amsterdam/asc-ui'
+import { Heading, themeSpacing, useMatchMedia } from '@amsterdam/asc-ui'
 import { FunctionComponent, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
@@ -37,7 +37,7 @@ const MapPanel: FunctionComponent = () => {
   const [drawerState, setDrawerState] = useState(DrawerState.Closed)
   const [locationParameter] = useParam(locationParam)
   const [polygon] = useParam(polygonParam)
-  const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
+  const [showDesktopVariant] = useMatchMedia({ minBreakpoint: 'tabletM' })
   const location = useLocation()
   const mode = showDesktopVariant ? DeviceMode.Desktop : DeviceMode.Mobile
   // TODO: Replace this logic with 'useRouteMatch()' when the following PR has been released:

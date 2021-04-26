@@ -1,9 +1,1 @@
-export {
-  default,
-  DeviceMode,
-  DrawerControl,
-  DrawerOverlayProps,
-  DrawerState,
-  isDesktop,
-  isMobile,
-} from './DrawerOverlay'
+export { default, DeviceMode, DrawerState, isDesktop, isMobile } from './DrawerOverlay'

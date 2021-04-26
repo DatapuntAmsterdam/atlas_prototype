@@ -8,8 +8,6 @@ module.exports = {
     'plugin:jsx-a11y/strict',
     'plugin:prettier/recommended',
     'prettier',
-    'prettier/react',
-    'prettier/@typescript-eslint',
     'plugin:cypress/recommended',
   ],
   parserOptions: {

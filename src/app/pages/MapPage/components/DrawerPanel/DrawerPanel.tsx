@@ -4,7 +4,7 @@ import { DeviceMode, isMobile } from '../DrawerOverlay'
 
 const STACK_SPACING = 8
 
-export interface DrawerPanelProps {
+interface DrawerPanelProps {
   stackLevel?: number
   deviceMode?: DeviceMode
 }

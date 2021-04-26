@@ -6,6 +6,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
 import { Configuration, DefinePlugin } from 'webpack'
+import { Configuration as DevServerConfiguration } from 'webpack-dev-server'
 
 /**
  * Gets the absolute path to a module in the `node_modules` directory.
@@ -74,7 +75,11 @@ const svgoConfig = {
   prefixIds: true,
 }
 
-export function createConfig(additionalOptions: CreateConfigOptions): Configuration {
+export interface WebpackConfiguration extends Configuration {
+  devServer?: DevServerConfiguration
+}
+
+export function createConfig(additionalOptions: CreateConfigOptions): WebpackConfiguration {
   const options: Required<CreateConfigOptions> = {
     ...{ checkTypes: true, mode: 'none' },
     ...additionalOptions,
@@ -224,7 +229,7 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
             to: 'assets',
           },
         ],
-      }),
+      }) as any,
       new DefinePlugin({
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         'process.env.VERSION': JSON.stringify(require('./package.json').version),

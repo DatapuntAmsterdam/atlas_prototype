@@ -7,12 +7,12 @@ import {
   Button,
   CompactPager,
   Heading,
-  hooks,
   Label,
   Link,
   Paragraph,
   Select,
   themeSpacing,
+  useMatchMedia,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import L, { LatLng, LatLngExpression, LatLngTuple } from 'leaflet'
@@ -122,7 +122,7 @@ const DrawResults: FunctionComponent<DrawResultsProps> = ({ currentOverlay }) =>
   const userScopes = useSelector(getUserScopes)
   const { trackEvent } = useMatomo()
   const history = useHistory()
-  const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
+  const [showDesktopVariant] = useMatchMedia({ minBreakpoint: 'tabletM' })
   const memoHighlightMaker = useMemo<LatLngExpression>(() => highlightMarker || [0, 0], [
     highlightMarker,
   ])

@@ -1,7 +1,7 @@
 import { merge } from 'webpack-merge'
-import { createConfig, distPath } from './webpack.common'
+import { createConfig, distPath, WebpackConfiguration } from './webpack.common'
 
-export default merge(createConfig({ mode: 'development' }), {
+export default merge<WebpackConfiguration>(createConfig({ mode: 'development' }), {
   // Workaround needed to enable HMR during development.
   // This should be fixed automatically when webpack-dev-server v4 is used.
   // More information: https://github.com/webpack/webpack-dev-server/issues/2758#issuecomment-710086019
@@ -9,11 +9,7 @@ export default merge(createConfig({ mode: 'development' }), {
   target: 'web',
   devtool: 'inline-source-map',
   devServer: {
-    historyApiFallback: {
-      // allow "." character in URL path: https://stackoverflow.com/a/38576357
-      // e.g.: http://localhost:3000/datasets/brk/subject/NL.KAD.Persoon.1234
-      disableDotRule: true,
-    },
+    historyApiFallback: true,
     disableHostCheck: true,
     contentBase: distPath,
     compress: true,

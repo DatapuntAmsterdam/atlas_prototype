@@ -211,7 +211,7 @@ export interface DrawerControl {
   node: ReactComponentElement<typeof Control>
 }
 
-export interface DrawerOverlayProps {
+interface DrawerOverlayProps {
   mode?: DeviceMode
   state?: DrawerState
   controls?: DrawerControl[]

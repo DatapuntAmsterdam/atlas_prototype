@@ -1,1 +1,1 @@
-export { default, CMSCollectionList } from './CardListBlock'
+export { default } from './CardListBlock'

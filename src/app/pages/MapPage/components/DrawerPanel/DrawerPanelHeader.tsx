@@ -12,7 +12,7 @@ const CloseButton = styled(Button)`
   margin-left: auto;
 `
 
-export interface DrawerPanelHeaderProps {
+interface DrawerPanelHeaderProps {
   onClose?: () => void
 }
 

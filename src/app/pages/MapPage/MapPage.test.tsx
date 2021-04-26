@@ -1,6 +1,7 @@
 /**
  * @jest-environment jsdom-global
  */
+import { PropsWithChildren } from 'react'
 import { render } from '@testing-library/react'
 import MapPage from './MapPage'
 import MapContext, { initialState } from './MapContext'
@@ -16,7 +17,7 @@ jest.mock('../../components/PanoramaViewer/PanoramaViewer', () => () => (
 jest.mock('@amsterdam/arm-core', () => ({
   // @ts-ignore
   ...jest.requireActual('@amsterdam/arm-core'),
-  Map: ({ children }) => <div>{children}</div>,
+  Map: ({ children }: PropsWithChildren<any>) => <div>{children}</div>,
 }))
 
 jest.mock('react-router-dom', () => ({
