@@ -37,6 +37,7 @@ const config: Config.InitialOptions = {
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/modules/', '/node_modules/', '/test/'],
   watchPathIgnorePatterns: ['/modules/'],
+  transformIgnorePatterns: ['node_modules/(?!escape-string-regexp)'],
 }
 
 export default config

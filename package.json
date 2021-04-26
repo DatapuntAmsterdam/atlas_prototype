@@ -18,7 +18,7 @@
     "lint:js": "eslint --format=node_modules/eslint-formatter-pretty ./ --ext js,jsx,ts,tsx",
     "start": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack serve --config webpack.dev.ts",
     "start:prod": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack serve --config webpack.prod.ts",
-    "test": "jest --coverage",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
     "test:watch": "npm run test -- --watch --onlyChanged",
     "test:e2e": "cypress run",
     "test:e2e:watch": "cypress open",
