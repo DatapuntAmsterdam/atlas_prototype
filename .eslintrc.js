@@ -30,6 +30,17 @@ module.exports = {
     'import/no-cycle': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'no-console': 'error',
+    'no-restricted-imports': [
+      'error',
+      {
+        paths: [
+          {
+            name: 'react',
+            importNames: ['default'],
+          },
+        ],
+      },
+    ],
 
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',

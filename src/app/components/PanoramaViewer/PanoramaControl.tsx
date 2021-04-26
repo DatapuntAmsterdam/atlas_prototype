@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo } from 'react'
+import { useCallback, useContext, useMemo } from 'react'
 import { ControlButton } from '@amsterdam/arm-core'
 import { Close } from '@amsterdam/asc-assets'
 import styled from 'styled-components'

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import React, { FunctionComponent, useContext } from 'react'
+import { FunctionComponent, useContext } from 'react'
 import ViewerInfoBar from '../ViewerInfoBar/ViewerInfoBar'
 import useParam from '../../utils/useParam'
 import { locationParam } from '../../pages/MapPage/query-params'
