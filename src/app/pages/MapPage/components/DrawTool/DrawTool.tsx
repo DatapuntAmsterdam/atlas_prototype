@@ -7,19 +7,11 @@ import {
   PolylineType,
 } from '@amsterdam/arm-draw'
 import L, { LatLng, LatLngLiteral, Polygon } from 'leaflet'
-import {
-  FunctionComponent,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import { FunctionComponent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import useParam from '../../../../utils/useParam'
 import { drawToolOpenParam, PolyDrawing, polygonParam, polylineParam } from '../../query-params'
-import DataSelectionContext from './DataSelectionContext'
+import { useDataSelectionContext } from './DataSelectionContext'
 import { routing } from '../../../../routes'
 import useBuildQueryString from '../../../../utils/useBuildQueryString'
 
@@ -71,17 +63,12 @@ const createPolyLayer = (drawing: PolyDrawing, line = false): PolylineType | Pol
 }
 
 const DrawTool: FunctionComponent = () => {
-  const {
-    fetchData,
-    fetchMapVisualization,
-    mapVisualizations: mapVisualization,
-    removeDataSelection,
-  } = useContext(DataSelectionContext)
   const { buildQueryString } = useBuildQueryString()
 
   const [polygon, setPolygon] = useParam(polygonParam)
   const [polyline, setPolyline] = useParam(polylineParam)
   const [drawtoolOpen] = useParam(drawToolOpenParam)
+  const { setDistanceText } = useDataSelectionContext()
   const history = useHistory()
 
   const [initialDrawnItems, setInitialDrawnItems] = useState<ExtendedLayer[]>([])
@@ -98,28 +85,9 @@ const DrawTool: FunctionComponent = () => {
 
   const getDrawingData = useCallback((layer: ExtendedLayer, distanceText: string) => {
     if (layer instanceof Polygon) {
-      const latLngs = layer.getLatLngs() as LatLng[][]
+      // const latLngs = layer.getLatLngs() as LatLng[][]
 
-      Promise.all([
-        fetchMapVisualization(latLngs, layer.id),
-        fetchData(
-          latLngs,
-          layer.id,
-          {
-            size: 20,
-            page: 1,
-          },
-          {
-            layer,
-            distanceText,
-          },
-        ),
-      ])
-        .then(() => {})
-        .catch((error: string) => {
-          // eslint-disable-next-line no-console
-          console.error(`DrawTool: could not retrieve dataSelection with markers: ${error}`)
-        })
+      setDistanceText(distanceText)
     }
   }, [])
 
@@ -194,11 +162,6 @@ const DrawTool: FunctionComponent = () => {
           : ((coordinates as unknown) as LatLngLiteral)
       })
 
-      // remove the markerGroups.
-      if (mapVisualization && deletedLayersIds.length) {
-        removeDataSelection()
-      }
-
       if (deletedLayersBounds.length === 0) {
         return
       }
@@ -218,7 +181,7 @@ const DrawTool: FunctionComponent = () => {
         polyline: newPolyline,
       })
     },
-    [mapVisualization, setPolygon, setPolyline],
+    [setPolygon, setPolyline],
   )
 
   const onClose = () => {
@@ -233,7 +196,6 @@ const DrawTool: FunctionComponent = () => {
 
     // Clean up
     return () => {
-      removeDataSelection()
       drawnItemsGroup.clearLayers()
       mapInstance.off(L.Draw.Event.EDITVERTEX as any, onEditVertex as any)
     }
@@ -244,16 +206,9 @@ const DrawTool: FunctionComponent = () => {
    * handle adding and removing drawings when navigating
    */
   useEffect(() => {
-    const drawingsOnMap = drawnItemsGroup.getLayers().map(({ id }: any) => id)
-    const layersToAdd = [polygon?.id, polyline?.id]
-    const layersToRemove = drawingsOnMap.filter((id) => !layersToAdd.includes(id))
-
     // Delete old drawings / layers
     drawnItemsGroup.eachLayer((layer) => {
       const typedLayer = layer as ExtendedLayer
-      if (layersToRemove.includes(typedLayer.id) && typedLayer instanceof Polygon) {
-        removeDataSelection()
-      }
       drawnItemsGroup.removeLayer(typedLayer)
     })
 

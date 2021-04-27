@@ -43,14 +43,12 @@ jest.mock('react-router-dom', () => ({
 describe('DrawTool', () => {
   it('fetches the dataselection when polygon exists', () => {
     const fetchDataMock = jest.fn()
-    const fetchMapVisualizationMock = jest.fn()
     render(
       withMapContext(
         <DataSelectionContext.Provider
           value={{
             ...dataSelectionInitialValue,
             fetchData: fetchDataMock,
-            fetchMapVisualization: fetchMapVisualizationMock,
           }}
         >
           <DrawTool />
@@ -59,11 +57,9 @@ describe('DrawTool', () => {
     )
 
     expect(fetchDataMock).toHaveBeenCalledTimes(1)
-    expect(fetchMapVisualizationMock).toHaveBeenCalledTimes(1)
   })
   it('updates the URl query when user edited the polygon', () => {
     const fetchDataMock = jest.fn()
-    const fetchMapVisualizationMock = jest.fn()
     const Component = () => {
       const mapInstance = useMapInstance()
       useEffect(() => {
@@ -80,7 +76,6 @@ describe('DrawTool', () => {
           value={{
             ...dataSelectionInitialValue,
             fetchData: fetchDataMock,
-            fetchMapVisualization: fetchMapVisualizationMock,
           }}
         >
           <Component />

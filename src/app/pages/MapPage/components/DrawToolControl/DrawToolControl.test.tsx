@@ -2,6 +2,7 @@ import { render } from '@testing-library/react'
 import DrawToolControl from './DrawToolControl'
 import { drawToolOpenParam } from '../../query-params'
 import withMapContext from '../../../../utils/withMapContext'
+import DataSelectionProvider from '../DrawTool/DataSelectionProvider'
 
 const mockPush = jest.fn()
 let search = ''
@@ -27,7 +28,13 @@ describe('DrawToolControl', () => {
 
   it('renders the DrawTool when url contains the drawtoolOpen parameter', () => {
     search = `${drawToolOpenParam.name}=true`
-    const { getByTestId } = render(withMapContext(<DrawToolControl />))
+    const { getByTestId } = render(
+      withMapContext(
+        <DataSelectionProvider>
+          <DrawToolControl />
+        </DataSelectionProvider>,
+      ),
+    )
 
     expect(getByTestId('drawTool')).toBeDefined()
   })

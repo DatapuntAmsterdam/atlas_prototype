@@ -1,48 +1,22 @@
-import { LatLng } from 'leaflet'
-import { createContext } from 'react'
-import { DataSelectionType } from '../../config'
-import { DataSelection, MapData, MapVisualization, PaginationParams } from './DataSelectionProvider'
+import { createContext, Dispatch, SetStateAction, useContext } from 'react'
 
 interface DataSelectionContextValues {
-  fetchData: (
-    latLngs: LatLng[][],
-    id: string,
-    paginationParams: PaginationParams,
-    mapData?: MapData,
-    setState?: boolean,
-  ) => Promise<DataSelection | null>
-  fetchMapVisualization: (
-    latLngs: LatLng[][],
-    id: string,
-    setState?: boolean,
-  ) => Promise<MapVisualization | null>
-  removeDataSelection: () => void
-  mapVisualizations: MapVisualization[]
-  dataSelection: DataSelection[]
-  type: DataSelectionType
-  setType: (type: DataSelectionType) => void
-  loadingIds: string[]
-  errorIds: string[]
-  forbidden: boolean
+  distanceText?: string
+  setDistanceText: Dispatch<SetStateAction<DataSelectionContextValues['distanceText']>>
 }
 
-export const dataSelectionInitialValue = {
-  fetchData: () => {
-    return {} as any
-  },
-  fetchMapVisualization: () => {
-    return {} as any
-  },
-  removeDataSelection: () => {},
-  mapVisualizations: [],
-  dataSelection: [],
-  forbidden: false,
-  type: DataSelectionType.BAG,
-  setType: () => {},
-  loadingIds: [],
-  errorIds: [],
-}
+const DataSelectionContext = createContext<DataSelectionContextValues | null>(null)
 
-const DataSelectionContext = createContext<DataSelectionContextValues>(dataSelectionInitialValue)
+export function useDataSelectionContext() {
+  const context = useContext(DataSelectionContext)
+
+  if (!context) {
+    throw new Error(
+      'No provider found for DataSelectionContext, make sure you include DataSelectionProvider in your component hierarchy.',
+    )
+  }
+
+  return context
+}
 
 export default DataSelectionContext

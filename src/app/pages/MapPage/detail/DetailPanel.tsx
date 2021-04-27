@@ -34,6 +34,7 @@ import DetailLinkList from './DetailLinkList'
 import DetailTable from './DetailTable'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
 import useAsyncMapPanelHeader from '../utils/useAsyncMapPanelHeader'
+import GeneralErrorAlert from '../../../components/Alerts/GeneralErrorAlert'
 
 const Message = styled(Paragraph)`
   margin: ${themeSpacing(4)} 0;
@@ -157,14 +158,7 @@ const DetailPanel: FunctionComponent = () => {
   )
 
   if (isRejected(results)) {
-    return (
-      <Alert level="error" data-testid="errorMessage">
-        <Paragraph>
-          Er kunnen door een technische storing helaas geen gegevens worden getoond. Probeer het
-          later nog eens.
-        </Paragraph>
-      </Alert>
-    )
+    return <GeneralErrorAlert />
   }
 
   if (isPending(results)) {

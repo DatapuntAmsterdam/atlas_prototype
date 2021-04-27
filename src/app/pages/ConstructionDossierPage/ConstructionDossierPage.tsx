@@ -1,4 +1,4 @@
-import { Alert, Paragraph, Row, themeSpacing } from '@amsterdam/asc-ui'
+import { Row, themeSpacing } from '@amsterdam/asc-ui'
 import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
 import { FunctionComponent, lazy, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
@@ -11,6 +11,7 @@ import useParam from '../../utils/useParam'
 import { AuthTokenProvider } from './AuthTokenContext'
 import DossierDetails from './components/DossierDetails'
 import { fileNameParam, fileUrlParam } from './query-params'
+import GeneralErrorAlert from '../../components/Alerts/GeneralErrorAlert'
 
 const ImageViewer = lazy(
   () => import(/* webpackChunkName: "ImageViewer" */ './components/ImageViewer'),
@@ -46,14 +47,7 @@ const ConstructionDossierPage: FunctionComponent = () => {
   }
 
   if (isRejected(result)) {
-    return (
-      <Alert level="error" data-testid="errorMessage">
-        <Paragraph>
-          Er kunnen door een technische storing helaas geen bouw- en omgevingsdossiers worden
-          getoond. Probeer het later nog eens.
-        </Paragraph>
-      </Alert>
-    )
+    return <GeneralErrorAlert />
   }
 
   const dossierId = `${result.value.stadsdeel}${result.value.dossiernr}`
