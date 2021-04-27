@@ -6,6 +6,7 @@ import joinUrl from '../../../../utils/joinUrl'
 import environment from '../../../../../environment'
 import { server } from '../../../../../../test/server'
 import { mapLayersParam, panoHeadingParam, panoPitchParam } from '../../query-params'
+import { singleFixture } from '../../../../../api/panorama/thumbnail'
 
 jest.mock('react-router-dom', () => ({
   // @ts-ignore
@@ -18,6 +19,10 @@ jest.mock('react-router-dom', () => ({
 
 describe('PanoramaPreview', () => {
   it('should build a link including current parameters, panorama parameters and layers for panorama', async () => {
+    const panoramaThumbnailUrl = joinUrl([environment.API_ROOT, 'panorama/thumbnail'])
+    server.use(
+      rest.get(panoramaThumbnailUrl, async (req, res, ctx) => res(ctx.json(singleFixture))),
+    )
     const { container } = render(withAppContext(<PanoramaPreview location={{ lat: 1, lng: 2 }} />))
     await waitFor(() => {
       const link = container.querySelector('a')

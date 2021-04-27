@@ -9,7 +9,6 @@ const typeaheadUrl = joinUrl([environment.API_ROOT, 'typeahead'])
 const iiifMetadataUrl = joinUrl([environment.API_ROOT, 'iiif-metadata/bouwdossier', ':id'])
 const dcatDatasetsUrl = joinUrl([environment.API_ROOT, 'dcatd/datasets', ':id'])
 const dcatDatasetFiltersUrl = joinUrl([environment.API_ROOT, 'dcatd/openapi'])
-const panoramaThumbnailUrl = joinUrl([environment.API_ROOT, 'panorama/thumbnail', '?:q'])
 const stadsdeelUrl = joinUrl([environment.API_ROOT, 'gebieden/stadsdeel', ':id'])
 
 const handlers = [
@@ -37,12 +36,6 @@ const handlers = [
     const datasetFiltersFixture = require('../src/api/dcatd/openapi').singleFixture
 
     return res(ctx.json(datasetFiltersFixture))
-  }),
-
-  rest.get(panoramaThumbnailUrl, async (req, res, ctx) => {
-    const panoramaThumbnailFixture = require('../src/api/panorama/thumbnail').singleFixture
-
-    return res(ctx.json(panoramaThumbnailFixture))
   }),
 
   rest.get(stadsdeelUrl, async (req, res, ctx) => {
