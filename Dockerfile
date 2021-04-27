@@ -1,7 +1,7 @@
 ################################
 # Base
 ################################
-FROM node:14 AS build-deps
+FROM node:16 AS build-deps
 LABEL maintainer="datapunt@amsterdam.nl"
 
 WORKDIR /app
