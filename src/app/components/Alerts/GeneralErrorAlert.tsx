@@ -1,4 +1,3 @@
-import React from 'react'
 import { Alert, Paragraph } from '@amsterdam/asc-ui'
 
 const GeneralErrorAlert = () => (

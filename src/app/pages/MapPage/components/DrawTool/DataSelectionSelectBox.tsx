@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { ChangeEvent, useCallback } from 'react'
 import styled from 'styled-components'
 import { breakpoint, Label, Select } from '@amsterdam/asc-ui'
 import { useLocation, useHistory } from 'react-router-dom'
@@ -23,7 +23,7 @@ const DataSelectionSelectBox = () => {
   const history = useHistory()
   const { trackEvent } = useMatomo()
   const { currentDatasetType } = useLegacyDataselectionConfig()
-  const handleOnChangeType = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleOnChangeType = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     const selectedOption = e.target.value as DataSelectionType
     trackEvent({
       category: 'dataselection',
@@ -31,17 +31,23 @@ const DataSelectionSelectBox = () => {
       name: config[selectedOption].title,
     })
     history.push({
-      pathname: config[currentDatasetType.toUpperCase()].path,
+      pathname: config[selectedOption].path,
       search: location.search,
     })
   }, [])
 
+  if (!currentDatasetType) {
+    // eslint-disable-next-line no-console
+    console.warn('DataSelectionSelectBox should be only used on dataselection pages')
+    return null
+  }
+
   return (
     <>
-      <StyledLabel htmlFor="sort-select" label="Type:" position="left" />
+      <StyledLabel htmlFor="dataSelectionSelectBox" label="Type:" position="left" />
       <StyledSelect
-        id="sort-select"
-        data-testid="sort-select"
+        id="dataSelectionSelectBox"
+        data-testid="dataSelectionSelectBox"
         value={currentDatasetType.toUpperCase()}
         onChange={handleOnChangeType}
       >

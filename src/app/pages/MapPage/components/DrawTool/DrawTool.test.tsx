@@ -4,7 +4,7 @@ import L from 'leaflet'
 import { render } from '@testing-library/react'
 import withMapContext from '../../../../utils/withMapContext'
 import DrawTool from './DrawTool'
-import DataSelectionContext, { dataSelectionInitialValue } from './DataSelectionContext'
+import DataSelectionProvider from './DataSelectionProvider'
 
 jest.mock('leaflet', () => ({
   // @ts-ignore
@@ -41,25 +41,7 @@ jest.mock('react-router-dom', () => ({
 }))
 
 describe('DrawTool', () => {
-  it('fetches the dataselection when polygon exists', () => {
-    const fetchDataMock = jest.fn()
-    render(
-      withMapContext(
-        <DataSelectionContext.Provider
-          value={{
-            ...dataSelectionInitialValue,
-            fetchData: fetchDataMock,
-          }}
-        >
-          <DrawTool />
-        </DataSelectionContext.Provider>,
-      ),
-    )
-
-    expect(fetchDataMock).toHaveBeenCalledTimes(1)
-  })
   it('updates the URl query when user edited the polygon', () => {
-    const fetchDataMock = jest.fn()
     const Component = () => {
       const mapInstance = useMapInstance()
       useEffect(() => {
@@ -72,14 +54,9 @@ describe('DrawTool', () => {
 
     render(
       withMapContext(
-        <DataSelectionContext.Provider
-          value={{
-            ...dataSelectionInitialValue,
-            fetchData: fetchDataMock,
-          }}
-        >
+        <DataSelectionProvider>
           <Component />
-        </DataSelectionContext.Provider>,
+        </DataSelectionProvider>,
       ),
     )
 

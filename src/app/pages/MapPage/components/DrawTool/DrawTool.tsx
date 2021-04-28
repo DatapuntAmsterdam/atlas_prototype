@@ -85,8 +85,6 @@ const DrawTool: FunctionComponent = () => {
 
   const getDrawingData = useCallback((layer: ExtendedLayer, distanceText: string) => {
     if (layer instanceof Polygon) {
-      // const latLngs = layer.getLatLngs() as LatLng[][]
-
       setDistanceText(distanceText)
     }
   }, [])

@@ -2,7 +2,6 @@ import { v4 as uuidv4 } from 'uuid'
 import { DataSelectionMapVisualizationType, DataSelectionType } from '../../config'
 import { DataSelectionResponse, MapVisualization } from './DataSelectionProvider'
 
-// eslint-disable-next-line import/prefer-default-export
 export const normalizeMapVisualization = (
   type: DataSelectionType,
   data: any,

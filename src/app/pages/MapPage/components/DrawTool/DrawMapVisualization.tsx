@@ -1,9 +1,9 @@
 import { createClusterMarkers, MarkerClusterGroup } from '@amsterdam/arm-cluster'
 import { GeoJSON } from '@amsterdam/react-maps'
 import { FunctionComponent } from 'react'
+import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
 import geoJsonConfig from '../../../../../map/components/leaflet/services/geo-json-config.constant'
 import config, { DataSelectionMapVisualizationType, DataSelectionType } from '../../config'
-import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
 import { fetchWithToken } from '../../../../../shared/services/api/api'
 import { normalizeMapVisualization } from './normalize'
 import useLegacyDataselectionConfig from '../../../../components/DataSelection/useLegacyDataselectionConfig'
@@ -14,31 +14,28 @@ const DrawMapVisualization: FunctionComponent = () => {
   const { currentDatasetType } = useLegacyDataselectionConfig()
   const [polygon] = useParam(polygonParam)
   const mapVisualizations = usePromise(async () => {
-    if (polygon) {
-      const searchParams = new URLSearchParams({
-        shape: JSON.stringify(polygon?.polygon.map(({ lat, lng }) => [lng, lat])),
-      })
-      const {
-        object_list: data,
-        eigenpercelen: eigenPercelen,
-        niet_eigenpercelen: nietEigenPercelen,
-        extent,
-      } = await fetchWithToken(
-        `${
-          config[currentDatasetType.toUpperCase()]?.endpointMapVisualization ?? ''
-        }?${searchParams.toString()}`,
-      )
-      return normalizeMapVisualization(
-        currentDatasetType.toUpperCase() as DataSelectionType,
-        data,
-        {
-          eigenPercelen,
-          nietEigenPercelen,
-          extent,
-        },
-      )
+    if (!polygon) {
+      return null
     }
-    return null
+    const searchParams = new URLSearchParams({
+      shape: JSON.stringify(polygon?.polygon.map(({ lat, lng }) => [lng, lat])),
+    })
+    const {
+      object_list: data,
+      eigenpercelen: eigenPercelen,
+      niet_eigenpercelen: nietEigenPercelen,
+      extent,
+    } = await fetchWithToken(
+      `${
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        config[currentDatasetType.toUpperCase()]?.endpointMapVisualization ?? ''
+      }?${searchParams.toString()}`,
+    )
+    return normalizeMapVisualization(currentDatasetType.toUpperCase() as DataSelectionType, data, {
+      eigenPercelen,
+      nietEigenPercelen,
+      extent,
+    })
   }, [polygon])
 
   if (isPending(mapVisualizations)) {
