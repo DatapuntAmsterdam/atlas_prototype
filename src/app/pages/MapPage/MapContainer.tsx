@@ -1,7 +1,6 @@
-import { Alert, Heading, Link } from '@amsterdam/asc-ui'
 import { FunctionComponent, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link as RouterLink, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import {
   getMapLayers as fetchMapLayers,
   getPanelLayers as fetchPanelLayers,
@@ -9,7 +8,6 @@ import {
   MapLayer,
 } from '../../../map/services'
 import { getUser } from '../../../shared/ducks/user/user'
-import { toMap } from '../../../store/redux-first-router/actions'
 import useParam from '../../utils/useParam'
 import MapContext, { MapState } from './MapContext'
 import MapPage from './MapPage'

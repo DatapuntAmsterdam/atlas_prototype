@@ -10,18 +10,11 @@ import useLeafletEvent from '../../../utils/useLeafletEvent'
 import useParam from '../../../utils/useParam'
 import { useMapContext } from '../MapContext'
 import { MarkerProps } from '../MapMarkers'
-import {
-  drawToolOpenParam,
-  locationParam,
-  polygonParam,
-  polylineParam,
-  zoomParam,
-} from '../query-params'
+import { locationParam, polygonParam, zoomParam } from '../query-params'
 import { SnapPoint } from '../types'
 
 const MapSearchMarker: FunctionComponent<MarkerProps> = ({ position }) => {
   const { legendLeafletLayers } = useMapContext()
-  const [drawtoolOpen] = useParam(drawToolOpenParam)
   const [zoom] = useParam(zoomParam)
   const [polygon] = useParam(polygonParam)
   const location = useLocation()

@@ -10,7 +10,7 @@ import {
   useMatchMedia,
 } from '@amsterdam/asc-ui'
 import { Link as RouterLink } from 'react-router-dom'
-import { Dispatch, FunctionComponent, SetStateAction, useState } from 'react'
+import { FunctionComponent, useState } from 'react'
 import ReduxRouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import LoadingSpinner from '../../../../components/LoadingSpinner/LoadingSpinner'
