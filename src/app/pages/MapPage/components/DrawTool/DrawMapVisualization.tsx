@@ -9,16 +9,20 @@ import { normalizeMapVisualization } from './normalize'
 import useLegacyDataselectionConfig from '../../../../components/DataSelection/useLegacyDataselectionConfig'
 import useParam from '../../../../utils/useParam'
 import { polygonParam } from '../../query-params'
+import { useDataSelection } from '../../../../components/DataSelection/DataSelectionContext'
+import { createFiltersObject } from '../../../../../shared/services/data-selection/normalizations'
 
 const DrawMapVisualization: FunctionComponent = () => {
   const { currentDatasetType } = useLegacyDataselectionConfig()
   const [polygon] = useParam(polygonParam)
+  const { activeFilters } = useDataSelection()
   const mapVisualizations = usePromise(async () => {
-    if (!polygon) {
+    if (!polygon && !activeFilters) {
       return null
     }
     const searchParams = new URLSearchParams({
       shape: JSON.stringify(polygon?.polygon.map(({ lat, lng }) => [lng, lat])),
+      ...createFiltersObject(activeFilters),
     })
     const {
       object_list: data,
@@ -36,7 +40,7 @@ const DrawMapVisualization: FunctionComponent = () => {
       nietEigenPercelen,
       extent,
     })
-  }, [polygon])
+  }, [polygon, activeFilters])
 
   if (isPending(mapVisualizations)) {
     return null

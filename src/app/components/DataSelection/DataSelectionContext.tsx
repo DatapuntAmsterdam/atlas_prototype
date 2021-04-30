@@ -16,14 +16,22 @@ import {
 import { ActiveFilter, AvailableFilter } from './types'
 import useLegacyDataselectionConfig from './useLegacyDataselectionConfig'
 
+type Action<T extends keyof DataSelectionContextProps> = Dispatch<
+  SetStateAction<DataSelectionContextProps[T]>
+>
+
 export interface DataSelectionContextProps {
   availableFilters: AvailableFilter[]
   addFilter: (filter: DataSelectionFilters) => void
   removeFilter: (key: string) => void
   totalResults: number
   activeFilters: ActiveFilter[]
-  setTotalResults: Dispatch<SetStateAction<number>>
-  setAvailableFilters: Dispatch<SetStateAction<any>>
+  setTotalResults: Action<'totalResults'>
+  setAvailableFilters: Action<'availableFilters'>
+  distanceText?: string
+  drawToolLocked: boolean
+  setDrawToolLocked: Action<'drawToolLocked'>
+  setDistanceText: Action<'distanceText'>
 }
 
 const DataSelectionContext = createContext<DataSelectionContextProps | null>(null)
@@ -33,7 +41,11 @@ export default DataSelectionContext
 const DataSelectionProvider: FunctionComponent = ({ children }) => {
   const [activeParamFilters, setActiveParamFilters] = useParam(dataSelectionFiltersParam)
   const [polygon] = useParam(polygonParam)
-  const [availableFilters, setAvailableFilters] = useState([])
+  const [distanceText, setDistanceText] = useState<string>()
+  const [drawToolLocked, setDrawToolLocked] = useState(false)
+  const [availableFilters, setAvailableFilters] = useState<
+    DataSelectionContextProps['availableFilters']
+  >([])
   const [totalResults, setTotalResults] = useState(0)
   const { currentDatasetConfig } = useLegacyDataselectionConfig()
 
@@ -95,6 +107,10 @@ const DataSelectionProvider: FunctionComponent = ({ children }) => {
         totalResults,
         setTotalResults,
         setAvailableFilters,
+        distanceText,
+        setDistanceText,
+        drawToolLocked,
+        setDrawToolLocked,
       }}
     >
       {children}

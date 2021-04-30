@@ -2,7 +2,7 @@ import { render } from '@testing-library/react'
 import DrawToolControl from './DrawToolControl'
 import { drawToolOpenParam } from '../../query-params'
 import withMapContext from '../../../../utils/withMapContext'
-import DataSelectionProvider from '../DrawTool/DataSelectionProvider'
+import { DataSelectionProvider } from '../../../../components/DataSelection/DataSelectionContext'
 
 const mockPush = jest.fn()
 let search = ''

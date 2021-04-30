@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react'
 import withMapContext from '../../utils/withMapContext'
 import MapMarkers from './MapMarkers'
+import { DataSelectionProvider } from '../../components/DataSelection/DataSelectionContext'
 
 let currentPath = '/kaart'
 
@@ -20,21 +21,45 @@ jest.mock('./map-search/MapSearchMarker', () => () => <div data-testid="searchMa
 
 describe('MapMarkers', () => {
   it('should render the search marker when on /kaart, /kaart/geozoek and detail page', () => {
-    const { getByTestId, rerender } = render(withMapContext(<MapMarkers panoActive={false} />))
+    const { getByTestId, rerender } = render(
+      withMapContext(
+        <DataSelectionProvider>
+          <MapMarkers panoActive={false} />
+        </DataSelectionProvider>,
+      ),
+    )
     expect(getByTestId('searchMarker')).not.toBeNull()
 
     currentPath = '/kaart/geozoek'
-    rerender(withMapContext(<MapMarkers panoActive={false} />))
+    rerender(
+      withMapContext(
+        <DataSelectionProvider>
+          <MapMarkers panoActive={false} />
+        </DataSelectionProvider>,
+      ),
+    )
     expect(getByTestId('searchMarker')).not.toBeNull()
 
     currentPath = '/kaart/bag/buurt/123'
-    rerender(withMapContext(<MapMarkers panoActive={false} />))
+    rerender(
+      withMapContext(
+        <DataSelectionProvider>
+          <MapMarkers panoActive={false} />
+        </DataSelectionProvider>,
+      ),
+    )
     expect(getByTestId('searchMarker')).not.toBeNull()
   })
 
   it('should not render the search marker, but the panorama marker when panoramaviewer is active', () => {
     currentPath = '/kaart/geozoek'
-    const { getByTestId, queryByTestId } = render(withMapContext(<MapMarkers panoActive />))
+    const { getByTestId, queryByTestId } = render(
+      withMapContext(
+        <DataSelectionProvider>
+          <MapMarkers panoActive />
+        </DataSelectionProvider>,
+      ),
+    )
     expect(getByTestId('panoramaMarker')).not.toBeNull()
     expect(queryByTestId('searchMarker')).toBeNull()
   })

@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
 import { DrawerPanelHeader, LargeDrawerPanel, SmallDrawerPanel } from '../DrawerPanel'
 import DrawerOverlay, { DeviceMode, DrawerState } from '../DrawerOverlay'
-import { Overlay } from '../../types'
 import { routing } from '../../../../routes'
 import MapSearchResults from '../../map-search/MapSearchResults'
 import DetailPanel from '../../detail/DetailPanel'
@@ -14,6 +13,7 @@ import { locationParam, polygonParam } from '../../query-params'
 import DrawResults from '../DrawTool/DrawResults'
 import useParam from '../../../../utils/useParam'
 import { useMapContext } from '../../MapContext'
+import { useDataSelection } from '../../../../components/DataSelection/DataSelectionContext'
 
 const TitleHeading = styled(Heading)`
   margin: 0;
@@ -26,7 +26,6 @@ const SubtitleHeading = styled(Heading)`
 
 const DrawerContainer = styled.div`
   padding: ${themeSpacing(0, 4)};
-  margin: ${themeSpacing(3, 0)};
 `
 
 const StyledLargeDrawerPanel = styled(LargeDrawerPanel)<{ show: boolean }>`
@@ -41,6 +40,7 @@ const MapPanel: FunctionComponent = () => {
   const [polygon] = useParam(polygonParam)
   const [showDesktopVariant] = useMatchMedia({ minBreakpoint: 'tabletM' })
   const location = useLocation()
+  const { activeFilters } = useDataSelection()
   const mode = showDesktopVariant ? DeviceMode.Desktop : DeviceMode.Mobile
   // TODO: Replace this logic with 'useRouteMatch()' when the following PR has been released:
   // https://github.com/ReactTraining/react-router/pull/7822
@@ -92,14 +92,15 @@ const MapPanel: FunctionComponent = () => {
       ((matchPath(location.pathname, routing.addresses_TEMP.path) ||
         matchPath(location.pathname, routing.establishments_TEMP.path) ||
         matchPath(location.pathname, routing.cadastralObjects_TEMP.path)) &&
-        !polygon)
+        !polygon &&
+        !activeFilters.length)
     ) {
       return false
     }
 
     // Other pages definitely have content in drawer panel
     return true
-  }, [matchPath, location, locationParameter, legendActive])
+  }, [matchPath, location, locationParameter, legendActive, activeFilters])
 
   return (
     <>
@@ -131,7 +132,7 @@ const MapPanel: FunctionComponent = () => {
                   ]}
                   exact
                 >
-                  <DrawResults currentOverlay={Overlay.Results} />
+                  <DrawResults />
                 </Route>
               </Switch>
             </DrawerContainer>

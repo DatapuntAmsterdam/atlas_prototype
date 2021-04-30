@@ -10,12 +10,20 @@ import useLeafletEvent from '../../../utils/useLeafletEvent'
 import useParam from '../../../utils/useParam'
 import { useMapContext } from '../MapContext'
 import { MarkerProps } from '../MapMarkers'
-import { locationParam, zoomParam } from '../query-params'
+import {
+  drawToolOpenParam,
+  locationParam,
+  polygonParam,
+  polylineParam,
+  zoomParam,
+} from '../query-params'
 import { SnapPoint } from '../types'
 
 const MapSearchMarker: FunctionComponent<MarkerProps> = ({ position }) => {
   const { legendLeafletLayers } = useMapContext()
+  const [drawtoolOpen] = useParam(drawToolOpenParam)
   const [zoom] = useParam(zoomParam)
+  const [polygon] = useParam(polygonParam)
   const location = useLocation()
   const history = useHistory()
   const { buildQueryString } = useBuildQueryString()
@@ -46,7 +54,7 @@ const MapSearchMarker: FunctionComponent<MarkerProps> = ({ position }) => {
     } else {
       history.push({
         pathname: routing.dataSearchGeo_TEMP.path,
-        search: buildQueryString([[locationParam, e.latlng]]),
+        search: buildQueryString([[locationParam, e.latlng]], [polygonParam]),
       })
     }
   }
@@ -62,6 +70,7 @@ const MapSearchMarker: FunctionComponent<MarkerProps> = ({ position }) => {
   )
 
   return position &&
+    !polygon &&
     !matchPath(location.pathname, { path: routing.dataDetail_TEMP.path, exact: true }) ? (
     <ARMMarker latLng={position} />
   ) : null

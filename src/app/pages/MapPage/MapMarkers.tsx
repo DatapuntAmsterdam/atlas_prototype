@@ -1,11 +1,10 @@
 import { LatLngLiteral } from 'leaflet'
 import { FunctionComponent, useMemo } from 'react'
-import { matchPath, useLocation } from 'react-router-dom'
 import PanoramaViewerMarker from '../../components/PanoramaViewer/PanoramaViewerMarker'
 import useParam from '../../utils/useParam'
 import MapSearchMarker from './map-search/MapSearchMarker'
-import { drawToolOpenParam, locationParam } from './query-params'
-import { routing } from '../../routes'
+import { locationParam } from './query-params'
+import { useDataSelection } from '../../components/DataSelection/DataSelectionContext'
 
 export interface MarkerProps {
   position: LatLngLiteral | null
@@ -18,18 +17,12 @@ export interface MapMarkersProps {
 
 const MapMarkers: FunctionComponent<MapMarkersProps> = ({ panoActive }) => {
   const [locationParameter, setLocationParameter] = useParam(locationParam)
-  const location = useLocation()
-  const [showDrawTool] = useParam(drawToolOpenParam)
+  const { drawToolLocked } = useDataSelection()
 
-  const renderSearchMarker = useMemo(
-    () =>
-      !panoActive &&
-      !showDrawTool &&
-      (matchPath(location.pathname, { path: routing.dataDetail_TEMP.path, exact: true }) ||
-        matchPath(location.pathname, { path: routing.dataSearchGeo_TEMP.path, exact: true }) ||
-        matchPath(location.pathname, { path: routing.data_TEMP.path, exact: true })),
-    [location, panoActive, showDrawTool],
-  )
+  const renderSearchMarker = useMemo(() => !drawToolLocked && !panoActive, [
+    drawToolLocked,
+    panoActive,
+  ])
 
   return (
     <>

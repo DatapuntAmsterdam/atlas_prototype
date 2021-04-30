@@ -1,7 +1,10 @@
+import { ReactNode } from 'react'
 import { fireEvent, render } from '@testing-library/react'
 import MapPanel from './MapPanel'
 import 'jest-styled-components'
 import withMapContext from '../../../../utils/withMapContext'
+import { DataSelectionProvider } from '../../../../components/DataSelection/DataSelectionContext'
+import { MapContextProps } from '../../MapContext'
 
 jest.mock('react-resize-detector', () => ({
   useResizeDetector: jest.fn(() => ({
@@ -25,13 +28,20 @@ jest.mock('react-router-dom', () => ({
   }),
 }))
 
+const renderWithMapAndDataSelectionContext = (
+  component: ReactNode,
+  mapContextProps?: Partial<MapContextProps>,
+) => withMapContext(<DataSelectionProvider>{component}</DataSelectionProvider>, mapContextProps)
+
 describe('MapPanel', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
 
   it('should open and close the legend panel', () => {
-    const { getByTestId, queryByTestId } = render(withMapContext(<MapPanel />))
+    const { getByTestId, queryByTestId } = render(
+      renderWithMapAndDataSelectionContext(<MapPanel />),
+    )
 
     const legendControlButton = getByTestId('legendControl').querySelector('button')
 
@@ -50,7 +60,9 @@ describe('MapPanel', () => {
   it('should hide (not unmount) the content panel when legend panel is active', () => {
     currentPath = '/kaart/geozoek/'
     search = '?locatie=123,123'
-    const { getByTestId, queryAllByTestId } = render(withMapContext(<MapPanel />))
+    const { getByTestId, queryAllByTestId } = render(
+      renderWithMapAndDataSelectionContext(<MapPanel />),
+    )
 
     const legendControlButton = getByTestId('legendControl').querySelector('button')
 
@@ -62,7 +74,9 @@ describe('MapPanel', () => {
   })
 
   it('should close the legend panel when navigating to a detail panel', () => {
-    const { getByTestId, queryByTestId, rerender } = render(withMapContext(<MapPanel />))
+    const { getByTestId, queryByTestId, rerender } = render(
+      renderWithMapAndDataSelectionContext(<MapPanel />),
+    )
 
     const legendControlButton = getByTestId('legendControl').querySelector('button')
 
@@ -72,13 +86,15 @@ describe('MapPanel', () => {
 
     // Close
     currentPath = '/kaart/parkeervakken/parkeervakken/120876487667/'
-    rerender(withMapContext(<MapPanel />))
+    rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
 
     expect(queryByTestId('legendPanel')).toBeNull()
   })
 
   it('should close the legend panel when navigating to a geo search', () => {
-    const { getByTestId, queryByTestId, rerender } = render(withMapContext(<MapPanel />))
+    const { getByTestId, queryByTestId, rerender } = render(
+      renderWithMapAndDataSelectionContext(<MapPanel />),
+    )
 
     const legendControlButton = getByTestId('legendControl').querySelector('button')
 
@@ -88,13 +104,13 @@ describe('MapPanel', () => {
 
     // Close
     currentPath = '/kaart/geozoek/'
-    rerender(withMapContext(<MapPanel />))
+    rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
 
     expect(queryByTestId('legendPanel')).toBeNull()
   })
 
   it('should show the right map controls when panorama is not in full screen mode', () => {
-    const { queryByTestId } = render(withMapContext(<MapPanel />))
+    const { queryByTestId } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
 
     expect(queryByTestId('baselayerControl')).toBeDefined()
     expect(queryByTestId('drawtoolControl')).toBeDefined()
@@ -102,7 +118,9 @@ describe('MapPanel', () => {
   })
 
   it('should show the right map controls when panorama is in full screen mode', () => {
-    const { queryByTestId } = render(withMapContext(<MapPanel />, { panoFullScreen: true }))
+    const { queryByTestId } = render(
+      renderWithMapAndDataSelectionContext(<MapPanel />, { panoFullScreen: true }),
+    )
 
     expect(queryByTestId('drawtoolControl')).toBeNull()
     expect(queryByTestId('baselayerControl')).toBeNull()
@@ -113,7 +131,7 @@ describe('MapPanel', () => {
     currentPath = '/kaart/geozoek/'
     search = ''
 
-    const { queryByTestId } = render(withMapContext(<MapPanel />))
+    const { queryByTestId } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
 
     expect(queryByTestId('drawerPanel')).toBeNull()
   })
@@ -122,7 +140,7 @@ describe('MapPanel', () => {
     currentPath = '/kaart/geozoek/'
     search = '?locatie=123,123'
 
-    const { queryByTestId } = render(withMapContext(<MapPanel />))
+    const { queryByTestId } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
 
     expect(queryByTestId('drawerPanel')).not.toBeNull()
   })
@@ -131,15 +149,15 @@ describe('MapPanel', () => {
     currentPath = '/kaart/bag/adressen/'
     search = ''
 
-    const { queryByTestId, rerender } = render(withMapContext(<MapPanel />))
+    const { queryByTestId, rerender } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
     expect(queryByTestId('drawerPanel')).toBeNull()
 
     currentPath = '/kaart/hr/vestigingen/'
-    rerender(withMapContext(<MapPanel />))
+    rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
     expect(queryByTestId('drawerPanel')).toBeNull()
 
     currentPath = '/kaart/brk/kadastrale-objecten/'
-    rerender(withMapContext(<MapPanel />))
+    rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
     expect(queryByTestId('drawerPanel')).toBeNull()
   })
 
@@ -153,15 +171,15 @@ describe('MapPanel', () => {
       ],
     })}`
 
-    const { queryByTestId, rerender } = render(withMapContext(<MapPanel />))
+    const { queryByTestId, rerender } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
     expect(queryByTestId('drawerPanel')).not.toBeNull()
 
     currentPath = '/kaart/hr/vestigingen/'
-    rerender(withMapContext(<MapPanel />))
+    rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
     expect(queryByTestId('drawerPanel')).not.toBeNull()
 
     currentPath = '/kaart/brk/kadastrale-objecten/'
-    rerender(withMapContext(<MapPanel />))
+    rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
     expect(queryByTestId('drawerPanel')).not.toBeNull()
   })
 })

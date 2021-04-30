@@ -18,7 +18,6 @@ import {
   zoomParam,
 } from './query-params'
 import MapPanel from './components/MapPanel'
-import DataSelectionProvider from './components/DrawTool/DataSelectionProvider'
 
 const MapView = styled.div`
   height: 100%;
@@ -107,13 +106,11 @@ const MapPage: FunctionComponent = () => {
           }, [mapInstanceRef, setCenter]),
         }}
       >
-        <DataSelectionProvider>
-          <LeafletLayers />
+        <LeafletLayers />
 
-          {panoActive && <PanoramaViewer />}
-          <MapMarkers panoActive={panoActive} />
-          <MapPanel />
-        </DataSelectionProvider>
+        {panoActive && <PanoramaViewer />}
+        <MapMarkers panoActive={panoActive} />
+        <MapPanel />
       </MapComponent>
     </MapView>
   )

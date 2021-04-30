@@ -33,7 +33,6 @@ const DataSelectionFilters: FunctionComponent = () => {
   const [expandedFilters, setExpandedFilters] = useState<string[]>([])
   const { addFilter, activeFilters, availableFilters } = useDataSelection()
   const { currentDatasetConfig } = useLegacyDataselectionConfig()
-
   const filteredAvailableFilters = useMemo(() => {
     if (!activeFilters.length) {
       return []

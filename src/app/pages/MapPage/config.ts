@@ -25,7 +25,7 @@ export default {
   [DataSelectionType.BAG]: {
     authScope: AuthScope.None,
     title: 'Adressen',
-    path: routing.addresses.path,
+    path: routing.addresses_TEMP.path,
     toTable: toAddresses(),
     toDetailAction: (id: string) =>
       toDetailFromEndpoint(`${environment.API_ROOT}bag/nummeraanduiding/${id}`),
@@ -35,7 +35,7 @@ export default {
   [DataSelectionType.HR]: {
     authScope: AuthScope.HR,
     title: 'Vestigingen',
-    path: routing.establishments.path,
+    path: routing.establishments_TEMP.path,
     toTable: toEstablishments(),
     toDetailAction: (id: string) =>
       toDetailFromEndpoint(`${environment.API_ROOT}handelsregister/vestiging/${id}`),
@@ -45,7 +45,7 @@ export default {
   [DataSelectionType.BRK]: {
     authScope: AuthScope.BRK,
     title: 'Kadastrale objecten',
-    path: routing.cadastralObjects.path,
+    path: routing.cadastralObjects_TEMP.path,
     toTable: toCadastralObjects(),
     toDetailAction: (id: string) => toDetailFromEndpoint(`${environment.API_ROOT}brk/object/${id}`),
     endpointData: `${environment.API_ROOT}dataselectie/brk/kot/`,

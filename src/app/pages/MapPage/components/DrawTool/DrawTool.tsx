@@ -10,10 +10,16 @@ import L, { LatLng, LatLngLiteral, Polygon } from 'leaflet'
 import { FunctionComponent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import useParam from '../../../../utils/useParam'
-import { drawToolOpenParam, PolyDrawing, polygonParam, polylineParam } from '../../query-params'
-import { useDataSelectionContext } from './DataSelectionContext'
+import {
+  dataSelectionFiltersParam,
+  drawToolOpenParam,
+  PolyDrawing,
+  polygonParam,
+  polylineParam,
+} from '../../query-params'
 import { routing } from '../../../../routes'
 import useBuildQueryString from '../../../../utils/useBuildQueryString'
+import { useDataSelection } from '../../../../components/DataSelection/DataSelectionContext'
 
 function getTotalDistance(latLngs: LatLng[]) {
   return latLngs.reduce(
@@ -68,8 +74,8 @@ const DrawTool: FunctionComponent = () => {
   const [polygon, setPolygon] = useParam(polygonParam)
   const [polyline, setPolyline] = useParam(polylineParam)
   const [drawtoolOpen] = useParam(drawToolOpenParam)
-  const { setDistanceText } = useDataSelectionContext()
   const history = useHistory()
+  const { activeFilters, setDistanceText, setDrawToolLocked } = useDataSelection()
 
   const [initialDrawnItems, setInitialDrawnItems] = useState<ExtendedLayer[]>([])
 
@@ -94,19 +100,30 @@ const DrawTool: FunctionComponent = () => {
    * @param shape
    */
   const updateShape = (shape: { polygon: PolyDrawing | null; polyline: PolyDrawing | null }) => {
-    if (shape.polygon || shape.polyline) {
-      const method = shape.polygon ? 'push' : 'replace'
-      history[method]({
+    if (shape.polygon) {
+      history.push({
         pathname: routing.addresses_TEMP.path,
         search: buildQueryString([
           [polylineParam, shape.polyline],
           [polygonParam, shape.polygon],
         ]),
       })
+    } else if (activeFilters.length) {
+      setDistanceText(undefined)
+      history.push({
+        pathname: routing.addresses_TEMP.path,
+        search: buildQueryString(
+          [[polylineParam, shape.polyline]],
+          [polygonParam, drawToolOpenParam],
+        ),
+      })
     } else {
       history.push({
         pathname: routing.dataSearchGeo_TEMP.path,
-        search: buildQueryString(undefined, [polylineParam, polygonParam, drawToolOpenParam]),
+        search: buildQueryString(
+          [[polylineParam, shape.polyline]],
+          [dataSelectionFiltersParam, polygonParam, drawToolOpenParam],
+        ),
       })
     }
   }
@@ -137,6 +154,7 @@ const DrawTool: FunctionComponent = () => {
           ? polylineRef.current
           : { id: layer.id, polygon: getLayerCoordinates(layer) }
 
+      setDrawToolLocked(false)
       updateShape({
         polygon: updatedPolygon,
         polyline: updatedPolyline,
@@ -230,6 +248,9 @@ const DrawTool: FunctionComponent = () => {
       onEndInitialItems={attachDataToLayer}
       onDelete={onDeleteDrawing}
       onClose={onClose}
+      onDrawStart={() => {
+        setDrawToolLocked(true)
+      }}
       drawnItems={initialDrawnItems}
       drawnItemsGroup={drawnItemsGroup}
     />
