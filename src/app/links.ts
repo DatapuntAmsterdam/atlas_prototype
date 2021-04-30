@@ -6,6 +6,7 @@ import { ViewMode } from '../shared/ducks/ui/ui'
 import parameters from '../store/parameters'
 import { fileNameParam, fileUrlParam } from './pages/ConstructionDossierPage/query-params'
 import { MAIN_PATHS, routing } from './routes'
+import { FEATURE_BETA_MAP, isFeatureEnabled } from './features'
 
 export const toAddresses = (): LocationDescriptorObject => {
   const searchParams = new URLSearchParams({
@@ -63,9 +64,10 @@ export interface DataDetailParams {
 }
 
 export const toDataDetail = ({ type, subtype, id }: DataDetailParams): LocationDescriptorObject => {
-  const path = window.location.pathname.includes(MAIN_PATHS.MAP)
-    ? routing.dataDetail_TEMP.path
-    : routing.dataDetail.path
+  const path =
+    window.location.pathname.includes(MAIN_PATHS.MAP) || isFeatureEnabled(FEATURE_BETA_MAP)
+      ? routing.dataDetail_TEMP.path
+      : routing.dataDetail.path
 
   return {
     pathname: generatePath(path, { type, subtype, id }),

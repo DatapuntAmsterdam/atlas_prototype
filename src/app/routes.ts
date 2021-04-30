@@ -1,4 +1,5 @@
 import PAGES from './pages'
+import { FEATURE_BETA_MAP, isFeatureEnabled } from './features'
 
 export const ROUTER_NAMESPACE = 'atlasRouter'
 
@@ -27,6 +28,9 @@ function typeHelper<K extends PropertyKey>(obj: Record<K, Route>): Record<K, Rou
   return obj
 }
 
+const legacyMapDataPath = isFeatureEnabled(FEATURE_BETA_MAP) ? MAIN_PATHS.MAP : MAIN_PATHS.DATA
+const betaMapDataPath = isFeatureEnabled(FEATURE_BETA_MAP) ? MAIN_PATHS.DATA : MAIN_PATHS.MAP
+
 export const routing = typeHelper({
   home: {
     title: 'Home',
@@ -36,25 +40,25 @@ export const routing = typeHelper({
   },
   data: {
     title: 'Data',
-    path: `/${MAIN_PATHS.DATA}/`,
+    path: `/${legacyMapDataPath}/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.DATA}`,
     page: PAGES.DATA,
   },
   addresses: {
     title: 'Adressen',
-    path: `/${MAIN_PATHS.DATA}/bag/adressen/`,
+    path: `/${legacyMapDataPath}/bag/adressen/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.ADDRESSES}`,
     page: PAGES.ADDRESSES,
   },
   establishments: {
     title: 'Vestigingen',
-    path: `/${MAIN_PATHS.DATA}/hr/vestigingen/`,
+    path: `/${legacyMapDataPath}/hr/vestigingen/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.ESTABLISHMENTS}`,
     page: PAGES.ESTABLISHMENTS,
   },
   cadastralObjects: {
     title: 'Kadastrale objecten',
-    path: `/${MAIN_PATHS.DATA}/brk/kadastrale-objecten/`,
+    path: `/${legacyMapDataPath}/brk/kadastrale-objecten/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.CADASTRAL_OBJECTS}`,
     page: PAGES.CADASTRAL_OBJECTS,
   },
@@ -84,7 +88,7 @@ export const routing = typeHelper({
   },
   dataSearchGeo: {
     title: 'Data zoekresultaten op locatie',
-    path: `/${MAIN_PATHS.DATA}/geozoek/`,
+    path: `/${legacyMapDataPath}/geozoek/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.DATA_SEARCH_GEO}`,
     page: PAGES.DATA_SEARCH_GEO,
   },
@@ -121,7 +125,7 @@ export const routing = typeHelper({
   },
   dataDetail: {
     title: 'Data detail',
-    path: `/${MAIN_PATHS.DATA}/:type/:subtype/:id/`,
+    path: `/${legacyMapDataPath}/:type/:subtype/:id/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.DATA_DETAIL}`,
     page: PAGES.DATA_DETAIL,
   },
@@ -183,43 +187,43 @@ export const routing = typeHelper({
 
   data_TEMP: {
     title: 'Data',
-    path: `/${MAIN_PATHS.MAP}/`,
+    path: `/${betaMapDataPath}/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.DATA}_TEMP`,
     page: PAGES.DATA,
   },
   dataSearchGeo_TEMP: {
     title: 'Data zoekresultaten op locatie',
-    path: `/${MAIN_PATHS.MAP}/geozoek/`,
+    path: `/${betaMapDataPath}/geozoek/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.DATA_SEARCH_GEO}_TEMP`,
     page: PAGES.DATA_SEARCH_GEO,
   },
   dataDetail_TEMP: {
     title: 'Data detail',
-    path: `/${MAIN_PATHS.MAP}/:type/:subtype/:id/`,
+    path: `/${betaMapDataPath}/:type/:subtype/:id/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.DATA_DETAIL}_TEMP`,
     page: PAGES.DATA_DETAIL,
   },
   panorama_TEMP: {
     title: 'Panoramabeeld',
-    path: `/${MAIN_PATHS.MAP}/panorama/:id/`,
+    path: `/${betaMapDataPath}/panorama/:id/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.PANORAMA}_TEMP`,
     page: PAGES.PANORAMA,
   },
   addresses_TEMP: {
     title: 'Adressen',
-    path: `/${MAIN_PATHS.MAP}/bag/adressen/`,
+    path: `/${betaMapDataPath}/bag/adressen/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.ADDRESSES}_TEMP`,
     page: PAGES.ADDRESSES,
   },
   establishments_TEMP: {
     title: 'Vestigingen',
-    path: `/${MAIN_PATHS.MAP}/hr/vestigingen/`,
+    path: `/${betaMapDataPath}/hr/vestigingen/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.ESTABLISHMENTS}_TEMP`,
     page: PAGES.ESTABLISHMENTS,
   },
   cadastralObjects_TEMP: {
     title: 'Kadastrale objecten',
-    path: `/${MAIN_PATHS.MAP}/brk/kadastrale-objecten/`,
+    path: `/${betaMapDataPath}/brk/kadastrale-objecten/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.CADASTRAL_OBJECTS}_TEMP`,
     page: PAGES.CADASTRAL_OBJECTS,
   },
