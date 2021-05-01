@@ -147,7 +147,7 @@ describe('DocumentDetails', () => {
       { wrapper },
     )
 
-    expect(screen.getByTestId('noRights')).toBeDefined()
+    expect(screen.getByTestId('noRights')).toBeInTheDocument()
   })
 
   it('triggers the onRequestLoginLink prop if a login link is requested', () => {
@@ -181,7 +181,7 @@ describe('DocumentDetails', () => {
       { wrapper },
     )
 
-    expect(screen.getByTestId('noExtendedRights')).toBeDefined()
+    expect(screen.getByTestId('noExtendedRights')).toBeInTheDocument()
   })
 
   it('renders the the files gallery', () => {

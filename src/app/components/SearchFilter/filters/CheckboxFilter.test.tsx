@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render } from '@testing-library/react'
+import { screen, cleanup, fireEvent, render } from '@testing-library/react'
 import { FilterOption } from '../../../models/filter'
 import { FilterProps } from '../models'
 import CheckboxFilter from './CheckboxFilter'
@@ -24,28 +24,28 @@ describe('CheckboxFilter', () => {
 
   it('should render a list of options without selection', () => {
     const props: FilterProps = { ...defaultProps, options }
-    const { getByLabelText } = render(<CheckboxFilter {...props} />)
+    render(<CheckboxFilter {...props} />)
 
-    const firstNode = getByLabelText('First') as HTMLInputElement
-    const secondNode = getByLabelText('Second') as HTMLInputElement
-    const lastNode = getByLabelText('Last') as HTMLInputElement
+    const firstNode = screen.getByLabelText('First') as HTMLInputElement
+    const secondNode = screen.getByLabelText('Second') as HTMLInputElement
+    const lastNode = screen.getByLabelText('Last') as HTMLInputElement
     ;[firstNode, secondNode, lastNode].forEach((node, index) => {
       const option = options[index]
 
       expect(node.tagName).toEqual('INPUT')
       expect(node.type).toEqual('checkbox')
-      expect(node.getAttribute('value')).toEqual(option.id)
-      expect(node.checked).toEqual(false)
+      expect(node.value).toBe(option.id)
+      expect(node).not.toBeChecked()
     })
   })
 
   it('should render a list of options with selection', () => {
     const selection = ['second']
     const props: FilterProps = { ...defaultProps, options, selection }
-    const { getByLabelText } = render(<CheckboxFilter {...props} />)
-    const secondNode = getByLabelText('Second') as HTMLInputElement
+    render(<CheckboxFilter {...props} />)
+    const secondNode = screen.getByLabelText('Second') as HTMLInputElement
 
-    expect(secondNode.checked).toEqual(true)
+    expect(secondNode).toBeChecked()
   })
 
   it('should handle changes in selection', () => {
@@ -57,9 +57,9 @@ describe('CheckboxFilter', () => {
       selection,
       onSelectionChange: selectionChangeMock,
     }
-    const { getByLabelText } = render(<CheckboxFilter {...props} />)
+    render(<CheckboxFilter {...props} />)
 
-    fireEvent.click(getByLabelText('Last'))
+    fireEvent.click(screen.getByLabelText('Last'))
 
     expect(selectionChangeMock).toHaveBeenCalledWith(['first', 'last'])
   })
@@ -73,9 +73,9 @@ describe('CheckboxFilter', () => {
       selection,
       onSelectionChange: selectionChangeMock,
     }
-    const { getByLabelText } = render(<CheckboxFilter {...props} />)
+    render(<CheckboxFilter {...props} />)
 
-    fireEvent.click(getByLabelText('First'))
+    fireEvent.click(screen.getByLabelText('First'))
 
     expect(selectionChangeMock).toHaveBeenCalledWith([])
   })

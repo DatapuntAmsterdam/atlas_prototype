@@ -79,14 +79,14 @@ describe('DatasetSearchResults', () => {
     // if, for whatever reason, the GraphQL request returns faulty data or has another internal error, the `results` prop can be null or otherwise empty
     render(withAppContext(<DatasetSearchResults />))
 
-    expect(screen.queryAllByTestId('DatasetCard')).toHaveLength(0)
+    expect(screen.queryAllByTestId('datasetCard').length).toBe(0)
     expect(screen.getByTestId('noSearchResults')).toBeInTheDocument()
   })
 
   it('shows a list of card components', () => {
     render(withAppContext(<DatasetSearchResults results={results} />))
 
-    expect(screen.queryByTestId('noSearchResults')).toBeNull()
+    expect(screen.queryByTestId('noSearchResults')).not.toBeInTheDocument()
 
     expect(screen.queryAllByTestId('datasetCard')).toHaveLength(results.length)
   })
@@ -95,7 +95,7 @@ describe('DatasetSearchResults', () => {
     const { rerender } = render(withAppContext(<DatasetSearchResults results={results} />))
 
     // no user, no button
-    expect(screen.queryByTestId('actionButton')).toBeNull()
+    expect(screen.queryByTestId('actionButton')).not.toBeInTheDocument()
 
     mockedGetState.mockImplementation(
       () =>
@@ -114,12 +114,12 @@ describe('DatasetSearchResults', () => {
     rerender(withAppContext(<DatasetSearchResults results={results} isOverviewPage={false} />))
 
     // user, but no overviewpage, no button
-    expect(screen.queryByTestId('actionButton')).toBeNull()
+    expect(screen.queryByTestId('actionButton')).not.toBeInTheDocument()
 
     rerender(withAppContext(<DatasetSearchResults results={results} isOverviewPage />))
 
     // no scopes, no button
-    expect(screen.queryByTestId('actionButton')).toBeNull()
+    expect(screen.queryByTestId('actionButton')).not.toBeInTheDocument()
 
     mockedGetState.mockImplementation(
       () =>
@@ -169,7 +169,7 @@ describe('DatasetSearchResults', () => {
   it('shows an alert with labels that the current user does not have access to', () => {
     const { rerender } = render(withAppContext(<DatasetSearchResults results={results} />))
 
-    expect(screen.queryByTestId('auth-alert')).toBeNull()
+    expect(screen.queryByTestId('auth-alert')).not.toBeInTheDocument()
 
     mockedGetUnauthorizedLabels.mockImplementation(() => ['foo', 'bar', 'baz'])
 
@@ -181,7 +181,7 @@ describe('DatasetSearchResults', () => {
   it('shows the no results component', () => {
     const { rerender } = render(withAppContext(<DatasetSearchResults results={results} />))
 
-    expect(screen.queryByTestId('noSearchResults')).toBeNull()
+    expect(screen.queryByTestId('noSearchResults')).not.toBeInTheDocument()
 
     rerender(withAppContext(<DatasetSearchResults results={[]} />))
 
@@ -191,7 +191,7 @@ describe('DatasetSearchResults', () => {
   it('shows an error message', () => {
     const { rerender } = render(withAppContext(<DatasetSearchResults results={[]} />))
 
-    expect(screen.queryByTestId('errorMessage')).toBeNull()
+    expect(screen.queryByTestId('errorMessage')).not.toBeInTheDocument()
 
     mockedGetLoadingErrors.mockImplementation(() => [
       { message: 'foo' },

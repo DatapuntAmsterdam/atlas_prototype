@@ -1,10 +1,10 @@
-import { render } from '@testing-library/react'
+import { screen, render } from '@testing-library/react'
 import DetailTable from './DetailTable'
 import { DetailResultItemType } from '../../../../map/types/details'
 
 describe('DetailTable', () => {
   it('should render a table', () => {
-    const { getByTestId } = render(
+    render(
       <DetailTable
         item={{
           type: DetailResultItemType.Table,
@@ -14,7 +14,7 @@ describe('DetailTable', () => {
       />,
     )
 
-    expect(getByTestId('detailTable')).toBeDefined()
+    expect(screen.getByTestId('detailTable')).toBeInTheDocument()
   })
 
   it('should show a paragraph that no results have been found', () => {

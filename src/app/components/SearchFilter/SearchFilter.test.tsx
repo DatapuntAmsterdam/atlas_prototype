@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render } from '@testing-library/react'
+import { screen, cleanup, fireEvent, render } from '@testing-library/react'
 import * as reactRedux from 'react-redux'
 import { Filter, FilterOption, FilterType } from '../../models/filter'
 import * as ducks from '../../pages/SearchPage/SearchPageDucks'
@@ -66,38 +66,30 @@ describe('SearchFilter', () => {
   beforeEach(cleanup)
 
   it('should render a list with checkbox inputs', () => {
-    const { getByLabelText } = render(
-      <SearchFilter filter={checkboxFilter} hideCount={false} totalCount={totalCount} />,
-    )
+    render(<SearchFilter filter={checkboxFilter} hideCount={false} totalCount={totalCount} />)
 
-    const inputNode = getByLabelText('One (10)')
-    expect(inputNode.getAttribute('type')).toBe('checkbox')
+    const inputNode = screen.getByLabelText('One (10)')
+    expect(inputNode).toHaveAttribute('type', 'checkbox')
   })
 
   it('should render a list with radio inputs', () => {
-    const { getByLabelText } = render(
-      <SearchFilter filter={radioFilter} hideCount={false} totalCount={totalCount} />,
-    )
+    render(<SearchFilter filter={radioFilter} hideCount={false} totalCount={totalCount} />)
 
-    const inputNode = getByLabelText('One (10)')
-    expect(inputNode.getAttribute('type')).toBe('radio')
+    const inputNode = screen.getByLabelText('One (10)')
+    expect(inputNode).toHaveAttribute('type', 'radio')
   })
 
   it('should render a select with the filter options', () => {
-    const { getByText } = render(
-      <SearchFilter filter={selectFilter} hideCount={false} totalCount={totalCount} />,
-    )
+    render(<SearchFilter filter={selectFilter} hideCount={false} totalCount={totalCount} />)
 
-    const selectNode = getByText('One (10)')
+    const selectNode = screen.getByText('One (10)')
     expect(selectNode.tagName).toBe('OPTION')
   })
 
   it('should handle changes in selection for checkboxes', () => {
-    const { getByLabelText } = render(
-      <SearchFilter filter={checkboxFilter} hideCount={false} totalCount={totalCount} />,
-    )
+    render(<SearchFilter filter={checkboxFilter} hideCount={false} totalCount={totalCount} />)
 
-    const inputNodeOne = getByLabelText('One (10)')
+    const inputNodeOne = screen.getByLabelText('One (10)')
 
     fireEvent.click(inputNodeOne)
     expect(ducks.setFilterValues).toBeCalledWith('group', ['one'])
@@ -105,11 +97,9 @@ describe('SearchFilter', () => {
   })
 
   it('should handle changes in selection for radio buttons', () => {
-    const { getByLabelText } = render(
-      <SearchFilter filter={radioFilter} hideCount={false} totalCount={totalCount} />,
-    )
+    render(<SearchFilter filter={radioFilter} hideCount={false} totalCount={totalCount} />)
 
-    const inputNodeOne = getByLabelText('One (10)')
+    const inputNodeOne = screen.getByLabelText('One (10)')
 
     fireEvent.click(inputNodeOne)
     expect(ducks.setFilterValues).toBeCalledWith('group', ['one'])
@@ -117,11 +107,9 @@ describe('SearchFilter', () => {
   })
 
   it('should handle changes in selection for a select', () => {
-    const { getByText } = render(
-      <SearchFilter filter={selectFilter} hideCount={false} totalCount={totalCount} />,
-    )
+    render(<SearchFilter filter={selectFilter} hideCount={false} totalCount={totalCount} />)
 
-    const inputNodeOne = getByText('One (10)')
+    const inputNodeOne = screen.getByText('One (10)')
 
     fireEvent.click(inputNodeOne)
     expect(ducks.setFilterValues).toBeCalledWith('group', ['one'])
@@ -138,11 +126,9 @@ describe('SearchFilter', () => {
 
   describe('Matomo tracking', () => {
     it('should track changes added to selection using Matomo', () => {
-      const { getByLabelText } = render(
-        <SearchFilter filter={checkboxFilter} hideCount={false} totalCount={totalCount} />,
-      )
+      render(<SearchFilter filter={checkboxFilter} hideCount={false} totalCount={totalCount} />)
 
-      const inputNodeOne = getByLabelText('One (10)')
+      const inputNodeOne = screen.getByLabelText('One (10)')
 
       fireEvent.click(inputNodeOne)
 
@@ -155,11 +141,9 @@ describe('SearchFilter', () => {
 
     it('should track changes removed from selection using Matomo', () => {
       const useSelectorSpy = jest.spyOn(reactRedux, 'useSelector').mockImplementation(() => ['one'])
-      const { getByLabelText } = render(
-        <SearchFilter filter={checkboxFilter} hideCount={false} totalCount={totalCount} />,
-      )
+      render(<SearchFilter filter={checkboxFilter} hideCount={false} totalCount={totalCount} />)
 
-      const inputNodeOne = getByLabelText('One (10)')
+      const inputNodeOne = screen.getByLabelText('One (10)')
 
       fireEvent.click(inputNodeOne)
 

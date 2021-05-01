@@ -18,7 +18,7 @@ describe('IFrame', () => {
   it('hides the loading spinner when the iframe loads', () => {
     render(<IFrame src={src} title={title} />)
     fireEvent.load(screen.getByTitle(title))
-    expect(screen.queryByTestId('loadingSpinner')).toBeNull()
+    expect(screen.queryByTestId('loadingSpinner')).not.toBeInTheDocument()
   })
 
   it('sets the height based on events from the iframe', async () => {

@@ -1,6 +1,6 @@
 import { mocked } from 'ts-jest/utils'
 import usePromise from '@amsterdam/use-promise'
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import useDownload from '../../utils/useDownload'
 import PublicationDetailPage from './PublicationDetailPage'
 import withAppContext from '../../utils/withAppContext'
@@ -51,18 +51,18 @@ describe('PublicationDetailPage', () => {
   it('should render the spinner when the request is loading', () => {
     mockedUsePromise.mockReturnValue({ status: 'pending' })
 
-    const { getByTestId } = render(withAppContext(<PublicationDetailPage />))
+    render(withAppContext(<PublicationDetailPage />))
 
-    expect(getByTestId(LOADING_SPINNER_TEST_ID)).toBeDefined()
+    expect(screen.getByTestId(LOADING_SPINNER_TEST_ID)).toBeInTheDocument()
   })
 
   it('should call the useDownload hook when user tries to download publication', () => {
     mockedUsePromise.mockReturnValue({ status: 'fulfilled', value: mockData })
-    const { getByTestId } = render(withAppContext(<PublicationDetailPage />))
+    render(withAppContext(<PublicationDetailPage />))
 
-    expect(getByTestId('documentCover')).toBeDefined()
+    expect(screen.getByTestId('documentCover')).toBeInTheDocument()
 
-    fireEvent.click(getByTestId('documentCover').querySelector('button') as Element)
+    fireEvent.click(within(screen.getByTestId('documentCover')).getByRole('button'))
 
     expect(mockDownloadFile).toHaveBeenCalled()
   })

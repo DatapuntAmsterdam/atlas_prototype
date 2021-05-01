@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render } from '@testing-library/react'
+import { screen, cleanup, fireEvent, render } from '@testing-library/react'
 import * as ducks from './SearchPageDucks'
 import SearchSort from './SearchSort'
 
@@ -23,11 +23,9 @@ describe('SearchSort', () => {
   beforeEach(cleanup)
 
   it('should handle changes in the selection', () => {
-    const { getByTestId } = render(
-      <SearchSort sort="date:asc" isOverviewPage={false} disabled={false} />,
-    )
+    render(<SearchSort sort="date:asc" isOverviewPage={false} disabled={false} />)
 
-    const select = getByTestId('sort-select')
+    const select = screen.getByTestId('sort-select')
 
     fireEvent.change(select)
     expect(mockTrackEvent).toBeCalled()

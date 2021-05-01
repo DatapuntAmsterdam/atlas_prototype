@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { screen, render } from '@testing-library/react'
 import withMapContext from '../../utils/withMapContext'
 import MapMarkers from './MapMarkers'
 import { DataSelectionProvider } from '../../components/DataSelection/DataSelectionContext'
@@ -21,14 +21,14 @@ jest.mock('./map-search/MapSearchMarker', () => () => <div data-testid="searchMa
 
 describe('MapMarkers', () => {
   it('should render the search marker when on /kaart, /kaart/geozoek and detail page', () => {
-    const { getByTestId, rerender } = render(
+    const { rerender } = render(
       withMapContext(
         <DataSelectionProvider>
           <MapMarkers panoActive={false} />
         </DataSelectionProvider>,
       ),
     )
-    expect(getByTestId('searchMarker')).not.toBeNull()
+    expect(screen.getByTestId('searchMarker')).toBeInTheDocument()
 
     currentPath = '/kaart/geozoek'
     rerender(
@@ -38,7 +38,7 @@ describe('MapMarkers', () => {
         </DataSelectionProvider>,
       ),
     )
-    expect(getByTestId('searchMarker')).not.toBeNull()
+    expect(screen.getByTestId('searchMarker')).toBeInTheDocument()
 
     currentPath = '/kaart/bag/buurt/123'
     rerender(
@@ -48,19 +48,19 @@ describe('MapMarkers', () => {
         </DataSelectionProvider>,
       ),
     )
-    expect(getByTestId('searchMarker')).not.toBeNull()
+    expect(screen.getByTestId('searchMarker')).toBeInTheDocument()
   })
 
   it('should not render the search marker, but the panorama marker when panoramaviewer is active', () => {
     currentPath = '/kaart/geozoek'
-    const { getByTestId, queryByTestId } = render(
+    render(
       withMapContext(
         <DataSelectionProvider>
           <MapMarkers panoActive />
         </DataSelectionProvider>,
       ),
     )
-    expect(getByTestId('panoramaMarker')).not.toBeNull()
-    expect(queryByTestId('searchMarker')).toBeNull()
+    expect(screen.getByTestId('panoramaMarker')).toBeInTheDocument()
+    expect(screen.queryByTestId('searchMarker')).not.toBeInTheDocument()
   })
 })

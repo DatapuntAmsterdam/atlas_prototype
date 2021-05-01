@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { screen, render } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 import usePromise from '@amsterdam/use-promise'
 import SpecialDetailPage from './SpecialDetailPage'
@@ -26,9 +26,9 @@ describe('SpecialDetailPage', () => {
   it('should show a loading spinner', () => {
     mockedUsePromise.mockReturnValue({ status: 'pending' })
 
-    const { getByTestId } = render(withAppContext(<SpecialDetailPage />))
+    render(withAppContext(<SpecialDetailPage />))
 
-    expect(getByTestId(LOADING_SPINNER_TEST_ID)).toBeDefined()
+    expect(screen.getByTestId(LOADING_SPINNER_TEST_ID)).toBeInTheDocument()
   })
 
   it('should render an error alert', () => {
@@ -37,8 +37,8 @@ describe('SpecialDetailPage', () => {
       reason: new Error('Whoopsie'),
     })
 
-    const { getByTestId } = render(withAppContext(<SpecialDetailPage />))
+    render(withAppContext(<SpecialDetailPage />))
 
-    expect(getByTestId(ERROR_MESSAGE_TEST_ID)).toBeDefined()
+    expect(screen.getByTestId(ERROR_MESSAGE_TEST_ID)).toBeInTheDocument()
   })
 })

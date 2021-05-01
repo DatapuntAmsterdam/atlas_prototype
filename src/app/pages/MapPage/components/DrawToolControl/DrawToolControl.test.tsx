@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { screen, render } from '@testing-library/react'
 import DrawToolControl from './DrawToolControl'
 import { drawToolOpenParam } from '../../query-params'
 import withMapContext from '../../../../utils/withMapContext'
@@ -20,15 +20,15 @@ jest.mock('react-router-dom', () => ({
 
 describe('DrawToolControl', () => {
   it('renders the control', () => {
-    const { container, getByTestId } = render(withMapContext(<DrawToolControl />))
+    const { container } = render(withMapContext(<DrawToolControl />))
 
-    expect(getByTestId('drawtoolOpenButton')).toBeDefined()
+    expect(screen.getByTestId('drawtoolOpenButton')).toBeInTheDocument()
     expect(container.firstChild).toBeDefined()
   })
 
   it('renders the DrawTool when url contains the drawtoolOpen parameter', () => {
     search = `${drawToolOpenParam.name}=true`
-    const { getByTestId } = render(
+    render(
       withMapContext(
         <DataSelectionProvider>
           <DrawToolControl />
@@ -36,6 +36,6 @@ describe('DrawToolControl', () => {
       ),
     )
 
-    expect(getByTestId('drawTool')).toBeDefined()
+    expect(screen.getByTestId('drawTool')).toBeInTheDocument()
   })
 })

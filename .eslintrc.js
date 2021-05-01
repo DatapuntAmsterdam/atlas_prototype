@@ -7,6 +7,9 @@ module.exports = {
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:jsx-a11y/strict',
     'plugin:prettier/recommended',
+    'plugin:testing-library/dom',
+    'plugin:testing-library/react',
+    'plugin:jest-dom/recommended',
     'prettier',
     'plugin:cypress/recommended',
   ],
@@ -57,6 +60,9 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
+
+    'testing-library/await-async-utils': 'off',
+    'testing-library/no-node-access': 'off',
 
     'jsx-a11y/label-has-for': [
       'error',

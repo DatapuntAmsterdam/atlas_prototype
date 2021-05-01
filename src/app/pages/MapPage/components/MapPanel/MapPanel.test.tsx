@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { fireEvent, render } from '@testing-library/react'
+import { screen, fireEvent, render } from '@testing-library/react'
 import MapPanel from './MapPanel'
 import 'jest-styled-components'
 import withMapContext from '../../../../utils/withMapContext'
@@ -39,126 +39,116 @@ describe('MapPanel', () => {
   })
 
   it('should open and close the legend panel', () => {
-    const { getByTestId, queryByTestId } = render(
-      renderWithMapAndDataSelectionContext(<MapPanel />),
-    )
+    render(renderWithMapAndDataSelectionContext(<MapPanel />))
 
-    const legendControlButton = getByTestId('legendControl').querySelector('button')
+    const legendControlButton = screen.getByTestId('legendControl').querySelector('button')
 
-    expect(queryByTestId('legendPanel')).toBeNull()
+    expect(screen.queryByTestId('legendPanel')).not.toBeInTheDocument()
 
     // Open
     fireEvent.click(legendControlButton as Element)
-    expect(getByTestId('legendPanel')).not.toBeNull()
+    expect(screen.getByTestId('legendPanel')).toBeInTheDocument()
 
     // Close
-    const closeButton = getByTestId('closePanelButton')
+    const closeButton = screen.getByTestId('closePanelButton')
     fireEvent.click(closeButton)
-    expect(queryByTestId('legendPanel')).toBeNull()
+    expect(screen.queryByTestId('legendPanel')).not.toBeInTheDocument()
   })
 
   it('should hide (not unmount) the content panel when legend panel is active', () => {
     currentPath = '/kaart/geozoek/'
     search = '?locatie=123,123'
-    const { getByTestId, queryAllByTestId } = render(
-      renderWithMapAndDataSelectionContext(<MapPanel />),
-    )
+    render(renderWithMapAndDataSelectionContext(<MapPanel />))
 
-    const legendControlButton = getByTestId('legendControl').querySelector('button')
+    const legendControlButton = screen.getByTestId('legendControl').querySelector('button')
 
-    expect(getByTestId('drawerPanel')).toHaveStyleRule('display', 'block')
+    expect(screen.getByTestId('drawerPanel')).toHaveStyleRule('display', 'block')
 
     // Open
     fireEvent.click(legendControlButton as Element)
-    expect(queryAllByTestId('drawerPanel')[0]).toHaveStyleRule('display', 'none')
+    expect(screen.queryAllByTestId('drawerPanel')[0]).toHaveStyleRule('display', 'none')
   })
 
   it('should close the legend panel when navigating to a detail panel', () => {
-    const { getByTestId, queryByTestId, rerender } = render(
-      renderWithMapAndDataSelectionContext(<MapPanel />),
-    )
+    const { rerender } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
 
-    const legendControlButton = getByTestId('legendControl').querySelector('button')
+    const legendControlButton = screen.getByTestId('legendControl').querySelector('button')
 
     // Open
     fireEvent.click(legendControlButton as Element)
-    expect(getByTestId('legendPanel')).toBeDefined()
+    expect(screen.getByTestId('legendPanel')).toBeInTheDocument()
 
     // Close
     currentPath = '/kaart/parkeervakken/parkeervakken/120876487667/'
     rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
 
-    expect(queryByTestId('legendPanel')).toBeNull()
+    expect(screen.queryByTestId('legendPanel')).not.toBeInTheDocument()
   })
 
   it('should close the legend panel when navigating to a geo search', () => {
-    const { getByTestId, queryByTestId, rerender } = render(
-      renderWithMapAndDataSelectionContext(<MapPanel />),
-    )
+    const { rerender } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
 
-    const legendControlButton = getByTestId('legendControl').querySelector('button')
+    const legendControlButton = screen.getByTestId('legendControl').querySelector('button')
 
     // Open
     fireEvent.click(legendControlButton as Element)
-    expect(getByTestId('legendPanel')).toBeDefined()
+    expect(screen.getByTestId('legendPanel')).toBeInTheDocument()
 
     // Close
     currentPath = '/kaart/geozoek/'
     rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
 
-    expect(queryByTestId('legendPanel')).toBeNull()
+    expect(screen.queryByTestId('legendPanel')).not.toBeInTheDocument()
   })
 
   it('should show the right map controls when panorama is not in full screen mode', () => {
-    const { queryByTestId } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
+    render(renderWithMapAndDataSelectionContext(<MapPanel />))
 
-    expect(queryByTestId('baselayerControl')).toBeDefined()
-    expect(queryByTestId('drawtoolControl')).toBeDefined()
-    expect(queryByTestId('legendControl')).toBeDefined()
+    expect(screen.queryByTestId('baselayerControl')).toBeInTheDocument()
+    expect(screen.queryByTestId('drawtoolControl')).toBeInTheDocument()
+    expect(screen.queryByTestId('legendControl')).toBeInTheDocument()
   })
 
   it('should show the right map controls when panorama is in full screen mode', () => {
-    const { queryByTestId } = render(
-      renderWithMapAndDataSelectionContext(<MapPanel />, { panoFullScreen: true }),
-    )
+    render(renderWithMapAndDataSelectionContext(<MapPanel />, { panoFullScreen: true }))
 
-    expect(queryByTestId('drawtoolControl')).toBeNull()
-    expect(queryByTestId('baselayerControl')).toBeNull()
-    expect(queryByTestId('legendControl')).toBeDefined()
+    expect(screen.queryByTestId('drawtoolControl')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('baselayerControl')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('legendControl')).toBeInTheDocument()
   })
 
   it("should not render the panel when location isn't set on geosearch page", () => {
     currentPath = '/kaart/geozoek/'
     search = ''
 
-    const { queryByTestId } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
+    render(renderWithMapAndDataSelectionContext(<MapPanel />))
 
-    expect(queryByTestId('drawerPanel')).toBeNull()
+    expect(screen.queryByTestId('drawerPanel')).not.toBeInTheDocument()
   })
 
   it('should show the panel when location is set on geosearch page', () => {
     currentPath = '/kaart/geozoek/'
     search = '?locatie=123,123'
 
-    const { queryByTestId } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
+    render(renderWithMapAndDataSelectionContext(<MapPanel />))
 
-    expect(queryByTestId('drawerPanel')).not.toBeNull()
+    expect(screen.queryByTestId('drawerPanel')).toBeInTheDocument()
   })
 
   it("should not render the panel when polygon isn't set on dataselection pages (adressen, vestigingen and kadastrale objecten)", () => {
     currentPath = '/kaart/bag/adressen/'
     search = ''
 
-    const { queryByTestId, rerender } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
-    expect(queryByTestId('drawerPanel')).toBeNull()
+    const { rerender } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
+    expect(screen.queryByTestId('drawerPanel')).not.toBeInTheDocument()
 
     currentPath = '/kaart/hr/vestigingen/'
     rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
-    expect(queryByTestId('drawerPanel')).toBeNull()
+    expect(screen.queryByTestId('drawerPanel')).not.toBeInTheDocument()
 
     currentPath = '/kaart/brk/kadastrale-objecten/'
     rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
-    expect(queryByTestId('drawerPanel')).toBeNull()
+    expect(screen.queryByTestId('drawerPanel')).not.toBeInTheDocument()
   })
 
   it('should show the panel when polygon is set on dataselection pages (adressen, vestigingen and kadastrale objecten)', () => {
@@ -171,15 +161,15 @@ describe('MapPanel', () => {
       ],
     })}`
 
-    const { queryByTestId, rerender } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
-    expect(queryByTestId('drawerPanel')).not.toBeNull()
+    const { rerender } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
+    expect(screen.queryByTestId('drawerPanel')).toBeInTheDocument()
 
     currentPath = '/kaart/hr/vestigingen/'
     rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
-    expect(queryByTestId('drawerPanel')).not.toBeNull()
+    expect(screen.queryByTestId('drawerPanel')).toBeInTheDocument()
 
     currentPath = '/kaart/brk/kadastrale-objecten/'
     rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
-    expect(queryByTestId('drawerPanel')).not.toBeNull()
+    expect(screen.queryByTestId('drawerPanel')).toBeInTheDocument()
   })
 })

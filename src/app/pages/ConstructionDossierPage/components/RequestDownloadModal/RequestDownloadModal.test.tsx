@@ -87,7 +87,7 @@ describe('RequestDownloadModal', () => {
   it('shows the loading message', () => {
     render(<RequestDownloadModal files={MOCK_FILES} onClose={() => {}} />, { wrapper })
 
-    expect(screen.getByTestId('loadingMessage')).toBeDefined()
+    expect(screen.getByTestId('loadingMessage')).toBeInTheDocument()
   })
 
   it('shows the error message', async () => {
@@ -95,7 +95,7 @@ describe('RequestDownloadModal', () => {
 
     render(<RequestDownloadModal files={MOCK_FILES} onClose={() => {}} />, { wrapper })
 
-    await waitFor(() => expect(screen.getByTestId('errorMessage')).toBeDefined())
+    await waitFor(() => expect(screen.getByTestId('errorMessage')).toBeInTheDocument())
   })
 
   it('handles a retry the in the error state', async () => {
@@ -103,7 +103,7 @@ describe('RequestDownloadModal', () => {
 
     render(<RequestDownloadModal files={MOCK_FILES} onClose={() => {}} />, { wrapper })
 
-    const retryButton = await waitFor(() => screen.getByText('Probeer opnieuw'))
+    const retryButton = await waitFor(() => screen.findByText('Probeer opnieuw'))
 
     fireEvent.click(retryButton)
     expect(requestDownloadLinkMock).toHaveBeenCalledTimes(2)
@@ -116,7 +116,7 @@ describe('RequestDownloadModal', () => {
 
     render(<RequestDownloadModal files={MOCK_FILES} onClose={onClose} />, { wrapper })
 
-    const closeButton = await waitFor(() => screen.getByText('Annuleren'))
+    const closeButton = await waitFor(() => screen.findByText('Annuleren'))
 
     fireEvent.click(closeButton)
     expect(onClose).toHaveBeenCalled()
@@ -127,7 +127,7 @@ describe('RequestDownloadModal', () => {
 
     render(<RequestDownloadModal files={MOCK_FILES} onClose={() => {}} />, { wrapper })
 
-    await waitFor(() => expect(screen.getByTestId('successMessage')).toBeDefined())
+    await waitFor(() => expect(screen.getByTestId('successMessage')).toBeInTheDocument())
   })
 
   it('handles closing the modal in the success state', async () => {
@@ -137,7 +137,7 @@ describe('RequestDownloadModal', () => {
 
     render(<RequestDownloadModal files={MOCK_FILES} onClose={onClose} />, { wrapper })
 
-    const closeButton = await waitFor(() => screen.getByText('Sluiten'))
+    const closeButton = await waitFor(() => screen.findByText('Sluiten'))
 
     fireEvent.click(closeButton)
     expect(onClose).toHaveBeenCalled()

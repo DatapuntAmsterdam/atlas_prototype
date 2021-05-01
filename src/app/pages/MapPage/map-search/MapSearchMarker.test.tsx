@@ -28,6 +28,7 @@ describe('MapSearchMarker', () => {
 
   it('should not show the marker on the map when position is null', () => {
     const { container } = render(withMapContext(<MapSearchMarker position={null} />))
+    // eslint-disable-next-line testing-library/no-container
     expect(container.querySelector('.leaflet-marker-icon')).toBeNull()
   })
 
@@ -35,10 +36,12 @@ describe('MapSearchMarker', () => {
     const { container, rerender } = render(
       withMapContext(<MapSearchMarker position={{ lat: 123, lng: 321 }} />),
     )
+    // eslint-disable-next-line testing-library/no-container
     expect(container.querySelector('.leaflet-marker-icon')).not.toBeNull()
 
     currentPath = '/kaart/bag/buurt/id123'
     rerender(withMapContext(<MapSearchMarker position={{ lat: 123, lng: 321 }} />))
+    // eslint-disable-next-line testing-library/no-container
     expect(container.querySelector('.leaflet-marker-icon')).toBeNull()
   })
 

@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react'
+import { screen, fireEvent, render } from '@testing-library/react'
 import { CmsType } from '../../../shared/config/cms.config'
 import EditorialResults from './EditorialResults'
 import { LOADING_SPINNER_TEST_ID } from '../LoadingSpinner/LoadingSpinner'
@@ -8,6 +8,7 @@ import {
   ERROR_MESSAGE_TEST_ID,
 } from '../ErrorMessage/ErrorMessage'
 import { NormalizedFieldItems } from '../../../normalizations/cms/types'
+import { EDITORIAL_CARD_TEST_ID } from '../EditorialCard/EditorialCard'
 
 describe('EditorialResults', () => {
   Object.defineProperty(window, 'location', {
@@ -40,13 +41,13 @@ describe('EditorialResults', () => {
       errors: [],
       results: [],
     }
-    const { queryByTestId, rerender } = render(<EditorialResults {...props} loading />)
+    const { rerender } = render(<EditorialResults {...props} loading />)
 
-    expect(queryByTestId(LOADING_SPINNER_TEST_ID)).toBeDefined()
+    expect(screen.queryByTestId(LOADING_SPINNER_TEST_ID)).toBeInTheDocument()
 
     rerender(withAppContext(<EditorialResults {...props} loading={false} />))
 
-    expect(queryByTestId(LOADING_SPINNER_TEST_ID)).toBeDefined()
+    expect(screen.queryByTestId(LOADING_SPINNER_TEST_ID)).not.toBeInTheDocument()
   })
 
   it('should render the cards', () => {
@@ -58,17 +59,15 @@ describe('EditorialResults', () => {
       type: CmsType.Article,
       errors: [],
     }
-    const { queryAllByTestId, rerender } = render(
-      withAppContext(<EditorialResults {...props} results={[]} />),
-    )
+    const { rerender } = render(withAppContext(<EditorialResults {...props} results={[]} />))
 
-    expect(queryAllByTestId('editorialCard')).toHaveLength(0)
+    expect(screen.queryAllByTestId(EDITORIAL_CARD_TEST_ID).length).toBe(0)
 
     // Should render two cards
     rerender(
       withAppContext(<EditorialResults {...props} results={[result, { ...result, id: '2' }]} />),
     )
-    expect(queryAllByTestId('editorialCard')).toHaveLength(2)
+    expect(screen.queryAllByTestId(EDITORIAL_CARD_TEST_ID)).toHaveLength(2)
   })
 
   it('should render AuthAlert', () => {
@@ -90,9 +89,9 @@ describe('EditorialResults', () => {
         },
       ],
     }
-    const { getByTestId } = render(withAppContext(<EditorialResults {...props} />))
+    render(withAppContext(<EditorialResults {...props} />))
 
-    expect(getByTestId('auth-alert')).toBeDefined()
+    expect(screen.getByTestId('auth-alert')).toBeInTheDocument()
   })
   it('should render ErrorMessage', () => {
     const props = {
@@ -109,11 +108,11 @@ describe('EditorialResults', () => {
         },
       ],
     }
-    const { getByTestId } = render(withAppContext(<EditorialResults {...props} />))
+    render(withAppContext(<EditorialResults {...props} />))
 
-    expect(getByTestId(ERROR_MESSAGE_TEST_ID)).toBeDefined()
+    expect(screen.getByTestId(ERROR_MESSAGE_TEST_ID)).toBeInTheDocument()
     expect(window.location.reload).not.toHaveBeenCalled()
-    fireEvent.click(getByTestId(ERROR_MESSAGE_RELOAD_BUTTON_TEST_ID))
+    fireEvent.click(screen.getByTestId(ERROR_MESSAGE_RELOAD_BUTTON_TEST_ID))
     expect(window.location.reload).toHaveBeenCalled()
   })
 })

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { screen, render } from '@testing-library/react'
 import { Viewer } from 'openseadragon'
 import { mocked } from 'ts-jest/utils'
 import OSDViewer from './OSDViewer'
@@ -89,7 +89,7 @@ describe('OSDViewer', () => {
   })
 
   it('passes along additional props to the root element', () => {
-    const { getByTestId } = render(<OSDViewer options={{}} data-testid="viewer" />)
-    expect(getByTestId('viewer')).toBeDefined()
+    render(<OSDViewer options={{}} data-testid="viewer" />)
+    expect(screen.getByTestId('viewer')).toBeInTheDocument()
   })
 })
