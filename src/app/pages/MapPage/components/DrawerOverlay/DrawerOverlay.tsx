@@ -57,6 +57,10 @@ const ControlsContainer = styled.div<ModeProp>`
   justify-content: space-between;
   padding: ${themeSpacing(4)};
 
+  @media print {
+    display: none;
+  }
+
   ${({ $mode }) =>
     isDesktop($mode) &&
     css`
@@ -124,6 +128,10 @@ const DrawerHandleDesktop = styled(Button)`
   position: relative;
   margin-right: ${themeSpacing(9)};
 
+  @media print {
+    display: none;
+  }
+
   & > ${styles.IconStyle} {
     opacity: 0;
   }
@@ -156,6 +164,11 @@ const DrawerContainer = styled.div<{ animate: boolean } & ModeProp>`
   right: 0;
   left: 0;
   will-change: transform;
+
+  @media print {
+    position: relative;
+    width: 100%;
+  }
 
   ${({ $mode }) =>
     isDesktop($mode) &&

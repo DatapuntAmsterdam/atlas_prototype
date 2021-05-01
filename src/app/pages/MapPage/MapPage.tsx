@@ -27,6 +27,10 @@ const MapView = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
+
+  @media print {
+    overflow: scroll;
+  }
 `
 
 const GlobalStyle = createGlobalStyle<{
@@ -36,12 +40,20 @@ const GlobalStyle = createGlobalStyle<{
   body {
     touch-action: none;
     overflow: hidden; // This will prevent the scrollBar on iOS due to navigation bar
+    @media print {
+      overflow: auto;
+    }
   }
 
   // Need to set the styled globally and not as a Styled Component as this will cause problems with leaflet calculating the map canvas / dimensions
   .leaflet-container {
     position: sticky !important;
     height: ${({ panoActive }) => (panoActive ? '50%' : '100%')};
+    @media print {
+      min-height: 100vh;
+      page-break-after: always;
+    }
+
     ${({ panoFullScreen }) =>
       panoFullScreen &&
       css`

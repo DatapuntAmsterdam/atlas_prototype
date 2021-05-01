@@ -44,6 +44,13 @@ const DrawerPanel = styled.div<DrawerPanelProps>`
     0.25s ease-in-out;
   background-color: ${themeColor('tint', 'level1')};
 
+  @media print {
+    position: relative;
+    min-height: 100vh;
+    height: 1200px;
+    page-break-before: always;
+  }
+
   ${({ deviceMode = defaultDeviceMode, stackLevel = 0 }) => {
     if (isMobile(deviceMode)) {
       return css`

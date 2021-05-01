@@ -11,6 +11,10 @@ export interface AuthAlertProps {
 
 const StyledAlert = styled(Alert)`
   margin-bottom: ${themeSpacing(2)};
+
+  @media print {
+    display: none;
+  }
 `
 
 export const getNormalAuthAlertDescription = (excludedResults?: string) =>
