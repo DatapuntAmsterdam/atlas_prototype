@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@amsterdam/asc-ui'
-import { render, waitFor } from '@testing-library/react'
+import { screen, render, waitFor } from '@testing-library/react'
 import { createMemoryHistory, createPath } from 'history'
 import { Suspense } from 'react'
 import { Route, Router } from 'react-router-dom'
@@ -75,17 +75,17 @@ describe('ConstructionDossierPage', () => {
   })
 
   it('renders the loading state', () => {
-    const { getByTestId } = render(renderWithHistory())
+    render(renderWithHistory())
 
-    expect(getByTestId('loadingSpinner')).toBeDefined()
+    expect(screen.getByTestId('loadingSpinner')).toBeInTheDocument()
   })
 
   it('renders the error state', async () => {
     mockedGetBouwdossierById.mockRejectedValue(new Error('Whoopsie'))
 
-    const { getByTestId } = render(renderWithHistory())
+    render(renderWithHistory())
 
-    await waitFor(() => expect(getByTestId('errorMessage')).toBeDefined())
+    await waitFor(() => expect(screen.getByTestId('errorMessage')).toBeInTheDocument())
   })
 
   it('renders the file viewer if a file is selected', async () => {
@@ -95,17 +95,17 @@ describe('ConstructionDossierPage', () => {
       initialEntries: [createPath(toConstructionDossier('foo', 'file.png', 'path/to/file.png'))],
     })
 
-    const { getByTestId } = render(<Suspense fallback="">{renderWithHistory(history)}</Suspense>)
+    render(<Suspense fallback="">{renderWithHistory(history)}</Suspense>)
 
-    await waitFor(() => expect(getByTestId('imageViewer')).toBeDefined())
+    await waitFor(() => expect(screen.getByTestId('imageViewer')).toBeInTheDocument())
   })
 
   it('renders the file details', async () => {
     mockedGetBouwdossierById.mockResolvedValue(singleFixture)
 
-    const { getByTestId } = render(renderWithHistory())
+    render(renderWithHistory())
 
-    await waitFor(() => expect(getByTestId('dossierDetails')).toBeDefined())
+    await waitFor(() => expect(screen.getByTestId('dossierDetails')).toBeInTheDocument())
   })
 
   it('hides the file details if the image viewer is active', async () => {
@@ -115,8 +115,8 @@ describe('ConstructionDossierPage', () => {
       initialEntries: [createPath(toConstructionDossier('foo', 'file.png', 'path/to/file.png'))],
     })
 
-    const { queryByTestId } = render(<Suspense fallback="">{renderWithHistory(history)}</Suspense>)
+    render(<Suspense fallback="">{renderWithHistory(history)}</Suspense>)
 
-    await waitFor(() => expect(queryByTestId('dossierDetails')).toBeNull())
+    await waitFor(() => expect(screen.queryByTestId('dossierDetails')).not.toBeInTheDocument())
   })
 })

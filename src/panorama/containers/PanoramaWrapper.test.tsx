@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import * as reactRedux from 'react-redux'
 import PanoramaWrapper from './PanoramaWrapper'
 import { ForbiddenError } from '../../shared/services/api/customError'
@@ -15,8 +15,8 @@ describe('PanoramaWrapper', () => {
     const errorSelectorMock = jest
       .spyOn(reactRedux, 'useSelector')
       .mockImplementation(() => new ForbiddenError(403, 'forbidden'))
-    const { queryByTestId } = render(withAppContext(<PanoramaWrapper />))
+    render(withAppContext(<PanoramaWrapper />))
     expect(errorSelectorMock).toHaveBeenCalledTimes(1)
-    expect(queryByTestId('panoramaContainer')).toBeNull()
+    expect(screen.queryByTestId('panoramaContainer')).not.toBeInTheDocument()
   })
 })

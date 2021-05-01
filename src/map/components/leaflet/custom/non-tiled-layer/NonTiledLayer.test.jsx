@@ -77,7 +77,7 @@ describe('NonTiledLayer', () => {
   })
 })
 
-function renderComponent() {
+function getComponent() {
   return shallow(<NonTiledLayer url="url" params={{ test: '123' }} />, {
     context: {
       layerContainer: {
@@ -99,20 +99,20 @@ describe('NonTiledLayer', () => {
   }
 
   it('should rerender everything when props change', () => {
-    const wrapper = renderComponent()
+    const nonTiledLayer = getComponent()
     const setParamsMock = jest.fn()
 
-    wrapper.instance().leafletElement = {
+    nonTiledLayer.instance().leafletElement = {
       setParams: setParamsMock,
       setOpacity: jest.fn(),
       setUrl: jest.fn(),
       wmsParams: {},
     }
 
-    wrapper.instance().updateLeafletElement({ props }, { props })
+    nonTiledLayer.instance().updateLeafletElement({ props }, { props })
     expect(setParamsMock).not.toHaveBeenCalled()
 
-    wrapper
+    nonTiledLayer
       .instance()
       .updateLeafletElement(
         { props },

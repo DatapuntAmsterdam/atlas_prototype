@@ -5,7 +5,7 @@ import '../../../../services/crs-service'
 
 leafletModule.Proj.geoJson = jest.fn()
 
-function shallowRenderComponent() {
+function getComponent() {
   return shallow(
     <RdGeoJson
       data={{
@@ -42,7 +42,7 @@ function shallowRenderComponent() {
 
 describe('RdGeoJson component', () => {
   it('should call super.componentWillUnmount', () => {
-    const component = shallowRenderComponent()
+    const component = getComponent()
     component.instance().componentWillUnmount()
     expect(component.instance().layerContainer.removeLayer).toHaveBeenCalled()
   })

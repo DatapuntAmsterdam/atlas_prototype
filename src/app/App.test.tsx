@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { screen, render } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import configureMockStore from 'redux-mock-store'
@@ -90,7 +90,7 @@ describe('App', () => {
   })
 
   it('should render the header', () => {
-    const { getByTestId } = render(
+    render(
       <Provider store={store}>
         <Router>
           {/*
@@ -99,11 +99,11 @@ describe('App', () => {
         </Router>
       </Provider>,
     )
-    expect(getByTestId('header')).toBeDefined()
+    expect(screen.getByTestId('header')).toBeInTheDocument()
   })
 
   it('should render skip navigation buttons (A11Y)', () => {
-    const { getByTitle } = render(
+    render(
       <Provider store={store}>
         <Router>
           {/*
@@ -112,8 +112,8 @@ describe('App', () => {
         </Router>
       </Provider>,
     )
-    expect(getByTitle('Direct naar: inhoud')).toBeDefined()
-    expect(getByTitle('Direct naar: zoeken')).toBeDefined()
-    expect(getByTitle('Direct naar: footer')).toBeDefined()
+    expect(screen.getByTitle('Direct naar: inhoud')).toBeInTheDocument()
+    expect(screen.getByTitle('Direct naar: zoeken')).toBeInTheDocument()
+    expect(screen.getByTitle('Direct naar: footer')).toBeInTheDocument()
   })
 })

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { screen, render } from '@testing-library/react'
 import SearchResultsOverview from './SearchResultsOverview'
 import withAppContext from '../../utils/withAppContext'
 import { ERROR_MESSAGE_TEST_ID } from '../../components/ErrorMessage/ErrorMessage'
@@ -22,7 +22,7 @@ jest.mock('./config', () => ({
 
 describe('SearchResultsOverview', () => {
   it('should render NoSearchResults component when no results are given', () => {
-    const { getByTestId, rerender } = render(
+    const { rerender } = render(
       <SearchResultsOverview
         loading={false}
         totalCount={0}
@@ -32,7 +32,7 @@ describe('SearchResultsOverview', () => {
       />,
     )
 
-    expect(getByTestId('noSearchResults')).toBeDefined()
+    expect(screen.getByTestId('noSearchResults')).toBeInTheDocument()
 
     rerender(
       <SearchResultsOverview
@@ -48,7 +48,7 @@ describe('SearchResultsOverview', () => {
       />,
     )
 
-    expect(getByTestId('noSearchResults')).toBeDefined()
+    expect(screen.getByTestId('noSearchResults')).toBeInTheDocument()
   })
 
   describe('with results', () => {
@@ -61,7 +61,7 @@ describe('SearchResultsOverview', () => {
     }))
 
     it('renders correct number of components', () => {
-      const { queryAllByTestId } = render(
+      render(
         withAppContext(
           <SearchResultsOverview
             loading={false}
@@ -73,11 +73,11 @@ describe('SearchResultsOverview', () => {
         ),
       )
 
-      expect(queryAllByTestId('searchResultItem').length).toBe(mockTypes.length)
+      expect(screen.queryAllByTestId('searchResultItem').length).toBe(mockTypes.length)
     })
 
     it('renders the components for each type', () => {
-      const { getAllByTestId, getByTestId } = render(
+      render(
         withAppContext(
           <SearchResultsOverview
             loading={false}
@@ -89,22 +89,22 @@ describe('SearchResultsOverview', () => {
         ),
       )
 
-      const searchHeading = getAllByTestId('searchHeading')
+      const searchHeading = screen.getAllByTestId('searchHeading')
       // Heading
       expect(searchHeading.length).toBe(2)
-      expect(searchHeading[0].textContent).toContain('This is foo (1)')
-      expect(searchHeading[1].textContent).toContain('This is foo2 (1)')
+      expect(searchHeading[0]).toHaveTextContent('This is foo (1)')
+      expect(searchHeading[1]).toHaveTextContent('This is foo2 (1)')
 
       // Results body
-      expect(getByTestId('componentFoo')).toBeDefined()
-      expect(getByTestId('componentFoo2')).toBeDefined()
+      expect(screen.getByTestId('componentFoo')).toBeInTheDocument()
+      expect(screen.getByTestId('componentFoo2')).toBeInTheDocument()
 
       // Links
-      expect(getAllByTestId('searchLink')[0].textContent).toContain(
+      expect(screen.getAllByTestId('searchLink')[0]).toHaveTextContent(
         "Resultaten tonen binnen de categorie 'This is foo'",
       )
 
-      expect(getAllByTestId('searchLink')[1].textContent).toContain(
+      expect(screen.getAllByTestId('searchLink')[1]).toHaveTextContent(
         "Resultaten tonen binnen de categorie 'This is foo2'",
       )
     })
@@ -113,7 +113,7 @@ describe('SearchResultsOverview', () => {
       const mockErrors = [{ message: 'Some error', path: ['foo2'] }]
       const mockResultsWithError = [{ key: 'foo2', totalCount: 0, results: [] }]
 
-      const { getByTestId } = render(
+      render(
         withAppContext(
           <SearchResultsOverview
             query="some query"
@@ -125,7 +125,7 @@ describe('SearchResultsOverview', () => {
         ),
       )
 
-      expect(getByTestId(ERROR_MESSAGE_TEST_ID)).toBeDefined()
+      expect(screen.getByTestId(ERROR_MESSAGE_TEST_ID)).toBeInTheDocument()
     })
   })
 })

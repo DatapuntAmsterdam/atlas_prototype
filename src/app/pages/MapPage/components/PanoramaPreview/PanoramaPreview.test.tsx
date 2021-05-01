@@ -1,5 +1,5 @@
 import { rest } from 'msw'
-import { render, waitFor } from '@testing-library/react'
+import { screen, render, waitFor } from '@testing-library/react'
 import PanoramaPreview from './PanoramaPreview'
 import withAppContext from '../../../../utils/withAppContext'
 import joinUrl from '../../../../utils/joinUrl'
@@ -25,6 +25,7 @@ describe('PanoramaPreview', () => {
     )
     const { container } = render(withAppContext(<PanoramaPreview location={{ lat: 1, lng: 2 }} />))
     await waitFor(() => {
+      // eslint-disable-next-line testing-library/no-container
       const link = container.querySelector('a')
       const params = new URLSearchParams(link?.search)
       expect(params.get('someOtherParam')).toContain(1)
@@ -46,11 +47,9 @@ describe('PanoramaPreview', () => {
         return res(ctx.status(403))
       }),
     )
-    const { findByTestId } = render(
-      withAppContext(<PanoramaPreview location={{ lat: 1, lng: 2 }} />),
-    )
+    render(withAppContext(<PanoramaPreview location={{ lat: 1, lng: 2 }} />))
 
-    const panoAlert = await findByTestId('panoAlert')
-    expect(panoAlert).toBeDefined()
+    const panoAlert = await screen.findByTestId('panoAlert')
+    expect(panoAlert).toBeInTheDocument()
   })
 })

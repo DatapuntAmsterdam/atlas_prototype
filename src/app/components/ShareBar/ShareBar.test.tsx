@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react'
+import { screen, render, fireEvent } from '@testing-library/react'
 import configureMockStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
 import * as ui from '../../../shared/ducks/ui/ui'
@@ -29,13 +29,13 @@ describe('ShareBar', () => {
     jest.spyOn(ui, 'hasPrintMode').mockImplementation(() => false)
     jest.spyOn(ui, 'isPrintMode').mockImplementation(() => false)
 
-    const { queryAllByRole } = render(
+    render(
       <Provider store={store}>
         <ShareBar hideInPrintMode={false} />
       </Provider>,
     )
 
-    const buttons = queryAllByRole('button')
+    const buttons = screen.queryAllByRole('button')
 
     buttons.forEach((button) => {
       fireEvent.click(button)
@@ -48,12 +48,12 @@ describe('ShareBar', () => {
   it('should only render the print button when in print mode', () => {
     jest.spyOn(ui, 'hasPrintMode').mockImplementation(() => true)
     jest.spyOn(ui, 'isPrintMode').mockImplementation(() => false)
-    const { queryAllByRole } = render(
+    render(
       <Provider store={store}>
         <ShareBar hideInPrintMode={false} />
       </Provider>,
     )
-    const buttons = queryAllByRole('button')
+    const buttons = screen.queryAllByRole('button')
     expect(buttons.length).toBe(5)
     fireEvent.click(buttons[4])
     expect(showPrintModeMock).toHaveBeenCalled()
@@ -69,6 +69,6 @@ describe('ShareBar', () => {
       </Provider>,
     )
 
-    expect(container.firstChild).toBeNull()
+    expect(container.firstChild).not.toBeInTheDocument()
   })
 })

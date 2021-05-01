@@ -70,7 +70,7 @@ describe('ImageViewer', () => {
       ),
     )
 
-    await waitFor(() => expect(screen.getByTestId('imageViewer')).toBeDefined())
+    await waitFor(() => expect(screen.getByTestId('imageViewer')).toBeInTheDocument())
   })
 
   it('renders an error message if the image cannot be opened', async () => {
@@ -97,7 +97,7 @@ describe('ImageViewer', () => {
       ),
     )
 
-    await waitFor(() => expect(screen.getByTestId('errorMessage')).toBeDefined())
+    await waitFor(() => expect(screen.getByTestId('errorMessage')).toBeInTheDocument())
   })
 
   it('renders the correct error message if the file is an image', async () => {
@@ -127,7 +127,7 @@ describe('ImageViewer', () => {
     await waitFor(() =>
       expect(
         screen.getByText('Er is een fout opgetreden bij het laden van dit bestand.'),
-      ).toBeDefined(),
+      ).toBeInTheDocument(),
     )
   })
 
@@ -158,7 +158,7 @@ describe('ImageViewer', () => {
     await waitFor(() =>
       expect(
         screen.getByText('Dit bestandsformaat kan niet worden weergegeven op deze pagina.'),
-      ).toBeDefined(),
+      ).toBeInTheDocument(),
     )
   })
 
@@ -274,9 +274,9 @@ describe('ImageViewer', () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByTestId('viewerControls')).toBeDefined()
-      expect(screen.queryByTestId('zoomControls')).toBeNull()
-      expect(screen.queryByTestId('contextMenu')).toBeNull()
+      expect(screen.getByTestId('viewerControls')).toBeInTheDocument()
+      expect(screen.queryByTestId('zoomControls')).not.toBeInTheDocument()
+      expect(screen.queryByTestId('contextMenu')).not.toBeInTheDocument()
     })
   })
 
@@ -305,9 +305,9 @@ describe('ImageViewer', () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByTestId('viewerControls')).toBeDefined()
-      expect(screen.getByTestId('zoomControls')).toBeDefined()
-      expect(screen.getByTestId('contextMenu')).toBeDefined()
+      expect(screen.getByTestId('viewerControls')).toBeInTheDocument()
+      expect(screen.getByTestId('zoomControls')).toBeInTheDocument()
+      expect(screen.getByTestId('contextMenu')).toBeInTheDocument()
     })
   })
 

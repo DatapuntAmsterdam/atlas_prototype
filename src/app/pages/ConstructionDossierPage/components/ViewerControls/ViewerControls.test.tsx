@@ -1,11 +1,11 @@
-import { render } from '@testing-library/react'
+import { screen, render } from '@testing-library/react'
 import ViewerControls from './ViewerControls'
 
 describe('ViewerControls', () => {
   it('passes other props to the root', () => {
-    const { getByTestId } = render(<ViewerControls data-testid="root" />)
+    render(<ViewerControls data-testid="root" />)
 
-    expect(getByTestId('root')).toBeDefined()
+    expect(screen.getByTestId('root')).toBeInTheDocument()
   })
 
   it('renders the controls', () => {
@@ -13,7 +13,7 @@ describe('ViewerControls', () => {
     const bottomLeftComponent = 'BottomLeftComponent'
     const topRightComponent = 'TopRightComponent'
     const bottomRightComponent = 'BottomRightComponent'
-    const { getByText } = render(
+    render(
       <ViewerControls
         topLeftComponent={topLeftComponent}
         bottomLeftComponent={bottomLeftComponent}
@@ -22,17 +22,17 @@ describe('ViewerControls', () => {
       />,
     )
 
-    expect(getByText(topLeftComponent)).toBeDefined()
-    expect(getByText(bottomLeftComponent)).toBeDefined()
-    expect(getByText(topRightComponent)).toBeDefined()
-    expect(getByText(bottomRightComponent)).toBeDefined()
+    expect(screen.getByText(topLeftComponent)).toBeInTheDocument()
+    expect(screen.getByText(bottomLeftComponent)).toBeInTheDocument()
+    expect(screen.getByText(topRightComponent)).toBeInTheDocument()
+    expect(screen.getByText(bottomRightComponent)).toBeInTheDocument()
   })
 
   it('renders the meta data', () => {
     const metaData = ['hello', 'world']
-    const { getByText } = render(<ViewerControls metaData={metaData} />)
+    render(<ViewerControls metaData={metaData} />)
 
-    expect(getByText(metaData[0])).toBeDefined()
-    expect(getByText(metaData[1])).toBeDefined()
+    expect(screen.getByText(metaData[0])).toBeInTheDocument()
+    expect(screen.getByText(metaData[1])).toBeInTheDocument()
   })
 })

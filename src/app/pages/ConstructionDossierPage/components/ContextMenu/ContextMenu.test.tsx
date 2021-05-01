@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react'
+import { screen, fireEvent, render } from '@testing-library/react'
 import * as reactRedux from 'react-redux'
 import { mocked } from 'ts-jest/utils'
 import { sharePage, showPrintMode } from '../../../../../shared/ducks/ui/ui'
@@ -36,7 +36,7 @@ describe('ContextMenu', () => {
   })
 
   it('passes along other props to the root', () => {
-    const { getByTestId } = render(
+    render(
       withAppContext(
         <ContextMenu
           handleDownload={() => {}}
@@ -47,7 +47,7 @@ describe('ContextMenu', () => {
         />,
       ),
     )
-    expect(getByTestId('root')).toBeDefined()
+    expect(screen.getByTestId('root')).toBeInTheDocument()
   })
 
   it('opens the print mode if the print button is pressed', () => {
@@ -55,7 +55,7 @@ describe('ContextMenu', () => {
 
     useDispatchMock.mockReturnValue(dispatchMock)
 
-    const { getByText } = render(
+    render(
       withAppContext(
         <ContextMenu
           handleDownload={() => {}}
@@ -66,13 +66,13 @@ describe('ContextMenu', () => {
       ),
     )
 
-    fireEvent.click(getByText('Printen'))
+    fireEvent.click(screen.getByText('Printen'))
 
     expect(dispatchMock).toHaveBeenCalledWith(showPrintMode())
   })
 
   it('renders image download items if the file is an image', () => {
-    const { queryByText, rerender } = render(
+    const { rerender } = render(
       withAppContext(
         <ContextMenu
           handleDownload={() => {}}
@@ -83,8 +83,8 @@ describe('ContextMenu', () => {
       ),
     )
 
-    expect(queryByText('Download klein')).toBeNull()
-    expect(queryByText('Download groot')).toBeNull()
+    expect(screen.queryByText('Download klein')).not.toBeInTheDocument()
+    expect(screen.queryByText('Download groot')).not.toBeInTheDocument()
 
     rerender(
       withAppContext(
@@ -97,25 +97,25 @@ describe('ContextMenu', () => {
       ),
     )
 
-    expect(queryByText('Download klein')).toBeDefined()
-    expect(queryByText('Download groot')).toBeDefined()
+    expect(screen.queryByText('Download klein')).toBeInTheDocument()
+    expect(screen.queryByText('Download groot')).toBeInTheDocument()
   })
 
   it('disables the download items if the download is loading', () => {
-    const { getByText } = render(
+    render(
       withAppContext(
         <ContextMenu handleDownload={() => {}} fileUrl="test.png" isImage downloadLoading />,
       ),
     )
 
-    expect(getByText('Download klein')).toHaveAttribute('disabled')
-    expect(getByText('Download groot')).toHaveAttribute('disabled')
-    expect(getByText('Download origineel')).toHaveAttribute('disabled')
+    expect(screen.getByText('Download klein')).toBeDisabled()
+    expect(screen.getByText('Download groot')).toBeDisabled()
+    expect(screen.getByText('Download origineel')).toBeDisabled()
   })
 
   it('triggers the downloads correctly if the file is an image', () => {
     const handleDownloadMock = jest.fn()
-    const { getByText } = render(
+    render(
       withAppContext(
         <ContextMenu
           handleDownload={handleDownloadMock}
@@ -126,9 +126,9 @@ describe('ContextMenu', () => {
       ),
     )
 
-    fireEvent.click(getByText('Download klein'))
-    fireEvent.click(getByText('Download groot'))
-    fireEvent.click(getByText('Download origineel'))
+    fireEvent.click(screen.getByText('Download klein'))
+    fireEvent.click(screen.getByText('Download groot'))
+    fireEvent.click(screen.getByText('Download origineel'))
 
     expect(handleDownloadMock).toHaveBeenCalledWith('test.png/full/800,/0/default.jpg', 'klein')
     expect(handleDownloadMock).toHaveBeenCalledWith('test.png/full/1600,/0/default.jpg', 'groot')
@@ -137,7 +137,7 @@ describe('ContextMenu', () => {
 
   it('triggers the download of the original if the file is an image', () => {
     const handleDownloadMock = jest.fn()
-    const { getByText } = render(
+    render(
       withAppContext(
         <ContextMenu
           handleDownload={handleDownloadMock}
@@ -148,7 +148,7 @@ describe('ContextMenu', () => {
       ),
     )
 
-    fireEvent.click(getByText('Download origineel'))
+    fireEvent.click(screen.getByText('Download origineel'))
 
     expect(handleDownloadMock).toHaveBeenCalledWith('test.png?source_file=true', 'origineel')
   })

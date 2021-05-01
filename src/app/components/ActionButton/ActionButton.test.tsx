@@ -23,13 +23,13 @@ describe('ActionButton', () => {
       />,
     )
 
-    expect(screen.getByTestId('actionButton')).toBeDefined()
+    expect(screen.getByTestId('actionButton')).toBeInTheDocument()
   })
 
   it('disables the button when fetching', () => {
     render(<ActionButton fetching iconLeft={null} label={LABEL} onClick={() => {}} />)
 
-    expect(screen.getByText(LABEL)).toHaveAttribute('disabled')
+    expect(screen.getByText(LABEL)).toBeDisabled()
   })
 
   it('triggers the onClick prop if pressed', () => {

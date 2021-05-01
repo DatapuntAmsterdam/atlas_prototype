@@ -1,4 +1,4 @@
-import { fireEvent, render, within } from '@testing-library/react'
+import { screen, fireEvent, render, within } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 import { singleFixture as bouwdossierFixture } from '../../../../../api/iiif-metadata/bouwdossier'
 import withAppContext from '../../../../utils/withAppContext'
@@ -29,21 +29,16 @@ describe.skip('DossierDetails', () => {
   })
 
   it('sets the title', () => {
-    const { container, getByText } = render(
-      withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />),
-    )
-    const h1 = container.querySelector('h1')
+    render(withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />))
 
-    expect(getByText('Bouw- en omgevingsdossiers')).toBeInTheDocument()
-    expect(h1).toHaveTextContent(bouwdossierFixture.titel)
+    expect(screen.getByText('Bouw- en omgevingsdossiers')).toBeInTheDocument()
+    expect(screen.getByText(bouwdossierFixture.titel)).toBeInTheDocument()
   })
 
   it('renders a definition list', () => {
-    const { getByTestId } = render(
-      withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />),
-    )
+    render(withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />))
 
-    const definitionList = getByTestId('definitionList')
+    const definitionList = screen.getByTestId('definitionList')
     const listElements = ['titel', 'datering', 'dossier_type', 'dossiernr', 'access']
 
     listElements.forEach((element) => {
@@ -55,7 +50,7 @@ describe.skip('DossierDetails', () => {
   })
 
   it('renders olo_liaan_nummer', () => {
-    const { getByTestId, queryByTestId, rerender } = render(
+    const { rerender } = render(
       withAppContext(
         <DossierDetails
           dossierId="SDC9999"
@@ -64,7 +59,7 @@ describe.skip('DossierDetails', () => {
       ),
     )
 
-    expect(queryByTestId('oloLiaanNumber')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('oloLiaanNumber')).not.toBeInTheDocument()
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const olo_liaan_nummer = 1
@@ -78,11 +73,11 @@ describe.skip('DossierDetails', () => {
       ),
     )
 
-    expect(getByTestId('oloLiaanNumber')).toBeInTheDocument()
+    expect(screen.getByTestId('oloLiaanNumber')).toBeInTheDocument()
   })
 
   it('renders the subfiles', () => {
-    const { getAllByTestId, getByTestId, getByText, rerender } = render(
+    const { rerender } = render(
       withAppContext(
         <DossierDetails
           dossierId="SDC9999"
@@ -91,20 +86,22 @@ describe.skip('DossierDetails', () => {
       ),
     )
 
-    expect(getByTestId('DocumentsHeading')).toBeInTheDocument()
+    expect(screen.getByTestId('DocumentsHeading')).toBeInTheDocument()
 
     bouwdossierFixture.documenten.forEach((doc, index) => {
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      expect(getByText(`${doc.subdossier_titel} (${doc.bestanden.length})`)).toBeInTheDocument()
-      const filesGallery = within(getByTestId(`constructionDocuments-${index}`)).getByTestId(
+      expect(
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        screen.getByText(`${doc.subdossier_titel} (${doc.bestanden.length})`),
+      ).toBeInTheDocument()
+      const filesGallery = within(screen.getByTestId(`constructionDocuments-${index}`)).getByTestId(
         'filesGallery',
       )
       expect(filesGallery).toBeInTheDocument()
       expect(
-        within(getByTestId(`constructionDocuments-${index}`)).queryAllByTestId(
+        within(screen.getByTestId(`constructionDocuments-${index}`)).queryAllByTestId(
           'oloLiaanNumberDocumentDescription',
         ),
-      ).toHaveLength(0)
+      ).not.toBeInTheDocument()
     })
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -119,23 +116,23 @@ describe.skip('DossierDetails', () => {
       ),
     )
 
-    expect(getAllByTestId('oloLiaanNumberDocumentDescription')).toHaveLength(
+    expect(screen.getAllByTestId('oloLiaanNumberDocumentDescription')).toHaveLength(
       bouwdossierFixture.documenten.length,
     )
   })
 
   it('renders the addresses', () => {
-    const { queryByTestId, getByTestId, rerender } = render(
+    const { rerender } = render(
       withAppContext(
         <DossierDetails dossierId="SDC9999" dossier={{ ...bouwdossierFixture, adressen: [] }} />,
       ),
     )
 
-    expect(queryByTestId('constructionDossierAddresses')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('constructionDossierAddresses')).not.toBeInTheDocument()
 
     rerender(withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />))
 
-    expect(getByTestId('constructionDossierAddresses')).toBeInTheDocument()
+    expect(screen.getByTestId('constructionDossierAddresses')).toBeInTheDocument()
   })
 
   it('opens and closes the login link request modal', () => {
@@ -143,15 +140,13 @@ describe.skip('DossierDetails', () => {
       return <button data-testid="closeModal" onClick={onClose} type="button" />
     })
 
-    const { queryByTestId, getByTestId } = render(
-      withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />),
-    )
+    render(withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />))
 
-    expect(queryByTestId('loginLinkRequestModal')).toBeNull()
-    fireEvent.click(getByTestId('requestLoginLink'))
-    expect(queryByTestId('loginLinkRequestModal')).toBeDefined()
+    expect(screen.queryByTestId('loginLinkRequestModal')).not.toBeInTheDocument()
+    fireEvent.click(screen.getByTestId('requestLoginLink'))
+    expect(screen.queryByTestId('loginLinkRequestModal')).toBeInTheDocument()
 
-    fireEvent.click(getByTestId('closeModal'))
-    expect(queryByTestId('loginLinkRequestModal')).toBeNull()
+    fireEvent.click(screen.getByTestId('closeModal'))
+    expect(screen.queryByTestId('loginLinkRequestModal')).not.toBeInTheDocument()
   })
 })

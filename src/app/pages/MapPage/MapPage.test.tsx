@@ -2,7 +2,7 @@
  * @jest-environment jsdom-global
  */
 import { PropsWithChildren } from 'react'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import MapPage from './MapPage'
 import withMapContext from '../../utils/withMapContext'
 
@@ -29,9 +29,9 @@ jest.mock('react-router-dom', () => ({
 
 describe('MapPage', () => {
   it('should show the PanoramaViewer when panoHeading and locatie parameters are set', async () => {
-    const { findByTestId } = render(withMapContext(<MapPage />))
+    render(withMapContext(<MapPage />))
 
-    const component = await findByTestId('panoramaViewer')
-    expect(component).toBeDefined()
+    const component = await screen.findByTestId('panoramaViewer')
+    expect(component).toBeInTheDocument()
   })
 })

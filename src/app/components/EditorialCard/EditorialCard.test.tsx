@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { screen, render } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 import { CmsType, SpecialType } from '../../../shared/config/cms.config'
 import { NOT_FOUND_THUMBNAIL } from '../../../shared/config/constants'
@@ -27,9 +27,9 @@ describe('EditorialCard', () => {
   })
 
   it('should display a cover image', () => {
-    const { container } = render(<EditorialCard {...mockDataItem} />)
+    render(<EditorialCard {...mockDataItem} />)
 
-    const image = container.querySelector('img')
+    const image = screen.getByRole('img')
 
     expect(image?.getAttribute('src')).toBe('image.jpg')
   })
@@ -37,30 +37,29 @@ describe('EditorialCard', () => {
   it('should not render when type is omitted', () => {
     const { container } = render(<EditorialCard {...mockDataItem} type={undefined} />)
 
-    expect(container.firstChild).toBeNull()
+    expect(container.firstChild).not.toBeInTheDocument()
   })
 
   it('should display the correct title', () => {
-    const { container } = render(<EditorialCard {...mockDataItem} />)
+    render(<EditorialCard {...mockDataItem} />)
 
-    const heading = container.querySelector('h3')
-    expect(heading?.textContent).toBe(mockDataItem.title)
+    expect(screen.getByText(mockDataItem.title)).toBeInTheDocument()
   })
 
   it("should display a placeholder when there's no cover image", () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { image: unusedImage, ...mockDataItems } = mockDataItem
-    const { container } = render(<EditorialCard image={null} {...mockDataItems} />)
+    render(<EditorialCard image={null} {...mockDataItems} />)
 
-    const image = container.querySelector('img')
+    const image = screen.getByRole('img')
 
     expect(image?.getAttribute('src')).toBe(NOT_FOUND_THUMBNAIL)
   })
 
   it('should display a content type if enabled', () => {
-    const { container, rerender, getByTestId } = render(<EditorialCard {...mockDataItem} />)
+    const { rerender } = render(<EditorialCard {...mockDataItem} />)
 
-    expect(container.querySelectorAll('[data-testid="contentType"]').length).toBe(0)
+    expect(screen.queryByTestId('contentType')).not.toBeInTheDocument()
 
     rerender(
       <EditorialCard
@@ -71,15 +70,13 @@ describe('EditorialCard', () => {
       />,
     )
 
-    expect(getByTestId('contentType')?.textContent).toBe(SpecialType.Animation)
+    expect(screen.getByTestId('contentType')?.textContent).toBe(SpecialType.Animation)
   })
 
   it("should display a date there's one provided", () => {
-    const { container, rerender, getByTestId } = render(
-      <EditorialCard date="date" {...mockDataItem} />,
-    )
+    const { rerender } = render(<EditorialCard date="date" {...mockDataItem} />)
 
-    expect(getByTestId('metaText')?.textContent).toBe('date')
+    expect(screen.getByTestId('metaText')).toHaveTextContent('date')
 
     rerender(
       <EditorialCard
@@ -89,6 +86,6 @@ describe('EditorialCard', () => {
       />,
     )
 
-    expect(container.querySelectorAll("[data-test='metaText']")?.length).toBe(0)
+    expect(screen.queryByTestId('metaText')).not.toBeInTheDocument()
   })
 })

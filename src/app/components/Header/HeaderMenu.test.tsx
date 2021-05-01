@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { screen, render } from '@testing-library/react'
 import withAppContext from '../../utils/withAppContext'
 import HeaderMenu from './HeaderMenu'
 import navigationLinks from '../HomePage/services/navigationLinks'
@@ -6,17 +6,17 @@ import { HEADER_LINK_HELP, HEADER_LINKS_ABOUT } from '../../../shared/config/con
 
 describe('HeaderMenu', () => {
   it('should render all links', () => {
-    const { getByTestId } = render(withAppContext(<HeaderMenu type="default" />))
+    render(withAppContext(<HeaderMenu type="default" />))
 
     navigationLinks.forEach(({ testId }) => {
-      expect(getByTestId(testId)).toBeDefined()
+      expect(screen.getByTestId(testId)).toBeInTheDocument()
     })
     HEADER_LINKS_ABOUT.forEach(({ testId }) => {
-      expect(getByTestId(testId)).toBeDefined()
+      expect(screen.getByTestId(testId)).toBeInTheDocument()
     })
 
-    expect(getByTestId('headerMenuLinkFeedback')).toBeDefined()
-    expect(getByTestId('headerMenuLinkLogin')).toBeDefined()
-    expect(getByTestId(HEADER_LINK_HELP.testId)).toBeDefined()
+    expect(screen.getByTestId('headerMenuLinkFeedback')).toBeInTheDocument()
+    expect(screen.getByTestId('headerMenuLinkLogin')).toBeInTheDocument()
+    expect(screen.getByTestId(HEADER_LINK_HELP.testId)).toBeInTheDocument()
   })
 })

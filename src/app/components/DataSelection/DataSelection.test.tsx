@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from '@testing-library/react'
+import { screen, fireEvent, render, waitFor } from '@testing-library/react'
 import { rest } from 'msw'
 import DataSelection from './DataSelection'
 import { DataSelectionProvider } from './DataSelectionContext'
@@ -45,7 +45,7 @@ describe('DataSelection', () => {
   describe('Table', () => {
     it('should render', async () => {
       jest.spyOn(reduxFirstRouterSelectors, 'hasUserAccesToPage').mockReturnValue(true)
-      const { queryAllByTestId } = render(
+      render(
         withAppContext(
           <DataSelectionProvider>
             <DataSelection />
@@ -53,14 +53,14 @@ describe('DataSelection', () => {
         ),
       )
       await waitFor(() => {
-        const rows = queryAllByTestId('dataSelectionTableRow').length
+        const rows = screen.queryAllByTestId('dataSelectionTableRow').length
         expect(rows).toBe(2)
       })
     })
 
     it('should add a filter', async () => {
       jest.spyOn(reduxFirstRouterSelectors, 'hasUserAccesToPage').mockReturnValue(true)
-      const { queryByTestId } = render(
+      render(
         withAppContext(
           <DataSelectionProvider>
             <DataSelection />
@@ -68,7 +68,8 @@ describe('DataSelection', () => {
         ),
       )
       await waitFor(() => {
-        const filter = queryByTestId('dataSelectionAvailableFilters')
+        const filter = screen
+          .queryByTestId('dataSelectionAvailableFilters')
           ?.querySelectorAll('li')[0]
           .querySelector('button') as Element
         fireEvent.click(filter)
@@ -83,7 +84,7 @@ describe('DataSelection', () => {
     it('should remove a filter', async () => {
       search = 'filters=%7B%22woonplaats%22%3A%22Amsterdam%22%7D'
       jest.spyOn(reduxFirstRouterSelectors, 'hasUserAccesToPage').mockReturnValue(true)
-      const { queryByTestId } = render(
+      render(
         withAppContext(
           <DataSelectionProvider>
             <DataSelection />
@@ -91,7 +92,8 @@ describe('DataSelection', () => {
         ),
       )
       await waitFor(() => {
-        const activeFilter = queryByTestId('activeFilters')
+        const activeFilter = screen
+          .queryByTestId('activeFilters')
           ?.querySelectorAll('li')[0]
           .querySelector('button') as Element
         fireEvent.click(activeFilter)
@@ -108,7 +110,7 @@ describe('DataSelection', () => {
     it('should render', async () => {
       search = ''
       jest.spyOn(reduxFirstRouterSelectors, 'hasUserAccesToPage').mockReturnValue(true)
-      const { queryByTestId } = render(
+      render(
         withAppContext(
           <DataSelectionProvider>
             <DataSelection />
@@ -116,7 +118,7 @@ describe('DataSelection', () => {
         ),
       )
       await waitFor(() => {
-        const rows = queryByTestId('dataSelectionList')?.querySelectorAll('li').length
+        const rows = screen.queryByTestId('dataSelectionList')?.querySelectorAll('li').length
         expect(rows).toBe(2)
       })
     })
