@@ -11,13 +11,15 @@ import useParam from '../../../../utils/useParam'
 import { polygonParam } from '../../query-params'
 import { useDataSelection } from '../../../../components/DataSelection/DataSelectionContext'
 import { createFiltersObject } from '../../../../../shared/services/data-selection/normalizations'
+import { useMapContext } from '../../MapContext'
 
 const DrawMapVisualization: FunctionComponent = () => {
   const { currentDatasetType } = useLegacyDataselectionConfig()
   const [polygon] = useParam(polygonParam)
   const { activeFilters } = useDataSelection()
+  const { showMapDrawVisualization } = useMapContext()
   const mapVisualizations = usePromise(async () => {
-    if (!polygon && !activeFilters) {
+    if (!polygon && !activeFilters.length) {
       return null
     }
     const searchParams = new URLSearchParams({
@@ -50,7 +52,7 @@ const DrawMapVisualization: FunctionComponent = () => {
     return null
   }
 
-  return mapVisualizations.value ? (
+  return showMapDrawVisualization && mapVisualizations.value ? (
     <>
       {mapVisualizations.value.type === DataSelectionMapVisualizationType.GeoJSON &&
         mapVisualizations.value.data.map((feature) => (

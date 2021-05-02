@@ -25,7 +25,7 @@ jest.mock('leaflet', () => ({
 
 const mockPush = jest.fn()
 const mockReplace = jest.fn()
-const locationPath = '/kaart/bag/foo/bar'
+const locationPath = '/kaart/bag/adressen'
 jest.mock('react-router-dom', () => ({
   // @ts-ignore
   ...jest.requireActual('react-router-dom'),

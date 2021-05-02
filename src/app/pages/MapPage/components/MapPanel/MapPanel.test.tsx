@@ -104,7 +104,7 @@ describe('MapPanel', () => {
   it('should show the right map controls when panorama is not in full screen mode', () => {
     render(renderWithMapAndDataSelectionContext(<MapPanel />))
 
-    expect(screen.queryByTestId('baselayerControl')).toBeInTheDocument()
+    expect(screen.queryByTestId('mapContextMenuControls')).toBeInTheDocument()
     expect(screen.queryByTestId('drawtoolControl')).toBeInTheDocument()
     expect(screen.queryByTestId('legendControl')).toBeInTheDocument()
   })

@@ -64,7 +64,7 @@ const MapPanel: FunctionComponent = () => {
   }
 
   useEffect(() => {
-    if (locationParameter || polygon) {
+    if (locationParameter || polygon || activeFilters.length) {
       setDrawerState(DrawerState.Open)
     }
   }, [locationParameter, polygon])

@@ -30,6 +30,8 @@ import useAsyncMapPanelHeader from '../../utils/useAsyncMapPanelHeader'
 import { AuthError } from '../../../../../shared/services/api/customError'
 import LoginLink from '../../../../components/Links/LoginLink/LoginLink'
 import formatCount from '../../../../utils/formatCount'
+import AuthScope from '../../../../../shared/services/api/authScope'
+import { useMapContext } from '../../MapContext'
 
 const ResultLink = styled(ReduxRouterLink)`
   width: 100%;
@@ -60,6 +62,7 @@ const Results: FunctionComponent = () => {
   const [polygon] = useParam(polygonParam)
   const { activeFilters, distanceText } = useDataSelection()
   const { currentDatasetType, currentDatasetConfig } = useLegacyDataselectionConfig()
+  const { setShowMapDrawVisualization } = useMapContext()
 
   const result = usePromise(async () => {
     if (polygon?.polygon || activeFilters.length) {
@@ -95,7 +98,12 @@ const Results: FunctionComponent = () => {
     if (result.reason instanceof AuthError) {
       return (
         <Alert level="info" dismissible>
-          <Paragraph>{result.reason.message}</Paragraph>
+          <Paragraph>
+            {currentDatasetConfig?.AUTH_SCOPE === AuthScope.BrkRsn
+              ? `Medewerkers met speciale bevoegdheden kunnen inloggen om kadastrale objecten met
+            zakelijk rechthebbenden te bekijken.`
+              : `Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken. `}
+          </Paragraph>
           <LoginLink />
         </Alert>
       )
@@ -103,11 +111,15 @@ const Results: FunctionComponent = () => {
     return <GeneralErrorAlert />
   }
 
+  const showMarkers =
+    // @ts-ignore
+    result.value.totalCount <= currentDatasetConfig?.MAX_NUMBER_OF_CLUSTERED_MARKERS
+
+  setShowMapDrawVisualization(showMarkers)
+
   return (
     <>
-      {/*
-      // @ts-ignore */}
-      {result.value.totalCount > currentDatasetConfig?.MAX_NUMBER_OF_CLUSTERED_MARKERS && (
+      {!showMarkers && (
         <StyledAlert level="info">
           <Paragraph>{`Deze resultaten worden niet getoond op de kaart, omdat deze niet meer dan ${formatCount(
             currentDatasetConfig?.MAX_NUMBER_OF_CLUSTERED_MARKERS ?? 0,

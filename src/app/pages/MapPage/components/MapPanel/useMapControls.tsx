@@ -36,7 +36,7 @@ const useMapControls = (showDesktopVariant: boolean, onOpenLegend: () => void) =
     let mapControls: DrawerControl[] = [
       legendControl,
       {
-        id: 'mapContextMenuControl',
+        id: 'mapContextMenuControls',
         hAlign: 'left',
         vAlign: showDesktopVariant ? 'bottom' : 'top',
         node: <MapContextMenuControl />,

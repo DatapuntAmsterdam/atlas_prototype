@@ -20,6 +20,8 @@ import {
 import { routing } from '../../../../routes'
 import useBuildQueryString from '../../../../utils/useBuildQueryString'
 import { useDataSelection } from '../../../../components/DataSelection/DataSelectionContext'
+import useLegacyDataselectionConfig from '../../../../components/DataSelection/useLegacyDataselectionConfig'
+import config from '../../config'
 
 function getTotalDistance(latLngs: LatLng[]) {
   return latLngs.reduce(
@@ -76,15 +78,18 @@ const DrawTool: FunctionComponent = () => {
   const [drawtoolOpen] = useParam(drawToolOpenParam)
   const history = useHistory()
   const { activeFilters, setDistanceText, setDrawToolLocked } = useDataSelection()
-
+  const { currentDatasetType } = useLegacyDataselectionConfig()
   const [initialDrawnItems, setInitialDrawnItems] = useState<ExtendedLayer[]>([])
 
   // We needs refs here for leaflet event handlers
+  const currentDatasetTypeRef = useRef(currentDatasetType)
   const polygonRef = useRef(polygon)
-  polygonRef.current = polygon
-
   const polylineRef = useRef(polyline)
+  const activeFiltersRef = useRef(activeFilters)
+  currentDatasetTypeRef.current = currentDatasetType
+  polygonRef.current = polygon
   polylineRef.current = polyline
+  activeFiltersRef.current = activeFilters
 
   const mapInstance = useMapInstance()
   const drawnItemsGroup = useMemo(() => new L.FeatureGroup(), [])
@@ -100,9 +105,11 @@ const DrawTool: FunctionComponent = () => {
    * @param shape
    */
   const updateShape = (shape: { polygon: PolyDrawing | null; polyline: PolyDrawing | null }) => {
+    const pathname =
+      config[currentDatasetTypeRef.current?.toUpperCase()]?.path ?? routing.addresses_TEMP.path
     if (shape.polygon) {
       history.push({
-        pathname: routing.addresses_TEMP.path,
+        pathname,
         search: buildQueryString([
           [polylineParam, shape.polyline],
           [polygonParam, shape.polygon],
@@ -111,7 +118,7 @@ const DrawTool: FunctionComponent = () => {
     } else if (activeFilters.length) {
       setDistanceText(undefined)
       history.push({
-        pathname: routing.addresses_TEMP.path,
+        pathname,
         search: buildQueryString(
           [[polylineParam, shape.polyline]],
           [polygonParam, drawToolOpenParam],
@@ -216,6 +223,12 @@ const DrawTool: FunctionComponent = () => {
       mapInstance.off(L.Draw.Event.EDITVERTEX as any, onEditVertex as any)
     }
   }, [])
+
+  useEffect(() => {
+    if (!polygon) {
+      setDistanceText(undefined)
+    }
+  }, [polygon])
 
   /**
    * This effect will handle loading drawings from initial state and

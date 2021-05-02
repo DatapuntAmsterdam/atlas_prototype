@@ -64,7 +64,12 @@ const MapSearchMarker: FunctionComponent<MarkerProps> = ({ position }) => {
 
   return position &&
     !polygon &&
-    !matchPath(location.pathname, { path: routing.dataDetail_TEMP.path, exact: true }) ? (
+    !matchPath(location.pathname, { path: routing.dataDetail_TEMP.path, exact: true }) &&
+    !(
+      matchPath(location.pathname, routing.addresses_TEMP.path) ||
+      matchPath(location.pathname, routing.establishments_TEMP.path) ||
+      matchPath(location.pathname, routing.cadastralObjects_TEMP.path)
+    ) ? (
     <ARMMarker latLng={position} />
   ) : null
 }

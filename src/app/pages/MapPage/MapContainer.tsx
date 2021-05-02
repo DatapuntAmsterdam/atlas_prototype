@@ -31,14 +31,14 @@ const MapContainer: FunctionComponent = ({ children }) => {
 
   const [detailFeature, setDetailFeature] = useState<MapState['detailFeature']>(null)
   const [panoImageDate, setPanoImageDate] = useState<MapState['panoImageDate']>(null)
+  const [showMapDrawVisualization, setShowMapDrawVisualization] = useState(false)
   const [layers, setLayers] = useState<{ mapLayers: MapLayer[]; panelLayers: MapCollection[] }>({
     mapLayers: [],
     panelLayers: [],
   })
   const [panelHeader, setPanelHeader] = useState<MapState['panelHeader']>({ title: 'Resultaten' })
 
-  const showDrawContent = useMemo(() => !!(polyline || polygon), [polygon, polyline])
-  const [showDrawTool, setShowDrawTool] = useState(showDrawContent)
+  const [showDrawTool, setShowDrawTool] = useState(!!(polyline || polygon))
   const [panoFullScreen, setPanoFullScreen] = useParam(panoFullScreenParam)
   const user = useSelector(getUser)
 
@@ -74,10 +74,11 @@ const MapContainer: FunctionComponent = ({ children }) => {
         setPanelHeader,
         showDrawTool,
         setShowDrawTool,
-        showDrawContent,
         panoFullScreen,
         setPanoFullScreen,
         setPanoImageDate,
+        showMapDrawVisualization,
+        setShowMapDrawVisualization,
       }}
     >
       <Switch>

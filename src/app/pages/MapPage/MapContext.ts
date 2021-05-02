@@ -34,7 +34,7 @@ export interface MapState {
   legendLeafletLayers: Overlay[]
   detailFeature: Feature | null
   showDrawTool: boolean
-  showDrawContent: boolean
+  showMapDrawVisualization: boolean
   panoFullScreen: boolean
   panoImageDate: string | null
   panelHeader: { type?: string | null; title?: string | null }
@@ -48,6 +48,7 @@ export interface MapContextProps extends MapState {
   setPanoFullScreen: Action<'panoFullScreen'>
   setPanoImageDate: Action<'panoImageDate'>
   setPanelHeader: Action<'panelHeader'>
+  setShowMapDrawVisualization: Action<'showMapDrawVisualization'>
 }
 
 const MapContext = createContext<MapContextProps | null>(null)

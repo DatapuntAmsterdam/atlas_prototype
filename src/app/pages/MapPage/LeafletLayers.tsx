@@ -28,7 +28,7 @@ const detailGeometryOptions: GeoJSONOptions = {
 }
 
 const LeafletLayers: FunctionComponent = () => {
-  const { legendLeafletLayers, detailFeature, showDrawContent } = useMapContext()
+  const { legendLeafletLayers, detailFeature } = useMapContext()
   const tmsLayers = useMemo(
     () => legendLeafletLayers.filter((overlay): overlay is TmsOverlay => overlay.type === 'tms'),
     [legendLeafletLayers],
@@ -41,7 +41,7 @@ const LeafletLayers: FunctionComponent = () => {
 
   return (
     <>
-      {showDrawContent && <DrawMapVisualization />}
+      <DrawMapVisualization />
       {detailFeature && (
         <GeoJSON
           key={detailFeature.id}

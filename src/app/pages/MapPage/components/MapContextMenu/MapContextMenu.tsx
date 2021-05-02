@@ -112,6 +112,7 @@ const MapContextMenu: FunctionComponent = () => {
           await navigator.clipboard.writeText(
             `${window.location.origin}${window.location.pathname}?${params.toString()}`,
           )
+          // eslint-disable-next-line no-alert
           alert('Embed URL is gekopieerd naar klembord')
         }}
         icon={
