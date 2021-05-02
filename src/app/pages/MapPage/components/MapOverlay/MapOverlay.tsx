@@ -9,6 +9,10 @@ const MapOverlay = styled.div`
   top: 0;
   z-index: 1;
   pointer-events: none;
+
+  @media print {
+    position: relative;
+  }
 `
 
 export default MapOverlay

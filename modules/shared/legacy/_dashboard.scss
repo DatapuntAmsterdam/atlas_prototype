@@ -6,6 +6,10 @@ $backdrop-color: rgba(0, 0, 0, 0.5);
   height: 100%;
   background: $primary-light;
 
+  @media print {
+    height: initial;
+  }
+
   .styled-header {
     width: 100%;
     display: flex;
