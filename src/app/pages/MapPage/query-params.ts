@@ -41,6 +41,13 @@ export interface Pano {
   fov: number
 }
 
+export const isEmbeddedParam: UrlParam<boolean> = {
+  name: 'embed',
+  defaultValue: false,
+  decode: (value) => value === 'true',
+  encode: (value) => value.toString(),
+}
+
 const COORDINATE_PRECISION = 7
 
 function encodeLatLngLiteral(value: LatLngLiteral) {

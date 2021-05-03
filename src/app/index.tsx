@@ -6,6 +6,7 @@ import { AnyAction, Store } from 'redux'
 import environment from '../environment'
 import configureStore from '../store/store'
 import App from './App'
+import { UiProvider } from './contexts/ui'
 import { disableFeature, enableFeature, getEnabledFeatures } from './features'
 import resolveRedirects from './redirects'
 import './sentry'
@@ -42,7 +43,9 @@ function renderApp(store: Store<any, AnyAction>, history: History) {
       {/* Normally we would use the router from 'react-router-dom', but since we gradually migrate from
       redux-first-router to react-router, we need to share the history */}
       <Router history={history}>
-        <App />
+        <UiProvider>
+          <App />
+        </UiProvider>
       </Router>
     </Provider>,
     document.getElementById('root'),

@@ -23,7 +23,6 @@ import environment from '../environment'
 import { hasGlobalError } from '../shared/ducks/error/error-message'
 import {
   hasOverflowScroll,
-  isEmbedded,
   isEmbedPreview,
   isPrintMode,
   isPrintModeLandscape,
@@ -35,6 +34,7 @@ import AppBody, { APP_CONTAINER_ID } from './AppBody'
 import Footer, { FOOTER_ID } from './components/Footer/Footer'
 import Header from './components/Header'
 import { SEARCH_BAR_INPUT_ID } from './components/SearchBar/SearchBar'
+import { useIsEmbedded } from './contexts/ui'
 import matomoInstance from './matomo'
 import { isContentPage, isEditorialDetailPage, isSearchPage } from './pages'
 import { routing } from './routes'
@@ -102,7 +102,7 @@ const AppWrapper: FunctionComponent<AppWrapperProps> = ({ children, hasMaxWidth,
 
 const App: FunctionComponent = () => {
   const currentPage = useSelector(getPage)
-  const embedMode = useSelector(isEmbedded)
+  const isEmbedded = useIsEmbedded()
   const homePage = useSelector(isHomepage)
   const printMode = useSelector(isPrintMode)
   const printModeLandscape = useSelector(isPrintModeLandscape)
@@ -140,7 +140,7 @@ const App: FunctionComponent = () => {
     const printEmbedModeClasses = classNames({
       [printAndEmbedClasses[0]]: printMode,
       [printAndEmbedClasses[1]]: printModeLandscape,
-      [printAndEmbedClasses[2]]: embedMode,
+      [printAndEmbedClasses[2]]: isEmbedded,
       [printAndEmbedClasses[3]]: embedPreviewMode,
     })
 
@@ -190,7 +190,7 @@ const App: FunctionComponent = () => {
             >
               Direct naar: footer
             </SkipNavigationLink>
-            {!embedMode && (
+            {!isEmbedded && (
               <Header
                 homePage={homePage}
                 hasMaxWidth={hasMaxWidth}
