@@ -1,18 +1,11 @@
-import {
-  createContext,
-  Dispatch,
-  FunctionComponent,
-  SetStateAction,
-  useContext,
-  useMemo,
-  useState,
-} from 'react'
-import useParam from '../../utils/useParam'
+import { Dispatch, FunctionComponent, SetStateAction, useContext, useMemo, useState } from 'react'
 import {
   DataSelectionFilters,
   dataSelectionFiltersParam,
   polygonParam,
 } from '../../pages/MapPage/query-params'
+import createNamedContext from '../../utils/createNamedContext'
+import useParam from '../../utils/useParam'
 import { ActiveFilter, AvailableFilter } from './types'
 import useLegacyDataselectionConfig from './useLegacyDataselectionConfig'
 
@@ -34,7 +27,10 @@ export interface DataSelectionContextProps {
   setDistanceText: Action<'distanceText'>
 }
 
-const DataSelectionContext = createContext<DataSelectionContextProps | null>(null)
+const DataSelectionContext = createNamedContext<DataSelectionContextProps | null>(
+  'DataSelection',
+  null,
+)
 
 export default DataSelectionContext
 

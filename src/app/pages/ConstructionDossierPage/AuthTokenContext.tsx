@@ -1,15 +1,16 @@
-import { createContext, FunctionComponent, useContext, useEffect, useMemo, useState } from 'react'
 import jwtDecode from 'jwt-decode'
+import { FunctionComponent, useContext, useEffect, useMemo, useState } from 'react'
 import { getAccessToken } from '../../../shared/services/auth/auth'
+import createNamedContext from '../../utils/createNamedContext'
+import useInterval from '../../utils/useInterval'
 import useParam from '../../utils/useParam'
 import { authTokenParam } from './query-params'
-import useInterval from '../../utils/useInterval'
 
 export interface AuthTokenContextProps {
   token: string | null
 }
 
-const AuthTokenContext = createContext<AuthTokenContextProps | null>(null)
+const AuthTokenContext = createNamedContext<AuthTokenContextProps | null>('AuthToken', null)
 
 export default AuthTokenContext
 

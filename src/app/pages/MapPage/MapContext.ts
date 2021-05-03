@@ -1,8 +1,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Feature } from 'geojson'
 import { TileLayerOptions, WMSOptions } from 'leaflet'
-import { createContext, Dispatch, SetStateAction, useContext } from 'react'
+import { Dispatch, SetStateAction, useContext } from 'react'
 import { MapCollection, MapLayer } from '../../../map/services'
+import createNamedContext from '../../utils/createNamedContext'
 
 export interface WmsOverlay {
   type: 'wms'
@@ -51,7 +52,7 @@ export interface MapContextProps extends MapState {
   setShowMapDrawVisualization: Action<'showMapDrawVisualization'>
 }
 
-const MapContext = createContext<MapContextProps | null>(null)
+const MapContext = createNamedContext<MapContextProps | null>('Map', null)
 
 export function useMapContext() {
   const context = useContext(MapContext)
