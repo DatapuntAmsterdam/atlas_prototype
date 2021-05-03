@@ -86,10 +86,12 @@ const DrawTool: FunctionComponent = () => {
   const polygonRef = useRef(polygon)
   const polylineRef = useRef(polyline)
   const activeFiltersRef = useRef(activeFilters)
+  const buildQueryStringRef = useRef(buildQueryString)
   currentDatasetTypeRef.current = currentDatasetType
   polygonRef.current = polygon
   polylineRef.current = polyline
   activeFiltersRef.current = activeFilters
+  buildQueryStringRef.current = buildQueryString
 
   const mapInstance = useMapInstance()
   const drawnItemsGroup = useMemo(() => new L.FeatureGroup(), [])
@@ -110,7 +112,7 @@ const DrawTool: FunctionComponent = () => {
     if (shape.polygon) {
       history.push({
         pathname,
-        search: buildQueryString([
+        search: buildQueryStringRef.current([
           [polylineParam, shape.polyline],
           [polygonParam, shape.polygon],
         ]),
@@ -119,7 +121,7 @@ const DrawTool: FunctionComponent = () => {
       setDistanceText(undefined)
       history.push({
         pathname,
-        search: buildQueryString(
+        search: buildQueryStringRef.current(
           [[polylineParam, shape.polyline]],
           [polygonParam, drawToolOpenParam],
         ),
@@ -127,7 +129,7 @@ const DrawTool: FunctionComponent = () => {
     } else {
       history.push({
         pathname: routing.dataSearchGeo_TEMP.path,
-        search: buildQueryString(
+        search: buildQueryStringRef.current(
           [[polylineParam, shape.polyline]],
           [dataSelectionFiltersParam, polygonParam, drawToolOpenParam],
         ),
@@ -170,10 +172,6 @@ const DrawTool: FunctionComponent = () => {
     [setPolygon, setPolyline],
   )
 
-  const onEditVertex = (e: L.DrawEvents.EditVertex) => {
-    updateDrawings(e.poly as ExtendedLayer)
-  }
-
   const onDeleteDrawing = useCallback(
     (deletedLayers: ExtendedLayer[]) => {
       const deletedLayersIds = deletedLayers.map(({ id }) => id)
@@ -215,6 +213,11 @@ const DrawTool: FunctionComponent = () => {
   }
 
   useEffect(() => {
+    const onEditVertex = (e: L.DrawEvents.EditVertex) => {
+      setDrawToolLocked(true)
+      updateDrawings(e.poly as ExtendedLayer)
+    }
+
     mapInstance.on(L.Draw.Event.EDITVERTEX as any, onEditVertex as any)
 
     // Clean up

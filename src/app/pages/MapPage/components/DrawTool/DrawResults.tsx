@@ -11,12 +11,11 @@ import {
 } from '@amsterdam/asc-ui'
 import { Link as RouterLink } from 'react-router-dom'
 import { FunctionComponent, useState } from 'react'
-import ReduxRouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import LoadingSpinner from '../../../../components/LoadingSpinner/LoadingSpinner'
 import config, { DataSelectionType } from '../../config'
 import useBuildQueryString from '../../../../utils/useBuildQueryString'
-import { polygonParam, ViewMode, viewParam } from '../../query-params'
+import { drawToolOpenParam, polygonParam, ViewMode, viewParam } from '../../query-params'
 import useParam from '../../../../utils/useParam'
 import useLegacyDataselectionConfig from '../../../../components/DataSelection/useLegacyDataselectionConfig'
 import { fetchWithToken } from '../../../../../shared/services/api/api'
@@ -33,7 +32,7 @@ import formatCount from '../../../../utils/formatCount'
 import AuthScope from '../../../../../shared/services/api/authScope'
 import { useMapContext } from '../../MapContext'
 
-const ResultLink = styled(ReduxRouterLink)`
+const ResultLink = styled(RouterLink)`
   width: 100%;
   margin-bottom: ${themeSpacing(2)};
 `
@@ -63,6 +62,7 @@ const Results: FunctionComponent = () => {
   const { activeFilters, distanceText } = useDataSelection()
   const { currentDatasetType, currentDatasetConfig } = useLegacyDataselectionConfig()
   const { setShowMapDrawVisualization } = useMapContext()
+  const { buildQueryString } = useBuildQueryString()
 
   const result = usePromise(async () => {
     if (polygon?.polygon || activeFilters.length) {
@@ -132,7 +132,10 @@ const Results: FunctionComponent = () => {
       )}
       {result.value.results.map(({ id: locationId, name: locationName }) => (
         <Link
-          to={config[currentDatasetType.toUpperCase()].toDetailAction(locationId)}
+          to={{
+            pathname: config[currentDatasetType.toUpperCase()].getDetailPath(locationId),
+            search: buildQueryString(undefined, [polygonParam, drawToolOpenParam]),
+          }}
           as={ResultLink}
           inList
           key={locationId}

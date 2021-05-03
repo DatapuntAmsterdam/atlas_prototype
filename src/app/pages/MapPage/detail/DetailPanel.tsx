@@ -70,8 +70,6 @@ export const HeadingWrapper = styled.div`
   margin-bottom: ${themeSpacing(7)};
 `
 
-export const InfoBoxWrapper = styled.div``
-
 // Todo AfterBeta: legacyLayout can be removed
 const Wrapper = styled.div<LegacyLayout>`
   ${({ legacyLayout }) =>
@@ -104,7 +102,8 @@ interface LegacyLayout {
 const DetailPanel: FunctionComponent = () => {
   const { setDetailFeature } = useMapContext()
   const { isUserAuthorized } = useAuthScope()
-  const { type, subtype: subType, id } = useParams<DataDetailParams>()
+  const { type, subtype: subType, id: rawId } = useParams<DataDetailParams>()
+  const id = rawId.includes('id') ? rawId.substr(2) : rawId
 
   async function getDetailData() {
     if (!type) {
