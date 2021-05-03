@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { breakpoint } from '@amsterdam/asc-ui'
 import { useHistory, useLocation } from 'react-router-dom'
 import Reduce from './reduce.svg'
-import { useMapContext } from '../../pages/MapPage/MapContext'
+import { useMapContext } from '../../MapContext'
 import Enlarge from './enlarge.svg'
 import {
   mapLayersParam,
@@ -14,11 +14,11 @@ import {
   panoHeadingParam,
   panoPitchParam,
   panoTagParam,
-} from '../../pages/MapPage/query-params'
-import useBuildQueryString from '../../utils/useBuildQueryString'
+} from '../../query-params'
+import useBuildQueryString from '../../../../utils/useBuildQueryString'
 import { PANO_LAYERS } from './PanoramaViewer'
-import useParam from '../../utils/useParam'
-import Control from '../../pages/MapPage/components/Control'
+import useParam from '../../../../utils/useParam'
+import Control from '../Control'
 
 const ResizeButton = styled(ControlButton)`
   margin-top: 2px;

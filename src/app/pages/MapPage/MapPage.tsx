@@ -3,19 +3,16 @@ import L from 'leaflet'
 import { FunctionComponent, useCallback, useEffect } from 'react'
 import { Theme, themeSpacing } from '@amsterdam/asc-ui'
 import styled, { createGlobalStyle, css } from 'styled-components'
-import PanoramaViewer from '../../components/PanoramaViewer/PanoramaViewer'
+import PanoramaViewer from './components/PanoramaViewer/PanoramaViewer'
 import useParam from '../../utils/useParam'
 import LeafletLayers from './LeafletLayers'
 import { useMapContext } from './MapContext'
 import MapMarkers from './MapMarkers'
 import {
   centerParam,
-  drawToolOpenParam,
   locationParam,
   panoHeadingParam,
   panoPitchParam,
-  polygonParam,
-  polylineParam,
   zoomParam,
 } from './query-params'
 import MapPanel from './components/MapPanel'
@@ -76,9 +73,6 @@ const MapPage: FunctionComponent = () => {
   const [location] = useParam(locationParam)
   const [panoPitch] = useParam(panoPitchParam)
   const [panoHeading] = useParam(panoHeadingParam)
-  const [polygon] = useParam(polygonParam)
-  const [polyline] = useParam(polylineParam)
-  const [, setShowDrawTool] = useParam(drawToolOpenParam)
 
   const panoActive = panoHeading !== null && location !== null
 
@@ -93,12 +87,6 @@ const MapPage: FunctionComponent = () => {
   useEffect(() => {
     mapInstanceRef.current?.setZoom(zoom)
   }, [zoom])
-
-  useEffect(() => {
-    if (polygon || polyline) {
-      setShowDrawTool(true, 'replace')
-    }
-  }, [polygon, polyline])
 
   return (
     <MapView>

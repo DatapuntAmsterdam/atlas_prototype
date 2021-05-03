@@ -146,10 +146,10 @@ const DrawerHandleDesktop = styled(Button)`
   }
 `
 
-const HandleIcon = styled(ChevronRight)<{ isOpen: boolean }>`
+const HandleIcon = styled(ChevronRight)<{ $isOpen: boolean }>`
   transition: transform 0.25s ease-in-out;
-  ${({ isOpen }) =>
-    isOpen &&
+  ${({ $isOpen }) =>
+    $isOpen &&
     css`
       transform: rotate(180deg);
     `}
@@ -503,7 +503,7 @@ const DrawerOverlay: FunctionComponent<DrawerOverlayProps> = ({
             {isDesktop(mode) ? (
               <DrawerHandleMiniDesktop>
                 <Icon size={20}>
-                  <HandleIcon isOpen={state === DrawerState.Open} />
+                  <HandleIcon $isOpen={state === DrawerState.Open} />
                 </Icon>
               </DrawerHandleMiniDesktop>
             ) : null}

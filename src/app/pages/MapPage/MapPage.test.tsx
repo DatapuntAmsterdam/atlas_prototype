@@ -10,7 +10,7 @@ import { DataSelectionProvider } from '../../components/DataSelection/DataSelect
 jest.mock('./MapMarkers', () => () => <div data-testid="mapMarkers" />)
 jest.mock('./components/MapPanel/MapPanel', () => () => <div data-testid="mapPanel" />)
 jest.mock('./components/DrawTool/DrawResults', () => () => <div data-testid="drawResults" />)
-jest.mock('../../components/PanoramaViewer/PanoramaViewer', () => () => (
+jest.mock('./components/PanoramaViewer/PanoramaViewer', () => () => (
   <div data-testid="panoramaViewer" />
 ))
 

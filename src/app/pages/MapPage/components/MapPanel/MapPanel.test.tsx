@@ -6,6 +6,8 @@ import withMapContext from '../../../../utils/withMapContext'
 import { DataSelectionProvider } from '../../../../components/DataSelection/DataSelectionContext'
 import { MapContextProps } from '../../MapContext'
 
+jest.mock('../DrawTool/DrawTool', () => () => null)
+
 jest.mock('react-resize-detector', () => ({
   useResizeDetector: jest.fn(() => ({
     height: 0,
@@ -132,44 +134,6 @@ describe('MapPanel', () => {
 
     render(renderWithMapAndDataSelectionContext(<MapPanel />))
 
-    expect(screen.queryByTestId('drawerPanel')).toBeInTheDocument()
-  })
-
-  it("should not render the panel when polygon isn't set on dataselection pages (adressen, vestigingen and kadastrale objecten)", () => {
-    currentPath = '/kaart/bag/adressen/'
-    search = ''
-
-    const { rerender } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
-    expect(screen.queryByTestId('drawerPanel')).not.toBeInTheDocument()
-
-    currentPath = '/kaart/hr/vestigingen/'
-    rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
-    expect(screen.queryByTestId('drawerPanel')).not.toBeInTheDocument()
-
-    currentPath = '/kaart/brk/kadastrale-objecten/'
-    rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
-    expect(screen.queryByTestId('drawerPanel')).not.toBeInTheDocument()
-  })
-
-  it('should show the panel when polygon is set on dataselection pages (adressen, vestigingen and kadastrale objecten)', () => {
-    currentPath = '/kaart/bag/adressen/'
-    search = `?geo=${JSON.stringify({
-      id: 123,
-      polygon: [
-        [123, 123],
-        [321, 321],
-      ],
-    })}`
-
-    const { rerender } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
-    expect(screen.queryByTestId('drawerPanel')).toBeInTheDocument()
-
-    currentPath = '/kaart/hr/vestigingen/'
-    rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
-    expect(screen.queryByTestId('drawerPanel')).toBeInTheDocument()
-
-    currentPath = '/kaart/brk/kadastrale-objecten/'
-    rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
     expect(screen.queryByTestId('drawerPanel')).toBeInTheDocument()
   })
 })

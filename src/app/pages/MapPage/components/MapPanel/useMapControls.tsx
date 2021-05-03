@@ -6,11 +6,7 @@ import LegendControl from '../LegendControl'
 import ZoomControl from '../ZoomControl'
 import useParam from '../../../../utils/useParam'
 import { locationParam, panoHeadingParam } from '../../query-params'
-import {
-  PanoramaControl,
-  PanoramaMenuControl,
-  PanoramaViewerInfoBar,
-} from '../../../../components/PanoramaViewer'
+import { PanoramaControl, PanoramaMenuControl, PanoramaViewerInfoBar } from '../PanoramaViewer'
 import MapContextMenuControl from '../MapContextMenuControl/MapContextMenuControl'
 
 // Todo: consider moving onOpenLegend to a higher context

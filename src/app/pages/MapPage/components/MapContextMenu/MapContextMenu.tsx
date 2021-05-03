@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactNode } from 'react'
+import { FunctionComponent, ReactNode, useState } from 'react'
 import {
   ChevronDown,
   Ellipsis,
@@ -64,6 +64,7 @@ const StyledContextMenuComponent = styled(ContextMenuComponent)`
 const MapContextMenu: FunctionComponent = () => {
   const { trackEvent } = useMatomo()
   const { documentTitle } = useDocumentTitle()
+  const [open, setOpen] = useState(false)
   const handlePageShare = (target: ShareTarget) => {
     trackEvent({
       category: 'menu',
@@ -76,6 +77,7 @@ const MapContextMenu: FunctionComponent = () => {
       window.open(link.url, link.target)
     }
   }
+
   return (
     <StyledContextMenuComponent
       data-test="context-menu"
@@ -87,12 +89,17 @@ const MapContextMenu: FunctionComponent = () => {
         </Icon>
       }
       position="bottom"
+      open={open}
+      onClick={() => setOpen((currentValue) => !currentValue)}
     >
       <ContextMenuItem
         role="button"
         data-test="print"
         divider
-        onClick={() => window.print()}
+        onClick={() => {
+          setOpen(false)
+          window.print()
+        }}
         icon={
           <Icon padding={4} inline size={24}>
             <Print />
@@ -107,6 +114,7 @@ const MapContextMenu: FunctionComponent = () => {
         data-test="context-menu-embed"
         divider
         onClick={async () => {
+          setOpen(false)
           const params = new URLSearchParams(window.location.search)
           params.set('embed', 'true')
           await navigator.clipboard.writeText(
@@ -127,7 +135,10 @@ const MapContextMenu: FunctionComponent = () => {
         <ContextMenuItem
           key={id}
           role="button"
-          onClick={() => handlePageShare(link)}
+          onClick={() => {
+            setOpen(false)
+            handlePageShare(link)
+          }}
           icon={
             <Icon inline size={24} padding={4}>
               {icon}

@@ -11,7 +11,7 @@ import { fetchWithToken } from '../../../../../shared/services/api/api'
 import { normalizeMapVisualization } from './normalize'
 import useLegacyDataselectionConfig from '../../../../components/DataSelection/useLegacyDataselectionConfig'
 import useParam from '../../../../utils/useParam'
-import { drawToolOpenParam, polygonParam } from '../../query-params'
+import { polygonParam } from '../../query-params'
 import { useDataSelection } from '../../../../components/DataSelection/DataSelectionContext'
 import { createFiltersObject } from '../../../../../shared/services/data-selection/normalizations'
 import { useMapContext } from '../../MapContext'
@@ -97,7 +97,7 @@ const DrawMapVisualization: FunctionComponent = () => {
             marker.on('click', () => {
               history.push({
                 pathname: config[currentDatasetType.toUpperCase()].getDetailPath(id),
-                search: buildQueryString(undefined, [polygonParam, drawToolOpenParam]),
+                search: buildQueryString(undefined, [polygonParam]),
               })
             })
 

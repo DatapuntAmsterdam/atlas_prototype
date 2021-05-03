@@ -34,7 +34,6 @@ export interface MapState {
   mapLayers: MapLayer[]
   legendLeafletLayers: Overlay[]
   detailFeature: Feature | null
-  showDrawTool: boolean
   showMapDrawVisualization: boolean
   panoFullScreen: boolean
   panoImageDate: string | null
@@ -45,7 +44,6 @@ type Action<T extends keyof MapState> = Dispatch<SetStateAction<MapState[T]>>
 
 export interface MapContextProps extends MapState {
   setDetailFeature: Action<'detailFeature'>
-  setShowDrawTool: Action<'showDrawTool'>
   setPanoFullScreen: Action<'panoFullScreen'>
   setPanoImageDate: Action<'panoImageDate'>
   setPanelHeader: Action<'panelHeader'>

@@ -1,22 +1,11 @@
 import { ascDefaultTheme, themeColor } from '@amsterdam/asc-ui'
 import { useMapInstance } from '@amsterdam/react-maps'
-import {
-  DrawTool as DrawToolComponent,
-  ExtendedLayer,
-  PolygonType,
-  PolylineType,
-} from '@amsterdam/arm-draw'
 import L, { LatLng, LatLngLiteral, Polygon } from 'leaflet'
 import { FunctionComponent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import useParam from '../../../../utils/useParam'
-import {
-  dataSelectionFiltersParam,
-  drawToolOpenParam,
-  PolyDrawing,
-  polygonParam,
-  polylineParam,
-} from '../../query-params'
+import { PolyDrawing, polygonParam, polylineParam } from '../../query-params'
+import { BareDrawTool, ExtendedLayer, PolygonType, PolylineType } from './BareDrawTool'
 import { routing } from '../../../../routes'
 import useBuildQueryString from '../../../../utils/useBuildQueryString'
 import { useDataSelection } from '../../../../components/DataSelection/DataSelectionContext'
@@ -75,7 +64,6 @@ const DrawTool: FunctionComponent = () => {
 
   const [polygon, setPolygon] = useParam(polygonParam)
   const [polyline, setPolyline] = useParam(polylineParam)
-  const [drawtoolOpen] = useParam(drawToolOpenParam)
   const history = useHistory()
   const { activeFilters, setDistanceText, setDrawToolLocked } = useDataSelection()
   const { currentDatasetType } = useLegacyDataselectionConfig()
@@ -121,18 +109,7 @@ const DrawTool: FunctionComponent = () => {
       setDistanceText(undefined)
       history.push({
         pathname,
-        search: buildQueryStringRef.current(
-          [[polylineParam, shape.polyline]],
-          [polygonParam, drawToolOpenParam],
-        ),
-      })
-    } else {
-      history.push({
-        pathname: routing.dataSearchGeo_TEMP.path,
-        search: buildQueryStringRef.current(
-          [[polylineParam, shape.polyline]],
-          [dataSelectionFiltersParam, polygonParam, drawToolOpenParam],
-        ),
+        search: buildQueryStringRef.current([[polylineParam, shape.polyline]], [polygonParam]),
       })
     }
   }
@@ -163,7 +140,9 @@ const DrawTool: FunctionComponent = () => {
           ? polylineRef.current
           : { id: layer.id, polygon: getLayerCoordinates(layer) }
 
-      setDrawToolLocked(false)
+      setTimeout(() => {
+        setDrawToolLocked(false)
+      }, 100)
       updateShape({
         polygon: updatedPolygon,
         polyline: updatedPolyline,
@@ -208,7 +187,7 @@ const DrawTool: FunctionComponent = () => {
   const onClose = () => {
     history.push({
       pathname: routing.dataSearchGeo_TEMP.path,
-      search: buildQueryString(undefined, [polylineParam, polygonParam, drawToolOpenParam]),
+      search: buildQueryString(undefined, [polylineParam, polygonParam]),
     })
   }
 
@@ -255,10 +234,10 @@ const DrawTool: FunctionComponent = () => {
     if (drawnItems.length) {
       setInitialDrawnItems(drawnItems)
     }
-  }, [polygon, polyline, drawtoolOpen])
+  }, [polygon, polyline])
 
   return (
-    <DrawToolComponent
+    <BareDrawTool
       data-testid="drawTool"
       onDrawEnd={updateDrawings}
       onEndInitialItems={attachDataToLayer}

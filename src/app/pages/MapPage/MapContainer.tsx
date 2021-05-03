@@ -11,22 +11,13 @@ import { getUser } from '../../../shared/ducks/user/user'
 import useParam from '../../utils/useParam'
 import MapContext, { MapState } from './MapContext'
 import MapPage from './MapPage'
-import {
-  mapLayersParam,
-  panoFullScreenParam,
-  polygonParam,
-  polylineParam,
-  ViewMode,
-  viewParam,
-} from './query-params'
+import { mapLayersParam, panoFullScreenParam, ViewMode, viewParam } from './query-params'
 import buildLeafletLayers from './utils/buildLeafletLayers'
 import DataSelection from '../../components/DataSelection/DataSelection'
 import { routing } from '../../routes'
 
 const MapContainer: FunctionComponent = ({ children }) => {
   const [activeMapLayers] = useParam(mapLayersParam)
-  const [polyline] = useParam(polylineParam)
-  const [polygon] = useParam(polygonParam)
   const [view] = useParam(viewParam)
 
   const [detailFeature, setDetailFeature] = useState<MapState['detailFeature']>(null)
@@ -37,8 +28,6 @@ const MapContainer: FunctionComponent = ({ children }) => {
     panelLayers: [],
   })
   const [panelHeader, setPanelHeader] = useState<MapState['panelHeader']>({ title: 'Resultaten' })
-
-  const [showDrawTool, setShowDrawTool] = useState(!!(polyline || polygon))
   const [panoFullScreen, setPanoFullScreen] = useParam(panoFullScreenParam)
   const user = useSelector(getUser)
 
@@ -72,8 +61,6 @@ const MapContainer: FunctionComponent = ({ children }) => {
         legendLeafletLayers,
         setDetailFeature,
         setPanelHeader,
-        showDrawTool,
-        setShowDrawTool,
         panoFullScreen,
         setPanoFullScreen,
         setPanoImageDate,

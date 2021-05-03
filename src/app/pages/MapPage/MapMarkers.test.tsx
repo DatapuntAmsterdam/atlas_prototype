@@ -14,7 +14,7 @@ jest.mock('react-router-dom', () => ({
   }),
 }))
 
-jest.mock('../../components/PanoramaViewer/PanoramaViewerMarker', () => () => (
+jest.mock('./components/PanoramaViewer/PanoramaViewerMarker', () => () => (
   <div data-testid="panoramaMarker" />
 ))
 jest.mock('./map-search/MapSearchMarker', () => () => <div data-testid="searchMarker" />)

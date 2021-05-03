@@ -9,13 +9,13 @@ import {
   themeSpacing,
   useMatchMedia,
 } from '@amsterdam/asc-ui'
-import { Link as RouterLink } from 'react-router-dom'
-import { FunctionComponent, useState } from 'react'
+import { Link as RouterLink, useHistory } from 'react-router-dom'
+import { FunctionComponent, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import LoadingSpinner from '../../../../components/LoadingSpinner/LoadingSpinner'
 import config, { DataSelectionType } from '../../config'
 import useBuildQueryString from '../../../../utils/useBuildQueryString'
-import { drawToolOpenParam, polygonParam, ViewMode, viewParam } from '../../query-params'
+import { dataSelectionFiltersParam, polygonParam, ViewMode, viewParam } from '../../query-params'
 import useParam from '../../../../utils/useParam'
 import useLegacyDataselectionConfig from '../../../../components/DataSelection/useLegacyDataselectionConfig'
 import { fetchWithToken } from '../../../../../shared/services/api/api'
@@ -31,6 +31,7 @@ import LoginLink from '../../../../components/Links/LoginLink/LoginLink'
 import formatCount from '../../../../utils/formatCount'
 import AuthScope from '../../../../../shared/services/api/authScope'
 import { useMapContext } from '../../MapContext'
+import { routing } from '../../../../routes'
 
 const ResultLink = styled(RouterLink)`
   width: 100%;
@@ -63,6 +64,7 @@ const Results: FunctionComponent = () => {
   const { currentDatasetType, currentDatasetConfig } = useLegacyDataselectionConfig()
   const { setShowMapDrawVisualization } = useMapContext()
   const { buildQueryString } = useBuildQueryString()
+  const history = useHistory()
 
   const result = usePromise(async () => {
     if (polygon?.polygon || activeFilters.length) {
@@ -89,6 +91,15 @@ const Results: FunctionComponent = () => {
     isFulfilled(result) ? `${result.value.totalCount} Resultaten` : undefined,
     distanceText && `Locatie: ingetekend (${distanceText})`,
   )
+
+  useEffect(() => {
+    if (!activeFilters.length) {
+      history.push({
+        pathname: routing.dataSearchGeo_TEMP.path,
+        search: buildQueryString(undefined, [dataSelectionFiltersParam, polygonParam]),
+      })
+    }
+  }, [activeFilters])
 
   if (isPending(result)) {
     return <LoadingSpinner size={30} />
@@ -134,7 +145,7 @@ const Results: FunctionComponent = () => {
         <Link
           to={{
             pathname: config[currentDatasetType.toUpperCase()].getDetailPath(locationId),
-            search: buildQueryString(undefined, [polygonParam, drawToolOpenParam]),
+            search: buildQueryString(undefined, [polygonParam]),
           }}
           as={ResultLink}
           inList

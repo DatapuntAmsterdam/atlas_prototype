@@ -1,6 +1,6 @@
 import { LatLngLiteral } from 'leaflet'
 import { FunctionComponent, useMemo } from 'react'
-import PanoramaViewerMarker from '../../components/PanoramaViewer/PanoramaViewerMarker'
+import PanoramaViewerMarker from './components/PanoramaViewer/PanoramaViewerMarker'
 import useParam from '../../utils/useParam'
 import MapSearchMarker from './map-search/MapSearchMarker'
 import { locationParam } from './query-params'

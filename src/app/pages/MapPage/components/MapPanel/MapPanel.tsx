@@ -88,12 +88,7 @@ const MapPanel: FunctionComponent = () => {
         path: routing.data_TEMP.path,
         exact: true,
       }) ||
-      (dataSearchGeoMatch && !locationParameter) ||
-      ((matchPath(location.pathname, routing.addresses_TEMP.path) ||
-        matchPath(location.pathname, routing.establishments_TEMP.path) ||
-        matchPath(location.pathname, routing.cadastralObjects_TEMP.path)) &&
-        !polygon &&
-        !activeFilters.length)
+      (dataSearchGeoMatch && !locationParameter)
     ) {
       return false
     }

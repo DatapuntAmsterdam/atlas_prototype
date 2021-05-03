@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import PanoramaViewer from './PanoramaViewer'
-import withMapContext from '../../utils/withMapContext'
+import withMapContext from '../../../../utils/withMapContext'
 
 const mockPush = jest.fn()
 

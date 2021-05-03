@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 import { FunctionComponent } from 'react'
-import ViewerInfoBar from '../ViewerInfoBar/ViewerInfoBar'
-import useParam from '../../utils/useParam'
-import { locationParam } from '../../pages/MapPage/query-params'
-import Control from '../../pages/MapPage/components/Control'
-import { useMapContext } from '../../pages/MapPage/MapContext'
+import ViewerInfoBar from '../../../../components/ViewerInfoBar/ViewerInfoBar'
+import useParam from '../../../../utils/useParam'
+import { locationParam } from '../../query-params'
+import Control from '../Control'
+import { useMapContext } from '../../MapContext'
 
 const StyledControl = styled(Control)`
   order: 2;

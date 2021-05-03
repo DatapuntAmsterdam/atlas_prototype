@@ -1,11 +1,11 @@
 import { FunctionComponent, useCallback, useEffect, useRef } from 'react'
 import styled from 'styled-components'
-import { PANO_LABELS } from '../../../panorama/ducks/constants'
-import { loadScene } from '../../../panorama/services/marzipano/marzipano'
+import { PANO_LABELS } from '../../../../../panorama/ducks/constants'
+import { loadScene } from '../../../../../panorama/services/marzipano/marzipano'
 import {
   getImageDataById,
   getImageDataByLocation,
-} from '../../../panorama/services/panorama-api/panorama-api'
+} from '../../../../../panorama/services/panorama-api/panorama-api'
 import {
   locationParam,
   panoFovParam,
@@ -13,10 +13,10 @@ import {
   panoHeadingParam,
   panoPitchParam,
   panoTagParam,
-} from '../../pages/MapPage/query-params'
-import useMarzipano from '../../utils/useMarzipano'
-import useParam from '../../utils/useParam'
-import { useMapContext } from '../../pages/MapPage/MapContext'
+} from '../../query-params'
+import useMarzipano from '../../../../utils/useMarzipano'
+import useParam from '../../../../utils/useParam'
+import { useMapContext } from '../../MapContext'
 
 const MarzipanoView = styled.div`
   height: 100%;
