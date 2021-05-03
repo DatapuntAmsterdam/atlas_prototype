@@ -11,19 +11,19 @@ import {
   polylineParam,
 } from './query-params'
 
-describe('panoTagParam', () => {
-  describe('isEmbeddedParam', () => {
-    it('encodes the value to parameter value', () => {
-      expect(isEmbeddedParam.encode(true)).toBe('true')
-      expect(isEmbeddedParam.encode(false)).toBe('false')
-    })
-
-    it('decodes the value from the parameter', () => {
-      expect(isEmbeddedParam.decode('true')).toBe(true)
-      expect(isEmbeddedParam.decode('false')).toBe(false)
-    })
+describe('isEmbeddedParam', () => {
+  it('encodes the value to parameter value', () => {
+    expect(isEmbeddedParam.encode(true)).toBe('true')
+    expect(isEmbeddedParam.encode(false)).toBe('false')
   })
 
+  it('decodes the value from the parameter', () => {
+    expect(isEmbeddedParam.decode('true')).toBe(true)
+    expect(isEmbeddedParam.decode('false')).toBe(false)
+  })
+})
+
+describe('panoTagParam', () => {
   it('encodes the parameter', () => {
     expect(panoTagParam.encode('pano2016bi')).toBe('pano2016bi')
   })
