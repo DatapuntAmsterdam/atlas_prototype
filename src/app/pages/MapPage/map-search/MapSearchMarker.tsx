@@ -1,6 +1,6 @@
 import { MapPanelContext, Marker as ARMMarker } from '@amsterdam/arm-core'
 import { LeafletMouseEvent } from 'leaflet'
-import { FunctionComponent, useContext } from 'react'
+import { FunctionComponent } from 'react'
 import { matchPath, useHistory, useLocation } from 'react-router-dom'
 import fetchNearestDetail from '../../../../map/services/nearest-detail/nearest-detail'
 import { toDataDetail } from '../../../links'
@@ -8,6 +8,7 @@ import { routing } from '../../../routes'
 import useBuildQueryString from '../../../utils/useBuildQueryString'
 import useLeafletEvent from '../../../utils/useLeafletEvent'
 import useParam from '../../../utils/useParam'
+import useRequiredContext from '../../../utils/useRequiredContext'
 import { useMapContext } from '../MapContext'
 import { MarkerProps } from '../MapMarkers'
 import { locationParam, polygonParam, zoomParam } from '../query-params'
@@ -21,7 +22,7 @@ const MapSearchMarker: FunctionComponent<MarkerProps> = ({ position }) => {
   const history = useHistory()
   const { buildQueryString } = useBuildQueryString()
 
-  const { setPositionFromSnapPoint } = useContext(MapPanelContext)
+  const { setPositionFromSnapPoint } = useRequiredContext(MapPanelContext)
 
   async function handleMapClick(e: LeafletMouseEvent) {
     const layers = legendLeafletLayers

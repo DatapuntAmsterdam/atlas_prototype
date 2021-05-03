@@ -1,9 +1,10 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Feature } from 'geojson'
 import { TileLayerOptions, WMSOptions } from 'leaflet'
-import { Dispatch, SetStateAction, useContext } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import { MapCollection, MapLayer } from '../../../map/services'
 import createNamedContext from '../../utils/createNamedContext'
+import useRequiredContext from '../../utils/useRequiredContext'
 
 export interface WmsOverlay {
   type: 'wms'
@@ -55,15 +56,7 @@ export interface MapContextProps extends MapState {
 const MapContext = createNamedContext<MapContextProps | null>('Map', null)
 
 export function useMapContext() {
-  const context = useContext(MapContext)
-
-  if (!context) {
-    throw new Error(
-      'No provider found for MapContext, make sure you include MapContainer in your component hierarchy.',
-    )
-  }
-
-  return context
+  return useRequiredContext(MapContext)
 }
 
 export default MapContext

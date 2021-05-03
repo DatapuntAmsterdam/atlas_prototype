@@ -1,4 +1,4 @@
-import { Dispatch, FunctionComponent, SetStateAction, useContext, useMemo, useState } from 'react'
+import { Dispatch, FunctionComponent, SetStateAction, useMemo, useState } from 'react'
 import {
   DataSelectionFilters,
   dataSelectionFiltersParam,
@@ -6,6 +6,7 @@ import {
 } from '../../pages/MapPage/query-params'
 import createNamedContext from '../../utils/createNamedContext'
 import useParam from '../../utils/useParam'
+import useRequiredContext from '../../utils/useRequiredContext'
 import { ActiveFilter, AvailableFilter } from './types'
 import useLegacyDataselectionConfig from './useLegacyDataselectionConfig'
 
@@ -117,13 +118,5 @@ const DataSelectionProvider: FunctionComponent = ({ children }) => {
 export { DataSelectionProvider }
 
 export function useDataSelection() {
-  const context = useContext(DataSelectionContext)
-
-  if (!context) {
-    throw new Error(
-      'No provider found for DataSelection, make sure you include DataSelectionProvider in your component hierarchy.',
-    )
-  }
-
-  return context
+  return useRequiredContext(DataSelectionContext)
 }
