@@ -1,19 +1,16 @@
 import { ascDefaultTheme, themeColor } from '@amsterdam/asc-ui'
 import { useMapInstance } from '@amsterdam/react-maps'
-import {
-  DrawTool as DrawToolComponent,
-  ExtendedLayer,
-  PolygonType,
-  PolylineType,
-} from '@amsterdam/arm-draw'
 import L, { LatLng, LatLngLiteral, Polygon } from 'leaflet'
 import { FunctionComponent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import useParam from '../../../../utils/useParam'
-import { drawToolOpenParam, PolyDrawing, polygonParam, polylineParam } from '../../query-params'
-import { useDataSelectionContext } from './DataSelectionContext'
+import { PolyDrawing, polygonParam, polylineParam } from '../../query-params'
+import { BareDrawTool, ExtendedLayer, PolygonType, PolylineType } from './BareDrawTool'
 import { routing } from '../../../../routes'
 import useBuildQueryString from '../../../../utils/useBuildQueryString'
+import { useDataSelection } from '../../../../components/DataSelection/DataSelectionContext'
+import useLegacyDataselectionConfig from '../../../../components/DataSelection/useLegacyDataselectionConfig'
+import config from '../../config'
 
 function getTotalDistance(latLngs: LatLng[]) {
   return latLngs.reduce(
@@ -65,20 +62,24 @@ const createPolyLayer = (drawing: PolyDrawing, line = false): PolylineType | Pol
 const DrawTool: FunctionComponent = () => {
   const { buildQueryString } = useBuildQueryString()
 
-  const [polygon, setPolygon] = useParam(polygonParam)
-  const [polyline, setPolyline] = useParam(polylineParam)
-  const [drawtoolOpen] = useParam(drawToolOpenParam)
-  const { setDistanceText } = useDataSelectionContext()
+  const [polygon] = useParam(polygonParam)
+  const [polyline] = useParam(polylineParam)
   const history = useHistory()
-
+  const { activeFilters, setDistanceText, setDrawToolLocked } = useDataSelection()
+  const { currentDatasetType } = useLegacyDataselectionConfig()
   const [initialDrawnItems, setInitialDrawnItems] = useState<ExtendedLayer[]>([])
 
   // We needs refs here for leaflet event handlers
+  const currentDatasetTypeRef = useRef(currentDatasetType)
   const polygonRef = useRef(polygon)
-  polygonRef.current = polygon
-
   const polylineRef = useRef(polyline)
+  const activeFiltersRef = useRef(activeFilters)
+  const buildQueryStringRef = useRef(buildQueryString)
+  currentDatasetTypeRef.current = currentDatasetType
+  polygonRef.current = polygon
   polylineRef.current = polyline
+  activeFiltersRef.current = activeFilters
+  buildQueryStringRef.current = buildQueryString
 
   const mapInstance = useMapInstance()
   const drawnItemsGroup = useMemo(() => new L.FeatureGroup(), [])
@@ -94,19 +95,21 @@ const DrawTool: FunctionComponent = () => {
    * @param shape
    */
   const updateShape = (shape: { polygon: PolyDrawing | null; polyline: PolyDrawing | null }) => {
-    if (shape.polygon || shape.polyline) {
-      const method = shape.polygon ? 'push' : 'replace'
-      history[method]({
-        pathname: routing.addresses_TEMP.path,
-        search: buildQueryString([
+    const pathname =
+      config[currentDatasetTypeRef.current?.toUpperCase()]?.path ?? routing.addresses_TEMP.path
+    if (shape.polygon) {
+      history.push({
+        pathname,
+        search: buildQueryStringRef.current([
           [polylineParam, shape.polyline],
           [polygonParam, shape.polygon],
         ]),
       })
     } else {
+      setDistanceText(undefined)
       history.push({
-        pathname: routing.dataSearchGeo_TEMP.path,
-        search: buildQueryString(undefined, [polylineParam, polygonParam, drawToolOpenParam]),
+        pathname,
+        search: buildQueryStringRef.current([[polylineParam, shape.polyline]], [polygonParam]),
       })
     }
   }
@@ -137,59 +140,60 @@ const DrawTool: FunctionComponent = () => {
           ? polylineRef.current
           : { id: layer.id, polygon: getLayerCoordinates(layer) }
 
+      setTimeout(() => {
+        setDrawToolLocked(false)
+      }, 100)
       updateShape({
         polygon: updatedPolygon,
         polyline: updatedPolyline,
       })
     },
-    [setPolygon, setPolyline],
+    [polygonRef, polylineRef],
   )
 
-  const onEditVertex = (e: L.DrawEvents.EditVertex) => {
-    updateDrawings(e.poly as ExtendedLayer)
-  }
+  const onDeleteDrawing = useCallback((deletedLayers: ExtendedLayer[]) => {
+    const deletedLayersIds = deletedLayers.map(({ id }) => id)
+    const deletedLayersBounds = deletedLayers.map((layer) => {
+      const coordinates = layer.getLatLngs()
 
-  const onDeleteDrawing = useCallback(
-    (deletedLayers: ExtendedLayer[]) => {
-      const deletedLayersIds = deletedLayers.map(({ id }) => id)
-      const deletedLayersBounds = deletedLayers.map((layer) => {
-        const coordinates = layer.getLatLngs()
+      return layer instanceof Polygon
+        ? (coordinates[0] as LatLngLiteral)
+        : ((coordinates as unknown) as LatLngLiteral)
+    })
 
-        return layer instanceof Polygon
-          ? (coordinates[0] as LatLngLiteral)
-          : ((coordinates as unknown) as LatLngLiteral)
-      })
+    if (deletedLayersBounds.length === 0) {
+      return
+    }
 
-      if (deletedLayersBounds.length === 0) {
-        return
-      }
+    const newPolygon =
+      polygonRef.current?.id && deletedLayersIds.includes(polygonRef.current.id)
+        ? null
+        : polygonRef.current
 
-      const newPolygon =
-        polygonRef.current?.id && deletedLayersIds.includes(polygonRef.current.id)
-          ? null
-          : polygonRef.current
+    const newPolyline =
+      polylineRef.current?.id && deletedLayersIds.includes(polylineRef.current.id)
+        ? null
+        : polylineRef.current
 
-      const newPolyline =
-        polylineRef.current?.id && deletedLayersIds.includes(polylineRef.current.id)
-          ? null
-          : polylineRef.current
-
-      updateShape({
-        polygon: newPolygon,
-        polyline: newPolyline,
-      })
-    },
-    [setPolygon, setPolyline],
-  )
+    updateShape({
+      polygon: newPolygon,
+      polyline: newPolyline,
+    })
+  }, [])
 
   const onClose = () => {
     history.push({
       pathname: routing.dataSearchGeo_TEMP.path,
-      search: buildQueryString(undefined, [polylineParam, polygonParam, drawToolOpenParam]),
+      search: buildQueryString(undefined, [polylineParam, polygonParam]),
     })
   }
 
   useEffect(() => {
+    const onEditVertex = (e: L.DrawEvents.EditVertex) => {
+      setDrawToolLocked(true)
+      updateDrawings(e.poly as ExtendedLayer)
+    }
+
     mapInstance.on(L.Draw.Event.EDITVERTEX as any, onEditVertex as any)
 
     // Clean up
@@ -198,6 +202,12 @@ const DrawTool: FunctionComponent = () => {
       mapInstance.off(L.Draw.Event.EDITVERTEX as any, onEditVertex as any)
     }
   }, [])
+
+  useEffect(() => {
+    if (!polygon) {
+      setDistanceText(undefined)
+    }
+  }, [polygon])
 
   /**
    * This effect will handle loading drawings from initial state and
@@ -221,15 +231,18 @@ const DrawTool: FunctionComponent = () => {
     if (drawnItems.length) {
       setInitialDrawnItems(drawnItems)
     }
-  }, [polygon, polyline, drawtoolOpen])
+  }, [polygon, polyline])
 
   return (
-    <DrawToolComponent
+    <BareDrawTool
       data-testid="drawTool"
       onDrawEnd={updateDrawings}
       onEndInitialItems={attachDataToLayer}
       onDelete={onDeleteDrawing}
       onClose={onClose}
+      onDrawStart={() => {
+        setDrawToolLocked(true)
+      }}
       drawnItems={initialDrawnItems}
       drawnItemsGroup={drawnItemsGroup}
     />

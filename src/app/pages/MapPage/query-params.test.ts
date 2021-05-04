@@ -1,6 +1,7 @@
 import { v4 as uuid } from 'uuid'
 import encodeParam from '../../utils/encodeParam'
 import {
+  isEmbeddedParam,
   panoFovParam,
   panoHeadingParam,
   panoPitchParam,
@@ -9,6 +10,18 @@ import {
   polygonParam,
   polylineParam,
 } from './query-params'
+
+describe('isEmbeddedParam', () => {
+  it('encodes the value to parameter value', () => {
+    expect(isEmbeddedParam.encode(true)).toBe('true')
+    expect(isEmbeddedParam.encode(false)).toBe('false')
+  })
+
+  it('decodes the value from the parameter', () => {
+    expect(isEmbeddedParam.decode('true')).toBe(true)
+    expect(isEmbeddedParam.decode('false')).toBe(false)
+  })
+})
 
 describe('panoTagParam', () => {
   it('encodes the parameter', () => {

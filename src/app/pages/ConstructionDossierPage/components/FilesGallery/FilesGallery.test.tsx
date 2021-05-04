@@ -222,6 +222,6 @@ describe('FilesGallery', () => {
       { wrapper },
     )
 
-    expect(screen.queryByTestId('showMore')).toBeNull()
+    expect(screen.queryByTestId('showMore')).not.toBeInTheDocument()
   })
 })

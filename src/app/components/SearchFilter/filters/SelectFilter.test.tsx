@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render } from '@testing-library/react'
+import { screen, cleanup, fireEvent, render } from '@testing-library/react'
 import { FilterOption } from '../../../models/filter'
 import { FilterProps } from '../models'
 import SelectFilter from './SelectFilter'
@@ -23,26 +23,26 @@ describe('SelectFilter', () => {
   ]
 
   it('should render an option to disable the filter and select it by default', () => {
-    const { getAllByText } = render(<SelectFilter {...defaultProps} />)
-    const node = getAllByText('Alles')[0] as HTMLOptionElement
+    render(<SelectFilter {...defaultProps} />)
+    const node = screen.getAllByText('Alles')[0] as HTMLOptionElement
 
     expect(node.tagName).toEqual('OPTION')
-    expect(node.getAttribute('value')).toEqual('')
+    expect(node).toHaveValue('')
     expect(node.selected).toEqual(true)
   })
 
   it('should render a list of options without selection', () => {
     const props: FilterProps = { ...defaultProps, options }
-    const { getAllByText } = render(<SelectFilter {...props} />)
+    render(<SelectFilter {...props} />)
 
-    const firstNode = getAllByText('First')[0] as HTMLOptionElement
-    const secondNode = getAllByText('Second')[0] as HTMLOptionElement
-    const lastNode = getAllByText('Last')[0] as HTMLOptionElement
+    const firstNode = screen.getAllByText('First')[0] as HTMLOptionElement
+    const secondNode = screen.getAllByText('Second')[0] as HTMLOptionElement
+    const lastNode = screen.getAllByText('Last')[0] as HTMLOptionElement
     ;[firstNode, secondNode, lastNode].forEach((node, index) => {
       const option = options[index]
 
       expect(node.tagName).toEqual('OPTION')
-      expect(node.getAttribute('value')).toEqual(option.id)
+      expect(node).toHaveValue(option.id)
       expect(node.selected).toEqual(false)
     })
   })
@@ -50,8 +50,8 @@ describe('SelectFilter', () => {
   it('should render a list of options with selection', () => {
     const selection = ['second']
     const props: FilterProps = { ...defaultProps, options, selection }
-    const { getAllByText } = render(<SelectFilter {...props} />)
-    const secondNode = getAllByText('Second')[0] as HTMLOptionElement
+    render(<SelectFilter {...props} />)
+    const secondNode = screen.getAllByText('Second')[0] as HTMLOptionElement
 
     expect(secondNode.selected).toEqual(true)
   })
@@ -65,8 +65,8 @@ describe('SelectFilter', () => {
       selection,
       onSelectionChange: selectionChangeMock,
     }
-    const { getByTestId } = render(<SelectFilter {...props} />)
-    const selectNode = getByTestId('test')
+    render(<SelectFilter {...props} />)
+    const selectNode = screen.getByTestId('test')
 
     fireEvent.change(selectNode, { target: { value: 'last' } })
 
@@ -82,8 +82,8 @@ describe('SelectFilter', () => {
       selection,
       onSelectionChange: selectionChangeMock,
     }
-    const { getByTestId } = render(<SelectFilter {...props} />)
-    const selectNode = getByTestId('test')
+    render(<SelectFilter {...props} />)
+    const selectNode = screen.getByTestId('test')
 
     fireEvent.change(selectNode, { target: { value: '' } })
 

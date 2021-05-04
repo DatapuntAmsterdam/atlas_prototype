@@ -1,24 +1,21 @@
-import { constants, Map as MapComponent, useStateRef } from '@amsterdam/arm-core'
+import { constants, Map as MapComponent, Scale, useStateRef } from '@amsterdam/arm-core'
 import L from 'leaflet'
 import { FunctionComponent, useCallback, useEffect } from 'react'
+import { Theme, themeSpacing } from '@amsterdam/asc-ui'
 import styled, { createGlobalStyle, css } from 'styled-components'
-import PanoramaViewer from '../../components/PanoramaViewer/PanoramaViewer'
+import PanoramaViewer from './components/PanoramaViewer/PanoramaViewer'
 import useParam from '../../utils/useParam'
 import LeafletLayers from './LeafletLayers'
 import { useMapContext } from './MapContext'
 import MapMarkers from './MapMarkers'
 import {
   centerParam,
-  drawToolOpenParam,
   locationParam,
   panoHeadingParam,
   panoPitchParam,
-  polygonParam,
-  polylineParam,
   zoomParam,
 } from './query-params'
 import MapPanel from './components/MapPanel'
-import DataSelectionProvider from './components/DrawTool/DataSelectionProvider'
 
 const MapView = styled.div`
   height: 100%;
@@ -27,26 +24,42 @@ const MapView = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
+
+  @media print {
+    overflow: scroll;
+  }
 `
 
 const GlobalStyle = createGlobalStyle<{
   panoActive?: boolean
   panoFullScreen: boolean
+  theme: Theme.ThemeInterface
 }>`
   body {
     touch-action: none;
     overflow: hidden; // This will prevent the scrollBar on iOS due to navigation bar
+    @media print {
+      overflow: auto;
+    }
   }
 
   // Need to set the styled globally and not as a Styled Component as this will cause problems with leaflet calculating the map canvas / dimensions
   .leaflet-container {
     position: sticky !important;
     height: ${({ panoActive }) => (panoActive ? '50%' : '100%')};
+    @media print {
+      min-height: 100vh;
+      page-break-after: always;
+    }
+
     ${({ panoFullScreen }) =>
       panoFullScreen &&
       css`
         display: none;
       `}
+  }
+  .leaflet-control-container .leaflet-control-scale {
+    margin: ${themeSpacing(0, 16, 4, 0)} !important;
   }
 `
 
@@ -60,9 +73,6 @@ const MapPage: FunctionComponent = () => {
   const [location] = useParam(locationParam)
   const [panoPitch] = useParam(panoPitchParam)
   const [panoHeading] = useParam(panoHeadingParam)
-  const [polygon] = useParam(polygonParam)
-  const [polyline] = useParam(polylineParam)
-  const [, setShowDrawTool] = useParam(drawToolOpenParam)
 
   const panoActive = panoHeading !== null && location !== null
 
@@ -78,12 +88,6 @@ const MapPage: FunctionComponent = () => {
     mapInstanceRef.current?.setZoom(zoom)
   }, [zoom])
 
-  useEffect(() => {
-    if (polygon || polyline) {
-      setShowDrawTool(true, 'replace')
-    }
-  }, [polygon, polyline])
-
   return (
     <MapView>
       <GlobalStyle panoActive={panoActive} panoFullScreen={panoFullScreen} />
@@ -93,6 +97,7 @@ const MapPage: FunctionComponent = () => {
           ...DEFAULT_AMSTERDAM_MAPS_OPTIONS,
           zoom: zoom ?? DEFAULT_AMSTERDAM_MAPS_OPTIONS.zoom,
           center: center ?? DEFAULT_AMSTERDAM_MAPS_OPTIONS.center,
+          attributionControl: false,
         }}
         events={{
           zoomend: useCallback(() => {
@@ -107,13 +112,18 @@ const MapPage: FunctionComponent = () => {
           }, [mapInstanceRef, setCenter]),
         }}
       >
-        <DataSelectionProvider>
-          <LeafletLayers />
+        <LeafletLayers />
 
-          {panoActive && <PanoramaViewer />}
-          <MapMarkers panoActive={panoActive} />
-          <MapPanel />
-        </DataSelectionProvider>
+        {panoActive && <PanoramaViewer />}
+        <MapMarkers panoActive={panoActive} />
+        <MapPanel />
+        <Scale
+          options={{
+            position: 'bottomright',
+            metric: true,
+            imperial: false,
+          }}
+        />
       </MapComponent>
     </MapView>
   )

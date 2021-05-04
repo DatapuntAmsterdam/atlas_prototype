@@ -38,7 +38,7 @@ describe('LoginLinkRequestFlow', () => {
       </ThemeProvider>,
     )
 
-    expect(screen.getByTestId('loadingMessage')).toBeDefined()
+    expect(screen.getByTestId('loadingMessage')).toBeInTheDocument()
   })
 
   it('shows the error message', async () => {
@@ -50,7 +50,7 @@ describe('LoginLinkRequestFlow', () => {
       </ThemeProvider>,
     )
 
-    await waitFor(() => expect(screen.getByTestId('errorMessage')).toBeDefined())
+    await waitFor(() => expect(screen.getByTestId('errorMessage')).toBeInTheDocument())
   })
 
   it('handles a retry the in the error state', async () => {
@@ -64,7 +64,7 @@ describe('LoginLinkRequestFlow', () => {
       </ThemeProvider>,
     )
 
-    const retryButton = await waitFor(() => screen.getByText('Probeer opnieuw'))
+    const retryButton = await waitFor(() => screen.findByText('Probeer opnieuw'))
 
     fireEvent.click(retryButton)
     expect(onRetry).toHaveBeenCalled()
@@ -81,7 +81,7 @@ describe('LoginLinkRequestFlow', () => {
       </ThemeProvider>,
     )
 
-    const closeButton = await waitFor(() => screen.getByText('Annuleren'))
+    const closeButton = await waitFor(() => screen.findByText('Annuleren'))
 
     fireEvent.click(closeButton)
     expect(onClose).toHaveBeenCalled()
@@ -96,7 +96,7 @@ describe('LoginLinkRequestFlow', () => {
       </ThemeProvider>,
     )
 
-    await waitFor(() => expect(screen.getByTestId('successMessage')).toBeDefined())
+    await waitFor(() => expect(screen.getByTestId('successMessage')).toBeInTheDocument())
   })
 
   it('handles closing the modal in the success state', async () => {
@@ -110,7 +110,7 @@ describe('LoginLinkRequestFlow', () => {
       </ThemeProvider>,
     )
 
-    const closeButton = await waitFor(() => screen.getByText('Sluiten'))
+    const closeButton = await waitFor(() => screen.findByText('Sluiten'))
 
     fireEvent.click(closeButton)
     expect(onClose).toHaveBeenCalled()

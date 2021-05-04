@@ -57,6 +57,10 @@ const ControlsContainer = styled.div<ModeProp>`
   justify-content: space-between;
   padding: ${themeSpacing(4)};
 
+  @media print {
+    display: none;
+  }
+
   ${({ $mode }) =>
     isDesktop($mode) &&
     css`
@@ -124,6 +128,10 @@ const DrawerHandleDesktop = styled(Button)`
   position: relative;
   margin-right: ${themeSpacing(9)};
 
+  @media print {
+    display: none;
+  }
+
   & > ${styles.IconStyle} {
     opacity: 0;
   }
@@ -138,10 +146,10 @@ const DrawerHandleDesktop = styled(Button)`
   }
 `
 
-const HandleIcon = styled(ChevronRight)<{ isOpen: boolean }>`
+const HandleIcon = styled(ChevronRight)<{ $isOpen: boolean }>`
   transition: transform 0.25s ease-in-out;
-  ${({ isOpen }) =>
-    isOpen &&
+  ${({ $isOpen }) =>
+    $isOpen &&
     css`
       transform: rotate(180deg);
     `}
@@ -156,6 +164,11 @@ const DrawerContainer = styled.div<{ animate: boolean } & ModeProp>`
   right: 0;
   left: 0;
   will-change: transform;
+
+  @media print {
+    position: relative;
+    width: 100%;
+  }
 
   ${({ $mode }) =>
     isDesktop($mode) &&
@@ -490,7 +503,7 @@ const DrawerOverlay: FunctionComponent<DrawerOverlayProps> = ({
             {isDesktop(mode) ? (
               <DrawerHandleMiniDesktop>
                 <Icon size={20}>
-                  <HandleIcon isOpen={state === DrawerState.Open} />
+                  <HandleIcon $isOpen={state === DrawerState.Open} />
                 </Icon>
               </DrawerHandleMiniDesktop>
             ) : null}

@@ -1,7 +1,6 @@
-import { Alert, Heading, Link } from '@amsterdam/asc-ui'
 import { FunctionComponent, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link as RouterLink } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import {
   getMapLayers as fetchMapLayers,
   getPanelLayers as fetchPanelLayers,
@@ -9,28 +8,26 @@ import {
   MapLayer,
 } from '../../../map/services'
 import { getUser } from '../../../shared/ducks/user/user'
-import { toMap } from '../../../store/redux-first-router/actions'
 import useParam from '../../utils/useParam'
 import MapContext, { MapState } from './MapContext'
 import MapPage from './MapPage'
-import { mapLayersParam, panoFullScreenParam, polygonParam, polylineParam } from './query-params'
+import { mapLayersParam, panoFullScreenParam, ViewMode, viewParam } from './query-params'
 import buildLeafletLayers from './utils/buildLeafletLayers'
+import DataSelection from '../../components/DataSelection/DataSelection'
+import { routing } from '../../routes'
 
 const MapContainer: FunctionComponent = ({ children }) => {
   const [activeMapLayers] = useParam(mapLayersParam)
-  const [polyline] = useParam(polylineParam)
-  const [polygon] = useParam(polygonParam)
+  const [view] = useParam(viewParam)
 
   const [detailFeature, setDetailFeature] = useState<MapState['detailFeature']>(null)
   const [panoImageDate, setPanoImageDate] = useState<MapState['panoImageDate']>(null)
+  const [showMapDrawVisualization, setShowMapDrawVisualization] = useState(false)
   const [layers, setLayers] = useState<{ mapLayers: MapLayer[]; panelLayers: MapCollection[] }>({
     mapLayers: [],
     panelLayers: [],
   })
   const [panelHeader, setPanelHeader] = useState<MapState['panelHeader']>({ title: 'Resultaten' })
-
-  const showDrawContent = useMemo(() => !!(polyline || polygon), [polygon, polyline])
-  const [showDrawTool, setShowDrawTool] = useState(showDrawContent)
   const [panoFullScreen, setPanoFullScreen] = useParam(panoFullScreenParam)
   const user = useSelector(getUser)
 
@@ -64,21 +61,26 @@ const MapContainer: FunctionComponent = ({ children }) => {
         legendLeafletLayers,
         setDetailFeature,
         setPanelHeader,
-        showDrawTool,
-        setShowDrawTool,
-        showDrawContent,
         panoFullScreen,
         setPanoFullScreen,
         setPanoImageDate,
+        showMapDrawVisualization,
+        setShowMapDrawVisualization,
       }}
     >
-      <Alert level="info" dismissible>
-        <Heading as="h3">Let op: Deze nieuwe interactieve kaart is nog in aanbouw.</Heading>
-        <Link darkBackground to={toMap()} as={RouterLink} inList>
-          Naar de oude kaart
-        </Link>
-      </Alert>
-      <MapPage>{children}</MapPage>
+      <Switch>
+        <Route
+          path={[
+            routing.addresses_TEMP.path,
+            routing.establishments_TEMP.path,
+            routing.cadastralObjects_TEMP.path,
+          ]}
+          exact
+        >
+          {view === ViewMode.Full ? <DataSelection /> : <MapPage>{children}</MapPage>}
+        </Route>
+        <Route path="*" component={MapPage} />
+      </Switch>
     </MapContext.Provider>
   )
 }

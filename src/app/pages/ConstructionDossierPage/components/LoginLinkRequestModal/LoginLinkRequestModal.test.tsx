@@ -127,7 +127,7 @@ describe('LoginLinkRequestModal', () => {
     fireEvent.change(screen.getByLabelText('E-mailadres'), { target: { value: MOCK_EMAIL } })
     fireEvent.click(screen.getByText('Versturen'))
 
-    expect(screen.queryByTestId('requestFlow')).toBeNull()
+    expect(screen.queryByTestId('requestFlow')).not.toBeInTheDocument()
   })
 
   it('closes when requested by the request flow', () => {

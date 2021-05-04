@@ -17,6 +17,13 @@ const StyledTabs = styled(Tabs)`
   margin-bottom: ${themeSpacing(2)};
 `
 
+const Header = styled.header`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`
+
 const DataSelectionHeader: FunctionComponent = () => {
   const [view] = useParam(viewParam)
   const user = useSelector(getUser)
@@ -47,43 +54,34 @@ const DataSelectionHeader: FunctionComponent = () => {
   const showNumberOfRecords = totalResults > 0 && currentDatasetConfig.SHOW_NUMBER_OF_RECORDS
   return (
     <>
-      <div className="qa-header u-margin__bottom--3">
-        <div className="u-pull--right qa-buttons">
-          <div className="u-inline-block u-margin__right--1">
-            <Button
-              variant="primaryInverted"
-              as={RouterLink}
-              title={`Resultaten in ${isTableView ? 'kaart' : 'tabel'} weergeven`}
-              iconSize={21}
-              iconLeft={isTableView ? <Map /> : <Table />}
-              // @ts-ignore
-              to={{
-                pathname: location.pathname,
-                search: buildQueryString([
-                  [viewParam, isTableView ? ViewMode.Split : ViewMode.Full],
-                ]),
-              }}
-            >
-              {`${isTableView ? 'Kaart' : 'Tabel'} weergeven`}
-            </Button>
-          </div>
+      <Header>
+        {view === ViewMode.Full && (
+          <h1 data-test="data-selection-heading">
+            {datasetTitle}
+            {totalResults > 0 && <span> ({totalResults.toLocaleString('NL-nl')})</span>}
+          </h1>
+        )}
+        {view === ViewMode.Split && <h1 data-test="data-selection-heading">Resultaten</h1>}
+        <div>
+          <Button
+            variant="primaryInverted"
+            as={RouterLink}
+            title={`Resultaten in ${isTableView ? 'kaart' : 'tabel'} weergeven`}
+            iconSize={21}
+            iconLeft={isTableView ? <Map /> : <Table />}
+            // @ts-ignore
+            to={{
+              pathname: location.pathname,
+              search: buildQueryString([[viewParam, isTableView ? ViewMode.Split : ViewMode.Full]]),
+            }}
+          >
+            {`${isTableView ? 'Kaart' : 'Tabel'} weergeven`}
+          </Button>
           {showDownloadButton && (
-            <div className="u-inline-block qa-download-button">
-              <DataSelectionDownloadButton {...{ activeFilters, dataset: currentDatasetType }} />
-            </div>
+            <DataSelectionDownloadButton {...{ activeFilters, dataset: currentDatasetType }} />
           )}
         </div>
-
-        <div className="qa-title">
-          {view === ViewMode.Full && (
-            <h1 data-test="data-selection-heading">
-              {datasetTitle}
-              {totalResults > 0 && <span> ({totalResults.toLocaleString('NL-nl')})</span>}
-            </h1>
-          )}
-          {view === ViewMode.Split && <h1 data-test="data-selection-heading">Resultaten</h1>}
-        </div>
-      </div>
+      </Header>
       {showTabs && (
         <StyledTabs label="An example of tabs" initialTab={currentDatasetType}>
           {tabs.map((tab) => (

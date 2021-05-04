@@ -160,16 +160,6 @@ describe('AuthTokenProvider', () => {
 })
 
 describe('useAuthToken', () => {
-  it('throws if no provider is present', () => {
-    const { result } = renderHook(() => useAuthToken())
-
-    expect(result.error).toEqual(
-      new Error(
-        'No provider found for AuthToken, make sure you include AuthTokenProvider in your component hierarchy.',
-      ),
-    )
-  })
-
   it('provides the token', () => {
     const token = 'Hello World'
     const { result } = renderHook(() => useAuthToken(), {

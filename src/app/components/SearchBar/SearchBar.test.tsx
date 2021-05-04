@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@amsterdam/asc-ui'
-import { render } from '@testing-library/react'
+import { screen, render } from '@testing-library/react'
 import SearchBar, { SearchBarProps } from './SearchBar'
 
 // Mock the SearchBarFilter component as it's not relevant for this test and is tested seperately
@@ -34,22 +34,22 @@ describe('SearchBar', () => {
   })
 
   it('should not show the backdrop by default', () => {
-    const { queryByTestId } = render(
+    render(
       <ThemeProvider>
         <SearchBar {...props} />
       </ThemeProvider>,
     )
 
-    expect(queryByTestId('backDrop')).toBeFalsy()
+    expect(screen.queryByTestId('backDrop')).toBeFalsy()
   })
 
   it('should show the backdrop when the component receives the right props', () => {
-    const { queryByTestId } = render(
+    render(
       <ThemeProvider>
         <SearchBar {...{ ...props, expanded: true }} />
       </ThemeProvider>,
     )
 
-    expect(queryByTestId('backDrop')).toBeTruthy()
+    expect(screen.queryByTestId('backDrop')).toBeTruthy()
   })
 })

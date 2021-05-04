@@ -23,18 +23,21 @@ const DataSelectionSelectBox = () => {
   const history = useHistory()
   const { trackEvent } = useMatomo()
   const { currentDatasetType } = useLegacyDataselectionConfig()
-  const handleOnChangeType = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
-    const selectedOption = e.target.value as DataSelectionType
-    trackEvent({
-      category: 'dataselection',
-      action: 'dropdown',
-      name: config[selectedOption].title,
-    })
-    history.push({
-      pathname: config[selectedOption].path,
-      search: location.search,
-    })
-  }, [])
+  const handleOnChangeType = useCallback(
+    (e: ChangeEvent<HTMLSelectElement>) => {
+      const selectedOption = e.target.value as DataSelectionType
+      trackEvent({
+        category: 'dataselection',
+        action: 'dropdown',
+        name: config[selectedOption].title,
+      })
+      history.push({
+        pathname: config[selectedOption].path,
+        search: location.search,
+      })
+    },
+    [location, trackEvent, config],
+  )
 
   if (!currentDatasetType) {
     // eslint-disable-next-line no-console

@@ -2,11 +2,11 @@ import { Marker } from '@amsterdam/arm-core'
 import { Icon, Marker as LeafletMarker } from 'leaflet'
 import 'leaflet-rotatedmarker'
 import { FunctionComponent, useEffect, useState } from 'react'
-import { MarkerProps } from '../../pages/MapPage/MapMarkers'
-import { panoHeadingParam } from '../../pages/MapPage/query-params'
-import useLeafletEvent from '../../utils/useLeafletEvent'
-import useMapCenterToMarker from '../../utils/useMapCenterToMarker'
-import useParam from '../../utils/useParam'
+import { MarkerProps } from '../../MapMarkers'
+import { panoHeadingParam } from '../../query-params'
+import useLeafletEvent from '../../../../utils/useLeafletEvent'
+import useMapCenterToMarker from '../../../../utils/useMapCenterToMarker'
+import useParam from '../../../../utils/useParam'
 
 const orientationIcon = new Icon({
   iconUrl: '/assets/images/map/panorama-orientation.svg',

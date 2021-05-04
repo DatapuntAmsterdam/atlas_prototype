@@ -8,6 +8,7 @@ import { polygonParam } from '../../pages/MapPage/query-params'
 
 const List = styled.ul`
   display: flex;
+  flex-wrap: wrap;
   list-style: none;
 `
 

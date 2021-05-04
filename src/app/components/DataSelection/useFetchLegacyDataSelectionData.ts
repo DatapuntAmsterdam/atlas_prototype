@@ -56,7 +56,6 @@ const useFetchLegacyDataSelectionData = () => {
     if (view === ViewMode.Split) {
       dispatch(closeMapPanel())
     }
-
     try {
       const result = await getFromQuery(
         signal,

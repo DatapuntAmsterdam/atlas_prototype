@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux'
-import { Button } from '@amsterdam/asc-ui'
+import { Button, themeSpacing } from '@amsterdam/asc-ui'
 import { Download } from '@amsterdam/asc-assets'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { FunctionComponent } from 'react'
+import styled from 'styled-components'
 import environment from '../../../environment'
 import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
 import { encodeQueryParams } from '../../../shared/services/query-string-parser/query-string-parser'
@@ -14,6 +15,10 @@ export interface DataSelectionDownloadButtonProps {
   dataset: DatasetType
   activeFilters: ActiveFilter[]
 }
+
+const StyledButton = styled(Button)`
+  margin-left: ${themeSpacing(4)};
+`
 
 const DataSelectionDownloadButton: FunctionComponent<DataSelectionDownloadButtonProps> = ({
   dataset,
@@ -61,8 +66,8 @@ const DataSelectionDownloadButton: FunctionComponent<DataSelectionDownloadButton
   const downloadUrl = `${url}${queryString}`
 
   return (
-    <Button
-      as="a"
+    <StyledButton
+      forwardedAs="a"
       variant="primary"
       href={downloadUrl}
       iconSize={21}
@@ -78,7 +83,7 @@ const DataSelectionDownloadButton: FunctionComponent<DataSelectionDownloadButton
       title="Downloaden als kommagescheiden bestand"
     >
       Downloaden
-    </Button>
+    </StyledButton>
   )
 }
 

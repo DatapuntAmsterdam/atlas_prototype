@@ -4,7 +4,7 @@ import L from 'leaflet'
 import { render } from '@testing-library/react'
 import withMapContext from '../../../../utils/withMapContext'
 import DrawTool from './DrawTool'
-import DataSelectionProvider from './DataSelectionProvider'
+import { DataSelectionProvider } from '../../../../components/DataSelection/DataSelectionContext'
 
 jest.mock('leaflet', () => ({
   // @ts-ignore
@@ -25,7 +25,7 @@ jest.mock('leaflet', () => ({
 
 const mockPush = jest.fn()
 const mockReplace = jest.fn()
-const locationPath = '/kaart/bag/foo/bar'
+const locationPath = '/kaart/bag/adressen'
 jest.mock('react-router-dom', () => ({
   // @ts-ignore
   ...jest.requireActual('react-router-dom'),

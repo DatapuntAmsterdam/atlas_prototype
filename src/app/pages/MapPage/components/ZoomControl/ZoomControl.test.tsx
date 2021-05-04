@@ -1,5 +1,5 @@
 import { useMapInstance } from '@amsterdam/react-maps'
-import { fireEvent, render } from '@testing-library/react'
+import { screen, fireEvent, render } from '@testing-library/react'
 import { Map } from 'leaflet'
 import { mocked } from 'ts-jest/utils'
 import withAppContext from '../../../../utils/withAppContext'
@@ -27,9 +27,9 @@ describe('ZoomControl', () => {
       zoomIn: mockedZoomIn,
     } as unknown) as Map)
 
-    const { getByTitle } = render(withAppContext(<ZoomControl />))
+    render(withAppContext(<ZoomControl />))
 
-    fireEvent.click(getByTitle('Inzoomen'))
+    fireEvent.click(screen.getByTitle('Inzoomen'))
     expect(mockedZoomIn).toBeCalled()
   })
 
@@ -40,9 +40,9 @@ describe('ZoomControl', () => {
       zoomOut: mockedZoomOut,
     } as unknown) as Map)
 
-    const { getByTitle } = render(withAppContext(<ZoomControl />))
+    render(withAppContext(<ZoomControl />))
 
-    fireEvent.click(getByTitle('Uitzoomen'))
+    fireEvent.click(screen.getByTitle('Uitzoomen'))
     expect(mockedZoomOut).toBeCalled()
   })
 })

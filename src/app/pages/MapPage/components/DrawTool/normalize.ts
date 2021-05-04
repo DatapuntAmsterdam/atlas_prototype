@@ -1,6 +1,41 @@
 import { v4 as uuidv4 } from 'uuid'
+import { Feature } from 'geojson'
+import { LatLngTuple } from 'leaflet'
 import { DataSelectionMapVisualizationType, DataSelectionType } from '../../config'
-import { DataSelectionResponse, MapVisualization } from './DataSelectionProvider'
+
+interface NamedFeature extends Feature {
+  name: string
+}
+
+interface MapVisualizationGeoJSON {
+  id: string
+  type: DataSelectionMapVisualizationType.GeoJSON
+  data: NamedFeature[]
+}
+
+export interface Marker {
+  id: string
+  latLng: LatLngTuple
+}
+
+export interface MapVisualizationMarkers {
+  id: string
+  type: DataSelectionMapVisualizationType.Markers
+  data: Marker[]
+}
+
+export type MapVisualization = MapVisualizationGeoJSON | MapVisualizationMarkers
+
+type DataSelectionResult = Array<{
+  id: string
+  name: string
+  marker?: Marker
+}>
+
+export interface DataSelectionResponse {
+  totalCount: number
+  results: DataSelectionResult
+}
 
 export const normalizeMapVisualization = (
   type: DataSelectionType,

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { screen, render } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 import usePromise from '@amsterdam/use-promise'
 import ArticleDetailPage from './ArticleDetailPage'
@@ -26,9 +26,9 @@ describe('ArticleDetailPage', () => {
   it('should render the spinner when the request is loading', () => {
     mockedUsePromise.mockReturnValue({ status: 'pending' })
 
-    const { getByTestId } = render(withAppContext(<ArticleDetailPage />))
+    render(withAppContext(<ArticleDetailPage />))
 
-    expect(getByTestId(LOADING_SPINNER_TEST_ID)).toBeDefined()
+    expect(screen.getByTestId(LOADING_SPINNER_TEST_ID)).toBeInTheDocument()
   })
 
   it('should render an error alert', () => {
@@ -37,8 +37,8 @@ describe('ArticleDetailPage', () => {
       reason: new Error('Whoopsie'),
     })
 
-    const { getByTestId } = render(withAppContext(<ArticleDetailPage />))
+    render(withAppContext(<ArticleDetailPage />))
 
-    expect(getByTestId(ERROR_MESSAGE_TEST_ID)).toBeDefined()
+    expect(screen.getByTestId(ERROR_MESSAGE_TEST_ID)).toBeInTheDocument()
   })
 })

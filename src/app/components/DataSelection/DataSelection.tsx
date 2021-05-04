@@ -1,8 +1,7 @@
-import { Alert, Container, Heading, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
-import classNames from 'classnames'
+import { Alert, Heading, Paragraph, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { useSelector } from 'react-redux'
 import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { FunctionComponent } from 'react'
 import { getDataSelectionPage } from '../../../shared/ducks/data-selection/selectors'
 import DataSelectionActiveFilters from './DataSelectionActiveFilters'
@@ -26,15 +25,42 @@ const StyledAlert = styled(Alert)`
   margin-bottom: ${themeSpacing(5)};
 `
 
-const StyledContainer = styled(Container)`
+const StyledContainer = styled.section<{ view: ViewMode }>`
   display: flex;
   flex-direction: column;
   margin: ${themeSpacing(4, 0)};
   padding: ${themeSpacing(0, 4)};
+  background-color: ${themeColor('tint', 'level1')};
+
+  ${({ view }) =>
+    view === ViewMode.Full &&
+    css`
+      overflow-x: auto;
+    `}
 `
 
-const DataSelectionContent: FunctionComponent = () => {
-  const [view] = useParam(viewParam)
+const Wrapper = styled.div<{ view: ViewMode }>`
+  margin-bottom: ${themeSpacing(4)};
+  ${({ view }) =>
+    view === ViewMode.Full &&
+    css`
+      display: grid;
+      grid-template-columns: 25% 75%;
+      grid-template-rows: 2fr;
+      grid-column-gap: ${themeSpacing(2)};
+      grid-row-gap: 0;
+    `}
+`
+
+const Footer = styled.footer`
+  grid-column: 2;
+`
+
+interface DataSelectionContentProps {
+  view: ViewMode
+}
+
+const DataSelectionContent: FunctionComponent<DataSelectionContentProps> = ({ view }) => {
   const page = useSelector(getDataSelectionPage)
   const { activeFilters, totalResults } = useDataSelection()
   const { fetchData } = useFetchLegacyDataSelectionData()
@@ -89,70 +115,60 @@ const DataSelectionContent: FunctionComponent = () => {
         </>
       )}
 
-      <div className="u-grid qa-data-grid">
-        <div className="u-row">
-          {showFilters && (
-            <div className="u-col-sm--3 c-data-selection__available-filters">
-              {showSbiFilers && <DataSelectionSbiFilters />}
-              <DataSelectionFilters />
-            </div>
-          )}
-          <div
-            className={classNames({
-              'u-col-sm--12': !showFilters,
-              'u-col-sm--9': showFilters,
-            })}
-          >
-            {messageMaxPages && (
-              <StyledAlert level="info" dismissible>
-                <Heading forwardedAs="h3">Deze pagina kan niet worden getoond</Heading>
-                <Paragraph>{messageMaxPages}</Paragraph>
-                <Paragraph>
-                  Tip: Gebruik de download-knop om alle resultaten te bekijken. Of voeg meer
-                  filtercriteria toe voor specifiekere resultaten.
-                </Paragraph>
-              </StyledAlert>
-            )}
-            {messageClusteredMarkers && (
-              <StyledAlert level="info">
-                <Paragraph>{messageClusteredMarkers}</Paragraph>
-                <Paragraph>
-                  Tip: Bekijk de lijst resultaten in kleinere delen. Dit kan door een voor een
-                  filtercriteria toe te voegen (bijv. de verschillende wijken uit de selectie).
-                </Paragraph>
-              </StyledAlert>
-            )}
-
-            {totalResults > 0 ? (
-              <div>
-                {view === ViewMode.Full && <DataSelectionTable content={data} />}
-                {view === ViewMode.Split && <DataSelectionList content={data} />}
-                <LegacyPagination currentPage={page} numberOfPages={numberOfPages} />
-                {view === ViewMode.Full && (
-                  <div className="u-row">
-                    <div className="u-col-sm--12">
-                      <div className="u-margin__top--4">
-                        <ShareBar />
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ) : null}
+      <Wrapper view={view}>
+        {showFilters && (
+          <div>
+            {showSbiFilers && <DataSelectionSbiFilters />}
+            <DataSelectionFilters />
           </div>
+        )}
+        <div>
+          {messageMaxPages && (
+            <StyledAlert level="info" dismissible>
+              <Heading forwardedAs="h3">Deze pagina kan niet worden getoond</Heading>
+              <Paragraph>{messageMaxPages}</Paragraph>
+              <Paragraph>
+                Tip: Gebruik de download-knop om alle resultaten te bekijken. Of voeg meer
+                filtercriteria toe voor specifiekere resultaten.
+              </Paragraph>
+            </StyledAlert>
+          )}
+          {messageClusteredMarkers && (
+            <StyledAlert level="info">
+              <Paragraph>{messageClusteredMarkers}</Paragraph>
+              <Paragraph>
+                Tip: Bekijk de lijst resultaten in kleinere delen. Dit kan door een voor een
+                filtercriteria toe te voegen (bijv. de verschillende wijken uit de selectie).
+              </Paragraph>
+            </StyledAlert>
+          )}
+
+          {totalResults > 0 ? (
+            <div>
+              {view === ViewMode.Full && <DataSelectionTable content={data} />}
+              {view === ViewMode.Split && <DataSelectionList content={data} />}
+            </div>
+          ) : null}
         </div>
-      </div>
+        <Footer>
+          <LegacyPagination currentPage={page} numberOfPages={numberOfPages} />
+          {view === ViewMode.Full && <ShareBar />}
+        </Footer>
+      </Wrapper>
     </>
   )
 }
 
-const DataSelection = () => (
-  <StyledContainer className="c-data-selection">
-    <div className="c-data-selection-content qa-data-selection-content">
-      <DataSelectionHeader />
-      <DataSelectionContent />
-    </div>
-  </StyledContainer>
-)
+const DataSelection = () => {
+  const [view] = useParam(viewParam)
+  return (
+    <StyledContainer view={view} className="c-data-selection">
+      <div className="c-data-selection-content">
+        <DataSelectionHeader />
+        <DataSelectionContent view={view} />
+      </div>
+    </StyledContainer>
+  )
+}
 
 export default DataSelection

@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react'
+import { screen, fireEvent, render } from '@testing-library/react'
 import withAppContext from '../../../../utils/withAppContext'
 import LegendControl from './LegendControl'
 
@@ -12,28 +12,22 @@ describe('LegendControl', () => {
   })
 
   it('renders the control with the mobile icon', () => {
-    const { getByTestId } = render(
-      withAppContext(<LegendControl showDesktopVariant={false} onClick={() => {}} />),
-    )
+    render(withAppContext(<LegendControl showDesktopVariant={false} onClick={() => {}} />))
 
-    expect(getByTestId('mobileIcon')).toBeDefined()
+    expect(screen.getByTestId('mobileIcon')).toBeInTheDocument()
   })
 
   it('renders the control with the desktop icon', () => {
-    const { getByTestId } = render(
-      withAppContext(<LegendControl showDesktopVariant onClick={() => {}} />),
-    )
+    render(withAppContext(<LegendControl showDesktopVariant onClick={() => {}} />))
 
-    expect(getByTestId('desktopIcon')).toBeDefined()
+    expect(screen.getByTestId('desktopIcon')).toBeInTheDocument()
   })
 
   it('calls the onClick callback when the control is clicked', () => {
     const onClick = jest.fn()
-    const { getByTitle } = render(
-      withAppContext(<LegendControl showDesktopVariant={false} onClick={onClick} />),
-    )
+    render(withAppContext(<LegendControl showDesktopVariant={false} onClick={onClick} />))
 
-    fireEvent.click(getByTitle('Legenda'))
+    fireEvent.click(screen.getByTitle('Legenda'))
 
     expect(onClick).toHaveBeenCalled()
   })

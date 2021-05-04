@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react'
+import { screen, fireEvent, render } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import LoginLinkButton from './LoginLinkButton'
@@ -33,21 +33,21 @@ describe('LoginLinkButton', () => {
   })
 
   it('renders the children', () => {
-    const { getByText } = render(<LoginLinkButton>Hello World!</LoginLinkButton>)
+    render(<LoginLinkButton>Hello World!</LoginLinkButton>)
 
-    expect(getByText('Hello World!')).toBeDefined()
+    expect(screen.getByText('Hello World!')).toBeInTheDocument()
   })
 
   it('passes the other props', () => {
-    const { getByTestId } = render(<LoginLinkButton data-testid="loginButton" />)
+    render(<LoginLinkButton data-testid="loginButton" />)
 
-    expect(getByTestId('loginButton')).toBeDefined()
+    expect(screen.getByTestId('loginButton')).toBeInTheDocument()
   })
 
   it('triggers the login when pressed', () => {
-    const { getByTestId } = render(<LoginLinkButton data-testid="loginButton" />)
+    render(<LoginLinkButton data-testid="loginButton" />)
 
-    fireEvent.click(getByTestId('loginButton'))
+    fireEvent.click(screen.getByTestId('loginButton'))
     expect(loginMock).toBeCalled()
   })
 
@@ -55,9 +55,9 @@ describe('LoginLinkButton', () => {
     const trackEventMock = jest.fn()
     useMatomoMock.mockReturnValue({ trackEvent: trackEventMock } as any)
 
-    const { getByTestId } = render(<LoginLinkButton data-testid="loginButton" />)
+    render(<LoginLinkButton data-testid="loginButton" />)
 
-    fireEvent.click(getByTestId('loginButton'))
+    fireEvent.click(screen.getByTestId('loginButton'))
 
     expect(trackEventMock).toBeCalledWith({
       action: 'inloggen',

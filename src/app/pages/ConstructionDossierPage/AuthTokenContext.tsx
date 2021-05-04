@@ -1,15 +1,17 @@
-import { createContext, FunctionComponent, useContext, useEffect, useMemo, useState } from 'react'
 import jwtDecode from 'jwt-decode'
+import { FunctionComponent, useEffect, useMemo, useState } from 'react'
 import { getAccessToken } from '../../../shared/services/auth/auth'
-import useParam from '../../utils/useParam'
-import { authTokenParam } from './query-params'
+import createNamedContext from '../../utils/createNamedContext'
 import useInterval from '../../utils/useInterval'
+import useParam from '../../utils/useParam'
+import useRequiredContext from '../../utils/useRequiredContext'
+import { authTokenParam } from './query-params'
 
 export interface AuthTokenContextProps {
   token: string | null
 }
 
-const AuthTokenContext = createContext<AuthTokenContextProps | null>(null)
+const AuthTokenContext = createNamedContext<AuthTokenContextProps | null>('AuthToken', null)
 
 export default AuthTokenContext
 
@@ -91,13 +93,5 @@ const AuthTokenProvider: FunctionComponent = ({ children }) => {
 export { AuthTokenProvider }
 
 export function useAuthToken() {
-  const context = useContext(AuthTokenContext)
-
-  if (!context) {
-    throw new Error(
-      'No provider found for AuthToken, make sure you include AuthTokenProvider in your component hierarchy.',
-    )
-  }
-
-  return context.token
+  return useRequiredContext(AuthTokenContext).token
 }

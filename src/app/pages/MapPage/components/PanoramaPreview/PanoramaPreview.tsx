@@ -1,7 +1,7 @@
 import { Link, perceivedLoading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
 import { LatLngLiteral } from 'leaflet'
-import { FunctionComponent, useMemo } from 'react'
+import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
@@ -10,7 +10,6 @@ import { ForbiddenError } from '../../../../../shared/services/api/customError'
 import { toPanoramaAndPreserveQuery } from '../../../../../store/redux-first-router/actions'
 import { getDetailLocation } from '../../../../../store/redux-first-router/selectors'
 import PanoAlert from '../../../../components/PanoAlert/PanoAlert'
-import { PANO_LAYERS } from '../../../../components/PanoramaViewer/PanoramaViewer'
 import pickLinkComponent from '../../../../utils/pickLinkComponent'
 import useBuildQueryString from '../../../../utils/useBuildQueryString'
 import useParam from '../../../../utils/useParam'
@@ -81,11 +80,6 @@ const PanoramaPreview: FunctionComponent<PanoramaPreviewProps> = ({
   const [activeLayers] = useParam(mapLayersParam)
   const browserLocation = useLocation()
 
-  const activeLayersWithoutPano = useMemo(
-    () => activeLayers.filter((id) => !PANO_LAYERS.includes(id)),
-    [],
-  )
-
   const result = usePromise(
     () =>
       getPanoramaThumbnail(location, {
@@ -98,9 +92,6 @@ const PanoramaPreview: FunctionComponent<PanoramaPreviewProps> = ({
     [location],
   )
 
-  const newLayers = useMemo(() => [...activeLayersWithoutPano, ...PANO_LAYERS], [
-    activeLayersWithoutPano,
-  ])
   const legacyReference = useSelector(getDetailLocation)
   const { buildQueryString } = useBuildQueryString()
 
@@ -129,7 +120,7 @@ const PanoramaPreview: FunctionComponent<PanoramaPreviewProps> = ({
             [panoHeadingParam, result?.value?.heading ?? panoHeadingParam.initialValue],
             [locationParam, location],
             // Zoom to level 11 when opening the PanoramaViewer, to show the panorama map layers
-            [mapLayersParam, newLayers],
+            [mapLayersParam, activeLayers],
             [zoomParam, 11],
           ]),
         }

@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render } from '@testing-library/react'
+import { screen, cleanup, fireEvent, render } from '@testing-library/react'
 import { FilterOption } from '../../../models/filter'
 import { FilterProps } from '../models'
 import RadioFilter from './RadioFilter'
@@ -23,38 +23,38 @@ describe('RadioFilter', () => {
   ]
 
   it('renders an option to disable the filter and select it by default', () => {
-    const { getByLabelText } = render(<RadioFilter {...defaultProps} />)
+    render(<RadioFilter {...defaultProps} />)
 
-    const node = getByLabelText('Alles') as HTMLInputElement
+    const node = screen.getByLabelText('Alles') as HTMLInputElement
 
     expect(node.tagName).toEqual('INPUT')
     expect(node.type).toEqual('radio')
-    expect(node.getAttribute('value')).toEqual('')
+    expect(node.value).toBe('')
     expect(node.checked).toEqual(true)
   })
 
   it('renders a list of options without selection', () => {
     const props: FilterProps = { ...defaultProps, options }
-    const { getByLabelText } = render(<RadioFilter {...props} />)
+    render(<RadioFilter {...props} />)
 
-    const firstNode = getByLabelText('First') as HTMLInputElement
-    const secondNode = getByLabelText('Second') as HTMLInputElement
-    const lastNode = getByLabelText('Last') as HTMLInputElement
+    const firstNode = screen.getByLabelText('First') as HTMLInputElement
+    const secondNode = screen.getByLabelText('Second') as HTMLInputElement
+    const lastNode = screen.getByLabelText('Last') as HTMLInputElement
     ;[firstNode, secondNode, lastNode].forEach((node, index) => {
       const option = options[index]
 
       expect(node.tagName).toEqual('INPUT')
       expect(node.type).toEqual('radio')
-      expect(node.getAttribute('value')).toEqual(option.id)
-      expect(node.checked).toEqual(false)
+      expect(node.value).toBe(option.id)
+      expect(node).not.toBeChecked()
     })
   })
 
   it('renders a list of options with selection', () => {
     const selection = ['second']
     const props: FilterProps = { ...defaultProps, options, selection }
-    const { getByLabelText } = render(<RadioFilter {...props} />)
-    const secondNode = getByLabelText('Second') as HTMLInputElement
+    render(<RadioFilter {...props} />)
+    const secondNode = screen.getByLabelText('Second') as HTMLInputElement
 
     expect(secondNode.checked).toEqual(true)
   })
@@ -68,9 +68,9 @@ describe('RadioFilter', () => {
       selection,
       onSelectionChange: selectionChangeMock,
     }
-    const { getByLabelText } = render(<RadioFilter {...props} />)
+    render(<RadioFilter {...props} />)
 
-    fireEvent.click(getByLabelText('Last'))
+    fireEvent.click(screen.getByLabelText('Last'))
 
     expect(selectionChangeMock).toHaveBeenCalledWith(['last'])
   })
@@ -84,25 +84,25 @@ describe('RadioFilter', () => {
       selection,
       onSelectionChange: selectionChangeMock,
     }
-    const { getByLabelText } = render(<RadioFilter {...props} />)
+    render(<RadioFilter {...props} />)
 
-    fireEvent.click(getByLabelText('Alles'))
+    fireEvent.click(screen.getByLabelText('Alles'))
 
     expect(selectionChangeMock).toHaveBeenCalledWith([])
   })
 
   it('shows the total count for the overview option if no selection is present', () => {
     const props: FilterProps = { ...defaultProps, options, hideCount: false }
-    const { getByLabelText } = render(<RadioFilter {...props} />)
+    render(<RadioFilter {...props} />)
 
-    expect(getByLabelText('Alles (999)')).toBeDefined()
+    expect(screen.getByLabelText('Alles (999)')).toBeInTheDocument()
   })
 
   it('hides the total count for the overview option if a selection is present', () => {
     const selection = ['first']
     const props: FilterProps = { ...defaultProps, options, selection, hideCount: false }
-    const { getByLabelText } = render(<RadioFilter {...props} />)
+    render(<RadioFilter {...props} />)
 
-    expect(getByLabelText('Alles')).toBeDefined()
+    expect(screen.getByLabelText('Alles')).toBeInTheDocument()
   })
 })

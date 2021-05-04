@@ -1,7 +1,10 @@
-import { createClusterMarkers, MarkerClusterGroup } from '@amsterdam/arm-cluster'
+import { MarkerClusterGroup } from '@amsterdam/arm-cluster'
 import { GeoJSON } from '@amsterdam/react-maps'
 import { FunctionComponent } from 'react'
+import { createGlobalStyle } from 'styled-components'
+import { BaseIconOptions, Icon, LatLng, Marker } from 'leaflet'
 import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
+import { useHistory } from 'react-router-dom'
 import geoJsonConfig from '../../../../../map/components/leaflet/services/geo-json-config.constant'
 import config, { DataSelectionMapVisualizationType, DataSelectionType } from '../../config'
 import { fetchWithToken } from '../../../../../shared/services/api/api'
@@ -9,16 +12,33 @@ import { normalizeMapVisualization } from './normalize'
 import useLegacyDataselectionConfig from '../../../../components/DataSelection/useLegacyDataselectionConfig'
 import useParam from '../../../../utils/useParam'
 import { polygonParam } from '../../query-params'
+import { useDataSelection } from '../../../../components/DataSelection/DataSelectionContext'
+import { createFiltersObject } from '../../../../../shared/services/data-selection/normalizations'
+import { useMapContext } from '../../MapContext'
+import ICON_CONFIG from '../../../../../map/components/leaflet/services/icon-config.constant'
+import useBuildQueryString from '../../../../utils/useBuildQueryString'
+
+const GlobalStyle = createGlobalStyle`
+  .dataselection-detail-marker {
+    cursor: pointer !important;
+  }
+`
 
 const DrawMapVisualization: FunctionComponent = () => {
   const { currentDatasetType } = useLegacyDataselectionConfig()
   const [polygon] = useParam(polygonParam)
+  const { activeFilters } = useDataSelection()
+  const { showMapDrawVisualization } = useMapContext()
+  const history = useHistory()
+  const { buildQueryString } = useBuildQueryString()
+
   const mapVisualizations = usePromise(async () => {
-    if (!polygon) {
+    if (!polygon && !activeFilters.length) {
       return null
     }
     const searchParams = new URLSearchParams({
       shape: JSON.stringify(polygon?.polygon.map(({ lat, lng }) => [lng, lat])),
+      ...createFiltersObject(activeFilters),
     })
     const {
       object_list: data,
@@ -36,7 +56,7 @@ const DrawMapVisualization: FunctionComponent = () => {
       nietEigenPercelen,
       extent,
     })
-  }, [polygon])
+  }, [polygon, activeFilters])
 
   if (isPending(mapVisualizations)) {
     return null
@@ -46,8 +66,9 @@ const DrawMapVisualization: FunctionComponent = () => {
     return null
   }
 
-  return mapVisualizations.value ? (
+  return showMapDrawVisualization && mapVisualizations.value ? (
     <>
+      <GlobalStyle />
       {mapVisualizations.value.type === DataSelectionMapVisualizationType.GeoJSON &&
         mapVisualizations.value.data.map((feature) => (
           <GeoJSON
@@ -60,12 +81,27 @@ const DrawMapVisualization: FunctionComponent = () => {
             setInstance={(layer) => layer.bringToBack()}
           />
         ))}
-
       {mapVisualizations.value.type === DataSelectionMapVisualizationType.Markers && (
         <MarkerClusterGroup
           key={mapVisualizations.value.id}
-          markers={createClusterMarkers({
-            markers: mapVisualizations.value.data.map(({ latLng }) => latLng),
+          markers={mapVisualizations.value.data.map(({ latLng, id }) => {
+            const lat = latLng[0]
+            const lng = latLng[1]
+            const marker = new Marker(new LatLng(lat, lng), {
+              icon: new Icon({
+                ...ICON_CONFIG.DETAIL,
+                className: 'dataselection-detail-marker',
+              } as BaseIconOptions),
+            })
+
+            marker.on('click', () => {
+              history.push({
+                pathname: config[currentDatasetType.toUpperCase()].getDetailPath(id),
+                search: buildQueryString(undefined, [polygonParam]),
+              })
+            })
+
+            return marker
           })}
         />
       )}

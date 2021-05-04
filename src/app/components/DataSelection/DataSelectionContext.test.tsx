@@ -25,16 +25,6 @@ describe('DataSelectionProvider', () => {
     pushMock.mockClear()
   })
 
-  it('throws if no provider is present', () => {
-    const { result } = renderHook(() => useDataSelection())
-
-    expect(result.error).toEqual(
-      new Error(
-        'No provider found for DataSelection, make sure you include DataSelectionProvider in your component hierarchy.',
-      ),
-    )
-  })
-
   it('adds a new filter', () => {
     locationMockValue = {
       pathname: defaultPathname,

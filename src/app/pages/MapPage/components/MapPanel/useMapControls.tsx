@@ -1,17 +1,13 @@
 import { useMemo } from 'react'
 import { useMapContext } from '../../MapContext'
-import BaseLayerToggle from '../BaseLayerToggleControl'
 import DrawToolControl from '../DrawToolControl'
 import { DrawerControl } from '../DrawerOverlay/DrawerOverlay'
 import LegendControl from '../LegendControl'
 import ZoomControl from '../ZoomControl'
 import useParam from '../../../../utils/useParam'
 import { locationParam, panoHeadingParam } from '../../query-params'
-import {
-  PanoramaControl,
-  PanoramaMenuControl,
-  PanoramaViewerInfoBar,
-} from '../../../../components/PanoramaViewer'
+import { PanoramaControl, PanoramaMenuControl, PanoramaViewerInfoBar } from '../PanoramaViewer'
+import MapContextMenuControl from '../MapContextMenuControl/MapContextMenuControl'
 
 // Todo: consider moving onOpenLegend to a higher context
 const useMapControls = (showDesktopVariant: boolean, onOpenLegend: () => void) => {
@@ -36,10 +32,10 @@ const useMapControls = (showDesktopVariant: boolean, onOpenLegend: () => void) =
     let mapControls: DrawerControl[] = [
       legendControl,
       {
-        id: 'baselayerToggle',
+        id: 'mapContextMenuControls',
         hAlign: 'left',
         vAlign: showDesktopVariant ? 'bottom' : 'top',
-        node: <BaseLayerToggle />,
+        node: <MapContextMenuControl />,
       },
     ]
 

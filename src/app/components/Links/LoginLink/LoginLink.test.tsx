@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react'
+import { screen, fireEvent, render } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 import { login } from '../../../../shared/services/auth/auth'
 import LoginLink from './LoginLink'
@@ -20,9 +20,9 @@ const mockedLogin = mocked(login, true)
 
 describe('LoginLink', () => {
   it('should trigger the login when clicked', () => {
-    const { getByTestId } = render(<LoginLink />)
+    render(<LoginLink />)
 
-    fireEvent.click(getByTestId('link'))
+    fireEvent.click(screen.getByTestId('link'))
 
     expect(mockedLogin).toHaveBeenCalled()
     expect(mockTrackEvent).toHaveBeenCalled()

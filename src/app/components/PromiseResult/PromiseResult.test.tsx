@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@amsterdam/asc-ui'
 import usePromise from '@amsterdam/use-promise'
-import { fireEvent, render } from '@testing-library/react'
+import { screen, fireEvent, render } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 import { AuthError } from '../../../shared/services/api/customError'
 import AuthAlert from '../Alerts/AuthAlert'
@@ -68,9 +68,9 @@ describe('PromiseResult', () => {
     mockedUsePromise.mockReturnValue({ status: 'pending' })
 
     const factory = () => Promise.resolve(null)
-    const { getByTestId } = render(<PromiseResult factory={factory}>{() => null}</PromiseResult>)
+    render(<PromiseResult factory={factory}>{() => null}</PromiseResult>)
 
-    expect(getByTestId(LOADING_SPINNER_TEST_ID)).toBeDefined()
+    expect(screen.getByTestId(LOADING_SPINNER_TEST_ID)).toBeInTheDocument()
   })
 
   it('renders an error message when the result is rejected', () => {
@@ -80,13 +80,13 @@ describe('PromiseResult', () => {
     })
 
     const factory = () => Promise.resolve(null)
-    const { getByTestId } = render(
+    render(
       <ThemeProvider>
         <PromiseResult factory={factory}>{() => null}</PromiseResult>
       </ThemeProvider>,
     )
 
-    expect(getByTestId(ERROR_MESSAGE_TEST_ID)).toBeDefined()
+    expect(screen.getByTestId(ERROR_MESSAGE_TEST_ID)).toBeInTheDocument()
   })
 
   it('increases the retry count when the user clicks the retry button', () => {
@@ -96,13 +96,13 @@ describe('PromiseResult', () => {
     })
 
     const factory = () => Promise.resolve(null)
-    const { getByText } = render(
+    render(
       <ThemeProvider>
         <PromiseResult factory={factory}>{() => null}</PromiseResult>
       </ThemeProvider>,
     )
 
-    fireEvent.click(getByText('Probeer opnieuw'))
+    fireEvent.click(screen.getByText('Probeer opnieuw'))
 
     expect(mockedUsePromise).toBeCalledWith(factory, [1])
   })
@@ -119,12 +119,12 @@ describe('PromiseResult', () => {
     mockedAuthAlert.mockImplementation(({ 'data-testid': testId }) => <div data-testid={testId} />)
 
     const factory = () => Promise.resolve(null)
-    const { getByTestId } = render(
+    render(
       <ThemeProvider>
         <PromiseResult factory={factory}>{() => null}</PromiseResult>
       </ThemeProvider>,
     )
 
-    expect(getByTestId('auth-alert')).toBeDefined()
+    expect(screen.getByTestId('auth-alert')).toBeInTheDocument()
   })
 })

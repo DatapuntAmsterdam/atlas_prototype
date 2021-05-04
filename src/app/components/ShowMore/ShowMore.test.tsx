@@ -1,11 +1,11 @@
-import { cleanup, fireEvent, render } from '@testing-library/react'
+import { screen, cleanup, fireEvent, render } from '@testing-library/react'
 import ShowMore from './ShowMore'
 
 describe('ShowMore', () => {
   beforeEach(cleanup)
 
   it('should render no button if the items can be contained within the limit', () => {
-    const { queryByTestId } = render(
+    render(
       <ShowMore limit={20}>
         <span>Item 1</span>
         <span>Item 2</span>
@@ -13,11 +13,11 @@ describe('ShowMore', () => {
       </ShowMore>,
     )
 
-    expect(queryByTestId('showMoreButton')).toBeNull()
+    expect(screen.queryByTestId('showMoreButton')).not.toBeInTheDocument()
   })
 
   it('should render a button if the items cannot be contained within the limit', () => {
-    const { getByTestId } = render(
+    render(
       <ShowMore limit={2}>
         <span>Item 1</span>
         <span>Item 2</span>
@@ -25,11 +25,11 @@ describe('ShowMore', () => {
       </ShowMore>,
     )
 
-    expect(getByTestId('showMoreButton')).toBeDefined()
+    expect(screen.getByTestId('showMoreButton')).toBeInTheDocument()
   })
 
   it('should hide the items if they cannot be contained within the limit', () => {
-    const { queryByTestId } = render(
+    render(
       <ShowMore limit={2}>
         <span>Item 1</span>
         <span>Item 2</span>
@@ -37,11 +37,11 @@ describe('ShowMore', () => {
       </ShowMore>,
     )
 
-    expect(queryByTestId('extraItem')).toBeNull()
+    expect(screen.queryByTestId('extraItem')).not.toBeInTheDocument()
   })
 
   it('should show and hide items when the button is pressed', () => {
-    const { getByTestId, queryByTestId } = render(
+    render(
       <ShowMore limit={2}>
         <span>Item 1</span>
         <span>Item 2</span>
@@ -49,9 +49,9 @@ describe('ShowMore', () => {
       </ShowMore>,
     )
 
-    fireEvent.click(getByTestId('showMoreButton'))
-    expect(getByTestId('extraItem')).toBeDefined()
-    fireEvent.click(getByTestId('showMoreButton'))
-    expect(queryByTestId('extraItem')).toBeNull()
+    fireEvent.click(screen.getByTestId('showMoreButton'))
+    expect(screen.getByTestId('extraItem')).toBeInTheDocument()
+    fireEvent.click(screen.getByTestId('showMoreButton'))
+    expect(screen.queryByTestId('extraItem')).not.toBeInTheDocument()
   })
 })

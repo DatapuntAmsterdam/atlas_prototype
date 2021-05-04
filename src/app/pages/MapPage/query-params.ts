@@ -41,6 +41,13 @@ export interface Pano {
   fov: number
 }
 
+export const isEmbeddedParam: UrlParam<boolean> = {
+  name: 'embed',
+  defaultValue: false,
+  decode: (value) => value === 'true',
+  encode: (value) => value.toString(),
+}
+
 const COORDINATE_PRECISION = 7
 
 function encodeLatLngLiteral(value: LatLngLiteral) {
@@ -81,13 +88,6 @@ export const locationParam: UrlParam<LatLngLiteral | null> = {
   defaultValue: null,
   decode: decodeLatLngLiteral,
   encode: (value) => (value ? encodeLatLngLiteral(value) : null),
-}
-
-export const drawToolOpenParam: UrlParam<boolean> = {
-  name: 'drawToolOpen',
-  defaultValue: false,
-  decode: (value) => value === 'true',
-  encode: (value) => value.toString(),
 }
 
 export const mapLayersParam: UrlParam<string[]> = {

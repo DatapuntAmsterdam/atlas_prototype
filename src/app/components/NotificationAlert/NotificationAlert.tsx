@@ -4,8 +4,9 @@ import { FunctionComponent, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import environment from '../../../environment'
-import { isEmbedded, isPrintMode } from '../../../shared/ducks/ui/ui'
+import { isPrintMode } from '../../../shared/ducks/ui/ui'
 import { createCookie, getCookie } from '../../../shared/services/cookie/cookie'
+import { useIsEmbedded } from '../../contexts/ui'
 import useDataFetching from '../../utils/useDataFetching'
 import { InfoModal } from '../Modal'
 
@@ -24,9 +25,9 @@ const StyledAlert = styled(Alert)`
 `
 
 const NotificationAlert: FunctionComponent = () => {
-  const hide = useSelector(isEmbedded)
   const { fetchData, results } = useDataFetching()
   const printMode = useSelector(isPrintMode)
+  const isEmbedded = useIsEmbedded()
 
   useEffect(() => {
     if (printMode) {
@@ -41,7 +42,7 @@ const NotificationAlert: FunctionComponent = () => {
     })()
   }, [])
 
-  if (!printMode && !hide && !getCookie(COOKIE_NAME) && results) {
+  if (!printMode && !isEmbedded && !getCookie(COOKIE_NAME) && results) {
     const { title, body, field_notification_type, field_position, field_notification_title } =
       results?.data[0]?.attributes || {}
 
@@ -58,7 +59,7 @@ const NotificationAlert: FunctionComponent = () => {
       ) : (
         <InfoModal
           id="infoModal"
-          {...{ open: !hide, title: field_notification_title ?? title, body: body.value }}
+          {...{ open: !isEmbedded, title: field_notification_title ?? title, body: body.value }}
           closeModalAction={() => createCookie(COOKIE_NAME, '8')}
         />
       )

@@ -2,14 +2,14 @@ import { ControlButton } from '@amsterdam/arm-core'
 import { Checkmark, ChevronDown, ExternalLink } from '@amsterdam/asc-assets'
 import { ContextMenu, ContextMenuItem, Icon, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useState } from 'react'
 import styled from 'styled-components'
-import { PANO_LABELS } from '../../../panorama/ducks/constants'
-import { getStreetViewUrl } from '../../../panorama/services/panorama-api/panorama-api'
-import Clock from '../../../shared/assets/icons/Clock.svg'
-import { locationParam, panoHeadingParam, panoTagParam } from '../../pages/MapPage/query-params'
-import useParam from '../../utils/useParam'
-import Control from '../../pages/MapPage/components/Control'
+import { PANO_LABELS } from '../../../../../panorama/ducks/constants'
+import { getStreetViewUrl } from '../../../../../panorama/services/panorama-api/panorama-api'
+import Clock from '../../../../../shared/assets/icons/Clock.svg'
+import { locationParam, panoHeadingParam, panoTagParam } from '../../query-params'
+import useParam from '../../../../utils/useParam'
+import Control from '../Control'
 
 export const getLabel = (id: string): string =>
   PANO_LABELS.find(({ id: labelId }) => labelId === id)?.label || PANO_LABELS[0].label
@@ -50,9 +50,11 @@ const PanoramaMenuControl: FunctionComponent = () => {
   const [location] = useParam(locationParam)
   const [panoHeading] = useParam(panoHeadingParam)
   const [panoTag, setPanoTag] = useParam(panoTagParam)
+  const [open, setOpen] = useState(false)
   const { trackEvent } = useMatomo()
 
   const handleOpenPanoramaExternal = () => {
+    setOpen(false)
     if (location) {
       const url = getStreetViewUrl([location.lat, location.lng], panoHeading)
 
@@ -79,13 +81,18 @@ const PanoramaMenuControl: FunctionComponent = () => {
         position="bottom"
         variant="blank"
         forwardedAs={ContextMenuButton}
+        open={open}
+        onClick={() => setOpen((currentValue) => !currentValue)}
       >
         {PANO_LABELS.map(({ id, label }, index) => (
           <StyledContextMenuItem
             key={id}
             divider={index === PANO_LABELS.length - 1}
             role="button"
-            onClick={() => setPanoTag(id)}
+            onClick={() => {
+              setOpen(false)
+              setPanoTag(id)
+            }}
             icon={
               panoTag === id ? (
                 <CheckmarkIcon inline size={12}>

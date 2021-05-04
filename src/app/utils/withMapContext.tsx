@@ -7,8 +7,7 @@ const initialState: MapContextProps = {
   panelLayers: [],
   mapLayers: [],
   legendLeafletLayers: [],
-  showDrawTool: false,
-  showDrawContent: false,
+  showMapDrawVisualization: false,
   detailFeature: null,
   panoFullScreen: false,
   panoImageDate: null,
@@ -16,10 +15,10 @@ const initialState: MapContextProps = {
     title: 'Resultaten',
   },
   setDetailFeature: () => {},
-  setShowDrawTool: () => {},
   setPanoFullScreen: () => {},
   setPanoImageDate: () => {},
   setPanelHeader: () => {},
+  setShowMapDrawVisualization: () => {},
 }
 
 const withMapContext = (component: ReactNode, mapContextProps?: Partial<MapContextProps>) =>
