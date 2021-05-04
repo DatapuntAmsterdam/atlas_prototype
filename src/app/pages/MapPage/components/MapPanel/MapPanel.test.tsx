@@ -5,6 +5,7 @@ import 'jest-styled-components'
 import withMapContext from '../../../../utils/withMapContext'
 import { DataSelectionProvider } from '../../../../components/DataSelection/DataSelectionContext'
 import { MapContextProps } from '../../MapContext'
+import { UiProvider } from '../../../../contexts/ui'
 
 jest.mock('../DrawTool/DrawTool', () => () => null)
 
@@ -30,10 +31,13 @@ jest.mock('react-router-dom', () => ({
   }),
 }))
 
-const renderWithMapAndDataSelectionContext = (
-  component: ReactNode,
-  mapContextProps?: Partial<MapContextProps>,
-) => withMapContext(<DataSelectionProvider>{component}</DataSelectionProvider>, mapContextProps)
+const renderWithWrapper = (component: ReactNode, mapContextProps?: Partial<MapContextProps>) =>
+  withMapContext(
+    <DataSelectionProvider>
+      <UiProvider>{component}</UiProvider>
+    </DataSelectionProvider>,
+    mapContextProps,
+  )
 
 describe('MapPanel', () => {
   afterEach(() => {
@@ -41,7 +45,7 @@ describe('MapPanel', () => {
   })
 
   it('should open and close the legend panel', () => {
-    render(renderWithMapAndDataSelectionContext(<MapPanel />))
+    render(renderWithWrapper(<MapPanel />))
 
     const legendControlButton = screen.getByTestId('legendControl').querySelector('button')
 
@@ -60,7 +64,7 @@ describe('MapPanel', () => {
   it('should hide (not unmount) the content panel when legend panel is active', () => {
     currentPath = '/kaart/geozoek/'
     search = '?locatie=123,123'
-    render(renderWithMapAndDataSelectionContext(<MapPanel />))
+    render(renderWithWrapper(<MapPanel />))
 
     const legendControlButton = screen.getByTestId('legendControl').querySelector('button')
 
@@ -72,7 +76,7 @@ describe('MapPanel', () => {
   })
 
   it('should close the legend panel when navigating to a detail panel', () => {
-    const { rerender } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
+    const { rerender } = render(renderWithWrapper(<MapPanel />))
 
     const legendControlButton = screen.getByTestId('legendControl').querySelector('button')
 
@@ -82,13 +86,13 @@ describe('MapPanel', () => {
 
     // Close
     currentPath = '/kaart/parkeervakken/parkeervakken/120876487667/'
-    rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
+    rerender(renderWithWrapper(<MapPanel />))
 
     expect(screen.queryByTestId('legendPanel')).not.toBeInTheDocument()
   })
 
   it('should close the legend panel when navigating to a geo search', () => {
-    const { rerender } = render(renderWithMapAndDataSelectionContext(<MapPanel />))
+    const { rerender } = render(renderWithWrapper(<MapPanel />))
 
     const legendControlButton = screen.getByTestId('legendControl').querySelector('button')
 
@@ -98,13 +102,13 @@ describe('MapPanel', () => {
 
     // Close
     currentPath = '/kaart/geozoek/'
-    rerender(renderWithMapAndDataSelectionContext(<MapPanel />))
+    rerender(renderWithWrapper(<MapPanel />))
 
     expect(screen.queryByTestId('legendPanel')).not.toBeInTheDocument()
   })
 
   it('should show the right map controls when panorama is not in full screen mode', () => {
-    render(renderWithMapAndDataSelectionContext(<MapPanel />))
+    render(renderWithWrapper(<MapPanel />))
 
     expect(screen.queryByTestId('mapContextMenuControls')).toBeInTheDocument()
     expect(screen.queryByTestId('drawtoolControl')).toBeInTheDocument()
@@ -112,7 +116,7 @@ describe('MapPanel', () => {
   })
 
   it('should show the right map controls when panorama is in full screen mode', () => {
-    render(renderWithMapAndDataSelectionContext(<MapPanel />, { panoFullScreen: true }))
+    render(renderWithWrapper(<MapPanel />, { panoFullScreen: true }))
 
     expect(screen.queryByTestId('drawtoolControl')).not.toBeInTheDocument()
     expect(screen.queryByTestId('baselayerControl')).not.toBeInTheDocument()
@@ -123,7 +127,7 @@ describe('MapPanel', () => {
     currentPath = '/kaart/geozoek/'
     search = ''
 
-    render(renderWithMapAndDataSelectionContext(<MapPanel />))
+    render(renderWithWrapper(<MapPanel />))
 
     expect(screen.queryByTestId('drawerPanel')).not.toBeInTheDocument()
   })
@@ -132,7 +136,7 @@ describe('MapPanel', () => {
     currentPath = '/kaart/geozoek/'
     search = '?locatie=123,123'
 
-    render(renderWithMapAndDataSelectionContext(<MapPanel />))
+    render(renderWithWrapper(<MapPanel />))
 
     expect(screen.queryByTestId('drawerPanel')).toBeInTheDocument()
   })

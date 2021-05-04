@@ -1,19 +1,19 @@
-import { Heading, themeSpacing, useMatchMedia } from '@amsterdam/asc-ui'
-import { FunctionComponent, useEffect, useMemo, useState } from 'react'
-import styled from 'styled-components'
+import { Heading, themeSpacing } from '@amsterdam/asc-ui'
+import { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react'
 import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
-import { DrawerPanelHeader, LargeDrawerPanel, SmallDrawerPanel } from '../DrawerPanel'
-import DrawerOverlay, { DeviceMode, DrawerState } from '../DrawerOverlay'
+import styled from 'styled-components'
+import { useDataSelection } from '../../../../components/DataSelection/DataSelectionContext'
 import { routing } from '../../../../routes'
-import MapSearchResults from '../../map-search/MapSearchResults'
+import useParam from '../../../../utils/useParam'
 import DetailPanel from '../../detail/DetailPanel'
+import MapSearchResults from '../../map-search/MapSearchResults'
+import { useMapContext } from '../../MapContext'
+import { locationParam, polygonParam } from '../../query-params'
+import DrawerOverlay, { DeviceMode, DrawerState } from '../DrawerOverlay'
+import { DrawerPanelHeader, LargeDrawerPanel, SmallDrawerPanel } from '../DrawerPanel'
+import DrawResults from '../DrawTool/DrawResults'
 import LegendPanel from '../LegendPanel/LegendPanel'
 import useMapControls from './useMapControls'
-import { locationParam, polygonParam } from '../../query-params'
-import DrawResults from '../DrawTool/DrawResults'
-import useParam from '../../../../utils/useParam'
-import { useMapContext } from '../../MapContext'
-import { useDataSelection } from '../../../../components/DataSelection/DataSelectionContext'
 
 const TitleHeading = styled(Heading)`
   margin: 0;
@@ -38,10 +38,8 @@ const MapPanel: FunctionComponent = () => {
   const [drawerState, setDrawerState] = useState(DrawerState.Closed)
   const [locationParameter] = useParam(locationParam)
   const [polygon] = useParam(polygonParam)
-  const [showDesktopVariant] = useMatchMedia({ minBreakpoint: 'tabletM' })
   const location = useLocation()
   const { activeFilters } = useDataSelection()
-  const mode = showDesktopVariant ? DeviceMode.Desktop : DeviceMode.Mobile
   // TODO: Replace this logic with 'useRouteMatch()' when the following PR has been released:
   // https://github.com/ReactTraining/react-router/pull/7822
   const dataDetailMatch = useMemo(
@@ -54,10 +52,10 @@ const MapPanel: FunctionComponent = () => {
     [location.pathname, routing.dataSearchGeo_TEMP.path],
   )
 
-  const onOpenLegend = () => {
+  const onOpenLegend = useCallback(() => {
     setLegendActive(true)
-    setDrawerState(mode === DeviceMode.Desktop ? DrawerState.Open : DrawerState.Preview)
-  }
+    setDrawerState(DrawerState.Open)
+  }, [])
 
   const onCloseLegend = () => {
     setLegendActive(false)
@@ -79,7 +77,7 @@ const MapPanel: FunctionComponent = () => {
     }
   }, [dataDetailMatch, dataSearchGeoMatch, locationParameter])
 
-  const controls = useMapControls(showDesktopVariant, onOpenLegend)
+  const controls = useMapControls(onOpenLegend)
 
   const showContentPanel = useMemo(() => {
     if (
@@ -100,7 +98,7 @@ const MapPanel: FunctionComponent = () => {
   return (
     <>
       <DrawerOverlay
-        mode={mode}
+        mode={DeviceMode.Desktop}
         controls={controls}
         state={drawerState}
         onStateChange={(state) => setDrawerState(state)}

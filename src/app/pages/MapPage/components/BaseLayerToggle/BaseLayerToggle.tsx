@@ -1,6 +1,7 @@
 import { BaseLayerToggle as BaseLayerToggleComponent } from '@amsterdam/arm-core'
 import { FunctionComponent, useMemo } from 'react'
 import { getMapBaseLayers, MapBaseLayer } from '../../../../../map/services'
+import { useIsEmbedded } from '../../../../contexts/ui'
 import useParam from '../../../../utils/useParam'
 import { BaseLayer, baseLayerParam } from '../../query-params'
 
@@ -27,6 +28,7 @@ const aerialIds = aerialLayers.map(({ id }) => id)
 // TODO: Refactor BaseLayerToggle to use an object instead of array of MapBaseLayers
 const BaseLayerToggle: FunctionComponent = () => {
   const [activeBaseLayer, setActiveBaseLayer] = useParam(baseLayerParam)
+  const isEmbedded = useIsEmbedded()
 
   const aerialIndex = useMemo(
     () => (aerialIds.includes(activeBaseLayer) && aerialIds.indexOf(activeBaseLayer)) || 0,
@@ -40,6 +42,7 @@ const BaseLayerToggle: FunctionComponent = () => {
 
   return (
     <BaseLayerToggleComponent
+      style={isEmbedded ? { display: 'none' } : undefined}
       aerialLayers={aerialLayers}
       topoLayers={topoLayers}
       aerialDefaultIndex={aerialIndex}

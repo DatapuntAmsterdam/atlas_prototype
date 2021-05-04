@@ -1,33 +1,30 @@
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import { mocked } from 'ts-jest/utils'
+import { useIsEmbedded } from '../../../../contexts/ui'
 import DrawToolControl from './DrawToolControl'
-import withMapContext from '../../../../utils/withMapContext'
-import { DataSelectionProvider } from '../../../../components/DataSelection/DataSelectionContext'
 
+jest.mock('../../../../contexts/ui')
 jest.mock('../DrawTool/DrawTool', () => () => null)
-const mockPush = jest.fn()
-const search = ''
-jest.mock('react-router-dom', () => ({
-  // @ts-ignore
-  ...jest.requireActual('react-router-dom'),
-  useHistory: () => ({
-    push: mockPush,
-  }),
-  useLocation: () => ({
-    pathname: '/kaart/bag/foo/bar',
-    search,
-  }),
-}))
+
+const useIsEmbeddedMock = mocked(useIsEmbedded)
 
 describe('DrawToolControl', () => {
-  it('renders the control', () => {
-    const { container } = render(
-      withMapContext(
-        <DataSelectionProvider>
-          <DrawToolControl />
-        </DataSelectionProvider>,
-      ),
-    )
+  beforeEach(() => {
+    useIsEmbeddedMock.mockReturnValue(false)
+  })
 
-    expect(container.firstChild).toBeDefined()
+  afterEach(() => {
+    useIsEmbeddedMock.mockReset()
+  })
+
+  it('renders the control', () => {
+    render(<DrawToolControl />)
+    expect(screen.getByTestId('drawtoolControl')).toBeInTheDocument()
+  })
+
+  it('hides the control if embedded', () => {
+    useIsEmbeddedMock.mockReturnValue(true)
+    render(<DrawToolControl />)
+    expect(screen.queryByTestId('drawtoolControl')).not.toBeInTheDocument()
   })
 })

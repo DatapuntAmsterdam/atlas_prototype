@@ -1,23 +1,24 @@
-import { FunctionComponent, ReactNode, useState } from 'react'
 import {
   ChevronDown,
   Ellipsis,
-  Embed,
-  Print,
   Email,
+  Embed,
   FacebookPadded,
   Linkedin,
+  Print,
   Twitter,
 } from '@amsterdam/asc-assets'
-import styled from 'styled-components'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 import {
   ContextMenu as ContextMenuComponent,
   ContextMenuItem,
   Icon,
   themeSpacing,
 } from '@amsterdam/asc-ui'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
+import { FunctionComponent, ReactNode, useState } from 'react'
+import styled from 'styled-components'
 import getShareUrl, { ShareTarget } from '../../../../../shared/services/share-url/share-url'
+import { useIsEmbedded } from '../../../../contexts/ui'
 import useDocumentTitle from '../../../../utils/useDocumentTitle'
 
 const socialItemsArray: Array<{
@@ -64,7 +65,14 @@ const StyledContextMenuComponent = styled(ContextMenuComponent)`
 const MapContextMenu: FunctionComponent = () => {
   const { trackEvent } = useMatomo()
   const { documentTitle } = useDocumentTitle()
+  const isEmbedded = useIsEmbedded()
   const [open, setOpen] = useState(false)
+
+  // Hide the context menu if embedded.
+  if (isEmbedded) {
+    return null
+  }
+
   const handlePageShare = (target: ShareTarget) => {
     trackEvent({
       category: 'menu',
