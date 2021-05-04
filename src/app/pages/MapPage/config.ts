@@ -26,6 +26,7 @@ export default {
     title: 'Adressen',
     path: routing.addresses_TEMP.path,
     toTable: toAddresses(),
+    extraParams: {},
     getDetailPath: (id: string) => `/${MAIN_PATHS.MAP}/bag/nummeraanduiding/${id}`,
     endpointData: `${environment.API_ROOT}dataselectie/bag/`,
     endpointMapVisualization: `${environment.API_ROOT}dataselectie/bag/geolocation/`,
@@ -34,6 +35,9 @@ export default {
     authScope: AuthScope.HR,
     title: 'Vestigingen',
     path: routing.establishments_TEMP.path,
+    extraParams: {
+      dataset: 'ves',
+    },
     toTable: toEstablishments(),
     getDetailPath: (id: string) => `/${MAIN_PATHS.MAP}/handelsregister/vestiging/${id}`,
     endpointData: `${environment.API_ROOT}dataselectie/hr/`,
@@ -42,6 +46,7 @@ export default {
   [DataSelectionType.BRK]: {
     authScope: AuthScope.BRK,
     title: 'Kadastrale objecten',
+    extraParams: {},
     path: routing.cadastralObjects_TEMP.path,
     toTable: toCadastralObjects(),
     getDetailPath: (id: string) => `/${MAIN_PATHS.MAP}/brk/object/${id}`,

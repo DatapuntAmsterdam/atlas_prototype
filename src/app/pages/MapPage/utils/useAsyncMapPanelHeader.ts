@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { isFulfilled, isPending, isRejected, PromiseResult } from '@amsterdam/use-promise'
 import { useMapContext } from '../MapContext'
-import { AuthError } from '../../../../shared/services/api/customError'
+import { AuthError, ForbiddenError } from '../../../../shared/services/api/customError'
 
 const useAsyncMapPanelHeader = <T = any>(
   results: PromiseResult<T>,
@@ -27,7 +27,7 @@ const useAsyncMapPanelHeader = <T = any>(
     if (isRejected(results)) {
       setPanelHeader({
         title:
-          results.reason instanceof AuthError
+          results.reason instanceof AuthError || results.reason instanceof ForbiddenError
             ? 'Meer resultaten na inloggen'
             : 'Er is een fout opgetreden',
       })

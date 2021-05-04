@@ -26,7 +26,7 @@ import { useDataSelection } from '../../../../components/DataSelection/DataSelec
 import DataSelectionActiveFilters from '../../../../components/DataSelection/DataSelectionActiveFilters'
 import { createFiltersObject } from '../../../../../shared/services/data-selection/normalizations'
 import useAsyncMapPanelHeader from '../../utils/useAsyncMapPanelHeader'
-import { AuthError } from '../../../../../shared/services/api/customError'
+import { AuthError, ForbiddenError } from '../../../../../shared/services/api/customError'
 import LoginLink from '../../../../components/Links/LoginLink/LoginLink'
 import formatCount from '../../../../utils/formatCount'
 import AuthScope from '../../../../../shared/services/api/authScope'
@@ -69,6 +69,7 @@ const Results: FunctionComponent = () => {
       shape: JSON.stringify(polygon?.polygon.map(({ lat, lng }) => [lng, lat])),
       size: '20',
       page: paginationPage.toString(),
+      ...config[currentDatasetType.toUpperCase()]?.extraParams,
       ...createFiltersObject(activeFilters),
     })
 
@@ -92,7 +93,7 @@ const Results: FunctionComponent = () => {
   }
 
   if (isRejected(result)) {
-    if (result.reason instanceof AuthError) {
+    if (result.reason instanceof AuthError || result.reason instanceof ForbiddenError) {
       return (
         <Alert level="info" dismissible>
           <Paragraph>
