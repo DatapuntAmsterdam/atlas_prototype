@@ -6,9 +6,16 @@ import {
   Heading,
   Paragraph,
   Row,
+  List,
+  ListItem,
+  Link,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { useMemo, useState } from 'react'
+import { routing } from '../../routes'
+import { generatePath } from 'react-router'
+import { Link as RouterLink } from 'react-router-dom'
+import { routingKey } from '../../../shared/config/cms.config'
 import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
 import { useParams } from 'react-router-dom'
 import environment from '../../../environment'
@@ -67,6 +74,7 @@ const PublicationDetailPage = () => {
     field_publication_source: source,
     field_intro: intro,
     field_language: lang,
+    related,
   } = result.value
   const documentTitle = title && `Publicatie: ${title}`
 
@@ -127,6 +135,24 @@ const PublicationDetailPage = () => {
                 <EditorialContent>
                   {intro && <Paragraph strong dangerouslySetInnerHTML={{ __html: intro }} />}
                   {body && <CustomHTMLBlock body={body.value} />}
+                  {related?.length ? (
+                      <List>
+                        {related.map(({ id: linkId, title: linkTitle, type, to }) => (
+                          <ListItem key={linkId}>
+                            <Link
+                              as={RouterLink}
+                              to={generatePath(routing[routingKey[type!]].path, { // TODO: is 'type!' de juiste oplossing?
+                                slug: to.payload.slug,
+                                id: to.payload.id,
+                              })}
+                              inList
+                            >
+                              {linkTitle}
+                            </Link>
+                          </ListItem>
+                        ))}
+                      </List>
+                    ) : null}
                 </EditorialContent>
               </Column>
             </Column>
