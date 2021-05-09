@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@amsterdam/arm-cluster": "^0.5.1",
-    "@amsterdam/arm-core": "^0.5.1",
+    "@amsterdam/arm-core": "^0.6.0",
     "@amsterdam/arm-draw": "^0.5.2-alpha.21",
     "@amsterdam/arm-nontiled": "^0.5.1",
     "@amsterdam/asc-assets": "^0.29.2",
