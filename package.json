@@ -179,7 +179,7 @@
     "jest-localstorage-mock": "^2.4.10",
     "jest-styled-components": "^7.0.4",
     "jsontokens": "^3.0.0",
-    "lint-staged": "10.5.4",
+    "lint-staged": "11.0.0",
     "lodash.clonedeep": "^4.5.0",
     "mini-css-extract-plugin": "^1.6.0",
     "msw": "^0.28.2",
