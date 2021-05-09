@@ -1,11 +1,14 @@
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Checkbox, Column, Link, Row, themeSpacing } from '@amsterdam/asc-ui'
 import { FunctionComponent, useMemo, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import { Bestand, Document } from '../../../../../api/iiif-metadata/bouwdossier'
 import { NOT_FOUND_THUMBNAIL } from '../../../../../shared/config/constants'
+import { userIsAuthenticated } from '../../../../../shared/ducks/user/user'
 import ActionButton from '../../../../components/ActionButton'
+import { FEATURE_KEYCLOAK_AUTH, isFeatureEnabled } from '../../../../features'
 import { toConstructionDossier } from '../../../../links'
 import { useAuthToken } from '../../AuthTokenContext'
 import IIIFThumbnail from '../IIIFThumbnail'
@@ -93,6 +96,11 @@ const FilesGallery: FunctionComponent<FilesGalleryProps> = ({
     [token],
   )
 
+  // Only allow downloads from a signed in user if authenticated with Keycloak.
+  // TODO: This logic can be removed once we switch to Keycloak entirely.
+  const authenticated = useSelector(userIsAuthenticated)
+  const disableDownload = authenticated && !isFeatureEnabled(FEATURE_KEYCLOAK_AUTH)
+
   function toggleFile(file: Bestand) {
     if (selectedFiles.includes(file)) {
       onFileSelectionChange(selectedFiles.filter((selectedFile) => selectedFile.url !== file.url))
@@ -129,7 +137,7 @@ const FilesGallery: FunctionComponent<FilesGalleryProps> = ({
                   data-testid="thumbnail"
                 />
               </StyledLink>
-              {!disabled && (
+              {!disabled && !disableDownload && (
                 <StyledCheckbox
                   data-testid="fileToggle"
                   checked={selectedFiles.includes(file)}
