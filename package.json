@@ -26,10 +26,10 @@
     "analyze": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack --config webpack.analyze.ts"
   },
   "dependencies": {
-    "@amsterdam/arm-cluster": "^0.5.1",
-    "@amsterdam/arm-core": "^0.5.1",
-    "@amsterdam/arm-draw": "^0.5.2-alpha.21",
-    "@amsterdam/arm-nontiled": "^0.5.1",
+    "@amsterdam/arm-cluster": "^0.6.0",
+    "@amsterdam/arm-core": "^0.6.0",
+    "@amsterdam/arm-draw": "^0.6.0",
+    "@amsterdam/arm-nontiled": "^0.6.0",
     "@amsterdam/asc-assets": "^0.29.2",
     "@amsterdam/asc-ui": "^0.29.3",
     "@amsterdam/react-maps": "^0.12.0",
