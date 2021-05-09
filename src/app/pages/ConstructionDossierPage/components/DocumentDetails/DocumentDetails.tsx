@@ -1,6 +1,6 @@
 import { Download } from '@amsterdam/asc-assets'
 import { Alert, Button, Heading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import {
@@ -59,10 +59,16 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
   const scopes = useSelector(getUserScopes)
   const token = useAuthToken()
 
-  const hasRights = scopes.includes(SCOPES['BD/R']) || !!token
-  const hasExtendedRights = scopes.includes(SCOPES['BD/X'])
-  const restricted = document.access === 'RESTRICTED'
-  const disabled = (!hasRights && !hasExtendedRights) || (restricted && !hasExtendedRights)
+  const restricted = dossier.access === 'RESTRICTED'
+  const hasRights = useMemo(() => {
+    // Only users with extended rights can view restricted documents.
+    if (restricted) {
+      return scopes.includes(SCOPES['BD/X'])
+    }
+
+    // Only users with read rights, or with a login link token can view public documents.
+    return scopes.includes(SCOPES['BD/R']) || !!token
+  }, [restricted, scopes, token])
 
   function onDownloadFiles() {
     if (selectedFiles.length === 0) {
@@ -87,7 +93,7 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
             <DocumentHeading forwardedAs="h3">
               {`${document.subdossier_titel} (${document.bestanden.length})`}
             </DocumentHeading>
-            {!disabled && (
+            {hasRights && (
               <DownloadButton
                 type="button"
                 variant="primary"
@@ -118,21 +124,8 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
       <GalleryContainer>
         {document.bestanden.length > 0 ? (
           <>
-            {!hasRights && !hasExtendedRights ? (
-              <StyledAlert level="info" dismissible data-testid="noRights">
-                <div>
-                  U kunt hier{' '}
-                  <LinkButton type="button" onClick={onRequestLoginLink}>
-                    toegang aanvragen
-                  </LinkButton>{' '}
-                  om de om bouw- en omgevingsdossiers in te zien. Medewerkers/ketenpartners van
-                  Gemeente Amsterdam kunnen <LoginLinkButton>inloggen</LoginLinkButton> om deze te
-                  bekijken.
-                </div>
-              </StyledAlert>
-            ) : (
-              restricted &&
-              !hasExtendedRights && (
+            {!hasRights &&
+              (restricted ? (
                 <StyledAlert level="info" dismissible data-testid="noExtendedRights">
                   <div>
                     Medewerkers/ketenpartners van Gemeente Amsterdam met extra bevoegdheden kunnen{' '}
@@ -140,15 +133,26 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
                     te bekijken.
                   </div>
                 </StyledAlert>
-              )
-            )}
+              ) : (
+                <StyledAlert level="info" dismissible data-testid="noRights">
+                  <div>
+                    U kunt hier{' '}
+                    <LinkButton type="button" onClick={onRequestLoginLink}>
+                      toegang aanvragen
+                    </LinkButton>{' '}
+                    om de om bouw- en omgevingsdossiers in te zien. Medewerkers/ketenpartners van
+                    Gemeente Amsterdam kunnen <LoginLinkButton>inloggen</LoginLinkButton> om deze te
+                    bekijken.
+                  </div>
+                </StyledAlert>
+              ))}
             <FilesGallery
               data-testid="filesGallery"
               dossierId={dossierId}
               document={document}
               selectedFiles={selectedFiles}
               onFileSelectionChange={(files) => setSelectedFiles(files)}
-              disabled={disabled}
+              disabled={!hasRights}
             />
           </>
         ) : (

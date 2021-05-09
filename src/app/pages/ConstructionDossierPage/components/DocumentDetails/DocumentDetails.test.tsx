@@ -168,14 +168,14 @@ describe('DocumentDetails', () => {
     expect(onRequestLoginLinkMock).toBeCalled()
   })
 
-  it('renders a message if the document is restricted and the user has no extended rights', () => {
+  it('renders a message if the dossier is restricted and the user has no extended rights', () => {
     getUserScopesMock.mockReturnValue([SCOPES['BD/R']])
 
     render(
       <DocumentDetails
         dossierId="SDC9999"
-        dossier={dossierFixture}
-        document={{ ...documentFixture, access: 'RESTRICTED' }}
+        dossier={{ ...dossierFixture, access: 'RESTRICTED' }}
+        document={documentFixture}
         onRequestLoginLink={() => {}}
       />,
       { wrapper },
