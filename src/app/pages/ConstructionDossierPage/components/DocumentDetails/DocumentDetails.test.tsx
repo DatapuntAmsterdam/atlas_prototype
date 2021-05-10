@@ -184,6 +184,22 @@ describe('DocumentDetails', () => {
     expect(screen.getByTestId('noExtendedRights')).toBeInTheDocument()
   })
 
+  it('renders a message if the document is restricted and the user has no extended rights', () => {
+    getUserScopesMock.mockReturnValue([SCOPES['BD/R']])
+
+    render(
+      <DocumentDetails
+        dossierId="SDC9999"
+        dossier={dossierFixture}
+        document={{ ...documentFixture, access: 'RESTRICTED' }}
+        onRequestLoginLink={() => {}}
+      />,
+      { wrapper },
+    )
+
+    expect(screen.getByTestId('noExtendedRights')).toBeInTheDocument()
+  })
+
   it('renders the the files gallery', () => {
     render(
       <DocumentDetails

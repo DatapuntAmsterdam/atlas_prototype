@@ -65,7 +65,7 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
   const authenticated = useSelector(userIsAuthenticated)
   const disableDownload = authenticated && !isFeatureEnabled(FEATURE_KEYCLOAK_AUTH)
 
-  const restricted = dossier.access === 'RESTRICTED'
+  const restricted = dossier.access === 'RESTRICTED' || document.access === 'RESTRICTED'
   const hasRights = useMemo(() => {
     // Only users with extended rights can view restricted documents.
     if (restricted) {
