@@ -158,7 +158,7 @@ const DrawTool: FunctionComponent = () => {
 
       return layer instanceof Polygon
         ? (coordinates[0] as LatLngLiteral)
-        : ((coordinates as unknown) as LatLngLiteral)
+        : (coordinates as unknown as LatLngLiteral)
     })
 
     if (deletedLayersBounds.length === 0) {

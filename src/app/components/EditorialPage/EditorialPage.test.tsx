@@ -21,7 +21,7 @@ describe('EditorialPage', () => {
   const mockTrackPageView = jest.fn()
 
   beforeEach(() => {
-    useMatomoMock.mockReturnValue(({ trackPageView: mockTrackPageView } as unknown) as ReturnType<
+    useMatomoMock.mockReturnValue({ trackPageView: mockTrackPageView } as unknown as ReturnType<
       typeof useMatomo
     >)
 

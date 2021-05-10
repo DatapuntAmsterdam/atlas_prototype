@@ -4,8 +4,7 @@ import { Point } from 'geojson'
 export default {
   _links: {
     self: {
-      href:
-        'https://api.data.amsterdam.nl/monumenten/monumenten/3cf53160-d8bf-4447-93ba-1eb03a35cfe4/',
+      href: 'https://api.data.amsterdam.nl/monumenten/monumenten/3cf53160-d8bf-4447-93ba-1eb03a35cfe4/',
     },
   },
   identificerende_sleutel_monument: '3cf53160-d8bf-4447-93ba-1eb03a35cfe4',
@@ -27,8 +26,7 @@ export default {
   heeft_als_grondslag_beperking: null,
   heeft_situeringen: {
     count: 1,
-    href:
-      'https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=3cf53160-d8bf-4447-93ba-1eb03a35cfe4',
+    href: 'https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=3cf53160-d8bf-4447-93ba-1eb03a35cfe4',
   },
   monumentcoordinaten: {
     type: 'Point',

@@ -127,10 +127,10 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
     }
   }, [extractIdEndpoint, openEditorialSuggestion, decodeLayers, highlightValue])
 
-  const htmlContent = useMemo(() => highlightSuggestion(content, highlightValue), [
-    content,
-    highlightValue,
-  ])
+  const htmlContent = useMemo(
+    () => highlightSuggestion(content, highlightValue),
+    [content, highlightValue],
+  )
 
   return (
     <li>

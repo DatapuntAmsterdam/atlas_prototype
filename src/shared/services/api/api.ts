@@ -60,9 +60,8 @@ export const fetchWithToken = <T = any>(
     options.signal = cancel
   }
 
-  const searchParams = (params instanceof URLSearchParams
-    ? params
-    : new URLSearchParams(params)
+  const searchParams = (
+    params instanceof URLSearchParams ? params : new URLSearchParams(params)
   ).toString()
 
   const fullUrl = `${url}${searchParams ? `?${searchParams}` : ''}`

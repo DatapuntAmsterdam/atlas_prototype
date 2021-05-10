@@ -1935,7 +1935,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       const units = await Promise.all(
         features.map(
           async ({ properties }: { properties: { id: string } }) =>
-            (await fetchDetailData(serviceDefinition, properties.id)).data as PotentialApiResult,
+            (
+              await fetchDetailData(serviceDefinition, properties.id)
+            ).data as PotentialApiResult,
         ),
       )
 
@@ -2384,7 +2386,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     type: 'bag/woonplaats',
     endpoint: woonplaatsenPath,
     mapDetail: (result) => {
-      const typedResult = (result as unknown) as Woonplaatsen
+      const typedResult = result as unknown as Woonplaatsen
       return {
         title: GLOSSARY.DEFINITIONS.WOONPLAATS.singular,
         subTitle: typedResult.naam,
@@ -2398,7 +2400,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
                 {
                   pageSize: 25,
                   normalize: (data) => {
-                    const typedData = (data as unknown) as OpenbareRuimtesList
+                    const typedData = data as unknown as OpenbareRuimtesList
                     return typedData._embedded.openbareruimtes.map(({ _links, naam, id }) => ({
                       _display: naam,
                       _links,
@@ -2782,7 +2784,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     type: 'overlastgebieden/algemeenoverlast',
     endpoint: endpointTypes.overlastgebiedenAlgemeenoverlast,
     mapDetail: (result) => {
-      const typedResult = (result as unknown) as OverlastgebiedenSingle
+      const typedResult = result as unknown as OverlastgebiedenSingle
       return {
         title: 'Overlastgebieden Algemeenoverlast',
         subTitle: typedResult.oovNaam,
@@ -2794,7 +2796,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     type: 'overlastgebieden/dealeroverlast',
     endpoint: endpointTypes.overlastgebiedenDealeroverlast,
     mapDetail: (result) => {
-      const typedResult = (result as unknown) as OverlastgebiedenSingle
+      const typedResult = result as unknown as OverlastgebiedenSingle
       return {
         title: 'Overlastgebieden Dealeroverlast',
         subTitle: typedResult.oovNaam,
@@ -2806,7 +2808,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     type: 'overlastgebieden/cameratoezicht',
     endpoint: endpointTypes.overlastgebiedenCameratoezicht,
     mapDetail: (result) => {
-      const typedResult = (result as unknown) as OverlastgebiedenSingle
+      const typedResult = result as unknown as OverlastgebiedenSingle
       return {
         title: 'Overlastgebieden Cameratoezicht',
         subTitle: typedResult.oovNaam,
@@ -2818,7 +2820,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     type: 'overlastgebieden/alcoholverbod',
     endpoint: endpointTypes.overlastgebiedenAlcoholverbod,
     mapDetail: (result) => {
-      const typedResult = (result as unknown) as OverlastgebiedenSingle
+      const typedResult = result as unknown as OverlastgebiedenSingle
       return {
         title: 'Overlastgebieden Alcoholverbod',
         subTitle: typedResult.oovNaam,
@@ -2830,7 +2832,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     type: 'overlastgebieden/rondleidingverbod',
     endpoint: endpointTypes.overlastgebiedenRondleidingverbod,
     mapDetail: (result) => {
-      const typedResult = (result as unknown) as OverlastgebiedenSingle
+      const typedResult = result as unknown as OverlastgebiedenSingle
       return {
         title: 'Overlastgebieden Rondleidingverbod',
         subTitle: typedResult.oovNaam,
@@ -2842,7 +2844,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     type: 'overlastgebieden/taxistandplaats',
     endpoint: taxistandplaatsPath,
     mapDetail: (result) => {
-      const typedResult = (result as unknown) as OverlastgebiedenSingle
+      const typedResult = result as unknown as OverlastgebiedenSingle
       return {
         title: 'Overlastgebieden Taxistandplaats',
         subTitle: typedResult.oovNaam,

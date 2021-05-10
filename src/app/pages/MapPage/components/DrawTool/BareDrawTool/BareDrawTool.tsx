@@ -74,10 +74,11 @@ const BareDrawTool: FunctionComponent<DrawToolProps> = ({
   ...otherProps
 }) => {
   const [inEditMode, setInEditMode] = useState(false)
-  const [currentDrawing, setCurrentDrawing] = useState<{
-    type: 'polygon' | 'polyline'
-    drawing: Draw.Polyline | Draw.Polygon
-  } | null>(null)
+  const [currentDrawing, setCurrentDrawing] =
+    useState<{
+      type: 'polygon' | 'polyline'
+      drawing: Draw.Polyline | Draw.Polygon
+    } | null>(null)
   const [inCreateMode, setInCreateMode, inCreateModeRef] = useStateRef(false)
 
   const mapInstance = useMapInstance() as DrawMap

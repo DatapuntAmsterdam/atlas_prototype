@@ -130,9 +130,10 @@ const DatasetDetailPage: FunctionComponent = () => {
   const { id } = useParams<DatasetDetailPageParams>()
   const userScopes = useSelector(getUserScopes)
   const history = useHistory()
-  const canEdit = useMemo(() => userScopes.some((scope) => dcatdScopes.includes(scope)), [
-    userScopes,
-  ])
+  const canEdit = useMemo(
+    () => userScopes.some((scope) => dcatdScopes.includes(scope)),
+    [userScopes],
+  )
 
   const onError = (e: Error) => {
     if (e instanceof NotFoundError && e.code === 404) {

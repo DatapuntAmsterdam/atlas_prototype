@@ -33,7 +33,7 @@ const configureStore = (): { store: Store<any>; history: History<unknown> } => {
   }
 
   const routeConnector = connectRoutes(routesMap, routingOptions)
-  const { history } = (routeConnector as unknown) as { history: History }
+  const { history } = routeConnector as unknown as { history: History }
 
   paramsRegistry.history = history
 

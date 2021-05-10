@@ -12,11 +12,11 @@ const mockedUseBindHandler = mocked(useBindHandler)
 
 describe('OSDViewer', () => {
   beforeEach(() => {
-    mockedViewer.mockReturnValue(({
+    mockedViewer.mockReturnValue({
       addHandler: jest.fn(),
       removeHandler: jest.fn(),
       destroy: jest.fn(),
-    } as unknown) as Viewer)
+    } as unknown as Viewer)
 
     mockedUseBindHandler.mockImplementation(() => {})
   })
@@ -41,11 +41,11 @@ describe('OSDViewer', () => {
   })
 
   it('calls the onInit prop when initializing the viewer', () => {
-    const mockInstance = ({
+    const mockInstance = {
       addHandler: jest.fn(),
       removeHandler: jest.fn(),
       destroy: jest.fn(),
-    } as unknown) as Viewer
+    } as unknown as Viewer
 
     mockedViewer.mockReturnValue(mockInstance)
 
@@ -58,11 +58,11 @@ describe('OSDViewer', () => {
   it('destroys the viewer when unmounted', () => {
     const destroy = jest.fn()
 
-    mockedViewer.mockReturnValue(({
+    mockedViewer.mockReturnValue({
       addHandler: jest.fn(),
       removeHandler: jest.fn(),
       destroy,
-    } as unknown) as Viewer)
+    } as unknown as Viewer)
 
     const { unmount } = render(<OSDViewer options={{}} />)
 
@@ -71,11 +71,11 @@ describe('OSDViewer', () => {
   })
 
   it('binds the event handlers', () => {
-    const mockInstance = ({
+    const mockInstance = {
       addHandler: jest.fn(),
       removeHandler: jest.fn(),
       destroy: jest.fn(),
-    } as unknown) as Viewer
+    } as unknown as Viewer
 
     mockedViewer.mockReturnValue(mockInstance)
 

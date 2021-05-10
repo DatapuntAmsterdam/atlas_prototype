@@ -20,9 +20,13 @@ const usePagination = (query: DocumentNode, variables: Variables, resolver: stri
 
   const { fetching, error, data } = result || {}
 
-  // eslint-disable-next-line prefer-const
-  let { totalCount, filters = [], results = [], pageInfo = null }: any =
-    data && !Array.isArray(resolver) && data[resolver] ? data[resolver] : {}
+  let {
+    totalCount,
+    filters = [],
+    results = [],
+    // eslint-disable-next-line prefer-const
+    pageInfo = null,
+  }: any = data && !Array.isArray(resolver) && data[resolver] ? data[resolver] : {}
 
   if (data && Array.isArray(resolver)) {
     const allCounts: number[] = resolver.map((key) => data[key] && data[key].totalCount)

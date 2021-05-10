@@ -19,10 +19,10 @@ const MapMarkers: FunctionComponent<MapMarkersProps> = ({ panoActive }) => {
   const [locationParameter, setLocationParameter] = useParam(locationParam)
   const { drawToolLocked } = useDataSelection()
 
-  const renderSearchMarker = useMemo(() => !drawToolLocked && !panoActive, [
-    drawToolLocked,
-    panoActive,
-  ])
+  const renderSearchMarker = useMemo(
+    () => !drawToolLocked && !panoActive,
+    [drawToolLocked, panoActive],
+  )
 
   return (
     <>

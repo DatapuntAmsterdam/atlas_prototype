@@ -70,14 +70,12 @@ export const FOOTER_LINKS_SOCIAL: ContentLinkHref[] = [
   {
     testId: 'SocialNieuwsbriefOIS',
     title: 'Nieuwsbrief OIS',
-    href:
-      'https://www.amsterdam.nl/nieuwsbrieven/bestuur-organisatie/dienstverlening/nieuwsbrief-data/nieuwsbrief-data/',
+    href: 'https://www.amsterdam.nl/nieuwsbrieven/bestuur-organisatie/dienstverlening/nieuwsbrief-data/nieuwsbrief-data/',
   },
   {
     testId: 'SocialVacatures',
     title: 'Vacatures',
-    href:
-      'https://www.amsterdam.nl/bestuur-organisatie/werkenbij/externe/?zoeken=true&zoeken_term=&selectie_zoeken_op_maanden=AllYears&zoek_clustered_keywords_cluster=3669_3670_3671_3672_3673_3674_3675_3676_3677_3678_3679_3717_3681_3682_3683_3684_3685_3686_3688&zoek_clustered_keywords=3717&zoek_clustered_keywords_cluster=3662_3664_3665_3666_3667_3668_3715&zoek_clustered_keywords_cluster=3689_3690_3692_3693',
+    href: 'https://www.amsterdam.nl/bestuur-organisatie/werkenbij/externe/?zoeken=true&zoeken_term=&selectie_zoeken_op_maanden=AllYears&zoek_clustered_keywords_cluster=3669_3670_3671_3672_3673_3674_3675_3676_3677_3678_3679_3717_3681_3682_3683_3684_3685_3686_3688&zoek_clustered_keywords=3717&zoek_clustered_keywords_cluster=3662_3664_3665_3666_3667_3668_3715&zoek_clustered_keywords_cluster=3689_3690_3692_3693',
   },
   {
     testId: 'SocialTwitter',

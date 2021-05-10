@@ -709,9 +709,7 @@ ${input.gebruiksdoel[1]}`,
     it('should call fetchWithToken with the right arguments', () => {
       const fetchWithTokenMock = jest.spyOn(api, 'fetchWithToken')
       getGarbageContainersByBagObject('123', 'ligplaats')
-      expect(
-        fetchWithTokenMock,
-      ).toHaveBeenCalledWith(
+      expect(fetchWithTokenMock).toHaveBeenCalledWith(
         `${environment.API_ROOT}v1/huishoudelijkafval/bag_object_loopafstand/`,
         { format: 'json', bagObjectType: 'ligplaats', bagObjectId: '123' },
       )

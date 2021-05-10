@@ -102,14 +102,14 @@ export const getPage = ({ [REDUCER_KEY]: { page } }: StoreValue) => page
 export const getQuery = ({ [REDUCER_KEY]: { query } }: StoreValue) => query
 export const getActiveFilters = ({ [REDUCER_KEY]: { activeFilters } }: StoreValue) => activeFilters
 
-export const getFilterValues = (type: string) => ({
-  [REDUCER_KEY]: { activeFilters },
-}: StoreValue) => {
-  const matchedFilter = activeFilters.find((filter) => filter.type === type)
+export const getFilterValues =
+  (type: string) =>
+  ({ [REDUCER_KEY]: { activeFilters } }: StoreValue) => {
+    const matchedFilter = activeFilters.find((filter) => filter.type === type)
 
-  if (matchedFilter !== undefined) {
-    return matchedFilter.values
+    if (matchedFilter !== undefined) {
+      return matchedFilter.values
+    }
+
+    return []
   }
-
-  return []
-}

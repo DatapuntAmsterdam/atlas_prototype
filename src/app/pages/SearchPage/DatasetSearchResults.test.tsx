@@ -65,9 +65,9 @@ describe('DatasetSearchResults', () => {
   beforeEach(() => {
     mockedGetState.mockImplementation(
       () =>
-        (({
+        ({
           user: null,
-        } as unknown) as RootState),
+        } as unknown as RootState),
     )
 
     mockedGetUnauthorizedLabels.mockImplementation(() => [])
@@ -99,7 +99,7 @@ describe('DatasetSearchResults', () => {
 
     mockedGetState.mockImplementation(
       () =>
-        (({
+        ({
           user: {
             accessToken: '',
             authenticated: false,
@@ -108,7 +108,7 @@ describe('DatasetSearchResults', () => {
             name: '',
             scopes: [],
           },
-        } as unknown) as RootState),
+        } as unknown as RootState),
     )
 
     rerender(withAppContext(<DatasetSearchResults results={results} isOverviewPage={false} />))

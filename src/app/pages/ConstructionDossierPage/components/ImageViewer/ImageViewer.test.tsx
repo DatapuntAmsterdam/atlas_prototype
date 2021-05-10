@@ -349,7 +349,7 @@ describe('ImageViewer', () => {
     mockedOSDViewer.mockImplementation(
       ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
         useEffect(() => {
-          onInit?.(({ viewport: { zoomBy } } as unknown) as Viewer)
+          onInit?.({ viewport: { zoomBy } } as unknown as Viewer)
           onOpen?.({} as ViewerEvent)
         }, [])
 
@@ -382,7 +382,7 @@ describe('ImageViewer', () => {
     mockedOSDViewer.mockImplementation(
       ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
         useEffect(() => {
-          onInit?.(({ viewport: { zoomBy } } as unknown) as Viewer)
+          onInit?.({ viewport: { zoomBy } } as unknown as Viewer)
           onOpen?.({} as ViewerEvent)
         }, [])
 

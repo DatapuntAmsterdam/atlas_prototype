@@ -16,20 +16,17 @@ export const shouldResetState = (action, allowedRoutes = []) =>
   action.type.startsWith(ROUTER_NAMESPACE) &&
   allowedRoutes.every((route) => !action.type.includes(route))
 
-const toSearchOfType = (type) => (
-  additionalParams = null,
-  skipSaga = false,
-  forceSaga = false,
-  preserve = true,
-) => ({
-  type,
-  meta: {
-    preserve,
-    skipSaga,
-    forceSaga,
-    additionalParams,
-  },
-})
+const toSearchOfType =
+  (type) =>
+  (additionalParams = null, skipSaga = false, forceSaga = false, preserve = true) => ({
+    type,
+    meta: {
+      preserve,
+      skipSaga,
+      forceSaga,
+      additionalParams,
+    },
+  })
 
 export const toDataDetail = (detailReference, additionalParams = null, tracking = true) => {
   const [id, type, subtype] = detailReference

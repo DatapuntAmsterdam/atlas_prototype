@@ -10,10 +10,10 @@ describe('useBindHandler', () => {
 
   it('does nothing if the handler is not present', () => {
     const mockAddHandler = jest.fn()
-    const fakeViewer = ({
+    const fakeViewer = {
       addHandler: mockAddHandler,
       removeHandler: () => {},
-    } as unknown) as Viewer
+    } as unknown as Viewer
 
     const { result } = renderHook(() => useBindHandler('open', fakeViewer))
 
@@ -24,10 +24,10 @@ describe('useBindHandler', () => {
   it('adds an event handler', () => {
     const handler = () => {}
     const mockAddHandler = jest.fn()
-    const fakeViewer = ({
+    const fakeViewer = {
       addHandler: mockAddHandler,
       removeHandler: () => {},
-    } as unknown) as Viewer
+    } as unknown as Viewer
 
     renderHook(() => useBindHandler('open', fakeViewer, handler))
     expect(mockAddHandler).toBeCalledWith('open', handler)
@@ -36,10 +36,10 @@ describe('useBindHandler', () => {
   it('removes an event handler when unmounted', () => {
     const handler = () => {}
     const mockRemoveHandler = jest.fn()
-    const fakeViewer = ({
+    const fakeViewer = {
       addHandler: () => {},
       removeHandler: mockRemoveHandler,
-    } as unknown) as Viewer
+    } as unknown as Viewer
 
     const { unmount } = renderHook(() => useBindHandler('open', fakeViewer, handler))
     unmount()

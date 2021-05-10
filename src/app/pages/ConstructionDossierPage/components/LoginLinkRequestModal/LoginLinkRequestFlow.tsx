@@ -21,9 +21,10 @@ const LoginLinkRequestFlow: FunctionComponent<LoginLinkRequestFlowProps> = ({
   onRetry,
   onClose,
 }) => {
-  const result = usePromise(() => requestLoginLink({ email, originUrl: window.location.href }), [
-    email,
-  ])
+  const result = usePromise(
+    () => requestLoginLink({ email, originUrl: window.location.href }),
+    [email],
+  )
 
   if (isPending(result)) {
     return (

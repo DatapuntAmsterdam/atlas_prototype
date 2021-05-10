@@ -16,33 +16,35 @@ import uiReducer, { REDUCER_KEY as UI } from '../shared/ducks/ui/ui'
 import UserReducer, { REDUCER_KEY as USER } from '../shared/ducks/user/user'
 import { LOCATION } from '../store/redux-first-router/constants'
 
-const rootReducer = (routeReducer: any) => (oldState: any = {}, action: any) => {
-  const mapLayers = combineReducers({
-    layers: MapLayersReducer,
-    baseLayers: MapBaseLayersReducer,
-    panelLayers: MapPanelLayersReducer,
-  })
+const rootReducer =
+  (routeReducer: any) =>
+  (oldState: any = {}, action: any) => {
+    const mapLayers = combineReducers({
+      layers: MapLayersReducer,
+      baseLayers: MapBaseLayersReducer,
+      panelLayers: MapPanelLayersReducer,
+    })
 
-  // Use combine reducer for new reducers
-  const newRootReducer = combineReducers({
-    [ERROR]: errorMessageReducer,
-    [MAP]: MapReducer,
-    mapDetail: MapDetailReducer,
-    [PANORAMA]: PanoramaReducer,
-    [UI]: uiReducer,
-    [USER]: UserReducer,
-    mapLayers,
-    [LOCATION]: routeReducer,
-    [DETAIL]: DetailReducer,
-    [DATA_SEARCH_REDUCER]: DataSearchReducer,
-    [SELECTION]: SelectionReducer,
-    [DATA_SELECTION]: DataSelectionReducer,
-    [SEARCH]: SearchPageReducer,
-  })
+    // Use combine reducer for new reducers
+    const newRootReducer = combineReducers({
+      [ERROR]: errorMessageReducer,
+      [MAP]: MapReducer,
+      mapDetail: MapDetailReducer,
+      [PANORAMA]: PanoramaReducer,
+      [UI]: uiReducer,
+      [USER]: UserReducer,
+      mapLayers,
+      [LOCATION]: routeReducer,
+      [DETAIL]: DetailReducer,
+      [DATA_SEARCH_REDUCER]: DataSearchReducer,
+      [SELECTION]: SelectionReducer,
+      [DATA_SELECTION]: DataSelectionReducer,
+      [SEARCH]: SearchPageReducer,
+    })
 
-  // Combine legacy and new reducer states
-  return newRootReducer(oldState, action)
-}
+    // Combine legacy and new reducer states
+    return newRootReducer(oldState, action)
+  }
 
 export default rootReducer
 

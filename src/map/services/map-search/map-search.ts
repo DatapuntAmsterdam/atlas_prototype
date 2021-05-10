@@ -91,40 +91,39 @@ interface MapFeatureProperties {
   type: string
 }
 
-export const fetchRelatedForUser = (user: UserState) => (
-  data: FeatureCollection<Geometry, MapFeatureProperties>,
-) => {
-  const relatableFeature = data.features.find(
-    (feature) => relatedResourcesByType[feature.properties.type],
-  )
+export const fetchRelatedForUser =
+  (user: UserState) => (data: FeatureCollection<Geometry, MapFeatureProperties>) => {
+    const relatableFeature = data.features.find(
+      (feature) => relatedResourcesByType[feature.properties.type],
+    )
 
-  if (!relatableFeature) {
-    return data.features
+    if (!relatableFeature) {
+      return data.features
+    }
+
+    const resources = relatedResourcesByType[relatableFeature.properties.type]
+    const requests = resources.map((resource) =>
+      resource.authScope && (!user.authenticated || !user.scopes.includes(resource.authScope))
+        ? []
+        : resource.fetch(relatableFeature.properties.id).then((results) =>
+            results.map((result) => ({
+              ...result,
+              properties: {
+                // eslint-disable-next-line no-underscore-dangle
+                uri: result._links.self.href,
+                // eslint-disable-next-line no-underscore-dangle
+                display: result._display,
+                type: resource.type,
+                parent: relatableFeature.properties.type,
+              },
+            })),
+          ),
+    )
+
+    return Promise.all(requests).then((results) =>
+      results.reduce((accumulator, subResults) => accumulator.concat(subResults), data.features),
+    )
   }
-
-  const resources = relatedResourcesByType[relatableFeature.properties.type]
-  const requests = resources.map((resource) =>
-    resource.authScope && (!user.authenticated || !user.scopes.includes(resource.authScope))
-      ? []
-      : resource.fetch(relatableFeature.properties.id).then((results) =>
-          results.map((result) => ({
-            ...result,
-            properties: {
-              // eslint-disable-next-line no-underscore-dangle
-              uri: result._links.self.href,
-              // eslint-disable-next-line no-underscore-dangle
-              display: result._display,
-              type: resource.type,
-              parent: relatableFeature.properties.type,
-            },
-          })),
-        ),
-  )
-
-  return Promise.all(requests).then((results) =>
-    results.reduce((accumulator, subResults) => accumulator.concat(subResults), data.features),
-  )
-}
 
 export interface MapSearchResponse {
   errors: boolean

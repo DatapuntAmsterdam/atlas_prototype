@@ -23,9 +23,9 @@ describe('ZoomControl', () => {
   it('zooms in on the map when the zoom in button is clicked', () => {
     const mockedZoomIn = jest.fn()
 
-    mockedUseMapInstance.mockReturnValueOnce(({
+    mockedUseMapInstance.mockReturnValueOnce({
       zoomIn: mockedZoomIn,
-    } as unknown) as Map)
+    } as unknown as Map)
 
     render(withAppContext(<ZoomControl />))
 
@@ -36,9 +36,9 @@ describe('ZoomControl', () => {
   it('zooms out on the map when the zoom out button is clicked', () => {
     const mockedZoomOut = jest.fn()
 
-    mockedUseMapInstance.mockReturnValueOnce(({
+    mockedUseMapInstance.mockReturnValueOnce({
       zoomOut: mockedZoomOut,
-    } as unknown) as Map)
+    } as unknown as Map)
 
     render(withAppContext(<ZoomControl />))
 

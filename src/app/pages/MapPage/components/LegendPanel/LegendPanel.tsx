@@ -37,9 +37,10 @@ const LegendPanel: FunctionComponent = () => {
   const [zoomLevel] = useParam(zoomParam)
   const [activeLayers, setActiveMapLayers] = useParam(mapLayersParam)
 
-  const overlays = useMemo(() => activeLayers.map((layer) => ({ id: layer, isVisible: true })), [
-    activeLayers,
-  ])
+  const overlays = useMemo(
+    () => activeLayers.map((layer) => ({ id: layer, isVisible: true })),
+    [activeLayers],
+  )
 
   // TODO: Replace 'MapPanel' with something better.
   return (

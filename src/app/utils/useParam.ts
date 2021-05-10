@@ -22,9 +22,10 @@ const useParam = <T>(urlParam: UrlParam<T>): [T, SetValueFn<T>] => {
   const location = useLocation()
   const params = new URLSearchParams(location.search)
   const rawValue = params.get(urlParam.name)
-  const state = useMemo(() => (rawValue ? urlParam.decode(rawValue) : urlParam.defaultValue), [
-    rawValue,
-  ])
+  const state = useMemo(
+    () => (rawValue ? urlParam.decode(rawValue) : urlParam.defaultValue),
+    [rawValue],
+  )
 
   // We need a ref here so that React is properly notified of changes in the component hierarchy for rendering.
   const stateRef = useRef(state)

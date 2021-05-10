@@ -66,8 +66,7 @@ describe('fetchNearestDetail', () => {
               distance: 0,
               id: 'NL.KAD.OnroerendeZaak.11440911470000',
               type: 'kadaster/kadastraal_object',
-              uri:
-                'https://acc.api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.11440911470000/',
+              uri: 'https://acc.api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.11440911470000/',
             },
           },
           {
@@ -76,8 +75,7 @@ describe('fetchNearestDetail', () => {
               distance: 0,
               id: 'NL.KAD.OnroerendeZaak.11440886070000',
               type: 'kadaster/kadastraal_object',
-              uri:
-                'https://acc.api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.11440886070000/',
+              uri: 'https://acc.api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.11440886070000/',
             },
           },
         ],

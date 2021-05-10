@@ -47,7 +47,7 @@ describe('getMessage', () => {
   })
 
   it('gets the general message if an unknown type is present', () => {
-    expect(getMessage(({ error: { types: { foo: false } } } as unknown) as RootState)).toEqual(
+    expect(getMessage({ error: { types: { foo: false } } } as unknown as RootState)).toEqual(
       ERROR_MESSAGES[ErrorType.General],
     )
   })

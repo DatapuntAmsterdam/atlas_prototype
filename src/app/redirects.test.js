@@ -109,9 +109,8 @@ describe('redirects', () => {
 
   it('should redirect webhook routes', () => {
     trackMock.mockClear()
-    const redirectToAddressMock = getVerblijfsobjectIdFromAddressQuery.mockReturnValue(
-      'theMockedId',
-    )
+    const redirectToAddressMock =
+      getVerblijfsobjectIdFromAddressQuery.mockReturnValue('theMockedId')
 
     webHooks.forEach((route) => {
       expectWithNewRoute(`https://www.someurl.com${route.from}`, window.location.replace, (cb) => {
