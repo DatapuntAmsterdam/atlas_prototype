@@ -39,9 +39,7 @@ const FileType: FunctionComponent<Props> = ({ formattedValue }) => (
 )
 
 const HandelsNaam: FunctionComponent<Props> = ({ variables }) => (
-  <span className={`c-handelsnaam ${variables?.[1]?.value ? 'c-handelsnaam__failliet' : ''}`}>
-    {variables?.[0]?.value}
-  </span>
+  <span className="c-handelsnaam">{!Array.isArray(variables) ? variables?.handelsnaam : ''}</span>
 )
 
 const SBIOmschrijving: FunctionComponent<Props> = ({ variables }) => (

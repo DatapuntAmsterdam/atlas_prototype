@@ -3,10 +3,3 @@
   width: 400px;
   white-space: normal;
 }
-
-.c-handelsnaam__failliet {
-  @extend %failliet;
-
-  display: inline-block;
-  font-style: italic;
-}

@@ -25,18 +25,12 @@ const StyledAlert = styled(Alert)`
   margin-bottom: ${themeSpacing(5)};
 `
 
-const StyledContainer = styled.section<{ view: ViewMode }>`
+const StyledContainer = styled.section`
   display: flex;
   flex-direction: column;
   margin: ${themeSpacing(4, 0)};
   padding: ${themeSpacing(0, 4)};
   background-color: ${themeColor('tint', 'level1')};
-
-  ${({ view }) =>
-    view === ViewMode.Full &&
-    css`
-      overflow-x: auto;
-    `}
 `
 
 const Wrapper = styled.div<{ view: ViewMode }>`
@@ -46,8 +40,8 @@ const Wrapper = styled.div<{ view: ViewMode }>`
     css`
       display: grid;
       grid-template-columns: 25% 75%;
-      grid-template-rows: 2fr;
-      grid-column-gap: ${themeSpacing(2)};
+      grid-template-rows: 1fr;
+      grid-column-gap: ${themeSpacing(4)};
       grid-row-gap: 0;
     `}
 `
@@ -56,24 +50,18 @@ const Footer = styled.footer`
   grid-column: 2;
 `
 
-interface DataSelectionContentProps {
-  view: ViewMode
-}
-
-const DataSelectionContent: FunctionComponent<DataSelectionContentProps> = ({ view }) => {
+const DataSelectionContent: FunctionComponent = () => {
   const page = useSelector(getDataSelectionPage)
+  const [view] = useParam(viewParam)
   const { activeFilters, totalResults } = useDataSelection()
   const { fetchData } = useFetchLegacyDataSelectionData()
   const { fetchMarkers } = useFetchLegacyDataSelectionMarkers()
 
-  const result = usePromise(
-    (signal) => fetchData(signal),
-    [
-      view, // view can change: table or map view AKA Full or Split mode
-      page, // Pagination page
-      activeFilters, // Enabling or disabling filters
-    ],
-  )
+  const result = usePromise((signal) => fetchData(signal), [
+    view, // view can change: table or map view AKA Full or Split mode
+    page, // Pagination page
+    activeFilters, // Enabling or disabling filters
+  ])
 
   usePromise((signal) => fetchMarkers(signal), [result])
 
@@ -98,8 +86,13 @@ const DataSelectionContent: FunctionComponent<DataSelectionContentProps> = ({ vi
     )
   }
 
-  const { numberOfPages, data, showSbiFilers, messageMaxPages, messageClusteredMarkers } =
-    result.value
+  const {
+    numberOfPages,
+    data,
+    showSbiFilers,
+    messageMaxPages,
+    messageClusteredMarkers,
+  } = result.value
 
   const showFilters = view === ViewMode.Full && totalResults > 0
   return (
@@ -147,26 +140,23 @@ const DataSelectionContent: FunctionComponent<DataSelectionContentProps> = ({ vi
               {view === ViewMode.Split && <DataSelectionList content={data} />}
             </div>
           ) : null}
+          <Footer>
+            <LegacyPagination currentPage={page} numberOfPages={numberOfPages} />
+            {view === ViewMode.Full && <ShareBar />}
+          </Footer>
         </div>
-        <Footer>
-          <LegacyPagination currentPage={page} numberOfPages={numberOfPages} />
-          {view === ViewMode.Full && <ShareBar />}
-        </Footer>
       </Wrapper>
     </>
   )
 }
 
-const DataSelection = () => {
-  const [view] = useParam(viewParam)
-  return (
-    <StyledContainer view={view} className="c-data-selection">
-      <div className="c-data-selection-content">
-        <DataSelectionHeader />
-        <DataSelectionContent view={view} />
-      </div>
-    </StyledContainer>
-  )
-}
+const DataSelection = () => (
+  <StyledContainer className="c-data-selection">
+    <div className="c-data-selection-content">
+      <DataSelectionHeader />
+      <DataSelectionContent />
+    </div>
+  </StyledContainer>
+)
 
 export default DataSelection
