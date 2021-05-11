@@ -57,11 +57,14 @@ const DataSelectionContent: FunctionComponent = () => {
   const { fetchData } = useFetchLegacyDataSelectionData()
   const { fetchMarkers } = useFetchLegacyDataSelectionMarkers()
 
-  const result = usePromise((signal) => fetchData(signal), [
-    view, // view can change: table or map view AKA Full or Split mode
-    page, // Pagination page
-    activeFilters, // Enabling or disabling filters
-  ])
+  const result = usePromise(
+    (signal) => fetchData(signal),
+    [
+      view, // view can change: table or map view AKA Full or Split mode
+      page, // Pagination page
+      activeFilters, // Enabling or disabling filters
+    ],
+  )
 
   usePromise((signal) => fetchMarkers(signal), [result])
 
@@ -86,13 +89,8 @@ const DataSelectionContent: FunctionComponent = () => {
     )
   }
 
-  const {
-    numberOfPages,
-    data,
-    showSbiFilers,
-    messageMaxPages,
-    messageClusteredMarkers,
-  } = result.value
+  const { numberOfPages, data, showSbiFilers, messageMaxPages, messageClusteredMarkers } =
+    result.value
 
   const showFilters = view === ViewMode.Full && totalResults > 0
   return (
