@@ -13,8 +13,8 @@ export interface UrlParam<T> {
   defaultValue: T
   // Optional initial value that can be used if the value to be set is unknown
   initialValue?: T
-  decode: (value: string) => T
-  encode: (value: T) => string | null
+  decode: (value: string) => NonNullable<T>
+  encode: (value: NonNullable<T>) => string
 }
 
 const useParam = <T>(urlParam: UrlParam<T>): [T, SetValueFn<T>] => {

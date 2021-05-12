@@ -2,8 +2,15 @@ import isEqual from 'lodash.isequal'
 import { UrlParam } from './useParam'
 
 function encodeParam<T>(urlParam: UrlParam<T>, value: T) {
-  const encodedValue = value && urlParam.encode(value)
-  return isEqual(urlParam.defaultValue, value) ? null : encodedValue
+  if (isEqual(urlParam.defaultValue, value)) {
+    return null
+  }
+
+  if (value === undefined || value === null) {
+    return null
+  }
+
+  return urlParam.encode(value as NonNullable<T>)
 }
 
 export default encodeParam

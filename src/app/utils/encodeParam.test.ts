@@ -1,7 +1,8 @@
 import encodeParam from './encodeParam'
+import { UrlParam } from './useParam'
 
 describe('encodeParam', () => {
-  it('should encode a parameter', () => {
+  it('encodes a parameter', () => {
     expect(
       encodeParam(
         {
@@ -15,7 +16,7 @@ describe('encodeParam', () => {
     ).toEqual('{"foo":"bar"}')
   })
 
-  it('should return null if the value matches the default value', () => {
+  it('returns null if the value matches the default value', () => {
     expect(
       encodeParam(
         {
@@ -27,5 +28,17 @@ describe('encodeParam', () => {
         { foo: 'bar' },
       ),
     ).toEqual(null)
+  })
+
+  it('returns null if the value is null or undefined', () => {
+    const param: UrlParam<{ foo: string } | null | undefined> = {
+      name: 'test',
+      defaultValue: { foo: 'bar' },
+      encode: (value) => JSON.stringify(value),
+      decode: (value) => JSON.parse(value),
+    }
+
+    expect(encodeParam(param, null)).toEqual(null)
+    expect(encodeParam(param, undefined)).toEqual(null)
   })
 })
