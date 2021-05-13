@@ -12,7 +12,7 @@ import resolveRedirects from './redirects'
 import './sentry'
 
 // If there are no redirects for the current url, render the application
-resolveRedirects()
+resolveRedirects(window.location)
   .then((hasToRedirect) => {
     if (!hasToRedirect) {
       const { store, history } = configureStore()

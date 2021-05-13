@@ -2,11 +2,9 @@ import { getNummeraanduidingByAddress } from '../../api/bag/v1/nummeraanduiding-
 
 /**
  * Get a verblijfsobject id from a URL or search string
- *
- * @param locationSearch - Full URL or search string
  */
-const getVerblijfsobjectIdFromAddressQuery = async (locationSearch: string): Promise<string> => {
-  const result = await getNummeraanduidingByAddress(locationSearch)
+const getVerblijfsobjectIdFromAddressQuery = async (): Promise<string> => {
+  const result = await getNummeraanduidingByAddress(window.location.search)
 
   if (!result) return ''
 

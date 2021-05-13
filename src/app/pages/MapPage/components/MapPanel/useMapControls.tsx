@@ -110,7 +110,7 @@ const useMapControls = (onOpenLegend: () => void) => {
     mapControls.push(zoomControl)
 
     return mapControls
-  }, [legendControl, isEmbedded, mapLayers])
+  }, [legendControl, isEmbedded, mapLayers, panoFullScreen])
 }
 
 export default useMapControls

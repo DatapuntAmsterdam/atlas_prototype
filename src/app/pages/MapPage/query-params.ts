@@ -130,7 +130,7 @@ export const panoFovParam: UrlParam<number | null> = {
 export const panoHeadingParam: UrlParam<number | null> = {
   name: 'heading',
   defaultValue: null,
-  initialValue: 0,
+  initialValue: 24,
   decode: (value) => parseFloat(value),
   encode: (value) => value.toString(),
 }

@@ -29,7 +29,7 @@ function typeHelper<K extends PropertyKey>(obj: Record<K, Route>): Record<K, Rou
 }
 
 const legacyMapDataPath = isFeatureEnabled(FEATURE_BETA_MAP) ? MAIN_PATHS.MAP : MAIN_PATHS.DATA
-const betaMapDataPath = isFeatureEnabled(FEATURE_BETA_MAP) ? MAIN_PATHS.DATA : MAIN_PATHS.MAP
+export const betaMapDataPath = isFeatureEnabled(FEATURE_BETA_MAP) ? MAIN_PATHS.DATA : MAIN_PATHS.MAP
 
 export const routing = typeHelper({
   home: {

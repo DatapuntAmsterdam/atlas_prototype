@@ -1,6 +1,6 @@
 import environment from '../../../environment'
 import { toAddresses, toCadastralObjects, toEstablishments } from '../../links'
-import { MAIN_PATHS, routing } from '../../routes'
+import { betaMapDataPath, routing } from '../../routes'
 
 // Because we use these types as id's in option values (select), we need to convert them to strings
 export enum DataSelectionType {
@@ -27,7 +27,7 @@ export default {
     path: routing.addresses_TEMP.path,
     toTable: toAddresses(),
     extraParams: {},
-    getDetailPath: (id: string) => `/${MAIN_PATHS.MAP}/bag/nummeraanduiding/${id}`,
+    getDetailPath: (id: string) => `/${betaMapDataPath}/bag/nummeraanduiding/${id}`,
     endpointData: `${environment.API_ROOT}dataselectie/bag/`,
     endpointMapVisualization: `${environment.API_ROOT}dataselectie/bag/geolocation/`,
   },
@@ -39,7 +39,7 @@ export default {
       dataset: 'ves',
     },
     toTable: toEstablishments(),
-    getDetailPath: (id: string) => `/${MAIN_PATHS.MAP}/handelsregister/vestiging/${id}`,
+    getDetailPath: (id: string) => `/${betaMapDataPath}/handelsregister/vestiging/${id}`,
     endpointData: `${environment.API_ROOT}dataselectie/hr/`,
     endpointMapVisualization: `${environment.API_ROOT}dataselectie/hr/geolocation/`,
   },
@@ -49,7 +49,7 @@ export default {
     extraParams: {},
     path: routing.cadastralObjects_TEMP.path,
     toTable: toCadastralObjects(),
-    getDetailPath: (id: string) => `/${MAIN_PATHS.MAP}/brk/object/${id}`,
+    getDetailPath: (id: string) => `/${betaMapDataPath}/brk/object/${id}`,
     endpointData: `${environment.API_ROOT}dataselectie/brk/kot/`,
     endpointMapVisualization: `${environment.API_ROOT}dataselectie/brk/geolocation/`,
   },

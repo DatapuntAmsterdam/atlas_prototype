@@ -13,7 +13,13 @@ jest.mock('../../api/bag/v1/nummeraanduiding-v1', () => ({
 const mockedGetNummeraanduidingByAddress = mocked(getNummeraanduidingByAddress, true)
 
 describe('getVerblijfsobjectIdFromAddressQuery', () => {
-  const queryParams = '?postcode=1&huisnummer=1'
+  let search = '?postcode=1&huisnummer=1'
+  Object.defineProperty(window, 'location', {
+    value: {
+      ...window.location,
+      search,
+    },
+  })
 
   beforeEach(() => {
     mockedGetNummeraanduidingByAddress.mockReset()
@@ -22,8 +28,10 @@ describe('getVerblijfsobjectIdFromAddressQuery', () => {
   it('should return an empty string when required parameters are not provided', async () => {
     mockedGetNummeraanduidingByAddress.mockReturnValueOnce(Promise.resolve(null))
 
-    expect(await getVerblijfsobjectIdFromAddressQuery('?')).toEqual('')
-    expect(await getVerblijfsobjectIdFromAddressQuery('?huisnummer=&postcode=')).toEqual('')
+    search = '?'
+    expect(await getVerblijfsobjectIdFromAddressQuery()).toEqual('')
+    search = '?huisnummer=&postcode='
+    expect(await getVerblijfsobjectIdFromAddressQuery()).toEqual('')
   })
 
   it('should return an empty string when not a single result is returned', async () => {
@@ -40,7 +48,7 @@ describe('getVerblijfsobjectIdFromAddressQuery', () => {
       Promise.resolve(responseWithMoreThanOneResult),
     )
 
-    expect(await getVerblijfsobjectIdFromAddressQuery(queryParams)).toEqual('')
+    expect(await getVerblijfsobjectIdFromAddressQuery()).toEqual('')
 
     const responseWithZeroResults = {
       page: { totalElements: 0, number: 1, size: 20, totalPages: 1 },
@@ -53,7 +61,7 @@ describe('getVerblijfsobjectIdFromAddressQuery', () => {
     }
     mockedGetNummeraanduidingByAddress.mockReturnValueOnce(Promise.resolve(responseWithZeroResults))
 
-    expect(await getVerblijfsobjectIdFromAddressQuery(queryParams)).toEqual('')
+    expect(await getVerblijfsobjectIdFromAddressQuery()).toEqual('')
   })
 
   it('should return an id', async () => {
@@ -69,8 +77,6 @@ describe('getVerblijfsobjectIdFromAddressQuery', () => {
     }
     mockedGetNummeraanduidingByAddress.mockReturnValueOnce(Promise.resolve(response))
 
-    expect(await getVerblijfsobjectIdFromAddressQuery(queryParams)).toEqual(
-      `id${verblijfsobjectId}`,
-    )
+    expect(await getVerblijfsobjectIdFromAddressQuery()).toEqual(`id${verblijfsobjectId}`)
   })
 })

@@ -5,19 +5,27 @@ import {
   REDIRECTS_ARTICLES,
   SHORTLINKS,
 } from '../shared/config/content-links'
-import { Environment } from '../shared/environment'
 import PARAMETERS from '../store/parameters'
 import { toArticleDetail } from './links'
 import matomoInstance from './matomo'
-import { MAIN_PATHS, routing } from './routes'
+import { betaMapDataPath, MAIN_PATHS, routing } from './routes'
 import getVerblijfsobjectIdFromAddressQuery from './utils/getVerblijfsobjectIdFromAddressQuery'
+import { Environment } from '../shared/environment'
+import { getImageDataById } from '../panorama/services/panorama-api/panorama-api'
+import {
+  locationParam,
+  panoFovParam,
+  panoHeadingParam,
+  panoPitchParam,
+} from './pages/MapPage/query-params'
+import matchRule from './utils/matchRule'
 
 const { VIEW, VIEW_CENTER, LAYERS, LEGEND, ZOOM, EMBED } = PARAMETERS
 
 interface Redirect {
   from: string
   to: string
-  load?: (search: string) => Promise<string>
+  load?: (location: Location) => Promise<string>
 }
 
 // This are the known broken legacy links
@@ -83,6 +91,37 @@ export const legacyRoutes: Redirect[] = [
   {
     from: '/#?mpb=topografie&mpz=11&mpfs=T&mpv=52.3731081:4.8932945&pgn=home&uvm=T',
     to: `${routing.data.path}?${VIEW}=kaart`,
+  },
+  {
+    from: `/${betaMapDataPath}/panorama/*/${window.location.search}`,
+    to: `/${betaMapDataPath}/geozoek/`,
+    load: async (location: Location) => {
+      try {
+        const panoramaId = location.pathname
+          .split('/')
+          .filter((part) => part !== '')
+          .pop()
+        const result = await getImageDataById(panoramaId)
+        const currentParams = new URLSearchParams(location.search)
+        const query = new URLSearchParams({
+          [locationParam.name]: locationParam.encode({
+            lat: result.location[0] as number,
+            lng: result.location[1] as number,
+          }),
+          [panoHeadingParam.name]: (panoHeadingParam.initialValue as number).toString(),
+          [panoFovParam.name]: (panoFovParam.initialValue as number).toString(),
+          [panoPitchParam.name]: (panoPitchParam.initialValue as number).toString(),
+        })
+        currentParams.forEach((value, key) => {
+          query.set(key, value)
+        })
+        return `?${query.toString()}`
+      } catch (e) {
+        // Perhaps show alert if Auth- or Forbidden error
+        // For now it will just redirect to /kaart/geozoek
+        return ''
+      }
+    },
   },
 ]
 
@@ -200,25 +239,37 @@ const REDIRECTS = [
   ...webHooks,
 ]
 
-export default async function resolveRedirects() {
-  const currentPath = normalizePath(
-    `${window.location.pathname}${window.location.search}${window.location.hash}`,
+export default async function resolveRedirects(location: Location) {
+  const currentPath = normalizePath(`${location.pathname}${location.search}${location.hash}`)
+  const exactMatchingRedirect = REDIRECTS.find(({ from }) => normalizePath(from) === currentPath)
+  const wildcardMatchingRedirect = REDIRECTS.find(({ from }) =>
+    matchRule(currentPath, normalizePath(from)),
   )
-  const matchingRedirect = REDIRECTS.find(({ from }) => normalizePath(from) === currentPath)
 
-  if (!matchingRedirect) {
+  if (!exactMatchingRedirect && wildcardMatchingRedirect) {
+    const urlSuffix = wildcardMatchingRedirect.load
+      ? await wildcardMatchingRedirect.load(location)
+      : null
+
+    if (urlSuffix !== null) {
+      // Tries to prevent cancelling the network request to Matomo, arbitrary number that allows Matomo some time to load
+      window.setTimeout(() => location.replace(`${wildcardMatchingRedirect.to}${urlSuffix}`), 1000)
+    }
+
+    return !!urlSuffix
+  }
+
+  if (!exactMatchingRedirect) {
     return false
   }
 
   // Retrieve the data needed for the webhook
   // When migrating to a SSR or static application an actual implementation of webhooks can be created
-  if (webHooks.includes(matchingRedirect)) {
-    const dataId = matchingRedirect.load
-      ? await matchingRedirect.load(window.location.search)
-      : null
+  if (webHooks.includes(exactMatchingRedirect)) {
+    const dataId = exactMatchingRedirect.load ? await exactMatchingRedirect.load(location) : null
 
     if (dataId) {
-      const redirectTo = `${matchingRedirect.to}${dataId}/`
+      const redirectTo = `${exactMatchingRedirect.to}${dataId}/`
 
       matomoInstance.trackEvent({
         category: 'webhook',
@@ -227,7 +278,7 @@ export default async function resolveRedirects() {
       })
 
       // Tries to prevent cancelling the network request to Matomo, arbitrary number that allows Matomo some time to load
-      window.setTimeout(() => window.location.replace(redirectTo), 0)
+      window.setTimeout(() => location.replace(redirectTo), 0)
     }
 
     return !!dataId
@@ -235,8 +286,8 @@ export default async function resolveRedirects() {
 
   // Track "themakaarten"
   // TODO: As soon as the collections can be found in the search, this must be double checked to prevent duplicate logs in Matomo
-  if (shortUrls.includes(matchingRedirect)) {
-    if (matchingRedirect.from.startsWith('/themakaart')) {
+  if (shortUrls.includes(exactMatchingRedirect)) {
+    if (exactMatchingRedirect.from.startsWith('/themakaart')) {
       // Get the title of the "themakaart" from the currentPath
       const action = currentPath.split('/')[2]
 
@@ -245,7 +296,7 @@ export default async function resolveRedirects() {
   }
 
   // Tries to prevent cancelling the network request to Matomo, arbitrary number that allows Matomo some time to load
-  window.setTimeout(() => window.location.replace(matchingRedirect.to), 1000)
+  window.setTimeout(() => location.replace(exactMatchingRedirect.to), 1000)
 
   return true
 }
