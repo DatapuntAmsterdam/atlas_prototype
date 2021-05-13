@@ -23,6 +23,10 @@ export const toArticleDetail = (id: string, slug: string): LocationDescriptorObj
   pathname: generatePath(routing.articleDetail.path, { id, slug }),
 })
 
+export const toArticleSearch = (): LocationDescriptorObject => ({
+  pathname: routing.articleSearch.path,
+})
+
 export const toCadastralObjects = (): LocationDescriptorObject => {
   const searchParams = new URLSearchParams({
     [parameters.VIEW]: ViewMode.Full,
@@ -36,6 +40,10 @@ export const toCadastralObjects = (): LocationDescriptorObject => {
 
 export const toCollectionDetail = (id: string, slug: string): LocationDescriptorObject => ({
   pathname: generatePath(routing.collectionDetail.path, { id, slug }),
+})
+
+export const toCollectionSearch = (): LocationDescriptorObject => ({
+  pathname: routing.collectionSearch.path,
 })
 
 export const toConstructionDossier = (
@@ -74,6 +82,23 @@ export const toDataDetail = ({ type, subtype, id }: DataDetailParams): LocationD
   }
 }
 
+export const toDataSearch = (): LocationDescriptorObject => ({
+  pathname: routing.dataSearch.path,
+})
+
+export interface DatasetDetailParams {
+  id: string
+  slug: string
+}
+
+export const toDatasetDetail = ({ id, slug }: DatasetDetailParams): LocationDescriptorObject => ({
+  pathname: generatePath(routing.datasetDetail.path, { id, slug }),
+})
+
+export const toDatasetSearch = (): LocationDescriptorObject => ({
+  pathname: routing.datasetSearch.path,
+})
+
 export const toEstablishments = (): LocationDescriptorObject => {
   const searchParams = new URLSearchParams({
     [parameters.VIEW]: ViewMode.Full,
@@ -85,6 +110,11 @@ export const toEstablishments = (): LocationDescriptorObject => {
   }
 }
 
+// TODO: Rename this method to match the name of the route.
+export const toGeoSearch = (): LocationDescriptorObject => ({
+  pathname: routing.dataSearchGeo.path,
+})
+
 export const toHelpPage = () =>
   toArticleDetail(HEADER_LINK_HELP.id[environment.DEPLOY_ENV], HEADER_LINK_HELP.slug)
 
@@ -92,8 +122,29 @@ export const toHome = (): LocationDescriptorObject => ({
   pathname: routing.home.path,
 })
 
+// TODO: Rename this method to match the name of the route.
+export const toMap = (): LocationDescriptorObject => ({
+  pathname: routing.data.path,
+})
+
+export const toMapSearch = (): LocationDescriptorObject => ({
+  pathname: routing.mapSearch.path,
+})
+
+export const toPanorama = (): LocationDescriptorObject => ({
+  pathname: routing.panorama.path,
+})
+
 export const toPublicationDetail = (id: string, slug: string): LocationDescriptorObject => ({
   pathname: generatePath(routing.publicationDetail.path, { id, slug }),
+})
+
+export const toPublicationSearch = (): LocationDescriptorObject => ({
+  pathname: routing.publicationSearch.path,
+})
+
+export const toSearch = (): LocationDescriptorObject => ({
+  pathname: routing.search.path,
 })
 
 export const toSpecialDetail = (
@@ -102,4 +153,8 @@ export const toSpecialDetail = (
   slug: string,
 ): LocationDescriptorObject => ({
   pathname: generatePath(routing.specialDetail.path, { id, type, slug }),
+})
+
+export const toSpecialSearch = (): LocationDescriptorObject => ({
+  pathname: routing.specialSearch.path,
 })

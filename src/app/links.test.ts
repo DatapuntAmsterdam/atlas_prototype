@@ -4,15 +4,27 @@ import { HEADER_LINK_HELP } from '../shared/config/content-links'
 import {
   toAddresses,
   toArticleDetail,
+  toArticleSearch,
   toCadastralObjects,
   toCollectionDetail,
+  toCollectionSearch,
   toConstructionDossier,
   toDataDetail,
+  toDataSearch,
+  toDatasetDetail,
+  toDatasetSearch,
   toEstablishments,
+  toGeoSearch,
   toHelpPage,
   toHome,
+  toMap,
+  toMapSearch,
+  toPanorama,
   toPublicationDetail,
+  toPublicationSearch,
+  toSearch,
   toSpecialDetail,
+  toSpecialSearch,
 } from './links'
 import { routing } from './routes'
 
@@ -36,6 +48,14 @@ describe('toArticleDetail', () => {
   })
 })
 
+describe('toArticleSearch', () => {
+  it('creates a location descriptor', () => {
+    expect(toArticleSearch()).toEqual({
+      pathname: routing.articleSearch.path,
+    })
+  })
+})
+
 describe('toCadastralObjects', () => {
   it('creates a location descriptor', () => {
     expect(toCadastralObjects()).toEqual({
@@ -52,6 +72,14 @@ describe('toCollectionDetail', () => {
   it('creates a location descriptor', () => {
     expect(toCollectionDetail(id, slug)).toEqual({
       pathname: generatePath(routing.collectionDetail.path, { id, slug }),
+    })
+  })
+})
+
+describe('toCollectionSearch', () => {
+  it('creates a location descriptor', () => {
+    expect(toCollectionSearch()).toEqual({
+      pathname: routing.collectionSearch.path,
     })
   })
 })
@@ -91,11 +119,46 @@ describe('toDataDetail', () => {
   })
 })
 
+describe('toDataSearch', () => {
+  it('creates a location descriptor', () => {
+    expect(toDataSearch()).toEqual({
+      pathname: routing.dataSearch.path,
+    })
+  })
+})
+
+describe('toDatasetDetail', () => {
+  const id = '123456'
+  const slug = 'hello-world'
+
+  it('creates a location descriptor', () => {
+    expect(toDatasetDetail({ id, slug })).toEqual({
+      pathname: generatePath(routing.datasetDetail.path, { id, slug }),
+    })
+  })
+})
+
+describe('toDatasetSearch', () => {
+  it('creates a location descriptor', () => {
+    expect(toDatasetSearch()).toEqual({
+      pathname: routing.datasetSearch.path,
+    })
+  })
+})
+
 describe('toEstablishments', () => {
   it('creates a location descriptor', () => {
     expect(toEstablishments()).toEqual({
       pathname: routing.establishments.path,
       search: 'modus=volledig',
+    })
+  })
+})
+
+describe('toGeoSearch', () => {
+  it('creates a location descriptor', () => {
+    expect(toGeoSearch()).toEqual({
+      pathname: routing.dataSearchGeo.path,
     })
   })
 })
@@ -119,6 +182,30 @@ describe('toHome', () => {
   })
 })
 
+describe('toMap', () => {
+  it('creates a location descriptor', () => {
+    expect(toMap()).toEqual({
+      pathname: routing.data.path,
+    })
+  })
+})
+
+describe('toMapSearch', () => {
+  it('creates a location descriptor', () => {
+    expect(toMapSearch()).toEqual({
+      pathname: routing.mapSearch.path,
+    })
+  })
+})
+
+describe('toPanorama', () => {
+  it('creates a location descriptor', () => {
+    expect(toPanorama()).toEqual({
+      pathname: routing.panorama.path,
+    })
+  })
+})
+
 describe('toPublicationDetail', () => {
   const id = '123456'
   const slug = 'hello-world'
@@ -126,6 +213,22 @@ describe('toPublicationDetail', () => {
   it('creates a location descriptor', () => {
     expect(toPublicationDetail(id, slug)).toEqual({
       pathname: generatePath(routing.publicationDetail.path, { id, slug }),
+    })
+  })
+})
+
+describe('toPublicationSearch', () => {
+  it('creates a location descriptor', () => {
+    expect(toPublicationSearch()).toEqual({
+      pathname: routing.publicationSearch.path,
+    })
+  })
+})
+
+describe('toSearch', () => {
+  it('creates a location descriptor', () => {
+    expect(toSearch()).toEqual({
+      pathname: routing.search.path,
     })
   })
 })
@@ -138,6 +241,14 @@ describe('toSpecialDetail', () => {
   it('creates a location descriptor', () => {
     expect(toSpecialDetail(id, type, slug)).toEqual({
       pathname: generatePath(routing.specialDetail.path, { id, type, slug }),
+    })
+  })
+})
+
+describe('toSpecialSearch', () => {
+  it('creates a location descriptor', () => {
+    expect(toSpecialSearch()).toEqual({
+      pathname: routing.specialSearch.path,
     })
   })
 })
