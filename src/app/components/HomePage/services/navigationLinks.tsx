@@ -8,16 +8,18 @@ import {
   NAVIGATION_LINK_DATA_SERVICES,
 } from '../../../../shared/config/content-links'
 import {
+  toMapWithLegendOpen,
+  toPanoramaAndPreserveQuery,
+} from '../../../../store/redux-first-router/actions'
+import {
+  toArticleDetail,
   toArticleSearch,
   toCollectionSearch,
   toDatasetSearch,
   toMapSearch,
-  toMapWithLegendOpen,
-  toPanoramaAndPreserveQuery,
   toPublicationSearch,
   toSpecialSearch,
-} from '../../../../store/redux-first-router/actions'
-import { toArticleDetail } from '../../../links'
+} from '../../../links'
 import { routing as routes } from '../../../routes'
 
 export interface NavigationLink {
@@ -88,25 +90,25 @@ const navigationLinks: NavigationLink[] = [
   },
   {
     id: 6,
-    to: toCollectionSearch(null, false, false, false),
+    to: toCollectionSearch(),
     testId: routes.collectionSearch.title,
     title: routes.collectionSearch.title,
   },
   {
     id: 7,
-    to: toSpecialSearch(null, false, false, false),
+    to: toSpecialSearch(),
     testId: routes.specialSearch.title,
     title: routes.specialSearch.title,
   },
   {
     id: 9,
-    to: toMapSearch(null, false, false, false),
+    to: toMapSearch(),
     testId: routes.mapSearch.title,
     title: routes.mapSearch.title,
   },
   {
     id: 3,
-    to: toDatasetSearch(null, false, false, false),
+    to: toDatasetSearch(),
     CardIcon: () => (
       <Icon size={48}>
         <Data />
@@ -118,7 +120,7 @@ const navigationLinks: NavigationLink[] = [
   },
   {
     id: 2,
-    to: toPublicationSearch(null, false, false, false),
+    to: toPublicationSearch(),
     CardIcon: () => (
       <Icon size={48}>
         <DocumentText />
@@ -130,7 +132,7 @@ const navigationLinks: NavigationLink[] = [
   },
   {
     id: 8,
-    to: toArticleSearch(null, false, false, false),
+    to: toArticleSearch(),
     testId: routes.articleSearch.title,
     title: routes.articleSearch.title,
   },
