@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux'
-import SearchPageReducer, { REDUCER_KEY as SEARCH } from '../app/pages/SearchPage/SearchPageDucks'
 import MapBaseLayersReducer from '../map/ducks/base-layers/map-base-layers'
 import MapDetailReducer from '../map/ducks/detail/reducer'
 import MapLayersReducer from '../map/ducks/layers/map-layers'
@@ -39,7 +38,6 @@ const rootReducer =
       [DATA_SEARCH_REDUCER]: DataSearchReducer,
       [SELECTION]: SelectionReducer,
       [DATA_SELECTION]: DataSelectionReducer,
-      [SEARCH]: SearchPageReducer,
     })
 
     // Combine legacy and new reducer states

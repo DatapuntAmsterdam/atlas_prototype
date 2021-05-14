@@ -1,5 +1,6 @@
-import type { To } from 'redux-first-router-link'
+import type { LocationDescriptorObject } from 'history'
 import { CmsType } from '../../../shared/config/cms.config'
+import EditorialResults from '../../components/EditorialResults'
 import {
   toArticleSearch,
   toCollectionSearch,
@@ -9,8 +10,7 @@ import {
   toPublicationSearch,
   toSearch,
   toSpecialSearch,
-} from '../../../store/redux-first-router/actions'
-import EditorialResults from '../../components/EditorialResults'
+} from '../../links'
 import { routing } from '../../routes'
 import { SearchType } from './constants'
 import DataSearchResults from './DataSearchResults'
@@ -33,7 +33,7 @@ export const DEFAULT_LIMIT = 10
 export interface SearchConfig {
   resolver: any
   query: string
-  to: (additionalParams?: any, skipSaga?: boolean, forceSaga?: boolean, preserve?: boolean) => To
+  to: LocationDescriptorObject
   path: string
   label: string
   type: CmsType | SearchType
@@ -46,7 +46,7 @@ const SEARCH_TYPES_CONFIG: { [key: string]: SearchConfig } = {
   [routing.collectionSearch.page]: {
     resolver: 'collectionSearch',
     query: collectionSearchQuery,
-    to: toCollectionSearch,
+    to: toCollectionSearch(),
     path: routing.collectionSearch.path,
     label: routing.collectionSearch.title,
     type: CmsType.Collection,
@@ -56,7 +56,7 @@ const SEARCH_TYPES_CONFIG: { [key: string]: SearchConfig } = {
   [routing.specialSearch.page]: {
     resolver: 'specialSearch',
     query: specialSearchQuery,
-    to: toSpecialSearch,
+    to: toSpecialSearch(),
     path: routing.specialSearch.path,
     label: routing.specialSearch.title,
     type: CmsType.Special,
@@ -66,7 +66,7 @@ const SEARCH_TYPES_CONFIG: { [key: string]: SearchConfig } = {
   [routing.mapSearch.page]: {
     resolver: 'mapSearch',
     query: mapSearchQuery,
-    to: toMapSearch,
+    to: toMapSearch(),
     path: routing.mapSearch.path,
     label: routing.mapSearch.title,
     type: SearchType.Map,
@@ -76,7 +76,7 @@ const SEARCH_TYPES_CONFIG: { [key: string]: SearchConfig } = {
   [routing.dataSearch.page]: {
     resolver: 'dataSearch',
     query: dataSearchQuery,
-    to: toDataSearch,
+    to: toDataSearch(),
     path: routing.dataSearch.path,
     label: routing.dataSearch.title,
     type: SearchType.Data,
@@ -86,7 +86,7 @@ const SEARCH_TYPES_CONFIG: { [key: string]: SearchConfig } = {
   [routing.datasetSearch.page]: {
     resolver: 'datasetSearch',
     query: datasetSearchQuery,
-    to: toDatasetSearch,
+    to: toDatasetSearch(),
     path: routing.datasetSearch.path,
     label: routing.datasetSearch.title,
     type: SearchType.Dataset,
@@ -96,7 +96,7 @@ const SEARCH_TYPES_CONFIG: { [key: string]: SearchConfig } = {
   [routing.publicationSearch.page]: {
     resolver: 'publicationSearch',
     query: publicationSearchQuery,
-    to: toPublicationSearch,
+    to: toPublicationSearch(),
     path: routing.publicationSearch.path,
     label: routing.publicationSearch.title,
     type: CmsType.Publication,
@@ -106,7 +106,7 @@ const SEARCH_TYPES_CONFIG: { [key: string]: SearchConfig } = {
   [routing.articleSearch.page]: {
     resolver: 'articleSearch',
     query: articleSearchQuery,
-    to: toArticleSearch,
+    to: toArticleSearch(),
     path: routing.articleSearch.path,
     label: routing.articleSearch.title,
     type: CmsType.Article,
@@ -126,7 +126,7 @@ export default {
   [routing.search.page]: {
     // The all search results page calls the resolver for each search type
     resolver: Object.values(SEARCH_TYPES_CONFIG).map(({ resolver }) => resolver),
-    to: toSearch,
+    to: toSearch(),
     query: searchQuery,
     path: routing.search.path,
     label: routing.search.title,

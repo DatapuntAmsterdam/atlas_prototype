@@ -1,12 +1,12 @@
 import { useQuery } from 'urql'
 import type { DocumentNode, GraphQLFormattedError } from 'graphql'
 import type { ErrorExtensions } from '../../models/graphql'
-import type { ActiveFilter } from './SearchPageDucks'
+import type { ActiveFilter, Sort } from './query-params'
 
 interface Variables {
   q: string
   page: number | null
-  sort?: { field: string; order: string }
+  sort: Sort | null
   limit: number | null
   withPagination: boolean
   filters: ActiveFilter[]

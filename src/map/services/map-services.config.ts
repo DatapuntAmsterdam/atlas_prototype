@@ -1,8 +1,7 @@
 /* eslint-disable no-underscore-dangle,camelcase,@typescript-eslint/restrict-template-expressions */
 import type { LatLngLiteral } from 'leaflet'
 import type { List as OpenbareRuimtesList } from '../../api/bag/v1/openbareruimtes'
-import type { Single as Woonplaatsen } from '../../api/bag/v1/woonplaatsen'
-import { path as woonplaatsenPath } from '../../api/bag/v1/woonplaatsen'
+import { path as woonplaatsenPath, Single as Woonplaatsen } from '../../api/bag/v1/woonplaatsen'
 import { path as alcoholverbodPath } from '../../api/overlastgebieden/alcoholverbod'
 import { path as algemeenoverlastPath } from '../../api/overlastgebieden/algemeenoverlast'
 import { path as cameratoezichtPath } from '../../api/overlastgebieden/cameratoezicht'

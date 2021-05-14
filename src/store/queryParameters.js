@@ -12,19 +12,7 @@ import {
   viewParam,
   zoomParam,
 } from '../app/pages/MapPage/query-params'
-import {
-  activeFiltersParam,
-  pageParam,
-  queryParam,
-  sortParam,
-} from '../app/pages/SearchPage/query-params'
-import {
-  getActiveFilters,
-  getPage,
-  getQuery,
-  getSort,
-  REDUCER_KEY as SEARCH_REDUCER,
-} from '../app/pages/SearchPage/SearchPageDucks'
+import { pageParam } from '../app/pages/SearchPage/query-params'
 import { routing } from '../app/routes'
 import { initialState as mapInitialState, REDUCER_KEY as MAP } from '../map/ducks/map/constants'
 import {
@@ -101,28 +89,11 @@ const routesWithCmsData = [
 
 /* istanbul ignore next */
 export default paramsRegistry
-  .addParameter(queryParam.name, (routes) => {
-    routes.add(routesWithSearch, SEARCH_REDUCER, 'query', {
-      selector: getQuery,
-      defaultValue: '',
-    })
-  })
-  .addParameter(sortParam.name, (routes) => {
-    routes.add(routesWithSearch, SEARCH_REDUCER, 'sort', {
-      selector: getSort,
-      defaultValue: '',
-    })
-  })
   .addParameter(pageParam.name, (routes) => {
-    routes
-      .add(routesWithDataSelection, DATA_SELECTION, 'page', {
-        defaultValue: dataSelectionInitialState.page,
-        selector: getDataSelectionPage,
-      })
-      .add(routesWithSearch, SEARCH_REDUCER, 'page', {
-        selector: getPage,
-        defaultValue: 1,
-      })
+    routes.add(routesWithDataSelection, DATA_SELECTION, 'page', {
+      defaultValue: dataSelectionInitialState.page,
+      selector: getDataSelectionPage,
+    })
   })
   .addParameter(polygonParam.name, (routes) => {
     routes.add(routesWithDataSelection, DATA_SELECTION, 'geometryFilter', {
@@ -246,31 +217,6 @@ export default paramsRegistry
       },
       false,
     )
-  })
-  .addParameter(activeFiltersParam.name, (routes) => {
-    routes.add(routesWithSearch, SEARCH_REDUCER, 'activeFilters', {
-      selector: getActiveFilters,
-      defaultValue: [],
-      decode: (val) =>
-        val
-          ? val.split('|').map((encodedFilters) => {
-              const [type, filters] = encodedFilters.split(';')
-              const decodedFilters = filters.split('.')
-
-              return {
-                type,
-                values: decodedFilters,
-              }
-            })
-          : [],
-      encode: (selectorResult = {}) =>
-        selectorResult
-          .map(({ type, values }) => {
-            const encodedFilters = Array.isArray(values) ? values.join('.') : values
-            return `${type};${encodedFilters}`
-          })
-          .join('|'),
-    })
   })
   .addParameter(PARAMETERS.DETAIL_REFERENCE, (routes) => {
     routes.add(

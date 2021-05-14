@@ -10,14 +10,14 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import type { FunctionComponent } from 'react'
 import type { EditorialResultsProps } from '../../components/EditorialResults/EditorialResults'
 import PAGES from '../../pages'
 import formatCount from '../../utils/formatCount'
-import type { SearchConfig } from './config'
-import SEARCH_PAGE_CONFIG, { EDITORIAL_SEARCH_PAGES } from './config'
+import toSearchParams from '../../utils/toSearchParams'
+import SEARCH_PAGE_CONFIG, { EDITORIAL_SEARCH_PAGES, SearchConfig } from './config'
 import { pageParam } from './query-params'
 import type { SearchPageFiltersProps } from './SearchPageFilters'
 import SearchResultsOverview from './SearchResultsOverview'
@@ -94,7 +94,6 @@ const StyledCompactPager = styled(CompactPager)`
 interface SearchPageResultsProps
   extends Pick<EditorialResultsProps, 'query' | 'errors' | 'loading' | 'results'>,
     Pick<SearchPageFiltersProps, 'setShowFilter' | 'totalCount' | 'currentPage'> {
-  sort: string | null
   page: number
   pageInfo: {
     hasLimitedResults: string
@@ -114,12 +113,11 @@ const SearchPageResults: FunctionComponent<SearchPageResultsProps> = ({
   currentPage,
   isOverviewPage,
   setShowFilter,
-  sort,
   page,
   pageInfo,
   hasQuery,
 }) => {
-  const dispatch = useDispatch()
+  const history = useHistory()
   const allResultsPageActive = currentPage === PAGES.SEARCH
   const pageConfig = SEARCH_PAGE_CONFIG[currentPage] as SearchConfig
 
@@ -160,7 +158,7 @@ const SearchPageResults: FunctionComponent<SearchPageResultsProps> = ({
         </FilterButton>
         {EDITORIAL_SEARCH_PAGES.includes(currentPage) && (
           <>
-            <SearchSort isOverviewPage={isOverviewPage} sort={sort} disabled={loading} />
+            <SearchSort isOverviewPage={isOverviewPage} disabled={loading} />
             <StyledDivider />
           </>
         )}
@@ -211,15 +209,12 @@ const SearchPageResults: FunctionComponent<SearchPageResultsProps> = ({
               pageSize={Math.ceil(totalCount / pageInfo.totalPages)}
               collectionSize={totalCount}
               onPageChange={(pageNumber) => {
-                dispatch(
-                  pageConfig.to(
-                    {
-                      [pageParam.name]: pageNumber,
-                    },
-                    false,
-                    true,
-                  ),
-                )
+                history.push({
+                  ...pageConfig.to,
+                  search: toSearchParams([[pageParam, pageNumber]], {
+                    initialValue: window.location.search,
+                  }).toString(),
+                })
               }}
             />
           )}
