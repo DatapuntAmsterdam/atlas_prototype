@@ -6,7 +6,7 @@ import SearchBar from '../../app/components/SearchBar'
 import { LOCAL_STORAGE_KEY } from '../../app/components/SearchBarFilter/SearchBarFilter'
 import SEARCH_PAGE_CONFIG from '../../app/pages/SearchPage/config'
 import { SearchType } from '../../app/pages/SearchPage/constants'
-import { searchQueryParam } from '../../app/pages/SearchPage/query-params'
+import { queryParam } from '../../app/pages/SearchPage/query-params'
 import useParam from '../../app/utils/useParam'
 import useTraverseList from '../../app/utils/useTraverseList'
 import autoSuggestSearch, {
@@ -25,7 +25,7 @@ const ACTIVE_ITEM_CLASS = 'auto-suggest__dropdown-item--active'
 const HeaderSearch: FunctionComponent = () => {
   const history = useHistory()
 
-  const [searchQuery, setSearchQuery] = useParam(searchQueryParam)
+  const [searchQuery, setSearchQuery] = useParam(queryParam)
 
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [loading, setLoading] = useState(false)

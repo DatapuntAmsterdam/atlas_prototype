@@ -10,7 +10,7 @@ import useCurrentPage from '../../utils/useCurrentPage'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import useParam from '../../utils/useParam'
 import SEARCH_PAGE_CONFIG, { DEFAULT_LIMIT } from './config'
-import { searchQueryParam } from './query-params'
+import { queryParam } from './query-params'
 import { ActiveFilter, getActiveFilters, getPage, getSort } from './SearchPageDucks'
 import SearchPageFilters from './SearchPageFilters'
 import SearchPageResults from './SearchPageResults'
@@ -39,7 +39,7 @@ const SearchPage = () => {
 
   const currentPage = useCurrentPage()
 
-  const [query] = useParam(searchQueryParam)
+  const [query] = useParam(queryParam)
   const hasQuery = query.trim().length > 0
   const defaultSort = !hasQuery ? 'date:desc' : ''
   const withPagination = isPaginatable(currentPage, activeFilters)
