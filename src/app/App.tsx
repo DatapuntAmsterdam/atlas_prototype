@@ -11,6 +11,7 @@ import { MatomoProvider } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
 import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import {
   cacheExchange,
@@ -35,9 +36,9 @@ import Footer, { FOOTER_ID } from './components/Footer/Footer'
 import Header from './components/Header'
 import { SEARCH_BAR_INPUT_ID } from './components/SearchBar/SearchBar'
 import { useIsEmbedded } from './contexts/ui'
+import { toNotFound } from './links'
 import matomoInstance from './matomo'
 import { isContentPage, isEditorialDetailPage, isSearchPage } from './pages'
-import { routing } from './routes'
 
 const StyledContainer = styled(Container)`
   min-height: 100%;
@@ -101,6 +102,7 @@ const AppWrapper: FunctionComponent<AppWrapperProps> = ({ children, hasMaxWidth,
 }
 
 const App: FunctionComponent = () => {
+  const history = useHistory()
   const currentPage = useSelector(getPage)
   const isEmbedded = useIsEmbedded()
   const homePage = useSelector(isHomepage)
@@ -119,8 +121,8 @@ const App: FunctionComponent = () => {
     isSearchPage(currentPage)
 
   // Redirect to the 404 page if currentPage isn't set
-  if (currentPage === '' && typeof window !== 'undefined') {
-    window.location.replace(routing.niet_gevonden.path)
+  if (currentPage === '') {
+    history.replace(toNotFound())
   }
 
   const bodyClasses = classNames({

@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import environment from '../../../environment'
-import { routing } from '../../routes'
+import { toNotFound } from '../../links'
 import getImageFromCms from '../../utils/getImageFromCms'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
@@ -52,7 +52,7 @@ const EditorialPage: FunctionComponent<EditorialPageProps> = ({
 
   useEffect(() => {
     if (error) {
-      window.location.replace(routing.niet_gevonden.path)
+      history.replace(toNotFound())
     }
   }, [error])
 

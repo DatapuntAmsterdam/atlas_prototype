@@ -19,6 +19,7 @@ import {
   toHome,
   toMap,
   toMapSearch,
+  toNotFound,
   toPanorama,
   toPublicationDetail,
   toPublicationSearch,
@@ -194,6 +195,14 @@ describe('toMapSearch', () => {
   it('creates a location descriptor', () => {
     expect(toMapSearch()).toEqual({
       pathname: routing.mapSearch.path,
+    })
+  })
+})
+
+describe('toNotFound', () => {
+  it('creates a location descriptor', () => {
+    expect(toNotFound()).toEqual({
+      pathname: routing.notFound.path,
     })
   })
 })

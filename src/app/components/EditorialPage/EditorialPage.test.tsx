@@ -1,8 +1,7 @@
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { mount, shallow } from 'enzyme'
 import { History } from 'history'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { mocked } from 'ts-jest/utils'
 import environment from '../../../environment'
 import useDocumentTitle from '../../utils/useDocumentTitle'

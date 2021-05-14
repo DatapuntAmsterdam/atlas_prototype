@@ -102,7 +102,7 @@ const AppBody: FunctionComponent<AppBodyProps> = ({
                   component={CollectionDetailPage}
                 />
                 <Route path={routing.actuality.path} exact component={ActualityPage} />
-                <Route path={routing.niet_gevonden.path} exact component={NotFoundPage} />
+                <Route path={routing.notFound.path} exact component={NotFoundPage} />
                 <Route path={mapSearchPagePaths} component={SearchPage} />
               </Switch>
             </Suspense>

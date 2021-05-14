@@ -117,7 +117,7 @@ export const routing = typeHelper({
     type: `${ROUTER_NAMESPACE}/${PAGES.LOGIN}`,
     page: PAGES.LOGIN,
   },
-  niet_gevonden: {
+  notFound: {
     title: 'Pagina niet gevonden',
     path: '/niet-gevonden/',
     type: `${ROUTER_NAMESPACE}/${PAGES.NOT_FOUND}`,

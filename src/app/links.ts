@@ -131,6 +131,10 @@ export const toMapSearch = (): LocationDescriptorObject => ({
   pathname: routing.mapSearch.path,
 })
 
+export const toNotFound = (): LocationDescriptorObject => ({
+  pathname: routing.notFound.path,
+})
+
 export const toPanorama = (): LocationDescriptorObject => ({
   pathname: routing.panorama.path,
 })

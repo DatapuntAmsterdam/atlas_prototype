@@ -1,11 +1,13 @@
 import { render, screen } from '@testing-library/react'
+import { createMemoryHistory } from 'history'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { MemoryRouter, Router } from 'react-router-dom'
 import configureMockStore from 'redux-mock-store'
 import { mocked } from 'ts-jest/utils'
 import { ViewMode } from '../shared/ducks/ui/ui'
 import App from './App'
 import { useIsEmbedded } from './contexts/ui'
+import { toNotFound } from './links'
 import PAGES from './pages'
 import { ROUTER_NAMESPACE } from './routes'
 import useParam from './utils/useParam'
@@ -62,28 +64,26 @@ describe('App', () => {
     const newStore = mockStore2(
       Object.assign(initialState, { location: { type: 'not-existing-page' } }),
     )
-    const replaceMock = jest.fn()
-    // @ts-ignore
-    delete window.location
-    // @ts-ignore
-    window.location = { replace: replaceMock }
+
+    const history = createMemoryHistory()
 
     render(
       <Provider store={newStore}>
-        <Router>
+        <Router history={history}>
           <App />
         </Router>
       </Provider>,
     )
-    expect(replaceMock).toHaveBeenCalled()
+
+    expect(history.location).toEqual(expect.objectContaining(toNotFound()))
   })
 
   it('should render', () => {
     const { container } = render(
       <Provider store={store}>
-        <Router>
+        <MemoryRouter>
           <App />
-        </Router>
+        </MemoryRouter>
       </Provider>,
     )
     const firstChild = container.firstChild as HTMLElement
@@ -93,9 +93,9 @@ describe('App', () => {
   it('should render the header', () => {
     render(
       <Provider store={store}>
-        <Router>
+        <MemoryRouter>
           <App />
-        </Router>
+        </MemoryRouter>
       </Provider>,
     )
     expect(screen.getByTestId('header')).toBeInTheDocument()
@@ -104,9 +104,9 @@ describe('App', () => {
   it('should render skip navigation buttons (A11Y)', () => {
     render(
       <Provider store={store}>
-        <Router>
+        <MemoryRouter>
           <App />
-        </Router>
+        </MemoryRouter>
       </Provider>,
     )
     expect(screen.getByTitle('Direct naar: inhoud')).toBeInTheDocument()
