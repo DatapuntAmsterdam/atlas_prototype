@@ -1,8 +1,6 @@
 import usePrevious from './usePrevious'
 
-const useCompare = (value) => {
+export default function useCompare<T>(value: T) {
   const prevVal = usePrevious(value)
   return prevVal !== value
 }
-
-export default useCompare
