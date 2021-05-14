@@ -13,15 +13,15 @@ import {
 import { FunctionComponent } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import PARAMETERS from '../../../store/parameters'
+import { EditorialResultsProps } from '../../components/EditorialResults/EditorialResults'
 import PAGES from '../../pages'
 import formatCount from '../../utils/formatCount'
 import SEARCH_PAGE_CONFIG, { EDITORIAL_SEARCH_PAGES, SearchConfig } from './config'
+import { pageParam } from './query-params'
+import { SearchPageFiltersProps } from './SearchPageFilters'
 import SearchResultsOverview from './SearchResultsOverview'
 import { SearchResultsOverviewSkeleton, SearchResultsSkeleton } from './SearchResultsSkeleton'
 import SearchSort from './SearchSort'
-import { EditorialResultsProps } from '../../components/EditorialResults/EditorialResults'
-import { SearchPageFiltersProps } from './SearchPageFilters'
 
 const StyledHeading = styled(Heading)`
   margin-bottom: ${themeSpacing(4)};
@@ -213,7 +213,7 @@ const SearchPageResults: FunctionComponent<SearchPageResultsProps> = ({
                 dispatch(
                   pageConfig.to(
                     {
-                      [PARAMETERS.PAGE]: pageNumber,
+                      [pageParam.name]: pageNumber,
                     },
                     false,
                     true,

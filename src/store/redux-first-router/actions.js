@@ -1,3 +1,4 @@
+import { activeFiltersParam } from '../../app/pages/SearchPage/query-params'
 import { ROUTER_NAMESPACE, routing } from '../../app/routes'
 import { ViewMode } from '../../shared/ducks/ui/ui'
 import PARAMETERS from '../parameters'
@@ -67,7 +68,7 @@ export const toDataSearch = toSearchOfType(routing.dataSearch.type)
 export const toDataSearchType = (type) =>
   toDataSearch(
     {
-      [PARAMETERS.FILTERS]: [
+      [activeFiltersParam.name]: [
         {
           type: 'dataTypes',
           values: [type],
@@ -200,4 +201,4 @@ export const toCollectionSearch = toSearchOfType(routing.collectionSearch.type)
 export const toMapSearch = toSearchOfType(routing.mapSearch.type)
 
 export const toMapSearchType = (type) =>
-  toMapSearch({ [PARAMETERS.FILTERS]: [{ type: 'map-type', values: [type] }] }, false, true)
+  toMapSearch({ [activeFiltersParam.name]: [{ type: 'map-type', values: [type] }] }, false, true)

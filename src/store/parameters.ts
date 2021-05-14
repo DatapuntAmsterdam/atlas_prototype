@@ -1,8 +1,5 @@
 export default {
-  QUERY: 'term',
-  SORT: 'sortering',
   MAP_BACKGROUND: 'achtergrond',
-  PAGE: 'pagina',
   GEO: 'geo',
   DRAWING_GEOMETRY: 'tekening',
   DETAIL: 'detail',
@@ -14,7 +11,6 @@ export default {
   HEADING: 'heading',
   PANORAMA_TAGS: 'tags',
   PITCH: 'pitch',
-  FILTERS: 'filters',
   DETAIL_REFERENCE: 'detail-ref',
   PAGE_REFERENCE: 'page-ref',
   EMBED_PREVIEW: 'embed-preview',

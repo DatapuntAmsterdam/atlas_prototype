@@ -2,10 +2,10 @@ import { FilterOption } from '@amsterdam/asc-ui'
 import { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import { useQuery } from 'urql'
-import PARAMETERS from '../../../store/parameters'
 import SEARCH_PAGE_CONFIG from '../../pages/SearchPage/config'
 // @ts-ignore
 import { totalCountSearch } from '../../pages/SearchPage/documents.graphql'
+import { queryParam } from '../../pages/SearchPage/query-params'
 import { routing } from '../../routes'
 import formatCount from '../../utils/formatCount'
 import FilterBox from '../FilterBox'
@@ -25,7 +25,7 @@ const PageFilterBox: FunctionComponent<PageFilterBoxProps> = ({ currentPage, que
     },
   })
 
-  const QUERY_PARAMETER = { [PARAMETERS.QUERY]: query }
+  const QUERY_PARAMETER = { [queryParam.name]: query }
 
   // We only want to preserve certain parameters when navigating between "filters" (pages)
   const RESET_ROUTE_ARGUMENTS = [QUERY_PARAMETER, undefined, undefined, false]

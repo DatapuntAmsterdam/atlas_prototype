@@ -1,4 +1,10 @@
 import {
+  activeFiltersParam,
+  pageParam,
+  queryParam,
+  sortParam,
+} from '../app/pages/SearchPage/query-params'
+import {
   getActiveFilters,
   getPage,
   getSort,
@@ -82,19 +88,19 @@ const routesWithCmsData = [
 
 /* istanbul ignore next */
 export default paramsRegistry
-  .addParameter(PARAMETERS.QUERY, (routes) => {
+  .addParameter(queryParam.name, (routes) => {
     routes.add(routesWithSearch, SEARCH_REDUCER, 'query', {
       selector: getQuery,
       defaultValue: '',
     })
   })
-  .addParameter(PARAMETERS.SORT, (routes) => {
+  .addParameter(sortParam.name, (routes) => {
     routes.add(routesWithSearch, SEARCH_REDUCER, 'sort', {
       selector: getSort,
       defaultValue: '',
     })
   })
-  .addParameter(PARAMETERS.PAGE, (routes) => {
+  .addParameter(pageParam.name, (routes) => {
     routes
       .add(routesWithDataSelection, DATA_SELECTION, 'page', {
         defaultValue: dataSelectionInitialState.page,
@@ -228,7 +234,7 @@ export default paramsRegistry
       false,
     )
   })
-  .addParameter(PARAMETERS.FILTERS, (routes) => {
+  .addParameter(activeFiltersParam.name, (routes) => {
     routes.add(routesWithSearch, SEARCH_REDUCER, 'activeFilters', {
       selector: getActiveFilters,
       defaultValue: [],

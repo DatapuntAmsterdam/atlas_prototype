@@ -1,14 +1,28 @@
 /* eslint-disable no-underscore-dangle,camelcase,@typescript-eslint/restrict-template-expressions */
 import { LatLngLiteral } from 'leaflet'
+import { List as OpenbareRuimtesList } from '../../api/bag/v1/openbareruimtes'
+import { path as woonplaatsenPath, Single as Woonplaatsen } from '../../api/bag/v1/woonplaatsen'
+import { path as alcoholverbodPath } from '../../api/overlastgebieden/alcoholverbod'
+import { path as algemeenoverlastPath } from '../../api/overlastgebieden/algemeenoverlast'
+import { path as cameratoezichtPath } from '../../api/overlastgebieden/cameratoezicht'
+import { path as dealeroverlastPath } from '../../api/overlastgebieden/dealeroverlast'
+import { path as rondleidingverbodPath } from '../../api/overlastgebieden/rondleidingverbod'
+import { path as taxistandplaatsPath } from '../../api/overlastgebieden/taxistandplaats'
+import { Single as OverlastgebiedenSingle } from '../../api/overlastgebieden/types'
+import { Root as Vastgoed } from '../../api/vsd/vastgoed/types'
 import config, { DataSelectionType } from '../../app/pages/MapPage/config'
-import getListFromApi from '../../app/pages/MapPage/detail/getListFromApi'
 import buildDetailUrl from '../../app/pages/MapPage/detail/buildDetailUrl'
+import getListFromApi from '../../app/pages/MapPage/detail/getListFromApi'
+import { activeFiltersParam } from '../../app/pages/SearchPage/query-params'
 import formatDate from '../../app/utils/formatDate'
 import getFileName from '../../app/utils/getFileName'
 import GLOSSARY, { Definition } from '../../detail/services/glossary.constant'
 import environment from '../../environment'
 import { DEFAULT_LOCALE } from '../../shared/config/locale.config'
 import { fetchWithToken } from '../../shared/services/api/api'
+import AuthScope from '../../shared/services/api/authScope'
+import { Wsg84Coordinate } from '../../shared/services/coordinate-reference-system/crs-converter'
+import getRdAndWgs84Coordinates from '../../shared/services/coordinate-reference-system/getRdAndWgs84Coordinates'
 import PARAMETERS from '../../store/parameters'
 import { getDetailPageData } from '../../store/redux-first-router/actions'
 import {
@@ -54,19 +68,6 @@ import {
   winkelgebied,
 } from './normalize/normalize'
 import vestiging from './vestiging/vestiging'
-import getRdAndWgs84Coordinates from '../../shared/services/coordinate-reference-system/getRdAndWgs84Coordinates'
-import AuthScope from '../../shared/services/api/authScope'
-import { Root as Vastgoed } from '../../api/vsd/vastgoed/types'
-import { Wsg84Coordinate } from '../../shared/services/coordinate-reference-system/crs-converter'
-import { path as woonplaatsenPath, Single as Woonplaatsen } from '../../api/bag/v1/woonplaatsen'
-import { List as OpenbareRuimtesList } from '../../api/bag/v1/openbareruimtes'
-import { path as algemeenoverlastPath } from '../../api/overlastgebieden/algemeenoverlast'
-import { path as dealeroverlastPath } from '../../api/overlastgebieden/dealeroverlast'
-import { path as alcoholverbodPath } from '../../api/overlastgebieden/alcoholverbod'
-import { path as cameratoezichtPath } from '../../api/overlastgebieden/cameratoezicht'
-import { path as rondleidingverbodPath } from '../../api/overlastgebieden/rondleidingverbod'
-import { path as taxistandplaatsPath } from '../../api/overlastgebieden/taxistandplaats'
-import { Single as OverlastgebiedenSingle } from '../../api/overlastgebieden/types'
 
 export const endpointTypes = {
   adressenLigplaats: 'bag/v1.1/ligplaats/',
@@ -313,7 +314,7 @@ export const getShowInTableBlock = (
   )
   const search = new URLSearchParams({
     [PARAMETERS.VIEW]: 'volledig',
-    [PARAMETERS.FILTERS]: filterParamValue,
+    [activeFiltersParam.name]: filterParamValue,
   }).toString()
   const title = 'In tabel weergeven'
 
