@@ -2,7 +2,12 @@ import { LocationDescriptorObject } from 'history'
 import { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import SEARCH_PAGE_CONFIG from '../../../app/pages/SearchPage/config'
-import PARAMETERS from '../../../store/parameters'
+import {
+  activeFiltersParam,
+  pageParam,
+  queryParam,
+} from '../../../app/pages/SearchPage/query-params'
+import toSearchParams from '../../../app/utils/toSearchParams'
 import { AutoSuggestSearchResult } from '../../services/auto-suggest/auto-suggest'
 import AutoSuggestItem from './AutoSuggestItem'
 
@@ -70,15 +75,11 @@ function getMoreResultsLink(
 
   return {
     pathname: path,
-    search: new URLSearchParams({
-      [PARAMETERS.QUERY]: `${inputValue}`,
-      [PARAMETERS.PAGE]: '1',
-      ...(subType
-        ? {
-            [PARAMETERS.FILTERS]: `dataTypes;${subType}`,
-          }
-        : {}),
-    }).toString(),
+    search: toSearchParams([
+      [queryParam, inputValue],
+      [pageParam, pageParam.defaultValue],
+      [activeFiltersParam, subType ? [{ type: 'dataTypes', values: [subType] }] : []],
+    ]).toString(),
   }
 }
 

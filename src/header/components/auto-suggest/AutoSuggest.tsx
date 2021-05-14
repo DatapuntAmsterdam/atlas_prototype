@@ -3,9 +3,10 @@ import { forwardRef, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import LoadingSpinner from '../../../app/components/LoadingSpinner/LoadingSpinner'
+import { toSearch } from '../../../app/links'
 import { SearchType } from '../../../app/pages/SearchPage/constants'
 import { queryParam } from '../../../app/pages/SearchPage/query-params'
-import { routing } from '../../../app/routes'
+import toSearchParams from '../../../app/utils/toSearchParams'
 import { CmsType } from '../../../shared/config/cms.config'
 import { AutoSuggestSearchResult, LABELS } from '../../services/auto-suggest/auto-suggest'
 import AutoSuggestCategory from './AutoSuggestCategory'
@@ -82,8 +83,8 @@ const AutoSuggest = forwardRef<HTMLDivElement, AutoSuggestProps>(
               // Side effect: clear the searchbar filter and navigate to main search page
               setSearchBarFilterValue(SearchType.Search)
               history.push({
-                pathname: routing.search.path,
-                search: `${queryParam.name}=${inputValue}`,
+                ...toSearch(),
+                search: toSearchParams([[queryParam, inputValue]]).toString(),
               })
             }}
           >

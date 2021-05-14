@@ -11,11 +11,13 @@ import {
   toCollectionDetail,
   toDataDetail,
   toDatasetDetail,
+  toMap,
   toPublicationDetail,
   toSpecialDetail,
 } from '../../../app/links'
 import { SearchType } from '../../../app/pages/SearchPage/constants'
-import { routing } from '../../../app/routes'
+import { queryParam } from '../../../app/pages/SearchPage/query-params'
+import toSearchParams from '../../../app/utils/toSearchParams'
 import toSlug from '../../../app/utils/toSlug'
 import { CmsType } from '../../../shared/config/cms.config'
 import { getViewMode, ViewMode } from '../../../shared/ducks/ui/ui'
@@ -73,9 +75,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
 
       return {
         ...toDatasetDetail({ id, slug }),
-        search: new URLSearchParams({
-          [PARAMETERS.QUERY]: `${inputValue}`,
-        }).toString(),
+        search: toSearchParams([[queryParam, inputValue]]).toString(),
       }
     }
 
@@ -101,9 +101,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
 
       return {
         ...openEditorialSuggestion({ id, slug }, suggestion.type, subType),
-        search: new URLSearchParams({
-          [PARAMETERS.QUERY]: `${inputValue}`,
-        }).toString(),
+        search: toSearchParams([[queryParam, inputValue]]).toString(),
       }
     }
 
@@ -111,10 +109,11 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
       const { searchParams } = new URL(suggestion.uri, window.location.origin)
 
       return {
-        pathname: routing.data.path,
+        ...toMap(),
+        // TODO: Use 'toSearchParams' here when all parameters are available as a 'UrlParam'.
         search: new URLSearchParams({
           [PARAMETERS.VIEW]: ViewMode.Map,
-          [PARAMETERS.QUERY]: `${inputValue}`,
+          [queryParam.name]: `${inputValue}`,
           [PARAMETERS.LEGEND]: 'true',
           [PARAMETERS.LAYERS]: searchParams.get(PARAMETERS.LAYERS) || '',
         }).toString(),
@@ -127,9 +126,10 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
     // suggestion.category TRACK
     return {
       ...toDataDetail({ type, subtype, id }),
+      // TODO: Use 'toSearchParams' here when all parameters are available as a 'UrlParam'.
       search: new URLSearchParams({
         [PARAMETERS.VIEW]: view,
-        [PARAMETERS.QUERY]: `${inputValue}`,
+        [queryParam.name]: `${inputValue}`,
         [PARAMETERS.LAYERS]: currentSearchParams.get(PARAMETERS.LAYERS) || '',
       }).toString(),
     }
