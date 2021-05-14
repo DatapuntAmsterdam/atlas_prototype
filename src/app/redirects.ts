@@ -1,15 +1,16 @@
-import { generatePath } from 'react-router-dom'
+import { createPath } from 'history'
 import environment from '../environment'
 import {
-  REDIRECTS_ARTICLES,
   ARTICLE_REDIRECT_FRAGMENTS,
+  REDIRECTS_ARTICLES,
   SHORTLINKS,
 } from '../shared/config/content-links'
+import { Environment } from '../shared/environment'
 import PARAMETERS from '../store/parameters'
+import { toArticleDetail } from './links'
 import matomoInstance from './matomo'
 import { MAIN_PATHS, routing } from './routes'
 import getVerblijfsobjectIdFromAddressQuery from './utils/getVerblijfsobjectIdFromAddressQuery'
-import { Environment } from '../shared/environment'
 
 const { VIEW, VIEW_CENTER, LAYERS, LEGEND, ZOOM, EMBED } = PARAMETERS
 
@@ -165,10 +166,7 @@ export const articleRedirectUrls: Redirect[] = [
 
 export const articleUrls: Redirect[] = REDIRECTS_ARTICLES.map((item) => ({
   from: item.from,
-  to: generatePath(routing.articleDetail.path, {
-    slug: item.to.slug,
-    id: item.to.id[environment.DEPLOY_ENV],
-  }),
+  to: createPath(toArticleDetail(item.to.id[environment.DEPLOY_ENV], item.to.slug)),
 }))
 
 const overviewPaths = [

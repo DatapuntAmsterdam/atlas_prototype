@@ -1,11 +1,19 @@
+import { Link, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import escapeStringRegexp from 'escape-string-regexp'
 import { LocationDescriptorObject } from 'history'
 import { FunctionComponent, useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import { generatePath, Link as RouterLink } from 'react-router-dom'
-import { Link, themeSpacing } from '@amsterdam/asc-ui'
+import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
+import {
+  toArticleDetail,
+  toCollectionDetail,
+  toDataDetail,
+  toDatasetDetail,
+  toPublicationDetail,
+  toSpecialDetail,
+} from '../../../app/links'
 import { SearchType } from '../../../app/pages/SearchPage/constants'
 import { routing } from '../../../app/routes'
 import toSlug from '../../../app/utils/toSlug'
@@ -46,13 +54,13 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
   ) => {
     switch (type) {
       case CmsType.Article:
-        return generatePath(routing.articleDetail.path, { slug, id })
+        return toArticleDetail(id, slug)
       case CmsType.Collection:
-        return generatePath(routing.collectionDetail.path, { slug, id })
+        return toCollectionDetail(id, slug)
       case CmsType.Publication:
-        return generatePath(routing.publicationDetail.path, { slug, id })
+        return toPublicationDetail(id, slug)
       case CmsType.Special:
-        return generatePath(routing.specialDetail.path, { type: subType, slug, id })
+        return toSpecialDetail(id, subType, slug)
       default:
         throw new Error(`Unable to open editorial suggestion, unknown type '${type}'.`)
     }
@@ -64,7 +72,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
       const slug = toSlug(suggestion.label)
 
       return {
-        pathname: generatePath(routing.datasetDetail.path, { id, slug }),
+        ...toDatasetDetail({ id, slug }),
         search: new URLSearchParams({
           [PARAMETERS.QUERY]: `${inputValue}`,
         }).toString(),
@@ -92,7 +100,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
       }
 
       return {
-        pathname: openEditorialSuggestion({ id, slug }, suggestion.type, subType),
+        ...openEditorialSuggestion({ id, slug }, suggestion.type, subType),
         search: new URLSearchParams({
           [PARAMETERS.QUERY]: `${inputValue}`,
         }).toString(),
@@ -118,7 +126,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
 
     // suggestion.category TRACK
     return {
-      pathname: generatePath(routing.dataDetail.path, { type, subtype, id: `id${id as string}` }),
+      ...toDataDetail({ type, subtype, id }),
       search: new URLSearchParams({
         [PARAMETERS.VIEW]: view,
         [PARAMETERS.QUERY]: `${inputValue}`,

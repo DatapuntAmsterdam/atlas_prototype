@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { generatePath, Link } from 'react-router-dom'
 import { getDetailPageData } from '../../../store/redux-first-router/actions'
-import { routing } from '../../routes'
+import { toDataDetail } from '../../links'
 import DataSelectionFormatter from './DataSelectionFormatter/DataSelectionFormatter'
 import { Data } from './types'
 
@@ -46,9 +46,7 @@ const DataSelectionTable: FunctionComponent<DataSelectionTableProps> = ({ conten
                 />
               </td>
             ))}
-            <TableRowLink
-              to={generatePath(routing.dataDetail.path, getDetailPageData(row.detailEndpoint))}
-            />
+            <TableRowLink to={toDataDetail(getDetailPageData(row.detailEndpoint))} />
           </tr>
         ))}
       </tbody>
