@@ -1,4 +1,5 @@
 import queryString from 'querystring'
+import { isEmbeddedParam } from '../../../app/pages/MapPage/query-params'
 import PARAMETERS from '../../../store/parameters'
 
 const getUrlQuery = () => queryString.decode(window.location.search.slice(1))
@@ -16,6 +17,6 @@ export const getIframeUrl = () => {
 
 export const getEmbedButtonLink = () => {
   const query = { ...getUrlQuery() }
-  delete query[PARAMETERS.EMBED]
+  delete query[isEmbeddedParam.name]
   return buildUrl(query)
 }

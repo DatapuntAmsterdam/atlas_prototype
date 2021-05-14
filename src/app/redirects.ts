@@ -1,26 +1,29 @@
 import { createPath } from 'history'
 import environment from '../environment'
+import { getImageDataById } from '../panorama/services/panorama-api/panorama-api'
 import {
   ARTICLE_REDIRECT_FRAGMENTS,
   REDIRECTS_ARTICLES,
   SHORTLINKS,
 } from '../shared/config/content-links'
-import PARAMETERS from '../store/parameters'
+import { Environment } from '../shared/environment'
 import { toArticleDetail } from './links'
 import matomoInstance from './matomo'
-import { betaMapDataPath, MAIN_PATHS, routing } from './routes'
-import getVerblijfsobjectIdFromAddressQuery from './utils/getVerblijfsobjectIdFromAddressQuery'
-import { Environment } from '../shared/environment'
-import { getImageDataById } from '../panorama/services/panorama-api/panorama-api'
 import {
+  centerParam,
+  isEmbeddedParam,
+  legendOpenParam,
   locationParam,
+  mapLayersParam,
   panoFovParam,
   panoHeadingParam,
   panoPitchParam,
+  viewParam,
+  zoomParam,
 } from './pages/MapPage/query-params'
+import { betaMapDataPath, MAIN_PATHS, routing } from './routes'
+import getVerblijfsobjectIdFromAddressQuery from './utils/getVerblijfsobjectIdFromAddressQuery'
 import matchRule from './utils/matchRule'
-
-const { VIEW, VIEW_CENTER, LAYERS, LEGEND, ZOOM, EMBED } = PARAMETERS
 
 interface Redirect {
   from: string
@@ -33,64 +36,64 @@ export const legacyRoutes: Redirect[] = [
   // https://www.parool.nl/amsterdam/kaart-met-onontplofte-bommen-in-amsterdam-nu-openbaar~a4539314/
   {
     from: '/#?mpb=topografie&mpz=8&mpfs=T&mpo=exvg::T:exin::T:exuo::T&mpv=52.3733262:4.8934106&pgn=home',
-    to: `${routing.data.path}?${VIEW}=kaart&${VIEW_CENTER}=52.3787158140549%2C4.893662070270319&${LAYERS}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${LEGEND}=false&${ZOOM}=8`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${centerParam.name}=52.3787158140549%2C4.893662070270319&${mapLayersParam.name}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${legendOpenParam.name}=false&${zoomParam.name}=8`,
   },
   {
     from: '/#?ate=T&mpb=topografie&mpz=8&mpfs=T&mpo=exvg::T:exin::T:exuo::T&mpv=52.3733262:4.8934106&pgn=home',
-    to: `${routing.data.path}?${VIEW}=kaart&${VIEW_CENTER}=52.3787158140549%2C4.893662070270319&${EMBED}=true&${LAYERS}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${LEGEND}=false&${ZOOM}=8`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${centerParam.name}=52.3787158140549%2C4.893662070270319&${isEmbeddedParam.name}=true&${mapLayersParam.name}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${legendOpenParam.name}=false&${zoomParam.name}=8`,
   },
   {
     from: '/#?ate=T&lse=T&mpb=topografie&mpz=8&mpfs=T&mpo=exvg::T:exin::T:exuo::T&mpv=52.3733262:4.8934106&pgn=home',
-    to: `${routing.data.path}?${VIEW}=kaart&${VIEW_CENTER}=52.3787158140549%2C4.893662070270319&${EMBED}=true&${LAYERS}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${LEGEND}=false&${ZOOM}=8`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${centerParam.name}=52.3787158140549%2C4.893662070270319&${isEmbeddedParam.name}=true&${mapLayersParam.name}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${legendOpenParam.name}=false&${zoomParam.name}=8`,
   },
   // https://www.telegraaf.nl/nieuws/1256075/ligt-er-een-bom-uit-woii-in-je-achtertuin-met-deze-kaart-kom-je-er-achter
   {
     from: '/#?mpb=topografie&mpz=11&mpfs=T&mpo=exvg::T:exin::T:exuo::T&mpv=52.3815892:4.8626601&pgn=home',
-    to: `${routing.data.path}?${VIEW}=kaart&${VIEW_CENTER}=52.3787158140549%2C4.893662070270319&${LAYERS}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${LEGEND}=false&${ZOOM}=8`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${centerParam.name}=52.3787158140549%2C4.893662070270319&${mapLayersParam.name}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${legendOpenParam.name}=false&${zoomParam.name}=8`,
   },
   {
     from: '/#?ate=T&mpb=topografie&mpz=11&mpfs=T&mpo=exvg::T:exin::T:exuo::T&mpv=52.3815892:4.8626601&pgn=home',
-    to: `${routing.data.path}?${VIEW}=kaart&${VIEW_CENTER}=52.3787158140549%2C4.893662070270319&${EMBED}=true&${LAYERS}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${LEGEND}=false&${ZOOM}=8`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${centerParam.name}=52.3787158140549%2C4.893662070270319&${isEmbeddedParam.name}=true&${mapLayersParam.name}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${legendOpenParam.name}=false&${zoomParam.name}=8`,
   },
   {
     from: '/#?ate=T&lse=T&mpb=topografie&mpz=11&mpfs=T&mpo=exvg::T:exin::T:exuo::T&mpv=52.3815892:4.8626601&pgn=home',
-    to: `${routing.data.path}?${VIEW}=kaart&${VIEW_CENTER}=52.3787158140549%2C4.893662070270319&${EMBED}=true&${LAYERS}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${LEGEND}=false&${ZOOM}=8`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${centerParam.name}=52.3787158140549%2C4.893662070270319&${isEmbeddedParam.name}=true&${mapLayersParam.name}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${legendOpenParam.name}=false&${zoomParam.name}=8`,
   },
   // https://www.amsterdamsdagblad.nl/gemeente/duizend-bommen-en-granaten-de-bommenkaart
   {
     from: '/#?mpb=topografie&mpz=8&mpfs=T&mpo=exvg::T:exin::T:exuo::T&mpv=52.3733262:4.8934106&pgn=home',
-    to: `${routing.data.path}?${VIEW}=kaart&${VIEW_CENTER}=52.3787158140549%2C4.893662070270319&${LAYERS}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${LEGEND}=false&${ZOOM}=8`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${centerParam.name}=52.3787158140549%2C4.893662070270319&${mapLayersParam.name}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${legendOpenParam.name}=false&${zoomParam.name}=8`,
   },
   {
     from: '/#?ate=T&mpb=topografie&mpz=8&mpfs=T&mpo=exvg::T:exin::T:exuo::T&mpv=52.3733262:4.8934106&pgn=home',
-    to: `${routing.data.path}?${VIEW}=kaart&${VIEW_CENTER}=52.3787158140549%2C4.893662070270319&${EMBED}=true&${LAYERS}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${LEGEND}=false&${ZOOM}=8`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${centerParam.name}=52.3787158140549%2C4.893662070270319&${isEmbeddedParam.name}=true&${mapLayersParam.name}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${legendOpenParam.name}=false&${zoomParam.name}=8`,
   },
   {
     from: '/#?ate=T&lse=T&mpb=topografie&mpz=8&mpfs=T&mpo=exvg::T:exin::T:exuo::T&mpv=52.3733262:4.8934106&pgn=home',
-    to: `${routing.data.path}?${VIEW}=kaart&${VIEW_CENTER}=52.3787158140549%2C4.893662070270319&${EMBED}=true&${LAYERS}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${LEGEND}=false&${ZOOM}=8`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${centerParam.name}=52.3787158140549%2C4.893662070270319&${isEmbeddedParam.name}=true&${mapLayersParam.name}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${legendOpenParam.name}=false&${zoomParam.name}=8`,
   },
-  // https://intranet.alliander.com/blog/${VIEW}/5359847/kaart-met-onontplofte-bommen-in-amsterdam
+  // https://intranet.alliander.com/blog/${viewParam.name}/5359847/kaart-met-onontplofte-bommen-in-amsterdam
   {
     from: '/#?mpb=topografie&mpz=14&mpfs=T&mpo=exvg::T:exin::T:exuo::T&mpv=52.3889979:4.9094038&pgn=home',
-    to: `${routing.data.path}?${VIEW}=kaart&${VIEW_CENTER}=52.3787158140549%2C4.893662070270319&${LAYERS}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${LEGEND}=false&${ZOOM}=8`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${centerParam.name}=52.3787158140549%2C4.893662070270319&${mapLayersParam.name}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${legendOpenParam.name}=false&${zoomParam.name}=8`,
   },
   {
     from: '/?_sp=144b47f5-2817-4a1f-888c-d1d1b69c89cb.1510908859477#?ate=T&mpb=topografie&mpz=14&mpfs=T&mpo=exvg::T:exin::T:exuo::T&mpv=52.3889979:4.9094038&pgn=home',
-    to: `${routing.data.path}?${VIEW}=kaart&${VIEW_CENTER}=52.3787158140549%2C4.893662070270319&${EMBED}=true&${LAYERS}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${LEGEND}=false&${ZOOM}=8`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${centerParam.name}=52.3787158140549%2C4.893662070270319&${isEmbeddedParam.name}=true&${mapLayersParam.name}=exvg%3A1%7Cexin%3A1%7Cexuo%3A1&${legendOpenParam.name}=false&${zoomParam.name}=8`,
   },
   // https://www.amsterdam.nl/ondernemen/biz/
   {
     from: '/#?mpb=topografie&mpz=9&mpfs=T&mpo=biz::T&mpv=52.3676245:4.8804992&pgn=home&uvm=T',
-    to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=biz%3A1&${LEGEND}=true&${ZOOM}=9`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${mapLayersParam.name}=biz%3A1&${legendOpenParam.name}=true&${zoomParam.name}=9`,
   },
   {
     from: '/#?ate=T&mpb=topografie&mpz=9&mpfs=T&mpo=biz::T&mpv=52.3676245:4.8804992&pgn=home&uvm=T',
-    to: `${routing.data.path}?${VIEW}=kaart&${EMBED}=true&${LAYERS}=biz%3A1&${LEGEND}=true&${ZOOM}=9`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${isEmbeddedParam.name}=true&${mapLayersParam.name}=biz%3A1&${legendOpenParam.name}=true&${zoomParam.name}=9`,
   },
   // home map
   {
     from: '/#?mpb=topografie&mpz=11&mpfs=T&mpv=52.3731081:4.8932945&pgn=home&uvm=T',
-    to: `${routing.data.path}?${VIEW}=kaart`,
+    to: `${routing.data.path}?${viewParam.name}=kaart`,
   },
   {
     from: `/${betaMapDataPath}/panorama/*/${window.location.search}`,
@@ -128,23 +131,23 @@ export const legacyRoutes: Redirect[] = [
 export const shortUrls: Redirect[] = [
   {
     from: '/themakaart/taxi/',
-    to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=themtaxi-bgt%3A1|themtaxi-tar%3A1|themtaxi-pvrts%3A1|themtaxi-mzt%3A1|themtaxi-oovtig%3A1|themtaxi-vezips%3A1|themtaxi-slpnb%3A1|themtaxi-slpb%3A1|themtaxi-nlpnb%3A1|themtaxi-nlpb%3A1&${LEGEND}=true`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${mapLayersParam.name}=themtaxi-bgt%3A1|themtaxi-tar%3A1|themtaxi-pvrts%3A1|themtaxi-mzt%3A1|themtaxi-oovtig%3A1|themtaxi-vezips%3A1|themtaxi-slpnb%3A1|themtaxi-slpb%3A1|themtaxi-nlpnb%3A1|themtaxi-nlpb%3A1&${legendOpenParam.name}=true`,
   },
   {
     from: '/themakaart/veiligheid-en-overlast/',
-    to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=veilov-oovoalg%3A1|veilov-oovodlrs%3A1|veilov-oovctg%3A1|veilov-oovoalco%3A1|veilov-oovorlv%3A1|veilov-oovtig%3A1|veilov-vwrk%3A1&${LEGEND}=true`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${mapLayersParam.name}=veilov-oovoalg%3A1|veilov-oovodlrs%3A1|veilov-oovctg%3A1|veilov-oovoalco%3A1|veilov-oovorlv%3A1|veilov-oovtig%3A1|veilov-vwrk%3A1&${legendOpenParam.name}=true`,
   },
   {
     from: '/themakaart/logistiek/',
-    to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=logistk-rtsur%3A1%7Clogistk-rtstgs%3A1%7Clogistk-rtsgs%3A1%7Clogistk-rtsvr75%3A1%7Clogistk-pvrll%3A1%7Clogistk-mzb%3A1%7Clogistk-mvw%3A1%7Clogistk-mzva%3A1&${LEGEND}=true`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${mapLayersParam.name}=logistk-rtsur%3A1%7Clogistk-rtstgs%3A1%7Clogistk-rtsgs%3A1%7Clogistk-rtsvr75%3A1%7Clogistk-pvrll%3A1%7Clogistk-mzb%3A1%7Clogistk-mvw%3A1%7Clogistk-mzva%3A1&${legendOpenParam.name}=true`,
   },
   {
     from: '/themakaart/ondergrond/',
-    to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=ondrgd-aardgasbel%3A1|ondrgd-aardgas1let%3A1|ondrgd-aardgas100let%3A1|ondrgd-aardgaspr106%3A1|ondrgd-aardgas%3A1|ondrgd-exuo%3A1|ondrgd-exgg%3A1|ondrgd-exvg%3A1|ondrgd-gbhv%3A1|ondrgd-gbep%3A1|ondrgd-gbgg%3A1|ondrgd-gbgs%3A1|ondrgd-gbos%3A1|ondrgd-gboh%3A1|ondrgd-gbwu%3A1|ondrgd-gbkw%3A1|ondrgd-gbvv%3A1|ondrgd-mvlpgst%3A1|ondrgd-mvlpgs%3A1|ondrgd-mvlpgtgrp%3A1|ondrgd-mvlpgtris%3A1|ondrgd-mvlpgt%3A1|ondrgd-mvlpgvgeb%3A1|ondrgd-mvlpgv106%3A1|ondrgd-mvlpgv105%3A1|ondrgd-mvlpgeb%3A1|ondrgd-mvlpga%3A1|ondrgd-exin%3A1|ondrgd-mbgm%3A1|ondrgd-mbaig%3A1|ondrgd-mbgwm%3A1|ondrgd-mbz%3A1|ondrgd-mbs%3A1|ondrgd-mbr%3A1|ondrgd-vezips%3A1&${LEGEND}=true`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${mapLayersParam.name}=ondrgd-aardgasbel%3A1|ondrgd-aardgas1let%3A1|ondrgd-aardgas100let%3A1|ondrgd-aardgaspr106%3A1|ondrgd-aardgas%3A1|ondrgd-exuo%3A1|ondrgd-exgg%3A1|ondrgd-exvg%3A1|ondrgd-gbhv%3A1|ondrgd-gbep%3A1|ondrgd-gbgg%3A1|ondrgd-gbgs%3A1|ondrgd-gbos%3A1|ondrgd-gboh%3A1|ondrgd-gbwu%3A1|ondrgd-gbkw%3A1|ondrgd-gbvv%3A1|ondrgd-mvlpgst%3A1|ondrgd-mvlpgs%3A1|ondrgd-mvlpgtgrp%3A1|ondrgd-mvlpgtris%3A1|ondrgd-mvlpgt%3A1|ondrgd-mvlpgvgeb%3A1|ondrgd-mvlpgv106%3A1|ondrgd-mvlpgv105%3A1|ondrgd-mvlpgeb%3A1|ondrgd-mvlpga%3A1|ondrgd-exin%3A1|ondrgd-mbgm%3A1|ondrgd-mbaig%3A1|ondrgd-mbgwm%3A1|ondrgd-mbz%3A1|ondrgd-mbs%3A1|ondrgd-mbr%3A1|ondrgd-vezips%3A1&${legendOpenParam.name}=true`,
   },
   {
     from: '/themakaart/vergunningen/',
-    to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=adasdas-vergbnb%3A1%7Cvrgngn-vergkvh%3A1%7Cvrgngn-vergbnb%3A1&${LEGEND}=true`,
+    to: `${routing.data.path}?${viewParam.name}=kaart&${mapLayersParam.name}=adasdas-vergbnb%3A1%7Cvrgngn-vergkvh%3A1%7Cvrgngn-vergbnb%3A1&${legendOpenParam.name}=true`,
   },
   {
     from: '/datablog/',

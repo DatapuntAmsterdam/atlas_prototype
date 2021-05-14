@@ -1,13 +1,13 @@
+import { isEmbeddedParam, viewParam } from '../../../app/pages/MapPage/query-params'
 import { routing } from '../../../app/routes'
 import GLOSSARY from '../../../detail/services/glossary.constant'
-import PARAMETERS from '../../../store/parameters'
 import { FETCH_DETAIL_SUCCESS } from '../../ducks/detail/constants'
 import { ViewMode } from '../../ducks/ui/ui'
 
 export const mapDocumentTitle = (action, defaultTitle) => {
   let pageTitle = defaultTitle
-  const view = action?.meta?.query?.[PARAMETERS.VIEW] ?? ''
-  const embed = action?.meta?.query?.[PARAMETERS.EMBED] ?? 'false'
+  const view = action?.meta?.query?.[viewParam.name] ?? ''
+  const embed = action?.meta?.query?.[isEmbeddedParam.name] ?? 'false'
 
   if (view === ViewMode.Map) {
     pageTitle = 'Grote kaart'
@@ -24,7 +24,7 @@ export const detailDocumentTitle = (action, defaultTitle = 'UNKNOWN') => {
     action.payload.subtype && action.payload.subtype.toUpperCase().replace(/-/g, '_')
   const glossaryDefinition = GLOSSARY.DEFINITIONS[glossaryKey]
   let label = glossaryDefinition ? glossaryDefinition.singular : defaultTitle
-  const embed = action?.meta?.query?.[PARAMETERS.EMBED] ?? 'false'
+  const embed = action?.meta?.query?.[isEmbeddedParam.name] ?? 'false'
 
   if (embed === 'true') {
     label = `${label} | Embedded`

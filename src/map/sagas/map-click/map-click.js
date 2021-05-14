@@ -1,14 +1,14 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
-import { getLayers } from '../../ducks/panel-layers/map-panel-layers'
-import { SET_MAP_CLICK_LOCATION } from '../../ducks/map/constants'
-import { getMapZoom } from '../../ducks/map/selectors'
-import { getSelectionType, SELECTION_TYPE } from '../../../shared/ducks/selection/selection'
+import { locationParam, viewParam } from '../../../app/pages/MapPage/query-params'
 import { setPanoramaLocation } from '../../../panorama/ducks/actions'
+import { requestNearestDetails } from '../../../shared/ducks/data-search/actions'
+import { getSelectionType, SELECTION_TYPE } from '../../../shared/ducks/selection/selection'
+import { getViewMode, isEmbedded, ViewMode } from '../../../shared/ducks/ui/ui'
 import { normalizeLocation } from '../../../shared/services/coordinate-reference-system'
 import { toGeoSearch } from '../../../store/redux-first-router/actions'
-import PARAMETERS from '../../../store/parameters'
-import { requestNearestDetails } from '../../../shared/ducks/data-search/actions'
-import { getViewMode, isEmbedded, ViewMode } from '../../../shared/ducks/ui/ui'
+import { SET_MAP_CLICK_LOCATION } from '../../ducks/map/constants'
+import { getMapZoom } from '../../ducks/map/selectors'
+import { getLayers } from '../../ducks/panel-layers/map-panel-layers'
 
 const latitudeLongitudeToArray = (location) => [location.latitude, location.longitude]
 
@@ -17,8 +17,8 @@ export function* goToGeoSearch(location) {
   const view = viewMode === ViewMode.Split ? ViewMode.Split : ViewMode.Map
   yield put(
     toGeoSearch({
-      [PARAMETERS.LOCATION]: location,
-      [PARAMETERS.VIEW]: view,
+      [locationParam.name]: location,
+      [viewParam.name]: view,
     }),
   )
 } // TODO: refactor, test

@@ -1,8 +1,8 @@
 import { all, call, put, select, takeLatest } from 'redux-saga/effects'
+import { centerParam, locationParam, panoTagParam } from '../../app/pages/MapPage/query-params'
 import { closeMapPanel, mapClear, toggleMapOverlay } from '../../map/ducks/map/actions'
 import { getMapCenter } from '../../map/ducks/map/selectors'
 import { getViewMode, ViewMode } from '../../shared/ducks/ui/ui'
-import PARAMETERS from '../../store/parameters'
 import { toPanorama } from '../../store/redux-first-router/actions'
 import { getLocationPayload } from '../../store/redux-first-router/selectors'
 import { fetchPanoramaError, fetchPanoramaRequest, fetchPanoramaSuccess } from '../ducks/actions'
@@ -38,13 +38,12 @@ export function* handlePanoramaRequest(fn, input, tags) {
     if (id && id !== panoramaData.id) {
       const viewCenter = yield select(getMapCenter)
       const location = yield select(getPanoramaLocation)
-      const panoramaTags =
-        tags !== initialState.tags ? { [PARAMETERS.PANORAMA_TAGS]: tags.join() } : {}
+      const panoramaTags = tags !== initialState.tags ? { [panoTagParam.name]: tags.join() } : {}
 
       const additionalParams = {
         ...panoramaTags,
-        [PARAMETERS.VIEW_CENTER]: viewCenter,
-        [PARAMETERS.LOCATION]: location,
+        [centerParam.name]: viewCenter,
+        [locationParam.name]: location,
       }
 
       yield put(toPanorama(panoramaData.id, { additionalParams }))

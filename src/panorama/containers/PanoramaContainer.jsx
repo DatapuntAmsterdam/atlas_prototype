@@ -13,11 +13,11 @@ import styled from 'styled-components'
 import { Map as ContextMenu } from '../../app/components/ContextMenu'
 import ToggleFullscreen from '../../app/components/ToggleFullscreen/ToggleFullscreen'
 import { toHome } from '../../app/links'
+import { locationParam, mapLayersParam, viewParam } from '../../app/pages/MapPage/query-params'
 import { getMapDetail } from '../../map/ducks/detail/actions'
 import { getMapOverlays } from '../../map/ducks/map/selectors'
 import { pageTypeToEndpoint } from '../../map/services/map-detail/map-detail'
 import { isPrintMode, isPrintOrEmbedMode, setViewMode, ViewMode } from '../../shared/ducks/ui/ui'
-import PARAMETERS from '../../store/parameters'
 import { toDataDetail, toGeoSearch } from '../../store/redux-first-router/actions'
 import PanoramaToggle from '../components/PanoramaToggle/PanoramaToggle'
 import StatusBar from '../components/StatusBar/StatusBar'
@@ -101,17 +101,17 @@ class PanoramaContainer extends Component {
     if (Array.isArray(detailReference) && detailReference.length) {
       // eslint-disable-next-line react/destructuring-assignment
       this.props.toDataDetail(detailReference, {
-        [PARAMETERS.LAYERS]: overlays,
-        [PARAMETERS.VIEW]: ViewMode.Split,
+        [mapLayersParam.name]: overlays,
+        [viewParam.name]: ViewMode.Split,
       })
     } else if (pageReference === 'home') {
       history.push(toHome())
     } else {
       // eslint-disable-next-line react/destructuring-assignment
       this.props.toGeoSearch({
-        [PARAMETERS.LOCATION]: panoramaLocation,
-        [PARAMETERS.VIEW]: ViewMode.Split,
-        [PARAMETERS.LAYERS]: overlays,
+        [locationParam.name]: panoramaLocation,
+        [viewParam.name]: ViewMode.Split,
+        [mapLayersParam.name]: overlays,
       })
     }
 

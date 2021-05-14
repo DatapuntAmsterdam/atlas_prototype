@@ -1,4 +1,18 @@
 import {
+  baseLayerParam,
+  centerParam,
+  isEmbeddedParam,
+  legendOpenParam,
+  locationParam,
+  mapLayersParam,
+  panoHeadingParam,
+  panoPitchParam,
+  panoTagParam,
+  polygonParam,
+  viewParam,
+  zoomParam,
+} from '../app/pages/MapPage/query-params'
+import {
   activeFiltersParam,
   pageParam,
   queryParam,
@@ -7,8 +21,8 @@ import {
 import {
   getActiveFilters,
   getPage,
-  getSort,
   getQuery,
+  getSort,
   REDUCER_KEY as SEARCH_REDUCER,
 } from '../app/pages/SearchPage/SearchPageDucks'
 import { routing } from '../app/routes'
@@ -37,7 +51,6 @@ import { getDataSearchLocation, getSearchCategory } from '../shared/ducks/data-s
 import { initialState as dataSelectionInitialState } from '../shared/ducks/data-selection/constants'
 import { DATA_SELECTION } from '../shared/ducks/data-selection/reducer'
 import { getDataSelectionPage, getGeometryFilter } from '../shared/ducks/data-selection/selectors'
-
 import {
   getViewMode,
   initialState as uiInitialState,
@@ -111,7 +124,7 @@ export default paramsRegistry
         defaultValue: 1,
       })
   })
-  .addParameter(PARAMETERS.GEO, (routes) => {
+  .addParameter(polygonParam.name, (routes) => {
     routes.add(routesWithDataSelection, DATA_SELECTION, 'geometryFilter', {
       selector: getGeometryFilter,
       defaultValue: dataSelectionInitialState.geometryFilter,
@@ -143,7 +156,7 @@ export default paramsRegistry
       },
     })
   })
-  .addParameter(PARAMETERS.VIEW, (routes) => {
+  .addParameter(viewParam.name, (routes) => {
     routes.add(routesWithMapActive, UI, 'viewMode', {
       selector: getViewMode,
       defaultValue: uiInitialState.viewMode,
@@ -155,7 +168,7 @@ export default paramsRegistry
       selector: getSearchCategory,
     })
   })
-  .addParameter(PARAMETERS.VIEW_CENTER, (routes) => {
+  .addParameter(centerParam.name, (routes) => {
     routes.add(
       routesWithMapActive,
       MAP,
@@ -171,7 +184,7 @@ export default paramsRegistry
       false,
     )
   })
-  .addParameter(PARAMETERS.ZOOM, (routes) => {
+  .addParameter(zoomParam.name, (routes) => {
     routes.add(
       routesWithMapActive,
       MAP,
@@ -184,7 +197,7 @@ export default paramsRegistry
       false,
     )
   })
-  .addParameter(PARAMETERS.LEGEND, (routes) => {
+  .addParameter(legendOpenParam.name, (routes) => {
     routes.add(
       routesWithMapActive,
       MAP,
@@ -196,7 +209,7 @@ export default paramsRegistry
       false,
     )
   })
-  .addParameter(PARAMETERS.HEADING, (routes) => {
+  .addParameter(panoHeadingParam.name, (routes) => {
     routes.add(
       routing.panorama.type,
       PANORAMA,
@@ -208,13 +221,13 @@ export default paramsRegistry
       false,
     )
   })
-  .addParameter(PARAMETERS.MAP_BACKGROUND, (routes) => {
+  .addParameter(baseLayerParam.name, (routes) => {
     routes.add(routesWithMapActive, MAP, 'baseLayer', {
       defaultValue: mapInitialState.baseLayer,
       selector: getActiveBaseLayer,
     })
   })
-  .addParameter(PARAMETERS.PANORAMA_TAGS, (routes) => {
+  .addParameter(panoTagParam.name, (routes) => {
     routes.add(routing.panorama.type, PANORAMA, 'tags', {
       defaultValue: panoramaInitialState.tags,
       selector: getPanoramaTags,
@@ -222,7 +235,7 @@ export default paramsRegistry
       decode: (val) => val && val.split(','),
     })
   })
-  .addParameter(PARAMETERS.PITCH, (routes) => {
+  .addParameter(panoPitchParam.name, (routes) => {
     routes.add(
       routing.panorama.type,
       PANORAMA,
@@ -293,7 +306,7 @@ export default paramsRegistry
       selector: isEmbedPreview,
     })
   })
-  .addParameter(PARAMETERS.EMBED, (routes) => {
+  .addParameter(isEmbeddedParam.name, (routes) => {
     routes.add(routesWithMapActive, UI, 'isEmbed', {
       defaultValue: uiInitialState.isEmbed,
       selector: isEmbedded,
@@ -315,7 +328,7 @@ export default paramsRegistry
       },
     )
   })
-  .addParameter(PARAMETERS.LAYERS, (routes) => {
+  .addParameter(mapLayersParam.name, (routes) => {
     routes.add(
       [...routesWithMapActive, ...routesWithSearch],
       MAP,
@@ -337,7 +350,7 @@ export default paramsRegistry
       false,
     )
   })
-  .addParameter(PARAMETERS.LOCATION, (routes) => {
+  .addParameter(locationParam.name, (routes) => {
     routes
       .add(
         routing.panorama.type,

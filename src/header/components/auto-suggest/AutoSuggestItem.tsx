@@ -15,13 +15,13 @@ import {
   toPublicationDetail,
   toSpecialDetail,
 } from '../../../app/links'
+import { legendOpenParam, mapLayersParam, viewParam } from '../../../app/pages/MapPage/query-params'
 import { SearchType } from '../../../app/pages/SearchPage/constants'
 import { queryParam } from '../../../app/pages/SearchPage/query-params'
 import toSearchParams from '../../../app/utils/toSearchParams'
 import toSlug from '../../../app/utils/toSlug'
 import { CmsType } from '../../../shared/config/cms.config'
 import { getViewMode, ViewMode } from '../../../shared/ducks/ui/ui'
-import PARAMETERS from '../../../store/parameters'
 import { decodeLayers } from '../../../store/queryParameters'
 import { extractIdEndpoint, getDetailPageData } from '../../../store/redux-first-router/actions'
 import { AutoSuggestSearchContent } from '../../services/auto-suggest/auto-suggest'
@@ -107,31 +107,33 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
 
     if (suggestion.type === SearchType.Map) {
       const { searchParams } = new URL(suggestion.uri, window.location.origin)
+      const rawMapLayers = searchParams.get(mapLayersParam.name)
+      const mapLayers = rawMapLayers ? mapLayersParam.decode(rawMapLayers) : []
 
       return {
         ...toMap(),
-        // TODO: Use 'toSearchParams' here when all parameters are available as a 'UrlParam'.
-        search: new URLSearchParams({
-          [PARAMETERS.VIEW]: ViewMode.Map,
-          [queryParam.name]: `${inputValue}`,
-          [PARAMETERS.LEGEND]: 'true',
-          [PARAMETERS.LAYERS]: searchParams.get(PARAMETERS.LAYERS) || '',
-        }).toString(),
+        search: toSearchParams([
+          [viewParam, ViewMode.Map],
+          [queryParam, inputValue],
+          [legendOpenParam, true],
+          [mapLayersParam, mapLayers],
+        ]).toString(),
       }
     }
 
     const { type, subtype, id } = getDetailPageData(suggestion.uri)
     const currentSearchParams = new URLSearchParams(window.location.search)
+    const rawMapLayers = currentSearchParams.get(mapLayersParam.name)
+    const mapLayers = rawMapLayers ? mapLayersParam.decode(rawMapLayers) : []
 
     // suggestion.category TRACK
     return {
       ...toDataDetail({ type, subtype, id }),
-      // TODO: Use 'toSearchParams' here when all parameters are available as a 'UrlParam'.
-      search: new URLSearchParams({
-        [PARAMETERS.VIEW]: view,
-        [queryParam.name]: `${inputValue}`,
-        [PARAMETERS.LAYERS]: currentSearchParams.get(PARAMETERS.LAYERS) || '',
-      }).toString(),
+      search: toSearchParams([
+        [viewParam, view],
+        [queryParam, inputValue],
+        [mapLayersParam, mapLayers],
+      ]).toString(),
     }
   }, [extractIdEndpoint, openEditorialSuggestion, decodeLayers, highlightValue])
 

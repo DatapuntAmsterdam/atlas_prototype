@@ -1,5 +1,6 @@
 import { MATOMO_CONSTANTS } from '../../../app/matomo'
 import PAGES from '../../../app/pages'
+import { viewParam } from '../../../app/pages/MapPage/query-params'
 import { routing } from '../../../app/routes'
 import {
   CLOSE_MODAL,
@@ -33,7 +34,6 @@ import {
   AUTHENTICATE_USER_REQUEST,
   AUTHENTICATE_USER_SUCCESS,
 } from '../../../shared/ducks/user/user'
-import PARAMETERS from '../../parameters'
 import { getPage, isPanoPage } from '../../redux-first-router/selectors'
 
 export const TRACK_ACTION_NAVIGATION = 'navigation'
@@ -58,7 +58,7 @@ const trackEvents = {
 
     const viewMode = getViewMode(state)
 
-    if (viewMode === ViewMode.Map && query?.[PARAMETERS.VIEW] === undefined) {
+    if (viewMode === ViewMode.Map && query?.[viewParam.name] === undefined) {
       return [
         MATOMO_CONSTANTS.TRACK_EVENT,
         'navigation', // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM MAP
@@ -67,11 +67,7 @@ const trackEvents = {
       ]
     }
 
-    if (
-      !isFirstAction &&
-      viewMode === ViewMode.Split &&
-      query?.[PARAMETERS.VIEW] === ViewMode.Map
-    ) {
+    if (!isFirstAction && viewMode === ViewMode.Split && query?.[viewParam.name] === ViewMode.Map) {
       return [
         MATOMO_CONSTANTS.TRACK_EVENT,
         'navigation', // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM SPLITSCREEN

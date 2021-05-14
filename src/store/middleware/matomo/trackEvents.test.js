@@ -1,9 +1,8 @@
 import { MATOMO_CONSTANTS } from '../../../app/matomo'
 import PAGES from '../../../app/pages'
+import { viewParam } from '../../../app/pages/MapPage/query-params'
+import { ROUTER_NAMESPACE, routing } from '../../../app/routes'
 import { ViewMode } from '../../../shared/ducks/ui/ui'
-import PARAMETERS from '../../parameters'
-import { routing, ROUTER_NAMESPACE } from '../../../app/routes'
-
 import trackEvents, {
   TRACK_ACTION_NAVIGATION,
   TRACK_CATEGORY_AUTO_SUGGEST,
@@ -59,7 +58,7 @@ describe('trackEvents', () => {
       const payload = {
         state: { ui: { viewMode: ViewMode.Split } },
         isFirstAction: false,
-        query: { [PARAMETERS.VIEW]: ViewMode.Map },
+        query: { [viewParam.name]: ViewMode.Map },
       }
 
       expect(dataDetailTrackingFunc(payload)).toEqual([

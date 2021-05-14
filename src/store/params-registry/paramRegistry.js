@@ -1,9 +1,12 @@
 import queryString from 'querystring'
 import PAGES from '../../app/pages'
+import {
+  dataSelectionFiltersParam,
+  polygonParam,
+  viewParam,
+} from '../../app/pages/MapPage/query-params'
 import { ROUTER_NAMESPACE } from '../../app/routes'
 import getState from '../../shared/services/redux/get-state'
-import PARAMETERS from '../parameters'
-import { dataSelectionFiltersParam, polygonParam } from '../../app/pages/MapPage/query-params'
 
 /**
  * ParamsRegistry manages the relations between url parameters, reducers and routes.
@@ -28,7 +31,7 @@ class ParamsRegistry {
       .sort()
       .sort(([key1], [key2]) =>
         // eslint-disable-next-line no-nested-ternary
-        key1 === PARAMETERS.VIEW ? -1 : key2 === PARAMETERS.VIEW ? 1 : 0,
+        key1 === viewParam.name ? -1 : key2 === viewParam.name ? 1 : 0,
       )
       .reduce(
         (acc, [key, value]) => ({

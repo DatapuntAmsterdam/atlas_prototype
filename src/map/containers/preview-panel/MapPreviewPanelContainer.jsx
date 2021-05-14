@@ -1,27 +1,26 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {
-  toDataDetail,
-  toPanoramaAndPreserveQuery,
-  toMapAndPreserveQuery,
-  toDetailFromEndpoint,
-} from '../../../store/redux-first-router/actions'
-import { getDetailLocation, getPage } from '../../../store/redux-first-router/selectors'
-
-import { selectNotClickableVisibleMapLayers } from '../../ducks/panel-layers/map-panel-layers'
-import { selectLatestMapDetail } from '../../ducks/detail/selectors'
-import { isEmbedded, isEmbedPreview, setViewMode, ViewMode } from '../../../shared/ducks/ui/ui'
-import { getDetail } from '../../../shared/ducks/detail/selectors'
-import MapPreviewPanel from './MapPreviewPanel'
-import { getLocationId } from '../../ducks/map/selectors'
-import { isGeoSearch } from '../../../shared/ducks/selection/selection'
+import { legendOpenParam, viewParam } from '../../../app/pages/MapPage/query-params'
 import {
   getDataSearch,
   getDataSearchLocation,
   getMapPanelResults,
   isSearchLoading,
 } from '../../../shared/ducks/data-search/selectors'
-import PARAMETERS from '../../../store/parameters'
+import { getDetail } from '../../../shared/ducks/detail/selectors'
+import { isGeoSearch } from '../../../shared/ducks/selection/selection'
+import { isEmbedded, isEmbedPreview, setViewMode, ViewMode } from '../../../shared/ducks/ui/ui'
+import {
+  toDataDetail,
+  toDetailFromEndpoint,
+  toMapAndPreserveQuery,
+  toPanoramaAndPreserveQuery,
+} from '../../../store/redux-first-router/actions'
+import { getDetailLocation, getPage } from '../../../store/redux-first-router/selectors'
+import { selectLatestMapDetail } from '../../ducks/detail/selectors'
+import { getLocationId } from '../../ducks/map/selectors'
+import { selectNotClickableVisibleMapLayers } from '../../ducks/panel-layers/map-panel-layers'
+import MapPreviewPanel from './MapPreviewPanel'
 
 const mapStateToProps = (state) => ({
   searchResults: getMapPanelResults(state),
@@ -55,8 +54,8 @@ const mapDispatchToProps = (dispatch) => ({
   openDetail: ({ id, type, subtype }) =>
     dispatch(
       toDataDetail([id, type, subtype], {
-        [PARAMETERS.VIEW]: ViewMode.Split,
-        [PARAMETERS.LEGEND]: false,
+        [viewParam.name]: ViewMode.Split,
+        [legendOpenParam.name]: false,
       }),
     ),
 })

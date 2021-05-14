@@ -1,7 +1,11 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
+import { polygonParam, viewParam } from '../../../app/pages/MapPage/query-params'
+import { routing } from '../../../app/routes'
+import { mapEmptyGeometry, mapEndDrawing, mapSetDrawingMode } from '../../../map/ducks/map/actions'
+import { cancel, disable, enable, setPolygon } from '../../../map/services/draw-tool/draw-tool'
+import drawToolConfig from '../../../map/services/draw-tool/draw-tool.config'
 import { preserveQuery } from '../../../store/redux-first-router/actions'
 import { isDataSelectionPage } from '../../../store/redux-first-router/selectors'
-import { cancel, disable, enable, setPolygon } from '../../../map/services/draw-tool/draw-tool'
 import {
   CANCEL_DATA_SELECTION,
   END_DATA_SELECTION,
@@ -10,11 +14,7 @@ import {
   START_DATA_SELECTION,
 } from '../../ducks/data-selection/constants'
 import { getGeometryFilter } from '../../ducks/data-selection/selectors'
-import { mapEmptyGeometry, mapEndDrawing, mapSetDrawingMode } from '../../../map/ducks/map/actions'
-import PARAMETERS from '../../../store/parameters'
-import drawToolConfig from '../../../map/services/draw-tool/draw-tool.config'
 import { ViewMode } from '../../ducks/ui/ui'
-import { routing } from '../../../app/routes'
 
 function* setGeometryFilters({ payload }) {
   const geometryFilters = yield select(getGeometryFilter)
@@ -29,8 +29,8 @@ function* setGeometryFilters({ payload }) {
         preserveQuery(
           { type: routing.addresses.type },
           {
-            [PARAMETERS.GEO]: geometryFilters,
-            [PARAMETERS.VIEW]: ViewMode.Split,
+            [polygonParam.name]: geometryFilters,
+            [viewParam.name]: ViewMode.Split,
           },
         ),
       )

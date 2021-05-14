@@ -4,9 +4,9 @@ import { createMemoryHistory } from 'history'
 import { Router } from 'react-router-dom'
 import configureMockStore from 'redux-mock-store'
 import { toHome } from '../../app/links'
+import { locationParam, mapLayersParam, viewParam } from '../../app/pages/MapPage/query-params'
 import { getMapOverlays } from '../../map/ducks/map/selectors'
 import { setViewMode, ViewMode } from '../../shared/ducks/ui/ui'
-import PARAMETERS from '../../store/parameters'
 import { toDataDetail, toGeoSearch } from '../../store/redux-first-router/actions'
 import { fetchPanoramaHotspotRequest } from '../ducks/actions'
 import {
@@ -130,8 +130,8 @@ describe('PanoramaContainer', () => {
     expect(store.dispatch).toHaveBeenCalledWith(
       toDataDetail(detailReference, {
         // Layers with the 'pano' prefix should be filtered out.
-        [PARAMETERS.LAYERS]: [{ id: 'foo' }, { id: 'bar' }],
-        [PARAMETERS.VIEW]: ViewMode.Split,
+        [mapLayersParam.name]: [{ id: 'foo' }, { id: 'bar' }],
+        [viewParam.name]: ViewMode.Split,
       }),
     )
   })
@@ -168,10 +168,10 @@ describe('PanoramaContainer', () => {
 
     expect(store.dispatch).toHaveBeenCalledWith(
       toGeoSearch({
-        [PARAMETERS.LOCATION]: panoramaLocation,
-        [PARAMETERS.VIEW]: ViewMode.Split,
+        [locationParam.name]: panoramaLocation,
+        [viewParam.name]: ViewMode.Split,
         // Layers with the 'pano' prefix should be filtered out.
-        [PARAMETERS.LAYERS]: [{ id: 'foo' }, { id: 'bar' }],
+        [mapLayersParam.name]: [{ id: 'foo' }, { id: 'bar' }],
       }),
     )
   })

@@ -1,16 +1,14 @@
-import PARAMETERS from '../../src/store/parameters'
+import { centerParam, viewParam } from '../../src/app/pages/MapPage/query-params'
 import { routing } from '../../src/app/routes'
 import {
   ADDRESS_PAGE,
   COMPONENTS,
-  DETAIL_PANEL,
   DATA_SEARCH,
+  DETAIL_PANEL,
   HOMEPAGE,
   MAP,
   MAP_LAYERS,
 } from '../support/selectors'
-
-const { VIEW, VIEW_CENTER } = PARAMETERS
 
 describe('map module', () => {
   describe('user should be able to navigate to the map from the homepage', () => {
@@ -106,7 +104,7 @@ describe('map module', () => {
   describe('user should be able to use the map', () => {
     it('should render the leaflet map', () => {
       cy.hidePopup()
-      cy.visit(`/${routing.data.path}?${VIEW}=kaart`)
+      cy.visit(`/${routing.data.path}?${viewParam.name}=kaart`)
       cy.get(ADDRESS_PAGE.mapContainer).should('be.visible')
       cy.get(MAP.mapContainer).should('be.visible')
       cy.get('.leaflet-tile-container').should('be.visible')
@@ -114,7 +112,9 @@ describe('map module', () => {
 
     it('should add a map-layer to the leaflet map', () => {
       cy.hidePopup()
-      cy.visit(`/${routing.data.path}?${VIEW_CENTER}=52.3731081%2C4.8932945&${VIEW}=kaart`)
+      cy.visit(
+        `/${routing.data.path}?${centerParam.name}=52.3731081%2C4.8932945&${viewParam.name}=kaart`,
+      )
       // the map-panel should have the class collapsed by default
       cy.get(MAP.mapPanel).should('have.class', 'map-panel--collapsed')
       cy.get(MAP.toggleMapPanel).click()
@@ -219,7 +219,7 @@ describe('map module', () => {
   describe('user should be able to open the map panel when collapsed', () => {
     it('should open the map panel component', () => {
       cy.hidePopup()
-      cy.visit(`/${routing.data.path}?${VIEW}=kaart`)
+      cy.visit(`/${routing.data.path}?${viewParam.name}=kaart`)
 
       cy.get(MAP.mapPanel).should('have.class', 'map-panel--collapsed')
       cy.get(DATA_SEARCH.scrollWrapper).should('not.be.visible')

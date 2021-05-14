@@ -3,21 +3,16 @@ import { generatePath } from 'react-router-dom'
 import environment from '../environment'
 import { HEADER_LINK_HELP } from '../shared/config/content-links'
 import { ViewMode } from '../shared/ducks/ui/ui'
-import parameters from '../store/parameters'
-import { fileNameParam, fileUrlParam } from './pages/ConstructionDossierPage/query-params'
-import { MAIN_PATHS, routing } from './routes'
 import { FEATURE_BETA_MAP, isFeatureEnabled } from './features'
+import { fileNameParam, fileUrlParam } from './pages/ConstructionDossierPage/query-params'
+import { viewParam } from './pages/MapPage/query-params'
+import { MAIN_PATHS, routing } from './routes'
+import toSearchParams from './utils/toSearchParams'
 
-export const toAddresses = (): LocationDescriptorObject => {
-  const searchParams = new URLSearchParams({
-    [parameters.VIEW]: ViewMode.Full,
-  })
-
-  return {
-    pathname: routing.addresses.path,
-    search: searchParams.toString(),
-  }
-}
+export const toAddresses = (): LocationDescriptorObject => ({
+  pathname: routing.addresses.path,
+  search: toSearchParams([[viewParam, ViewMode.Full]]).toString(),
+})
 
 export const toArticleDetail = (id: string, slug: string): LocationDescriptorObject => ({
   pathname: generatePath(routing.articleDetail.path, { id, slug }),
@@ -27,16 +22,10 @@ export const toArticleSearch = (): LocationDescriptorObject => ({
   pathname: routing.articleSearch.path,
 })
 
-export const toCadastralObjects = (): LocationDescriptorObject => {
-  const searchParams = new URLSearchParams({
-    [parameters.VIEW]: ViewMode.Full,
-  })
-
-  return {
-    pathname: routing.cadastralObjects.path,
-    search: searchParams.toString(),
-  }
-}
+export const toCadastralObjects = (): LocationDescriptorObject => ({
+  pathname: routing.cadastralObjects.path,
+  search: toSearchParams([[viewParam, ViewMode.Full]]).toString(),
+})
 
 export const toCollectionDetail = (id: string, slug: string): LocationDescriptorObject => ({
   pathname: generatePath(routing.collectionDetail.path, { id, slug }),
@@ -99,16 +88,10 @@ export const toDatasetSearch = (): LocationDescriptorObject => ({
   pathname: routing.datasetSearch.path,
 })
 
-export const toEstablishments = (): LocationDescriptorObject => {
-  const searchParams = new URLSearchParams({
-    [parameters.VIEW]: ViewMode.Full,
-  })
-
-  return {
-    pathname: routing.establishments.path,
-    search: searchParams.toString(),
-  }
-}
+export const toEstablishments = (): LocationDescriptorObject => ({
+  pathname: routing.establishments.path,
+  search: toSearchParams([[viewParam, ViewMode.Full]]).toString(),
+})
 
 // TODO: Rename this method to match the name of the route.
 export const toGeoSearch = (): LocationDescriptorObject => ({

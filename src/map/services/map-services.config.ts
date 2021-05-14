@@ -13,9 +13,14 @@ import { Root as Vastgoed } from '../../api/vsd/vastgoed/types'
 import config, { DataSelectionType } from '../../app/pages/MapPage/config'
 import buildDetailUrl from '../../app/pages/MapPage/detail/buildDetailUrl'
 import getListFromApi from '../../app/pages/MapPage/detail/getListFromApi'
-import { activeFiltersParam } from '../../app/pages/SearchPage/query-params'
+import {
+  dataSelectionFiltersParam,
+  ViewMode,
+  viewParam,
+} from '../../app/pages/MapPage/query-params'
 import formatDate from '../../app/utils/formatDate'
 import getFileName from '../../app/utils/getFileName'
+import toSearchParams from '../../app/utils/toSearchParams'
 import GLOSSARY, { Definition } from '../../detail/services/glossary.constant'
 import environment from '../../environment'
 import { DEFAULT_LOCALE } from '../../shared/config/locale.config'
@@ -23,7 +28,6 @@ import { fetchWithToken } from '../../shared/services/api/api'
 import AuthScope from '../../shared/services/api/authScope'
 import { Wsg84Coordinate } from '../../shared/services/coordinate-reference-system/crs-converter'
 import getRdAndWgs84Coordinates from '../../shared/services/coordinate-reference-system/getRdAndWgs84Coordinates'
-import PARAMETERS from '../../store/parameters'
 import { getDetailPageData } from '../../store/redux-first-router/actions'
 import {
   DetailAuthentication,
@@ -309,13 +313,11 @@ export const getShowInTableBlock = (
     value?: string | null
   }[],
 ): DetailResultItemLinkList<InternalLink>[] => {
-  const filterParamValue = JSON.stringify(
-    Object.fromEntries(filters.map(({ key, value }) => [key, value])),
-  )
-  const search = new URLSearchParams({
-    [PARAMETERS.VIEW]: 'volledig',
-    [activeFiltersParam.name]: filterParamValue,
-  }).toString()
+  const search = toSearchParams([
+    [viewParam, ViewMode.Full],
+    [dataSelectionFiltersParam, Object.fromEntries(filters.map(({ key, value }) => [key, value]))],
+  ]).toString()
+
   const title = 'In tabel weergeven'
 
   return [
