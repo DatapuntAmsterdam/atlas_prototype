@@ -11,7 +11,7 @@ import {
   toCollectionSearch,
   toPublicationSearch,
   toSpecialSearch,
-} from '../../../store/redux-first-router/actions'
+} from '../../links'
 import getErrorsForPath from '../../utils/getErrorsForPath'
 import getLoadingErrors from '../../utils/getLoadingErrors'
 import getUnauthorizedLabels from '../../utils/getUnauthorizedLabels'
@@ -123,7 +123,7 @@ const EditorialResults: FunctionComponent<EditorialResultsProps> = ({
             <NoSearchResults
               query={query}
               label={label}
-              to={EDITORIAL_OVERVIEW_ACTIONS[overviewType](null, false, false, false)}
+              to={EDITORIAL_OVERVIEW_ACTIONS[overviewType]()}
             />
           )}
           {!hasLoadingError && unauthorizedLabels.length > 0 && (

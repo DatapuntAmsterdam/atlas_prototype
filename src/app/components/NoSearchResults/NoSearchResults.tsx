@@ -1,9 +1,8 @@
 import { Heading, Link, List, Paragraph, themeSpacing, Typography } from '@amsterdam/asc-ui'
 import { LocationDescriptorObject } from 'history'
 import { FunctionComponent } from 'react'
-import { To } from 'redux-first-router-link'
+import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
-import pickLinkComponent from '../../utils/pickLinkComponent'
 import { formatNoResultsMessage } from './utils'
 
 const StyledList = styled(List)`
@@ -23,7 +22,7 @@ const StyledListItem: FunctionComponent = ({ children }) => (
 export interface NoSearchResultsProps {
   query: string
   label?: string
-  to?: To | LocationDescriptorObject
+  to?: LocationDescriptorObject
 }
 
 const NoSearchResults: FunctionComponent<NoSearchResultsProps> = ({ query, label = '', to }) => (
@@ -35,7 +34,7 @@ const NoSearchResults: FunctionComponent<NoSearchResultsProps> = ({ query, label
       {to && (
         <StyledListItem>
           Of bekijk de lijst{' '}
-          <Link as={pickLinkComponent(to)} to={to} title={label} variant="inline">
+          <Link as={RouterLink} to={to} title={label} variant="inline">
             {label}
           </Link>{' '}
           en filter vervolgens op thema.

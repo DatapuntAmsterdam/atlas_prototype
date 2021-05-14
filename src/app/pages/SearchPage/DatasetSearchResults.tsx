@@ -5,13 +5,14 @@ import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { dcatdScopes } from '../../../shared/services/auth/auth'
 import getState from '../../../shared/services/redux/get-state'
-import { toDatasetDetail, toDatasetSearch } from '../../../store/redux-first-router/actions'
+import { toDatasetDetail } from '../../../store/redux-first-router/actions'
 import ActionButton from '../../components/ActionButton'
 import AuthAlert from '../../components/Alerts/AuthAlert'
 import DatasetCard from '../../components/DatasetCard'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import { modificationDateFilter } from '../../components/Filters/Filters'
 import NoSearchResults from '../../components/NoSearchResults'
+import { toDatasetSearch } from '../../links'
 import { ErrorExtensions } from '../../models/graphql'
 import getErrorsForPath from '../../utils/getErrorsForPath'
 import getLoadingErrors from '../../utils/getLoadingErrors'
@@ -112,7 +113,7 @@ const DatasetSearchResults: FunctionComponent<DatasetSearchResultsProps> = ({
       buttonOnClick={() => window.location.reload()}
     />
   ) : (
-    <NoSearchResults query={query} label={label} to={toDatasetSearch(null, false, false, false)} />
+    <NoSearchResults query={query} label={label} to={toDatasetSearch()} />
   )
 }
 
