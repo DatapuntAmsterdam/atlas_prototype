@@ -54,7 +54,11 @@ export function getName() {
   }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { given_name } = keycloak.userInfo as any
+  const { preferred_username, given_name } = keycloak.userInfo as any
+
+  if (typeof preferred_username === 'string') {
+    return preferred_username
+  }
 
   if (typeof given_name === 'string') {
     return given_name
