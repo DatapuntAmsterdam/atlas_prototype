@@ -40,7 +40,7 @@ describe('SearchBar', () => {
       </ThemeProvider>,
     )
 
-    expect(screen.queryByTestId('backDrop')).toBeFalsy()
+    expect(screen.queryByTestId('backDrop')).not.toBeInTheDocument()
   })
 
   it('should show the backdrop when the component receives the right props', () => {
@@ -50,6 +50,6 @@ describe('SearchBar', () => {
       </ThemeProvider>,
     )
 
-    expect(screen.queryByTestId('backDrop')).toBeTruthy()
+    expect(screen.queryByTestId('backDrop')).toBeInTheDocument()
   })
 })
