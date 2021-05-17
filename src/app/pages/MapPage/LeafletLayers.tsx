@@ -1,11 +1,14 @@
 import { NonTiledLayer } from '@amsterdam/arm-nontiled'
-import { GeoJSON, TileLayer } from '@amsterdam/react-maps'
-import { BaseIconOptions, GeoJSONOptions, Icon, Marker } from 'leaflet'
+import { GeoJSON, TileLayer, useMapInstance } from '@amsterdam/react-maps'
+import { BaseIconOptions, GeoJSONOptions, Icon, Marker, GeoJSON as GeoJSONType } from 'leaflet'
 import { FunctionComponent, useMemo } from 'react'
 import ICON_CONFIG from '../../../map/components/leaflet/services/icon-config.constant'
 import MAP_CONFIG from '../../../map/services/map.config'
 import { TmsOverlay, useMapContext, WmsOverlay } from './MapContext'
 import DrawMapVisualization from './components/DrawTool/DrawMapVisualization'
+import useParam from '../../utils/useParam'
+import { zoomParam } from './query-params'
+import useMapCenterToMarker from '../../utils/useMapCenterToMarker'
 
 const detailGeometryStyle = {
   color: 'red',
@@ -29,6 +32,9 @@ const detailGeometryOptions: GeoJSONOptions = {
 
 const LeafletLayers: FunctionComponent = () => {
   const { legendLeafletLayers, detailFeature } = useMapContext()
+  const mapInstance = useMapInstance()
+  const [zoom] = useParam(zoomParam)
+  const { panToWithPanelOffset } = useMapCenterToMarker()
   const tmsLayers = useMemo(
     () => legendLeafletLayers.filter((overlay): overlay is TmsOverlay => overlay.type === 'tms'),
     [legendLeafletLayers],
@@ -39,6 +45,19 @@ const LeafletLayers: FunctionComponent = () => {
     [legendLeafletLayers],
   )
 
+  /**
+   * Center the map and zoom in to the detail object
+   * @param layer
+   */
+  const handleDetailFeatureOnLoad = (layer: GeoJSONType<any>) => {
+    const bounds = layer.getBounds()
+    const maxZoom = Math.round(mapInstance.getBoundsZoom(bounds) / 1.25)
+    if (maxZoom > zoom) {
+      panToWithPanelOffset(bounds, maxZoom)
+    }
+    layer.bringToBack()
+  }
+
   return (
     <>
       <DrawMapVisualization />
@@ -47,7 +66,7 @@ const LeafletLayers: FunctionComponent = () => {
           key={detailFeature.id}
           args={[detailFeature]}
           options={detailGeometryOptions}
-          setInstance={(layer) => layer.bringToBack()}
+          setInstance={handleDetailFeatureOnLoad}
         />
       )}
       {tmsLayers.map(({ id, url, options }) => (

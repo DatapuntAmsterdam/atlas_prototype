@@ -18,7 +18,7 @@ import {
   InfoBoxProps,
   PaginatedData as PaginatedDataType,
 } from '../../../../map/types/details'
-import { AuthError } from '../../../../shared/services/api/customError'
+import { AuthError, ForbiddenError } from '../../../../shared/services/api/customError'
 import AuthAlert from '../../../components/Alerts/AuthAlert'
 import PromiseResult from '../../../components/PromiseResult/PromiseResult'
 import Spacer from '../../../components/Spacer/Spacer'
@@ -35,6 +35,9 @@ import DetailTable from './DetailTable'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
 import useAsyncMapPanelHeader from '../utils/useAsyncMapPanelHeader'
 import GeneralErrorAlert from '../../../components/Alerts/GeneralErrorAlert'
+import AuthScope from '../../../../shared/services/api/authScope'
+import LoginLink from '../../../components/Links/LoginLink/LoginLink'
+import useLegacyDataselectionConfig from '../../../components/DataSelection/useLegacyDataselectionConfig'
 
 const Message = styled(Paragraph)`
   margin: ${themeSpacing(4)} 0;
@@ -103,6 +106,7 @@ const DetailPanel: FunctionComponent = () => {
   const { setDetailFeature } = useMapContext()
   const { isUserAuthorized } = useAuthScope()
   const { type, subtype: subType, id: rawId } = useParams<DataDetailParams>()
+  const { currentDatasetConfig } = useLegacyDataselectionConfig()
   const id = rawId.includes('id') ? rawId.substr(2) : rawId
 
   async function getDetailData() {
@@ -157,6 +161,19 @@ const DetailPanel: FunctionComponent = () => {
   )
 
   if (isRejected(results)) {
+    if (results.reason instanceof AuthError || results.reason instanceof ForbiddenError) {
+      return (
+        <Alert level="info" dismissible>
+          <Paragraph>
+            {currentDatasetConfig?.AUTH_SCOPE === AuthScope.BrkRsn
+              ? `Medewerkers met speciale bevoegdheden kunnen inloggen om kadastrale objecten met
+            zakelijk rechthebbenden te bekijken.`
+              : `Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken. `}
+          </Paragraph>
+          <LoginLink />
+        </Alert>
+      )
+    }
     return <GeneralErrorAlert />
   }
 

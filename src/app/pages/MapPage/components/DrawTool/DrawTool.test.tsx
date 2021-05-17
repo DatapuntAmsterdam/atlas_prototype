@@ -46,7 +46,7 @@ describe('DrawTool', () => {
       const mapInstance = useMapInstance()
       useEffect(() => {
         mapInstance.fireEvent(L.Draw.Event.EDITVERTEX as any, {
-          poly: { id: 'foo', getLatLngs: () => [['123'], ['123']] },
+          poly: { id: 'foo', getLatLngs: () => [['123'], ['123']], getBounds: jest.fn() },
         })
       }, [])
       return <DrawTool />

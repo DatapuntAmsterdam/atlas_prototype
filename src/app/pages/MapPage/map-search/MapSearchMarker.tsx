@@ -13,6 +13,7 @@ import { useMapContext } from '../MapContext'
 import { MarkerProps } from '../MapMarkers'
 import { locationParam, polygonParam, zoomParam } from '../query-params'
 import { SnapPoint } from '../types'
+import useMapCenterToMarker from '../../../utils/useMapCenterToMarker'
 
 const MapSearchMarker: FunctionComponent<MarkerProps> = ({ position }) => {
   const { legendLeafletLayers } = useMapContext()
@@ -21,6 +22,7 @@ const MapSearchMarker: FunctionComponent<MarkerProps> = ({ position }) => {
   const location = useLocation()
   const history = useHistory()
   const { buildQueryString } = useBuildQueryString()
+  const { panToWithPanelOffset } = useMapCenterToMarker()
 
   const { setPositionFromSnapPoint } = useRequiredContext(MapPanelContext)
 
@@ -46,6 +48,7 @@ const MapSearchMarker: FunctionComponent<MarkerProps> = ({ position }) => {
         search: location.search,
       })
     } else {
+      panToWithPanelOffset(e.latlng)
       history.push({
         pathname: routing.dataSearchGeo_TEMP.path,
         search: buildQueryString([[locationParam, e.latlng]], [polygonParam]),

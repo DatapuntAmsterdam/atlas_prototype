@@ -9,6 +9,10 @@ let currentPath = '/kaart'
 
 const pushMock = jest.fn()
 
+jest.mock('../../../utils/useMapCenterToMarker', () => () => ({
+  panToWithPanelOffset: jest.fn(),
+}))
+
 jest.mock('react-router-dom', () => ({
   // @ts-ignore
   ...jest.requireActual('react-router-dom'),

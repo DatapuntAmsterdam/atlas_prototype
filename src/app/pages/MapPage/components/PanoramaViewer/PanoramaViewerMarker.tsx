@@ -23,11 +23,16 @@ const pawnIcon = new Icon({
 const PanoramaViewerMarker: FunctionComponent<MarkerProps> = ({ position, setPosition }) => {
   const [orientationMarker, setOrientationMarker] = useState<LeafletMarker>()
   const [panoHeading] = useParam(panoHeadingParam)
+  const { panToWithPanelOffset } = useMapCenterToMarker()
 
-  // TODO: be able to give a x & y offset (when MapPanel is open)
-  useMapCenterToMarker(position)
-
-  useLeafletEvent('click', ({ latlng }) => setPosition?.(latlng), [])
+  useLeafletEvent(
+    'click',
+    ({ latlng }) => {
+      panToWithPanelOffset(latlng)
+      setPosition?.(latlng)
+    },
+    [],
+  )
 
   useEffect(() => {
     if (orientationMarker && panoHeading) {

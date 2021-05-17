@@ -62,7 +62,15 @@ const MapPanel: FunctionComponent = () => {
   }
 
   useEffect(() => {
-    if (locationParameter || polygon || activeFilters.length) {
+    if (
+      locationParameter ||
+      polygon ||
+      activeFilters.length ||
+      matchPath(location.pathname, {
+        path: routing.dataDetail_TEMP.path,
+        exact: true,
+      })
+    ) {
       setDrawerState(DrawerState.Open)
     }
   }, [locationParameter, polygon])
