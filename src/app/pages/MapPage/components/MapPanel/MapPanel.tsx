@@ -7,7 +7,7 @@ import { useDataSelection } from '../../../../components/DataSelection/DataSelec
 import { routing } from '../../../../routes'
 import useParam from '../../../../utils/useParam'
 import DetailPanel from '../../detail/DetailPanel'
-import MapSearchResults from '../../map-search/MapSearchResults'
+import MapSearchResults from '../MapSearchResults/MapSearchResults'
 import { useMapContext } from '../../MapContext'
 import { locationParam, polygonParam } from '../../query-params'
 import DrawerOverlay, { DeviceMode, DrawerState } from '../DrawerOverlay'
@@ -74,7 +74,7 @@ const MapPanel: FunctionComponent = () => {
     ) {
       setDrawerState(DrawerState.Open)
     }
-  }, [locationParameter, polygon])
+  }, [locationParameter, polygon, location])
 
   // Hide the legend when any of the following events occur:
   // - The user selects an item on the map, navigating to a detail panel.

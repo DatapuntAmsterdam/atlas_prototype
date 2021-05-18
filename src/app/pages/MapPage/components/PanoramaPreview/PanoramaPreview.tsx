@@ -20,7 +20,6 @@ import {
   panoFovParam,
   panoHeadingParam,
   panoPitchParam,
-  zoomParam,
 } from '../../query-params'
 import { MAIN_PATHS } from '../../../../routes'
 import { FEATURE_BETA_MAP, isFeatureEnabled } from '../../../../features'
@@ -120,9 +119,7 @@ const PanoramaPreview: FunctionComponent<PanoramaPreviewProps> = ({
             [panoFovParam, panoFovParam.initialValue],
             [panoHeadingParam, result?.value?.heading ?? panoHeadingParam.initialValue],
             [locationParam, location],
-            // Zoom to level 11 when opening the PanoramaViewer, to show the panorama map layers
             [mapLayersParam, activeLayers],
-            [zoomParam, 11],
           ]),
         }
       : // eslint-disable-next-line camelcase

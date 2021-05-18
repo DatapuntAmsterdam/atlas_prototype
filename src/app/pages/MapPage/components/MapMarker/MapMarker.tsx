@@ -1,21 +1,28 @@
-import { MapPanelContext, Marker as ARMMarker } from '@amsterdam/arm-core'
 import { matchPath, useHistory, useLocation } from 'react-router-dom'
+import { MapPanelContext, Marker as ARMMarker } from '@amsterdam/arm-core'
 import type { LeafletMouseEvent } from 'leaflet'
 import type { FunctionComponent } from 'react'
-import fetchNearestDetail from '../../../../map/services/nearest-detail/nearest-detail'
-import { toDataDetail } from '../../../links'
-import { routing } from '../../../routes'
-import useBuildQueryString from '../../../utils/useBuildQueryString'
-import useLeafletEvent from '../../../utils/useLeafletEvent'
-import useParam from '../../../utils/useParam'
-import useRequiredContext from '../../../utils/useRequiredContext'
-import { useMapContext } from '../MapContext'
-import type { MarkerProps } from '../MapMarkers'
-import { locationParam, polygonParam, zoomParam } from '../query-params'
-import { SnapPoint } from '../types'
-import useMapCenterToMarker from '../../../utils/useMapCenterToMarker'
+import useParam from '../../../../utils/useParam'
+import { locationParam, polygonParam, zoomParam } from '../../query-params'
+import { useDataSelection } from '../../../../components/DataSelection/DataSelectionContext'
+import { useMapContext } from '../../MapContext'
+import useBuildQueryString from '../../../../utils/useBuildQueryString'
+import useMapCenterToMarker from '../../../../utils/useMapCenterToMarker'
+import useRequiredContext from '../../../../utils/useRequiredContext'
+import fetchNearestDetail from '../../../../../map/services/nearest-detail/nearest-detail'
+import { toDataDetail } from '../../../../links'
+import { routing } from '../../../../routes'
+import useLeafletEvent from '../../../../utils/useLeafletEvent'
+import { SnapPoint } from '../../types'
+import PanoramaViewerMarker from '../PanoramaViewer/PanoramaViewerMarker'
 
-const MapSearchMarker: FunctionComponent<MarkerProps> = ({ position }) => {
+export interface MarkerProps {
+  panoActive: boolean
+}
+
+const MapMarker: FunctionComponent<MarkerProps> = ({ panoActive }) => {
+  const [position] = useParam(locationParam)
+  const { drawToolLocked } = useDataSelection()
   const { legendLeafletLayers } = useMapContext()
   const [zoom] = useParam(zoomParam)
   const [polygon] = useParam(polygonParam)
@@ -45,15 +52,15 @@ const MapSearchMarker: FunctionComponent<MarkerProps> = ({ position }) => {
 
       history.push({
         ...toDataDetail({ type, subtype: subType ?? '', id }),
-        search: location.search,
+        search: buildQueryString([[locationParam, e.latlng]]),
       })
     } else {
-      panToWithPanelOffset(e.latlng)
       history.push({
         pathname: routing.dataSearchGeo_TEMP.path,
         search: buildQueryString([[locationParam, e.latlng]], [polygonParam]),
       })
     }
+    panToWithPanelOffset(e.latlng)
   }
 
   useLeafletEvent(
@@ -66,16 +73,27 @@ const MapSearchMarker: FunctionComponent<MarkerProps> = ({ position }) => {
     [location, legendLeafletLayers],
   )
 
-  return position &&
+  const showPanoMarker = panoActive && !drawToolLocked
+  const showSearchMarker =
+    position &&
+    !drawToolLocked &&
     !polygon &&
     !matchPath(location.pathname, { path: routing.dataDetail_TEMP.path, exact: true }) &&
     !(
       matchPath(location.pathname, routing.addresses_TEMP.path) ||
       matchPath(location.pathname, routing.establishments_TEMP.path) ||
       matchPath(location.pathname, routing.cadastralObjects_TEMP.path)
-    ) ? (
-    <ARMMarker latLng={position} />
-  ) : null
+    )
+
+  if (showPanoMarker) {
+    return <PanoramaViewerMarker position={position} />
+  }
+
+  if (showSearchMarker && position) {
+    return <ARMMarker latLng={position} />
+  }
+
+  return null
 }
 
-export default MapSearchMarker
+export default MapMarker

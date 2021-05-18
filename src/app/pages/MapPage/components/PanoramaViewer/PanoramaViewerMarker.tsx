@@ -1,14 +1,14 @@
 import { Marker } from '@amsterdam/arm-core'
-import { Icon } from 'leaflet'
+import { Icon, LatLngLiteral } from 'leaflet'
+import 'leaflet-rotatedmarker'
+import { createGlobalStyle } from 'styled-components'
 import { useEffect, useState } from 'react'
 import type { FunctionComponent } from 'react'
 import type { Marker as LeafletMarker } from 'leaflet'
-import 'leaflet-rotatedmarker'
-import type { MarkerProps } from '../../MapMarkers'
 import { panoHeadingParam } from '../../query-params'
-import useLeafletEvent from '../../../../utils/useLeafletEvent'
-import useMapCenterToMarker from '../../../../utils/useMapCenterToMarker'
 import useParam from '../../../../utils/useParam'
+
+const PAWN_CLASS = 'pawnIcon'
 
 const orientationIcon = new Icon({
   iconUrl: '/assets/images/map/panorama-orientation.svg',
@@ -20,21 +20,22 @@ const pawnIcon = new Icon({
   iconUrl: '/assets/images/map/panorama-person.svg',
   iconSize: [18, 31],
   iconAnchor: [9, 22],
+  className: PAWN_CLASS,
 })
 
-const PanoramaViewerMarker: FunctionComponent<MarkerProps> = ({ position, setPosition }) => {
+const GlobalStyle = createGlobalStyle`
+  .${PAWN_CLASS} {
+    z-index: 1000 !important;
+  }
+`
+
+interface PanoramaViewerMarkerProps {
+  position: LatLngLiteral | null
+}
+
+const PanoramaViewerMarker: FunctionComponent<PanoramaViewerMarkerProps> = ({ position }) => {
   const [orientationMarker, setOrientationMarker] = useState<LeafletMarker>()
   const [panoHeading] = useParam(panoHeadingParam)
-  const { panToWithPanelOffset } = useMapCenterToMarker()
-
-  useLeafletEvent(
-    'click',
-    ({ latlng }) => {
-      panToWithPanelOffset(latlng)
-      setPosition?.(latlng)
-    },
-    [],
-  )
 
   useEffect(() => {
     if (orientationMarker && panoHeading) {
@@ -44,6 +45,7 @@ const PanoramaViewerMarker: FunctionComponent<MarkerProps> = ({ position, setPos
 
   return position ? (
     <>
+      <GlobalStyle />
       <Marker
         setInstance={setOrientationMarker}
         latLng={position}

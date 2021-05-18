@@ -8,7 +8,7 @@ import withMapContext from '../../utils/withMapContext'
 import { DataSelectionProvider } from '../../components/DataSelection/DataSelectionContext'
 
 jest.mock('@amsterdam/react-maps')
-jest.mock('./MapMarkers', () => () => <div data-testid="mapMarkers" />)
+jest.mock('./components/MapMarker/MapMarker', () => () => <div data-testid="mapMarkers" />)
 jest.mock('./components/MapPanel/MapPanel', () => () => <div data-testid="mapPanel" />)
 jest.mock('./components/DrawTool/DrawResults', () => () => <div data-testid="drawResults" />)
 jest.mock('./components/PanoramaViewer/PanoramaViewer', () => () => (

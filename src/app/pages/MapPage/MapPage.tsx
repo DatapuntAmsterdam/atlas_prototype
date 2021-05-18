@@ -9,7 +9,7 @@ import PanoramaViewer from './components/PanoramaViewer/PanoramaViewer'
 import useParam from '../../utils/useParam'
 import LeafletLayers from './LeafletLayers'
 import { useMapContext } from './MapContext'
-import MapMarkers from './MapMarkers'
+import MapMarker from './components/MapMarker'
 import {
   centerParam,
   locationParam,
@@ -100,6 +100,7 @@ const MapPage: FunctionComponent = () => {
           zoom: zoom ?? DEFAULT_AMSTERDAM_MAPS_OPTIONS.zoom,
           center: center ?? DEFAULT_AMSTERDAM_MAPS_OPTIONS.center,
           attributionControl: false,
+          minZoom: 7,
         }}
         events={{
           zoomend: useCallback(() => {
@@ -117,8 +118,9 @@ const MapPage: FunctionComponent = () => {
         <LeafletLayers />
 
         {panoActive && <PanoramaViewer />}
-        <MapMarkers panoActive={panoActive} />
+        <MapMarker panoActive={panoActive} />
         <MapPanel />
+        <div data-testid="asdasdassdas" style={{ width: '20px' }} />
         <Scale
           options={{
             position: 'bottomright',

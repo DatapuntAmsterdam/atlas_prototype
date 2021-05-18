@@ -1,16 +1,14 @@
 import { NonTiledLayer } from '@amsterdam/arm-nontiled'
-import { GeoJSON, TileLayer, useMapInstance } from '@amsterdam/react-maps'
+import { GeoJSON, TileLayer } from '@amsterdam/react-maps'
 import { Icon, Marker } from 'leaflet'
 import { useMemo } from 'react'
-import type { BaseIconOptions, GeoJSONOptions, GeoJSON as GeoJSONType } from 'leaflet'
+import type { BaseIconOptions, GeoJSON as GeoJSONType, GeoJSONOptions } from 'leaflet'
 import type { FunctionComponent } from 'react'
 import ICON_CONFIG from '../../../map/components/leaflet/services/icon-config.constant'
 import MAP_CONFIG from '../../../map/services/map.config'
 import type { TmsOverlay, WmsOverlay } from './MapContext'
 import { useMapContext } from './MapContext'
 import DrawMapVisualization from './components/DrawTool/DrawMapVisualization'
-import useParam from '../../utils/useParam'
-import { zoomParam } from './query-params'
 import useMapCenterToMarker from '../../utils/useMapCenterToMarker'
 
 const detailGeometryStyle = {
@@ -35,8 +33,6 @@ const detailGeometryOptions: GeoJSONOptions = {
 
 const LeafletLayers: FunctionComponent = () => {
   const { legendLeafletLayers, detailFeature } = useMapContext()
-  const mapInstance = useMapInstance()
-  const [zoom] = useParam(zoomParam)
   const { panToWithPanelOffset } = useMapCenterToMarker()
   const tmsLayers = useMemo(
     () => legendLeafletLayers.filter((overlay): overlay is TmsOverlay => overlay.type === 'tms'),
@@ -53,11 +49,7 @@ const LeafletLayers: FunctionComponent = () => {
    * @param layer
    */
   const handleDetailFeatureOnLoad = (layer: GeoJSONType<any>) => {
-    const bounds = layer.getBounds()
-    const maxZoom = Math.round(mapInstance.getBoundsZoom(bounds) / 1.25)
-    if (maxZoom > zoom) {
-      panToWithPanelOffset(bounds, maxZoom)
-    }
+    panToWithPanelOffset(layer.getBounds())
     layer.bringToBack()
   }
 

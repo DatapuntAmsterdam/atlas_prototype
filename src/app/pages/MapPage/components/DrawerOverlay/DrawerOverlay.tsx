@@ -23,7 +23,7 @@ import type Control from '../Control'
 import MapOverlay from '../MapOverlay'
 
 const HANDLE_SIZE_MOBILE = 70
-const HANDLE_SIZE_DESKTOP = 50
+const HANDLE_SIZE_DESKTOP = 40
 // The height of the preview area in pixels, handle and controls excluded.
 const PREVIEW_SIZE = 200
 const SNAP_OFFSET = 0.5 // 0 - 1, increase this to snap quicker to bottom or top, instead of middle
@@ -128,7 +128,7 @@ const DrawerHandleDesktop = styled(Button)`
   width: ${HANDLE_SIZE_DESKTOP - 20}px;
   height: 100%;
   position: relative;
-  margin-right: ${themeSpacing(9)};
+  margin-right: ${themeSpacing(5)};
 
   @media print {
     display: none;
@@ -262,14 +262,6 @@ const DrawerOverlay: FunctionComponent<DrawerOverlayProps> = ({
     : 0
 
   const drawerContentRef = useRef<HTMLDivElement>(null)
-
-  const [activePanelElement, setActivePanelElement] = useState<Element | null>(null)
-  const activePanelSize = useResizeDetector({
-    targetRef: {
-      current: activePanelElement,
-    },
-  })
-  const activePanelWidth = activePanelSize?.width ?? 0
 
   const DrawerHandle = isMobile(mode) ? DrawerHandleMobile : DrawerHandleDesktop
   const requestFrame = useAnimationFrame()
@@ -461,9 +453,6 @@ const DrawerOverlay: FunctionComponent<DrawerOverlayProps> = ({
   if (isMobile(mode)) {
     // The drawer needs to be completely visible in the open position, but without the controls that are locked to it in the viewport.
     drawerContainerStyle.top = `-${lockedControlsHeight}px`
-  } else {
-    // The drawer content should be the same width as the active panel.
-    drawerContentStyle.width = `${activePanelWidth}px`
   }
 
   drawerContainerStyle.transform = getDrawerPositionTransform()
@@ -514,13 +503,10 @@ const DrawerOverlay: FunctionComponent<DrawerOverlayProps> = ({
           <DrawerContent ref={drawerContentRef} style={drawerContentStyle}>
             {Children.toArray(children)
               .filter((child): child is ReactElement => isValidElement(child))
-              .map((child, index, { length }) => {
-                const isLast = index === length - 1
-
+              .map((child, index) => {
                 return cloneElement(child, {
                   deviceMode: mode,
                   stackLevel: index,
-                  ref: isLast ? (element: Element) => setActivePanelElement(element) : null,
                 })
               })}
           </DrawerContent>
