@@ -5,14 +5,15 @@ const useMapCenterToMarker = () => {
   const mapInstance = useMapInstance()
 
   const panToWithPanelOffset = (boundOrLatLng: LatLngBounds | LatLngLiteral, maxZoom?: number) => {
-    const mapWidth =
-      ((document.querySelector('[data-testid="drawerPanel"]') as HTMLElement)?.offsetWidth ?? 0) -
-      window.innerWidth
+    const drawerPanel = document.querySelector('[data-testid="drawerPanel"]')
+    const drawerPanelWidth = drawerPanel instanceof HTMLElement ? drawerPanel.offsetWidth + 30 : 0
+    const mapWidth = window.innerWidth - drawerPanelWidth
+
     if (boundOrLatLng instanceof LatLngBounds) {
       mapInstance.fitBounds(boundOrLatLng, { maxZoom, paddingTopLeft: [mapWidth * -1, 0] })
     } else {
       const { x, y } = mapInstance.latLngToContainerPoint(boundOrLatLng)
-      const newLocation = mapInstance.containerPointToLatLng([x + mapWidth / 2, y])
+      const newLocation = mapInstance.containerPointToLatLng([x - drawerPanelWidth / 2, y])
       mapInstance.panTo(newLocation)
     }
   }
