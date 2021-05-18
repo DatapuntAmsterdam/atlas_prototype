@@ -2,7 +2,7 @@ import { Alert, Heading, Paragraph, themeColor, themeSpacing } from '@amsterdam/
 import { useSelector } from 'react-redux'
 import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
 import styled, { css } from 'styled-components'
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 import { getDataSelectionPage } from '../../../shared/ducks/data-selection/selectors'
 import DataSelectionActiveFilters from './DataSelectionActiveFilters'
 import { ViewMode, viewParam } from '../../pages/MapPage/query-params'

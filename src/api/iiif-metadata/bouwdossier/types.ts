@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { Links } from '../../types'
+import type { Links } from '../../types'
 
 export type BouwdossierStatus = 'Aanvraag' | 'Behandeling'
 export type BouwdossierAccess = 'RESTRICTED' | 'PUBLIC'

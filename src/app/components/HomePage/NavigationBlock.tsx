@@ -1,8 +1,9 @@
 import { breakpoint, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import NavigationCard from './NavigationCard'
-import navigationLinks, { NavigationLink } from './services/navigationLinks'
+import type { NavigationLink } from './services/navigationLinks'
+import navigationLinks from './services/navigationLinks'
 
 const StyledCardContainer = styled.div`
   position: relative;

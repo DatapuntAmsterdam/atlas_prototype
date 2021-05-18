@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
-import { isFulfilled, isPending, isRejected, PromiseResult } from '@amsterdam/use-promise'
+import { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
+import type { PromiseResult } from '@amsterdam/use-promise'
 import { useMapContext } from '../MapContext'
 import { AuthError, ForbiddenError } from '../../../../shared/services/api/customError'
 

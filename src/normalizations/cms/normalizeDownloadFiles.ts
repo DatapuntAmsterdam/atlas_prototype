@@ -1,4 +1,4 @@
-import { FieldDownload } from './types'
+import type { FieldDownload } from './types'
 
 interface NormalizedDownloadObject {
   fileName: string

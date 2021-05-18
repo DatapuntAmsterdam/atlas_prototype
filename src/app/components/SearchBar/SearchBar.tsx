@@ -8,8 +8,9 @@ import {
   showAboveBackDrop,
   styles,
 } from '@amsterdam/asc-ui'
-import { FunctionComponent, InputHTMLAttributes, useState } from 'react'
+import { useState } from 'react'
 import styled, { css } from 'styled-components'
+import type { FunctionComponent, InputHTMLAttributes } from 'react'
 import CONSTANTS from '../../../shared/config/constants'
 import SearchBarFilter from '../SearchBarFilter'
 

@@ -1,7 +1,7 @@
 import fixtureSingle from './taxistandplaats.json'
 import fixtureList from './taxistandplaats-list.json'
-import { Single } from '../types'
-import { HALList } from '../../types'
+import type { Single } from '../types'
+import type { HALList } from '../../types'
 
 type List = HALList<{
   taxistandplaats: Single[]

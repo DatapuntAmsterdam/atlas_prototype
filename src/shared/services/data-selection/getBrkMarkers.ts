@@ -1,8 +1,8 @@
 import environment from '../../../environment'
 import { fetchWithToken } from '../api/api'
 import generateId from '../state-token-generator/state-token-generator'
-import { BoundingBox, FilterObject } from '../../../app/components/DataSelection/types'
-import { LegacyDataSelectionConfigType } from './data-selection-config'
+import type { BoundingBox, FilterObject } from '../../../app/components/DataSelection/types'
+import type { LegacyDataSelectionConfigType } from './data-selection-config'
 
 function getBrkMarkers(
   signal: AbortSignal,

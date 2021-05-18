@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react'
 import withAppContext from '../../../../utils/withAppContext'
-import CardListBlock, { CMSCollectionList } from './CardListBlock'
+import type { CMSCollectionList } from './CardListBlock'
+import CardListBlock from './CardListBlock'
 
 const RESULTS: CMSCollectionList[] = [{ field_title: 'Some title', field_content: [] }]
 

@@ -1,3 +1,4 @@
+import type { UiState } from './ui'
 import uiReducer, {
   hasEmbedMode,
   hasPrintMode,
@@ -20,7 +21,6 @@ import uiReducer, {
   SHOW_PRINT,
   toggleMapPanelHandle,
   TOGGLE_MAP_PANEL_HANDLE,
-  UiState,
   ViewMode,
 } from './ui'
 

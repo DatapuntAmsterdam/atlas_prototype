@@ -1,9 +1,10 @@
 import { useStateRef } from '@amsterdam/arm-core'
 import debounce from 'lodash.debounce'
 import Marzipano from 'marzipano'
-import { RefObject, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import type { RefObject } from 'react'
 import { getOrientation } from '../../panorama/services/marzipano/marzipano'
-import { Pano } from '../pages/MapPage/query-params'
+import type { Pano } from '../pages/MapPage/query-params'
 
 const useMarzipano = (
   ref: RefObject<HTMLElement>,

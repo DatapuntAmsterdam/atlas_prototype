@@ -1,7 +1,7 @@
 import { themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import { FunctionComponent } from 'react'
-import { GraphQLFormattedError } from 'graphql'
+import type { FunctionComponent } from 'react'
+import type { GraphQLFormattedError } from 'graphql'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import SearchLink from '../../components/Links/SearchLink/SearchLink'
 import NoSearchResults from '../../components/NoSearchResults'
@@ -9,7 +9,8 @@ import SearchHeading from '../../components/SearchHeading/SearchHeading'
 import formatCount from '../../utils/formatCount'
 import getErrorsForPath from '../../utils/getErrorsForPath'
 import getLoadingErrors from '../../utils/getLoadingErrors'
-import SEARCH_PAGE_CONFIG, { SearchConfig } from './config'
+import type { SearchConfig } from './config'
+import SEARCH_PAGE_CONFIG from './config'
 
 const ResultsComponent = styled.div`
   margin-bottom: ${themeSpacing(8)};

@@ -1,6 +1,6 @@
-import { LocationDescriptorObject } from 'history'
-import { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
+import type { LocationDescriptorObject } from 'history'
+import type { FunctionComponent } from 'react'
 import SEARCH_PAGE_CONFIG from '../../../app/pages/SearchPage/config'
 import {
   activeFiltersParam,
@@ -8,7 +8,7 @@ import {
   queryParam,
 } from '../../../app/pages/SearchPage/query-params'
 import toSearchParams from '../../../app/utils/toSearchParams'
-import { AutoSuggestSearchResult } from '../../services/auto-suggest/auto-suggest'
+import type { AutoSuggestSearchResult } from '../../services/auto-suggest/auto-suggest'
 import AutoSuggestItem from './AutoSuggestItem'
 
 export interface AutoSuggestCategoryProps {

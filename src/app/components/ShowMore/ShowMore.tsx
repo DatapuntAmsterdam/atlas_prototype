@@ -1,7 +1,8 @@
 import { ChevronDown, ChevronUp } from '@amsterdam/asc-assets'
 import { Button, Icon, svgFill, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import { Children, useState, FunctionComponent } from 'react'
+import { Children, useState } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 
 const ShowMoreButton = styled(Button)`
   height: auto;

@@ -1,6 +1,6 @@
 import { screen, cleanup, fireEvent, render } from '@testing-library/react'
-import { FilterOption } from '../../../models/filter'
-import { FilterProps } from '../models'
+import type { FilterOption } from '../../../models/filter'
+import type { FilterProps } from '../models'
 import RadioFilter from './RadioFilter'
 
 describe('RadioFilter', () => {

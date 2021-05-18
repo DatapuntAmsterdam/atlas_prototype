@@ -2,22 +2,15 @@
 import { icons, useStateRef } from '@amsterdam/arm-core'
 import { ascDefaultTheme, themeColor } from '@amsterdam/asc-ui'
 import { useMapInstance } from '@amsterdam/react-maps'
-import {
-  FeatureGroup,
-  DrawMap,
-  LayerEvent,
-  LeafletKeyboardEvent,
-  Draw,
-  Edit,
-  drawLocal,
-  DrawEvents,
-} from 'leaflet'
+import { Draw, drawLocal, Edit, FeatureGroup } from 'leaflet'
 import 'leaflet-draw'
-import { FunctionComponent, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { createGlobalStyle } from 'styled-components'
 import { v4 as uuidv4 } from 'uuid'
+import type { FunctionComponent } from 'react'
+import type { DrawEvents, DrawMap, LayerEvent, LeafletKeyboardEvent } from 'leaflet'
 import DrawToolControls from './DrawToolControls'
-import { ExtendedLayer, PolygonType, PolylineType } from './types'
+import type { ExtendedLayer, PolygonType, PolylineType } from './types'
 
 const { drawIcon } = icons
 

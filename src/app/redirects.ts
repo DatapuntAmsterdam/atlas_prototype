@@ -6,7 +6,7 @@ import {
   REDIRECTS_ARTICLES,
   SHORTLINKS,
 } from '../shared/config/content-links'
-import { Environment } from '../shared/environment'
+import type { Environment } from '../shared/environment'
 import { toArticleDetail } from './links'
 import matomoInstance from './matomo'
 import {

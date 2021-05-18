@@ -1,4 +1,5 @@
-import { Context, useContext } from 'react'
+import { useContext } from 'react'
+import type { Context } from 'react'
 
 /**
  * Passes the call to `useContext` and throw an exception if the resolved value is either null or undefined.

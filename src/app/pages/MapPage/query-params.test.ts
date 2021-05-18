@@ -1,12 +1,12 @@
 import { v4 as uuid } from 'uuid'
 import encodeParam from '../../utils/encodeParam'
+import type { PolyDrawing } from './query-params'
 import {
   isEmbeddedParam,
   panoFovParam,
   panoHeadingParam,
   panoPitchParam,
   panoTagParam,
-  PolyDrawing,
   polygonParam,
   polylineParam,
 } from './query-params'

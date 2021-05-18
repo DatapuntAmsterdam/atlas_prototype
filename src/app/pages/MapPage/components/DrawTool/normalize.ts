@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
-import { Feature } from 'geojson'
-import { LatLngTuple } from 'leaflet'
+import type { Feature } from 'geojson'
+import type { LatLngTuple } from 'leaflet'
 import { DataSelectionMapVisualizationType, DataSelectionType } from '../../config'
 
 interface NamedFeature extends Feature {

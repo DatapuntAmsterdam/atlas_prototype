@@ -1,5 +1,6 @@
-import { ascDefaultTheme, breakpoint, Theme } from '@amsterdam/asc-ui'
+import { ascDefaultTheme, breakpoint } from '@amsterdam/asc-ui'
 import styled, { css } from 'styled-components'
+import type { Theme } from '@amsterdam/asc-ui'
 
 const GAP = ascDefaultTheme.spacing * 6
 

@@ -1,6 +1,7 @@
-import { LocationDescriptorObject } from 'history'
 import { Link as RouterLink } from 'react-router-dom'
-import ReduxRouterLink, { To } from 'redux-first-router-link'
+import ReduxRouterLink from 'redux-first-router-link'
+import type { LocationDescriptorObject } from 'history'
+import type { To } from 'redux-first-router-link'
 import pickLinkComponent from './pickLinkComponent'
 
 describe('pickLinkComponent', () => {

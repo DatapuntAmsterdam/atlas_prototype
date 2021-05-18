@@ -1,5 +1,6 @@
-import { FunctionComponent, useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import { PANO_LABELS } from '../../../../../panorama/ducks/constants'
 import { loadScene } from '../../../../../panorama/services/marzipano/marzipano'
 import {

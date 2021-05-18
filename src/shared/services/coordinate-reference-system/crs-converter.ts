@@ -1,5 +1,5 @@
-import { LatLngLiteral } from 'leaflet'
 import proj4 from 'proj4'
+import type { LatLngLiteral } from 'leaflet'
 import { RD, WGS84 } from '../../../map/services/crs-config'
 
 export interface Wsg84Coordinate {

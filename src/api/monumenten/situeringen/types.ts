@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { APIReference, Links } from '../../types'
+import type { APIReference, Links } from '../../types'
 
 export interface Single extends APIReference {
   _display: string

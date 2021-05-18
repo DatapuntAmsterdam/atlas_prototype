@@ -1,5 +1,6 @@
-import { FunctionComponent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import LoadingSpinner from '../../../../components/LoadingSpinner/LoadingSpinner'
 
 const IFrameContainer = styled.div`

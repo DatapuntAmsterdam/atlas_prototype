@@ -1,6 +1,7 @@
 import { Divider } from '@amsterdam/asc-ui'
-import { FunctionComponent, Fragment } from 'react'
-import { DetailResultItemTable } from '../../types/details'
+import { Fragment } from 'react'
+import type { FunctionComponent } from 'react'
+import type { DetailResultItemTable } from '../../types/details'
 
 export interface MapDetailResultItemTableProps {
   item: DetailResultItemTable

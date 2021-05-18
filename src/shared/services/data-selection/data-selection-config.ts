@@ -1,5 +1,5 @@
 import { routing } from '../../../app/routes'
-import { BoundingBox, FilterObject } from '../../../app/components/DataSelection/types'
+import type { BoundingBox, FilterObject } from '../../../app/components/DataSelection/types'
 import getBrkMarkers from './getBrkMarkers'
 import getMarkers from './getMarkers'
 

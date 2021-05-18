@@ -1,12 +1,5 @@
-import {
-  ActiveFilter,
-  activeFiltersParam,
-  pageParam,
-  queryParam,
-  Sort,
-  SortOrder,
-  sortParam,
-} from './query-params'
+import type { ActiveFilter, Sort } from './query-params'
+import { activeFiltersParam, pageParam, queryParam, SortOrder, sortParam } from './query-params'
 
 describe('activeFiltersParam', () => {
   const encoded = 'date;date:2013|theme;theme:bestuur.theme:verkeer'

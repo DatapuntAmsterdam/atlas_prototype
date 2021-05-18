@@ -1,6 +1,6 @@
 import { breakpoint, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 
 const StyledContainer = styled.div`
   width: 100%;

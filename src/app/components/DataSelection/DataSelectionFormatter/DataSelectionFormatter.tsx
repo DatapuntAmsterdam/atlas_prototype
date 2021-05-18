@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 import {
   aggregateFilter,
   alignRightFilter,
@@ -11,7 +11,7 @@ import {
   truncateHtmlAsTextFilter,
   zipCodeFilter,
 } from '../../Filters/Filters'
-import { DataBodyContent } from '../types'
+import type { DataBodyContent } from '../types'
 import { BezoekAdres, FileType, HandelsNaam, SBIOmschrijving, Tags } from './Templates'
 
 const TEMPLATE_MAPPER = {

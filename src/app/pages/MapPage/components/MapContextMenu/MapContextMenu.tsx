@@ -15,8 +15,9 @@ import {
   themeSpacing,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { FunctionComponent, ReactNode, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent, ReactNode } from 'react'
 import getShareUrl, { ShareTarget } from '../../../../../shared/services/share-url/share-url'
 import { useIsEmbedded } from '../../../../contexts/ui'
 import useDocumentTitle from '../../../../utils/useDocumentTitle'

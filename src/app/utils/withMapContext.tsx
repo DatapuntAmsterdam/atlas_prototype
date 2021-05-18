@@ -1,6 +1,7 @@
-import { ReactNode } from 'react'
 import { Map as MapComponent } from '@amsterdam/arm-core'
-import MapContext, { MapContextProps } from '../pages/MapPage/MapContext'
+import type { ReactNode } from 'react'
+import type { MapContextProps } from '../pages/MapPage/MapContext'
+import MapContext from '../pages/MapPage/MapContext'
 import withAppContext from './withAppContext'
 
 const initialState: MapContextProps = {

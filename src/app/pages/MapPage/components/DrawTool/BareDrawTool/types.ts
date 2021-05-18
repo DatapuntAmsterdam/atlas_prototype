@@ -1,4 +1,4 @@
-import { Polygon, Polyline } from 'leaflet'
+import type { Polygon, Polyline } from 'leaflet'
 
 interface ExtraLayerTypes {
   id: string

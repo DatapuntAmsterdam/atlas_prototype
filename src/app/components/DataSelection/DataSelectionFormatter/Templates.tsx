@@ -1,6 +1,6 @@
 import classNames from 'classnames'
-import { FunctionComponent } from 'react'
-import { DataBodyContent } from '../types'
+import type { FunctionComponent } from 'react'
+import type { DataBodyContent } from '../types'
 
 interface FormattedValue {
   name: string

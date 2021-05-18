@@ -9,7 +9,6 @@ import {
 } from '@amsterdam/asc-ui'
 import { MatomoProvider } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
-import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
@@ -20,6 +19,7 @@ import {
   fetchExchange,
   Provider as GraphQLProvider,
 } from 'urql'
+import type { FunctionComponent } from 'react'
 import environment from '../environment'
 import { hasGlobalError } from '../shared/ducks/error/error-message'
 import {

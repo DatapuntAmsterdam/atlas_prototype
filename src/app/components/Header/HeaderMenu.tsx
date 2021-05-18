@@ -8,10 +8,11 @@ import {
   themeColor,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { ComponentProps, FunctionComponent, useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
+import type { ComponentProps, FunctionComponent } from 'react'
 import environment from '../../../environment'
 import CONSTANTS from '../../../shared/config/constants'
 import { HEADER_LINKS_ABOUT, HEADER_LINK_HELP } from '../../../shared/config/content-links'

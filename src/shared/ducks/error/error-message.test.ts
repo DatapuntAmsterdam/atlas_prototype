@@ -1,4 +1,4 @@
-import { RootState } from '../../../reducers/root'
+import type { RootState } from '../../../reducers/root'
 import errorMessageReducer, {
   ErrorType,
   getMessage,

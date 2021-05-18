@@ -1,8 +1,8 @@
 import { fetchWithToken } from '../api/api'
 import environment from '../../../environment'
 import { createFiltersObject, formatData, formatFilters } from './normalizations'
-import { LegacyDataSelectionConfigType } from './data-selection-config'
-import {
+import type { LegacyDataSelectionConfigType } from './data-selection-config'
+import type {
   ActiveFilter,
   LegacyDataSelectionViewTypes,
 } from '../../../app/components/DataSelection/types'

@@ -1,7 +1,8 @@
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Button, Link, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent, useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
 import { useDataSelection } from './DataSelectionContext'
 

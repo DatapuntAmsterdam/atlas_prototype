@@ -1,8 +1,8 @@
-import { FunctionComponent } from 'react'
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Button } from '@amsterdam/asc-ui'
 import { useMapInstance } from '@amsterdam/react-maps'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import Control from '../Control'
 
 const ZoomButton = styled(Button)`

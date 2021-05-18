@@ -1,15 +1,16 @@
-import { FunctionComponent, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
+import type { FunctionComponent } from 'react'
+import type { MapCollection, MapLayer } from '../../../map/services'
 import {
   getMapLayers as fetchMapLayers,
   getPanelLayers as fetchPanelLayers,
-  MapCollection,
-  MapLayer,
 } from '../../../map/services'
 import { getUser } from '../../../shared/ducks/user/user'
 import useParam from '../../utils/useParam'
-import MapContext, { MapState } from './MapContext'
+import type { MapState } from './MapContext'
+import MapContext from './MapContext'
 import MapPage from './MapPage'
 import { mapLayersParam, panoFullScreenParam, ViewMode, viewParam } from './query-params'
 import buildLeafletLayers from './utils/buildLeafletLayers'

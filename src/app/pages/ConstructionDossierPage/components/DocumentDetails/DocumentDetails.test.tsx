@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import { FunctionComponent } from 'react'
 import { mocked } from 'ts-jest/utils'
+import type { FunctionComponent } from 'react'
 import { singleFixture as dossierFixture } from '../../../../../api/iiif-metadata/bouwdossier'
 import withAppContext from '../../../../utils/withAppContext'
 import AuthTokenContext from '../../AuthTokenContext'

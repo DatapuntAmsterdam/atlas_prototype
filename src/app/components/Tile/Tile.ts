@@ -2,7 +2,7 @@ import { breakpoint, Link, perceivedLoading, themeColor, themeSpacing } from '@a
 import styled, { css } from 'styled-components'
 import { NOT_FOUND_THUMBNAIL } from '../../../shared/config/constants'
 import getImageFromCms from '../../utils/getImageFromCms'
-import { SizeOnBreakpoint } from '../TileGrid/TileGridStyle'
+import type { SizeOnBreakpoint } from '../TileGrid/TileGridStyle'
 import TileLabel from './TileLabel'
 
 export interface TileProps {

@@ -1,7 +1,7 @@
 import { Close } from '@amsterdam/asc-assets'
 import { Button, Divider, Heading, Modal, Paragraph, themeSpacing, TopBar } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 
 export interface SelectFilesModalProps {
   onClose: () => void

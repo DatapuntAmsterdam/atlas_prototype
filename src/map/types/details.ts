@@ -1,9 +1,9 @@
-import { AlertLevel } from '@amsterdam/asc-ui'
-import { Point } from 'geojson'
-import { LocationDescriptor, LocationDescriptorObject } from 'history'
-import { ReactNode } from 'react'
-import AuthScope from '../../shared/services/api/authScope'
-import { Definition } from '../../detail/services/glossary.constant'
+import type { AlertLevel } from '@amsterdam/asc-ui'
+import type { Point } from 'geojson'
+import type { LocationDescriptor, LocationDescriptorObject } from 'history'
+import type { ReactNode } from 'react'
+import type AuthScope from '../../shared/services/api/authScope'
+import type { Definition } from '../../detail/services/glossary.constant'
 
 export type InfoBoxProps = {
   meta?: DetailResultItemDefinitionListEntry[]

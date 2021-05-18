@@ -1,11 +1,12 @@
-import { FunctionComponent, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Button, Heading, Link, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
+import type { FunctionComponent } from 'react'
 import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
 import Metadata from '../../../shared/assets/icons/metadata.svg'
 import { useDataSelection } from './DataSelectionContext'
-import { AvailableFilter } from './types'
+import type { AvailableFilter } from './types'
 import useLegacyDataselectionConfig from './useLegacyDataselectionConfig'
 
 const StyledHeading = styled(Heading)`

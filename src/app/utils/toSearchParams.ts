@@ -1,5 +1,5 @@
 import encodeParam from './encodeParam'
-import { UrlParam } from './useParam'
+import type { UrlParam } from './useParam'
 
 export type UrlParamTuple<T> = [UrlParam<T>, T]
 

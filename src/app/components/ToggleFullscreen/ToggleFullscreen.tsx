@@ -1,7 +1,7 @@
-import { FunctionComponent } from 'react'
 import styled, { css } from 'styled-components'
 import { ControlButton } from '@amsterdam/arm-core'
 import { themeSpacing } from '@amsterdam/asc-ui'
+import type { FunctionComponent } from 'react'
 import Maximize from '../../../shared/assets/icons/icon-maximize.svg'
 import Minimize from '../../../shared/assets/icons/icon-minimize.svg'
 

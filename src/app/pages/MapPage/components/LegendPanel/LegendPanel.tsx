@@ -1,6 +1,7 @@
-import { FunctionComponent, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import MapPanel from '../../../../../map/containers/panel/MapPanel'
 import { getUser } from '../../../../../shared/ducks/user/user'
 import useParam from '../../../../utils/useParam'

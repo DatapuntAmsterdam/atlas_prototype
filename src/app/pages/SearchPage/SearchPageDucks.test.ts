@@ -1,11 +1,10 @@
+import type { SearchPageState, ActiveFilter } from './SearchPageDucks'
 import reducer, {
   initialState,
   setSort,
   setFilterValues,
-  SearchPageState,
   REDUCER_KEY,
   getSort,
-  ActiveFilter,
   getActiveFilters,
   getFilterValues,
   setPage,

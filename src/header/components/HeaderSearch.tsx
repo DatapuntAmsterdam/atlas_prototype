@@ -1,7 +1,8 @@
 import { srOnlyStyle } from '@amsterdam/asc-ui'
-import { FunctionComponent, useCallback, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import SearchBar from '../../app/components/SearchBar'
 import { LOCAL_STORAGE_KEY } from '../../app/components/SearchBarFilter/SearchBarFilter'
 import SEARCH_PAGE_CONFIG from '../../app/pages/SearchPage/config'
@@ -9,10 +10,8 @@ import { SearchType } from '../../app/pages/SearchPage/constants'
 import { queryParam } from '../../app/pages/SearchPage/query-params'
 import useParam from '../../app/utils/useParam'
 import useTraverseList from '../../app/utils/useTraverseList'
-import autoSuggestSearch, {
-  AutoSuggestSearchResult,
-  MIN_QUERY_LENGTH,
-} from '../services/auto-suggest/auto-suggest'
+import type { AutoSuggestSearchResult } from '../services/auto-suggest/auto-suggest'
+import autoSuggestSearch, { MIN_QUERY_LENGTH } from '../services/auto-suggest/auto-suggest'
 import AutoSuggest from './auto-suggest/AutoSuggest'
 
 // TODO: Add the screen reader only "styling" to asc-ui

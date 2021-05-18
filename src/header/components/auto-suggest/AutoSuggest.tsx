@@ -7,8 +7,9 @@ import { toSearch } from '../../../app/links'
 import { SearchType } from '../../../app/pages/SearchPage/constants'
 import { queryParam } from '../../../app/pages/SearchPage/query-params'
 import toSearchParams from '../../../app/utils/toSearchParams'
-import { CmsType } from '../../../shared/config/cms.config'
-import { AutoSuggestSearchResult, LABELS } from '../../services/auto-suggest/auto-suggest'
+import type { CmsType } from '../../../shared/config/cms.config'
+import type { AutoSuggestSearchResult } from '../../services/auto-suggest/auto-suggest'
+import { LABELS } from '../../services/auto-suggest/auto-suggest'
 import AutoSuggestCategory from './AutoSuggestCategory'
 
 export type SearchCategory = CmsType | SearchType

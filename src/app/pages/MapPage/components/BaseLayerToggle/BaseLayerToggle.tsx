@@ -1,9 +1,12 @@
 import { BaseLayerToggle as BaseLayerToggleComponent } from '@amsterdam/arm-core'
-import { FunctionComponent, useMemo } from 'react'
-import { getMapBaseLayers, MapBaseLayer } from '../../../../../map/services'
+import { useMemo } from 'react'
+import type { FunctionComponent } from 'react'
+import type { MapBaseLayer } from '../../../../../map/services'
+import { getMapBaseLayers } from '../../../../../map/services'
 import { useIsEmbedded } from '../../../../contexts/ui'
 import useParam from '../../../../utils/useParam'
-import { BaseLayer, baseLayerParam } from '../../query-params'
+import type { BaseLayer } from '../../query-params'
+import { baseLayerParam } from '../../query-params'
 
 const aerialLayers = getMapBaseLayers()
   .filter(({ category }) => category === 'aerial')

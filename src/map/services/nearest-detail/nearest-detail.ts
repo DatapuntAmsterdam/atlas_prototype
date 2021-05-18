@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Feature, Geometry } from 'geojson'
+import type { Feature, Geometry } from 'geojson'
 import environment from '../../../environment'
 import { fetchWithToken } from '../../../shared/services/api/api'
-import { MapLayer, MapLayerType } from '../index'
+import type { MapLayer, MapLayerType } from '../index'
 import MAP_CONFIG from '../map.config'
 
 // TODO: Replace this type with the 'LatLng' type from Leaflet.

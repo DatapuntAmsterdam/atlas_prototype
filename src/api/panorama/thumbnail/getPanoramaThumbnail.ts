@@ -1,8 +1,8 @@
-import { LatLngLiteral } from 'leaflet'
+import type { LatLngLiteral } from 'leaflet'
 import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
 import { fetchProxy } from '../../../shared/services/api/api'
-import { PanoramaThumbnail } from './types'
+import type { PanoramaThumbnail } from './types'
 
 export interface FetchPanoramaOptions {
   /**

@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 // @ts-ignore
 import normalize from 'json-api-normalize'
-import { Single } from '../../../api/cms/article'
-import { NormalizedResult } from '../../../normalizations/cms/types'
-import { CmsType } from '../../config/cms.config'
+import type { Single } from '../../../api/cms/article'
+import type { NormalizedResult } from '../../../normalizations/cms/types'
+import type { CmsType } from '../../config/cms.config'
 
 export const getType = (type?: string) => type && type.replace('node--', '')
 

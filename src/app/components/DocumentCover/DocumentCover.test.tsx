@@ -1,7 +1,8 @@
 import { screen, fireEvent, render, within } from '@testing-library/react'
-import { FunctionComponent } from 'react'
 import { ThemeProvider } from '@amsterdam/asc-ui'
-import DocumentCover, { DocumentCoverProps } from './DocumentCover'
+import type { FunctionComponent } from 'react'
+import type { DocumentCoverProps } from './DocumentCover'
+import DocumentCover from './DocumentCover'
 import getImageFromCms from '../../utils/getImageFromCms'
 
 describe('DocumentCover', () => {

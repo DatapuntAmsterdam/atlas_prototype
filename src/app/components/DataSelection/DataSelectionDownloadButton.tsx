@@ -2,14 +2,15 @@ import { useSelector } from 'react-redux'
 import { Button, themeSpacing } from '@amsterdam/asc-ui'
 import { Download } from '@amsterdam/asc-assets'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import environment from '../../../environment'
 import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
 import { encodeQueryParams } from '../../../shared/services/query-string-parser/query-string-parser'
 import { getAccessToken } from '../../../shared/services/auth/auth'
 import { getGeometryFilter } from '../../../shared/ducks/data-selection/selectors'
-import { ActiveFilter, DatasetType } from './types'
+import type { ActiveFilter } from './types'
+import { DatasetType } from './types'
 
 export interface DataSelectionDownloadButtonProps {
   dataset: DatasetType

@@ -1,10 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import { FunctionComponent } from 'react'
-import {
-  Bestand,
-  Document,
-  singleFixture as bouwdossierFixture,
-} from '../../../../../api/iiif-metadata/bouwdossier'
+import type { FunctionComponent } from 'react'
+import type { Bestand, Document } from '../../../../../api/iiif-metadata/bouwdossier'
+import { singleFixture as bouwdossierFixture } from '../../../../../api/iiif-metadata/bouwdossier'
 import { NOT_FOUND_THUMBNAIL } from '../../../../../shared/config/constants'
 import withAppContext from '../../../../utils/withAppContext'
 import AuthTokenContext from '../../AuthTokenContext'

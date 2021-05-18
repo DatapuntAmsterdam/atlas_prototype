@@ -1,10 +1,12 @@
-import { ChangeEvent, useCallback } from 'react'
+import { useCallback } from 'react'
 import styled from 'styled-components'
 import { breakpoint, Label, Select } from '@amsterdam/asc-ui'
 import { useLocation, useHistory } from 'react-router-dom'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+import type { ChangeEvent } from 'react'
 import useLegacyDataselectionConfig from '../../../../components/DataSelection/useLegacyDataselectionConfig'
-import config, { DataSelectionType } from '../../config'
+import type { DataSelectionType } from '../../config'
+import config from '../../config'
 
 const StyledSelect = styled(Select)`
   @media screen and ${breakpoint('min-width', 'tabletS')} {

@@ -1,4 +1,4 @@
-import { SpecialType } from '../../shared/config/cms.config'
+import type { SpecialType } from '../../shared/config/cms.config'
 
 // @ts-ignore
 export interface DoubleNormalizedResults extends NormalizedFieldItems {

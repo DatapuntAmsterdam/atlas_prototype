@@ -1,5 +1,5 @@
-import { MapLayer } from '../services'
-import { UserState } from '../../shared/ducks/user/user'
+import type { MapLayer } from '../services'
+import type { UserState } from '../../shared/ducks/user/user'
 
 // eslint-disable-next-line import/prefer-default-export
 export function isAuthorised(layer: MapLayer, user: UserState) {

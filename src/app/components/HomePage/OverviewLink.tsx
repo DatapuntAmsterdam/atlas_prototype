@@ -1,7 +1,7 @@
 import { breakpoint, Link, themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import { FunctionComponent } from 'react'
-import { NormalizedFieldItems } from '../../../normalizations/cms/types'
+import type { FunctionComponent } from 'react'
+import type { NormalizedFieldItems } from '../../../normalizations/cms/types'
 
 const StyledLink = styled(Link)`
   margin-top: ${themeSpacing(4)};

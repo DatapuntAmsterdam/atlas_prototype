@@ -1,11 +1,12 @@
 import { Link, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import escapeStringRegexp from 'escape-string-regexp'
-import { LocationDescriptorObject } from 'history'
-import { FunctionComponent, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
+import type { LocationDescriptorObject } from 'history'
 import {
   toArticleDetail,
   toCollectionDetail,
@@ -24,7 +25,7 @@ import { CmsType } from '../../../shared/config/cms.config'
 import { getViewMode, ViewMode } from '../../../shared/ducks/ui/ui'
 import { decodeLayers } from '../../../store/queryParameters'
 import { extractIdEndpoint, getDetailPageData } from '../../../store/redux-first-router/actions'
-import { AutoSuggestSearchContent } from '../../services/auto-suggest/auto-suggest'
+import type { AutoSuggestSearchContent } from '../../services/auto-suggest/auto-suggest'
 
 export interface AutoSuggestItemProps {
   content: string

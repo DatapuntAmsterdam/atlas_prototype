@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 import IconBuilding from '../../../shared/assets/icons/data/IconBuilding.svg'
 import IconChurch from '../../../shared/assets/icons/data/IconChurch.svg'
 import IconConstruction from '../../../shared/assets/icons/data/IconConstruction.svg'

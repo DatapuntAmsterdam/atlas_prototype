@@ -1,8 +1,8 @@
 import { Link, List, ListItem } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
+import type { FunctionComponent } from 'react'
 import environment from '../../../environment'
-import { ContentLink } from '../../../shared/config/content-links'
+import type { ContentLink } from '../../../shared/config/content-links'
 import { toArticleDetail } from '../../links'
 
 export interface FooterLinksProps {

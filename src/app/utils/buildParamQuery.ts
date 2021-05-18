@@ -1,4 +1,4 @@
-import { UrlParam } from './useParam'
+import type { UrlParam } from './useParam'
 
 const buildParamQuery = <T>(urlParam: UrlParam<T>, newValue: string | null): URLSearchParams => {
   const newParams = new URLSearchParams(window.location.search)

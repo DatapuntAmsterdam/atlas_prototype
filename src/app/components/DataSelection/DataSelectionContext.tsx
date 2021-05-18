@@ -1,13 +1,11 @@
-import { Dispatch, FunctionComponent, SetStateAction, useMemo, useState } from 'react'
-import {
-  DataSelectionFilters,
-  dataSelectionFiltersParam,
-  polygonParam,
-} from '../../pages/MapPage/query-params'
+import { useMemo, useState } from 'react'
+import type { Dispatch, FunctionComponent, SetStateAction } from 'react'
+import type { DataSelectionFilters } from '../../pages/MapPage/query-params'
+import { dataSelectionFiltersParam, polygonParam } from '../../pages/MapPage/query-params'
 import createNamedContext from '../../utils/createNamedContext'
 import useParam from '../../utils/useParam'
 import useRequiredContext from '../../utils/useRequiredContext'
-import { ActiveFilter, AvailableFilter } from './types'
+import type { ActiveFilter, AvailableFilter } from './types'
 import useLegacyDataselectionConfig from './useLegacyDataselectionConfig'
 
 type Action<T extends keyof DataSelectionContextProps> = Dispatch<

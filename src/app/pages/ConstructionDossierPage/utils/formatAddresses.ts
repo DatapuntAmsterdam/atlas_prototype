@@ -1,4 +1,4 @@
-import { Adres } from '../../../../api/iiif-metadata/bouwdossier'
+import type { Adres } from '../../../../api/iiif-metadata/bouwdossier'
 
 /* eslint-disable camelcase */
 export const formatAddress = ({

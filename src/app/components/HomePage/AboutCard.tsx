@@ -8,9 +8,9 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import { NormalizedFieldItems } from '../../../normalizations/cms/types'
+import type { FunctionComponent } from 'react'
+import type { NormalizedFieldItems } from '../../../normalizations/cms/types'
 
 const StyledCard = styled(Card)`
   width: 100%;

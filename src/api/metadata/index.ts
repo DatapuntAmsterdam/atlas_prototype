@@ -1,4 +1,4 @@
-import { Metadata } from './types'
+import type { Metadata } from './types'
 import fixture from './metadata.json'
 
 export const singleFixture = fixture as Metadata[]

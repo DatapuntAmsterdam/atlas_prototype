@@ -10,12 +10,12 @@ import {
   themeSpacing,
   TopBar,
 } from '@amsterdam/asc-ui'
-import { FunctionComponent, ReactElement } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent, ReactElement } from 'react'
 import CONSTANTS from '../../../shared/config/constants'
 import PageFilterBox from '../../components/PageFilterBox/PageFilterBox'
 import SearchFilter from '../../components/SearchFilter'
-import { Filter } from '../../models/filter'
+import type { Filter } from '../../models/filter'
 
 export interface SearchPageFiltersProps {
   filters: Filter[]

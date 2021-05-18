@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { Links, SmallAPIReference } from '../../types'
+import type { Links, SmallAPIReference } from '../../types'
 
 export interface List {
   count: number

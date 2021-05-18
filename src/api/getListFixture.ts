@@ -1,4 +1,4 @@
-import { APIReference } from './types'
+import type { APIReference } from './types'
 import environment from '../environment'
 
 const getListResultFixture = (

@@ -1,7 +1,7 @@
 import fixtureSingle from './verblijfsobjecten.json'
 import fixtureList from './verblijfsobjecten-list.json'
-import { Single } from './types'
-import { HALList } from '../../../types'
+import type { Single } from './types'
+import type { HALList } from '../../../types'
 
 type List = HALList<{ verblijfsobjecten: Single[] }>
 
@@ -10,4 +10,4 @@ export const listFixture = fixtureList as List
 export const fixtureId = '0363010000543292'
 export const path = 'v1/bag/verblijfsobjecten/'
 
-export { Single, List }
+export type { Single, List }

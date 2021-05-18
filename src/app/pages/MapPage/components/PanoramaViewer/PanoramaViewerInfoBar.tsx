@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 import ViewerInfoBar from '../../../../components/ViewerInfoBar/ViewerInfoBar'
 import useParam from '../../../../utils/useParam'
 import { locationParam } from '../../query-params'

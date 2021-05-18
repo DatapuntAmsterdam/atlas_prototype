@@ -1,8 +1,9 @@
 import { Email, Facebook, Linkedin, Print, Twitter } from '@amsterdam/asc-assets'
 import { ShareButton, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent, useCallback } from 'react'
+import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled, { css } from 'styled-components'
+import type { FunctionComponent } from 'react'
 import { hasPrintMode, isPrintMode, sharePage, showPrintMode } from '../../../shared/ducks/ui/ui'
 import getShareUrl from '../../../shared/services/share-url/share-url'
 

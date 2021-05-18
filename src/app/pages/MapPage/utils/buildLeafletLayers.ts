@@ -1,9 +1,9 @@
-import { TileLayerOptions } from 'leaflet'
-import { MapLayer } from '../../../../map/services'
+import type { TileLayerOptions } from 'leaflet'
+import type { MapLayer } from '../../../../map/services'
 import MAP_CONFIG from '../../../../map/services/map.config'
-import { UserState } from '../../../../shared/ducks/user/user'
+import type { UserState } from '../../../../shared/ducks/user/user'
 import { createUrlWithToken } from '../../../../shared/services/api/api'
-import { Overlay } from '../MapContext'
+import type { Overlay } from '../MapContext'
 
 const findLayer = (layers: MapLayer[], id: string) => {
   const idParts = id.split('-').reverse()

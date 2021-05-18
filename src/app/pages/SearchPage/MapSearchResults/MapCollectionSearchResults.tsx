@@ -10,8 +10,9 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import { FunctionComponent, useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import environment from '../../../../environment'
 
 const CardContainer = styled.div`

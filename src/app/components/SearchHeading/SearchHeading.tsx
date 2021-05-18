@@ -1,6 +1,6 @@
 import { Heading, Icon, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 
 const Divider = styled.div`
   width: 200px;

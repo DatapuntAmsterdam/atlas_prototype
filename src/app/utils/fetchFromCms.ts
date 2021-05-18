@@ -1,8 +1,8 @@
 import { fetchWithToken } from '../../shared/services/api/api'
-import { Single } from '../../api/cms/article'
+import type { Single } from '../../api/cms/article'
 import cmsJsonApiNormalizer from '../../shared/services/cms/cms-json-api-normalizer'
 import normalizeCMSResults from '../../normalizations/cms/normalizeCMSResults'
-import { DoubleNormalizedResults, NormalizedFieldItems } from '../../normalizations/cms/types'
+import type { DoubleNormalizedResults, NormalizedFieldItems } from '../../normalizations/cms/types'
 
 const fetchSingleFromCms = (endpoint: string, fields: string[]) =>
   fetchWithToken<Single>(endpoint).then((data) => {

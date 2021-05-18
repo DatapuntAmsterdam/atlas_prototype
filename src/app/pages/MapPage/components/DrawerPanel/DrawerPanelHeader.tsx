@@ -1,7 +1,7 @@
 import { Close } from '@amsterdam/asc-assets'
 import { Button, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 
 const HeaderContainer = styled.div`
   display: flex;

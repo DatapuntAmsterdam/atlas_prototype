@@ -1,6 +1,6 @@
-import { LatLngBoundsLiteral } from 'leaflet'
+import type { LatLngBoundsLiteral } from 'leaflet'
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { GeoJSON, Position } from 'geojson'
+import type { GeoJSON, Position } from 'geojson'
 
 function getCoordinates(
   coordinates: Position[] | Position[][] | Position[][][],

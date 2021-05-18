@@ -1,7 +1,7 @@
 import { Button, Paragraph } from '@amsterdam/asc-ui'
 import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import requestLoginLink from '../../../../../api/iiif/requestLoginLink'
 import LoadingSpinner from '../../../../components/LoadingSpinner/LoadingSpinner'
 import ButtonBar from '../ButtonBar'

@@ -1,6 +1,7 @@
 import { useMapInstance } from '@amsterdam/react-maps'
-import { LeafletEventHandlerFn, LeafletEventHandlerFnMap } from 'leaflet'
-import { DependencyList, useEffect } from 'react'
+import { useEffect } from 'react'
+import type { LeafletEventHandlerFn, LeafletEventHandlerFnMap } from 'leaflet'
+import type { DependencyList } from 'react'
 
 export default function useLeafletEvent<T extends keyof LeafletEventHandlerFnMap>(
   eventName: T,

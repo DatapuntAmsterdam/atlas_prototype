@@ -14,10 +14,10 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import { LocationDescriptorObject } from 'history'
-import { FunctionComponent } from 'react'
-import { To } from 'redux-first-router-link'
 import styled from 'styled-components'
+import type { LocationDescriptorObject } from 'history'
+import type { FunctionComponent } from 'react'
+import type { To } from 'redux-first-router-link'
 import pickLinkComponent from '../../utils/pickLinkComponent'
 
 const StyledHeading = styled(Heading)`

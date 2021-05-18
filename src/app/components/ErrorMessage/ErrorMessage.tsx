@@ -1,6 +1,6 @@
 import { breakpoint, Button, Paragraph, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
+import type { FunctionComponent, HTMLAttributes } from 'react'
 
 const ErrorMessageStyle = styled.div`
   ${({ absolute }: { absolute: boolean }) =>

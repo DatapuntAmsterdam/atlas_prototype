@@ -1,4 +1,4 @@
-import { Link, PaginatedData } from '../../../../map/types/details'
+import type { Link, PaginatedData } from '../../../../map/types/details'
 import { fetchWithToken } from '../../../../shared/services/api/api'
 
 interface ApiLinkObject {

@@ -1,7 +1,7 @@
 import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
 import { fetchProxy } from '../../../shared/services/api/api'
-import { DcatDataset } from './types'
+import type { DcatDataset } from './types'
 
 /**
  * Get a data catalogue entry by its identifier.

@@ -1,5 +1,6 @@
 import { useMapInstance } from '@amsterdam/react-maps'
-import { LatLngBounds, LatLngLiteral } from 'leaflet'
+import { LatLngBounds } from 'leaflet'
+import type { LatLngLiteral } from 'leaflet'
 
 const useMapCenterToMarker = () => {
   const mapInstance = useMapInstance()

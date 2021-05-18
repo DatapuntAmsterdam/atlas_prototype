@@ -1,8 +1,8 @@
-import { FunctionComponent } from 'react'
 import { Card, CardContent, Heading, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import styled, { css } from 'styled-components'
+import type { FunctionComponent } from 'react'
 import OverviewLink from './OverviewLink'
-import { NormalizedFieldItems } from '../../../normalizations/cms/types'
+import type { NormalizedFieldItems } from '../../../normalizations/cms/types'
 
 const StyledCard = styled(Card)<{ isLoading: boolean }>`
   border-top: 2px solid;

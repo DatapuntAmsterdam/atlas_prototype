@@ -1,8 +1,8 @@
-import { LatLngLiteral } from 'leaflet'
+import type { LatLngLiteral } from 'leaflet'
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { FeatureCollection, Geometry } from 'geojson'
+import type { FeatureCollection, Geometry } from 'geojson'
 import environment from '../../../environment'
-import { UserState } from '../../../shared/ducks/user/user'
+import type { UserState } from '../../../shared/ducks/user/user'
 import { fetchWithToken } from '../../../shared/services/api/api'
 import {
   fetchByPandId as fetchAddressByPandId,

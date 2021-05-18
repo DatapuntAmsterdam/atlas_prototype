@@ -1,7 +1,7 @@
 import { ChevronDown, Download, Ellipsis, Print } from '@amsterdam/asc-assets'
 import { ContextMenu as AscContextMenu, ContextMenuItem, Icon } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import { useDispatch } from 'react-redux'
+import type { FunctionComponent } from 'react'
 import { sharePage, showPrintMode } from '../../../../../shared/ducks/ui/ui'
 import socialItems from '../../../../components/ContextMenu/socialItems'
 

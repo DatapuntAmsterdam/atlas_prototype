@@ -1,7 +1,7 @@
 import { Api, Data, DocumentText, Map, Pano, Table } from '@amsterdam/asc-assets'
 import { Icon } from '@amsterdam/asc-ui'
-import { LocationDescriptorObject } from 'history'
-import { To } from 'redux-first-router-link'
+import type { LocationDescriptorObject } from 'history'
+import type { To } from 'redux-first-router-link'
 import environment from '../../../../environment'
 import {
   NAVIGATION_LINK_DATA_IN_TABLES,

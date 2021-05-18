@@ -1,5 +1,5 @@
-import { Point } from 'geojson'
-import { PotentialApiResult } from '../../../map/types/details'
+import type { Point } from 'geojson'
+import type { PotentialApiResult } from '../../../map/types/details'
 import isObject from '../../../app/utils/isObject'
 import BOUNDING_BOX from '../../../map/services/bounding-box.constant'
 import * as crsConverter from '../coordinate-reference-system/crs-converter'

@@ -1,7 +1,7 @@
 import { Heading, Link, Paragraph } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
+import type { FunctionComponent } from 'react'
 import { authenticateRequest } from '../../../shared/ducks/user/user'
 import { login } from '../../../shared/services/auth/auth'
 import { toAddresses, toCadastralObjects, toEstablishments } from '../../links'

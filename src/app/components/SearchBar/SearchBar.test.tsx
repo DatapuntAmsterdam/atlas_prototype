@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@amsterdam/asc-ui'
 import { screen, render } from '@testing-library/react'
-import SearchBar, { SearchBarProps } from './SearchBar'
+import type { SearchBarProps } from './SearchBar'
+import SearchBar from './SearchBar'
 
 // Mock the SearchBarFilter component as it's not relevant for this test and is tested seperately
 jest.mock('../SearchBarFilter', () => () => <div />)

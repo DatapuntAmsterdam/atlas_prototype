@@ -7,7 +7,7 @@ import {
   ERROR_MESSAGE_RELOAD_BUTTON_TEST_ID,
   ERROR_MESSAGE_TEST_ID,
 } from '../ErrorMessage/ErrorMessage'
-import { NormalizedFieldItems } from '../../../normalizations/cms/types'
+import type { NormalizedFieldItems } from '../../../normalizations/cms/types'
 import { EDITORIAL_CARD_TEST_ID } from '../EditorialCard/EditorialCard'
 
 describe('EditorialResults', () => {

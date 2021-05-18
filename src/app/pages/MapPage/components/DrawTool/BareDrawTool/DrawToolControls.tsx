@@ -1,6 +1,6 @@
 import { Button, themeColor } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import styled, { css } from 'styled-components'
+import type { FunctionComponent } from 'react'
 import { POLYGON_BUTTON_TITLE, POLYLINE_BUTTON_TITLE, REMOVE_BUTTON_TITLE } from './config'
 
 const DrawToolButton = styled(Button)<{ active: boolean }>`

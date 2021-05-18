@@ -1,6 +1,6 @@
-import { FunctionComponent } from 'react'
 import { Close } from '@amsterdam/asc-assets'
 import { Button, Divider, Heading, Modal, Paragraph, TopBar } from '@amsterdam/asc-ui'
+import type { FunctionComponent } from 'react'
 import CONSTANTS from '../../../shared/config/constants'
 import ModalBlock from './ModalBlock'
 import withModalBehaviour from './withModalBehaviour'

@@ -1,6 +1,6 @@
 import { Heading, themeColor } from '@amsterdam/asc-ui'
-import { ComponentProps, FunctionComponent } from 'react'
 import styled from 'styled-components'
+import type { ComponentProps, FunctionComponent } from 'react'
 
 const StyledHeading = styled(Heading)`
   color: ${themeColor('secondary')};

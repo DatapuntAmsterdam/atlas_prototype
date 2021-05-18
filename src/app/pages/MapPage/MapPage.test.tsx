@@ -1,8 +1,8 @@
 /**
  * @jest-environment jsdom-global
  */
-import { PropsWithChildren } from 'react'
 import { render, screen } from '@testing-library/react'
+import type { PropsWithChildren } from 'react'
 import MapPage from './MapPage'
 import withMapContext from '../../utils/withMapContext'
 import { DataSelectionProvider } from '../../components/DataSelection/DataSelectionContext'

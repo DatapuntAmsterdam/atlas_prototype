@@ -1,4 +1,4 @@
-import { DetailInfo } from '../../types/details'
+import type { DetailInfo } from '../../types/details'
 
 const PATH_SEPARATOR = '/'
 

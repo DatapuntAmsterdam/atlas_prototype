@@ -1,5 +1,7 @@
-import { EventHandler, Options, Viewer, ViewerEvent } from 'openseadragon'
-import { FunctionComponent, RefCallback, useCallback, useEffect, useState } from 'react'
+import { Viewer } from 'openseadragon'
+import { useCallback, useEffect, useState } from 'react'
+import type { EventHandler, Options, ViewerEvent } from 'openseadragon'
+import type { FunctionComponent, RefCallback } from 'react'
 import useBindHandler from './useBindHandler'
 
 export interface OSDViewerProps {

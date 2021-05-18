@@ -1,5 +1,5 @@
 import formatDate from '../../utils/formatDate'
-import { ObjectDetail } from '../../../api/dataselectie/bag/types'
+import type { ObjectDetail } from '../../../api/dataselectie/bag/types'
 
 export const aggregateFilter = (input: (string | undefined)[]) => {
   const result = input.reduce<Array<{ name?: string; count: number }>>((aggregation, value) => {

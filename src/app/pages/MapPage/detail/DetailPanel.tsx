@@ -1,28 +1,25 @@
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Alert, Button, List, ListItem, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
-import { Fragment, FunctionComponent, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
-import {
-  fetchDetailData,
-  getServiceDefinition,
-  MapDetails,
-  toMapDetails,
-} from '../../../../map/services/map'
-import {
+import type { FunctionComponent } from 'react'
+import type { MapDetails } from '../../../../map/services/map'
+import { fetchDetailData, getServiceDefinition, toMapDetails } from '../../../../map/services/map'
+import type {
   DetailResultItem,
   DetailResultItemGroupedItems,
   DetailResultItemPaginatedData,
-  DetailResultItemType,
   InfoBoxProps,
   PaginatedData as PaginatedDataType,
 } from '../../../../map/types/details'
+import { DetailResultItemType } from '../../../../map/types/details'
 import { AuthError, ForbiddenError } from '../../../../shared/services/api/customError'
 import AuthAlert from '../../../components/Alerts/AuthAlert'
 import PromiseResult from '../../../components/PromiseResult/PromiseResult'
 import Spacer from '../../../components/Spacer/Spacer'
-import { DataDetailParams } from '../../../links'
+import type { DataDetailParams } from '../../../links'
 import useAuthScope from '../../../utils/useAuthScope'
 import AuthenticationWrapper from '../components/AuthenticationWrapper'
 import PanoramaPreview, { PreviewContainer } from '../components/PanoramaPreview/PanoramaPreview'

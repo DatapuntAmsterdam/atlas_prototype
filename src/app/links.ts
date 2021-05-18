@@ -1,5 +1,5 @@
-import { LocationDescriptorObject } from 'history'
 import { generatePath } from 'react-router-dom'
+import type { LocationDescriptorObject } from 'history'
 import environment from '../environment'
 import { HEADER_LINK_HELP } from '../shared/config/content-links'
 import { ViewMode } from '../shared/ducks/ui/ui'

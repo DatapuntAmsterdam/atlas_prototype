@@ -1,7 +1,8 @@
 import { breakpoint, themeSpacing } from '@amsterdam/asc-ui'
-import { LatLngLiteral } from 'leaflet'
-import { useMemo, FunctionComponent } from 'react'
+import { useMemo } from 'react'
 import styled from 'styled-components'
+import type { LatLngLiteral } from 'leaflet'
+import type { FunctionComponent } from 'react'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
 import formatDate from '../../utils/formatDate'
 

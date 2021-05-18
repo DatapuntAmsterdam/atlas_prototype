@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 import { breakpoint, Column, Row, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import CardList from '../CardList'
-import { NormalizedFieldItems } from '../../../../../normalizations/cms/types'
+import type { NormalizedFieldItems } from '../../../../../normalizations/cms/types'
 
 export interface CMSCollectionList {
   field_title: string

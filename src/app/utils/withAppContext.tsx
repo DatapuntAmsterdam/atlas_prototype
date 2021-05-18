@@ -1,7 +1,7 @@
-import { ReactElement } from 'react'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router-dom'
 import { ThemeProvider } from '@amsterdam/asc-ui'
+import type { ReactElement } from 'react'
 
 import configureStore from '../../store/store'
 

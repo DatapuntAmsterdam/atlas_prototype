@@ -4,4 +4,5 @@ import serverHandlers from './server-handlers'
 
 const server = setupServer(...serverHandlers)
 
-export { server, rest, MockedRequest }
+export { server, rest }
+export type { MockedRequest }

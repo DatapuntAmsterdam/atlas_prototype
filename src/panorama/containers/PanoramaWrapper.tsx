@@ -1,6 +1,6 @@
-import { FunctionComponent } from 'react'
 import { Alert, Paragraph } from '@amsterdam/asc-ui'
 import { useSelector } from 'react-redux'
+import type { FunctionComponent } from 'react'
 import PanoramaContainer from './PanoramaContainer'
 import PanoAlert from '../../app/components/PanoAlert/PanoAlert'
 import { ERROR_MESSAGES, ErrorType } from '../../shared/ducks/error/error-message'

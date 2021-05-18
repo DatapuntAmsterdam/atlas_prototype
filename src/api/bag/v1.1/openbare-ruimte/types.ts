@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Geometry } from 'geojson'
-import { SmallAPIReference, APIReference, Links } from '../../../types'
+import type { Geometry } from 'geojson'
+import type { SmallAPIReference, APIReference, Links } from '../../../types'
 
 export interface Single {
   _links: Links

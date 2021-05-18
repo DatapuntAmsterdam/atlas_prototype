@@ -6,8 +6,8 @@ import {
   styles,
 } from '@amsterdam/asc-ui'
 import classNames from 'classnames'
-import { FunctionComponent } from 'react'
 import styled, { css } from 'styled-components'
+import type { FunctionComponent } from 'react'
 import HeaderSearch from '../../../header/components/HeaderSearch'
 import EmbedHeader from './EmbedHeader'
 import HeaderMenu from './HeaderMenu'

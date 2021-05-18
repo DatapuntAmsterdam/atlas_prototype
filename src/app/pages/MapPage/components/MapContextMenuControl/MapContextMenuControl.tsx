@@ -1,5 +1,5 @@
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import Control from '../Control'
 import BaseLayerToggle from '../BaseLayerToggle'
 import MapContextMenu from '../MapContextMenu/MapContextMenu'

@@ -1,10 +1,10 @@
-import { ReactNode } from 'react'
 import { screen, fireEvent, render } from '@testing-library/react'
+import type { ReactNode } from 'react'
 import MapPanel from './MapPanel'
 import 'jest-styled-components'
 import withMapContext from '../../../../utils/withMapContext'
 import { DataSelectionProvider } from '../../../../components/DataSelection/DataSelectionContext'
-import { MapContextProps } from '../../MapContext'
+import type { MapContextProps } from '../../MapContext'
 import { UiProvider } from '../../../../contexts/ui'
 
 jest.mock('../DrawTool/DrawTool', () => () => null)

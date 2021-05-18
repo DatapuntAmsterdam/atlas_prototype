@@ -8,9 +8,10 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import { FunctionComponent, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import usePromise, { isFulfilled, isRejected } from '@amsterdam/use-promise'
+import type { FunctionComponent } from 'react'
 import cmsConfig from '../../../shared/config/cms.config'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import OrganizationCard from './OrganizationCard'

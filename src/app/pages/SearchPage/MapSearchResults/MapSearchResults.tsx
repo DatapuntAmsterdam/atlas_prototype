@@ -1,6 +1,6 @@
 import { themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import IconMap from '../../../../shared/assets/icons/data/IconMap.svg'
 import IconMapLayers from '../../../../shared/assets/icons/IconMapLayers.svg'
 import { toMapSearchType } from '../../../../store/redux-first-router/actions'

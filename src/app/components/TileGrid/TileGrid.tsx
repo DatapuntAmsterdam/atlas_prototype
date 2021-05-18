@@ -1,5 +1,6 @@
-import { FunctionComponent } from 'react'
-import TileGridStyle, { TileGridProps } from './TileGridStyle'
+import type { FunctionComponent } from 'react'
+import type { TileGridProps } from './TileGridStyle'
+import TileGridStyle from './TileGridStyle'
 
 const TileGrid: FunctionComponent<TileGridProps & React.HTMLAttributes<HTMLDivElement>> = ({
   children,

@@ -1,9 +1,9 @@
 import { Alert, CustomHTMLBlock, Link, ShowMoreShowLess } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
-import { LocationDescriptor } from 'history'
-import { DetailResultItemDefinitionList } from '../../../../map/types/details'
+import type { FunctionComponent } from 'react'
+import type { LocationDescriptor } from 'history'
+import type { DetailResultItemDefinitionList } from '../../../../map/types/details'
 import DefinitionList, { DefinitionListItem } from '../../../components/DefinitionList'
 
 const StyledCustomHTMLBlock = styled(CustomHTMLBlock)`

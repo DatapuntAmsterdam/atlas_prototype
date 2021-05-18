@@ -1,4 +1,4 @@
-import { Point } from 'geojson'
+import type { Point } from 'geojson'
 import * as crsConverter from '../coordinate-reference-system/crs-converter'
 import getGeometry from './geometry'
 

@@ -1,6 +1,6 @@
 import fixtureSingle from './woonplaats.json'
 import fixtureList from './woonplaats-list.json'
-import { Single, List } from './types'
+import type { Single, List } from './types'
 
 export const singleFixture = fixtureSingle as Single
 export const listFixture = fixtureList as List

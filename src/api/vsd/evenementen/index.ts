@@ -1,5 +1,5 @@
 import fixtureSingle from './evenementen.json'
-import { Root as Evenementen } from './types'
+import type { Root as Evenementen } from './types'
 
 export const singleFixture = fixtureSingle as Evenementen
 export const path = 'vsd/evenementen/'

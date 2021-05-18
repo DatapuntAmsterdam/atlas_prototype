@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 import { Link, ListItem } from '@amsterdam/asc-ui'
-import { LocationDescriptorObject } from 'history'
-import { FunctionComponent } from 'react'
-import { To } from 'redux-first-router-link'
 import styled from 'styled-components'
+import type { LocationDescriptorObject } from 'history'
+import type { FunctionComponent } from 'react'
+import type { To } from 'redux-first-router-link'
 import { NORMAL_VBO_STATUSSES } from '../../../map/services/map-search/status-labels'
 import pickLinkComponent from '../../utils/pickLinkComponent'
 

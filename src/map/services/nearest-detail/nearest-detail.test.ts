@@ -1,5 +1,5 @@
 import { mocked } from 'ts-jest/utils'
-import { MapLayer } from '..'
+import type { MapLayer } from '..'
 import { fetchWithToken } from '../../../shared/services/api/api'
 import fetchNearestDetail, { sortResults } from './nearest-detail'
 

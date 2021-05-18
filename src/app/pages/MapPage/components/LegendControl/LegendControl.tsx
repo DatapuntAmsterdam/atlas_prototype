@@ -1,7 +1,7 @@
 import { MapLayers } from '@amsterdam/asc-assets'
 import { Button } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 import Control from '../Control'
 
 interface LegendControlProps {

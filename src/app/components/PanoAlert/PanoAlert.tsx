@@ -1,6 +1,6 @@
 import { Alert, Heading, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 
 const StyledAlert = styled(Alert)`
   margin-bottom: ${themeSpacing(2)};

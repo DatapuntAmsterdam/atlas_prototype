@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { getUserScopes } from '../../shared/ducks/user/user'
-import AuthScope from '../../shared/services/api/authScope'
+import type AuthScope from '../../shared/services/api/authScope'
 
 const useAuthScope = () => {
   const userScopes = useSelector(getUserScopes)

@@ -1,6 +1,6 @@
 import { breakpoint, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 
 const DefinitionListItemWrapper = styled.div`
   display: flex;

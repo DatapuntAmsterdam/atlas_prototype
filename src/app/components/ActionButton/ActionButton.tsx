@@ -1,6 +1,6 @@
 import { Button, svgFill, themeColor } from '@amsterdam/asc-ui'
-import { FunctionComponent, ReactNode } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent, ReactNode } from 'react'
 
 const StyledButton = styled(Button)`
   border-color: ${themeColor('tint', 'level7')};

@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Feature } from 'geojson'
-import { TileLayerOptions, WMSOptions } from 'leaflet'
-import { Dispatch, SetStateAction } from 'react'
-import { MapCollection, MapLayer } from '../../../map/services'
+import type { Feature } from 'geojson'
+import type { TileLayerOptions, WMSOptions } from 'leaflet'
+import type { Dispatch, SetStateAction } from 'react'
+import type { MapCollection, MapLayer } from '../../../map/services'
 import createNamedContext from '../../utils/createNamedContext'
 import useRequiredContext from '../../utils/useRequiredContext'
 

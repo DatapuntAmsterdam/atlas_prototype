@@ -1,5 +1,5 @@
 import fixtureSingle from './uitgevoerdonderzoek.json'
-import { Root as Uitgevoerdonderzoek } from './types'
+import type { Root as Uitgevoerdonderzoek } from './types'
 
 export const singleFixture = fixtureSingle as Uitgevoerdonderzoek
 export const path = 'milieuthemas/explosieven/uitgevoerdonderzoek/'

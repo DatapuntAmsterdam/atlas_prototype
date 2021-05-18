@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Point } from 'geojson'
-import { APIReference, Links, SmallAPIReference } from '../../types'
+import type { Point } from 'geojson'
+import type { APIReference, Links, SmallAPIReference } from '../../types'
 
 export interface Single extends APIReference {
   identificerende_sleutel_monument: string

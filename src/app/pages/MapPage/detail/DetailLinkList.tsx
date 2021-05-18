@@ -1,9 +1,9 @@
 import { Link as AscLink, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { FunctionComponent, HTMLAttributes } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
-import { DetailResultItemLinkList, Link } from '../../../../map/types/details'
+import type { FunctionComponent, HTMLAttributes } from 'react'
+import type { DetailResultItemLinkList, Link } from '../../../../map/types/details'
 
 export const LinkList = styled.div`
   display: flex;

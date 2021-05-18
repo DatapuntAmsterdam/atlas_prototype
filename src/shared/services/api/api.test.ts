@@ -1,4 +1,5 @@
-import { server, rest, MockedRequest } from '../../../../test/server'
+import type { MockedRequest } from '../../../../test/server'
+import { server, rest } from '../../../../test/server'
 import * as auth from '../auth/auth'
 import { createUrlWithToken, fetchProxy, fetchWithToken } from './api'
 import { AuthError, ForbiddenError, NotFoundError } from './customError'

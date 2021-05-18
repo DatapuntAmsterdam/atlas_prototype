@@ -1,7 +1,7 @@
-import { FunctionComponent, MouseEventHandler } from 'react'
 import { Close } from '@amsterdam/asc-assets'
 import { Button, Divider, Heading, Link, Modal, Paragraph, TopBar } from '@amsterdam/asc-ui'
 import { Link as RouterLink } from 'react-router-dom'
+import type { FunctionComponent, MouseEventHandler } from 'react'
 import CONSTANTS from '../../../shared/config/constants'
 import { toHelpPage } from '../../links'
 import ModalBlock from './ModalBlock'

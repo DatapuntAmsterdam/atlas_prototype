@@ -1,8 +1,9 @@
-import { useState, useEffect, FunctionComponent, MouseEvent as ReactMouseEvent } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Close } from '@amsterdam/asc-assets'
 import styled from 'styled-components'
 import { Button } from '@amsterdam/asc-ui'
+import type { FunctionComponent, MouseEvent as ReactMouseEvent } from 'react'
 import { hideEmbedPreview } from '../../../shared/ducks/ui/ui'
 
 const CloseButton = styled(Button)`

@@ -1,5 +1,5 @@
-import { FunctionComponent, ReactNode } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent, ReactNode } from 'react'
 
 export interface SplitScreenProps {
   leftComponent: ReactNode

@@ -1,7 +1,7 @@
 import { Alert, Paragraph } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import { getMessage } from '../../../shared/ducks/error/error-message'
 import { isPrintMode } from '../../../shared/ducks/ui/ui'
 

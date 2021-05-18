@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { Viewer } from 'openseadragon'
+import type { Viewer } from 'openseadragon'
 import useBindHandler from './useBindHandler'
 
 describe('useBindHandler', () => {

@@ -1,6 +1,6 @@
 import { RDGeoJSON as RDGeoJSONComponent } from '@amsterdam/arm-core'
-import { Geometry } from 'geojson'
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
+import type { Geometry } from 'geojson'
 
 export interface RDGeoJSONProps {
   geometry: Geometry

@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
-import { RootState } from '../../../reducers/root'
+import type { RootState } from '../../../reducers/root'
 import getState from '../../../shared/services/redux/get-state'
 import getLoadingErrors from '../../utils/getLoadingErrors'
 import getUnauthorizedLabels from '../../utils/getUnauthorizedLabels'

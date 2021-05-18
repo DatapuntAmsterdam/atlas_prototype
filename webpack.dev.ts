@@ -1,5 +1,6 @@
 import { merge } from 'webpack-merge'
-import { createConfig, distPath, WebpackConfiguration } from './webpack.common'
+import type { WebpackConfiguration } from './webpack.common'
+import { createConfig, distPath } from './webpack.common'
 
 export default merge<WebpackConfiguration>(createConfig({ mode: 'development' }), {
   // Workaround needed to enable HMR during development.

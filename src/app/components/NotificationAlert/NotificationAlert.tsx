@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Alert } from '@amsterdam/asc-ui'
-import { FunctionComponent, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import environment from '../../../environment'
 import { isPrintMode } from '../../../shared/ducks/ui/ui'
 import { createCookie, getCookie } from '../../../shared/services/cookie/cookie'

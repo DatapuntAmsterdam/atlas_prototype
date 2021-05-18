@@ -1,4 +1,4 @@
-import { LatLngTuple } from 'leaflet'
+import type { LatLngTuple } from 'leaflet'
 
 export enum SnapPoint {
   Full,

@@ -4,13 +4,13 @@ import {
   ImageCardContent,
   Link,
   styles,
-  Theme,
   themeColor,
   Typography,
 } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import { FunctionComponent } from 'react'
-import { NormalizedFieldItems } from '../../../normalizations/cms/types'
+import type { Theme } from '@amsterdam/asc-ui'
+import type { FunctionComponent } from 'react'
+import type { NormalizedFieldItems } from '../../../normalizations/cms/types'
 
 const HighlightCardHeadingStyle = styled(Typography)`
   margin: 0;

@@ -10,12 +10,12 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import styled, { css } from 'styled-components'
+import type { FunctionComponent } from 'react'
 import getContentTypeLabel from '../../utils/getContentTypeLabel'
 import getImageFromCms from '../../utils/getImageFromCms'
-import { NormalizedFieldItems } from '../../../normalizations/cms/types'
-import { CmsType } from '../../../shared/config/cms.config'
+import type { NormalizedFieldItems } from '../../../normalizations/cms/types'
+import type { CmsType } from '../../../shared/config/cms.config'
 
 const StyledHeading = styled(Heading)`
   margin-bottom: ${themeSpacing(2)};

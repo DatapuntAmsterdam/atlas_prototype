@@ -1,5 +1,5 @@
 import fixture from './thumbnail.json'
-import { PanoramaThumbnail } from './types'
+import type { PanoramaThumbnail } from './types'
 
 export * from './getPanoramaThumbnail'
 export * from './types'

@@ -8,8 +8,9 @@ import {
 } from '../../app/links'
 import formatDate from '../../app/utils/formatDate'
 import toSlug from '../../app/utils/toSlug'
-import { CmsType, SpecialType } from '../../shared/config/cms.config'
-import { FieldLink, NormalizedFieldItems, NormalizedResult } from './types'
+import type { SpecialType } from '../../shared/config/cms.config'
+import { CmsType } from '../../shared/config/cms.config'
+import type { FieldLink, NormalizedFieldItems, NormalizedResult } from './types'
 
 export const EDITORIAL_DETAIL_ACTIONS = {
   [CmsType.Article]: toArticleDetail,

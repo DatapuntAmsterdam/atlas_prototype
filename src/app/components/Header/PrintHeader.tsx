@@ -1,8 +1,8 @@
-import { FunctionComponent } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Close, Print } from '@amsterdam/asc-assets'
 import { Button } from '@amsterdam/asc-ui'
+import type { FunctionComponent } from 'react'
 import { hidePrintMode } from '../../../shared/ducks/ui/ui'
 
 const CloseButton = styled(Button)`

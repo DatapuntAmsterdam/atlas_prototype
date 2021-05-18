@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { MutableRefObject } from 'react'
+import type { MutableRefObject } from 'react'
 import useMarzipano from './useMarzipano'
 
 jest.mock('marzipano', () => ({

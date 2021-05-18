@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Position } from 'geojson'
-import { RdCoordinate, rdToWgs84, wgs84ToRd, Wsg84Coordinate } from './crs-converter'
+import type { Position } from 'geojson'
+import type { RdCoordinate, Wsg84Coordinate } from './crs-converter'
+import { rdToWgs84, wgs84ToRd } from './crs-converter'
 
 function coordinateToTuple(coordinate: Wsg84Coordinate | RdCoordinate) {
   return [

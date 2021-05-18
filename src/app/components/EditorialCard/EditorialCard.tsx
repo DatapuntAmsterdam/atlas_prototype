@@ -11,13 +11,15 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import styled, { css } from 'styled-components'
-import { CmsType, SpecialType } from '../../../shared/config/cms.config'
+import type { FunctionComponent } from 'react'
+import type { CmsType } from '../../../shared/config/cms.config'
+import { SpecialType } from '../../../shared/config/cms.config'
 import { NOT_FOUND_THUMBNAIL } from '../../../shared/config/constants'
 import getContentTypeLabel from '../../utils/getContentTypeLabel'
-import getImageFromCms, { Resize } from '../../utils/getImageFromCms'
-import { NormalizedFieldItems } from '../../../normalizations/cms/types'
+import type { Resize } from '../../utils/getImageFromCms'
+import getImageFromCms from '../../utils/getImageFromCms'
+import type { NormalizedFieldItems } from '../../../normalizations/cms/types'
 
 const getImageSize = (image: string, resize: Resize, imageSize: number) => {
   const small = Math.round(imageSize * 0.5)

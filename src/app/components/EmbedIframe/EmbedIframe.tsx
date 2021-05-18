@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 import { getIframeUrl } from '../../../shared/services/embed-url/embed-url'
 
 const EmbedIframeComponent: FunctionComponent = () => (

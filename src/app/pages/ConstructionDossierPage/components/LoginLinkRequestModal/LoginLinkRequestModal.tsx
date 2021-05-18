@@ -10,8 +10,9 @@ import {
   themeSpacing,
   TopBar,
 } from '@amsterdam/asc-ui'
-import { FormEvent, FunctionComponent, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
+import type { FormEvent, FunctionComponent } from 'react'
 import ButtonBar from '../ButtonBar'
 import LoginLinkRequestFlow from './LoginLinkRequestFlow'
 

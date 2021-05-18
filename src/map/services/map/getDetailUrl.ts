@@ -1,6 +1,6 @@
 import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
-import { ServiceDefinition } from '../map-services.config'
+import type { ServiceDefinition } from '../map-services.config'
 
 // eslint-disable-next-line import/prefer-default-export
 export function getDetailUrl(serviceDefinition: ServiceDefinition, id: string) {

@@ -1,9 +1,9 @@
 import { ControlButton } from '@amsterdam/arm-core'
 import { themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
-import { Action } from 'redux'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
+import type { Action } from 'redux'
 import Measure from '../../../shared/assets/icons/icon-measure.svg'
 import { isEmbedded, isEmbedPreview, isPrintMode } from '../../../shared/ducks/ui/ui'
 

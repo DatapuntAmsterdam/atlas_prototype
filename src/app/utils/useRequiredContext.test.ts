@@ -1,5 +1,6 @@
-import { useContext, Context } from 'react'
+import { useContext } from 'react'
 import { mocked } from 'ts-jest/utils'
+import type { Context } from 'react'
 import useRequiredContext from './useRequiredContext'
 
 jest.mock('react')

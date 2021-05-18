@@ -1,10 +1,11 @@
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { List } from '@amsterdam/asc-ui'
+import type { FunctionComponent } from 'react'
 import { toDetailFromEndpoint } from '../../../store/redux-first-router/actions'
-import LocationSearchListItem, { Result } from './LocationSearchListItem'
+import type { Result } from './LocationSearchListItem'
+import LocationSearchListItem from './LocationSearchListItem'
 import { ViewMode } from '../../../shared/ducks/ui/ui'
-import AuthScope from '../../../shared/services/api/authScope'
+import type AuthScope from '../../../shared/services/api/authScope'
 
 const StyledList = styled(List)`
   margin-bottom: 0;

@@ -1,5 +1,5 @@
 import fixture from './meetbout.json'
-import { Single } from './types'
+import type { Single } from './types'
 
 export const singleFixture = fixture as Single
 export const path = 'meetbouten/meetbout/'

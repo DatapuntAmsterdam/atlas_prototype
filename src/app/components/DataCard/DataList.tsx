@@ -1,15 +1,16 @@
 import { breakpoint, Link, themeSpacing } from '@amsterdam/asc-ui'
 import RouterLink from 'redux-first-router-link'
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import { ViewMode } from '../../../shared/ducks/ui/ui'
 import { toDataSearchType, toDetailFromEndpoint } from '../../../store/redux-first-router/actions'
 import formatCount from '../../utils/formatCount'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import SearchLink from '../Links/SearchLink/SearchLink'
 import SearchHeading from '../SearchHeading/SearchHeading'
-import DataIcon, { DataIconType } from './DataIcon'
-import { DataResult } from '../../pages/SearchPage/types'
+import type { DataIconType } from './DataIcon'
+import DataIcon from './DataIcon'
+import type { DataResult } from '../../pages/SearchPage/types'
 
 const List = styled.ul<{ hasMarginBottom: boolean }>`
   margin-bottom: ${({ hasMarginBottom }) => hasMarginBottom && themeSpacing(6)};

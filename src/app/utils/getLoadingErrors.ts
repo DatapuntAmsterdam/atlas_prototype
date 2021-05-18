@@ -1,5 +1,5 @@
-import { GraphQLFormattedError } from 'graphql'
-import { ErrorExtensions } from '../models/graphql'
+import type { GraphQLFormattedError } from 'graphql'
+import type { ErrorExtensions } from '../models/graphql'
 
 /**
  * Takes a list of errors and gets the ones that are considered 'loading errors'.

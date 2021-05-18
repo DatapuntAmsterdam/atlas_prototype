@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Geometry } from 'geojson'
-import { SmallAPIReference, Links, APIReference } from '../../types'
+import type { Geometry } from 'geojson'
+import type { SmallAPIReference, Links, APIReference } from '../../types'
 
 export interface Gemeente {
   _display: string

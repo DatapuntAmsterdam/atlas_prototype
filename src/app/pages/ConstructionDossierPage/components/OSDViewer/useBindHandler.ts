@@ -1,5 +1,5 @@
-import { EventHandler, Viewer, ViewerEvent, ViewerEventName } from 'openseadragon'
 import { useEffect } from 'react'
+import type { EventHandler, Viewer, ViewerEvent, ViewerEventName } from 'openseadragon'
 
 export default function useBindHandler(
   eventName: ViewerEventName,

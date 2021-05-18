@@ -1,16 +1,16 @@
 import { themeSpacing } from '@amsterdam/asc-ui'
-import { GraphQLFormattedError } from 'graphql'
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
+import type { GraphQLFormattedError } from 'graphql'
+import type { FunctionComponent } from 'react'
 import AuthAlert from '../../components/Alerts/AuthAlert'
 import DataCard, { DataList } from '../../components/DataCard'
 import { NoDataSearchResults } from '../../components/NoSearchResults'
-import { ErrorExtensions } from '../../models/graphql'
+import type { ErrorExtensions } from '../../models/graphql'
 import getErrorsForPath from '../../utils/getErrorsForPath'
 import getLoadingErrors from '../../utils/getLoadingErrors'
 import getUnauthorizedLabels from '../../utils/getUnauthorizedLabels'
-import { DataIconType } from '../../components/DataCard/DataIcon'
-import { DataResult } from './types'
+import type { DataIconType } from '../../components/DataCard/DataIcon'
+import type { DataResult } from './types'
 
 const CardWrapper = styled.div<{ compact: boolean }>`
   width: 100%;

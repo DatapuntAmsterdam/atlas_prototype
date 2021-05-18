@@ -1,5 +1,6 @@
-import { bindActionCreators, Dispatch } from 'redux'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import type { Dispatch } from 'redux'
 import { getShapeDistanceTxt, isDrawingEnabled, getShapeMarkers } from '../../ducks/map/selectors'
 import {
   cancelDrawing,
@@ -8,7 +9,7 @@ import {
   startDrawing,
 } from '../../../shared/ducks/data-selection/actions'
 import ToggleDrawing from './ToggleDrawing'
-import { RootState } from '../../../reducers/root'
+import type { RootState } from '../../../reducers/root'
 
 const mapStateToProps = (state: RootState) => ({
   isEnabled: isDrawingEnabled(state),

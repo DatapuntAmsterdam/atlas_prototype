@@ -1,7 +1,7 @@
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { Paragraph } from '@amsterdam/asc-ui'
-import { DetailResultItemTable } from '../../../../map/types/details'
+import type { FunctionComponent } from 'react'
+import type { DetailResultItemTable } from '../../../../map/types/details'
 import { Table, TableData, TableHeader, TableRow } from '../../../components/Table'
 
 const TableWrapper = styled.div`

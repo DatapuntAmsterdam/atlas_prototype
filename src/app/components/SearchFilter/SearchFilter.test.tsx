@@ -1,6 +1,7 @@
 import { screen, cleanup, fireEvent, render } from '@testing-library/react'
 import * as reactRedux from 'react-redux'
-import { Filter, FilterOption, FilterType } from '../../models/filter'
+import type { Filter, FilterOption } from '../../models/filter'
+import { FilterType } from '../../models/filter'
 import * as ducks from '../../pages/SearchPage/SearchPageDucks'
 import SearchFilter, { getFilterComponent } from './SearchFilter'
 

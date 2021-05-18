@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { APIReference, Links, SmallAPIReference } from '../../types'
+import type { APIReference, Links, SmallAPIReference } from '../../types'
 
 export interface Single extends APIReference {
   identificerende_sleutel_complex: string

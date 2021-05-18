@@ -1,19 +1,19 @@
 import { Alert, Heading, Link } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import { LocationDescriptor } from 'history'
 import { Link as RouterLink, useParams } from 'react-router-dom'
-import { FunctionComponent } from 'react'
-import {
+import type { LocationDescriptor } from 'history'
+import type { FunctionComponent } from 'react'
+import type {
   DetailInfo,
   DetailResultItem,
   DetailResultItemDefinitionList,
   DetailResultItemTable,
-  DetailResultItemType,
 } from '../../types/details'
+import { DetailResultItemType } from '../../types/details'
 import MapDetailResultItemTable from './MapDetailResultItemTable'
 import MapDetailResultWrapper from './MapDetailResultWrapper'
 import useDataDetail from '../../../app/pages/DataDetailPage/useDataDetail'
-import { MapDetails } from '../../services/map'
+import type { MapDetails } from '../../services/map'
 import PromiseResult from '../../../app/components/PromiseResult/PromiseResult'
 
 export interface MapDetailResultProps {

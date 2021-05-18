@@ -1,4 +1,4 @@
-import { GraphQLFormattedError } from 'graphql'
+import type { GraphQLFormattedError } from 'graphql'
 
 /**
  * Searches a list of errors for a matching path.

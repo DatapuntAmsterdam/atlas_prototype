@@ -1,13 +1,14 @@
 import { Alert, Heading, Link, Paragraph, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
-import mapSearch, {
+import type { FunctionComponent } from 'react'
+import type {
   MapSearchCategory,
   MapSearchResult,
 } from '../../../../map/services/map-search/map-search'
+import mapSearch from '../../../../map/services/map-search/map-search'
 import { getUser } from '../../../../shared/ducks/user/user'
 import formatNumber from '../../../../shared/services/number-formatter/number-formatter'
 import { getDetailPageData } from '../../../../store/redux-first-router/actions'

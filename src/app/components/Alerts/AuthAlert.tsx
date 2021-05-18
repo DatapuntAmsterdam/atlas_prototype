@@ -1,6 +1,6 @@
-import { FunctionComponent } from 'react'
 import { Alert, Heading, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import LoginLink from '../Links/LoginLink/LoginLink'
 
 export interface AuthAlertProps {

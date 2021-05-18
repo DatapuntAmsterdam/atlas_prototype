@@ -4,20 +4,22 @@ import { useResizeDetector } from 'react-resize-detector'
 import {
   Children,
   cloneElement,
-  CSSProperties,
   Fragment,
-  FunctionComponent,
   isValidElement,
-  ReactComponentElement,
-  ReactElement,
-  TouchEvent,
   useEffect,
   useRef,
   useState,
 } from 'react'
 import styled, { css } from 'styled-components'
+import type {
+  CSSProperties,
+  FunctionComponent,
+  ReactComponentElement,
+  ReactElement,
+  TouchEvent,
+} from 'react'
 import useAnimationFrame from '../../../../utils/useAnimationFrame'
-import Control from '../Control'
+import type Control from '../Control'
 import MapOverlay from '../MapOverlay'
 
 const HANDLE_SIZE_MOBILE = 70

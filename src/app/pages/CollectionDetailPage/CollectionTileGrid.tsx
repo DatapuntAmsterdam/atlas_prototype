@@ -5,12 +5,14 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import { Fragment, FunctionComponent } from 'react'
+import { Fragment } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import { Tile, TileLabel } from '../../components/Tile'
 import TileGrid from '../../components/TileGrid/TileGrid'
-import { SizeOnBreakpoint, TileGridItem } from '../../components/TileGrid/TileGridStyle'
-import { NormalizedFieldItems } from '../../../normalizations/cms/types'
+import type { SizeOnBreakpoint } from '../../components/TileGrid/TileGridStyle'
+import { TileGridItem } from '../../components/TileGrid/TileGridStyle'
+import type { NormalizedFieldItems } from '../../../normalizations/cms/types'
 
 const StyledHeading = styled(Heading)`
   color: ${themeColor('tint', 'level1')};

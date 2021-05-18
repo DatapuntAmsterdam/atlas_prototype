@@ -1,7 +1,7 @@
 import { FilterOption } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import { useQuery } from 'urql'
+import type { FunctionComponent } from 'react'
 import SEARCH_PAGE_CONFIG from '../../pages/SearchPage/config'
 // @ts-ignore
 import { totalCountSearch } from '../../pages/SearchPage/documents.graphql'

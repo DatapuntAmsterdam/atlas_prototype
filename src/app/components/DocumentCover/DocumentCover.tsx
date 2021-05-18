@@ -1,7 +1,8 @@
 import { Download } from '@amsterdam/asc-assets'
 import { breakpoint, Button, Image, Spinner, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import getImageFromCms from '../../utils/getImageFromCms'
 
 const defaultPublicationImage = '/sites/default/files/images/default-plaatje-publicatie-OIS.jpg'

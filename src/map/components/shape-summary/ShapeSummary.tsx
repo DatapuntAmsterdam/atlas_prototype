@@ -1,6 +1,6 @@
 import { Button } from '@amsterdam/asc-ui'
 import { Close } from '@amsterdam/asc-assets'
-import { FunctionComponent, MouseEvent as ReactMouseEvent } from 'react'
+import type { FunctionComponent, MouseEvent as ReactMouseEvent } from 'react'
 
 export interface ShapeSummaryProps {
   shapeDistanceTxt: string

@@ -1,10 +1,10 @@
 import { CardContainer } from '@amsterdam/asc-ui'
-import { GraphQLFormattedError } from 'graphql'
-import { FunctionComponent } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
+import type { GraphQLFormattedError } from 'graphql'
+import type { FunctionComponent } from 'react'
 import { EDITORIAL_DETAIL_ACTIONS } from '../../../normalizations/cms/normalizeCMSResults'
-import { NormalizedFieldItems } from '../../../normalizations/cms/types'
+import type { NormalizedFieldItems } from '../../../normalizations/cms/types'
 import { CmsType } from '../../../shared/config/cms.config'
 import {
   toArticleSearch,

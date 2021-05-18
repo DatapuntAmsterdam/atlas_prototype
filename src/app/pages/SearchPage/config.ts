@@ -1,4 +1,4 @@
-import { To } from 'redux-first-router-link'
+import type { To } from 'redux-first-router-link'
 import { CmsType } from '../../../shared/config/cms.config'
 import {
   toArticleSearch,

@@ -5,8 +5,9 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
-import { Configuration, DefinePlugin } from 'webpack'
-import { Configuration as DevServerConfiguration } from 'webpack-dev-server'
+import { DefinePlugin } from 'webpack'
+import type { Configuration } from 'webpack'
+import type { Configuration as DevServerConfiguration } from 'webpack-dev-server'
 
 /**
  * Gets the absolute path to a module in the `node_modules` directory.

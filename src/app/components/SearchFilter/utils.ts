@@ -1,4 +1,4 @@
-import { FilterOption } from '../../models/filter'
+import type { FilterOption } from '../../models/filter'
 import formatCount from '../../utils/formatCount'
 
 export function formatOptionLabel({ count, label }: FilterOption, hideCount: boolean) {

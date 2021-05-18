@@ -1,4 +1,4 @@
-import { UrlParam } from '../../utils/useParam'
+import type { UrlParam } from '../../utils/useParam'
 
 export const authTokenParam: UrlParam<string | null> = {
   name: 'auth',

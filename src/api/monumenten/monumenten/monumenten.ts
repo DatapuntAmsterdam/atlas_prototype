@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Point } from 'geojson'
+import type { Point } from 'geojson'
 
 export default {
   _links: {

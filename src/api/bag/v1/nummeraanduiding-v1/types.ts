@@ -1,4 +1,4 @@
-import { Links } from '../../../types'
+import type { Links } from '../../../types'
 
 export interface List {
   _embedded: Embedded

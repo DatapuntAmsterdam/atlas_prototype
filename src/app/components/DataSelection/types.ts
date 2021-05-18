@@ -1,7 +1,7 @@
-import { LatLngTuple } from 'leaflet'
-import { ObjectDetail } from '../../../api/dataselectie/bag/types'
-import { Links } from '../../../api/types'
-import { FormatterType, TemplateType } from './DataSelectionFormatter/DataSelectionFormatter'
+import type { LatLngTuple } from 'leaflet'
+import type { ObjectDetail } from '../../../api/dataselectie/bag/types'
+import type { Links } from '../../../api/types'
+import type { FormatterType, TemplateType } from './DataSelectionFormatter/DataSelectionFormatter'
 
 export enum DatasetType {
   Bag = 'bag',

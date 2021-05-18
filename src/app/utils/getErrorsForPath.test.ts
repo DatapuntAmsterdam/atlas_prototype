@@ -1,4 +1,4 @@
-import { GraphQLFormattedError } from 'graphql'
+import type { GraphQLFormattedError } from 'graphql'
 import getErrorsForPath from './getErrorsForPath'
 
 const ERROR_NO_PATH = {

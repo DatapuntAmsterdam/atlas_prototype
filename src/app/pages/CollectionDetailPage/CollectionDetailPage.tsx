@@ -1,9 +1,10 @@
 /* eslint-disable camelcase */
 import { Link, Row, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import cmsConfig from '../../../shared/config/cms.config'
 import CardListBlock from './components/CardListBlock'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'

@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Geometry } from 'geojson'
-import { APIReference } from '../../types'
+import type { Geometry } from 'geojson'
+import type { APIReference } from '../../types'
 
 export interface Root extends APIReference {
   vhe_id: string

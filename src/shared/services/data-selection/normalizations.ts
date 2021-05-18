@@ -1,7 +1,7 @@
 import { v4 } from 'uuid'
 import isObject from '../../../app/utils/isObject'
-import { LegacyDataSelectionConfigType } from './data-selection-config'
-import {
+import type { LegacyDataSelectionConfigType } from './data-selection-config'
+import type {
   ActiveFilter,
   AvailableFilter,
   AvailableFilterOption,
@@ -11,7 +11,7 @@ import {
   ObjectDetailWithLink,
 } from '../../../app/components/DataSelection/types'
 import environment from '../../../environment'
-import { AggsList, Bucket, ObjectDetail } from '../../../api/dataselectie/bag/types'
+import type { AggsList, Bucket, ObjectDetail } from '../../../api/dataselectie/bag/types'
 
 export function formatFilters(config: LegacyDataSelectionConfigType, aggsList: AggsList) {
   const rawData = Object.entries(aggsList).reduce((acc, [key, value]) => {

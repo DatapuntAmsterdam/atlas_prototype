@@ -1,4 +1,3 @@
-import { FunctionComponent } from 'react'
 import {
   Column,
   CustomHTMLBlock,
@@ -10,7 +9,8 @@ import {
   themeSpacing,
 } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import { DoubleNormalizedResults } from '../../../../../normalizations/cms/types'
+import type { FunctionComponent } from 'react'
+import type { DoubleNormalizedResults } from '../../../../../normalizations/cms/types'
 import ShareBar from '../../../../components/ShareBar/ShareBar'
 
 const StyledColumn = styled(Column)`

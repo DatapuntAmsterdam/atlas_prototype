@@ -1,5 +1,5 @@
-import { FunctionComponent, ReactNode } from 'react'
 import styled, { css } from 'styled-components'
+import type { FunctionComponent, ReactNode } from 'react'
 
 const ViewerControlsContainer = styled.div`
   bottom: 0;

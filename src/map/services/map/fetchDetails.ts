@@ -1,12 +1,12 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import center from '@turf/center'
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Geometry, Position } from 'geojson'
-import { LatLngLiteral } from 'leaflet'
+import type { Geometry, Position } from 'geojson'
+import type { LatLngLiteral } from 'leaflet'
 import { fetchWithToken } from '../../../shared/services/api/api'
-import { DetailInfo, DetailResult } from '../../types/details'
+import type { DetailInfo, DetailResult } from '../../types/details'
 import { RD, WGS84 } from '../crs-config'
-import { ServiceDefinition } from '../map-services.config'
+import type { ServiceDefinition } from '../map-services.config'
 import { getDetailUrl } from './getDetailUrl'
 import { getAccessToken } from '../../../shared/services/auth/auth'
 

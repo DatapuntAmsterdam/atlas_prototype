@@ -1,9 +1,10 @@
 import { Download } from '@amsterdam/asc-assets'
 import { Alert, Button, Heading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import {
+import type { FunctionComponent } from 'react'
+import type {
   Bestand,
   Document,
   Single as Bouwdossier,

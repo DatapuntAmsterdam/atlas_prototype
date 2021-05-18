@@ -1,9 +1,11 @@
 import { call, put, race, select, take, takeLatest } from 'redux-saga/effects'
 import { isFeatureEnabled, FEATURE_KEYCLOAK_AUTH } from '../../../app/features'
-import {
-  authenticateFailed,
+import type {
   AuthenticateUserReloadAction,
   AuthenticateUserRequestAction,
+} from '../../ducks/user/user'
+import {
+  authenticateFailed,
   authenticateUserSuccess,
   AUTHENTICATE_USER_FAILED,
   AUTHENTICATE_USER_RELOAD,

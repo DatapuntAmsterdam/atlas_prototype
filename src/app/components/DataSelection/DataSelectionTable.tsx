@@ -1,10 +1,10 @@
-import { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import { getDetailPageData } from '../../../store/redux-first-router/actions'
 import { toDataDetail } from '../../links'
 import DataSelectionFormatter from './DataSelectionFormatter/DataSelectionFormatter'
-import { Data } from './types'
+import type { Data } from './types'
 
 const TableRowLink = styled(Link)`
   position: absolute;

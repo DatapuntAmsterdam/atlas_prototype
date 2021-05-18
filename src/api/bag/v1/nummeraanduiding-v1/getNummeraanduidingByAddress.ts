@@ -1,7 +1,7 @@
 import joinUrl from '../../../../app/utils/joinUrl'
 import environment from '../../../../environment'
 import { fetchWithoutToken } from '../../../../shared/services/api/api'
-import { List } from './types'
+import type { List } from './types'
 
 /**
  * Retrieve nummeraanduiding

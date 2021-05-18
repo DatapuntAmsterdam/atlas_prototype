@@ -1,7 +1,8 @@
 import { Card, CardContent, CardMedia, Image, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import usePromise, { isFulfilled, isPending } from '@amsterdam/use-promise'
-import { FunctionComponent, useEffect } from 'react'
+import { useEffect } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import { NOT_FOUND_THUMBNAIL } from '../../../../../shared/config/constants'
 import { getAccessToken } from '../../../../../shared/services/auth/auth'
 

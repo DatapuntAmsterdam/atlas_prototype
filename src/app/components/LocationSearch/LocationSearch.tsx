@@ -1,7 +1,7 @@
 import { Alert, Container, Heading, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import {
   getDataSearchError,
   getDataSearchLocation,

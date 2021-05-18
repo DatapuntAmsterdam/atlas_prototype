@@ -1,7 +1,7 @@
-import { DocumentNode, GraphQLFormattedError } from 'graphql'
 import { useQuery } from 'urql'
-import { ErrorExtensions } from '../../models/graphql'
-import { ActiveFilter } from './SearchPageDucks'
+import type { DocumentNode, GraphQLFormattedError } from 'graphql'
+import type { ErrorExtensions } from '../../models/graphql'
+import type { ActiveFilter } from './SearchPageDucks'
 
 interface Variables {
   q: string

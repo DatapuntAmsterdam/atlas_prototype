@@ -1,5 +1,6 @@
 import { mocked } from 'ts-jest/utils'
-import { getServiceDefinitions, ServiceDefinition } from '../map-services.config'
+import type { ServiceDefinition } from '../map-services.config'
+import { getServiceDefinitions } from '../map-services.config'
 import { getServiceDefinition } from './getServiceDefinition'
 
 jest.mock('../map-services.config')

@@ -1,4 +1,4 @@
-import { useState, FunctionComponent } from 'react'
+import { useState } from 'react'
 import {
   Alert,
   Button,
@@ -9,9 +9,10 @@ import {
   themeSpacing,
 } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 import Metadata from '../../../../shared/assets/icons/metadata.svg'
 import DetailDefinitionList from './DetailDefinitionList'
-import { InfoBoxProps } from '../../../../map/types/details'
+import type { InfoBoxProps } from '../../../../map/types/details'
 import Spacer from '../../../components/Spacer/Spacer'
 
 const StyledAlert = styled(Alert)`

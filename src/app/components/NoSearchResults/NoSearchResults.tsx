@@ -1,8 +1,8 @@
 import { Heading, Link, List, Paragraph, themeSpacing, Typography } from '@amsterdam/asc-ui'
-import { LocationDescriptorObject } from 'history'
-import { FunctionComponent } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
+import type { LocationDescriptorObject } from 'history'
+import type { FunctionComponent } from 'react'
 import { formatNoResultsMessage } from './utils'
 
 const StyledList = styled(List)`

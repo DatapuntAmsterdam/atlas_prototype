@@ -1,6 +1,6 @@
 import { Link, themeSpacing } from '@amsterdam/asc-ui'
-import { FunctionComponent } from 'react'
 import styled from 'styled-components'
+import type { FunctionComponent } from 'react'
 
 const StyledLink = styled(Link)`
   margin: ${themeSpacing(2, 0)};

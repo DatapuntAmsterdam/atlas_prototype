@@ -1,4 +1,4 @@
-import { ServiceDefinition } from '../map-services.config'
+import type { ServiceDefinition } from '../map-services.config'
 import { getDetailUrl } from './getDetailUrl'
 import environment from '../../../environment'
 

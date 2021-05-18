@@ -9,8 +9,8 @@ import {
   themeSpacing,
 } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import { FunctionComponent } from 'react'
-import { To } from 'redux-first-router-link'
+import type { FunctionComponent } from 'react'
+import type { To } from 'redux-first-router-link'
 import pickLinkComponent from '../../utils/pickLinkComponent'
 
 const StyledHeading = styled(Heading)`

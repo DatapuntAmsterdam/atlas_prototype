@@ -1,4 +1,5 @@
-import { Context, createContext } from 'react'
+import { createContext } from 'react'
+import type { Context } from 'react'
 
 export interface NamedContext<T> extends Omit<Context<T>, 'displayName'> {
   displayName: string

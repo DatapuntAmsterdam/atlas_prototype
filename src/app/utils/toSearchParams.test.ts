@@ -1,4 +1,4 @@
-import { UrlParam } from './useParam'
+import type { UrlParam } from './useParam'
 import toSearchParams from './toSearchParams'
 
 describe('toSearchParams', () => {

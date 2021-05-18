@@ -1,5 +1,7 @@
-import { shallow, ShallowWrapper } from 'enzyme'
-import ToggleDrawing, { ToggleDrawingProps, StyledControlButton } from './ToggleDrawing'
+import { shallow } from 'enzyme'
+import type { ShallowWrapper } from 'enzyme'
+import type { ToggleDrawingProps } from './ToggleDrawing'
+import ToggleDrawing, { StyledControlButton } from './ToggleDrawing'
 
 jest.mock('react-redux', () => ({
   // @ts-ignore
