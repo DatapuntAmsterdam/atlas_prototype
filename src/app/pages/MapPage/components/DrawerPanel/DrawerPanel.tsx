@@ -35,9 +35,6 @@ const defaultDeviceMode = DeviceMode.Mobile
 const DrawerPanel = styled.div<DrawerPanelProps>`
   height: 100%;
   width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
   overflow-y: auto;
   animation: ${({ deviceMode = defaultDeviceMode }) =>
       isMobile(deviceMode) ? slideInMobile : slideInDesktop}
@@ -64,7 +61,6 @@ const DrawerPanel = styled.div<DrawerPanelProps>`
     }
 
     return css`
-      margin-right: ${themeSpacing(STACK_SPACING * stackLevel)};
       ${stackLevel > 0 &&
       css`
         box-shadow: 1px 0 2px 1px #00000057;

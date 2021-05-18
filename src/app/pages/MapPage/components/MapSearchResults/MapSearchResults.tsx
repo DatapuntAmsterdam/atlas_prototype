@@ -7,18 +7,18 @@ import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-p
 import mapSearch, {
   MapSearchCategory,
   MapSearchResult,
-} from '../../../../map/services/map-search/map-search'
-import { getUser } from '../../../../shared/ducks/user/user'
-import formatNumber from '../../../../shared/services/number-formatter/number-formatter'
-import { getDetailPageData } from '../../../../store/redux-first-router/actions'
-import AuthAlert from '../../../components/Alerts/AuthAlert'
-import ShowMore from '../../../components/ShowMore'
-import useParam from '../../../utils/useParam'
-import buildDetailUrl from '../detail/buildDetailUrl'
-import { locationParam } from '../query-params'
-import PanoramaPreview from '../components/PanoramaPreview/PanoramaPreview'
-import useAsyncMapPanelHeader from '../utils/useAsyncMapPanelHeader'
-import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
+} from '../../../../../map/services/map-search/map-search'
+import { getUser } from '../../../../../shared/ducks/user/user'
+import formatNumber from '../../../../../shared/services/number-formatter/number-formatter'
+import { getDetailPageData } from '../../../../../store/redux-first-router/actions'
+import AuthAlert from '../../../../components/Alerts/AuthAlert'
+import ShowMore from '../../../../components/ShowMore'
+import useParam from '../../../../utils/useParam'
+import buildDetailUrl from '../../detail/buildDetailUrl'
+import { locationParam } from '../../query-params'
+import PanoramaPreview from '../PanoramaPreview/PanoramaPreview'
+import useAsyncMapPanelHeader from '../../utils/useAsyncMapPanelHeader'
+import LoadingSpinner from '../../../../components/LoadingSpinner/LoadingSpinner'
 
 const RESULT_LIMIT = 10
 

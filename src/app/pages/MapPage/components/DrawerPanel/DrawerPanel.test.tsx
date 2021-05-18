@@ -23,7 +23,6 @@ describe('DrawerPanel', () => {
       withAppContext(<DrawerPanel deviceMode={DeviceMode.Desktop} stackLevel={1} />),
     )
 
-    expect(container.firstChild).toHaveStyleRule('margin-right', '32px')
     expect(container.firstChild).toHaveStyleRule('box-shadow', expect.any(String))
   })
 
