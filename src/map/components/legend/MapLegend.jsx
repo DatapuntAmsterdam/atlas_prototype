@@ -7,6 +7,7 @@ import { createRef, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled, { css } from 'styled-components'
 import LoginLink from '../../../app/components/Links/LoginLink/LoginLink'
+import { useIsEmbedded } from '../../../app/contexts/ui'
 import SearchPlus from '../../../shared/assets/icons/search-plus.svg'
 import { isPrintOrEmbedMode } from '../../../shared/ducks/ui/ui'
 import MAP_CONFIG from '../../services/map.config'
@@ -98,7 +99,8 @@ const MapLegend = ({
 }) => {
   const ref = createRef()
   const { trackEvent } = useMatomo()
-  const isPrintOrEmbedView = useSelector(isPrintOrEmbedMode)
+  const isEmbeddedUi = useIsEmbedded()
+  const isPrintOrEmbedView = useSelector(isPrintOrEmbedMode) || isEmbeddedUi
   const testId = title
     .split(' ')
     .map((word) => `${word.charAt(0).toUpperCase()}${word.substring(1)}`)

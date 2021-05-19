@@ -110,7 +110,7 @@ const App: FunctionComponent = () => {
   const printModeLandscape = useSelector(isPrintModeLandscape)
   const embedPreviewMode = useSelector(isEmbedPreview)
   const overflowScroll = useSelector(hasOverflowScroll)
-  const printOrEmbedMode = useSelector(isPrintOrEmbedMode)
+  const printOrEmbedMode = useSelector(isPrintOrEmbedMode) || isEmbedded
   const visibilityError = useSelector(hasGlobalError)
 
   // Todo: match with react-router paths
