@@ -63,18 +63,16 @@ function getMoreResultsLink(
   inputValue: string,
   subType?: string,
 ): LocationDescriptorObject | null {
-  const actionType = Object.values(SEARCH_PAGE_CONFIG).find(
+  const config = Object.values(SEARCH_PAGE_CONFIG).find(
     ({ type: configType }) => type === configType,
   )
 
-  if (!actionType) {
+  if (!config) {
     return null
   }
 
-  const { path } = actionType
-
   return {
-    pathname: path,
+    ...config.to,
     search: toSearchParams([
       [queryParam, inputValue],
       [pageParam, pageParam.defaultValue],

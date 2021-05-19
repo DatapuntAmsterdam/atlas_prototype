@@ -1,5 +1,5 @@
 import { FilterOption } from '@amsterdam/asc-ui'
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import { useQuery } from 'urql'
 import type { FunctionComponent } from 'react'
 import SEARCH_PAGE_CONFIG from '../../pages/SearchPage/config'
@@ -8,6 +8,7 @@ import { totalCountSearch } from '../../pages/SearchPage/documents.graphql'
 import { queryParam } from '../../pages/SearchPage/query-params'
 import { routing } from '../../routes'
 import formatCount from '../../utils/formatCount'
+import toSearchParams from '../../utils/toSearchParams'
 import FilterBox from '../FilterBox'
 
 const ACTIVE_LINK_PROPS = { active: true, as: 'div' }
@@ -24,11 +25,6 @@ const PageFilterBox: FunctionComponent<PageFilterBoxProps> = ({ currentPage, que
       q: query,
     },
   })
-
-  const QUERY_PARAMETER = { [queryParam.name]: query }
-
-  // We only want to preserve certain parameters when navigating between "filters" (pages)
-  const RESET_ROUTE_ARGUMENTS = [QUERY_PARAMETER, undefined, undefined, false]
 
   const AVAILABLE_FILTERS = Object.keys(SEARCH_PAGE_CONFIG)
 
@@ -57,7 +53,10 @@ const PageFilterBox: FunctionComponent<PageFilterBoxProps> = ({ currentPage, que
       ...SEARCH_PAGE_CONFIG[filterPage],
       page: filterPage,
       title: `Zoekresultaten voor ${SEARCH_PAGE_CONFIG[filterPage].label}`,
-      to: SEARCH_PAGE_CONFIG[filterPage].to(...RESET_ROUTE_ARGUMENTS),
+      to: {
+        ...SEARCH_PAGE_CONFIG[filterPage].to,
+        search: toSearchParams([[queryParam, query]]).toString(),
+      },
       count,
     }
   })
@@ -65,14 +64,14 @@ const PageFilterBox: FunctionComponent<PageFilterBoxProps> = ({ currentPage, que
   return (
     <FilterBox label="Categorieën">
       <ul>
-        {FILTERS.map(({ page, path, title, count }) => (
+        {FILTERS.map(({ page, to, title, count }) => (
           <li key={page}>
             <FilterOption
               {...(currentPage === page
                 ? ACTIVE_LINK_PROPS
                 : {
-                    as: Link,
-                    to: { pathname: path, search: query ? `?term=${query}` : '' },
+                    as: RouterLink,
+                    to,
                     title,
                   })}
             >

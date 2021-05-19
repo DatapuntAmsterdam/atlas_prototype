@@ -8,6 +8,7 @@ import { LOCAL_STORAGE_KEY } from '../../app/components/SearchBarFilter/SearchBa
 import SEARCH_PAGE_CONFIG from '../../app/pages/SearchPage/config'
 import { SearchType } from '../../app/pages/SearchPage/constants'
 import { queryParam } from '../../app/pages/SearchPage/query-params'
+import toSearchParams from '../../app/utils/toSearchParams'
 import useParam from '../../app/utils/useParam'
 import useTraverseList from '../../app/utils/useTraverseList'
 import type { AutoSuggestSearchResult } from '../services/auto-suggest/auto-suggest'
@@ -94,14 +95,14 @@ const HeaderSearch: FunctionComponent = () => {
       if (selectedElement) {
         document.querySelector<HTMLAnchorElement>(`.${ACTIVE_ITEM_CLASS}`)?.click()
       } else {
-        const actionType = Object.values(SEARCH_PAGE_CONFIG).find(
+        const config = Object.values(SEARCH_PAGE_CONFIG).find(
           ({ type: configType }) => searchBarFilterValue === configType,
         )
 
-        if (actionType) {
+        if (config) {
           history.push({
-            pathname: actionType.path,
-            search: new URLSearchParams({ term: inputValue.trim() }).toString(),
+            ...config.to,
+            search: toSearchParams([[queryParam, inputValue.trim()]]).toString(),
           })
         }
       }

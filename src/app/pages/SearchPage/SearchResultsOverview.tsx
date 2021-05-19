@@ -48,7 +48,6 @@ const SearchResultsOverview: FunctionComponent<SearchResultsOverviewProps> = ({
           const {
             label,
             component: ResultComponent,
-            path,
             type,
             resolver,
             hideOverviewHeading,
@@ -98,7 +97,7 @@ const SearchResultsOverview: FunctionComponent<SearchResultsOverviewProps> = ({
               {hasResults && (
                 <SearchLink
                   to={{
-                    pathname: path,
+                    ...resultItem.to,
                     search: window.location.search,
                   }}
                   label={`Resultaten tonen binnen de categorie '${label}'`}
