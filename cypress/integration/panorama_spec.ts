@@ -118,7 +118,7 @@ describe('panorama module', () => {
 
       let largestButtonSize = 0
       let largestButton: JQuery<HTMLElement>
-      cy.get('.qa-hotspot-rotation')
+      cy.get('[data-testid="hotspot"]')
         .each((button) => {
           // get largest (i.e. closest by) navigation button
           cy.wrap(button)

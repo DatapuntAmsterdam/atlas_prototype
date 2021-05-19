@@ -1,4 +1,4 @@
-import { screen, fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import type { ReactNode } from 'react'
 import MapPanel from './MapPanel'
 import 'jest-styled-components'
@@ -6,6 +6,7 @@ import withMapContext from '../../../../utils/withMapContext'
 import { DataSelectionProvider } from '../../../../components/DataSelection/DataSelectionContext'
 import type { MapContextProps } from '../../MapContext'
 import { UiProvider } from '../../../../contexts/ui'
+import { DrawerState } from '../DrawerOverlay'
 
 jest.mock('../DrawTool/DrawTool', () => () => null)
 
@@ -45,44 +46,64 @@ describe('MapPanel', () => {
   })
 
   it('should open and close the legend panel', () => {
-    render(renderWithWrapper(<MapPanel />))
+    const setLegendActiveMock = jest.fn()
+    const setDrawerStateMock = jest.fn()
+    const { rerender } = render(
+      renderWithWrapper(<MapPanel />, {
+        setDrawerState: setDrawerStateMock,
+        setLegendActive: setLegendActiveMock,
+      }),
+    )
 
     const legendControlButton = screen.getByTestId('legendControl').querySelector('button')
 
-    expect(screen.queryByTestId('legendPanel')).not.toBeInTheDocument()
+    // Hide the legend and open the drawer by default onload (since we are on a detail page)
+    expect(setDrawerStateMock).toHaveBeenCalledWith(DrawerState.Open)
+    expect(setLegendActiveMock).toHaveBeenCalledWith(false)
 
     // Open
+    rerender(
+      renderWithWrapper(<MapPanel />, {
+        setDrawerState: setDrawerStateMock,
+        setLegendActive: setLegendActiveMock,
+        legendActive: true,
+      }),
+    )
     fireEvent.click(legendControlButton as Element)
-    expect(screen.getByTestId('legendPanel')).toBeInTheDocument()
+    expect(setLegendActiveMock).toHaveBeenCalledWith(true)
 
     // Close
     const closeButton = screen.getByTestId('closePanelButton')
     fireEvent.click(closeButton)
-    expect(screen.queryByTestId('legendPanel')).not.toBeInTheDocument()
+    expect(setLegendActiveMock).toHaveBeenCalledWith(false)
   })
 
   it('should hide (not unmount) the content panel when legend panel is active', () => {
     currentPath = '/kaart/geozoek/'
     search = '?locatie=123,123'
-    render(renderWithWrapper(<MapPanel />))
-
-    const legendControlButton = screen.getByTestId('legendControl').querySelector('button')
+    const { rerender } = render(
+      renderWithWrapper(<MapPanel />, { drawerState: DrawerState.Open, legendActive: false }),
+    )
 
     expect(screen.getByTestId('drawerPanel')).toHaveStyleRule('display', 'block')
 
-    // Open
-    fireEvent.click(legendControlButton as Element)
+    rerender(
+      renderWithWrapper(<MapPanel />, { drawerState: DrawerState.Closed, legendActive: true }),
+    )
     expect(screen.queryAllByTestId('drawerPanel')[0]).toHaveStyleRule('display', 'none')
   })
 
   it('should close the legend panel when navigating to a detail panel', () => {
-    const { rerender } = render(renderWithWrapper(<MapPanel />))
+    const setDrawerStateMock = jest.fn()
+    const { rerender } = render(
+      renderWithWrapper(<MapPanel />, { setDrawerState: setDrawerStateMock }),
+    )
 
     const legendControlButton = screen.getByTestId('legendControl').querySelector('button')
 
     // Open
     fireEvent.click(legendControlButton as Element)
-    expect(screen.getByTestId('legendPanel')).toBeInTheDocument()
+    expect(setDrawerStateMock).toHaveBeenCalledWith(DrawerState.Open)
 
     // Close
     currentPath = '/kaart/parkeervakken/parkeervakken/120876487667/'
@@ -91,14 +112,17 @@ describe('MapPanel', () => {
     expect(screen.queryByTestId('legendPanel')).not.toBeInTheDocument()
   })
 
-  it('should close the legend panel when navigating to a geo search', () => {
-    const { rerender } = render(renderWithWrapper(<MapPanel />))
+  it('should close the legend panel when navigating to a geo search without params', () => {
+    const setDrawerStateMock = jest.fn()
+    const { rerender } = render(
+      renderWithWrapper(<MapPanel />, { setDrawerState: setDrawerStateMock }),
+    )
 
     const legendControlButton = screen.getByTestId('legendControl').querySelector('button')
 
     // Open
     fireEvent.click(legendControlButton as Element)
-    expect(screen.getByTestId('legendPanel')).toBeInTheDocument()
+    expect(setDrawerStateMock).toHaveBeenCalledWith(DrawerState.Open)
 
     // Close
     currentPath = '/kaart/geozoek/'

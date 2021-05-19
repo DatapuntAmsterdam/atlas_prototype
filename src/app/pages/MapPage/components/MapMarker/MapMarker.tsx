@@ -1,10 +1,10 @@
+import { useEffect } from 'react'
 import { matchPath, useHistory, useLocation } from 'react-router-dom'
 import { MapPanelContext, Marker as ARMMarker } from '@amsterdam/arm-core'
 import type { LeafletMouseEvent } from 'leaflet'
 import type { FunctionComponent } from 'react'
 import useParam from '../../../../utils/useParam'
 import { locationParam, polygonParam, zoomParam } from '../../query-params'
-import { useDataSelection } from '../../../../components/DataSelection/DataSelectionContext'
 import { useMapContext } from '../../MapContext'
 import useBuildQueryString from '../../../../utils/useBuildQueryString'
 import useMapCenterToMarker from '../../../../utils/useMapCenterToMarker'
@@ -22,8 +22,7 @@ export interface MarkerProps {
 
 const MapMarker: FunctionComponent<MarkerProps> = ({ panoActive }) => {
   const [position] = useParam(locationParam)
-  const { drawToolLocked } = useDataSelection()
-  const { legendLeafletLayers } = useMapContext()
+  const { legendLeafletLayers, setLoading } = useMapContext()
   const [zoom] = useParam(zoomParam)
   const [polygon] = useParam(polygonParam)
   const location = useLocation()
@@ -38,18 +37,18 @@ const MapMarker: FunctionComponent<MarkerProps> = ({ panoActive }) => {
       .filter(({ layer }) => layer.detailUrl && zoom >= layer.minZoom)
       .map(({ layer }) => layer)
 
-    const nearestDetail =
-      layers.length > 0
-        ? await fetchNearestDetail(
-            { latitude: e.latlng.lat, longitude: e.latlng.lng },
-            layers,
-            zoom,
-          )
-        : null
-
-    if (nearestDetail) {
-      const { type, subType, id } = nearestDetail
-
+    let nearestDetails = null
+    if (layers.length > 0) {
+      setLoading(true)
+      nearestDetails = await fetchNearestDetail(
+        { latitude: e.latlng.lat, longitude: e.latlng.lng },
+        layers,
+        zoom,
+      )
+      setLoading(false)
+    }
+    if (nearestDetails) {
+      const { type, subType, id } = nearestDetails
       history.push({
         ...toDataDetail({ type, subtype: subType ?? '', id }),
         search: buildQueryString([[locationParam, e.latlng]]),
@@ -60,8 +59,13 @@ const MapMarker: FunctionComponent<MarkerProps> = ({ panoActive }) => {
         search: buildQueryString([[locationParam, e.latlng]], [polygonParam]),
       })
     }
-    panToWithPanelOffset(e.latlng)
   }
+
+  useEffect(() => {
+    if (position) {
+      panToWithPanelOffset(position)
+    }
+  }, [position])
 
   useLeafletEvent(
     'click',
@@ -73,10 +77,9 @@ const MapMarker: FunctionComponent<MarkerProps> = ({ panoActive }) => {
     [location, legendLeafletLayers],
   )
 
-  const showPanoMarker = panoActive && !drawToolLocked
+  const showPanoMarker = panoActive
   const showSearchMarker =
     position &&
-    !drawToolLocked &&
     !polygon &&
     !matchPath(location.pathname, { path: routing.dataDetail_TEMP.path, exact: true }) &&
     !(

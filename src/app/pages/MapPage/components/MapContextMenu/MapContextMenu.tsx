@@ -55,7 +55,7 @@ const socialItemsArray: Array<{
 ]
 
 const StyledContextMenuComponent = styled(ContextMenuComponent)`
-  margin-left: ${themeSpacing(0.5)};
+  margin-left: ${themeSpacing(2)};
   height: 100%;
   button {
     height: inherit;

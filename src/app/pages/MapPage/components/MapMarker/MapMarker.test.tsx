@@ -9,7 +9,6 @@ let currentPath = '/kaart'
 
 const pushMock = jest.fn()
 
-let drawToolLocked = false
 let search = '?locatie=123,123'
 
 jest.mock('../../../../utils/useMapCenterToMarker', () => () => ({
@@ -32,29 +31,14 @@ jest.mock('../../components/PanoramaViewer/PanoramaViewerMarker', () => () => (
   <div data-testid="panoramaMarker" />
 ))
 
-jest.mock('../../../../components/DataSelection/DataSelectionContext', () => ({
-  useDataSelection: () => ({
-    drawToolLocked,
-  }),
-}))
-
 describe('MapMarker', () => {
   afterEach(() => {
     jest.clearAllMocks()
-    drawToolLocked = false
     search = '?locatie=123,123'
   })
 
   it('should not show the markers on the map when position is null', () => {
     search = ''
-    const { container } = render(withMapContext(<MapMarker panoActive={false} />))
-    // eslint-disable-next-line testing-library/no-container
-    expect(container.querySelector('.leaflet-marker-icon')).toBeNull()
-    expect(screen.queryByTestId('panoramaMarker')).not.toBeInTheDocument()
-  })
-
-  it('should not show the markers on the map when drawtool is locked', () => {
-    drawToolLocked = true
     const { container } = render(withMapContext(<MapMarker panoActive={false} />))
     // eslint-disable-next-line testing-library/no-container
     expect(container.querySelector('.leaflet-marker-icon')).toBeNull()

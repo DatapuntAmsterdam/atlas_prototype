@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import type { MapContextProps } from '../pages/MapPage/MapContext'
 import MapContext from '../pages/MapPage/MapContext'
 import withAppContext from './withAppContext'
+import { DrawerState } from '../pages/MapPage/components/DrawerOverlay'
 
 const initialState: MapContextProps = {
   panelLayers: [],
@@ -15,11 +16,17 @@ const initialState: MapContextProps = {
   panelHeader: {
     title: 'Resultaten',
   },
+  legendActive: false,
+  loading: false,
+  drawerState: DrawerState.Closed,
   setDetailFeature: () => {},
   setPanoFullScreen: () => {},
   setPanoImageDate: () => {},
   setPanelHeader: () => {},
   setShowMapDrawVisualization: () => {},
+  setLegendActive: () => {},
+  setDrawerState: () => {},
+  setLoading: () => {},
 }
 
 const withMapContext = (component: ReactNode, mapContextProps?: Partial<MapContextProps>) =>

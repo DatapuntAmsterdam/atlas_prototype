@@ -351,12 +351,18 @@ export interface RenderDetailsProps extends LegacyLayout {
 }
 
 export const RenderDetails: FunctionComponent<RenderDetailsProps> = ({ details, legacyLayout }) => {
+  const { detailFeature } = useMapContext()
   if (!details) {
     // Todo: redirect to 404?
     return <Message>Geen detailweergave beschikbaar.</Message>
   }
   return (
     <Wrapper legacyLayout={legacyLayout} data-testid="data-detail">
+      {!detailFeature && (
+        <Alert level="warning" dismissible>
+          Er zijn geen resultaten op de kaart bij dit object
+        </Alert>
+      )}
       {details.showAuthAlert && <StyledAuthAlert excludedResults={details.authExcludedInfo} />}
       {/* eslint-disable-next-line no-nested-ternary */}
       {details.location && !details.data.noPanorama ? (

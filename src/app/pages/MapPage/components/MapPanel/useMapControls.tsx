@@ -60,24 +60,21 @@ const zoomControl: DrawerControl = {
   node: <ZoomControl />,
 }
 
+const legendControl: DrawerControl = {
+  id: 'legend',
+  hAlign: 'left',
+  vAlign: 'top',
+  node: <LegendControl showDesktopVariant />,
+}
+
 // Todo: consider moving onOpenLegend to a higher context
-const useMapControls = (onOpenLegend: () => void) => {
+const useMapControls = () => {
   const { panoFullScreen } = useMapContext()
   const isEmbedded = useIsEmbedded()
   const [panoHeading] = useParam(panoHeadingParam)
   const [mapLayers] = useParam(mapLayersParam)
   const [location] = useParam(locationParam)
   const panoActive = panoHeading !== null && location !== null
-
-  const legendControl = useMemo<DrawerControl>(
-    () => ({
-      id: 'legend',
-      hAlign: 'left',
-      vAlign: 'top',
-      node: <LegendControl showDesktopVariant onClick={onOpenLegend} />,
-    }),
-    [onOpenLegend],
-  )
 
   return useMemo(() => {
     if (panoFullScreen) {

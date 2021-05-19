@@ -1,5 +1,5 @@
 import { Heading, themeSpacing } from '@amsterdam/asc-ui'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import type { FunctionComponent } from 'react'
@@ -34,9 +34,8 @@ const StyledLargeDrawerPanel = styled(LargeDrawerPanel)<{ show: boolean }>`
 `
 
 const MapPanel: FunctionComponent = () => {
-  const { panelHeader } = useMapContext()
-  const [legendActive, setLegendActive] = useState(false)
-  const [drawerState, setDrawerState] = useState(DrawerState.Closed)
+  const { panelHeader, legendActive, drawerState, setLegendActive, setDrawerState } =
+    useMapContext()
   const [locationParameter] = useParam(locationParam)
   const [polygon] = useParam(polygonParam)
   const location = useLocation()
@@ -52,11 +51,6 @@ const MapPanel: FunctionComponent = () => {
     () => matchPath(location.pathname, routing.dataSearchGeo_TEMP.path),
     [location.pathname, routing.dataSearchGeo_TEMP.path],
   )
-
-  const onOpenLegend = useCallback(() => {
-    setLegendActive(true)
-    setDrawerState(DrawerState.Open)
-  }, [])
 
   const onCloseLegend = () => {
     setLegendActive(false)
@@ -86,7 +80,7 @@ const MapPanel: FunctionComponent = () => {
     }
   }, [dataDetailMatch, dataSearchGeoMatch, locationParameter])
 
-  const controls = useMapControls(onOpenLegend)
+  const controls = useMapControls()
 
   const showContentPanel = useMemo(() => {
     if (

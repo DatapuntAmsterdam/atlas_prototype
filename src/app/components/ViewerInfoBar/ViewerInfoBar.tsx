@@ -8,7 +8,7 @@ import formatDate from '../../utils/formatDate'
 
 const ViewerInfoBarStyle = styled.div`
   background-color: rgba(255, 255, 255, 0.3);
-  @media screen and ${breakpoint('max-width', 'tabletM')} {
+  @media screen and ${breakpoint('max-width', 'laptop')} {
     display: none;
   }
 
