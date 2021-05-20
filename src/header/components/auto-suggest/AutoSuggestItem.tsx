@@ -3,7 +3,7 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import escapeStringRegexp from 'escape-string-regexp'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import type { FunctionComponent } from 'react'
 import type { LocationDescriptorObject } from 'history'
@@ -49,6 +49,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
 }) => {
   const view = useSelector(getViewMode)
   const { trackEvent } = useMatomo()
+  const location = useLocation()
 
   const openEditorialSuggestion = (
     { id, slug }: { id: string; slug: string },
@@ -130,13 +131,18 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
     // suggestion.category TRACK
     return {
       ...toDataDetail({ type, subtype, id }),
-      search: toSearchParams([
-        [viewParam, view],
-        [queryParam, inputValue],
-        [mapLayersParam, mapLayers],
-      ]).toString(),
+      search: toSearchParams(
+        [
+          [viewParam, view],
+          [queryParam, inputValue],
+          [mapLayersParam, mapLayers],
+        ],
+        {
+          initialValue: location.search,
+        },
+      ).toString(),
     }
-  }, [extractIdEndpoint, openEditorialSuggestion, decodeLayers, highlightValue])
+  }, [extractIdEndpoint, openEditorialSuggestion, decodeLayers, highlightValue, location])
 
   const htmlContent = useMemo(
     () => highlightSuggestion(content, highlightValue),
