@@ -2,6 +2,8 @@ import { useMapInstance } from '@amsterdam/react-maps'
 import { LatLngBounds } from 'leaflet'
 import type { LatLngLiteral } from 'leaflet'
 
+const MAX_ZOOM = 14
+
 const useMapCenterToMarker = () => {
   const mapInstance = useMapInstance()
 
@@ -9,8 +11,9 @@ const useMapCenterToMarker = () => {
     const drawerPanel = document.querySelector('[data-testid="drawerPanel"]')
     const drawerPanelWidth = drawerPanel instanceof HTMLElement ? drawerPanel.offsetWidth : 0
     if (boundOrLatLng instanceof LatLngBounds) {
+      const boundsZoom = mapInstance.getBoundsZoom(boundOrLatLng)
       mapInstance.fitBounds(boundOrLatLng, {
-        maxZoom: mapInstance.getBoundsZoom(boundOrLatLng),
+        maxZoom: boundsZoom > MAX_ZOOM ? MAX_ZOOM : boundsZoom,
         paddingTopLeft: [drawerPanelWidth, 0],
       })
     } else {

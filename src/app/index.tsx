@@ -11,6 +11,17 @@ import { disableFeature, enableFeature, getEnabledFeatures } from './features'
 import resolveRedirects from './redirects'
 import './sentry'
 
+// Able to enable and disable feature-toggles via URL parameters
+const searchParams = new URLSearchParams(window.location.search)
+
+if (searchParams.has('enableFeature')) {
+  enableFeature(searchParams.get('enableFeature') as string)
+}
+
+if (searchParams.has('disableFeature')) {
+  disableFeature(searchParams.get('disableFeature') as string)
+}
+
 // If there are no redirects for the current url, render the application
 resolveRedirects(window.location)
   .then((hasToRedirect) => {

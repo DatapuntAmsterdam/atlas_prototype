@@ -50,7 +50,9 @@ function getDistanceLabel(layer: ExtendedLayer) {
 }
 
 const bindDistanceAndAreaToTooltip = (layer: ExtendedLayer, toolTipText: string) => {
-  layer.bindTooltip(toolTipText, { direction: 'bottom' }).openTooltip()
+  layer
+    .bindTooltip(toolTipText, { direction: 'bottom', permanent: !(layer instanceof Polygon) })
+    .openTooltip()
 }
 
 const createPolyLayer = (drawing: PolyDrawing, line = false): PolylineType | PolygonType => {
