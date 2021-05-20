@@ -3,10 +3,9 @@ import type { LocationDescriptorObject } from 'history'
 import environment from '../environment'
 import { HEADER_LINK_HELP } from '../shared/config/content-links'
 import { ViewMode } from '../shared/ducks/ui/ui'
-import { FEATURE_BETA_MAP, isFeatureEnabled } from './features'
 import { fileNameParam, fileUrlParam } from './pages/ConstructionDossierPage/query-params'
 import { viewParam } from './pages/MapPage/query-params'
-import { MAIN_PATHS, routing } from './routes'
+import { routing } from './routes'
 import toSearchParams from './utils/toSearchParams'
 
 export const toAddresses = (): LocationDescriptorObject => ({
@@ -61,13 +60,8 @@ export interface DataDetailParams {
 }
 
 export const toDataDetail = ({ type, subtype, id }: DataDetailParams): LocationDescriptorObject => {
-  const path =
-    window.location.pathname.includes(MAIN_PATHS.MAP) || isFeatureEnabled(FEATURE_BETA_MAP)
-      ? routing.dataDetail_TEMP.path
-      : routing.dataDetail.path
-
   return {
-    pathname: generatePath(path, { type, subtype, id }),
+    pathname: generatePath(routing.dataDetail.path, { type, subtype, id }),
   }
 }
 

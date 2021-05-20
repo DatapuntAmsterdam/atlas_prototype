@@ -18,7 +18,7 @@ jest.mock('react-resize-detector', () => ({
 }))
 
 const mockPush = jest.fn()
-let currentPath = '/kaart/bag/foo/bar' // detail page
+let currentPath = '/data/bag/foo/bar' // detail page
 let search = '?locatie=123,123'
 jest.mock('react-router-dom', () => ({
   // @ts-ignore
@@ -79,7 +79,7 @@ describe('MapPanel', () => {
   })
 
   it('should hide (not unmount) the content panel when legend panel is active', () => {
-    currentPath = '/kaart/geozoek/'
+    currentPath = '/data/geozoek/'
     search = '?locatie=123,123'
     const { rerender } = render(
       renderWithWrapper(<MapPanel />, { drawerState: DrawerState.Open, legendActive: false }),
@@ -106,7 +106,7 @@ describe('MapPanel', () => {
     expect(setDrawerStateMock).toHaveBeenCalledWith(DrawerState.Open)
 
     // Close
-    currentPath = '/kaart/parkeervakken/parkeervakken/120876487667/'
+    currentPath = '/data/parkeervakken/parkeervakken/120876487667/'
     rerender(renderWithWrapper(<MapPanel />))
 
     expect(screen.queryByTestId('legendPanel')).not.toBeInTheDocument()
@@ -125,7 +125,7 @@ describe('MapPanel', () => {
     expect(setDrawerStateMock).toHaveBeenCalledWith(DrawerState.Open)
 
     // Close
-    currentPath = '/kaart/geozoek/'
+    currentPath = '/data/geozoek/'
     rerender(renderWithWrapper(<MapPanel />))
 
     expect(screen.queryByTestId('legendPanel')).not.toBeInTheDocument()
@@ -148,7 +148,7 @@ describe('MapPanel', () => {
   })
 
   it("should not render the panel when location isn't set on geosearch page", () => {
-    currentPath = '/kaart/geozoek/'
+    currentPath = '/data/geozoek/'
     search = ''
 
     render(renderWithWrapper(<MapPanel />))
@@ -157,7 +157,7 @@ describe('MapPanel', () => {
   })
 
   it('should show the panel when location is set on geosearch page', () => {
-    currentPath = '/kaart/geozoek/'
+    currentPath = '/data/geozoek/'
     search = '?locatie=123,123'
 
     render(renderWithWrapper(<MapPanel />))

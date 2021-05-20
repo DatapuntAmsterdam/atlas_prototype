@@ -21,7 +21,7 @@ import {
   viewParam,
   zoomParam,
 } from './pages/MapPage/query-params'
-import { betaMapDataPath, MAIN_PATHS, routing } from './routes'
+import { MAIN_PATHS, routing } from './routes'
 import getVerblijfsobjectIdFromAddressQuery from './utils/getVerblijfsobjectIdFromAddressQuery'
 import matchRule from './utils/matchRule'
 
@@ -96,8 +96,8 @@ export const legacyRoutes: Redirect[] = [
     to: `${routing.data.path}?${viewParam.name}=kaart`,
   },
   {
-    from: `/${betaMapDataPath}/panorama/*/${window.location.search}`,
-    to: `/${betaMapDataPath}/geozoek/`,
+    from: `/${MAIN_PATHS.DATA}/panorama/*/${window.location.search}`,
+    to: `/${MAIN_PATHS.DATA}/geozoek/`,
     load: async (location: Location) => {
       try {
         const panoramaId = location.pathname

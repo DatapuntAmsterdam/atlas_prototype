@@ -11,6 +11,7 @@ import { FeedbackModal } from './components/Modal'
 import NotificationAlert from './components/NotificationAlert/NotificationAlert'
 import { mapSearchPagePaths, mapSplitPagePaths, routing } from './routes'
 import { DataSelectionProvider } from './components/DataSelection/DataSelectionContext'
+import { FEATURE_BETA_MAP, isFeatureEnabled } from './features'
 
 const HomePage = lazy(() => import(/* webpackChunkName: "HomePage" */ './pages/HomePage'))
 const ActualityPage = lazy(
@@ -121,10 +122,13 @@ const AppBody: FunctionComponent<AppBodyProps> = ({
                 <meta name="viewport" content="width=1024, user-scalable=yes" />
               </Helmet>
               <Switch>
-                <Route path={[routing.data_TEMP.path]}>
-                  {/* When the mobile map panel is working properly we can disable the meta rule up defined above */}
-                  <MapContainer />
-                </Route>
+                {isFeatureEnabled(FEATURE_BETA_MAP) && (
+                  <Route path={[routing.data.path]}>
+                    {/* When the mobile map panel is working properly we can disable the meta rule up defined above */}
+                    <MapContainer />
+                  </Route>
+                )}
+
                 <Route>
                   <div className={`c-dashboard__body ${bodyClasses}`}>
                     <NotificationAlert />
@@ -145,7 +149,9 @@ const AppBody: FunctionComponent<AppBodyProps> = ({
                               exact
                               component={DatasetDetailPage}
                             />
-                            <Route path={mapSplitPagePaths} component={MapSplitPage} />
+                            {!isFeatureEnabled(FEATURE_BETA_MAP) && (
+                              <Route path={mapSplitPagePaths} component={MapSplitPage} />
+                            )}
                           </Switch>
                         </div>
                       </div>

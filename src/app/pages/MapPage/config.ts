@@ -1,6 +1,6 @@
 import environment from '../../../environment'
 import { toAddresses, toCadastralObjects, toEstablishments } from '../../links'
-import { betaMapDataPath, routing } from '../../routes'
+import { MAIN_PATHS, routing } from '../../routes'
 
 // Because we use these types as id's in option values (select), we need to convert them to strings
 export enum DataSelectionType {
@@ -24,22 +24,22 @@ export default {
   [DataSelectionType.BAG]: {
     authScope: AuthScope.None,
     title: 'Adressen',
-    path: routing.addresses_TEMP.path,
+    path: routing.addresses.path,
     toTable: toAddresses(),
     extraParams: {},
-    getDetailPath: (id: string) => `/${betaMapDataPath}/bag/nummeraanduiding/${id}`,
+    getDetailPath: (id: string) => `/${MAIN_PATHS.DATA}/bag/nummeraanduiding/${id}`,
     endpointData: `${environment.API_ROOT}dataselectie/bag/`,
     endpointMapVisualization: `${environment.API_ROOT}dataselectie/bag/geolocation/`,
   },
   [DataSelectionType.HR]: {
     authScope: AuthScope.HR,
     title: 'Vestigingen',
-    path: routing.establishments_TEMP.path,
+    path: routing.establishments.path,
     extraParams: {
       dataset: 'ves',
     },
     toTable: toEstablishments(),
-    getDetailPath: (id: string) => `/${betaMapDataPath}/handelsregister/vestiging/${id}`,
+    getDetailPath: (id: string) => `/${MAIN_PATHS.DATA}/handelsregister/vestiging/${id}`,
     endpointData: `${environment.API_ROOT}dataselectie/hr/`,
     endpointMapVisualization: `${environment.API_ROOT}dataselectie/hr/geolocation/`,
   },
@@ -47,9 +47,9 @@ export default {
     authScope: AuthScope.BRK,
     title: 'Kadastrale objecten',
     extraParams: {},
-    path: routing.cadastralObjects_TEMP.path,
+    path: routing.cadastralObjects.path,
     toTable: toCadastralObjects(),
-    getDetailPath: (id: string) => `/${betaMapDataPath}/brk/object/${id}`,
+    getDetailPath: (id: string) => `/${MAIN_PATHS.DATA}/brk/object/${id}`,
     endpointData: `${environment.API_ROOT}dataselectie/brk/kot/`,
     endpointMapVisualization: `${environment.API_ROOT}dataselectie/brk/geolocation/`,
   },

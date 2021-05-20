@@ -81,9 +81,9 @@ const MapContainer: FunctionComponent = ({ children }) => {
       <Switch>
         <Route
           path={[
-            routing.addresses_TEMP.path,
-            routing.establishments_TEMP.path,
-            routing.cadastralObjects_TEMP.path,
+            routing.addresses.path,
+            routing.establishments.path,
+            routing.cadastralObjects.path,
           ]}
           exact
         >

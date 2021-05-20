@@ -6,7 +6,7 @@ import EmbedControl from './EmbedControl'
 
 describe('EmbedControl', () => {
   const wrapper: FunctionComponent = ({ children }) => (
-    <Router initialEntries={[`${routing.data_TEMP.path}?embed=true`]}>{children}</Router>
+    <Router initialEntries={[`${routing.data.path}?embed=true`]}>{children}</Router>
   )
 
   it('renders the control', () => {
@@ -20,7 +20,7 @@ describe('EmbedControl', () => {
     render(<EmbedControl />, { wrapper })
     fireEvent.click(screen.getByTestId('embedButton'))
 
-    expect(openMock).toBeCalledWith(routing.data_TEMP.path, 'blank')
+    expect(openMock).toBeCalledWith(routing.data.path, 'blank')
 
     openMock.mockRestore()
   })

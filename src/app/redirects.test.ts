@@ -8,7 +8,7 @@ import resolveRedirects, {
 import matomoInstance from './matomo'
 import getVerblijfsobjectIdFromAddressQuery from './utils/getVerblijfsobjectIdFromAddressQuery'
 import * as panoramaApi from '../panorama/services/panorama-api/panorama-api'
-import { betaMapDataPath } from './routes'
+import { MAIN_PATHS } from './routes'
 
 jest.useFakeTimers()
 
@@ -137,7 +137,7 @@ describe('redirects', () => {
         .spyOn(panoramaApi, 'getImageDataById')
         .mockReturnValue(Promise.resolve({ location: [321, 123] }))
       const { pathname, hash, search, href } = new URL(
-        `https://www.someurl.com/${betaMapDataPath}/panorama/123?heading=30`,
+        `https://www.someurl.com/${MAIN_PATHS.DATA}/panorama/123?heading=30`,
       )
       const replaceMock = jest.fn()
       // @ts-ignore
@@ -152,14 +152,14 @@ describe('redirects', () => {
       jest.runAllTimers()
 
       expect(replaceMock).toHaveBeenCalledWith(
-        `/${betaMapDataPath}/geozoek/?locatie=321%2C123&heading=30&fov=30&pitch=10`,
+        `/${MAIN_PATHS.DATA}/geozoek/?locatie=321%2C123&heading=30&fov=30&pitch=10`,
       )
     })
 
     it('should redirect legacy panorama urls to geozoek page without parameters when panorama location cannot be fetched', async () => {
       jest.spyOn(panoramaApi, 'getImageDataById').mockReturnValue(Promise.reject())
       const { pathname, hash, search, href } = new URL(
-        `https://www.someurl.com/${betaMapDataPath}/panorama/123`,
+        `https://www.someurl.com/${MAIN_PATHS.DATA}/panorama/123`,
       )
       const replaceMock = jest.fn()
       // @ts-ignore
@@ -173,7 +173,7 @@ describe('redirects', () => {
 
       jest.runAllTimers()
 
-      expect(replaceMock).toHaveBeenCalledWith(`/${betaMapDataPath}/geozoek/`)
+      expect(replaceMock).toHaveBeenCalledWith(`/${MAIN_PATHS.DATA}/geozoek/`)
     })
   })
 })

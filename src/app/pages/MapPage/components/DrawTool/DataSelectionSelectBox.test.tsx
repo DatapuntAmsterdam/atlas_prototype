@@ -33,7 +33,7 @@ describe('DataSelectionSelectBox', () => {
       target: { value: DataSelectionType.HR },
     })
     expect(mockPush).toHaveBeenCalledWith({
-      pathname: routing.establishments_TEMP.path,
+      pathname: routing.establishments.path,
       search: '',
     })
 
@@ -41,7 +41,7 @@ describe('DataSelectionSelectBox', () => {
       target: { value: DataSelectionType.BRK },
     })
     expect(mockPush).toHaveBeenCalledWith({
-      pathname: routing.cadastralObjects_TEMP.path,
+      pathname: routing.cadastralObjects.path,
       search: '',
     })
 
@@ -49,7 +49,7 @@ describe('DataSelectionSelectBox', () => {
       target: { value: DataSelectionType.BAG },
     })
     expect(mockPush).toHaveBeenCalledWith({
-      pathname: routing.addresses_TEMP.path,
+      pathname: routing.addresses.path,
       search: '',
     })
   })
@@ -59,11 +59,11 @@ describe('DataSelectionSelectBox', () => {
     const { rerender } = render(withAppContext(<DataSelectionSelectBox />))
     expect(screen.getByTestId('selectedValue')).toHaveTextContent('Vestigingen')
 
-    pathname = routing.addresses_TEMP.path
+    pathname = routing.addresses.path
     rerender(withAppContext(<DataSelectionSelectBox />))
     expect(screen.getByTestId('selectedValue')).toHaveTextContent('Adressen')
 
-    pathname = routing.cadastralObjects_TEMP.path
+    pathname = routing.cadastralObjects.path
     rerender(withAppContext(<DataSelectionSelectBox />))
     expect(screen.getByTestId('selectedValue')).toHaveTextContent('Kadastrale objecten')
   })

@@ -113,7 +113,7 @@ describe('toDataDetail', () => {
       .mockReturnValue({ pathname: '/kaart/some/path', search: '' } as Location)
 
     expect(toDataDetail({ type, subtype, id })).toEqual({
-      pathname: generatePath(routing.dataDetail_TEMP.path, { type, subtype, id }),
+      pathname: generatePath(routing.dataDetail.path, { type, subtype, id }),
     })
 
     locationSpy.mockRestore()

@@ -43,13 +43,13 @@ const MapPanel: FunctionComponent = () => {
   // TODO: Replace this logic with 'useRouteMatch()' when the following PR has been released:
   // https://github.com/ReactTraining/react-router/pull/7822
   const dataDetailMatch = useMemo(
-    () => matchPath(location.pathname, routing.dataDetail_TEMP.path),
-    [location.pathname, routing.dataDetail_TEMP.path],
+    () => matchPath(location.pathname, routing.dataDetail.path),
+    [location.pathname, routing.dataDetail.path],
   )
 
   const dataSearchGeoMatch = useMemo(
-    () => matchPath(location.pathname, routing.dataSearchGeo_TEMP.path),
-    [location.pathname, routing.dataSearchGeo_TEMP.path],
+    () => matchPath(location.pathname, routing.dataSearchGeo.path),
+    [location.pathname, routing.dataSearchGeo.path],
   )
 
   const onCloseLegend = () => {
@@ -62,7 +62,7 @@ const MapPanel: FunctionComponent = () => {
       polygon ||
       activeFilters.length ||
       matchPath(location.pathname, {
-        path: routing.dataDetail_TEMP.path,
+        path: routing.dataDetail.path,
         exact: true,
       })
     ) {
@@ -86,7 +86,7 @@ const MapPanel: FunctionComponent = () => {
     if (
       // Also geosearch-page always needs a location parameter
       matchPath(location.pathname, {
-        path: routing.data_TEMP.path,
+        path: routing.data.path,
         exact: true,
       }) ||
       (dataSearchGeoMatch && !locationParameter)
@@ -114,17 +114,17 @@ const MapPanel: FunctionComponent = () => {
             </DrawerPanelHeader>
             <DrawerContainer>
               <Switch>
-                <Route path={[routing.dataSearchGeo_TEMP.path, routing.panorama_TEMP.path]}>
+                <Route path={[routing.dataSearchGeo.path, routing.panorama.path]}>
                   <MapSearchResults />
                 </Route>
-                <Route path={[routing.dataDetail_TEMP.path]}>
+                <Route path={[routing.dataDetail.path]}>
                   <DetailPanel />
                 </Route>
                 <Route
                   path={[
-                    routing.addresses_TEMP.path,
-                    routing.establishments_TEMP.path,
-                    routing.cadastralObjects_TEMP.path,
+                    routing.addresses.path,
+                    routing.establishments.path,
+                    routing.cadastralObjects.path,
                   ]}
                   exact
                 >

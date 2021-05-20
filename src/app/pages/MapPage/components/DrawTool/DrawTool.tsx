@@ -107,7 +107,7 @@ const DrawTool: FunctionComponent = () => {
     bounds?: LatLngBounds,
   ) => {
     const pathname =
-      config[currentDatasetTypeRef.current?.toUpperCase()]?.path ?? routing.addresses_TEMP.path
+      config[currentDatasetTypeRef.current?.toUpperCase()]?.path ?? routing.addresses.path
     if (shape.polygon) {
       if (bounds) {
         panToWithPanelOffset(bounds.getCenter())
@@ -202,7 +202,7 @@ const DrawTool: FunctionComponent = () => {
 
   const onClose = () => {
     history.push({
-      pathname: routing.dataSearchGeo_TEMP.path,
+      pathname: routing.dataSearchGeo.path,
       search: buildQueryString(undefined, [polylineParam, polygonParam]),
     })
   }

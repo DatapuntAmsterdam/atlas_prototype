@@ -5,7 +5,7 @@ import withMapContext from '../../../../utils/withMapContext'
 import MapMarker from './MapMarker'
 import * as nearestDetail from '../../../../../map/services/nearest-detail/nearest-detail'
 
-let currentPath = '/kaart'
+let currentPath = '/data'
 
 const pushMock = jest.fn()
 
@@ -50,7 +50,7 @@ describe('MapMarker', () => {
     // eslint-disable-next-line testing-library/no-container
     expect(container.querySelector('.leaflet-marker-icon')).not.toBeNull()
 
-    currentPath = '/kaart/bag/buurt/id123'
+    currentPath = '/data/bag/buurt/id123'
     rerender(withMapContext(<MapMarker panoActive={false} />))
     // eslint-disable-next-line testing-library/no-container
     expect(container.querySelector('.leaflet-marker-icon')).toBeNull()
@@ -62,7 +62,7 @@ describe('MapMarker', () => {
   })
 
   it('navigate to geozoek page when user clicks on the map without an active layer', () => {
-    currentPath = '/kaart/'
+    currentPath = '/data/'
     const Component = () => {
       const mapInstance = useMapInstance()
       useEffect(() => {
@@ -77,13 +77,13 @@ describe('MapMarker', () => {
     }
     render(withMapContext(<Component />))
     expect(pushMock).toHaveBeenCalledWith({
-      pathname: '/kaart/geozoek/',
+      pathname: '/data/geozoek/',
       search: 'locatie=789%2C987',
     })
   })
 
   it('navigate to detail page when user clicks on the map with an active layer', async () => {
-    currentPath = '/kaart/'
+    currentPath = '/data/'
     jest
       .spyOn(nearestDetail, 'default')
       .mockReturnValue(Promise.resolve({ type: 'bag', subType: 'woonplaats', id: '123' } as any))

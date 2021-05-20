@@ -8,9 +8,6 @@ export const ROUTE_DATASET_MAPPER = {
   [routing.cadastralObjects.path]: DatasetType.Brk,
   [routing.establishments.path]: DatasetType.Hr,
   [routing.addresses.path]: DatasetType.Bag,
-  [routing.cadastralObjects_TEMP.path]: DatasetType.Brk,
-  [routing.establishments_TEMP.path]: DatasetType.Hr,
-  [routing.addresses_TEMP.path]: DatasetType.Bag,
 }
 
 const useLegacyDataselectionConfig = () => {

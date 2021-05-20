@@ -91,7 +91,7 @@ const PanoramaViewer: FunctionComponent = () => {
 
     if (isFulfilled(hotspotResult) && hotspotResult.value !== null) {
       history.push({
-        pathname: routing.dataSearchGeo_TEMP.path,
+        pathname: routing.dataSearchGeo.path,
         search: buildQueryString([
           [
             locationParam,

@@ -55,14 +55,14 @@ const MapMarker: FunctionComponent<MarkerProps> = ({ panoActive }) => {
       })
     } else {
       history.push({
-        pathname: routing.dataSearchGeo_TEMP.path,
+        pathname: routing.dataSearchGeo.path,
         search: buildQueryString([[locationParam, e.latlng]], [polygonParam]),
       })
     }
   }
 
   useEffect(() => {
-    if (position && matchPath(location.pathname, routing.dataSearchGeo_TEMP.path)) {
+    if (position && matchPath(location.pathname, routing.dataSearchGeo.path)) {
       panToWithPanelOffset(position)
     }
   }, [position])
@@ -81,11 +81,11 @@ const MapMarker: FunctionComponent<MarkerProps> = ({ panoActive }) => {
   const showSearchMarker =
     position &&
     !polygon &&
-    !matchPath(location.pathname, { path: routing.dataDetail_TEMP.path, exact: true }) &&
+    !matchPath(location.pathname, { path: routing.dataDetail.path, exact: true }) &&
     !(
-      matchPath(location.pathname, routing.addresses_TEMP.path) ||
-      matchPath(location.pathname, routing.establishments_TEMP.path) ||
-      matchPath(location.pathname, routing.cadastralObjects_TEMP.path)
+      matchPath(location.pathname, routing.addresses.path) ||
+      matchPath(location.pathname, routing.establishments.path) ||
+      matchPath(location.pathname, routing.cadastralObjects.path)
     )
 
   if (showPanoMarker) {
