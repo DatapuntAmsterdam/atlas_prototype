@@ -3,8 +3,8 @@ import { useMapInstance } from '@amsterdam/react-maps'
 import L, { Polygon } from 'leaflet'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import type { LatLng, LatLngLiteral } from 'leaflet'
 import type { FunctionComponent } from 'react'
-import type { LatLng, LatLngBounds, LatLngLiteral } from 'leaflet'
 import useParam from '../../../../utils/useParam'
 import type { PolyDrawing } from '../../query-params'
 import { polygonParam, polylineParam } from '../../query-params'
@@ -16,6 +16,8 @@ import { useDataSelection } from '../../../../components/DataSelection/DataSelec
 import useLegacyDataselectionConfig from '../../../../components/DataSelection/useLegacyDataselectionConfig'
 import config from '../../config'
 import useMapCenterToMarker from '../../../../utils/useMapCenterToMarker'
+import { useMapContext } from '../../MapContext'
+import { DrawerState } from '../DrawerOverlay'
 
 function getTotalDistance(latLngs: LatLng[]) {
   return latLngs.reduce(
@@ -75,6 +77,7 @@ const DrawTool: FunctionComponent = () => {
   const { activeFilters, setDistanceText, setDrawToolLocked } = useDataSelection()
   const { currentDatasetType } = useLegacyDataselectionConfig()
   const { panToWithPanelOffset } = useMapCenterToMarker()
+  const { setDrawerState } = useMapContext()
 
   const [initialDrawnItems, setInitialDrawnItems] = useState<ExtendedLayer[]>([])
 
@@ -102,18 +105,11 @@ const DrawTool: FunctionComponent = () => {
   /**
    * Update the state / URL with the current drawings
    * @param shape
-   * @param bounds
    */
-  const updateShape = (
-    shape: { polygon: PolyDrawing | null; polyline: PolyDrawing | null },
-    bounds?: LatLngBounds,
-  ) => {
+  const updateShape = (shape: { polygon: PolyDrawing | null; polyline: PolyDrawing | null }) => {
     const pathname =
       config[currentDatasetTypeRef.current?.toUpperCase()]?.path ?? routing.addresses.path
     if (shape.polygon) {
-      if (bounds) {
-        panToWithPanelOffset(bounds.getCenter())
-      }
       history.push({
         pathname,
         search: buildQueryStringRef.current([
@@ -158,16 +154,20 @@ const DrawTool: FunctionComponent = () => {
           ? polylineRef.current
           : { id: layer.id, polygon: getLayerCoordinates(layer) }
 
-      setTimeout(() => {
-        setDrawToolLocked(false)
-      }, 100)
-      updateShape(
-        {
-          polygon: updatedPolygon,
-          polyline: updatedPolyline,
-        },
-        layer.getBounds(),
-      )
+      // Ended drawing, so be able to click on the map to search by (geo) location
+      setDrawToolLocked(false)
+
+      if (layer instanceof Polygon) {
+        // Open the drawer when finishing drawing a polygon (show updated results)
+        setDrawerState(DrawerState.Open)
+
+        // Also pan and zoom to the drawing
+        panToWithPanelOffset(layer.getBounds())
+      }
+      updateShape({
+        polygon: updatedPolygon,
+        polyline: updatedPolyline,
+      })
     },
     [polygonRef, polylineRef],
   )

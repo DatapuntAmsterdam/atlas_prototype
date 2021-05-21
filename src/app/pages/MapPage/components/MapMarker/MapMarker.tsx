@@ -15,6 +15,7 @@ import { routing } from '../../../../routes'
 import useLeafletEvent from '../../../../utils/useLeafletEvent'
 import { SnapPoint } from '../../types'
 import PanoramaViewerMarker from '../PanoramaViewer/PanoramaViewerMarker'
+import { DrawerState } from '../DrawerOverlay'
 
 export interface MarkerProps {
   panoActive: boolean
@@ -22,7 +23,7 @@ export interface MarkerProps {
 
 const MapMarker: FunctionComponent<MarkerProps> = ({ panoActive }) => {
   const [position] = useParam(locationParam)
-  const { legendLeafletLayers, setLoading } = useMapContext()
+  const { legendLeafletLayers, setLoading, setDrawerState } = useMapContext()
   const [zoom] = useParam(zoomParam)
   const [polygon] = useParam(polygonParam)
   const location = useLocation()
@@ -33,6 +34,8 @@ const MapMarker: FunctionComponent<MarkerProps> = ({ panoActive }) => {
   const { setPositionFromSnapPoint } = useRequiredContext(MapPanelContext)
 
   async function handleMapClick(e: LeafletMouseEvent) {
+    // Always open the drawer when user clicks on the map
+    setDrawerState(DrawerState.Open)
     const layers = legendLeafletLayers
       .filter(({ layer }) => layer.detailUrl && zoom >= layer.minZoom)
       .map(({ layer }) => layer)

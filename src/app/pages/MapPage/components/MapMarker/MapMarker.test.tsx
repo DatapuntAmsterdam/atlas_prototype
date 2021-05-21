@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import withMapContext from '../../../../utils/withMapContext'
 import MapMarker from './MapMarker'
 import * as nearestDetail from '../../../../../map/services/nearest-detail/nearest-detail'
+import { DrawerState } from '../DrawerOverlay'
 
 let currentPath = '/data'
 
@@ -110,5 +111,29 @@ describe('MapMarker', () => {
       pathname: '/data/bag/woonplaats/123/',
       search: 'locatie=789%2C987',
     })
+  })
+
+  it('should open the map panel when user clicks on the map', async () => {
+    const setDrawerStateMock = jest.fn()
+    const Component = () => {
+      const mapInstance = useMapInstance()
+      useEffect(() => {
+        mapInstance.fireEvent('click', {
+          latlng: {
+            lat: 789,
+            lng: 987,
+          },
+        })
+      }, [])
+      return <MapMarker panoActive={false} />
+    }
+    render(
+      withMapContext(<Component />, {
+        setDrawerState: setDrawerStateMock,
+      }),
+    )
+    await Promise.resolve()
+
+    expect(setDrawerStateMock).toHaveBeenCalledWith(DrawerState.Open)
   })
 })

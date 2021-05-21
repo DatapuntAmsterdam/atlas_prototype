@@ -9,8 +9,8 @@ import useParam from '../../../../utils/useParam'
 import DetailPanel from '../../detail/DetailPanel'
 import MapSearchResults from '../MapSearchResults/MapSearchResults'
 import { useMapContext } from '../../MapContext'
-import { locationParam, panoFullScreenParam, polygonParam } from '../../query-params'
-import DrawerOverlay, { DeviceMode, DrawerState } from '../DrawerOverlay'
+import { locationParam } from '../../query-params'
+import DrawerOverlay, { DeviceMode } from '../DrawerOverlay'
 import { DrawerPanelHeader, LargeDrawerPanel, SmallDrawerPanel } from '../DrawerPanel'
 import DrawResults from '../DrawTool/DrawResults'
 import LegendPanel from '../LegendPanel/LegendPanel'
@@ -34,11 +34,9 @@ const StyledLargeDrawerPanel = styled(LargeDrawerPanel)<{ show: boolean }>`
 `
 
 const MapPanel: FunctionComponent = () => {
-  const { panelHeader, legendActive, drawerState, setLegendActive, setDrawerState } =
+  const { setDrawerState, panelHeader, legendActive, drawerState, setLegendActive } =
     useMapContext()
   const [locationParameter] = useParam(locationParam)
-  const [polygon] = useParam(polygonParam)
-  const [panoFullScreen] = useParam(panoFullScreenParam)
   const location = useLocation()
   const { activeFilters } = useDataSelection()
   // TODO: Replace this logic with 'useRouteMatch()' when the following PR has been released:
@@ -56,21 +54,6 @@ const MapPanel: FunctionComponent = () => {
   const onCloseLegend = () => {
     setLegendActive(false)
   }
-
-  useEffect(() => {
-    if (
-      !panoFullScreen &&
-      (locationParameter ||
-        polygon ||
-        activeFilters.length ||
-        matchPath(location.pathname, {
-          path: routing.dataDetail.path,
-          exact: true,
-        }))
-    ) {
-      setDrawerState(DrawerState.Open)
-    }
-  }, [locationParameter, polygon, location, panoFullScreen])
 
   // Hide the legend when any of the following events occur:
   // - The user selects an item on the map, navigating to a detail panel.
@@ -106,7 +89,7 @@ const MapPanel: FunctionComponent = () => {
         mode={DeviceMode.Desktop}
         controls={controls}
         state={drawerState}
-        onStateChange={(state) => setDrawerState(state)}
+        onStateChange={setDrawerState}
       >
         {showContentPanel && (
           <StyledLargeDrawerPanel data-testid="drawerPanel" show={!legendActive}>

@@ -57,8 +57,7 @@ describe('MapPanel', () => {
 
     const legendControlButton = screen.getByTestId('legendControl').querySelector('button')
 
-    // Hide the legend and open the drawer by default onload (since we are on a detail page)
-    expect(setDrawerStateMock).toHaveBeenCalledWith(DrawerState.Open)
+    // Effect should be called, since we are on a detail page
     expect(setLegendActiveMock).toHaveBeenCalledWith(false)
 
     // Open
@@ -70,6 +69,7 @@ describe('MapPanel', () => {
       }),
     )
     fireEvent.click(legendControlButton as Element)
+    expect(setDrawerStateMock).toHaveBeenCalledWith(DrawerState.Open)
     expect(setLegendActiveMock).toHaveBeenCalledWith(true)
 
     // Close

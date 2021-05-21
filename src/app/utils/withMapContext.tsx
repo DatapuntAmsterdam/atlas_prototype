@@ -18,7 +18,7 @@ const initialState: MapContextProps = {
   },
   legendActive: false,
   loading: false,
-  drawerState: DrawerState.Closed,
+  drawerState: DrawerState.Open,
   setDetailFeature: () => {},
   setPanoFullScreen: () => {},
   setPanoImageDate: () => {},

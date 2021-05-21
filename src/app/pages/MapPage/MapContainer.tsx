@@ -23,7 +23,7 @@ const MapContainer: FunctionComponent = ({ children }) => {
   const [view] = useParam(viewParam)
   const [legendActive, setLegendActive] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [drawerState, setDrawerState] = useState(DrawerState.Closed)
+  const [drawerState, setDrawerState] = useState(DrawerState.Open)
   const [detailFeature, setDetailFeature] = useState<MapState['detailFeature']>(null)
   const [panoImageDate, setPanoImageDate] = useState<MapState['panoImageDate']>(null)
   const [showMapDrawVisualization, setShowMapDrawVisualization] = useState(false)

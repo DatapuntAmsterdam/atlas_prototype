@@ -1,10 +1,11 @@
 import { useEffect } from 'react'
 import { useMapInstance } from '@amsterdam/react-maps'
-import L from 'leaflet'
+import L, { Polygon } from 'leaflet'
 import { render } from '@testing-library/react'
 import withMapContext from '../../../../utils/withMapContext'
 import DrawTool from './DrawTool'
 import { DataSelectionProvider } from '../../../../components/DataSelection/DataSelectionContext'
+import { DrawerState } from '../DrawerOverlay'
 
 jest.mock('leaflet', () => ({
   // @ts-ignore
@@ -21,6 +22,10 @@ jest.mock('leaflet', () => ({
     fire: jest.fn(),
     clearLayers: jest.fn(),
   })),
+}))
+const panToWithPanelOffsetMock = jest.fn()
+jest.mock('../../../../utils/useMapCenterToMarker', () => () => ({
+  panToWithPanelOffset: panToWithPanelOffsetMock,
 }))
 
 const mockPush = jest.fn()
@@ -42,11 +47,17 @@ jest.mock('react-router-dom', () => ({
 
 describe('DrawTool', () => {
   it('updates the URl query when user edited the polygon', () => {
+    const setDrawerStateMock = jest.fn()
     const Component = () => {
       const mapInstance = useMapInstance()
       useEffect(() => {
         mapInstance.fireEvent(L.Draw.Event.EDITVERTEX as any, {
-          poly: { id: 'foo', getLatLngs: () => [['123'], ['123']], getBounds: jest.fn() },
+          poly: new Polygon([
+            [123, 312],
+            [123, 312],
+            [123, 312],
+            [123, 312],
+          ]),
         })
       }, [])
       return <DrawTool />
@@ -57,11 +68,16 @@ describe('DrawTool', () => {
         <DataSelectionProvider>
           <Component />
         </DataSelectionProvider>,
+        {
+          setDrawerState: setDrawerStateMock,
+        },
       ),
     )
 
     // Todo: update to toHaveBeenCalledWith
     expect(mockPush).toHaveBeenCalled()
+    expect(panToWithPanelOffsetMock).toHaveBeenCalled()
+    expect(setDrawerStateMock).toHaveBeenCalledWith(DrawerState.Open)
   })
   it('removes the dataselection and URL parameter when removing a polygon drawing', () => {})
   it('removes the dataselection and URL parameters from all drawings when closing the draw tool', () => {})
