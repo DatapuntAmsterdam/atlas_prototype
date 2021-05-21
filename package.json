@@ -23,7 +23,9 @@
     "test:e2e": "cypress run",
     "test:e2e:watch": "cypress open",
     "prettier": "prettier --write \"./**/*.{js,jsx,ts,tsx,scss,css}\"",
-    "analyze": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack --config webpack.analyze.ts"
+    "analyze": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack --config webpack.analyze.ts",
+    "pre-commit": "lint-staged",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@amsterdam/arm-cluster": "^0.6.0",
@@ -206,16 +208,10 @@
   "engines": {
     "node": "^16"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && git diff src/api | grep -e '--' >/dev/null && npm run generate:api-index || echo 0",
-      "post-merge": "./scripts/post-merge.sh"
-    }
-  },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "prettier --write",
-      "eslint"
+      "eslint --fix"
     ],
     "*.scss": [
       "prettier --write"
