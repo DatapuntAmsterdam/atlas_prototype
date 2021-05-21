@@ -24,7 +24,6 @@
     "test:e2e:watch": "cypress open",
     "prettier": "prettier --write \"./**/*.{js,jsx,ts,tsx,scss,css}\"",
     "analyze": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack --config webpack.analyze.ts",
-    "pre-commit": "lint-staged",
     "prepare": "husky install"
   },
   "dependencies": {
