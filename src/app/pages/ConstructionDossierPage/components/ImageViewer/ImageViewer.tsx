@@ -3,13 +3,11 @@ import { Close, Download, Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Button, themeColor } from '@amsterdam/asc-ui'
 import usePromise, { isFulfilled, isRejected } from '@amsterdam/use-promise'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { IIIFTileSource } from 'openseadragon'
-import { useEffect, useMemo, useState } from 'react'
-import { useSelector } from 'react-redux'
-import styled, { css } from 'styled-components'
-import type { FunctionComponent } from 'react'
 import type { Options, Viewer } from 'openseadragon'
-import { isPrintMode } from '../../../../../shared/ducks/ui/ui'
+import { IIIFTileSource } from 'openseadragon'
+import type { FunctionComponent } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import styled from 'styled-components'
 import { fetchWithToken } from '../../../../../shared/services/api/api'
 import { getAccessToken } from '../../../../../shared/services/auth/auth'
 import ErrorMessage from '../../../../components/ErrorMessage/ErrorMessage'
@@ -19,19 +17,17 @@ import ContextMenu from '../ContextMenu'
 import OSDViewer from '../OSDViewer'
 import ViewerControls from '../ViewerControls'
 
-const ImageViewerContainer = styled(OSDViewer)<{ $printMode: boolean }>`
+const ImageViewerContainer = styled(OSDViewer)`
   background-color: ${themeColor('tint', 'level5')};
   color: transparent; // Hides error messages as they can't be hidden programmatically
   height: 100%;
   width: 100%;
 
-  ${({ $printMode }) =>
-    $printMode &&
-    css`
-      height: calc(
-        100vh - 188px
-      ); // Height of the printheader as defined in Angular (to be deprecated)
-    `}
+  @media print {
+    height: calc(
+      100vh - 188px
+    ); // Height of the printheader as defined in Angular (to be deprecated)
+  }
 `
 
 export interface ImageViewerProps {
@@ -49,7 +45,6 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
 }) => {
   const { trackEvent } = useMatomo()
   const [downloadLoading, downloadFile] = useDownload()
-  const printMode = useSelector(isPrintMode)
   const accessToken = getAccessToken()
   const headers = accessToken.length > 0 ? { Authorization: `Bearer ${accessToken}` } : undefined
   const [loading, setLoading] = useState(true)
@@ -118,7 +113,6 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
       {isFulfilled(viewerOptions) && (
         <ImageViewerContainer
           options={viewerOptions.value}
-          $printMode={printMode}
           onInit={setViewer}
           onOpen={() => setLoading(false)}
           onOpenFailed={() => {

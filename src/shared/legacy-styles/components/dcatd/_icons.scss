@@ -1,0 +1,37 @@
+/* sass-lint:disable property-sort-order */
+/* already in react sass lint style*/
+%icon {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+%icon-arrow-right {
+  @extend %icon;
+  background-image: url("data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><polygon points='407.805882 240 353 296.644401 561.343277 512.023234 353 727.355599 407.805882 784 671 512.023234'></polygon></svg>");
+  background-size: 65%;
+}
+
+%icon-plus {
+  @extend %icon;
+  background-image: url("data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><polygon points='549 549 784 549 784 475 549 475 549 240 475 240 475 475.52 240 475 240 549 475 548.978613 475 784 549 784'></polygon></svg>");
+  background-size: 76%;
+}
+
+%icon-plus-white {
+  @extend %icon;
+  background-image: url("data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><polygon fill='white' points='549 549 784 549 784 475 549 475 549 240 475 240 475 475.52 240 475 240 549 475 548.978613 475 784 549 784'></polygon></svg>");
+  background-size: 76%;
+}
+
+%icon-edit {
+  @extend %icon;
+  background-image: url("data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><path d='M784,426.083586 L469.548356,743.056475 L240,784 L290.310919,549.087991 L598.47353,240 L642.49676,284.155427 L343.767699,583.781541 L329.617375,656.3226 L367.351572,694.170109 L445.964483,676.823334 L739.97677,381.928159 L784,426.083586 Z M382.662852,597.919478 L669.492748,310.228261 L713.9625,354.83155 L427.132603,642.522767 L382.662852,597.919478 Z'></path></svg>");
+  background-size: 76%;
+}
+
+%icon-edit-white {
+  @extend %icon;
+  background-image: url("data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><path fill='white' d='M784,426.083586 L469.548356,743.056475 L240,784 L290.310919,549.087991 L598.47353,240 L642.49676,284.155427 L343.767699,583.781541 L329.617375,656.3226 L367.351572,694.170109 L445.964483,676.823334 L739.97677,381.928159 L784,426.083586 Z M382.662852,597.919478 L669.492748,310.228261 L713.9625,354.83155 L427.132603,642.522767 L382.662852,597.919478 Z'></path></svg>");
+  background-size: 76%;
+}

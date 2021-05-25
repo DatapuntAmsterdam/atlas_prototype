@@ -1,0 +1,62 @@
+%list-block {
+  border-bottom: 1px solid $secondary-gray20;
+  margin-bottom: 4 * $base-whitespace;
+  margin-left: -2 * $base-whitespace;
+  margin-right: -2 * $base-whitespace;
+  padding: 0 (2 * $base-whitespace);
+}
+
+%list-block-container {
+  border-bottom: none;
+  margin-bottom: 2 * $base-whitespace;
+}
+
+%list-block-indented {
+  border-bottom: 1px solid $secondary-gray20;
+  border-left: 2px solid $secondary-gray20;
+  margin-bottom: $base-whitespace;
+  margin-left: -$base-font-size;
+  margin-right: -2 * $base-whitespace;
+  padding-bottom: 0.8 * $base-whitespace;
+  padding-left: $base-font-size;
+  padding-right: 2 * $base-whitespace;
+  padding-top: 1.4 * $base-whitespace;
+}
+
+.c-detail {
+  padding: 2 * $base-whitespace;
+  background-color: $primary-light;
+
+  // Needs to be nested to gain more importance over `o-btn`
+  & .c-detail__table-link {
+    display: block;
+    line-height: inherit;
+    word-wrap: break-word;
+  }
+}
+
+.c-detail__block {
+  @extend %list-block;
+
+  .c-detail__block {
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  &.c-detail__block--container {
+    @extend %list-block-container;
+  }
+
+  .s-indented-list {
+    .c-detail__block {
+      @extend %list-block-indented;
+
+      .c-detail__block {
+        margin: 0;
+        padding: 0;
+        border: none;
+      }
+    }
+  }
+}

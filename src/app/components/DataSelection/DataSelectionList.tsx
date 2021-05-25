@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import type { FunctionComponent } from 'react'
 import { getDetailPageData } from '../../../store/redux-first-router/actions'
-import buildDetailUrl from '../../pages/MapPage/detail/buildDetailUrl'
+import buildDetailUrl from '../../pages/MapPage/components/DetailPanel/buildDetailUrl'
 import DataSelectionFormatter from './DataSelectionFormatter/DataSelectionFormatter'
 import type { Data } from './types'
 

@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Button, themeSpacing } from '@amsterdam/asc-ui'
 import type { FunctionComponent } from 'react'
-import { setPage } from '../../../shared/ducks/data-selection/actions'
 import First from '../../../shared/assets/icons/first.svg'
 import Previous from '../../../shared/assets/icons/previous.svg'
 import Next from '../../../shared/assets/icons/next.svg'
 import Last from '../../../shared/assets/icons/last.svg'
+import useParam from '../../utils/useParam'
+import { pageParam } from '../../pages/SearchPage/query-params'
 
 const PaginationButton = styled(Button)`
   &:last-of-type {
@@ -26,9 +26,9 @@ const LegacyPagination: FunctionComponent<LegacyPaginationProps> = ({
   currentPage: curPage,
 }) => {
   const [currentPage, setCurrentPage] = useState(curPage)
+  const [, setPage] = useParam(pageParam)
   const isFirstPage = currentPage === 1
   const isLastPage = currentPage === numberOfPages
-  const dispatch = useDispatch()
 
   const showPagination = numberOfPages > 1
 
@@ -36,12 +36,12 @@ const LegacyPagination: FunctionComponent<LegacyPaginationProps> = ({
     event.preventDefault()
 
     if (currentPage >= 1 && currentPage <= numberOfPages) {
-      dispatch(setPage(currentPage))
+      setPage(currentPage)
     }
   }
 
   if (numberOfPages && currentPage > numberOfPages) {
-    dispatch(setPage(1))
+    setPage(1)
   }
 
   return showPagination ? (
@@ -56,7 +56,7 @@ const LegacyPagination: FunctionComponent<LegacyPaginationProps> = ({
             variant="primaryInverted"
             iconSize={21}
             iconLeft={<First />}
-            onClick={() => dispatch(setPage(1))}
+            onClick={() => setPage(1)}
           >
             Eerste
           </PaginationButton>
@@ -66,7 +66,7 @@ const LegacyPagination: FunctionComponent<LegacyPaginationProps> = ({
             iconSize={21}
             iconLeft={<Previous />}
             disabled={isFirstPage}
-            onClick={() => dispatch(setPage(isFirstPage ? null : currentPage - 1))}
+            onClick={() => setPage(isFirstPage ? null : currentPage - 1)}
           >
             Vorige
           </PaginationButton>
@@ -102,7 +102,7 @@ const LegacyPagination: FunctionComponent<LegacyPaginationProps> = ({
             iconSize={21}
             iconRight={<Next />}
             disabled={isLastPage}
-            onClick={() => dispatch(setPage(isLastPage ? null : currentPage + 1))}
+            onClick={() => setPage(isLastPage ? null : currentPage + 1)}
           >
             Volgende
           </PaginationButton>
@@ -112,7 +112,7 @@ const LegacyPagination: FunctionComponent<LegacyPaginationProps> = ({
             iconSize={21}
             iconRight={<Last />}
             disabled={isLastPage}
-            onClick={() => dispatch(setPage(numberOfPages))}
+            onClick={() => setPage(numberOfPages)}
           >
             Laatste
           </PaginationButton>

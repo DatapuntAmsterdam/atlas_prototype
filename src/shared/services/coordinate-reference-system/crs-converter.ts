@@ -1,6 +1,6 @@
 import proj4 from 'proj4'
 import type { LatLngLiteral } from 'leaflet'
-import { RD, WGS84 } from '../../../map/services/crs-config'
+import { RD, WGS84 } from '../../../app/pages/MapPage/legacy/services/crs-config'
 
 export interface Wsg84Coordinate {
   latitude: number

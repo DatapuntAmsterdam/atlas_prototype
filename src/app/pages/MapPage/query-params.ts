@@ -1,6 +1,6 @@
 import { constants } from '@amsterdam/arm-core'
 import type { LatLngLiteral, LatLngTuple } from 'leaflet'
-import { PANO_LABELS } from '../../../panorama/ducks/constants'
+import { PANO_LABELS } from './components/PanoramaViewer/constants'
 import { normalizeCoordinate } from '../../../shared/services/coordinate-reference-system'
 import type { UrlParam } from '../../utils/useParam'
 

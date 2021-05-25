@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 import { typedAction } from '../../../app/utils/typedAction'
-import type { RootState } from '../../../reducers/root'
+import type { RootState } from '../root'
 
 export const REDUCER_KEY = 'error'
 

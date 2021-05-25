@@ -1,10 +1,8 @@
 import { Email, Facebook, Linkedin, Print, Twitter } from '@amsterdam/asc-assets'
 import { ShareButton, themeSpacing } from '@amsterdam/asc-ui'
-import { useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import styled, { css } from 'styled-components'
 import type { FunctionComponent } from 'react'
-import { hasPrintMode, isPrintMode, sharePage, showPrintMode } from '../../../shared/ducks/ui/ui'
+import { useCallback } from 'react'
+import styled, { css } from 'styled-components'
 import getShareUrl from '../../../shared/services/share-url/share-url'
 
 export interface ShareBarProps {
@@ -26,24 +24,14 @@ const ShareBarContainer = styled.div<ShareBarProps>`
 `
 
 const ShareBar: FunctionComponent<ShareBarProps> = ({ hideInPrintMode, ...otherProps }) => {
-  const dispatch = useDispatch()
+  const handlePageShare = useCallback((target) => {
+    const link = getShareUrl(target)
+    if (link) {
+      window.open(link.url, link.target)
+    }
+  }, [])
 
-  const handlePageShare = useCallback(
-    (target) => {
-      dispatch(sharePage())
-
-      const link = getShareUrl(target)
-      if (link) {
-        window.open(link.url, link.target)
-      }
-    },
-    [dispatch],
-  )
-  const pageAbleToPrint = useSelector(hasPrintMode)
-  const printMode = useSelector(isPrintMode)
-
-  const showShareBar = (hideInPrintMode && !printMode) || !hideInPrintMode
-  return showShareBar ? (
+  return (
     <ShareBarContainer {...otherProps} data-testid="sharebar">
       <ShareButton
         // @ts-ignore
@@ -81,20 +69,18 @@ const ShareBar: FunctionComponent<ShareBarProps> = ({ hideInPrintMode, ...otherP
       >
         <Email />
       </ShareButton>
-      {pageAbleToPrint && (
-        <ShareButton
-          // @ts-ignore
-          type="button"
-          onClick={() => {
-            dispatch(showPrintMode())
-          }}
-          title="Print deze pagina"
-        >
-          <Print />
-        </ShareButton>
-      )}
+      <ShareButton
+        // @ts-ignore
+        type="button"
+        onClick={() => {
+          window.print()
+        }}
+        title="Print deze pagina"
+      >
+        <Print />
+      </ShareButton>
     </ShareBarContainer>
-  ) : null
+  )
 }
 
 ShareBar.defaultProps = {
