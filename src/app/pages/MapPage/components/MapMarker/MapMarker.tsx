@@ -1,8 +1,9 @@
+import type { FunctionComponent } from 'react'
 import { useEffect } from 'react'
 import { matchPath, useHistory, useLocation } from 'react-router-dom'
 import { MapPanelContext, Marker as ARMMarker } from '@amsterdam/arm-core'
 import type { LeafletMouseEvent } from 'leaflet'
-import type { FunctionComponent } from 'react'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import useParam from '../../../../utils/useParam'
 import { locationParam, polygonParam, zoomParam } from '../../query-params'
 import { useMapContext } from '../../MapContext'
@@ -16,6 +17,7 @@ import useLeafletEvent from '../../../../utils/useLeafletEvent'
 import { SnapPoint } from '../../types'
 import PanoramaViewerMarker from '../PanoramaViewer/PanoramaViewerMarker'
 import { DrawerState } from '../DrawerOverlay'
+import { MARKER_SET } from '../../matomo-events'
 
 export interface MarkerProps {
   panoActive: boolean
@@ -28,6 +30,7 @@ const MapMarker: FunctionComponent<MarkerProps> = ({ panoActive }) => {
   const [polygon] = useParam(polygonParam)
   const location = useLocation()
   const history = useHistory()
+  const { trackEvent } = useMatomo()
   const { buildQueryString } = useBuildQueryString()
   const { panToWithPanelOffset } = useMapCenterToMarker()
 
@@ -57,6 +60,7 @@ const MapMarker: FunctionComponent<MarkerProps> = ({ panoActive }) => {
         search: buildQueryString([[locationParam, e.latlng]]),
       })
     } else {
+      trackEvent(MARKER_SET)
       history.push({
         pathname: routing.dataSearchGeo.path,
         search: buildQueryString([[locationParam, e.latlng]], [polygonParam]),

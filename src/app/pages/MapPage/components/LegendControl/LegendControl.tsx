@@ -1,11 +1,13 @@
+import type { FunctionComponent } from 'react'
 import { useCallback } from 'react'
 import { MapLayers } from '@amsterdam/asc-assets'
 import { Button } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import type { FunctionComponent } from 'react'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Control from '../Control'
 import { useMapContext } from '../../MapContext'
 import { DrawerState } from '../DrawerOverlay'
+import { LEGEND_OPEN } from '../../matomo-events'
 
 interface LegendControlProps {
   showDesktopVariant: boolean
@@ -21,7 +23,10 @@ const StyledControl = styled(Control)`
 
 const LegendControl: FunctionComponent<LegendControlProps> = ({ showDesktopVariant }) => {
   const { setLegendActive, setDrawerState } = useMapContext()
+  const { trackEvent } = useMatomo()
+
   const onOpenLegend = useCallback(() => {
+    trackEvent(LEGEND_OPEN)
     setLegendActive(true)
     setDrawerState(DrawerState.Open)
   }, [])

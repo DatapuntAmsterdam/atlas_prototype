@@ -1,9 +1,11 @@
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Button } from '@amsterdam/asc-ui'
 import { useMapInstance } from '@amsterdam/react-maps'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import styled from 'styled-components'
 import type { FunctionComponent } from 'react'
 import Control from '../Control'
+import { ZOOM_IN, ZOOM_OUT } from '../../matomo-events'
 
 const ZoomButton = styled(Button)`
   margin-bottom: 2px;
@@ -20,6 +22,7 @@ const StyledControl = styled(Control)`
 
 const ZoomControl: FunctionComponent = () => {
   const mapInstance = useMapInstance()
+  const { trackEvent } = useMatomo()
 
   return (
     <StyledControl data-testid="zoomControls">
@@ -29,7 +32,10 @@ const ZoomControl: FunctionComponent = () => {
         title="Inzoomen"
         size={44}
         iconSize={20}
-        onClick={() => mapInstance.zoomIn()}
+        onClick={() => {
+          trackEvent(ZOOM_IN)
+          mapInstance.zoomIn()
+        }}
         icon={<Enlarge />}
       />
       <ZoomButton
@@ -38,7 +44,10 @@ const ZoomControl: FunctionComponent = () => {
         title="Uitzoomen"
         size={44}
         iconSize={20}
-        onClick={() => mapInstance.zoomOut()}
+        onClick={() => {
+          trackEvent(ZOOM_OUT)
+          mapInstance.zoomOut()
+        }}
         icon={<Minimise />}
       />
     </StyledControl>

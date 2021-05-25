@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react'
 import { ControlButton } from '@amsterdam/arm-core'
 import { Close } from '@amsterdam/asc-assets'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import styled from 'styled-components'
 import { breakpoint } from '@amsterdam/asc-ui'
 import { useHistory, useLocation } from 'react-router-dom'
@@ -19,6 +20,7 @@ import useBuildQueryString from '../../../../utils/useBuildQueryString'
 import { PANO_LAYERS } from './PanoramaViewer'
 import useParam from '../../../../utils/useParam'
 import Control from '../Control'
+import { PANORAMA_CLOSE, PANORAMA_FULLSCREEN_TOGGLE } from '../../matomo-events'
 
 const ResizeButton = styled(ControlButton)`
   margin-top: 2px;
@@ -37,6 +39,7 @@ const PanoramaControl = () => {
   const browserLocation = useLocation()
   const { buildQueryString } = useBuildQueryString()
   const [activeLayers] = useParam(mapLayersParam)
+  const { trackEvent } = useMatomo()
 
   const activeLayersWithoutPano = useMemo(
     () => activeLayers.filter((id) => !PANO_LAYERS.includes(id)),
@@ -44,6 +47,7 @@ const PanoramaControl = () => {
   )
 
   const onClose = useCallback(() => {
+    trackEvent(PANORAMA_CLOSE)
     history.push({
       pathname: browserLocation.pathname,
       search: buildQueryString(
@@ -73,6 +77,10 @@ const PanoramaControl = () => {
         iconSize={40}
         data-testid="panoramaViewerFullscreenButton"
         onClick={() => {
+          trackEvent({
+            ...PANORAMA_FULLSCREEN_TOGGLE,
+            name: panoFullScreen ? 'volledig' : 'klein',
+          })
           setPanoFullScreen(!panoFullScreen)
         }}
         icon={panoFullScreen ? <Reduce /> : <Enlarge />}

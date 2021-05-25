@@ -1,10 +1,11 @@
 import { ascDefaultTheme, themeColor } from '@amsterdam/asc-ui'
 import { useMapInstance } from '@amsterdam/react-maps'
+import type { LatLng, LatLngLiteral } from 'leaflet'
 import L, { Polygon } from 'leaflet'
+import type { FunctionComponent } from 'react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import type { LatLng, LatLngLiteral } from 'leaflet'
-import type { FunctionComponent } from 'react'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import useParam from '../../../../utils/useParam'
 import type { PolyDrawing } from '../../query-params'
 import { polygonParam, polylineParam } from '../../query-params'
@@ -18,6 +19,14 @@ import config from '../../config'
 import useMapCenterToMarker from '../../../../utils/useMapCenterToMarker'
 import { useMapContext } from '../../MapContext'
 import { DrawerState } from '../DrawerOverlay'
+import {
+  DRAWTOOL_ADD_POLYGON,
+  DRAWTOOL_ADD_POLYLINE,
+  DRAWTOOL_EDIT_POLYGON,
+  DRAWTOOL_EDIT_POLYLINE,
+  DRAWTOOL_REMOVE_POLYGON,
+  DRAWTOOL_REMOVE_POLYLINE,
+} from '../../matomo-events'
 
 function getTotalDistance(latLngs: LatLng[]) {
   return latLngs.reduce(
@@ -78,6 +87,7 @@ const DrawTool: FunctionComponent = () => {
   const { currentDatasetType } = useLegacyDataselectionConfig()
   const { panToWithPanelOffset } = useMapCenterToMarker()
   const { setDrawerState } = useMapContext()
+  const { trackEvent } = useMatomo()
 
   const [initialDrawnItems, setInitialDrawnItems] = useState<ExtendedLayer[]>([])
 
@@ -164,6 +174,7 @@ const DrawTool: FunctionComponent = () => {
         // Also pan and zoom to the drawing
         panToWithPanelOffset(layer.getBounds())
       }
+
       updateShape({
         polygon: updatedPolygon,
         polyline: updatedPolyline,
@@ -196,6 +207,14 @@ const DrawTool: FunctionComponent = () => {
         ? null
         : polylineRef.current
 
+    if (newPolygon) {
+      trackEvent(DRAWTOOL_REMOVE_POLYGON)
+    }
+
+    if (newPolyline) {
+      trackEvent(DRAWTOOL_REMOVE_POLYLINE)
+    }
+
     updateShape({
       polygon: newPolygon,
       polyline: newPolyline,
@@ -209,10 +228,24 @@ const DrawTool: FunctionComponent = () => {
     })
   }
 
+  const onDrawEnd = (layer: ExtendedLayer) => {
+    updateDrawings(layer)
+    if (layer instanceof Polygon) {
+      trackEvent(DRAWTOOL_ADD_POLYGON)
+    } else {
+      trackEvent(DRAWTOOL_ADD_POLYLINE)
+    }
+  }
+
   useEffect(() => {
     const onEditVertex = (e: L.DrawEvents.EditVertex) => {
       setDrawToolLocked(true)
       updateDrawings(e.poly as ExtendedLayer)
+      if (e.poly instanceof Polygon) {
+        trackEvent(DRAWTOOL_EDIT_POLYGON)
+      } else {
+        trackEvent(DRAWTOOL_EDIT_POLYLINE)
+      }
     }
 
     mapInstance.on(L.Draw.Event.EDITVERTEX as any, onEditVertex as any)
@@ -257,7 +290,7 @@ const DrawTool: FunctionComponent = () => {
   return (
     <BareDrawTool
       data-testid="drawTool"
-      onDrawEnd={updateDrawings}
+      onDrawEnd={onDrawEnd}
       onEndInitialItems={attachDataToLayer}
       onDelete={onDeleteDrawing}
       onClose={onClose}
