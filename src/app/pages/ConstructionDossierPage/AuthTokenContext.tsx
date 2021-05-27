@@ -35,7 +35,11 @@ const STORAGE_KEY = 'AUTH_TOKEN'
 const EXPIRE_SKEW = 60 * 1000
 
 function decodeToken(token: string) {
-  return jwtDecode<DecodedToken>(token)
+  try {
+    return jwtDecode<DecodedToken>(token)
+  } catch (e) {
+    return false
+  }
 }
 
 function isExpired(token: DecodedToken) {
