@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { render, act } from '@testing-library/react'
 import { renderHook } from '@testing-library/react-hooks'
 import { createUnsecuredToken } from 'jsontokens'
 import decodeToken from 'jwt-decode'
@@ -118,14 +118,18 @@ describe('AuthTokenProvider', () => {
     const { rerender } = render(<AuthTokenProvider />)
 
     // Tick the timer once to cover 'else' branch.
-    jest.runOnlyPendingTimers()
+    act(() => {
+      jest.runOnlyPendingTimers()
+    })
 
     rerender(<AuthTokenProvider />)
 
     const dateNowMock = jest.spyOn(Date, 'now')
 
     dateNowMock.mockReturnValue(VALID_TOKEN.exp * 1000)
-    jest.runOnlyPendingTimers()
+    act(() => {
+      jest.runOnlyPendingTimers()
+    })
 
     const Tests = () => {
       expect(useAuthToken()).toBeNull()
