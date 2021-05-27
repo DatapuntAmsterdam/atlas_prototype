@@ -119,6 +119,7 @@ describe('AuthTokenProvider', () => {
 
     // Tick the timer once to cover 'else' branch.
     jest.runOnlyPendingTimers()
+
     rerender(<AuthTokenProvider />)
 
     const dateNowMock = jest.spyOn(Date, 'now')
@@ -145,6 +146,26 @@ describe('AuthTokenProvider', () => {
 
     getAccessTokenMock.mockReturnValue('FAKETOKEN')
     useParamMock.mockReturnValue([token, () => {}])
+
+    const Tests = () => {
+      expect(useAuthToken()).toBeNull()
+      return null
+    }
+
+    render(
+      <AuthTokenProvider>
+        <Tests />
+      </AuthTokenProvider>,
+    )
+  })
+
+  it('ignores the token if it is invalid', () => {
+    const token = createUnsecuredToken(VALID_TOKEN)
+
+    // Split the token at the first period so we have a 'broken' JWT token
+    const invalidToken = token.split('.')[0]
+
+    useParamMock.mockReturnValue([invalidToken, () => {}])
 
     const Tests = () => {
       expect(useAuthToken()).toBeNull()
