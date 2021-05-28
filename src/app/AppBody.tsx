@@ -111,7 +111,7 @@ const AppBody: FunctionComponent<AppBodyProps> = ({ visibilityError, bodyClasses
                 <meta name="viewport" content="width=1024, user-scalable=yes" />
               </Helmet>
               <Switch>
-                <Route>
+                <Route path={[routing.constructionDossier.path, routing.datasetDetail.path]}>
                   <div className={`c-dashboard__body ${bodyClasses}`}>
                     <NotificationAlert />
                     {visibilityError && <ErrorAlert />}
