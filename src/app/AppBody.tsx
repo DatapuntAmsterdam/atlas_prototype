@@ -111,11 +111,6 @@ const AppBody: FunctionComponent<AppBodyProps> = ({ visibilityError, bodyClasses
                 <meta name="viewport" content="width=1024, user-scalable=yes" />
               </Helmet>
               <Switch>
-                <Route path={[routing.data.path]}>
-                  {/* When the mobile map panel is working properly we can disable the meta rule up defined above */}
-                  <MapContainer />
-                </Route>
-
                 <Route>
                   <div className={`c-dashboard__body ${bodyClasses}`}>
                     <NotificationAlert />
@@ -138,6 +133,10 @@ const AppBody: FunctionComponent<AppBodyProps> = ({ visibilityError, bodyClasses
                       </div>
                     </div>
                   </div>
+                </Route>
+                <Route path={[routing.data.path]}>
+                  {/* When the mobile map panel is working properly we can disable the meta rule up defined above */}
+                  <MapContainer />
                 </Route>
               </Switch>
             </DataSelectionProvider>
