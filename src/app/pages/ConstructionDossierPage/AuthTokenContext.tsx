@@ -10,6 +10,7 @@ import { authTokenParam } from './query-params'
 
 export interface AuthTokenContextProps {
   token: string | null
+  isTokenExpired: boolean | null
 }
 
 const AuthTokenContext = createNamedContext<AuthTokenContextProps | null>('AuthToken', null)
@@ -63,9 +64,22 @@ const AuthTokenProvider: FunctionComponent = ({ children }) => {
     return rawToken
   })
 
+  const [isTokenExpired, setIsTokenExpired] = useState<boolean | null>(() => {
+    // Use the token from the url or local storage.
+    const rawToken = tokenParam ?? localStorage.getItem(STORAGE_KEY)
+    const decodedToken = rawToken ? decodeToken(rawToken) : null
+
+    // Ignore expired tokens.
+    if (decodedToken && isExpired(decodedToken)) {
+      return true
+    }
+
+    return false
+  })
+
   // Store token from url in local storage and clear it from the url.
   useEffect(() => {
-    if (tokenParam) {
+    if (tokenParam && !isTokenExpired) {
       localStorage.setItem(STORAGE_KEY, tokenParam)
       setTokenParam(null, 'replace')
     }
@@ -74,20 +88,22 @@ const AuthTokenProvider: FunctionComponent = ({ children }) => {
   const decodedToken = useMemo(() => (token ? decodeToken(token) : null), [token])
 
   // Clear token if it has expired.
-  function checkExpirity() {
-    if (decodedToken && isExpired(decodedToken)) {
+  function checkExpiry() {
+    if (decodedToken && !isTokenExpired && isExpired(decodedToken)) {
       localStorage.removeItem(STORAGE_KEY)
       setToken(null)
+      setIsTokenExpired(true)
     }
   }
 
-  useInterval(checkExpirity, 1000)
+  useInterval(checkExpiry, 1000)
 
   return (
     <AuthTokenContext.Provider
       value={{
         // Only provide the token if the user does not have an authenticated session.
         token: !getAccessToken() ? token : null,
+        isTokenExpired: !getAccessToken() ? isTokenExpired : null,
       }}
     >
       {children}
@@ -98,5 +114,5 @@ const AuthTokenProvider: FunctionComponent = ({ children }) => {
 export { AuthTokenProvider }
 
 export function useAuthToken() {
-  return useRequiredContext(AuthTokenContext).token
+  return useRequiredContext(AuthTokenContext)
 }

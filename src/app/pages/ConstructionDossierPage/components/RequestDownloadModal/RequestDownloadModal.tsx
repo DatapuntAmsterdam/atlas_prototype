@@ -24,7 +24,7 @@ const LoadingText = styled(Paragraph)`
 `
 
 const RequestDownloadModal: FunctionComponent<RequestDownloadModalProps> = ({ files, onClose }) => {
-  const token = useAuthToken()
+  const { token } = useAuthToken()
   const [retryCount, setRetryCount] = useState(0)
   const urls = useMemo(() => files.map((file) => file.url), [files])
   const result = usePromise(() => requestDownloadLink(urls, token), [urls, token, retryCount])

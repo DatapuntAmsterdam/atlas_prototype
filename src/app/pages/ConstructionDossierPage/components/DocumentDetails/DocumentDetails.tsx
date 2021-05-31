@@ -59,7 +59,7 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
   const [showSelectFilesModal, setShowSelectFilesModal] = useState(false)
   const [showRequestDownloadModal, setShowRequestDownloadModal] = useState(false)
   const scopes = useSelector(getUserScopes)
-  const token = useAuthToken()
+  const { token } = useAuthToken()
 
   // Only allow downloads from a signed in user if authenticated with Keycloak.
   // TODO: This logic can be removed once we switch to Keycloak entirely.

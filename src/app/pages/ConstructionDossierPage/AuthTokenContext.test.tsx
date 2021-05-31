@@ -30,7 +30,7 @@ describe('AuthTokenProvider', () => {
 
   it('provides an empty value if no token is set', () => {
     const Tests = () => {
-      expect(useAuthToken()).toBeNull()
+      expect(useAuthToken().token).toBeNull()
       return null
     }
 
@@ -51,7 +51,7 @@ describe('AuthTokenProvider', () => {
     localStorage.setItem('AUTH_TOKEN', localToken)
 
     const Tests = () => {
-      expect(decodeToken(useAuthToken() ?? '')).toEqual(urlTokenValue)
+      expect(decodeToken(useAuthToken().token ?? '')).toEqual(urlTokenValue)
       return null
     }
 
@@ -68,7 +68,7 @@ describe('AuthTokenProvider', () => {
     localStorage.setItem('AUTH_TOKEN', token)
 
     const Tests = () => {
-      expect(decodeToken(useAuthToken() ?? '')).toEqual(VALID_TOKEN)
+      expect(decodeToken(useAuthToken().token ?? '')).toEqual(VALID_TOKEN)
       return null
     }
 
@@ -85,7 +85,7 @@ describe('AuthTokenProvider', () => {
     useParamMock.mockReturnValue([token, () => {}])
 
     const Tests = () => {
-      expect(useAuthToken()).toBeNull()
+      expect(useAuthToken().token).toBeNull()
       return null
     }
 
@@ -132,7 +132,7 @@ describe('AuthTokenProvider', () => {
     })
 
     const Tests = () => {
-      expect(useAuthToken()).toBeNull()
+      expect(useAuthToken().token).toBeNull()
       return null
     }
 
@@ -152,7 +152,7 @@ describe('AuthTokenProvider', () => {
     useParamMock.mockReturnValue([token, () => {}])
 
     const Tests = () => {
-      expect(useAuthToken()).toBeNull()
+      expect(useAuthToken().token).toBeNull()
       return null
     }
 
@@ -172,7 +172,7 @@ describe('AuthTokenProvider', () => {
     useParamMock.mockReturnValue([invalidToken, () => {}])
 
     const Tests = () => {
-      expect(useAuthToken()).toBeNull()
+      expect(useAuthToken().token).toBeNull()
       return null
     }
 
@@ -187,7 +187,7 @@ describe('AuthTokenProvider', () => {
 describe('useAuthToken', () => {
   it('provides the token', () => {
     const token = 'Hello World'
-    const { result } = renderHook(() => useAuthToken(), {
+    const { result } = renderHook(() => useAuthToken().token, {
       wrapper: ({ children }) => (
         <AuthTokenContext.Provider value={{ token }}>{children}</AuthTokenContext.Provider>
       ),

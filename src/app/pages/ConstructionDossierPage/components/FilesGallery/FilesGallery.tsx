@@ -91,7 +91,7 @@ const FilesGallery: FunctionComponent<FilesGalleryProps> = ({
   const lessFiles = useMemo(() => document.bestanden.slice(0, MAX_LENGTH), [document.bestanden])
   const [files, setFiles] = useState(lessFiles)
   const hasMore = document.bestanden.length > MAX_LENGTH
-  const token = useAuthToken()
+  const { token } = useAuthToken()
   const tokenQueryString = useMemo(
     () => (token ? `?${new URLSearchParams({ auth: token }).toString()}` : ''),
     [token],
