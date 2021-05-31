@@ -39,7 +39,16 @@ const retrieveLayers = (
   detailIsShape?: boolean,
 ): MapLayer[] =>
   detailItems.map((item) => {
-    const [type, subType] = item.properties.type.split('/')
+    let [type, subType] = item.properties.type.split('/')
+
+    // Todo: find out why we need to make this translation
+    if (type === 'kadaster') {
+      type = 'brk'
+
+      if (subType === 'kadastraal_object') {
+        subType = 'object'
+      }
+    }
 
     return {
       detailIsShape,
