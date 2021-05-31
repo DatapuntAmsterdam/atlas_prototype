@@ -187,12 +187,29 @@ describe('AuthTokenProvider', () => {
 describe('useAuthToken', () => {
   it('provides the token', () => {
     const token = 'Hello World'
-    const { result } = renderHook(() => useAuthToken().token, {
+
+    const { result } = renderHook(() => useAuthToken(), {
       wrapper: ({ children }) => (
-        <AuthTokenContext.Provider value={{ token }}>{children}</AuthTokenContext.Provider>
+        <AuthTokenContext.Provider value={{ token, isTokenExpired: null }}>
+          {children}
+        </AuthTokenContext.Provider>
       ),
     })
 
-    expect(result.current).toEqual(token)
+    expect(result.current.token).toEqual(token)
+  })
+
+  it('provides the expiry status', () => {
+    const token = createUnsecuredToken(EXPIRED_TOKEN)
+
+    const { result } = renderHook(() => useAuthToken(), {
+      wrapper: ({ children }) => (
+        <AuthTokenContext.Provider value={{ token, isTokenExpired: null }}>
+          {children}
+        </AuthTokenContext.Provider>
+      ),
+    })
+
+    expect(result.current.isTokenExpired).toEqual(null)
   })
 })
