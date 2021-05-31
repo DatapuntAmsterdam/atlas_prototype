@@ -1,13 +1,12 @@
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import { routing } from '../routes'
-import { getLocationType } from '../../store/redux-first-router/selectors'
 
 const TITLE = 'Data en informatie - Amsterdam'
 
 function useDocumentTitle() {
-  const locationType = useSelector(getLocationType)
-  const route = Object.values(routing).find((value) => value.type === locationType)
+  const location = useLocation()
+  const route = Object.values(routing).find((value) => value.path === location.pathname)
   const routeTitle = route?.title ?? null
   const [documentTitle, setTitle] = useState(routeTitle ? `${routeTitle} - ${TITLE}` : TITLE)
 

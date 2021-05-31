@@ -24,11 +24,7 @@ describe('getDetailPageData', () => {
       id: '1234',
     })
   })
-  it('should return an object with values set to null when the type, subtype or id cannot be extracted', () => {
-    expect(getDetailPageData('https://example.com/')).toEqual({
-      type: null,
-      subtype: null,
-      id: null,
-    })
+  it('should throw an error when the type, subtype or id cannot be extracted', () => {
+    expect(() => getDetailPageData('https://example.com/')).toThrow()
   })
 })

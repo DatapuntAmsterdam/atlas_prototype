@@ -4,9 +4,7 @@ import { lazy, Suspense } from 'react'
 import { Helmet } from 'react-helmet'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
-import ErrorAlert from './components/ErrorAlert/ErrorAlert'
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
-import { FeedbackModal } from './components/Modal'
 import NotificationAlert from './components/NotificationAlert/NotificationAlert'
 import { mapSearchPagePaths, routing } from './routes'
 import { DataSelectionProvider } from './components/DataSelection/DataSelectionContext'
@@ -54,14 +52,12 @@ const StyledLoadingSpinner = styled(LoadingSpinner)`
 `
 
 export interface AppBodyProps {
-  visibilityError: boolean
-  bodyClasses: string
   hasGrid: boolean
 }
 
 export const APP_CONTAINER_ID = 'main'
 
-const AppBody: FunctionComponent<AppBodyProps> = ({ visibilityError, bodyClasses, hasGrid }) => {
+const AppBody: FunctionComponent<AppBodyProps> = ({ hasGrid }) => {
   const { enableLinkTracking } = useMatomo()
   enableLinkTracking()
 
@@ -79,7 +75,7 @@ const AppBody: FunctionComponent<AppBodyProps> = ({ visibilityError, bodyClasses
             <NotificationAlert />
             <Suspense fallback={<StyledLoadingSpinner />}>
               <Switch>
-                <Route exact path="/" component={HomePage} />
+                <Route exact path={routing.home.path} component={HomePage} />
                 <Route path={routing.articleDetail.path} exact component={ArticleDetailPage} />
                 <Route
                   path={routing.publicationDetail.path}
@@ -98,7 +94,6 @@ const AppBody: FunctionComponent<AppBodyProps> = ({ visibilityError, bodyClasses
               </Switch>
             </Suspense>
           </AppContainer>
-          <FeedbackModal id="feedbackModal" />
         </>
       ) : (
         <>
@@ -112,9 +107,8 @@ const AppBody: FunctionComponent<AppBodyProps> = ({ visibilityError, bodyClasses
               </Helmet>
               <Switch>
                 <Route path={[routing.constructionDossier.path, routing.datasetDetail.path]}>
-                  <div className={`c-dashboard__body ${bodyClasses}`}>
+                  <div className="c-dashboard__body">
                     <NotificationAlert />
-                    {visibilityError && <ErrorAlert />}
 
                     <div className="u-full-height u-overflow--y-auto">
                       <div className="u-full-height">
@@ -140,7 +134,6 @@ const AppBody: FunctionComponent<AppBodyProps> = ({ visibilityError, bodyClasses
                 </Route>
               </Switch>
             </DataSelectionProvider>
-            <FeedbackModal id="feedbackModal" />
           </Suspense>
         </>
       )}

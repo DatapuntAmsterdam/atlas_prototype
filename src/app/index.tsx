@@ -1,7 +1,6 @@
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { Router } from 'react-router-dom'
-import type { History } from 'history'
+import { BrowserRouter } from 'react-router-dom'
 import type { AnyAction, Store } from 'redux'
 import environment from '../environment'
 import configureStore from '../store/store'
@@ -26,9 +25,9 @@ if (searchParams.has('disableFeature')) {
 resolveRedirects(window.location)
   .then((hasToRedirect) => {
     if (!hasToRedirect) {
-      const { store, history } = configureStore()
+      const { store } = configureStore()
 
-      renderApp(store, history)
+      renderApp(store)
     }
   })
   .catch((error: string) => {
@@ -36,7 +35,7 @@ resolveRedirects(window.location)
     console.error(`Can't resolve redirects: ${error}`)
   })
 
-function renderApp(store: Store<any, AnyAction>, history: History) {
+function renderApp(store: Store<any, AnyAction>) {
   // eslint-disable-next-line no-console
   console.info(
     `Dataportaal: version: ${process.env.VERSION as string}, deploy env: ${environment.DEPLOY_ENV}`,
@@ -53,11 +52,11 @@ function renderApp(store: Store<any, AnyAction>, history: History) {
     <Provider store={store}>
       {/* Normally we would use the router from 'react-router-dom', but since we gradually migrate from
       redux-first-router to react-router, we need to share the history */}
-      <Router history={history}>
+      <BrowserRouter>
         <UiProvider>
           <App />
         </UiProvider>
-      </Router>
+      </BrowserRouter>
     </Provider>,
     document.getElementById('root'),
   )

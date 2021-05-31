@@ -1,16 +1,12 @@
 import { Api, Data, DocumentText, Map, Pano, Table } from '@amsterdam/asc-assets'
 import { Icon } from '@amsterdam/asc-ui'
 import type { LocationDescriptorObject } from 'history'
-import type { To } from 'redux-first-router-link'
+import { generatePath } from 'react-router-dom'
 import environment from '../../../../environment'
 import {
   NAVIGATION_LINK_DATA_IN_TABLES,
   NAVIGATION_LINK_DATA_SERVICES,
 } from '../../../../shared/config/content-links'
-import {
-  toMapWithLegendOpen,
-  toPanoramaAndPreserveQuery,
-} from '../../../../store/redux-first-router/actions'
 import {
   toArticleDetail,
   toArticleSearch,
@@ -20,11 +16,12 @@ import {
   toPublicationSearch,
   toSpecialSearch,
 } from '../../../links'
-import { routing as routes } from '../../../routes'
+import { routing, routing as routes } from '../../../routes'
+import { defaultPanoramaUrl } from '../../../pages/MapPage/config'
 
 export interface NavigationLink {
   id: number
-  to: To | LocationDescriptorObject
+  to: LocationDescriptorObject | string
   CardIcon?: () => JSX.Element
   testId: string
   title: string
@@ -36,7 +33,7 @@ export interface NavigationLink {
 const navigationLinks: NavigationLink[] = [
   {
     id: 0,
-    to: toMapWithLegendOpen(),
+    to: generatePath(routing.dataSearchGeo.path),
     CardIcon: () => (
       <Icon size={48}>
         <Map />
@@ -48,7 +45,7 @@ const navigationLinks: NavigationLink[] = [
   },
   {
     id: 1,
-    to: toPanoramaAndPreserveQuery(undefined, undefined, undefined, 'home'),
+    to: defaultPanoramaUrl,
     CardIcon: () => (
       <Icon size={48}>
         <Pano />

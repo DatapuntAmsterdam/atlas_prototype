@@ -9,9 +9,8 @@ import {
   themeSpacing,
 } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
+import { Link as RouterLink } from 'react-router-dom'
 import type { FunctionComponent } from 'react'
-import type { To } from 'redux-first-router-link'
-import pickLinkComponent from '../../utils/pickLinkComponent'
 
 const StyledHeading = styled(Heading)`
   border-bottom: 2px solid transparent;
@@ -75,7 +74,7 @@ interface DatasetCardProps {
   lastModified: string | Date
   modified: string
   distributionTypes: string[]
-  to: To
+  to: string
 }
 
 const DatasetCard: FunctionComponent<DatasetCardProps & Partial<HTMLAnchorElement>> = ({
@@ -90,7 +89,7 @@ const DatasetCard: FunctionComponent<DatasetCardProps & Partial<HTMLAnchorElemen
 }) => (
   <StyledLink
     {...{
-      forwardedAs: pickLinkComponent(to),
+      forwardedAs: RouterLink,
       key: id,
       to,
       title: shortTitle,

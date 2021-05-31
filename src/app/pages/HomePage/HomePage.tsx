@@ -8,7 +8,6 @@ import {
 } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
 import cmsConfig from '../../../shared/config/cms.config'
-import { toCollectionSearch } from '../../../store/redux-first-router/actions'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import AboutBlock from '../../components/HomePage/AboutBlock'
 import EditorialBlock from '../../components/HomePage/EditorialBlock'
@@ -17,6 +16,7 @@ import NavigationBlock from '../../components/HomePage/NavigationBlock'
 import OrganizationBlock from '../../components/HomePage/OrganizationBlock'
 import ThemesBlock from '../../components/HomePage/ThemesBlock'
 import ShareBar from '../../components/ShareBar/ShareBar'
+import { routing } from '../../routes'
 
 const HighlightColumn = styled(Column)`
   // aligns the HighlightsBlock with the NavigationBlock
@@ -62,7 +62,10 @@ const HomePage = () => (
           <EditorialBlock
             title="Dossiers"
             list={cmsConfig.HOME_COLLECTIONS}
-            showMoreProps={{ to: toCollectionSearch, label: 'Overzicht alle dossiers' }}
+            showMoreProps={{
+              to: { pathname: routing.collectionSearch.path },
+              label: 'Overzicht alle dossiers',
+            }}
           />
         </Column>
       </StyledRow>

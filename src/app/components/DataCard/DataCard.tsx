@@ -9,16 +9,17 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import { Fragment } from 'react'
-import RouterLink from 'redux-first-router-link'
-import styled from 'styled-components'
 import type { FunctionComponent } from 'react'
-import { ViewMode } from '../../../shared/ducks/ui/ui'
-import { toDataSearchType, toDetailFromEndpoint } from '../../../store/redux-first-router/actions'
+import { Fragment } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
+import styled from 'styled-components'
+import { getDetailPageData } from '../../../store/redux-first-router/actions'
 import formatCount from '../../utils/formatCount'
 import type { DataIconType } from './DataIcon'
 import DataIcon from './DataIcon'
 import type { DataResult } from '../../pages/SearchPage/types'
+import { routing } from '../../routes'
+import { toDataDetail } from '../../links'
 
 const StyledLink = styled(Link)`
   cursor: pointer;
@@ -96,7 +97,7 @@ const DataCard: FunctionComponent<DataCardProps> = ({
         <Heading as="h3" styleAs="h4">
           <StyledLink
             forwardedAs={RouterLink}
-            to={toDataSearchType(type)}
+            to={routing.dataSearch.path}
           >{`${label} (${formatCount(count)})`}</StyledLink>
         </Heading>
       </div>
@@ -106,7 +107,7 @@ const DataCard: FunctionComponent<DataCardProps> = ({
           {results?.map(({ id, endpoint, label: itemLabel }, index) => (
             <Fragment key={id}>
               <StyledParagraphLink
-                to={toDetailFromEndpoint(endpoint, ViewMode.Split)}
+                to={toDataDetail(getDetailPageData(endpoint))}
                 forwardedAs={RouterLink}
               >
                 {itemLabel}

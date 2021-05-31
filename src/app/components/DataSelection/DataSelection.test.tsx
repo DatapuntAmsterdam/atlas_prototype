@@ -1,10 +1,9 @@
-import { screen, fireEvent, render, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { rest } from 'msw'
 import DataSelection from './DataSelection'
 import { DataSelectionProvider } from './DataSelectionContext'
 import withAppContext from '../../utils/withAppContext'
 import { routing } from '../../routes'
-import * as reduxFirstRouterSelectors from '../../../store/redux-first-router/selectors'
 import { server } from '../../../../test/server'
 import { singleFixture as bagFixture } from '../../../api/dataselectie/bag'
 import joinUrl from '../../utils/joinUrl'
@@ -29,7 +28,6 @@ jest.mock('react-router-dom', () => ({
   }),
 }))
 
-jest.mock('../../../store/redux-first-router/selectors')
 const dataSelectionBagUrl = joinUrl([environment.API_ROOT, 'dataselectie/bag/'])
 
 jest.mock('react-redux', () => ({
@@ -44,7 +42,6 @@ describe('DataSelection', () => {
   })
   describe('Table', () => {
     it('should render', async () => {
-      jest.spyOn(reduxFirstRouterSelectors, 'hasUserAccesToPage').mockReturnValue(true)
       render(
         withAppContext(
           <DataSelectionProvider>
@@ -59,7 +56,6 @@ describe('DataSelection', () => {
     })
 
     it('should add a filter', async () => {
-      jest.spyOn(reduxFirstRouterSelectors, 'hasUserAccesToPage').mockReturnValue(true)
       render(
         withAppContext(
           <DataSelectionProvider>
@@ -83,7 +79,6 @@ describe('DataSelection', () => {
 
     it('should remove a filter', async () => {
       search = 'filters=%7B%22woonplaats%22%3A%22Amsterdam%22%7D'
-      jest.spyOn(reduxFirstRouterSelectors, 'hasUserAccesToPage').mockReturnValue(true)
       render(
         withAppContext(
           <DataSelectionProvider>
@@ -109,7 +104,6 @@ describe('DataSelection', () => {
   describe('List', () => {
     it('should render', async () => {
       search = ''
-      jest.spyOn(reduxFirstRouterSelectors, 'hasUserAccesToPage').mockReturnValue(true)
       render(
         withAppContext(
           <DataSelectionProvider>

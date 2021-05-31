@@ -2,10 +2,10 @@ import { Enlarge } from '@amsterdam/asc-assets'
 import { themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
 import type { GraphQLFormattedError } from 'graphql'
+import { generatePath } from 'react-router-dom'
 import type { FunctionComponent } from 'react'
 import { dcatdScopes } from '../../../shared/services/auth/auth'
 import getState from '../../../shared/services/redux/get-state'
-import { toDatasetDetail } from '../../../store/redux-first-router/actions'
 import ActionButton from '../../components/ActionButton'
 import AuthAlert from '../../components/Alerts/AuthAlert'
 import DatasetCard from '../../components/DatasetCard'
@@ -18,6 +18,7 @@ import getErrorsForPath from '../../utils/getErrorsForPath'
 import getLoadingErrors from '../../utils/getLoadingErrors'
 import getUnauthorizedLabels from '../../utils/getUnauthorizedLabels'
 import redirectToDcatd from '../../utils/redirectToDcatd'
+import { routing } from '../../routes'
 import toSlug from '../../utils/toSlug'
 
 const DatasetCardContainer = styled.div`
@@ -86,9 +87,9 @@ const DatasetSearchResults: FunctionComponent<DatasetSearchResultsProps> = ({
           <StyledDatasetCard
             data-testid="datasetCard"
             key={id}
-            to={toDatasetDetail({
+            to={generatePath(routing.datasetDetail.path, {
               id,
-              slug: toSlug(header) || '',
+              slug: toSlug(header) || 'dataset',
             })}
             shortTitle={header}
             teaser={teaser}

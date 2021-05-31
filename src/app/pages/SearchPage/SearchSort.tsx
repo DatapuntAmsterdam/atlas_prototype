@@ -1,8 +1,10 @@
 import { breakpoint, Label, Select, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { useDispatch } from 'react-redux'
+import { useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
-import { setPage, setSort } from './SearchPageDucks'
+import type { FunctionComponent } from 'react'
+import useBuildQueryString from '../../utils/useBuildQueryString'
+import { pageParam, Sort, sortParam } from './query-params'
 
 const SelectboxWrapper = styled.div`
   display: flex;
@@ -34,9 +36,17 @@ const StyledLabel = styled(Label)`
   }
 `
 
-const SearchSort = ({ sort, isOverviewPage, disabled }) => {
-  const dispatch = useDispatch()
+interface SearchSortProps {
+  sort: Sort | null
+  disabled: boolean
+  isOverviewPage: boolean
+}
+
+const SearchSort: FunctionComponent<SearchSortProps> = ({ sort, isOverviewPage, disabled }) => {
   const { trackEvent } = useMatomo()
+  const history = useHistory()
+  const location = useLocation()
+  const { buildQueryString } = useBuildQueryString()
 
   return (
     <SelectboxWrapper>
@@ -44,16 +54,26 @@ const SearchSort = ({ sort, isOverviewPage, disabled }) => {
         <StyledSelect
           id="sort-select"
           data-testid="sort-select"
-          value={sort}
+          value={sort ? `${sort.field}:${sort.order}` : undefined}
           disabled={disabled}
           onChange={(e) => {
+            // @ts-ignore
+            const [field, order] = e.target.value.split(':')
             trackEvent({
               category: 'search',
               action: 'sort',
+              // @ts-ignore
               name: e.target.value,
             })
-            dispatch(setSort(e.target.value))
-            dispatch(setPage(1))
+            history.replace({
+              pathname: location.pathname,
+              search: buildQueryString([
+                // @ts-ignore
+                [pageParam, 1],
+                // @ts-ignore
+                [sortParam, { field, order }],
+              ]),
+            })
           }}
         >
           {!isOverviewPage && <option value="">Relevantie</option>}

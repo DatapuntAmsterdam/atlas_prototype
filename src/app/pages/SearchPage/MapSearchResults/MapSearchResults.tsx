@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import type { FunctionComponent } from 'react'
 import IconMap from '../../../../shared/assets/icons/data/IconMap.svg'
 import IconMapLayers from '../../../../shared/assets/icons/IconMapLayers.svg'
-import { toMapSearchType } from '../../../../store/redux-first-router/actions'
 import SearchLink from '../../../components/Links/SearchLink/SearchLink'
 import NoSearchResults from '../../../components/NoSearchResults'
 import SearchHeading from '../../../components/SearchHeading/SearchHeading'
@@ -11,6 +10,9 @@ import { toMapSearch } from '../../../links'
 import formatCount from '../../../utils/formatCount'
 import MapCollectionSearchResults from './MapCollectionSearchResults'
 import MapLayerSearchResults from './MapLayerSearchResults'
+import { routing } from '../../../routes'
+import { activeFiltersParam } from '../query-params'
+import useBuildQueryString from '../../../utils/useBuildQueryString'
 
 export interface MapSearchResultsProps {
   query: string
@@ -51,6 +53,7 @@ const SearchResults: FunctionComponent<SearchResultsProps> = ({
   icon,
   resultsComponent: ResultsComponent,
 }) => {
+  const { buildQueryString } = useBuildQueryString()
   return (
     (results.length > 0 && (
       <>
@@ -60,7 +63,12 @@ const SearchResults: FunctionComponent<SearchResultsProps> = ({
           <>
             <Spacer />
             <SearchLink
-              to={toMapSearchType(type)}
+              to={{
+                pathname: routing.mapSearch.path,
+                search: buildQueryString([
+                  [activeFiltersParam, [{ type: 'map-type', values: [type] }]],
+                ]),
+              }}
               label={`Alle ${label && label.toLowerCase()} tonen`}
             />
           </>

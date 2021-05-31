@@ -50,15 +50,6 @@ export const isEditorialDetailPage = (page: string) =>
   page === PAGES.SPECIAL_DETAIL ||
   page === PAGES.COLLECTION_DETAIL
 
-export const isMapSplitPage = (page: string) =>
-  page === PAGES.DATA ||
-  page === PAGES.PANORAMA ||
-  page === PAGES.DATA_DETAIL ||
-  page === PAGES.ADDRESSES ||
-  page === PAGES.ESTABLISHMENTS ||
-  page === PAGES.DATA_SEARCH_GEO ||
-  page === PAGES.CADASTRAL_OBJECTS
-
 export const isSearchPage = (page: string) =>
   page === PAGES.SEARCH ||
   page === PAGES.DATA_SEARCH ||
