@@ -30,21 +30,6 @@ import { extractIdEndpoint, getDetailPageData } from '../../../store/redux-first
 import type { AutoSuggestSearchContent } from '../../services/auto-suggest/auto-suggest'
 import useParam from '../../../app/utils/useParam'
 
-function decodeLayers(value: string) {
-  if (!value) {
-    return []
-  }
-
-  return value.split('|').map((entry) => {
-    const [id, visibility] = entry.split(':')
-
-    return {
-      id,
-      isVisible: visibility === '1',
-    }
-  })
-}
-
 export interface AutoSuggestItemProps {
   content: string
   suggestion: AutoSuggestSearchContent
@@ -160,7 +145,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
         },
       ).toString(),
     }
-  }, [extractIdEndpoint, openEditorialSuggestion, decodeLayers, highlightValue, location])
+  }, [extractIdEndpoint, openEditorialSuggestion, highlightValue, location])
 
   const htmlContent = useMemo(
     () => highlightSuggestion(content, highlightValue),
