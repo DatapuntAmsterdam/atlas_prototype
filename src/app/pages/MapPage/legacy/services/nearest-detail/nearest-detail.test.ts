@@ -1,61 +1,13 @@
 import { mocked } from 'ts-jest/utils'
-import type { MapLayer } from '../index'
 import { fetchWithToken } from '../../../../../../shared/services/api/api'
-import fetchNearestDetail, { sortResults } from './nearest-detail'
+import type { MapLayer } from '../index'
+import fetchNearestDetail from './nearest-detail'
 
 jest.mock('../../../../../../shared/services/api/api')
 
 const mockedFetchWithToken = mocked(fetchWithToken)
 
 describe('fetchNearestDetail', () => {
-  it('should sortResults the results on distance and detailIsShape', () => {
-    expect(
-      sortResults([
-        {
-          detailIsShape: true,
-          distance: 10,
-        },
-        {
-          detailIsShape: undefined,
-          distance: 9,
-        },
-        {
-          detailIsShape: undefined,
-          distance: 8,
-        },
-        {
-          detailIsShape: undefined,
-          distance: 10,
-        },
-        {
-          detailIsShape: true,
-          distance: 9,
-        },
-      ] as MapLayer[]),
-    ).toEqual([
-      {
-        detailIsShape: undefined,
-        distance: 8,
-      },
-      {
-        detailIsShape: undefined,
-        distance: 9,
-      },
-      {
-        detailIsShape: undefined,
-        distance: 10,
-      },
-      {
-        detailIsShape: true,
-        distance: 9,
-      },
-      {
-        detailIsShape: true,
-        distance: 10,
-      },
-    ])
-  })
-
   it('should fetch the nearest detail', async () => {
     mockedFetchWithToken.mockImplementation(() =>
       Promise.resolve({

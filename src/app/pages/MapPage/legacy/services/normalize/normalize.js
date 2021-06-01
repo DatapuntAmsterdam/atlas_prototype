@@ -203,14 +203,6 @@ export const vastgoed = (result) => {
   return { ...result, ...additionalFields }
 }
 
-export const vestiging = (result) => {
-  const additionalFields = {
-    geometry: (result.bezoekadres && result.bezoekadres.geometrie) || result.geometrie,
-  }
-
-  return { ...result, ...additionalFields }
-}
-
 export const winkelgebied = (result) => {
   const additionalFields = {
     geometry: result.wkb_geometry,
