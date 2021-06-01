@@ -1,7 +1,7 @@
 import { Close } from '@amsterdam/asc-assets'
 import { Button, themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import type { FunctionComponent } from 'react'
+import type { FunctionComponent, HTMLAttributes } from 'react'
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -16,8 +16,10 @@ interface DrawerPanelHeaderProps {
   onClose?: () => void
 }
 
-const DrawerPanelHeader: FunctionComponent<DrawerPanelHeaderProps> = ({ children, onClose }) => (
-  <HeaderContainer>
+const DrawerPanelHeader: FunctionComponent<
+  DrawerPanelHeaderProps & HTMLAttributes<HTMLDivElement>
+> = ({ children, onClose, className }) => (
+  <HeaderContainer className={className}>
     <div>{children}</div>
     {onClose && (
       <CloseButton
