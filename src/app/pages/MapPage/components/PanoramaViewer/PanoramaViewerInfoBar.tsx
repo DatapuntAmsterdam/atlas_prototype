@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import type { FunctionComponent } from 'react'
+import { themeSpacing } from '@amsterdam/asc-ui'
 import ViewerInfoBar from '../../../../components/ViewerInfoBar/ViewerInfoBar'
 import useParam from '../../../../utils/useParam'
 import { locationParam } from '../../query-params'
@@ -9,7 +10,8 @@ import { useMapContext } from '../../MapContext'
 const StyledControl = styled(Control)`
   order: 2;
   align-self: flex-end;
-  transform: translateY(-100%);
+  position: absolute;
+  top: calc(70% - ${themeSpacing(13)});
 `
 
 const PanoramaViewerInfoBar: FunctionComponent = () => {

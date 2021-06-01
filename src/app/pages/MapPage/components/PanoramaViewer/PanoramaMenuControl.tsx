@@ -45,7 +45,8 @@ const ContextMenuButton = styled(ControlButton)`
 
 const StyledControl = styled(Control)`
   order: 2;
-  transform: translateY(-${themeSpacing(10)});
+  position: absolute;
+  top: calc(70% - ${themeSpacing(15)});
 `
 
 const PanoramaMenuControl: FunctionComponent = () => {
