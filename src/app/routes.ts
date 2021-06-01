@@ -208,14 +208,4 @@ export const mapSearchPagePaths = [
   routing.mapSearch.path,
 ]
 
-export const mapSplitPagePaths = [
-  routing.dataDetail.path,
-  routing.data.path,
-  routing.panorama.path,
-  routing.addresses.path,
-  routing.establishments.path,
-  routing.dataSearchGeo.path,
-  routing.cadastralObjects.path,
-]
-
 export default routes

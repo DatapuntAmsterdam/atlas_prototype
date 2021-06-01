@@ -57,9 +57,10 @@ const NotificationAlert: FunctionComponent = () => {
         </StyledAlert>
       ) : (
         <InfoModal
-          id="infoModal"
-          {...{ open: !isEmbedded, title: field_notification_title ?? title, body: body.value }}
-          closeModalAction={() => createCookie(COOKIE_NAME, '8')}
+          open={!isEmbedded}
+          title={field_notification_title ?? title}
+          body={body.value}
+          handleClose={() => createCookie(COOKIE_NAME, '8')}
         />
       )
     }

@@ -1,12 +1,14 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { DataSelectionProvider, useDataSelection } from './DataSelectionContext'
+import type { LocationDescriptorObject } from 'history'
+import { toEstablishments } from '../../links'
 import { routing } from '../../routes'
+import { DataSelectionProvider, useDataSelection } from './DataSelectionContext'
 
 const mockSearchValue = ''
 
 const pushMock = jest.fn()
 const defaultPathname = routing.addresses.path
-let locationMockValue = {
+let locationMockValue: LocationDescriptorObject = {
   pathname: defaultPathname,
   search: mockSearchValue,
 }
@@ -90,7 +92,7 @@ describe('DataSelectionProvider', () => {
 
     it('will show an SBI code on the Vestigingen / HR page, and strip out the quotes from the value', () => {
       locationMockValue = {
-        pathname: routing.establishments.path, // Note that we change the path to "Vestigingen" in order to show the SBI Code in the activeFilters
+        ...toEstablishments(),
         search: 'filters={"woonplaats":"Amsterdam", "sbi_code": "[\'1\']"}',
       }
 
@@ -106,7 +108,7 @@ describe('DataSelectionProvider', () => {
 
     it('will add a shape filter when polygons are set', () => {
       locationMockValue = {
-        pathname: routing.establishments.path,
+        ...toEstablishments(),
         search:
           'filters={"woonplaats":"Amsterdam"}&geo={"polygon":[[123,345],[456,678],[123,456]]}',
       }

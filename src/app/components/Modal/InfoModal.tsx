@@ -3,7 +3,6 @@ import { Button, Divider, Heading, Modal, Paragraph, TopBar } from '@amsterdam/a
 import type { FunctionComponent } from 'react'
 import CONSTANTS from '../../../shared/config/constants'
 import ModalBlock from './ModalBlock'
-import withModalBehaviour from './withModalBehaviour'
 
 interface InfoModalProps {
   handleClose(): void
@@ -29,9 +28,9 @@ const InfoModal: FunctionComponent<InfoModalProps> = ({ open, handleClose, title
     </TopBar>
     <Divider />
     <ModalBlock>
-      <Paragraph className="infomodal__body" dangerouslySetInnerHTML={{ __html: body }} />
+      {body && <Paragraph className="infomodal__body" dangerouslySetInnerHTML={{ __html: body }} />}
     </ModalBlock>
   </Modal>
 )
 
-export default withModalBehaviour(InfoModal)
+export default InfoModal

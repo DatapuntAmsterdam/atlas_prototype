@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $sbi-filter-gutter: 2 * $base-whitespace;
 $sbi-filter-item-height: 32px;
 
@@ -133,6 +135,6 @@ $sbi-filter-item-height: 32px;
 }
 
 .c-sbi-filter__hidden-options {
-  margin-bottom: $base-whitespace / 2;
+  margin-bottom: math.div($base-whitespace, 2);
   color: $secondary-gray40;
 }

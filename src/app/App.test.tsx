@@ -1,16 +1,10 @@
 import { render, screen } from '@testing-library/react'
-import { createMemoryHistory } from 'history'
-import { Provider } from 'react-redux'
-import { MemoryRouter, Router } from 'react-router-dom'
-import configureMockStore from 'redux-mock-store'
 import { mocked } from 'ts-jest/utils'
-import { ViewMode } from '../shared/ducks/ui/ui'
 import App from './App'
 import { useIsEmbedded } from './contexts/ui'
 import { toNotFound } from './links'
-import PAGES from './pages'
-import { ROUTER_NAMESPACE } from './routes'
 import useParam from './utils/useParam'
+import withAppContext from './utils/withAppContext'
 
 // Mock some components because of it's complex dependencies (like using .query files that jest cannot handle)
 jest.mock('./components/Header', () => () => <div data-testid="header" />)
@@ -22,92 +16,50 @@ jest.mock('./utils/useParam')
 
 const useIsEmbeddedMock = mocked(useIsEmbedded)
 const useParamMock = mocked(useParam)
-const mockStore = configureMockStore()
-const initialState = {
-  ui: {
-    isEmbed: false,
-    isEmbedPreview: false,
-    isPrintMode: false,
-    viewMode: ViewMode.Full,
-  },
-  search: {
-    query: '',
-  },
-  selection: {
-    type: '',
-  },
-  map: {
-    view: 'home',
-  },
-  user: {},
-  error: {
-    hasErrors: false,
-  },
-  location: {
-    type: `${ROUTER_NAMESPACE}/${PAGES.DATA}`,
-  },
-  files: {
-    fileName: '',
-    fileUrl: '',
-    type: 'default',
-  },
-}
-const store = mockStore(initialState)
 
 useParamMock.mockReturnValue(['someQuery', () => {}])
 useIsEmbeddedMock.mockReturnValue(false)
 
+const historyReplaceMock = jest.fn()
+let pathname = '/'
+
+jest.mock('react-router-dom', () => ({
+  // @ts-ignore
+  ...jest.requireActual('react-router-dom'),
+  useLocation: () => ({
+    pathname,
+    search: 'heading=10&locatie=12.12,3.21',
+  }),
+  useHistory: () => ({
+    replace: historyReplaceMock,
+  }),
+}))
+
 describe('App', () => {
+  afterEach(() => {
+    pathname = '/'
+  })
+
   it('should redirect to 404 page', () => {
-    const mockStore2 = configureMockStore()
-    const newStore = mockStore2(
-      Object.assign(initialState, { location: { type: 'not-existing-page' } }),
-    )
+    pathname = '/asdfasgasda'
+    render(withAppContext(<App />))
 
-    const history = createMemoryHistory()
-
-    render(
-      <Provider store={newStore}>
-        <Router history={history}>
-          <App />
-        </Router>
-      </Provider>,
-    )
-
-    expect(history.location).toEqual(expect.objectContaining(toNotFound()))
+    expect(historyReplaceMock).toHaveBeenCalledWith(expect.objectContaining(toNotFound()))
   })
 
   it('should render', () => {
-    const { container } = render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>
-      </Provider>,
-    )
+    const { container } = render(withAppContext(<App />))
     const firstChild = container.firstChild as HTMLElement
     expect(firstChild).toBeDefined()
   })
 
   it('should render the header', () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>
-      </Provider>,
-    )
+    render(withAppContext(<App />))
     expect(screen.getByTestId('header')).toBeInTheDocument()
   })
 
   it('should render skip navigation buttons (A11Y)', () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>
-      </Provider>,
-    )
+    render(withAppContext(<App />))
     expect(screen.getByTitle('Direct naar: inhoud')).toBeInTheDocument()
     expect(screen.getByTitle('Direct naar: zoeken')).toBeInTheDocument()
     expect(screen.getByTitle('Direct naar: footer')).toBeInTheDocument()

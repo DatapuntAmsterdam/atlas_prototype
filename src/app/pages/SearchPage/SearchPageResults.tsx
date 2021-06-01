@@ -18,7 +18,7 @@ import PAGES from '../../pages'
 import formatCount from '../../utils/formatCount'
 import toSearchParams from '../../utils/toSearchParams'
 import SEARCH_PAGE_CONFIG, { EDITORIAL_SEARCH_PAGES, SearchConfig } from './config'
-import { pageParam } from './query-params'
+import { pageParam, Sort } from './query-params'
 import type { SearchPageFiltersProps } from './SearchPageFilters'
 import SearchResultsOverview from './SearchResultsOverview'
 import { SearchResultsOverviewSkeleton, SearchResultsSkeleton } from './SearchResultsSkeleton'
@@ -94,7 +94,7 @@ const StyledCompactPager = styled(CompactPager)`
 interface SearchPageResultsProps
   extends Pick<EditorialResultsProps, 'query' | 'errors' | 'loading' | 'results'>,
     Pick<SearchPageFiltersProps, 'setShowFilter' | 'totalCount' | 'currentPage'> {
-  sort: string | null
+  sort: Sort | null
   page: number
   pageInfo: {
     hasLimitedResults: string
