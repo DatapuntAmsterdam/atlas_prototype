@@ -11,6 +11,7 @@ import {
   getImageDataByLocation,
 } from '../../../../../panorama/services/panorama-api/panorama-api'
 import {
+  COORDINATE_PRECISION,
   locationParam,
   panoFovParam,
   panoFullScreenParam,
@@ -32,7 +33,7 @@ const MarzipanoView = styled.div`
 `
 
 const PanoramaStyle = styled.div<{ panoFullScreen: boolean; loading: boolean }>`
-  height: ${({ panoFullScreen }) => (panoFullScreen ? '100%' : '50%')};
+  height: ${({ panoFullScreen }) => (panoFullScreen ? '100%' : '70%')};
   position: relative;
   order: -1; // Put the PanoramaViewer above the Map
   ${({ loading }) =>
@@ -86,7 +87,7 @@ const PanoramaViewer: FunctionComponent = () => {
       [location.lat, location.lng],
       PANO_LABELS.find(({ id }) => id === panoTag)?.tags || [],
     )
-  }, [location, panoTag, marzipanoViewer])
+  }, [location, panoTag])
 
   useEffect(() => {
     setLoading(isPending(hotspotResult))
@@ -154,6 +155,18 @@ const PanoramaViewer: FunctionComponent = () => {
 
     if (isFulfilled(imageDataResult) && imageDataResult.value !== null) {
       fetchPanoramaImage(imageDataResult.value)
+      const panoramaLocation = {
+        lat: parseFloat(imageDataResult.value.location[0].toFixed(COORDINATE_PRECISION)),
+        lng: parseFloat(imageDataResult.value.location[1].toFixed(COORDINATE_PRECISION)),
+      }
+      if (
+        location &&
+        (panoramaLocation.lat !== location.lat || panoramaLocation.lng !== location.lng)
+      ) {
+        history.replace({
+          search: buildQueryString([[locationParam, panoramaLocation]]),
+        })
+      }
     }
   }, [imageDataResult])
 
