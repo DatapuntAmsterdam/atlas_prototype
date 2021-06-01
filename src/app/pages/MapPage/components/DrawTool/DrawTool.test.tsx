@@ -5,7 +5,6 @@ import { render } from '@testing-library/react'
 import withMapContext from '../../../../utils/withMapContext'
 import DrawTool from './DrawTool'
 import { DataSelectionProvider } from '../../../../components/DataSelection/DataSelectionContext'
-import { DrawerState } from '../DrawerOverlay'
 
 jest.mock('leaflet', () => ({
   // @ts-ignore
@@ -77,7 +76,6 @@ describe('DrawTool', () => {
     // Todo: update to toHaveBeenCalledWith
     expect(mockPush).toHaveBeenCalled()
     expect(panToWithPanelOffsetMock).toHaveBeenCalled()
-    expect(setDrawerStateMock).toHaveBeenCalledWith(DrawerState.Open)
   })
   it('removes the dataselection and URL parameter when removing a polygon drawing', () => {})
   it('removes the dataselection and URL parameters from all drawings when closing the draw tool', () => {})
