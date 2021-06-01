@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme'
-import AutoSuggestCategory from './AutoSuggestCategory'
+import AutoSuggestCategory, { AutoSuggestCategoryProps } from './AutoSuggestCategory'
 
 jest.mock('../../../app/pages/SearchPage/config', () => ({
   TYPES: {
@@ -8,30 +8,30 @@ jest.mock('../../../app/pages/SearchPage/config', () => ({
 }))
 
 describe('AutoSuggestCategory', () => {
-  let props
+  let props: AutoSuggestCategoryProps
   beforeEach(() => {
     props = {
-      activeSuggestion: {
-        index: -1,
-      },
       category: {
         label: 'Straatnamen',
         type: 'data',
         content: [
           {
             category: 'Straatnamen',
+            type: '',
             index: 0,
             label: 'Dam',
             uri: 'bag/openbareruimte/03630000003186/',
           },
           {
             category: 'Straatnamen',
+            type: '',
             index: 1,
             label: 'Damloperspad',
             uri: 'bag/openbareruimte/03630000001038/',
           },
           {
             category: 'Straatnamen',
+            type: '',
             index: 2,
             label: 'Damrak',
             uri: 'bag/openbareruimte/03630000003187/',
@@ -39,8 +39,8 @@ describe('AutoSuggestCategory', () => {
         ],
         totalResults: 6,
       },
-      onSuggestionSelection: jest.fn(),
-      query: 'dam',
+      highlightValue: 'dam',
+      inputValue: 'dam',
     }
   })
 

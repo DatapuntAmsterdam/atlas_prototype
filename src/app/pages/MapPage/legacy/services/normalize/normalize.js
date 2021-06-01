@@ -149,14 +149,6 @@ export const adressenVerblijfsobject = (result) => {
   return normalize(result, additionalFields)
 }
 
-export const addNummeraanduiding = async (result) => {
-  return {
-    ...result,
-    // eslint-disable-next-line no-underscore-dangle
-    nummeraanduidingData: await fetchWithToken(result?.hoofdadres._links.self.href),
-  }
-}
-
 export const kadastraalObject = async (result) => {
   const brk = await fetchWithToken(
     // eslint-disable-next-line no-underscore-dangle

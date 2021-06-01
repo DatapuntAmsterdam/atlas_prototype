@@ -24,6 +24,7 @@
   </tbody>
 </table>
 */
+@use "sass:math";
 
 .c-table {
   border-spacing: 0;
@@ -35,10 +36,8 @@
 .c-table__field {
   border-bottom: 1px solid $secondary-gray20;
   font-weight: normal;
-  padding-bottom: $base-whitespace / 2;
-  padding-left: $base-whitespace;
-  padding-right: $base-whitespace * 2;
-  padding-top: $base-whitespace / 2;
+  padding: math.div($base-whitespace, 2) $base-whitespace * 2 math.div($base-whitespace, 2)
+    $base-whitespace;
   text-align: left;
   white-space: nowrap;
 
@@ -50,7 +49,7 @@
       display: block;
       padding-left: $base-whitespace;
       padding-right: $base-whitespace * 2;
-      padding-top: $base-whitespace / 2;
+      padding-top: math.div($base-whitespace, 2);
     }
   }
 

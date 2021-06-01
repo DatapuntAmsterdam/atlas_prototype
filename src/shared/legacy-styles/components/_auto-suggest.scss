@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $suggestion-offset: $base-font-size;
 $clear-button-margin: 3px;
 
@@ -63,7 +65,7 @@ $clear-button-margin: 3px;
     @include font-size($xs-font);
     color: $secondary-gray60;
     font-weight: $normal-weight;
-    margin-top: $base-whitespace / 2;
+    margin-top: math.div($base-whitespace, 2);
     text-align: center;
   }
 
@@ -103,7 +105,7 @@ $clear-button-margin: 3px;
       &__heading {
         color: $secondary-gray60;
         font-weight: $medium-weight;
-        margin: 0 $base-whitespace $base-whitespace / 2;
+        margin: 0 $base-whitespace math.div($base-whitespace, 2);
       }
     }
 
@@ -115,8 +117,8 @@ $clear-button-margin: 3px;
       display: block;
       font-weight: $normal-weight;
       overflow: hidden;
-      padding-bottom: $base-whitespace / 2;
-      padding-top: $base-whitespace / 3;
+      padding-bottom: math.div($base-whitespace, 2);
+      padding-top: math.div($base-whitespace, 3);
       position: relative;
       text-align: left;
       text-overflow: ellipsis;
@@ -154,7 +156,7 @@ $clear-button-margin: 3px;
 
       .icon {
         display: inline-block;
-        margin-left: $base-whitespace / 2;
+        margin-left: math.div($base-whitespace, 2);
         position: relative;
         vertical-align: sub;
         width: 2 * $base-whitespace + 2px;

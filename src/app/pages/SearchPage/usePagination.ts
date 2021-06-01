@@ -1,7 +1,7 @@
 import { useQuery } from 'urql'
 import type { DocumentNode, GraphQLFormattedError } from 'graphql'
 import type { ErrorExtensions } from '../../models/graphql'
-import type { ActiveFilter } from './SearchPageDucks'
+import type { ActiveFilter } from './query-params'
 
 interface Variables {
   q: string

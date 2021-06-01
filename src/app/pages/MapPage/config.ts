@@ -1,6 +1,15 @@
+import type { LocationDescriptorObject } from 'history'
 import environment from '../../../environment'
-import { toAddresses, toCadastralObjects, toEstablishments } from '../../links'
+import { toAddresses, toCadastralObjects, toEstablishments, toGeoSearch } from '../../links'
 import { MAIN_PATHS, routing } from '../../routes'
+import toSearchParams from '../../utils/toSearchParams'
+import {
+  centerParam,
+  locationParam,
+  panoFovParam,
+  panoHeadingParam,
+  panoPitchParam,
+} from './query-params'
 
 // Because we use these types as id's in option values (select), we need to convert them to strings
 export enum DataSelectionType {
@@ -18,6 +27,17 @@ export enum AuthScope {
   BRK = 'BRK/RSN',
   HR = 'HR/R',
   None = 'None',
+}
+
+export const defaultPanoramaUrl: LocationDescriptorObject = {
+  ...toGeoSearch(),
+  search: toSearchParams([
+    [centerParam, [52.373308, 4.8749081]],
+    [panoPitchParam, 4],
+    [panoHeadingParam, -144],
+    [panoFovParam, 27],
+    [locationParam, [52.3733935, 4.8935746]],
+  ]).toString(),
 }
 
 export default {

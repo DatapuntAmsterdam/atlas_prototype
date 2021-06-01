@@ -1,15 +1,15 @@
 import { breakpoint, styles, themeSpacing } from '@amsterdam/asc-ui'
+import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
 import styled from 'styled-components'
 import cmsConfig from '../../../shared/config/cms.config'
+import { toArticleSearch } from '../../links'
+import { fetchListFromCms } from '../../utils/fetchFromCms'
 import getImageFromCms from '../../utils/getImageFromCms'
 import ErrorMessage, { ErrorBackgroundCSS } from '../ErrorMessage/ErrorMessage'
 import HighlightCard from './HighlightCard'
 import OverviewLink from './OverviewLink'
-import { fetchListFromCms } from '../../utils/fetchFromCms'
-import { routing } from '../../routes'
 
 const HighlightBlockStyle = styled.div<{ showError: boolean }>`
   position: relative;
@@ -137,9 +137,7 @@ const HighlightBlock = () => {
       </HighlightBlockStyle>
       <OverviewLink
         linkProps={{
-          to: {
-            pathname: routing.articleSearch.path,
-          },
+          to: toArticleSearch(),
           forwardedAs: Link,
         }}
         label="Bekijk overzicht"

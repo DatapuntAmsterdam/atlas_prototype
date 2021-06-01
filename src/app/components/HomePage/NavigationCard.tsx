@@ -15,10 +15,9 @@ import {
   themeSpacing,
 } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
+import { Link as RouterLink } from 'react-router-dom'
 import type { LocationDescriptorObject } from 'history'
 import type { FunctionComponent } from 'react'
-import type { To } from 'redux-first-router-link'
-import pickLinkComponent from '../../utils/pickLinkComponent'
 
 const StyledHeading = styled(Heading)`
   margin-bottom: 0;
@@ -91,7 +90,7 @@ export interface NavigationCardProps {
   CardIcon: () => JSX.Element
   title: string
   description: string
-  to: To | LocationDescriptorObject
+  to: LocationDescriptorObject
 }
 
 const NavigationCard: FunctionComponent<NavigationCardProps> = ({
@@ -100,7 +99,7 @@ const NavigationCard: FunctionComponent<NavigationCardProps> = ({
   title,
   description,
 }) => (
-  <StyledLink forwardedAs={pickLinkComponent(to)} variant="blank" to={to}>
+  <StyledLink forwardedAs={RouterLink} variant="blank" to={to}>
     <StyledCard horizontal>
       <StyledCardMedia backgroundColor="level2">
         <CardIcon />

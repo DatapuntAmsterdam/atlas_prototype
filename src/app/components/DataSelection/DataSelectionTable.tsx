@@ -46,7 +46,7 @@ const DataSelectionTable: FunctionComponent<DataSelectionTableProps> = ({ conten
                 />
               </td>
             ))}
-            <TableRowLink to={toDataDetail(getDetailPageData(row.detailEndpoint))} />
+            <TableRowLink to={toDataDetail(getDetailPageData(row.detailEndpoint as string))} />
           </tr>
         ))}
       </tbody>
