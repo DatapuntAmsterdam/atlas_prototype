@@ -90,7 +90,7 @@ export interface NavigationCardProps {
   CardIcon: () => JSX.Element
   title: string
   description: string
-  to: LocationDescriptorObject | string
+  to: LocationDescriptorObject
 }
 
 const NavigationCard: FunctionComponent<NavigationCardProps> = ({

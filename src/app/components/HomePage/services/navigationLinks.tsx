@@ -1,7 +1,6 @@
 import { Api, Data, DocumentText, Map, Pano, Table } from '@amsterdam/asc-assets'
 import { Icon } from '@amsterdam/asc-ui'
 import type { LocationDescriptorObject } from 'history'
-import { generatePath } from 'react-router-dom'
 import environment from '../../../../environment'
 import {
   NAVIGATION_LINK_DATA_IN_TABLES,
@@ -12,16 +11,17 @@ import {
   toArticleSearch,
   toCollectionSearch,
   toDatasetSearch,
+  toGeoSearch,
   toMapSearch,
   toPublicationSearch,
   toSpecialSearch,
 } from '../../../links'
-import { routing, routing as routes } from '../../../routes'
 import { defaultPanoramaUrl } from '../../../pages/MapPage/config'
+import { routing as routes } from '../../../routes'
 
 export interface NavigationLink {
   id: number
-  to: LocationDescriptorObject | string
+  to: LocationDescriptorObject
   CardIcon?: () => JSX.Element
   testId: string
   title: string
@@ -33,7 +33,7 @@ export interface NavigationLink {
 const navigationLinks: NavigationLink[] = [
   {
     id: 0,
-    to: generatePath(routing.dataSearchGeo.path),
+    to: toGeoSearch(),
     CardIcon: () => (
       <Icon size={48}>
         <Map />

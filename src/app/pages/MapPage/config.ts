@@ -1,7 +1,8 @@
 import type { LocationDescriptorObject } from 'history'
 import environment from '../../../environment'
-import { toAddresses, toCadastralObjects, toEstablishments } from '../../links'
+import { toAddresses, toCadastralObjects, toEstablishments, toGeoSearch } from '../../links'
 import { MAIN_PATHS, routing } from '../../routes'
+import toSearchParams from '../../utils/toSearchParams'
 import {
   centerParam,
   locationParam,
@@ -29,14 +30,14 @@ export enum AuthScope {
 }
 
 export const defaultPanoramaUrl: LocationDescriptorObject = {
-  pathname: routing.dataSearchGeo.path,
-  search: new URLSearchParams({
-    [centerParam.name]: '52.373308,4.8749081',
-    [panoPitchParam.name]: '4',
-    [panoHeadingParam.name]: '-144',
-    [panoFovParam.name]: '27',
-    [locationParam.name]: '52.3733935,4.8935746',
-  }).toString(),
+  ...toGeoSearch(),
+  search: toSearchParams([
+    [centerParam, [52.373308, 4.8749081]],
+    [panoPitchParam, 4],
+    [panoHeadingParam, -144],
+    [panoFovParam, 27],
+    [locationParam, [52.3733935, 4.8935746]],
+  ]).toString(),
 }
 
 export default {
