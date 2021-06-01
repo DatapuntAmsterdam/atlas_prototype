@@ -1,19 +1,18 @@
 import { breakpoint, Link, themeSpacing } from '@amsterdam/asc-ui'
+import type { FunctionComponent } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
-import type { FunctionComponent } from 'react'
 import { getDetailPageData } from '../../../store/redux-first-router/actions'
+import { toDataDetail, toDataSearch } from '../../links'
+import { activeFiltersParam } from '../../pages/SearchPage/query-params'
+import type { DataResult } from '../../pages/SearchPage/types'
 import formatCount from '../../utils/formatCount'
+import useBuildQueryString from '../../utils/useBuildQueryString'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import SearchLink from '../Links/SearchLink/SearchLink'
 import SearchHeading from '../SearchHeading/SearchHeading'
 import type { DataIconType } from './DataIcon'
 import DataIcon from './DataIcon'
-import type { DataResult } from '../../pages/SearchPage/types'
-import { routing } from '../../routes'
-import { activeFiltersParam } from '../../pages/SearchPage/query-params'
-import useBuildQueryString from '../../utils/useBuildQueryString'
-import { toDataDetail } from '../../links'
 
 const List = styled.ul<{ hasMarginBottom: boolean }>`
   margin-bottom: ${({ hasMarginBottom }) => hasMarginBottom && themeSpacing(6)};
@@ -77,7 +76,7 @@ const DataList: FunctionComponent<DataSearchResultsProps> = ({
       {!withPagination && results && count > results.length && (
         <SearchLink
           to={{
-            pathname: routing.dataSearch.path,
+            ...toDataSearch(),
             search: buildQueryString([
               [
                 activeFiltersParam,

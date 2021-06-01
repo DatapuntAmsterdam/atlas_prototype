@@ -1,14 +1,14 @@
 import { Heading, Link, List, ListItem, themeSpacing } from '@amsterdam/asc-ui'
 import type { FunctionComponent } from 'react'
 import { useMemo, useState } from 'react'
-import { generatePath, Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import type { Single as Bouwdossier } from '../../../../../api/iiif-metadata/bouwdossier'
+import { toDataDetail } from '../../../../links'
 import formatAddresses from '../../utils/formatAddresses'
 import ContentBlock, { DefinitionList, DefinitionListItem, SubHeading } from '../ContentBlock'
 import DocumentDetails from '../DocumentDetails'
 import LoginLinkRequestModal from '../LoginLinkRequestModal'
-import { routing } from '../../../../routes'
 
 const Header = styled.header`
   padding: ${themeSpacing(5)};
@@ -85,10 +85,10 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
                   <Link
                     as={RouterLink}
                     inList
-                    to={generatePath(routing.dataDetail.path, {
-                      id: address.id,
+                    to={toDataDetail({
                       type: 'bag',
                       subtype: address.type,
+                      id: address.id,
                     })}
                   >
                     <span>{address.label}</span>

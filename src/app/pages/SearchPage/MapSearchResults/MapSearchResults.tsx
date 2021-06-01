@@ -1,6 +1,6 @@
 import { themeSpacing } from '@amsterdam/asc-ui'
-import styled from 'styled-components'
 import type { FunctionComponent } from 'react'
+import styled from 'styled-components'
 import IconMap from '../../../../shared/assets/icons/data/IconMap.svg'
 import IconMapLayers from '../../../../shared/assets/icons/IconMapLayers.svg'
 import SearchLink from '../../../components/Links/SearchLink/SearchLink'
@@ -8,11 +8,10 @@ import NoSearchResults from '../../../components/NoSearchResults'
 import SearchHeading from '../../../components/SearchHeading/SearchHeading'
 import { toMapSearch } from '../../../links'
 import formatCount from '../../../utils/formatCount'
+import useBuildQueryString from '../../../utils/useBuildQueryString'
+import { activeFiltersParam } from '../query-params'
 import MapCollectionSearchResults from './MapCollectionSearchResults'
 import MapLayerSearchResults from './MapLayerSearchResults'
-import { routing } from '../../../routes'
-import { activeFiltersParam } from '../query-params'
-import useBuildQueryString from '../../../utils/useBuildQueryString'
 
 export interface MapSearchResultsProps {
   query: string
@@ -64,7 +63,7 @@ const SearchResults: FunctionComponent<SearchResultsProps> = ({
             <Spacer />
             <SearchLink
               to={{
-                pathname: routing.mapSearch.path,
+                ...toMapSearch(),
                 search: buildQueryString([
                   [activeFiltersParam, [{ type: 'map-type', values: [type] }]],
                 ]),

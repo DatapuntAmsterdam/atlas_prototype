@@ -14,12 +14,11 @@ import { Fragment } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { getDetailPageData } from '../../../store/redux-first-router/actions'
+import { toDataDetail, toDataSearch } from '../../links'
+import type { DataResult } from '../../pages/SearchPage/types'
 import formatCount from '../../utils/formatCount'
 import type { DataIconType } from './DataIcon'
 import DataIcon from './DataIcon'
-import type { DataResult } from '../../pages/SearchPage/types'
-import { routing } from '../../routes'
-import { toDataDetail } from '../../links'
 
 const StyledLink = styled(Link)`
   cursor: pointer;
@@ -95,10 +94,9 @@ const DataCard: FunctionComponent<DataCardProps> = ({
     <StyledCardContent>
       <div>
         <Heading as="h3" styleAs="h4">
-          <StyledLink
-            forwardedAs={RouterLink}
-            to={routing.dataSearch.path}
-          >{`${label} (${formatCount(count)})`}</StyledLink>
+          <StyledLink forwardedAs={RouterLink} to={toDataSearch()}>{`${label} (${formatCount(
+            count,
+          )})`}</StyledLink>
         </Heading>
       </div>
 

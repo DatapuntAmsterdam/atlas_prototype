@@ -16,7 +16,7 @@ import NavigationBlock from '../../components/HomePage/NavigationBlock'
 import OrganizationBlock from '../../components/HomePage/OrganizationBlock'
 import ThemesBlock from '../../components/HomePage/ThemesBlock'
 import ShareBar from '../../components/ShareBar/ShareBar'
-import { routing } from '../../routes'
+import { toCollectionSearch } from '../../links'
 
 const HighlightColumn = styled(Column)`
   // aligns the HighlightsBlock with the NavigationBlock
@@ -63,7 +63,7 @@ const HomePage = () => (
             title="Dossiers"
             list={cmsConfig.HOME_COLLECTIONS}
             showMoreProps={{
-              to: { pathname: routing.collectionSearch.path },
+              to: toCollectionSearch(),
               label: 'Overzicht alle dossiers',
             }}
           />
