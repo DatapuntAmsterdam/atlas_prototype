@@ -8,13 +8,6 @@ import environment from '../../../../../../environment'
 
 const YEAR_UNKNOWN = 1005 // The API returns 1005 when a year is unknown
 
-const normalize = (result, additionalFields) => {
-  return {
-    ...result,
-    ...additionalFields,
-  }
-}
-
 export const oplaadpunten = (result) => {
   const CHARGER_TYPES = {
     REGULAR: 'Gewoon laadpunt',
@@ -48,7 +41,7 @@ export const oplaadpunten = (result) => {
     geometry: result.wkb_geometry,
   }
 
-  return normalize(result, additionalFields)
+  return { ...result, ...additionalFields }
 }
 
 export const meetbout = async (result) => {
@@ -63,7 +56,7 @@ export const meetbout = async (result) => {
     rollaagImage,
   }
 
-  return normalize(result, additionalFields)
+  return { ...result, ...additionalFields }
 }
 
 export const meetboutTable = (data) =>
@@ -104,7 +97,7 @@ export const napPeilmerk = (result) => {
       result.hoogte_nap || result.hoogte_nap === 0 ? `${formatNumber(result.hoogte_nap)} m` : '',
   }
 
-  return normalize(result, additionalFields)
+  return { ...result, ...additionalFields }
 }
 
 export const getGarbageContainersByBagObject = async (id, type) =>
@@ -131,7 +124,7 @@ export const adressenPand = (result) => {
         : 'onbekend',
   }
 
-  return normalize(result, additionalFields)
+  return { ...result, ...additionalFields }
 }
 
 export const adressenVerblijfsobject = (result) => {
@@ -146,7 +139,7 @@ export const adressenVerblijfsobject = (result) => {
     size: result.oppervlakte > 1 ? formatSquareMetre(result.oppervlakte) : 'onbekend',
   }
 
-  return normalize(result, additionalFields)
+  return { ...result, ...additionalFields }
 }
 
 export const kadastraalObject = async (result) => {
@@ -169,7 +162,7 @@ export const kadastraalObject = async (result) => {
     },
   }
 
-  return normalize(result, additionalFields)
+  return { ...result, ...additionalFields }
 }
 
 export const bekendmakingen = (result) => {
@@ -178,7 +171,7 @@ export const bekendmakingen = (result) => {
     geometry: result.wkb_geometry,
   }
 
-  return normalize(result, additionalFields)
+  return { ...result, ...additionalFields }
 }
 
 export const explosieven = (result) => {
@@ -187,7 +180,7 @@ export const explosieven = (result) => {
     datum_inslag: result.datum_inslag ? new Date(result.datum_inslag) : null,
   }
 
-  return normalize(result, additionalFields)
+  return { ...result, ...additionalFields }
 }
 
 export const evenementen = (result) => {
@@ -196,7 +189,7 @@ export const evenementen = (result) => {
     endDate: result.einddatum ? formatDate(new Date(result.einddatum)) : false,
   }
 
-  return normalize(result, additionalFields)
+  return { ...result, ...additionalFields }
 }
 
 export const vastgoed = (result) => {
@@ -300,5 +293,3 @@ export const parkeervak = (result) => {
 export function formatSquareMetre(value) {
   return `${formatCount(value)} m²`
 }
-
-export default normalize

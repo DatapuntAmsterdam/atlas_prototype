@@ -1,5 +1,5 @@
 import formatDate from '../../../../../utils/formatDate'
-import normalize, {
+import {
   adressenPand,
   adressenVerblijfsobject,
   bekendmakingen,
@@ -45,7 +45,7 @@ const societalActivities = (result) => {
     },
   }
 
-  return normalize(result, additionalFields)
+  return { ...result, ...additionalFields }
 }
 
 describe('normalize', () => {
