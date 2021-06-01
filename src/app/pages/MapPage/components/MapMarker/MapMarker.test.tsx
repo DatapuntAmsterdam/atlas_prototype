@@ -3,7 +3,7 @@ import { useMapInstance } from '@amsterdam/react-maps'
 import { useEffect } from 'react'
 import withMapContext from '../../../../utils/withMapContext'
 import MapMarker from './MapMarker'
-import * as nearestDetail from '../../../../../map/services/nearest-detail/nearest-detail'
+import * as nearestDetail from '../../legacy/services/nearest-detail/nearest-detail'
 import { DrawerState } from '../DrawerOverlay'
 
 let currentPath = '/data'

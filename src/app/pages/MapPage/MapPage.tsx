@@ -51,6 +51,7 @@ const GlobalStyle = createGlobalStyle<{
   // Need to set the styled globally and not as a Styled Component as this will cause problems with leaflet calculating the map canvas / dimensions
   .leaflet-container {
     position: sticky !important;
+    cursor: default;
     height: ${({ panoActive }) => (panoActive ? '30%' : '100%')};
     ${({ panoActive }) =>
       panoActive &&

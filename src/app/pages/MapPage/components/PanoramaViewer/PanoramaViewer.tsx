@@ -4,12 +4,9 @@ import styled, { css } from 'styled-components'
 import usePromise, { isFulfilled, isPending } from '@amsterdam/use-promise'
 import { useHistory } from 'react-router-dom'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { PANO_LABELS } from '../../../../../panorama/ducks/constants'
-import { loadScene } from '../../../../../panorama/services/marzipano/marzipano'
-import {
-  getImageDataById,
-  getImageDataByLocation,
-} from '../../../../../panorama/services/panorama-api/panorama-api'
+import { PANO_LABELS } from './constants'
+import { loadScene } from './marzipano/marzipano'
+import { getImageDataById, getImageDataByLocation } from './panorama-api/panorama-api'
 import {
   COORDINATE_PRECISION,
   locationParam,
@@ -22,7 +19,7 @@ import {
 import useMarzipano from '../../../../utils/useMarzipano'
 import useParam from '../../../../utils/useParam'
 import { useMapContext } from '../../MapContext'
-import { HotspotButton } from '../../../../../panorama/components/Hotspot/Hotspot'
+import { HotspotButton } from './Hotspot'
 import useBuildQueryString from '../../../../utils/useBuildQueryString'
 import { routing } from '../../../../routes'
 

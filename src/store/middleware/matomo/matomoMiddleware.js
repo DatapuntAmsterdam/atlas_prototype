@@ -1,6 +1,6 @@
 import trackEvents from './trackEvents'
 import trackViews from './trackViews'
-import { authCustomDimensions, viewCustomDimensions } from './customDimensions'
+import { authCustomDimensions } from './customDimensions'
 import matomoInstance from '../../../app/matomo'
 
 // Execute Matomo actions
@@ -34,10 +34,7 @@ const matomoMiddleware =
       const titleForMatomo = title.replace('Data en informatie - Amsterdam', 'Dataportaal')
 
       if (tracking || location) {
-        const customDimensions = [
-          ...authCustomDimensions(state),
-          ...viewCustomDimensions(query, state),
-        ]
+        const customDimensions = [...authCustomDimensions(state)]
 
         actionsToMatomo.forEach((matomoAction) => {
           matomoInstance.track({

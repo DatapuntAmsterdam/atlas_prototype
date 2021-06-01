@@ -2,7 +2,7 @@
 import type { Feature } from 'geojson'
 import type { TileLayerOptions, WMSOptions } from 'leaflet'
 import type { Dispatch, SetStateAction } from 'react'
-import type { MapCollection, MapLayer } from '../../../map/services'
+import type { MapCollection, MapLayer } from './legacy/services'
 import type { DrawerState } from './components/DrawerOverlay'
 import createNamedContext from '../../utils/createNamedContext'
 import useRequiredContext from '../../utils/useRequiredContext'

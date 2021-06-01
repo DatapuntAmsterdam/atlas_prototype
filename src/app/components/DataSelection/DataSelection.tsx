@@ -1,9 +1,7 @@
 import { Alert, Heading, Paragraph, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import { useSelector } from 'react-redux'
 import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
 import styled, { css } from 'styled-components'
 import type { FunctionComponent } from 'react'
-import { getDataSelectionPage } from '../../../shared/ducks/data-selection/selectors'
 import DataSelectionActiveFilters from './DataSelectionActiveFilters'
 import { ViewMode, viewParam } from '../../pages/MapPage/query-params'
 import useParam from '../../utils/useParam'
@@ -19,7 +17,7 @@ import useFetchLegacyDataSelectionData from './useFetchLegacyDataSelectionData'
 import { useDataSelection } from './DataSelectionContext'
 import DataSelectionHeader from './DataSelectionHeader'
 import { AuthError } from '../../../shared/services/api/customError'
-import useFetchLegacyDataSelectionMarkers from './useFetchLegacyDataSelectionMarkers'
+import { pageParam } from '../../pages/SearchPage/query-params'
 
 const StyledAlert = styled(Alert)`
   margin-bottom: ${themeSpacing(5)};
@@ -52,11 +50,10 @@ const Footer = styled.footer`
 `
 
 const DataSelectionContent: FunctionComponent = () => {
-  const page = useSelector(getDataSelectionPage)
+  const [page] = useParam(pageParam)
   const [view] = useParam(viewParam)
   const { activeFilters, totalResults } = useDataSelection()
   const { fetchData } = useFetchLegacyDataSelectionData()
-  const { fetchMarkers } = useFetchLegacyDataSelectionMarkers()
 
   const result = usePromise(
     (signal) => fetchData(signal),
@@ -66,8 +63,6 @@ const DataSelectionContent: FunctionComponent = () => {
       activeFilters, // Enabling or disabling filters
     ],
   )
-
-  usePromise((signal) => fetchMarkers(signal), [result])
 
   if (isPending(result)) {
     return <LoadingSpinner />

@@ -7,7 +7,6 @@
 !*.conf
 !favicon.png
 !index.ejs
-!modules/
 !package*
 !public/
 !scripts/

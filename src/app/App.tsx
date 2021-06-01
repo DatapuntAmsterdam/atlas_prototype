@@ -22,13 +22,6 @@ import {
 import type { FunctionComponent } from 'react'
 import environment from '../environment'
 import { hasGlobalError } from '../shared/ducks/error/error-message'
-import {
-  hasOverflowScroll,
-  isEmbedPreview,
-  isPrintMode,
-  isPrintModeLandscape,
-  isPrintOrEmbedMode,
-} from '../shared/ducks/ui/ui'
 import getState from '../shared/services/redux/get-state'
 import { getPage, isHomepage } from '../store/redux-first-router/selectors'
 import AppBody, { APP_CONTAINER_ID } from './AppBody'
@@ -106,11 +99,6 @@ const App: FunctionComponent = () => {
   const currentPage = useSelector(getPage)
   const isEmbedded = useIsEmbedded()
   const homePage = useSelector(isHomepage)
-  const printMode = useSelector(isPrintMode)
-  const printModeLandscape = useSelector(isPrintModeLandscape)
-  const embedPreviewMode = useSelector(isEmbedPreview)
-  const overflowScroll = useSelector(hasOverflowScroll)
-  const printOrEmbedMode = useSelector(isPrintOrEmbedMode) || isEmbedded
   const visibilityError = useSelector(hasGlobalError)
 
   // Todo: match with react-router paths
@@ -127,37 +115,7 @@ const App: FunctionComponent = () => {
 
   const bodyClasses = classNames({
     'c-dashboard__body--error': visibilityError,
-    'c-dashboard__body--overflow': overflowScroll,
   })
-
-  if (typeof window !== 'undefined') {
-    // Todo: preferably don't modify html class, now needed since these classes add height: auto to
-    // html and body
-    const printAndEmbedClasses = [
-      'is-print-mode',
-      'is-print-mode--landscape',
-      'is-embed',
-      'is-embed-preview',
-    ]
-    const printEmbedModeClasses = classNames({
-      [printAndEmbedClasses[0]]: printMode,
-      [printAndEmbedClasses[1]]: printModeLandscape,
-      [printAndEmbedClasses[2]]: isEmbedded,
-      [printAndEmbedClasses[3]]: embedPreviewMode,
-    })
-
-    // Adding/removing multiple classes as string doesn't seem to work in IE11.
-    // Add/remove them one by one.
-    printAndEmbedClasses.forEach((element) => {
-      document.documentElement.classList.remove(element)
-    })
-
-    if (printEmbedModeClasses) {
-      printEmbedModeClasses.split(' ').forEach((element) => {
-        document.documentElement.classList.add(element)
-      })
-    }
-  }
 
   return (
     <ThemeProvider>
@@ -192,21 +150,12 @@ const App: FunctionComponent = () => {
             >
               Direct naar: footer
             </SkipNavigationLink>
-            {!isEmbedded && (
-              <Header
-                homePage={homePage}
-                hasMaxWidth={hasMaxWidth}
-                printMode={printMode}
-                embedPreviewMode={embedPreviewMode}
-                printOrEmbedMode={printOrEmbedMode}
-              />
-            )}
+            {!isEmbedded && <Header homePage={homePage} hasMaxWidth={hasMaxWidth} />}
             <AppBody
               {...{
                 hasGrid: hasMaxWidth,
                 visibilityError,
                 bodyClasses,
-                embedPreviewMode,
               }}
             />
           </AppWrapper>

@@ -1,11 +1,10 @@
 import { Link, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import escapeStringRegexp from 'escape-string-regexp'
+import type { FunctionComponent } from 'react'
 import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
-import type { FunctionComponent } from 'react'
 import type { LocationDescriptorObject } from 'history'
 import {
   toArticleDetail,
@@ -22,10 +21,11 @@ import { queryParam } from '../../../app/pages/SearchPage/query-params'
 import toSearchParams from '../../../app/utils/toSearchParams'
 import toSlug from '../../../app/utils/toSlug'
 import { CmsType } from '../../../shared/config/cms.config'
-import { getViewMode, ViewMode } from '../../../shared/ducks/ui/ui'
+import { ViewMode } from '../../../shared/ducks/ui/ui'
 import { decodeLayers } from '../../../store/queryParameters'
 import { extractIdEndpoint, getDetailPageData } from '../../../store/redux-first-router/actions'
 import type { AutoSuggestSearchContent } from '../../services/auto-suggest/auto-suggest'
+import useParam from '../../../app/utils/useParam'
 
 export interface AutoSuggestItemProps {
   content: string
@@ -47,7 +47,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
   inputValue,
   label,
 }) => {
-  const view = useSelector(getViewMode)
+  const [view] = useParam(viewParam)
   const { trackEvent } = useMatomo()
   const location = useLocation()
 
