@@ -1,4 +1,5 @@
 // resources, resources-item and the styles/** are copyied form dcatd_admin and should be integrated in atlas
+@use "sass:math";
 @import 'resources';
 @import 'resources-item';
 
@@ -160,7 +161,7 @@
       display: inline-block;
       position: relative;
       height: 26px;
-      margin: $base-whitespace / 2 0 $base-whitespace / 2;
+      margin: math.div($base-whitespace, 2) 0 math.div($base-whitespace, 2);
       padding: 0 5px;
       border-top: 1px solid $secondary-gray30;
       border-right: 1px solid $secondary-gray30;

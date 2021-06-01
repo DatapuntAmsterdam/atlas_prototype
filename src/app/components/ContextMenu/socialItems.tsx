@@ -1,38 +1,40 @@
 import { Email, FacebookPadded, Linkedin, Twitter } from '@amsterdam/asc-assets'
 import { ContextMenuItem, Icon } from '@amsterdam/asc-ui'
-import getShareUrl from '../../../shared/services/share-url/share-url'
+import getShareUrl, { ShareTarget } from '../../../shared/services/share-url/share-url'
 
 const socialItemsArray = [
   {
     id: 1,
     title: 'Facebook',
-    link: 'facebook',
+    link: ShareTarget.Facebook,
     icon: <FacebookPadded />,
   },
   {
     id: 2,
     title: 'Twitter',
-    link: 'twitter',
+    link: ShareTarget.Twitter,
     icon: <Twitter />,
   },
   {
     id: 3,
     title: 'Linkedin',
-    link: 'linkedin',
+    link: ShareTarget.LinkedIn,
     icon: <Linkedin />,
   },
   {
     id: 4,
     title: 'E-mail',
-    link: 'email',
+    link: ShareTarget.Email,
     icon: <Email />,
   },
 ]
 
 const socialItems = () => {
-  const handlePageShare = (target) => {
+  const handlePageShare = (target: ShareTarget) => {
     const link = getShareUrl(target)
-    window.open(link.url, link.target)
+    if (link) {
+      window.open(link.url, link.target)
+    }
   }
 
   return socialItemsArray.map(({ link, title, icon, id }) => (

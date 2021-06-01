@@ -1,17 +1,11 @@
 import { Close } from '@amsterdam/asc-assets'
 import { Button, Divider, Heading, Link, Modal, Paragraph, TopBar } from '@amsterdam/asc-ui'
 import { Link as RouterLink } from 'react-router-dom'
-import type { FunctionComponent, MouseEventHandler } from 'react'
+import type { Dispatch, FunctionComponent, SetStateAction } from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import CONSTANTS from '../../../shared/config/constants'
 import { toHelpPage } from '../../links'
 import ModalBlock from './ModalBlock'
-import withModalBehaviour from './withModalBehaviour'
-
-export const openFeedbackForm = () => {
-  const openFeedbackFormEvent = new CustomEvent('openForm_feedbackModal')
-  window.dispatchEvent(openFeedbackFormEvent)
-}
 
 const FEEDBACK_RECIPIENT = 'terugmelding.basisinformatie@amsterdam.nl'
 const FEEDBACK_SUBJECT = 'Terugmelding data.amsterdam.nl'
@@ -36,20 +30,18 @@ const getMailtoLink = (recipient: string, subject: string, body: string) =>
   `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
 
 interface FeedbackModalProps {
-  reportFeedbackAction: MouseEventHandler<HTMLElement>
-  reportProblemAction: MouseEventHandler<HTMLElement>
-  handleClose(): void
   open: boolean
+  setOpen: Dispatch<SetStateAction<FeedbackModalProps['open']>>
 }
 
-const FeedbackModalComponent: FunctionComponent<FeedbackModalProps> = ({ open, handleClose }) => {
+const FeedbackModalComponent: FunctionComponent<FeedbackModalProps> = ({ open, setOpen }) => {
   const { trackEvent } = useMatomo()
   const onClose = () => {
     trackEvent({
       category: 'feedback',
       action: 'feedback-verlaten',
     })
-    handleClose()
+    setOpen(false)
   }
   return (
     <Modal
@@ -146,7 +138,7 @@ const FeedbackModalComponent: FunctionComponent<FeedbackModalProps> = ({ open, h
       </ModalBlock>
       <Divider transparent />
       <ModalBlock>
-        <Link variant="inline" to={toHelpPage()} onClick={handleClose} as={RouterLink}>
+        <Link variant="inline" to={toHelpPage()} onClick={() => setOpen(false)} as={RouterLink}>
           Hulp nodig?
         </Link>
       </ModalBlock>
@@ -154,4 +146,4 @@ const FeedbackModalComponent: FunctionComponent<FeedbackModalProps> = ({ open, h
   )
 }
 
-export default withModalBehaviour(FeedbackModalComponent)
+export default FeedbackModalComponent

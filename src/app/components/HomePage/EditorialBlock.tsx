@@ -1,9 +1,9 @@
 import { breakpoint, CardContainer, Column, Row, styles, themeColor } from '@amsterdam/asc-ui'
+import type { FunctionComponent } from 'react'
 import { useState } from 'react'
 import styled from 'styled-components'
+import { Link as RouterLink } from 'react-router-dom'
 import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
-import type { FunctionComponent } from 'react'
-import pickLinkComponent from '../../utils/pickLinkComponent'
 import ErrorMessage, { ErrorBackgroundCSS } from '../ErrorMessage/ErrorMessage'
 import BlockHeading from './BlockHeading'
 import EditorialBlockCard from './EditorialBlockCard'
@@ -134,8 +134,8 @@ const EditorialBlock: FunctionComponent<EditorialBlockProps> = ({
           <Column wrap span={{ small: 1, medium: 2, big: 3, large: 4, xLarge: 4 }}>
             <OverviewLink
               linkProps={{
-                to: showMoreProps.to(),
-                forwardedAs: pickLinkComponent(showMoreProps.to()),
+                to: showMoreProps.to,
+                forwardedAs: RouterLink,
               }}
               label={showMoreProps.label}
               title={showMoreProps.label}

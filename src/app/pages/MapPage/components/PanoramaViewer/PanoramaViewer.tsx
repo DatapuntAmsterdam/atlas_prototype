@@ -1,12 +1,14 @@
+import usePromise, { isFulfilled, isPending } from '@amsterdam/use-promise'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import type { FunctionComponent } from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import styled, { css } from 'styled-components'
-import usePromise, { isFulfilled, isPending } from '@amsterdam/use-promise'
 import { useHistory } from 'react-router-dom'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { PANO_LABELS } from './constants'
-import { loadScene } from './marzipano/marzipano'
-import { getImageDataById, getImageDataByLocation } from './panorama-api/panorama-api'
+import styled, { css } from 'styled-components'
+import { toGeoSearch } from '../../../../links'
+import useBuildQueryString from '../../../../utils/useBuildQueryString'
+import useMarzipano from '../../../../utils/useMarzipano'
+import useParam from '../../../../utils/useParam'
+import { useMapContext } from '../../MapContext'
 import {
   COORDINATE_PRECISION,
   locationParam,
@@ -16,12 +18,10 @@ import {
   panoPitchParam,
   panoTagParam,
 } from '../../query-params'
-import useMarzipano from '../../../../utils/useMarzipano'
-import useParam from '../../../../utils/useParam'
-import { useMapContext } from '../../MapContext'
+import { PANO_LABELS } from './constants'
 import { HotspotButton } from './Hotspot'
-import useBuildQueryString from '../../../../utils/useBuildQueryString'
-import { routing } from '../../../../routes'
+import { loadScene } from './marzipano/marzipano'
+import { getImageDataById, getImageDataByLocation } from './panorama-api/panorama-api'
 
 const MarzipanoView = styled.div`
   height: 100%;
@@ -91,7 +91,7 @@ const PanoramaViewer: FunctionComponent = () => {
 
     if (isFulfilled(hotspotResult) && hotspotResult.value !== null) {
       history.push({
-        pathname: routing.dataSearchGeo.path,
+        ...toGeoSearch(),
         search: buildQueryString([
           [
             locationParam,

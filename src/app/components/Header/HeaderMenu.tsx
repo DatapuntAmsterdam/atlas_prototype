@@ -8,21 +8,20 @@ import {
   themeColor,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+import type { ComponentProps, FunctionComponent } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
-import type { ComponentProps, FunctionComponent } from 'react'
 import environment from '../../../environment'
 import CONSTANTS from '../../../shared/config/constants'
-import { HEADER_LINKS_ABOUT, HEADER_LINK_HELP } from '../../../shared/config/content-links'
+import { HEADER_LINK_HELP, HEADER_LINKS_ABOUT } from '../../../shared/config/content-links'
 import { authenticateRequest, getUser } from '../../../shared/ducks/user/user'
 import { login, logout } from '../../../shared/services/auth/auth'
 import truncateString from '../../../shared/services/truncateString/truncateString'
 import { toArticleDetail, toHelpPage } from '../../links'
-import pickLinkComponent from '../../utils/pickLinkComponent'
 import navigationLinks from '../HomePage/services/navigationLinks'
-import { openFeedbackForm } from '../Modal/FeedbackModal'
+import { FeedbackModal } from '../Modal'
 
 const StyledMenuInline = styled(MenuInline)<{ tall: boolean }>`
   background-color: ${({ tall, theme }) =>
@@ -54,6 +53,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
   ...otherProps
 }) => {
   const dispatch = useDispatch()
+  const [openFeedbackModal, setOpenFeedbackModal] = useState(false)
   const user = useSelector(getUser)
   const [menuOpen, setMenuOpen] = useState(false)
   const { trackEvent } = useMatomo()
@@ -78,6 +78,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
       onExpand={setMenuOpen}
       backdropOpacity={CONSTANTS.BACKDROP_OPACITY}
     >
+      <FeedbackModal setOpen={setOpenFeedbackModal} open={openFeedbackModal} />
       <MenuFlyOut label="Onderdelen">
         {navigationLinks.map(({ id, title, to, testId }) => (
           <MenuButton
@@ -89,7 +90,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
               })
               dropFocus()
             }}
-            as={pickLinkComponent(to)}
+            as={RouterLink}
             iconLeft={<ChevronRight />}
             key={id}
             /* @ts-ignore */
@@ -137,7 +138,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
               name: 'Feedback',
             })
             setMenuOpen(false)
-            openFeedbackForm()
+            setOpenFeedbackModal(true)
             dropFocus()
           }}
           data-testid="headerMenuLinkFeedback"

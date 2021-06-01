@@ -1,10 +1,12 @@
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { memo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import type { FunctionComponent } from 'react'
+import { useCallback } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import type { Filter } from '../../models/filter'
 import { FilterType } from '../../models/filter'
-import { getFilterValues, setFilterValues, setPage } from '../../pages/SearchPage/SearchPageDucks'
+import { activeFiltersParam, pageParam } from '../../pages/SearchPage/query-params'
+import toSearchParams from '../../utils/toSearchParams'
+import useParam from '../../utils/useParam'
 import FilterBox from '../FilterBox'
 import CheckboxFilter from './filters/CheckboxFilter'
 import RadioFilter from './filters/RadioFilter'
@@ -36,25 +38,35 @@ export function getFilterComponent(filterType: FilterType) {
 const SearchFilter: FunctionComponent<SearchFilterProps> = ({ filter, totalCount, hideCount }) => {
   const { type, filterType, label, options } = filter
   const { trackEvent } = useMatomo()
-  const dispatch = useDispatch()
-  const selection = useSelector(getFilterValues(type))
+  const history = useHistory()
+  const location = useLocation()
+  const [filterValues] = useParam(activeFiltersParam)
+  const selection = filterValues.find(({ type: filterTypes }) => filterTypes === type)?.values ?? []
   const FilterContent = getFilterComponent(filterType)
 
-  function onSelectionChange(values: string[]) {
-    const disabledFilters = selection.filter((value) => !values.includes(value))
-    const enabledFilters = values.filter((value) => !selection.includes(value))
+  const onSelectionChange = useCallback(
+    (values: string[]) => {
+      const disabledFilters = selection?.filter((value) => !values.includes(value))
+      const enabledFilters = values.filter((value) => !selection?.includes(value))
 
-    disabledFilters.forEach((value) =>
-      trackEvent({ category: 'search', action: 'disable-filter', name: `${type}-${value}` }),
-    )
+      disabledFilters?.forEach((value) =>
+        trackEvent({ category: 'search', action: 'disable-filter', name: `${type}-${value}` }),
+      )
 
-    enabledFilters.forEach((value) =>
-      trackEvent({ category: 'search', action: 'enable-filter', name: `${type}-${value}` }),
-    )
+      enabledFilters.forEach((value) =>
+        trackEvent({ category: 'search', action: 'enable-filter', name: `${type}-${value}` }),
+      )
 
-    dispatch(setPage(1))
-    dispatch(setFilterValues(type, values))
-  }
+      history.replace({
+        pathname: location.pathname,
+        search: toSearchParams([
+          [activeFiltersParam, values.length ? [{ type, values }] : []],
+          [pageParam, 1],
+        ]).toString(),
+      })
+    },
+    [location, selection, type],
+  )
 
   return (
     <FilterBox label={label}>
@@ -71,4 +83,4 @@ const SearchFilter: FunctionComponent<SearchFilterProps> = ({ filter, totalCount
   )
 }
 
-export default memo(SearchFilter)
+export default SearchFilter

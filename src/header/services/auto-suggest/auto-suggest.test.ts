@@ -1,6 +1,6 @@
 import typeaheadFixture from '../../../api/typeahead/typeahead.json'
 import typeaheadAuthFixture from '../../../api/typeahead/typeahead_auth.json'
-import autoSuggestSearch, { sortResponse, SORT_ORDER } from './auto-suggest'
+import autoSuggestSearch, { SORT_ORDER, sortResponse, TypeaheadItem } from './auto-suggest'
 
 describe('The auto-suggest service', () => {
   it('returns unauthenticated data', async () => {
@@ -10,6 +10,7 @@ describe('The auto-suggest service', () => {
   })
 
   it('returns authenticated data', async () => {
+    // @ts-ignore
     global.setValidAuthentication()
 
     const suggestions = await autoSuggestSearch({ query: 'linnae' })
@@ -21,7 +22,7 @@ describe('The auto-suggest service', () => {
     it('should sort the response when all labels are returned', () => {
       const results = SORT_ORDER.map((key) => ({ label: key })).sort(
         (a, b) => b.label.localeCompare(a.label), // sort alphabetically to scrumble results
-      )
+      ) as TypeaheadItem[]
 
       const expected = SORT_ORDER.map((key) => ({ label: key }))
 
@@ -33,7 +34,7 @@ describe('The auto-suggest service', () => {
         .slice(0, 4)
         .sort(
           (a, b) => b.label.localeCompare(a.label), // sort alphabetically to scrumble results
-        )
+        ) as TypeaheadItem[]
 
       const expected = SORT_ORDER.map((key) => ({ label: key })).slice(0, 4)
 
@@ -45,7 +46,7 @@ describe('The auto-suggest service', () => {
         .slice(4)
         .sort(
           (a, b) => b.label.localeCompare(a.label), // sort alphabetically to scrumble results
-        )
+        ) as TypeaheadItem[]
 
       const expected = SORT_ORDER.map((key) => ({ label: key })).slice(4)
 

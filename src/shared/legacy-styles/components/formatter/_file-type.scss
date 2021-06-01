@@ -1,7 +1,9 @@
+@use "sass:math";
+
 .c-data-selection-file-type {
   @include font-size($xs-font);
   height: 16px;
-  margin-top: $base-whitespace / 5;
+  margin-top: math.div($base-whitespace, 5);
   float: left;
   color: $secondary-gray40;
 

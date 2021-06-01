@@ -19,7 +19,11 @@ const DataSelectionList: FunctionComponent<DataSelectionListProps> = ({ content 
   <ul data-testid="dataSelectionList">
     {content.body.map((row) => (
       <StyledListItem key={row.id}>
-        <Link as={RouterLink} to={buildDetailUrl(getDetailPageData(row.detailEndpoint))} inList>
+        <Link
+          as={RouterLink}
+          to={buildDetailUrl(getDetailPageData(row.detailEndpoint as string))}
+          inList
+        >
           <DataSelectionFormatter
             variables={row.content[0]}
             formatter={content.formatters[0]}

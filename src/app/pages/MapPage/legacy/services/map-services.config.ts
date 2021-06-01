@@ -177,7 +177,7 @@ const getLinkListBlock = (
   title: definition.plural,
   type: DetailResultItemType.LinkList,
   links: result?.map((res) => ({
-    to: buildDetailUrl(getDetailPageData(res._links?.self?.href)),
+    to: buildDetailUrl(getDetailPageData(res._links?.self?.href as string)),
     title: displayFormatter ? displayFormatter(res) : res._display,
   })),
   infoBox: getInfoBox(definition),
@@ -878,7 +878,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             {
               term: 'Woonplaats',
               description: result.woonplaats?._display,
-              to: buildDetailUrl(getDetailPageData(result.woonplaats?._links?.self?.href)),
+              to: buildDetailUrl(
+                getDetailPageData(result.woonplaats?._links?.self?.href as string),
+              ),
             },
             { term: 'Type', description: result.type as string },
             { term: 'Status', description: result.status },
@@ -1625,7 +1627,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             {
               term: 'Bouwblok',
               description: result.bouwblok,
-              to: buildDetailUrl(getDetailPageData(result.bouwblok_link)),
+              to: buildDetailUrl(getDetailPageData(result.bouwblok_link as string)),
             },
             {
               term: 'Bouwblokzijde',
@@ -1638,7 +1640,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             {
               term: 'Stadsdeel',
               description: result.stadsdeel,
-              to: buildDetailUrl(getDetailPageData(result.stadsdeel_link)),
+              to: buildDetailUrl(getDetailPageData(result.stadsdeel_link as string)),
             },
             {
               term: 'Indicatie beveiligd',
@@ -2075,7 +2077,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             links: [
               {
                 title: result.naam,
-                to: buildDetailUrl(getDetailPageData(result.maatschappelijke_activiteit)),
+                to: buildDetailUrl(getDetailPageData(result.maatschappelijke_activiteit as string)),
               },
             ],
           },

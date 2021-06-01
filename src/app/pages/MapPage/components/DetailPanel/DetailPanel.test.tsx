@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react'
+import { toGeoSearch } from '../../../../links'
 import withMapContext from '../../../../utils/withMapContext'
 import DetailPanel from './DetailPanel'
-import { routing } from '../../../../routes'
 
 const pushMock = jest.fn()
 jest.mock('react-router-dom', () => ({
@@ -31,7 +31,7 @@ describe.skip('DetailPanel', () => {
     fireEvent.click(button)
 
     expect(pushMock).toHaveBeenCalledWith({
-      pathname: routing.dataSearchGeo.path,
+      ...toGeoSearch(),
       search: 'thisOne=%22should_not%22',
     })
   })
