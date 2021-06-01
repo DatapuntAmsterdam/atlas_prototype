@@ -32,7 +32,6 @@ const modernModules = [
   '@amsterdam/react-maps',
   'body-scroll-lock',
   'escape-string-regexp',
-  'redux-first-router',
 ].map(modulePath)
 
 export interface CreateConfigOptions {

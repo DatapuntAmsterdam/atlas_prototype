@@ -15,13 +15,17 @@ import {
   toPublicationDetail,
   toSpecialDetail,
 } from '../../../app/links'
-import { legendOpenParam, mapLayersParam, viewParam } from '../../../app/pages/MapPage/query-params'
+import {
+  legendOpenParam,
+  mapLayersParam,
+  ViewMode,
+  viewParam,
+} from '../../../app/pages/MapPage/query-params'
 import { SearchType } from '../../../app/pages/SearchPage/constants'
 import { queryParam } from '../../../app/pages/SearchPage/query-params'
 import toSearchParams from '../../../app/utils/toSearchParams'
 import toSlug from '../../../app/utils/toSlug'
 import { CmsType } from '../../../shared/config/cms.config'
-import { ViewMode } from '../../../shared/ducks/ui/ui'
 import { extractIdEndpoint, getDetailPageData } from '../../../store/redux-first-router/actions'
 import type { AutoSuggestSearchContent } from '../../services/auto-suggest/auto-suggest'
 import useParam from '../../../app/utils/useParam'

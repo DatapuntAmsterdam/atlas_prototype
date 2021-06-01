@@ -1,7 +1,6 @@
-import { isEmbeddedParam, viewParam } from '../../../app/pages/MapPage/query-params'
+import { isEmbeddedParam, ViewMode, viewParam } from '../../../app/pages/MapPage/query-params'
 import { routing } from '../../../app/routes'
 import GLOSSARY from '../../../app/pages/MapPage/legacy/glossary.constant'
-import { ViewMode } from '../../ducks/ui/ui'
 
 export const mapDocumentTitle = (action, defaultTitle) => {
   let pageTitle = defaultTitle
