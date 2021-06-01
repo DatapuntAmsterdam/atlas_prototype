@@ -1,6 +1,7 @@
 import { themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import styled, { css, keyframes } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { DeviceMode, isMobile } from '../DrawerOverlay'
+import { slideInDesktop, slideInMobile } from './keyframes'
 
 const STACK_SPACING = 8
 
@@ -8,24 +9,6 @@ interface DrawerPanelProps {
   stackLevel?: number
   deviceMode?: DeviceMode
 }
-
-export const slideInMobile = keyframes`
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-`
-
-export const slideInDesktop = keyframes`
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-`
 
 // I tried to get this to work with 'defaultProps' to reduce repetition,
 // but I could not come to a solution that works with Styled Components and TS.
