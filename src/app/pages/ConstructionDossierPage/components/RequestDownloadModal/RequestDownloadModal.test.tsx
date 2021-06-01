@@ -33,7 +33,9 @@ const MOCK_URLS = MOCK_FILES.map((file) => file.url)
 
 const wrapper: FunctionComponent = ({ children }) => (
   <ThemeProvider>
-    <AuthTokenContext.Provider value={{ token: MOCK_TOKEN }}>{children}</AuthTokenContext.Provider>
+    <AuthTokenContext.Provider value={{ token: MOCK_TOKEN, isTokenExpired: null }}>
+      {children}
+    </AuthTokenContext.Provider>
   </ThemeProvider>
 )
 

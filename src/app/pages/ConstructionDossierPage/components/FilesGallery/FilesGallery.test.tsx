@@ -22,12 +22,16 @@ const MOCK_TOKEN = 'faketoken'
 
 const wrapper: FunctionComponent = ({ children }) =>
   withAppContext(
-    <AuthTokenContext.Provider value={{ token: null }}>{children}</AuthTokenContext.Provider>,
+    <AuthTokenContext.Provider value={{ token: null, isTokenExpired: null }}>
+      {children}
+    </AuthTokenContext.Provider>,
   )
 
 const wrapperWithToken: FunctionComponent = ({ children }) =>
   withAppContext(
-    <AuthTokenContext.Provider value={{ token: MOCK_TOKEN }}>{children}</AuthTokenContext.Provider>,
+    <AuthTokenContext.Provider value={{ token: MOCK_TOKEN, isTokenExpired: null }}>
+      {children}
+    </AuthTokenContext.Provider>,
   )
 
 describe('FilesGallery', () => {
