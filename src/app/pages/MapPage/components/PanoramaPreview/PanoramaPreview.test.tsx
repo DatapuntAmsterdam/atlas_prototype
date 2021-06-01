@@ -28,10 +28,10 @@ describe('PanoramaPreview', () => {
       // eslint-disable-next-line testing-library/no-container
       const link = container.querySelector('a')
       const params = new URLSearchParams(link?.search)
-      expect(params.get('someOtherParam')).toContain(1)
+      expect(params.get('someOtherParam')).toContain('1')
       expect(params.get(mapLayersParam.name)).toContain('random-layer')
-      expect(params.get(panoPitchParam.name)).toContain(0)
-      expect(params.get(panoHeadingParam.name)).toContain(131)
+      expect(params.get(panoPitchParam.name)).toContain('0')
+      expect(params.get(panoHeadingParam.name)).toContain('131')
     })
   })
 
