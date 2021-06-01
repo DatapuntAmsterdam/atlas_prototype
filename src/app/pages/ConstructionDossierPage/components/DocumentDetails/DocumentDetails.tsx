@@ -1,5 +1,5 @@
 import { Download } from '@amsterdam/asc-assets'
-import { Alert, Button, Heading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
+import { Button, Heading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
@@ -15,10 +15,9 @@ import { FEATURE_KEYCLOAK_AUTH, isFeatureEnabled } from '../../../../features'
 import { useAuthToken } from '../../AuthTokenContext'
 import ContentBlock, { DefinitionList, DefinitionListItem, SubHeading } from '../ContentBlock'
 import FilesGallery from '../FilesGallery'
-import LinkButton from '../LinkButton'
-import LoginLinkButton from '../LoginLinkButton'
 import RequestDownloadModal from '../RequestDownloadModal'
 import SelectFilesModal from '../SelectFilesModal'
+import LoginAlert from './LoginAlert'
 
 export interface DocumentDetailsProps {
   dossierId: string
@@ -43,10 +42,6 @@ const DownloadButton = styled(Button)`
 const GalleryContainer = styled.div`
   border-bottom: 1px solid ${themeColor('tint', 'level3')};
   padding: ${themeSpacing(5, 5, 10, 5)};
-`
-
-const StyledAlert = styled(Alert)`
-  margin-bottom: ${themeSpacing(5)} !important;
 `
 
 const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
@@ -131,28 +126,9 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
       <GalleryContainer>
         {document.bestanden.length > 0 ? (
           <>
-            {!hasRights &&
-              (restricted ? (
-                <StyledAlert level="info" dismissible data-testid="noExtendedRights">
-                  <div>
-                    Medewerkers/ketenpartners van Gemeente Amsterdam met extra bevoegdheden kunnen{' '}
-                    <LoginLinkButton>inloggen</LoginLinkButton> om alle bouw- en omgevingsdossiers
-                    te bekijken.
-                  </div>
-                </StyledAlert>
-              ) : (
-                <StyledAlert level="info" dismissible data-testid="noRights">
-                  <div>
-                    U kunt hier{' '}
-                    <LinkButton type="button" onClick={onRequestLoginLink}>
-                      toegang aanvragen
-                    </LinkButton>{' '}
-                    om de om bouw- en omgevingsdossiers in te zien. Medewerkers/ketenpartners van
-                    Gemeente Amsterdam kunnen <LoginLinkButton>inloggen</LoginLinkButton> om deze te
-                    bekijken.
-                  </div>
-                </StyledAlert>
-              ))}
+            {!hasRights && (
+              <LoginAlert restricted={restricted} onRequestLoginLink={onRequestLoginLink} />
+            )}
             <FilesGallery
               data-testid="filesGallery"
               dossierId={dossierId}

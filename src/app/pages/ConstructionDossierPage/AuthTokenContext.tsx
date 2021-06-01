@@ -79,8 +79,11 @@ const AuthTokenProvider: FunctionComponent = ({ children }) => {
 
   // Store token from url in local storage and clear it from the url.
   useEffect(() => {
-    if (tokenParam && !isTokenExpired) {
-      localStorage.setItem(STORAGE_KEY, tokenParam)
+    if (tokenParam) {
+      if (!isTokenExpired) {
+        localStorage.setItem(STORAGE_KEY, tokenParam)
+      }
+
       setTokenParam(null, 'replace')
     }
   }, [tokenParam])

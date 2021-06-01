@@ -6,11 +6,9 @@ import type { FunctionComponent } from 'react'
 import type { Single as Bouwdossier } from '../../../../../api/iiif-metadata/bouwdossier'
 import { toDataDetail } from '../../../../../store/redux-first-router/actions'
 import formatAddresses from '../../utils/formatAddresses'
-import { useAuthToken } from '../../AuthTokenContext'
 import ContentBlock, { SubHeading, DefinitionList, DefinitionListItem } from '../ContentBlock'
 import DocumentDetails from '../DocumentDetails'
 import LoginLinkRequestModal from '../LoginLinkRequestModal'
-import LoginExpiredModal from '../LoginExpiredModal'
 
 const Header = styled.header`
   padding: ${themeSpacing(5)};
@@ -31,8 +29,6 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
   ...otherProps
 }) => {
   const [showLoginLinkRequestModal, setShowLoginLinkRequestModal] = useState(false)
-  const [hideLoginExpiredModal, setHideLoginExpiredModal] = useState(false)
-  const { isTokenExpired } = useAuthToken()
 
   const addresses = useMemo(() => formatAddresses(dossier.adressen), [dossier.adressen])
   const sortedDocuments = useMemo(
@@ -45,12 +41,6 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
 
   return (
     <>
-      {isTokenExpired && !hideLoginExpiredModal && (
-        <LoginExpiredModal
-          data-testid="loginExpiredModal"
-          onClose={() => setHideLoginExpiredModal(true)}
-        />
-      )}
       {showLoginLinkRequestModal && (
         <LoginLinkRequestModal
           data-testid="loginLinkRequestModal"
