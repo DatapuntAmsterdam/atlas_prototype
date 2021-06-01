@@ -50,8 +50,6 @@ function renderApp(store: Store<any, AnyAction>) {
 
   ReactDOM.render(
     <Provider store={store}>
-      {/* Normally we would use the router from 'react-router-dom', but since we gradually migrate from
-      redux-first-router to react-router, we need to share the history */}
       <BrowserRouter>
         <UiProvider>
           <App />

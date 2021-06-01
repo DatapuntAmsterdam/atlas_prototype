@@ -8,9 +8,10 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import styled from 'styled-components'
-import { Link as RouterLink } from 'react-router-dom'
+import type { LocationDescriptor } from 'history'
 import type { FunctionComponent } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
+import styled from 'styled-components'
 
 const StyledHeading = styled(Heading)`
   border-bottom: 2px solid transparent;
@@ -74,7 +75,7 @@ interface DatasetCardProps {
   lastModified: string | Date
   modified: string
   distributionTypes: string[]
-  to: string
+  to: LocationDescriptor
 }
 
 const DatasetCard: FunctionComponent<DatasetCardProps & Partial<HTMLAnchorElement>> = ({
