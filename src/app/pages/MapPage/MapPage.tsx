@@ -10,13 +10,7 @@ import useParam from '../../utils/useParam'
 import LeafletLayers from './LeafletLayers'
 import { useMapContext } from './MapContext'
 import MapMarker from './components/MapMarker'
-import {
-  centerParam,
-  locationParam,
-  panoHeadingParam,
-  panoPitchParam,
-  zoomParam,
-} from './query-params'
+import { centerParam, panoPitchParam, zoomParam } from './query-params'
 import MapPanel from './components/MapPanel'
 import { useDataSelection } from '../../components/DataSelection/DataSelectionContext'
 import { useIsEmbedded } from '../../contexts/ui'
@@ -84,17 +78,13 @@ const GlobalStyle = createGlobalStyle<{
 const { DEFAULT_AMSTERDAM_MAPS_OPTIONS } = constants
 
 const MapPage: FunctionComponent = () => {
-  const { panoFullScreen, loading } = useMapContext()
+  const { panoFullScreen, loading, panoActive } = useMapContext()
   const { drawToolLocked } = useDataSelection()
   const [, setMapInstance, mapInstanceRef] = useStateRef<L.Map | null>(null)
   const [center, setCenter] = useParam(centerParam)
   const [zoom, setZoom] = useParam(zoomParam)
-  const [location] = useParam(locationParam)
   const [panoPitch] = useParam(panoPitchParam)
-  const [panoHeading] = useParam(panoHeadingParam)
   const isEmbedded = useIsEmbedded()
-
-  const panoActive = panoHeading !== null && location !== null
 
   // This is necessary to call, because we resize the map dynamically
   // https://leafletjs.com/reference-1.7.1.html#map-invalidatesize
