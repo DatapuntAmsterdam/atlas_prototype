@@ -9,7 +9,6 @@ import {
   nevenadresFilter,
   nummerAanduidingTypeFilter,
   truncateHtmlAsTextFilter,
-  verblijfsObjectGevormdFilter,
   zipCodeFilter,
 } from './Filters'
 
@@ -290,18 +289,6 @@ describe('Filters', () => {
       ;[5, true, { aap: 'noot' }].forEach((e) => {
         expect(truncateHtmlAsTextFilter(e)).toEqual(e)
       })
-    })
-  })
-
-  describe('verblijfsobject filter', () => {
-    it('returns "(verblijfsobject gevormd)" when the input (status_id) is "18"', () => {
-      expect(verblijfsObjectGevormdFilter('18')).toBe('(verblijfsobject gevormd)')
-    })
-
-    it('returns an empty string for all other input values', () => {
-      expect(verblijfsObjectGevormdFilter('17')).toBe('')
-      expect(verblijfsObjectGevormdFilter('19')).toBe('')
-      expect(verblijfsObjectGevormdFilter('')).toBe('')
     })
   })
 

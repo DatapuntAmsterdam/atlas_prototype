@@ -1,10 +1,8 @@
-import { screen, render } from '@testing-library/react'
-import { mocked } from 'ts-jest/utils'
 import usePromise from '@amsterdam/use-promise'
-import ArticleDetailPage from './ArticleDetailPage'
-import { LOADING_SPINNER_TEST_ID } from '../../components/LoadingSpinner/LoadingSpinner'
+import { render, screen } from '@testing-library/react'
+import { mocked } from 'ts-jest/utils'
 import withAppContext from '../../utils/withAppContext'
-import { ERROR_MESSAGE_TEST_ID } from '../../components/ErrorMessage/ErrorMessage'
+import ArticleDetailPage from './ArticleDetailPage'
 
 jest.mock('@amsterdam/use-promise', () => {
   const originalModule = jest.requireActual('@amsterdam/use-promise')
@@ -28,7 +26,7 @@ describe('ArticleDetailPage', () => {
 
     render(withAppContext(<ArticleDetailPage />))
 
-    expect(screen.getByTestId(LOADING_SPINNER_TEST_ID)).toBeInTheDocument()
+    expect(screen.getByTestId('loadingSpinner')).toBeInTheDocument()
   })
 
   it('should render an error alert', () => {
@@ -39,6 +37,6 @@ describe('ArticleDetailPage', () => {
 
     render(withAppContext(<ArticleDetailPage />))
 
-    expect(screen.getByTestId(ERROR_MESSAGE_TEST_ID)).toBeInTheDocument()
+    expect(screen.getByTestId('errorMessage')).toBeInTheDocument()
   })
 })

@@ -1,1 +1,1 @@
-export { default, UiProvider, useIsEmbedded } from './UiContext'
+export { UiProvider, useIsEmbedded } from './UiContext'

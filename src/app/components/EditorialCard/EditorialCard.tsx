@@ -217,10 +217,6 @@ interface EditorialCardProps
   highlighted?: boolean
 }
 
-export const EDITORIAL_CARD_TEST_ID = 'editorialCard'
-export const EDITORIAL_CARD_CONTENT_TYPE_TEST_ID = 'contentType'
-export const EDITORIAL_CARD_META_TEXT_TEST_ID = 'metaText'
-
 const EditorialCard: FunctionComponent<EditorialCardProps> = ({
   title,
   teaser,
@@ -241,15 +237,13 @@ const EditorialCard: FunctionComponent<EditorialCardProps> = ({
 
   return (
     // Don't use the title attribute here, as we already use a heading that can be read by screen readers
-    <StyledLink {...{ variant: 'blank', ...otherProps }} data-testid={EDITORIAL_CARD_TEST_ID}>
+    <StyledLink {...{ variant: 'blank', ...otherProps }} data-testid="editorialCard">
       <StyledCard horizontal highlighted={highlighted}>
         <CustomCardMedia {...{ highlighted, image, imageDimensions }} />
         <StyledCardContent highlighted={highlighted}>
           {showContentType && contentTypeLabel && (
             <div>
-              <ContentType data-testid={EDITORIAL_CARD_CONTENT_TYPE_TEST_ID}>
-                {contentTypeLabel}
-              </ContentType>
+              <ContentType data-testid="contentType">{contentTypeLabel}</ContentType>
             </div>
           )}
 
@@ -268,7 +262,7 @@ const EditorialCard: FunctionComponent<EditorialCardProps> = ({
           )}
 
           {date && (
-            <MetaText as="time" data-testid={EDITORIAL_CARD_META_TEXT_TEST_ID} dateTime={date}>
+            <MetaText as="time" data-testid="metaText" dateTime={date}>
               {specialType === SpecialType.Dashboard || specialType === SpecialType.Story
                 ? `Laatst gewijzigd: ${date}`
                 : date}

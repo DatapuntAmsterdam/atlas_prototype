@@ -1,4 +1,4 @@
-import { screen, render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 import { CmsType, SpecialType } from '../../../shared/config/cms.config'
 import { NOT_FOUND_THUMBNAIL } from '../../../shared/config/constants'

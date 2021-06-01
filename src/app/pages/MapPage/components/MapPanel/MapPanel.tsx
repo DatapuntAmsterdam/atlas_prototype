@@ -3,6 +3,7 @@ import type { FunctionComponent } from 'react'
 import { useEffect, useMemo } from 'react'
 import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { useDataSelection } from '../../../../components/DataSelection/DataSelectionContext'
 import { routing } from '../../../../routes'
 import useParam from '../../../../utils/useParam'
@@ -15,6 +16,7 @@ import { DrawerPanelHeader, LargeDrawerPanel, SmallDrawerPanel } from '../Drawer
 import DrawResults from '../DrawTool/DrawResults'
 import LegendPanel from '../LegendPanel/LegendPanel'
 import useMapControls from './useMapControls'
+import { LEGEND_CLOSE } from '../../matomo-events'
 
 const TitleHeading = styled(Heading)`
   margin: 0;
@@ -39,6 +41,7 @@ const MapPanel: FunctionComponent = () => {
   const [locationParameter] = useParam(locationParam)
   const location = useLocation()
   const { activeFilters } = useDataSelection()
+  const { trackEvent } = useMatomo()
   // TODO: Replace this logic with 'useRouteMatch()' when the following PR has been released:
   // https://github.com/ReactTraining/react-router/pull/7822
   const dataDetailMatch = useMemo(
@@ -53,6 +56,7 @@ const MapPanel: FunctionComponent = () => {
 
   const onCloseLegend = () => {
     setLegendActive(false)
+    trackEvent(LEGEND_CLOSE)
   }
 
   // Hide the legend when any of the following events occur:
@@ -99,7 +103,7 @@ const MapPanel: FunctionComponent = () => {
             </DrawerPanelHeader>
             <DrawerContainer>
               <Switch>
-                <Route path={[routing.dataSearchGeo.path, routing.panorama.path]}>
+                <Route path={routing.dataSearchGeo.path}>
                   <MapSearchResults />
                 </Route>
                 <Route path={[routing.dataDetail.path]}>
