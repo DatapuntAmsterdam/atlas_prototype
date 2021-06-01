@@ -1,1 +1,1 @@
-export { default, PreviewContainer } from './PanoramaPreview'
+export { default } from './PanoramaPreview'

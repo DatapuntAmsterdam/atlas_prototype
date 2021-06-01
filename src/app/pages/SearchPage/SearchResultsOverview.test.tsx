@@ -1,7 +1,6 @@
-import { screen, render } from '@testing-library/react'
-import SearchResultsOverview from './SearchResultsOverview'
+import { render, screen } from '@testing-library/react'
 import withAppContext from '../../utils/withAppContext'
-import { ERROR_MESSAGE_TEST_ID } from '../../components/ErrorMessage/ErrorMessage'
+import SearchResultsOverview from './SearchResultsOverview'
 
 jest.mock('./config', () => ({
   foo: {
@@ -125,7 +124,7 @@ describe('SearchResultsOverview', () => {
         ),
       )
 
-      expect(screen.getByTestId(ERROR_MESSAGE_TEST_ID)).toBeInTheDocument()
+      expect(screen.getByTestId('errorMessage')).toBeInTheDocument()
     })
   })
 })

@@ -6,7 +6,7 @@ import { NORMAL_PAND_STATUSSES, NORMAL_VBO_STATUSSES } from '../map-search/statu
 import { fetchWithToken } from '../../../../../../shared/services/api/api'
 import environment from '../../../../../../environment'
 
-export const YEAR_UNKNOWN = 1005 // The API returns 1005 when a year is unknown
+const YEAR_UNKNOWN = 1005 // The API returns 1005 when a year is unknown
 
 const normalize = (result, additionalFields) => {
   return {
@@ -216,24 +216,6 @@ export const vestiging = (result) => {
   }
 
   return { ...result, ...additionalFields }
-}
-
-export const societalActivities = (result) => {
-  const additionalFields = {
-    activities: (result.activiteiten || []).map((activity) => activity),
-    bijzondereRechtstoestand: {
-      /* eslint-disable no-underscore-dangle */
-      ...(result._bijzondere_rechts_toestand || {}),
-      surseanceVanBetaling:
-        (result._bijzondere_rechts_toestand &&
-          result._bijzondere_rechts_toestand.status === 'Voorlopig') ||
-        (result._bijzondere_rechts_toestand &&
-          result._bijzondere_rechts_toestand.status === 'Definitief'),
-      /* eslint-enable no-underscore-dangle */
-    },
-  }
-
-  return normalize(result, additionalFields)
 }
 
 export const winkelgebied = (result) => {

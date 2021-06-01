@@ -230,7 +230,7 @@ const getGarbageContainersDistanceTable = (
   }
 }
 
-export const getPaginatedListBlock = (
+const getPaginatedListBlock = (
   definition: Definition,
   apiUrl?: string | null,
   settings?: {
@@ -262,7 +262,7 @@ export const getPaginatedListBlock = (
   },
 })
 
-export const getLocationDefinitionListBlock = (result: any): DetailResultItem => {
+const getLocationDefinitionListBlock = (result: any): DetailResultItem => {
   const buurt = {
     config: GLOSSARY.DEFINITIONS.BUURT,
     value: result.buurt || result._buurt,
@@ -423,7 +423,7 @@ const getConstructionFileList = (detailInfo: DetailInfo) =>
     },
   )
 
-export const getMainMetaBlock = <T = PotentialApiResult>(
+const getMainMetaBlock = <T = PotentialApiResult>(
   result: T,
   definition: Definition,
 ): InfoBoxProps => ({

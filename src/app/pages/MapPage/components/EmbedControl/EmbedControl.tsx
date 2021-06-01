@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { isEmbeddedParam } from '../../query-params'
 import Control from '../Control'
 
-export const EmbedButton = styled(Button)`
+const EmbedButton = styled(Button)`
   position: absolute;
   right: ${themeSpacing(2)};
   top: ${themeSpacing(2)};

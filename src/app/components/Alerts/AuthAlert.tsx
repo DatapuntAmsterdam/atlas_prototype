@@ -17,12 +17,12 @@ const StyledAlert = styled(Alert)`
   }
 `
 
-export const getNormalAuthAlertDescription = (excludedResults?: string) =>
+const getNormalAuthAlertDescription = (excludedResults?: string) =>
   `Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer te informatie te vinden${
     excludedResults ? ` over: ${excludedResults}` : ''
   }. `
 
-export const getSpecialAuthAlertDescription = (excludedResults?: string) =>
+const getSpecialAuthAlertDescription = (excludedResults?: string) =>
   `Medewerkers met speciale bevoegdheden kunnen alle gegevens zien${
     excludedResults ? ` (ook ${excludedResults})` : ''
   }.`

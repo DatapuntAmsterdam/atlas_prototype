@@ -23,7 +23,7 @@ export enum DataSelectionMapVisualizationType {
   Markers,
 }
 
-export enum AuthScope {
+enum AuthScope {
   BRK = 'BRK/RSN',
   HR = 'HR/R',
   None = 'None',

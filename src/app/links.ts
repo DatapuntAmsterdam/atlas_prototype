@@ -111,10 +111,6 @@ export const toNotFound = (): LocationDescriptorObject => ({
   pathname: routing.notFound.path,
 })
 
-export const toPanorama = (): LocationDescriptorObject => ({
-  pathname: routing.panorama.path,
-})
-
 export const toPublicationDetail = (id: string, slug: string): LocationDescriptorObject => ({
   pathname: generatePath(routing.publicationDetail.path, { id, slug }),
 })

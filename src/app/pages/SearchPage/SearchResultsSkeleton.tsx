@@ -50,5 +50,3 @@ export const SearchResultsOverviewSkeleton: FunctionComponent = () => (
     })}
   </>
 )
-
-export default SearchResultsSkeleton

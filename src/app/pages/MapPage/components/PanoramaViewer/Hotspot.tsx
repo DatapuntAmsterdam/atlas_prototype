@@ -16,7 +16,7 @@ const HotspotImage = styled.div<{ year: string }>`
   `}
 `
 
-export const hotspotAnimation = keyframes`
+const hotspotAnimation = keyframes`
   0% {
     transform: scale(1);
   }
