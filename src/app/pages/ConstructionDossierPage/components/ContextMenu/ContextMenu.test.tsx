@@ -1,7 +1,6 @@
-import { screen, fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import * as reactRedux from 'react-redux'
 import { mocked } from 'ts-jest/utils'
-import { sharePage, showPrintMode } from '../../../../../shared/ducks/ui/ui'
 import socialItems from '../../../../components/ContextMenu/socialItems'
 import withAppContext from '../../../../utils/withAppContext'
 import ContextMenu from './ContextMenu'
@@ -67,8 +66,6 @@ describe('ContextMenu', () => {
     )
 
     fireEvent.click(screen.getByText('Printen'))
-
-    expect(dispatchMock).toHaveBeenCalledWith(showPrintMode())
   })
 
   it('renders image download items if the file is an image', () => {
@@ -151,28 +148,5 @@ describe('ContextMenu', () => {
     fireEvent.click(screen.getByText('Download origineel'))
 
     expect(handleDownloadMock).toHaveBeenCalledWith('test.png?source_file=true', 'origineel')
-  })
-
-  it('triggers the page share from the social items', () => {
-    const dispatchMock = jest.fn()
-
-    useDispatchMock.mockReturnValue(dispatchMock)
-    socialItemsMock.mockImplementation((shareFn: () => void) => {
-      shareFn()
-      return []
-    })
-
-    render(
-      withAppContext(
-        <ContextMenu
-          handleDownload={() => {}}
-          fileUrl="test.png"
-          isImage
-          downloadLoading={false}
-        />,
-      ),
-    )
-
-    expect(dispatchMock).toHaveBeenCalledWith(sharePage())
   })
 })

@@ -17,7 +17,6 @@ jest.mock('./components/Header', () => () => <div data-testid="header" />)
 jest.mock('./components/SearchBar/SearchBar', () => () => <div data-testid="search-bar" />)
 
 // For some reason we get styled-components console warnings when MapLegend is rendered ("The component styled.div with the id of "sc-xxxxx" has been created dynamically.")
-jest.mock('../map/components/legend/MapLegend')
 jest.mock('./contexts/ui')
 jest.mock('./utils/useParam')
 

@@ -2,7 +2,6 @@
  * The Keycloak feature, when enabled the default login will be replaced with Keycloak.
  */
 export const FEATURE_KEYCLOAK_AUTH = 'KEYCLOAK_AUTH'
-export const FEATURE_BETA_MAP = 'BETA_MAP'
 
 export const STORAGE_KEY = 'features'
 

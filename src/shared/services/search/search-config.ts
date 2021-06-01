@@ -1,4 +1,4 @@
-import categoryLabels from '../../../map/services/map-search/category-labels'
+import categoryLabels from '../../../app/pages/MapPage/legacy/services/map-search/category-labels'
 
 export default {
   QUERY_ENDPOINTS: [

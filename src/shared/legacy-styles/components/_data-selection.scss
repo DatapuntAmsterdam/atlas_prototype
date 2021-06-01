@@ -1,0 +1,11 @@
+$data-selection-outer-padding: 2 * $base-whitespace;
+
+.c-data-selection {
+  padding: $data-selection-outer-padding;
+}
+
+.c-data-selection-content {
+  .loading-indicator {
+    position: relative;
+  }
+}

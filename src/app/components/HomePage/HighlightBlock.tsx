@@ -1,15 +1,15 @@
 import { breakpoint, styles, themeSpacing } from '@amsterdam/asc-ui'
 import { useState } from 'react'
-import RouterLink from 'redux-first-router-link'
+import { Link } from 'react-router-dom'
 import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
 import styled from 'styled-components'
 import cmsConfig from '../../../shared/config/cms.config'
-import { toArticleSearch } from '../../../store/redux-first-router/actions'
 import getImageFromCms from '../../utils/getImageFromCms'
 import ErrorMessage, { ErrorBackgroundCSS } from '../ErrorMessage/ErrorMessage'
 import HighlightCard from './HighlightCard'
 import OverviewLink from './OverviewLink'
 import { fetchListFromCms } from '../../utils/fetchFromCms'
+import { routing } from '../../routes'
 
 const HighlightBlockStyle = styled.div<{ showError: boolean }>`
   position: relative;
@@ -136,7 +136,12 @@ const HighlightBlock = () => {
         </HighlightBlockInnerStyle>
       </HighlightBlockStyle>
       <OverviewLink
-        linkProps={{ to: toArticleSearch(), forwardedAs: RouterLink }}
+        linkProps={{
+          to: {
+            pathname: routing.articleSearch.path,
+          },
+          forwardedAs: Link,
+        }}
         label="Bekijk overzicht"
         title="Bekijk het overzicht van alle artikelen"
       />

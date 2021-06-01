@@ -1,8 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { closeMapPanel } from '../../../map/ducks/map/actions'
-import { fetchMarkersSuccess } from '../../../shared/ducks/data-selection/actions'
-import { VIEWS_TO_PARAMS } from '../../../shared/ducks/data-selection/constants'
-import { getDataSelectionPage } from '../../../shared/ducks/data-selection/selectors'
+import { useSelector } from 'react-redux'
 import { getUserScopes } from '../../../shared/ducks/user/user'
 import AuthScope from '../../../shared/services/api/authScope'
 import { AuthError } from '../../../shared/services/api/customError'
@@ -12,10 +8,17 @@ import { ViewMode, viewParam } from '../../pages/MapPage/query-params'
 import formatCount from '../../utils/formatCount'
 import useParam from '../../utils/useParam'
 import { useDataSelection } from './DataSelectionContext'
-import { DatasetType } from './types'
+import { DatasetType, LegacyDataSelectionViewTypes } from './types'
 import useLegacyDataselectionConfig from './useLegacyDataselectionConfig'
+import { pageParam } from '../../pages/SearchPage/query-params'
 
 const DEFAULT_ERROR_MESSAGE = 'Er is een fout opgetreden, probeer het later nog eens.'
+
+const VIEWS_TO_PARAMS = {
+  [ViewMode.Split]: LegacyDataSelectionViewTypes.List,
+  [ViewMode.Map]: LegacyDataSelectionViewTypes.List,
+  [ViewMode.Full]: LegacyDataSelectionViewTypes.Table,
+}
 
 /**
  * Note: a lot of this logic has been refactored from several sagas and put into this one
@@ -24,10 +27,9 @@ const DEFAULT_ERROR_MESSAGE = 'Er is een fout opgetreden, probeer het later nog 
  */
 const useFetchLegacyDataSelectionData = () => {
   const [view] = useParam(viewParam)
-  const dispatch = useDispatch()
   const userHasAccessToPage = useSelector(hasUserAccesToPage)
 
-  const page = useSelector(getDataSelectionPage)
+  const [page] = useParam(pageParam)
   const userScopes = useSelector(getUserScopes)
   const { setTotalResults, setAvailableFilters, activeFilters } = useDataSelection()
   const { currentDatasetConfig, currentDatasetType } = useLegacyDataselectionConfig()
@@ -35,7 +37,6 @@ const useFetchLegacyDataSelectionData = () => {
   const fetchData = async (signal: AbortSignal) => {
     // Side effect to reset the number of results and remove the markers from the map
     setTotalResults(0)
-    dispatch(fetchMarkersSuccess([]))
 
     if (!currentDatasetConfig) {
       throw new Error(DEFAULT_ERROR_MESSAGE)
@@ -52,10 +53,6 @@ const useFetchLegacyDataSelectionData = () => {
       )
     }
 
-    // Side effect to close the map panel
-    if (view === ViewMode.Split) {
-      dispatch(closeMapPanel())
-    }
     try {
       const result = await getFromQuery(
         signal,
