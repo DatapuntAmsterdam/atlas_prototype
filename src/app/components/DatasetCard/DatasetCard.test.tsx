@@ -4,7 +4,7 @@ import DatasetCard from './DatasetCard'
 describe('DatasetCard', () => {
   const mockDatasetItem = {
     id: '1',
-    to: '/',
+    to: { pathname: '/' },
     shortTitle: 'title',
     teaser: 'the teaser text',
     modified: 'modified',

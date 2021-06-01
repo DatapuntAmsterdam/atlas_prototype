@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { LocationDescriptorObject } from 'history'
+import type { LocationDescriptorObject } from 'history'
 import { toEstablishments } from '../../links'
 import { routing } from '../../routes'
 import { DataSelectionProvider, useDataSelection } from './DataSelectionContext'
