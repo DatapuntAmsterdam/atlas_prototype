@@ -20,8 +20,6 @@ RUN npm ci && \
 
 RUN npm run generate:sitemap
 
-COPY modules /app/modules
-
 COPY .browserslistrc \
     index.ejs \
     webpack.* \

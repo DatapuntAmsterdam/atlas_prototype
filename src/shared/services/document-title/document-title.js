@@ -1,7 +1,6 @@
 import { isEmbeddedParam, viewParam } from '../../../app/pages/MapPage/query-params'
 import { routing } from '../../../app/routes'
-import GLOSSARY from '../../../detail/services/glossary.constant'
-import { FETCH_DETAIL_SUCCESS } from '../../ducks/detail/constants'
+import GLOSSARY from '../../../app/pages/MapPage/legacy/glossary.constant'
 import { ViewMode } from '../../ducks/ui/ui'
 
 export const mapDocumentTitle = (action, defaultTitle) => {
@@ -65,10 +64,6 @@ const titleActionMapping = [
   {
     actionType: routing.datasetDetail.type,
     getTitle: datasetDetailDocumentTitle,
-  },
-  {
-    actionType: FETCH_DETAIL_SUCCESS,
-    getTitle: detailDocumentTitleWithName,
   },
 ]
 

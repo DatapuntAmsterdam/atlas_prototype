@@ -1,11 +1,11 @@
 import type { FunctionComponent } from 'react'
 import { useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
-import type { MapCollection, MapLayer } from '../../../map/services'
+import type { MapCollection, MapLayer } from './legacy/services'
 import {
   getMapLayers as fetchMapLayers,
   getPanelLayers as fetchPanelLayers,
-} from '../../../map/services'
+} from './legacy/services'
 import { getUser } from '../../../shared/ducks/user/user'
 import useParam from '../../utils/useParam'
 import type { MapState } from './MapContext'

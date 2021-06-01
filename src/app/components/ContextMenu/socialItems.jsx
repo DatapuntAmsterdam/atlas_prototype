@@ -29,10 +29,8 @@ const socialItemsArray = [
   },
 ]
 
-const socialItems = (openSharePage) => {
+const socialItems = () => {
   const handlePageShare = (target) => {
-    openSharePage(target)
-
     const link = getShareUrl(target)
     window.open(link.url, link.target)
   }

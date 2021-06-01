@@ -1,24 +1,14 @@
 import { MATOMO_CONSTANTS } from '../../../app/matomo'
 import PAGES from '../../../app/pages'
-import { viewParam } from '../../../app/pages/MapPage/query-params'
 import { ROUTER_NAMESPACE, routing } from '../../../app/routes'
 import { ViewMode } from '../../../shared/ducks/ui/ui'
 import trackEvents, {
   TRACK_ACTION_NAVIGATION,
   TRACK_CATEGORY_AUTO_SUGGEST,
-  TRACK_NAME_ENLARGE_DETAIL_MAP,
-  TRACK_NAME_FULL_DETAIL,
   TRACK_NAME_LEAVE_PANO,
 } from './trackEvents'
 
 describe('trackEvents', () => {
-  it('matches the snapshot', () => {
-    // snapshots generally don't offer much value, but in this case, since the value of trackEvents is an object with
-    // keys that are specific to the sections in the application that need to be tracked, it's worthwhile to generate
-    // a snaphot of the entire object so that any changes will be more easily picked up
-    expect(trackEvents).toMatchSnapshot()
-  })
-
   describe('data detail tracking', () => {
     const dataDetailTrackingFunc = trackEvents[routing.dataDetail.type]
     const trackingPayload = { state: { ui: { viewMode: undefined } } }
@@ -41,36 +31,6 @@ describe('trackEvents', () => {
       expect(
         dataDetailTrackingFunc({ ...trackingPayload, tracking: { ...trackingObj, event: 'foo' } }),
       ).toEqual([])
-    })
-
-    it('should return data for when the map is the view mode', () => {
-      const payload = { state: { ui: { viewMode: ViewMode.Map } } }
-
-      expect(dataDetailTrackingFunc(payload)).toEqual([
-        MATOMO_CONSTANTS.TRACK_EVENT,
-        TRACK_ACTION_NAVIGATION,
-        TRACK_NAME_FULL_DETAIL,
-        null,
-      ])
-    })
-
-    it('should return data for when split is the view mode', () => {
-      const payload = {
-        state: { ui: { viewMode: ViewMode.Split } },
-        isFirstAction: false,
-        query: { [viewParam.name]: ViewMode.Map },
-      }
-
-      expect(dataDetailTrackingFunc(payload)).toEqual([
-        MATOMO_CONSTANTS.TRACK_EVENT,
-        TRACK_ACTION_NAVIGATION,
-        TRACK_NAME_ENLARGE_DETAIL_MAP,
-        null,
-      ])
-
-      expect(dataDetailTrackingFunc({ ...payload, isFirstAction: true })).toEqual([])
-      expect(dataDetailTrackingFunc({ ...payload, query: {} })).toEqual([])
-      expect(dataDetailTrackingFunc({ ...payload, query: undefined })).toEqual([])
     })
 
     it('should return data for when page is a panoramo page', () => {

@@ -1,11 +1,11 @@
-import type { RootState } from '../../../reducers/root'
+import type { RootState } from '../root'
 import errorMessageReducer, {
+  ERROR_MESSAGES,
   ErrorType,
   getMessage,
   hasGlobalError,
   resetGlobalError,
   setGlobalError,
-  ERROR_MESSAGES,
 } from './error-message'
 
 describe('errorMessageReducer', () => {

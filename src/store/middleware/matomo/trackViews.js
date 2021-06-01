@@ -1,8 +1,5 @@
 import { MATOMO_CONSTANTS } from '../../../app/matomo'
 import { routing } from '../../../app/routes'
-import { FETCH_DETAIL_SUCCESS } from '../../../shared/ducks/detail/constants'
-import { getDetail } from '../../../shared/ducks/detail/selectors'
-import { isDatasetDetailPage } from '../../redux-first-router/selectors'
 
 let views = Object.entries(routing).reduce((acc, [, value]) => ({
   ...acc,
@@ -25,34 +22,6 @@ views = {
           null,
         ]
       : []
-  },
-  [routing.dataDetail.type]: function trackView({
-    isFirstAction = null,
-    query = {},
-    href,
-    title,
-    state,
-    tracking,
-  }) {
-    // eslint-disable-next-line no-nested-ternary
-    return !isFirstAction && tracking && tracking.id !== getDetail(state).id
-      ? [
-          MATOMO_CONSTANTS.TRACK_VIEW,
-          title, // PAGEVIEW -> DETAIL VIEW CLICK THROUGH VIEWS
-          href,
-          null,
-        ]
-      : isFirstAction || !!query.print
-      ? [
-          MATOMO_CONSTANTS.TRACK_VIEW,
-          title, // PAGEVIEW -> DETAIL VIEW INITIAL LOAD
-          href,
-          null,
-        ]
-      : []
-  },
-  [FETCH_DETAIL_SUCCESS]: function trackView({ href, title, state }) {
-    return isDatasetDetailPage(state) ? [MATOMO_CONSTANTS.TRACK_VIEW, title, href, null] : []
   },
 }
 

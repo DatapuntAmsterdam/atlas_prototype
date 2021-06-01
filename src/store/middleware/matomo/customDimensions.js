@@ -1,5 +1,4 @@
 import { getUserScopes, userIsAuthenticated } from '../../../shared/ducks/user/user'
-import { isEmbedded, isEmbedPreview, isPrintMode } from '../../../shared/ducks/ui/ui'
 
 const CONSTANTS = {
   DIMENSION3: {
@@ -18,6 +17,7 @@ const CONSTANTS = {
   },
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export const authCustomDimensions = (state) => {
   const authenticated = userIsAuthenticated(state)
     ? CONSTANTS.DIMENSION3.AUTHENTICATED
@@ -32,15 +32,5 @@ export const authCustomDimensions = (state) => {
   return [
     { id: CONSTANTS.DIMENSION3.ID, value: authenticated }, // customDimension = 'Authenticated'
     { id: CONSTANTS.DIMENSION4.ID, value: role }, // customDimension = 'Role'
-  ]
-}
-
-export const viewCustomDimensions = (query = {}, state) => {
-  const embedView =
-    !!query.embed || isEmbedded(state) || isEmbedPreview(state) ? CONSTANTS.DIMENSION5.EMBED : false
-  const printView = !!query.print || isPrintMode(state) ? CONSTANTS.DIMENSION5.PRINT : false
-
-  return [
-    { id: CONSTANTS.DIMENSION5.ID, value: embedView || printView }, // customDimension = 'Version'
   ]
 }

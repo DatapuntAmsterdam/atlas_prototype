@@ -1,8 +1,6 @@
 import { ChevronDown, Download, Ellipsis, Print } from '@amsterdam/asc-assets'
 import { ContextMenu as AscContextMenu, ContextMenuItem, Icon } from '@amsterdam/asc-ui'
-import { useDispatch } from 'react-redux'
 import type { FunctionComponent } from 'react'
-import { sharePage, showPrintMode } from '../../../../../shared/ducks/ui/ui'
 import socialItems from '../../../../components/ContextMenu/socialItems'
 
 export interface ContextMenuProps {
@@ -19,11 +17,6 @@ const ContextMenu: FunctionComponent<ContextMenuProps> = ({
   isImage,
   ...otherProps
 }) => {
-  const dispatch = useDispatch()
-
-  const openSharePage = () => dispatch(sharePage())
-  const openPrintMode = () => dispatch(showPrintMode())
-
   return (
     <AscContextMenu
       data-test="context-menu"
@@ -39,7 +32,9 @@ const ContextMenu: FunctionComponent<ContextMenuProps> = ({
       {...otherProps}
     >
       <ContextMenuItem
-        onClick={openPrintMode}
+        onClick={() => {
+          window.print()
+        }}
         icon={
           <Icon padding={4} inline size={24}>
             <Print />
@@ -91,7 +86,7 @@ const ContextMenu: FunctionComponent<ContextMenuProps> = ({
       >
         Download origineel
       </ContextMenuItem>
-      {socialItems(openSharePage)}
+      {socialItems()}
     </AscContextMenu>
   )
 }

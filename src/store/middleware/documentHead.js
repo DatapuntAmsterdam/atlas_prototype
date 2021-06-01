@@ -1,5 +1,4 @@
 import { routing } from '../../app/routes'
-import { FETCH_DETAIL_SUCCESS } from '../../shared/ducks/detail/constants'
 import titleActionMapping from '../../shared/services/document-title/document-title'
 
 const TITLE_SUFFIX = 'Data en informatie - Amsterdam'
@@ -9,10 +8,9 @@ const getDefaultDocumentTitle = (page) => () => routing?.[page]?.title ?? TITLE_
 
 const documentHead = () => (next) => (action) => {
   // The change of the route and some actions should change the document title
-  const shouldChangeTitle =
-    Object.keys(routing)
-      .map((key) => routing[key].type)
-      .includes(action.type) || action.type === FETCH_DETAIL_SUCCESS
+  const shouldChangeTitle = Object.keys(routing)
+    .map((key) => routing[key].type)
+    .includes(action.type)
   if (shouldChangeTitle) {
     const page = Object.keys(routing).find((key) => routing[key].type === action.type)
 

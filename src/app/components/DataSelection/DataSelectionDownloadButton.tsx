@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux'
 import { Button, themeSpacing } from '@amsterdam/asc-ui'
 import { Download } from '@amsterdam/asc-assets'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
@@ -8,9 +7,10 @@ import environment from '../../../environment'
 import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
 import { encodeQueryParams } from '../../../shared/services/query-string-parser/query-string-parser'
 import { getAccessToken } from '../../../shared/services/auth/auth'
-import { getGeometryFilter } from '../../../shared/ducks/data-selection/selectors'
 import type { ActiveFilter } from './types'
 import { DatasetType } from './types'
+import useParam from '../../utils/useParam'
+import { polygonParam } from '../../pages/MapPage/query-params'
 
 export interface DataSelectionDownloadButtonProps {
   dataset: DatasetType
@@ -25,7 +25,7 @@ const DataSelectionDownloadButton: FunctionComponent<DataSelectionDownloadButton
   dataset,
   activeFilters,
 }) => {
-  const geometryFilter = useSelector(getGeometryFilter)
+  const [polygon] = useParam(polygonParam)
   const { trackEvent } = useMatomo()
   const filterParams = []
   let url = `${environment.API_ROOT}${
@@ -38,11 +38,8 @@ const DataSelectionDownloadButton: FunctionComponent<DataSelectionDownloadButton
     }
   })
 
-  if (geometryFilter?.markers !== undefined) {
-    filterParams.push(
-      // @ts-ignore
-      `shape=${JSON.stringify(geometryFilter.markers.map(([lat, lng]) => [lng, lat]))}`,
-    )
+  if (polygon?.polygon.length) {
+    filterParams.push(`shape=${JSON.stringify(polygon?.polygon.map(({ lat, lng }) => [lng, lat]))}`)
   }
 
   if (dataset === DatasetType.Hr) {

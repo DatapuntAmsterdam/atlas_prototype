@@ -1,6 +1,6 @@
 import { useStore } from 'react-redux'
 import type { Store } from 'redux'
-import type { RootState } from '../../../reducers/root'
+import type { RootState } from '../../ducks/root'
 
 declare global {
   interface Window {
