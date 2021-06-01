@@ -62,7 +62,7 @@ const ItemWrapper = styled.div<{ gridArea?: string }>`
       grid-area: ${gridArea} !important;
     `}
 `
-export const HeadingWrapper = styled.div`
+const HeadingWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -322,7 +322,7 @@ export interface RenderDetailsProps {
   showNoMapObjectsAlert?: boolean
 }
 
-export const RenderDetails: FunctionComponent<RenderDetailsProps> = ({
+const RenderDetails: FunctionComponent<RenderDetailsProps> = ({
   details,
   showNoMapObjectsAlert,
 }) => {

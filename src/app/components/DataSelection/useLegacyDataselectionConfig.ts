@@ -4,7 +4,7 @@ import { DatasetType } from './types'
 import { routing } from '../../routes'
 import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
 
-export const ROUTE_DATASET_MAPPER = {
+const ROUTE_DATASET_MAPPER = {
   [routing.cadastralObjects.path]: DatasetType.Brk,
   [routing.establishments.path]: DatasetType.Hr,
   [routing.addresses.path]: DatasetType.Bag,

@@ -20,7 +20,7 @@ const generateParams = (layer: MapLayer, location: Location, zoom: number) => ({
     : Math.round(2 ** (MAP_CONFIG.BASE_LAYER_OPTIONS.maxZoom - zoom) / 2).toString(),
 })
 
-export const sortResults = (results: MapLayer[]) =>
+const sortResults = (results: MapLayer[]) =>
   results.sort((a, b) => {
     if (a.detailIsShape && b.detailIsShape) {
       return a.distance - b.distance

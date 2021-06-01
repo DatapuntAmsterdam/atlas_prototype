@@ -26,5 +26,3 @@ const geoJsonConfig = {
 }
 
 export default geoJsonConfig
-export const dataSelectionType = 'dataSelection'
-export const dataSelectionBounds = 'dataSelectionBounds'

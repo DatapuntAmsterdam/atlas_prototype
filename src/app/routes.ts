@@ -1,6 +1,6 @@
 import PAGES from './pages'
 
-export const ROUTER_NAMESPACE = 'atlasRouter'
+const ROUTER_NAMESPACE = 'atlasRouter'
 
 export const MAIN_PATHS = {
   ARTICLES: 'artikelen',
@@ -87,12 +87,6 @@ export const routing = typeHelper({
     path: `/${MAIN_PATHS.DATA}/geozoek/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.DATA_SEARCH_GEO}`,
     page: PAGES.DATA_SEARCH_GEO,
-  },
-  panorama: {
-    title: 'Panoramabeeld',
-    path: `/${MAIN_PATHS.DATA}/panorama/:id/`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.PANORAMA}`,
-    page: PAGES.PANORAMA,
   },
   constructionDossier: {
     title: 'Bouwdossier',

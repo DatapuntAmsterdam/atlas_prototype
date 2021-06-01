@@ -36,5 +36,3 @@ export const WGS84 = {
   code: 'EPSG:4326',
   projection: '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs',
 }
-
-export const EARTH_RADIUS = 6378137
