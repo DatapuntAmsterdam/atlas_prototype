@@ -7,19 +7,19 @@ import type { FunctionComponent } from 'react'
 import type {
   MapSearchCategory,
   MapSearchResult,
-} from '../../../../../map/services/map-search/map-search'
+} from '../../legacy/services/map-search/map-search'
+import mapSearch from '../../legacy/services/map-search/map-search'
 import { getUser } from '../../../../../shared/ducks/user/user'
 import formatNumber from '../../../../../shared/services/number-formatter/number-formatter'
 import { getDetailPageData } from '../../../../../store/redux-first-router/actions'
 import AuthAlert from '../../../../components/Alerts/AuthAlert'
 import ShowMore from '../../../../components/ShowMore'
 import useParam from '../../../../utils/useParam'
-import buildDetailUrl from '../../detail/buildDetailUrl'
 import { locationParam } from '../../query-params'
 import PanoramaPreview from '../PanoramaPreview/PanoramaPreview'
 import useAsyncMapPanelHeader from '../../utils/useAsyncMapPanelHeader'
 import LoadingSpinner from '../../../../components/LoadingSpinner/LoadingSpinner'
-import mapSearch from '../../../../../map/services/map-search/map-search'
+import { toDataDetail } from '../../../../links'
 
 const RESULT_LIMIT = 10
 
@@ -128,7 +128,7 @@ function renderResultItems(results: MapSearchResult[]) {
         <ResultLink
           key={result.type + result.label}
           forwardedAs={RouterLink}
-          to={buildDetailUrl(getDetailPageData(result.uri))}
+          to={toDataDetail(getDetailPageData(result.uri as string))}
           inList
         >
           {result.label}

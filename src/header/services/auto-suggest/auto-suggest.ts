@@ -96,7 +96,7 @@ function formatResponse(
 }
 
 // TODO: Generate these types from the OpenAPI spec: https://api.data.amsterdam.nl/typeahead/openapi
-interface TypeaheadItem {
+export interface TypeaheadItem {
   label: string
   content: TypeaheadContent[]
   // eslint-disable-next-line camelcase

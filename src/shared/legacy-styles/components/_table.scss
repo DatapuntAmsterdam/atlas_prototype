@@ -1,0 +1,106 @@
+/*
+@name Table
+@markup
+<table class="c-table">
+  <thead class="c-table">
+    <tr class="c-table__header-row">
+      <th class="c-table__field c-table__header-field">Key</th>
+      <th class="c-table__field c-table__header-field">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="c-table__content-row">
+      <th class="c-table__field c-table__content-field c-table__content-field--header" scope="row">Naam 24-posities (NEN)</th>
+      <td class="c-table__field c-table__content-field">Agatha Dekenstraat</td>
+    </tr>
+    <tr>
+      <th class="c-table__field c-table__content-field c-table__content-field--header" scope="row">Naam 17-posities (post)</th>
+      <td class="c-table__field c-table__content-field">A DEKENSTR</td>
+    </tr>
+    <tr>
+      <th class="c-table__field c-table__content-field c-table__content-field--header" scope="row">Woonplaats</th>
+      <td class="c-table__field c-table__content-field">Amsterdam</td>
+    </tr>
+  </tbody>
+</table>
+*/
+@use "sass:math";
+
+.c-table {
+  border-spacing: 0;
+  display: inline-table;
+  margin-bottom: $base-whitespace;
+  width: 100%;
+}
+
+.c-table__field {
+  border-bottom: 1px solid $secondary-gray20;
+  font-weight: normal;
+  padding: math.div($base-whitespace, 2) $base-whitespace * 2 math.div($base-whitespace, 2)
+    $base-whitespace;
+  text-align: left;
+  white-space: nowrap;
+
+  &--link {
+    cursor: pointer;
+    padding: 0;
+
+    & > div {
+      display: block;
+      padding-left: $base-whitespace;
+      padding-right: $base-whitespace * 2;
+      padding-top: math.div($base-whitespace, 2);
+    }
+  }
+
+  &:last-child {
+    padding-right: $base-whitespace;
+  }
+}
+
+.c-table__header-field,
+.c-table__content-field {
+  height: 42px;
+  vertical-align: middle;
+}
+
+.c-table__header-row {
+  color: $primary-dark;
+}
+
+.c-table__header-field {
+  border: none;
+  font-weight: $bold-weight;
+  padding: {
+    bottom: 0;
+    top: 0;
+  }
+}
+
+.c-table__content-row {
+  &:last-child {
+    .c-table__content-field {
+      border-bottom: none;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $secondary-gray10;
+  }
+
+  .c-table--click &:hover {
+    cursor: pointer;
+  }
+}
+
+.c-table__content-field {
+  a {
+    color: $primary-dark;
+    text-decoration: none;
+  }
+}
+
+.c-table__content-field--header {
+  font-weight: $medium-weight;
+}

@@ -1,6 +1,6 @@
 import { createPath } from 'history'
 import environment from '../environment'
-import { getImageDataById } from '../panorama/services/panorama-api/panorama-api'
+import { getImageDataById } from './pages/MapPage/components/PanoramaViewer/panorama-api/panorama-api'
 import {
   ARTICLE_REDIRECT_FRAGMENTS,
   REDIRECTS_ARTICLES,

@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Alert } from '@amsterdam/asc-ui'
-import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import styled from 'styled-components'
 import type { FunctionComponent } from 'react'
+import { useEffect } from 'react'
+import styled from 'styled-components'
 import environment from '../../../environment'
-import { isPrintMode } from '../../../shared/ducks/ui/ui'
 import { createCookie, getCookie } from '../../../shared/services/cookie/cookie'
 import { useIsEmbedded } from '../../contexts/ui'
 import useDataFetching from '../../utils/useDataFetching'
@@ -23,17 +21,17 @@ const StyledAlert = styled(Alert)`
   &:focus {
     z-index: 999;
   }
+
+  @media print {
+    display: none;
+  }
 `
 
 const NotificationAlert: FunctionComponent = () => {
   const { fetchData, results } = useDataFetching()
-  const printMode = useSelector(isPrintMode)
   const isEmbedded = useIsEmbedded()
 
   useEffect(() => {
-    if (printMode) {
-      return
-    }
     // Limit = 1 because this prevents us from getting multiple notifications
     const endpoint = `${environment.CMS_ROOT}jsonapi/node/notification?filter[field_active]=1&page[limit]=1`
     ;(() => {
@@ -43,7 +41,7 @@ const NotificationAlert: FunctionComponent = () => {
     })()
   }, [])
 
-  if (!printMode && !isEmbedded && !getCookie(COOKIE_NAME) && results) {
+  if (!isEmbedded && !getCookie(COOKIE_NAME) && results) {
     const { title, body, field_notification_type, field_position, field_notification_title } =
       results?.data[0]?.attributes || {}
 
@@ -59,9 +57,10 @@ const NotificationAlert: FunctionComponent = () => {
         </StyledAlert>
       ) : (
         <InfoModal
-          id="infoModal"
-          {...{ open: !isEmbedded, title: field_notification_title ?? title, body: body.value }}
-          closeModalAction={() => createCookie(COOKIE_NAME, '8')}
+          open={!isEmbedded}
+          title={field_notification_title ?? title}
+          body={body.value}
+          handleClose={() => createCookie(COOKIE_NAME, '8')}
         />
       )
     }

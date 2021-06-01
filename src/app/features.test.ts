@@ -1,10 +1,6 @@
-import {
-  disableFeature,
-  enableFeature,
-  getEnabledFeatures,
-  isFeatureEnabled,
-  STORAGE_KEY,
-} from './features'
+import { disableFeature, enableFeature, getEnabledFeatures, isFeatureEnabled } from './features'
+
+const STORAGE_KEY = 'features'
 
 describe('getEnabledFeatures', () => {
   beforeEach(() => localStorage.clear())

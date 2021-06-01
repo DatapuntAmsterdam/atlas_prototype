@@ -1,6 +1,6 @@
 import { constants } from '@amsterdam/arm-core'
 import type { LatLngLiteral, LatLngTuple } from 'leaflet'
-import { PANO_LABELS } from '../../../panorama/ducks/constants'
+import { PANO_LABELS } from './components/PanoramaViewer/constants'
 import { normalizeCoordinate } from '../../../shared/services/coordinate-reference-system'
 import type { UrlParam } from '../../utils/useParam'
 
@@ -48,7 +48,7 @@ export const isEmbeddedParam: UrlParam<boolean> = {
   encode: (value) => value.toString(),
 }
 
-const COORDINATE_PRECISION = 7
+export const COORDINATE_PRECISION = 7
 
 function encodeLatLngLiteral(value: LatLngLiteral) {
   return [value.lat, value.lng]
@@ -93,8 +93,11 @@ export const locationParam: UrlParam<LatLngLiteral | null> = {
 export const mapLayersParam: UrlParam<string[]> = {
   name: 'lagen',
   defaultValue: [],
-  decode: (value) => value.split('_'),
-  encode: (value) => value.join('_'),
+  decode: (value) => {
+    const cleanedValue = value.replaceAll(':1', '')
+    return cleanedValue.split('|')
+  },
+  encode: (value) => value.join('|'),
 }
 
 export const legendOpenParam: UrlParam<boolean> = {

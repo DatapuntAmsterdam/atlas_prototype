@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react'
 import { CmsType } from '../../../../../shared/config/cms.config'
-import { EDITORIAL_CARD_TEST_ID } from '../../../../components/EditorialCard/EditorialCard'
 import CardList from './CardList'
 
 describe('CardList', () => {
@@ -17,6 +16,6 @@ describe('CardList', () => {
         loading={false}
       />,
     )
-    expect(screen.getAllByTestId(EDITORIAL_CARD_TEST_ID).length).toBe(2)
+    expect(screen.getAllByTestId('editorialCard').length).toBe(2)
   })
 })

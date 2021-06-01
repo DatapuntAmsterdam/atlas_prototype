@@ -10,10 +10,10 @@ import useBuildQueryString from '../../utils/useBuildQueryString'
 import { useDataSelection } from './DataSelectionContext'
 import useLegacyDataselectionConfig from './useLegacyDataselectionConfig'
 import { ViewMode, viewParam } from '../../pages/MapPage/query-params'
-import { DATASETS } from '../../../shared/ducks/data-selection/constants'
 import DataSelectionDownloadButton from './DataSelectionDownloadButton'
 import useParam from '../../utils/useParam'
 import { DATASELECTION_MAP_BUTTON } from '../../pages/MapPage/matomo-events'
+import { DatasetType } from './types'
 
 const StyledTabs = styled(Tabs)`
   margin-bottom: ${themeSpacing(2)};
@@ -25,6 +25,12 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
 `
+
+const DATASETS = {
+  BAG: DatasetType.Bag,
+  BRK: DatasetType.Brk,
+  HR: DatasetType.Hr,
+}
 
 const DataSelectionHeader: FunctionComponent = () => {
   const [view] = useParam(viewParam)

@@ -1,0 +1,63 @@
+@use "sass:math";
+
+.c-ds-table {
+  $self: &;
+  display: inline-table;
+  width: 100%;
+  border-collapse: collapse;
+
+  &__head {
+    display: table-header-group;
+    white-space: nowrap;
+
+    #{$self}__cell {
+      border-bottom: 1px solid;
+      border-top: 1px solid;
+      font-weight: $bold-weight;
+      height: 26px;
+      vertical-align: middle;
+      text-align: start;
+    }
+  }
+
+  &__body {
+    display: table-row-group;
+
+    #{$self}__row {
+      &--link {
+        &:hover,
+        &:focus {
+          background-color: $secondary-gray10;
+        }
+      }
+
+      &:last-child {
+        #{$self}__cell {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  &__row {
+    /*
+     * Workaround for Chrome not supporting relative positions on table row elements. More information:
+     * - https://bugs.chromium.org/p/chromium/issues/detail?id=417223
+     * - https://stackoverflow.com/questions/8501727/table-row-wont-contain-elements-with-positionabsolute
+     */
+    transform: scale(1);
+    display: table-row;
+    text-decoration: none;
+    position: relative;
+  }
+
+  &__cell {
+    border-bottom: 1px solid $secondary-gray20;
+    color: $primary-dark;
+    display: table-cell;
+    font-weight: $medium-weight;
+    padding: math.div($base-whitespace, 2) $base-whitespace * 2 math.div($base-whitespace, 2)
+      $base-whitespace;
+    white-space: nowrap;
+  }
+}

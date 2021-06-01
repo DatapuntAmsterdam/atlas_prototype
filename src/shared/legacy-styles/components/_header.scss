@@ -1,0 +1,34 @@
+.o-header {
+  position: relative;
+}
+
+.o-header__title {
+  @include font-size-responsive($xl-header-font);
+}
+
+.o-header__title--emphasized {
+  font-style: italic;
+}
+
+.o-header__subtitle {
+  @include font-size-responsive($l-header-font);
+
+  color: $primary-contrast;
+  display: block;
+  margin-bottom: 0.4 * $base-whitespace;
+
+  &--dark {
+    color: $primary-dark;
+  }
+}
+
+.o-header__buttongroup {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.o-header__button {
+  float: right;
+  margin-left: 0.5 * $base-whitespace;
+}

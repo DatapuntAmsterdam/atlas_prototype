@@ -1,17 +1,13 @@
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+import type { FunctionComponent } from 'react'
 import { lazy, Suspense } from 'react'
 import { Helmet } from 'react-helmet'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
-import type { FunctionComponent } from 'react'
-import EmbedIframeComponent from './components/EmbedIframe/EmbedIframe'
-import ErrorAlert from './components/ErrorAlert/ErrorAlert'
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
-import { FeedbackModal } from './components/Modal'
 import NotificationAlert from './components/NotificationAlert/NotificationAlert'
-import { mapSearchPagePaths, mapSplitPagePaths, routing } from './routes'
+import { mapSearchPagePaths, routing } from './routes'
 import { DataSelectionProvider } from './components/DataSelection/DataSelectionContext'
-import { FEATURE_BETA_MAP, isFeatureEnabled } from './features'
 
 const HomePage = lazy(() => import(/* webpackChunkName: "HomePage" */ './pages/HomePage'))
 const ActualityPage = lazy(
@@ -35,9 +31,6 @@ const SpecialDetailPage = lazy(
 const CollectionDetailPage = lazy(
   () => import(/* webpackChunkName: "CollectionDetailPage" */ './pages/CollectionDetailPage'),
 )
-const MapSplitPage = lazy(
-  () => import(/* webpackChunkName: "MapSplitPage" */ './pages/MapSplitPage'),
-)
 const MapContainer = lazy(
   () => import(/* webpackChunkName: "MapContainer" */ './pages/MapPage/MapContainer'),
 )
@@ -59,20 +52,12 @@ const StyledLoadingSpinner = styled(LoadingSpinner)`
 `
 
 export interface AppBodyProps {
-  visibilityError: boolean
-  bodyClasses: string
   hasGrid: boolean
-  embedPreviewMode: boolean
 }
 
 export const APP_CONTAINER_ID = 'main'
 
-const AppBody: FunctionComponent<AppBodyProps> = ({
-  visibilityError,
-  bodyClasses,
-  hasGrid,
-  embedPreviewMode,
-}) => {
+const AppBody: FunctionComponent<AppBodyProps> = ({ hasGrid }) => {
   const { enableLinkTracking } = useMatomo()
   enableLinkTracking()
 
@@ -90,7 +75,7 @@ const AppBody: FunctionComponent<AppBodyProps> = ({
             <NotificationAlert />
             <Suspense fallback={<StyledLoadingSpinner />}>
               <Switch>
-                <Route exact path="/" component={HomePage} />
+                <Route exact path={routing.home.path} component={HomePage} />
                 <Route path={routing.articleDetail.path} exact component={ArticleDetailPage} />
                 <Route
                   path={routing.publicationDetail.path}
@@ -109,7 +94,6 @@ const AppBody: FunctionComponent<AppBodyProps> = ({
               </Switch>
             </Suspense>
           </AppContainer>
-          <FeedbackModal id="feedbackModal" />
         </>
       ) : (
         <>
@@ -122,45 +106,34 @@ const AppBody: FunctionComponent<AppBodyProps> = ({
                 <meta name="viewport" content="width=1024, user-scalable=yes" />
               </Helmet>
               <Switch>
-                {isFeatureEnabled(FEATURE_BETA_MAP) && (
-                  <Route path={[routing.data.path]}>
-                    {/* When the mobile map panel is working properly we can disable the meta rule up defined above */}
-                    <MapContainer />
-                  </Route>
-                )}
-
-                <Route>
-                  <div className={`c-dashboard__body ${bodyClasses}`}>
+                <Route path={[routing.constructionDossier.path, routing.datasetDetail.path]}>
+                  <div className="c-dashboard__body">
                     <NotificationAlert />
-                    {visibilityError && <ErrorAlert />}
-                    {embedPreviewMode ? (
-                      <EmbedIframeComponent />
-                    ) : (
-                      <div className="u-grid u-full-height u-overflow--y-auto">
-                        <div className="u-row u-full-height">
-                          <Switch>
-                            <Route
-                              path={routing.constructionDossier.path}
-                              exact
-                              component={ConstructionDossierPage}
-                            />
-                            <Route
-                              path={routing.datasetDetail.path}
-                              exact
-                              component={DatasetDetailPage}
-                            />
-                            {!isFeatureEnabled(FEATURE_BETA_MAP) && (
-                              <Route path={mapSplitPagePaths} component={MapSplitPage} />
-                            )}
-                          </Switch>
-                        </div>
+
+                    <div className="u-full-height u-overflow--y-auto">
+                      <div className="u-full-height">
+                        <Switch>
+                          <Route
+                            path={routing.constructionDossier.path}
+                            exact
+                            component={ConstructionDossierPage}
+                          />
+                          <Route
+                            path={routing.datasetDetail.path}
+                            exact
+                            component={DatasetDetailPage}
+                          />
+                        </Switch>
                       </div>
-                    )}
+                    </div>
                   </div>
+                </Route>
+                <Route path={[routing.data.path]}>
+                  {/* When the mobile map panel is working properly we can disable the meta rule up defined above */}
+                  <MapContainer />
                 </Route>
               </Switch>
             </DataSelectionProvider>
-            <FeedbackModal id="feedbackModal" />
           </Suspense>
         </>
       )}

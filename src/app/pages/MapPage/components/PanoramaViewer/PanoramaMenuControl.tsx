@@ -5,15 +5,15 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import type { FunctionComponent } from 'react'
 import { useState } from 'react'
 import styled from 'styled-components'
-import { PANO_LABELS } from '../../../../../panorama/ducks/constants'
-import { getStreetViewUrl } from '../../../../../panorama/services/panorama-api/panorama-api'
+import { PANO_LABELS } from './constants'
+import { getStreetViewUrl } from './panorama-api/panorama-api'
 import Clock from '../../../../../shared/assets/icons/Clock.svg'
 import { locationParam, panoHeadingParam, panoTagParam } from '../../query-params'
 import useParam from '../../../../utils/useParam'
 import Control from '../Control'
 import { PANORAMA_SELECT } from '../../matomo-events'
 
-export const getLabel = (id: string): string =>
+const getLabel = (id: string): string =>
   PANO_LABELS.find(({ id: labelId }) => labelId === id)?.label || PANO_LABELS[0].label
 
 const StyledContextMenu = styled(ContextMenu)`
@@ -45,7 +45,8 @@ const ContextMenuButton = styled(ControlButton)`
 
 const StyledControl = styled(Control)`
   order: 2;
-  transform: translateY(-${themeSpacing(10)});
+  position: absolute;
+  top: calc(70% - ${themeSpacing(15)});
 `
 
 const PanoramaMenuControl: FunctionComponent = () => {

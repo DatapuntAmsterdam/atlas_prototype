@@ -131,13 +131,6 @@ export const truncateHtmlAsTextFilter = (input?: any, maxLength = 250) => {
   return input
 }
 
-export const verblijfsObjectGevormdFilter = (statusId: string) => {
-  const VERBLIJFSOBJECT_GEVORMD = 18
-  const isVerblijfsobjectGevormd = Number(statusId) === VERBLIJFSOBJECT_GEVORMD
-
-  return isVerblijfsobjectGevormd ? '(verblijfsobject gevormd)' : ''
-}
-
 export const zipCodeFilter = (input?: string | null) => {
   // Only touch valid Dutch zip codes, leave all other input unchanged
   if (input && /^[1-9][0-9]{3}[a-zA-Z]{2}$/.exec(input)) {

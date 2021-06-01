@@ -2,9 +2,8 @@ import { generatePath } from 'react-router-dom'
 import type { LocationDescriptorObject } from 'history'
 import environment from '../environment'
 import { HEADER_LINK_HELP } from '../shared/config/content-links'
-import { ViewMode } from '../shared/ducks/ui/ui'
 import { fileNameParam, fileUrlParam } from './pages/ConstructionDossierPage/query-params'
-import { viewParam } from './pages/MapPage/query-params'
+import { ViewMode, viewParam } from './pages/MapPage/query-params'
 import { routing } from './routes'
 import toSearchParams from './utils/toSearchParams'
 
@@ -110,10 +109,6 @@ export const toMapSearch = (): LocationDescriptorObject => ({
 
 export const toNotFound = (): LocationDescriptorObject => ({
   pathname: routing.notFound.path,
-})
-
-export const toPanorama = (): LocationDescriptorObject => ({
-  pathname: routing.panorama.path,
 })
 
 export const toPublicationDetail = (id: string, slug: string): LocationDescriptorObject => ({

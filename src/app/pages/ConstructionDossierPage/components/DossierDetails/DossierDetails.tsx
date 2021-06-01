@@ -1,12 +1,12 @@
 import { Heading, Link, List, ListItem, themeSpacing } from '@amsterdam/asc-ui'
-import { useMemo, useState } from 'react'
-import RouterLink from 'redux-first-router-link'
-import styled from 'styled-components'
 import type { FunctionComponent } from 'react'
+import { useMemo, useState } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
+import styled from 'styled-components'
 import type { Single as Bouwdossier } from '../../../../../api/iiif-metadata/bouwdossier'
-import { toDataDetail } from '../../../../../store/redux-first-router/actions'
+import { toDataDetail } from '../../../../links'
 import formatAddresses from '../../utils/formatAddresses'
-import ContentBlock, { SubHeading, DefinitionList, DefinitionListItem } from '../ContentBlock'
+import ContentBlock, { DefinitionList, DefinitionListItem, SubHeading } from '../ContentBlock'
 import DocumentDetails from '../DocumentDetails'
 import LoginLinkRequestModal from '../LoginLinkRequestModal'
 
@@ -83,7 +83,15 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
             <List>
               {addresses.map((address) => (
                 <ListItem key={address.id}>
-                  <Link as={RouterLink} inList to={toDataDetail([address.id, 'bag', address.type])}>
+                  <Link
+                    as={RouterLink}
+                    inList
+                    to={toDataDetail({
+                      type: 'bag',
+                      subtype: address.type,
+                      id: address.id,
+                    })}
+                  >
                     <span>{address.label}</span>
                   </Link>
                 </ListItem>

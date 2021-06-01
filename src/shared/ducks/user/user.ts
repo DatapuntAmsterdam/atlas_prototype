@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import type { RootState } from '../../../reducers/root'
+import type { RootState } from '../root'
 
 export const REDUCER_KEY = 'user'
 export const AUTHENTICATE_USER_REQUEST = 'user/AUTHENTICATE_USER_REQUEST'

@@ -1,24 +1,20 @@
 import { ascDefaultTheme, themeColor } from '@amsterdam/asc-ui'
 import { useMapInstance } from '@amsterdam/react-maps'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import type { LatLng, LatLngLiteral } from 'leaflet'
 import L, { Polygon } from 'leaflet'
 import type { FunctionComponent } from 'react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
-import useParam from '../../../../utils/useParam'
-import type { PolyDrawing } from '../../query-params'
-import { polygonParam, polylineParam } from '../../query-params'
-import type { ExtendedLayer, PolygonType, PolylineType } from './BareDrawTool'
-import { BareDrawTool } from './BareDrawTool'
-import { routing } from '../../../../routes'
-import useBuildQueryString from '../../../../utils/useBuildQueryString'
 import { useDataSelection } from '../../../../components/DataSelection/DataSelectionContext'
 import useLegacyDataselectionConfig from '../../../../components/DataSelection/useLegacyDataselectionConfig'
-import config from '../../config'
+import { toGeoSearch } from '../../../../links'
+import { routing } from '../../../../routes'
+import useBuildQueryString from '../../../../utils/useBuildQueryString'
 import useMapCenterToMarker from '../../../../utils/useMapCenterToMarker'
+import useParam from '../../../../utils/useParam'
+import config from '../../config'
 import { useMapContext } from '../../MapContext'
-import { DrawerState } from '../DrawerOverlay'
 import {
   DRAWTOOL_ADD_POLYGON,
   DRAWTOOL_ADD_POLYLINE,
@@ -27,6 +23,11 @@ import {
   DRAWTOOL_REMOVE_POLYGON,
   DRAWTOOL_REMOVE_POLYLINE,
 } from '../../matomo-events'
+import type { PolyDrawing } from '../../query-params'
+import { polygonParam, polylineParam } from '../../query-params'
+import { DrawerState } from '../DrawerOverlay'
+import type { ExtendedLayer, PolygonType, PolylineType } from './BareDrawTool'
+import { BareDrawTool } from './BareDrawTool'
 
 function getTotalDistance(latLngs: LatLng[]) {
   return latLngs.reduce(
@@ -87,7 +88,7 @@ const DrawTool: FunctionComponent = () => {
   const { activeFilters, setDistanceText, setDrawToolLocked } = useDataSelection()
   const { currentDatasetType } = useLegacyDataselectionConfig()
   const { panToWithPanelOffset } = useMapCenterToMarker()
-  const { setDrawerState } = useMapContext()
+  const { setDrawerState, setLegendActive } = useMapContext()
   const { trackEvent } = useMatomo()
 
   const [initialDrawnItems, setInitialDrawnItems] = useState<ExtendedLayer[]>([])
@@ -121,6 +122,7 @@ const DrawTool: FunctionComponent = () => {
     const geoOrAddressPage = shape.polygon ? routing.addresses.path : location.pathname
     const pathname = config[currentDatasetTypeRef.current?.toUpperCase()]?.path ?? geoOrAddressPage
     if (shape.polygon) {
+      setLegendActive(false)
       history.push({
         pathname,
         search: buildQueryStringRef.current([
@@ -224,7 +226,7 @@ const DrawTool: FunctionComponent = () => {
 
   const onClose = () => {
     history.push({
-      pathname: routing.dataSearchGeo.path,
+      ...toGeoSearch(),
       search: buildQueryString(undefined, [polylineParam, polygonParam]),
     })
   }

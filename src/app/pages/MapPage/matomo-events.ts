@@ -1,5 +1,4 @@
 import type { TrackEventParams } from '@datapunt/matomo-tracker-react/lib/types'
-import { FEATURE_BETA_MAP, isFeatureEnabled } from '../../features'
 
 const CATEGORY = 'kaart-2.0'
 
@@ -59,7 +58,7 @@ export const PANORAMA_SELECT: TrackEventParams = {
 }
 
 export const PANORAMA_THUMBNAIL: TrackEventParams = {
-  category: isFeatureEnabled(FEATURE_BETA_MAP) ? CATEGORY : 'kaart',
+  category: CATEGORY,
   action: 'panorama-thumbnail',
 }
 
@@ -104,12 +103,12 @@ export const DRAWER_HANDLE: TrackEventParams = {
 }
 
 export const DATASELECTION_ADD_FILTER: TrackEventParams = {
-  category: isFeatureEnabled(FEATURE_BETA_MAP) ? CATEGORY : 'kaart',
+  category: CATEGORY,
   action: 'dataselectie-filter-toevoegen',
 }
 
 export const DATASELECTION_REMOVE_FILTER: TrackEventParams = {
-  category: isFeatureEnabled(FEATURE_BETA_MAP) ? CATEGORY : 'kaart',
+  category: CATEGORY,
   action: 'dataselectie-filter-verwijderen',
 }
 
@@ -119,6 +118,6 @@ export const DATASELECTION_TABLE_BUTTON: TrackEventParams = {
 }
 
 export const DATASELECTION_MAP_BUTTON: TrackEventParams = {
-  category: isFeatureEnabled(FEATURE_BETA_MAP) ? CATEGORY : 'kaart',
+  category: CATEGORY,
   action: 'dataselectie-kaart-toggle',
 }

@@ -5,13 +5,10 @@ import {
   showAboveBackDrop,
   styles,
 } from '@amsterdam/asc-ui'
-import classNames from 'classnames'
 import styled, { css } from 'styled-components'
 import type { FunctionComponent } from 'react'
 import HeaderSearch from '../../../header/components/HeaderSearch'
-import EmbedHeader from './EmbedHeader'
 import HeaderMenu from './HeaderMenu'
-import PrintHeader from './PrintHeader'
 
 const stickyStyle = css`
   position: sticky;
@@ -67,64 +64,31 @@ const StyledHeader = styled(HeaderComponent)`
 export interface HeaderProps {
   homePage: boolean
   hasMaxWidth: boolean
-  printMode: boolean
-  embedPreviewMode: boolean
-  printOrEmbedMode: boolean
 }
 
-const Header: FunctionComponent<HeaderProps> = ({
-  homePage,
-  printOrEmbedMode,
-  printMode,
-  embedPreviewMode,
-  hasMaxWidth,
-}) => {
-  if (!printOrEmbedMode) {
-    return (
-      <HeaderWrapper isHomePage={homePage} data-test="header">
-        <StyledHeader
-          tall={homePage}
-          title="Data en informatie"
-          homeLink="/"
-          className="styled-header"
-          fullWidth={!hasMaxWidth}
-          logo={AmsterdamLogo}
-          navigation={
-            <>
-              <HeaderSearch />
-              <HeaderMenu
-                type="default"
-                data-test="header-menu-default"
-                tall={homePage}
-                showAt="laptopM"
-              />
-              <HeaderMenu
-                type="mobile"
-                align="right"
-                data-test="header-menu-mobile"
-                hideAt="laptopM"
-              />
-            </>
-          }
-        />
-      </HeaderWrapper>
-    )
-  }
-
-  return (
-    <div className={classNames({ 'u-fixed': !printMode && !embedPreviewMode })}>
-      <div
-        className={`c-dashboard__heading ${classNames({
-          'o-max-width': hasMaxWidth,
-        })}`}
-      >
-        <div className={classNames({ 'o-max-width__inner': hasMaxWidth })}>
-          {printMode && <PrintHeader />}
-          {embedPreviewMode && <EmbedHeader />}
-        </div>
-      </div>
-    </div>
-  )
-}
+const Header: FunctionComponent<HeaderProps> = ({ homePage, hasMaxWidth }) => (
+  <HeaderWrapper isHomePage={homePage} data-testid="header">
+    <StyledHeader
+      tall={homePage}
+      title="Data en informatie"
+      homeLink="/"
+      className="styled-header"
+      fullWidth={!hasMaxWidth}
+      logo={AmsterdamLogo}
+      navigation={
+        <>
+          <HeaderSearch />
+          <HeaderMenu
+            type="default"
+            data-test="header-menu-default"
+            tall={homePage}
+            showAt="laptopM"
+          />
+          <HeaderMenu type="mobile" align="right" data-test="header-menu-mobile" hideAt="laptopM" />
+        </>
+      }
+    />
+  </HeaderWrapper>
+)
 
 export default Header

@@ -1,13 +1,13 @@
 import resolveRedirects, {
-  legacyRoutes,
-  shortUrls,
   articleUrls,
+  legacyRoutes,
   overviewUrls,
+  shortUrls,
   webHooks,
 } from './redirects'
 import matomoInstance from './matomo'
 import getVerblijfsobjectIdFromAddressQuery from './utils/getVerblijfsobjectIdFromAddressQuery'
-import * as panoramaApi from '../panorama/services/panorama-api/panorama-api'
+import * as panoramaApi from './pages/MapPage/components/PanoramaViewer/panorama-api/panorama-api'
 import { MAIN_PATHS } from './routes'
 
 jest.useFakeTimers()

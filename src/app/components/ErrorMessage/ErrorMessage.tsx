@@ -50,9 +50,6 @@ export interface ErrorMessageProps {
   absolute?: boolean
 }
 
-export const ERROR_MESSAGE_TEST_ID = 'errorMessage'
-export const ERROR_MESSAGE_RELOAD_BUTTON_TEST_ID = 'buttonReload'
-
 const ErrorMessage: FunctionComponent<ErrorMessageProps & HTMLAttributes<HTMLDivElement>> = ({
   message,
   buttonLabel,
@@ -61,11 +58,11 @@ const ErrorMessage: FunctionComponent<ErrorMessageProps & HTMLAttributes<HTMLDiv
   absolute = false,
   ...otherProps
 }) => (
-  <ErrorMessageStyle absolute={absolute} {...otherProps} data-testid={ERROR_MESSAGE_TEST_ID}>
+  <ErrorMessageStyle absolute={absolute} {...otherProps} data-testid="errorMessage">
     <Paragraph>{message}</Paragraph>
     <Button
       type="button"
-      data-testid={ERROR_MESSAGE_RELOAD_BUTTON_TEST_ID}
+      data-testid="buttonReload"
       onClick={buttonOnClick}
       iconLeft={buttonIcon}
       variant="primary"

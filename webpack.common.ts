@@ -5,8 +5,8 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
-import { DefinePlugin } from 'webpack'
 import type { Configuration } from 'webpack'
+import { DefinePlugin } from 'webpack'
 import type { Configuration as DevServerConfiguration } from 'webpack-dev-server'
 
 /**
@@ -32,7 +32,6 @@ const modernModules = [
   '@amsterdam/react-maps',
   'body-scroll-lock',
   'escape-string-regexp',
-  'redux-first-router',
 ].map(modulePath)
 
 export interface CreateConfigOptions {
@@ -225,7 +224,7 @@ export function createConfig(additionalOptions: CreateConfigOptions): WebpackCon
           { from: './public/static/', to: './' },
           // All assets in sub folders
           {
-            context: 'modules/shared/assets',
+            context: 'src/shared/assets',
             from: '**/*',
             to: 'assets',
           },

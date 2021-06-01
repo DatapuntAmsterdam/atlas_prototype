@@ -1,6 +1,6 @@
 import type { TileLayerOptions } from 'leaflet'
-import type { MapLayer } from '../../../../map/services'
-import MAP_CONFIG from '../../../../map/services/map.config'
+import type { MapLayer } from '../legacy/services'
+import MAP_CONFIG from '../legacy/services/map.config'
 import type { UserState } from '../../../../shared/ducks/user/user'
 import { createUrlWithToken } from '../../../../shared/services/api/api'
 import type { Overlay } from '../MapContext'

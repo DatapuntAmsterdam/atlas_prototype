@@ -1,23 +1,23 @@
+import { MapPanelContext, Marker as ARMMarker } from '@amsterdam/arm-core'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
+import type { LeafletMouseEvent } from 'leaflet'
 import type { FunctionComponent } from 'react'
 import { useEffect } from 'react'
 import { matchPath, useHistory, useLocation } from 'react-router-dom'
-import { MapPanelContext, Marker as ARMMarker } from '@amsterdam/arm-core'
-import type { LeafletMouseEvent } from 'leaflet'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
-import useParam from '../../../../utils/useParam'
-import { locationParam, polygonParam, zoomParam } from '../../query-params'
-import { useMapContext } from '../../MapContext'
-import useBuildQueryString from '../../../../utils/useBuildQueryString'
-import useMapCenterToMarker from '../../../../utils/useMapCenterToMarker'
-import useRequiredContext from '../../../../utils/useRequiredContext'
-import fetchNearestDetail from '../../../../../map/services/nearest-detail/nearest-detail'
-import { toDataDetail } from '../../../../links'
+import { toDataDetail, toGeoSearch } from '../../../../links'
 import { routing } from '../../../../routes'
+import useBuildQueryString from '../../../../utils/useBuildQueryString'
 import useLeafletEvent from '../../../../utils/useLeafletEvent'
-import { SnapPoint } from '../../types'
-import PanoramaViewerMarker from '../PanoramaViewer/PanoramaViewerMarker'
-import { DrawerState } from '../DrawerOverlay'
+import useMapCenterToMarker from '../../../../utils/useMapCenterToMarker'
+import useParam from '../../../../utils/useParam'
+import useRequiredContext from '../../../../utils/useRequiredContext'
+import fetchNearestDetail from '../../legacy/services/nearest-detail/nearest-detail'
+import { useMapContext } from '../../MapContext'
 import { MARKER_SET } from '../../matomo-events'
+import { locationParam, polygonParam, zoomParam } from '../../query-params'
+import { SnapPoint } from '../../types'
+import { DrawerState } from '../DrawerOverlay'
+import PanoramaViewerMarker from '../PanoramaViewer/PanoramaViewerMarker'
 
 export interface MarkerProps {
   panoActive: boolean
@@ -62,7 +62,7 @@ const MapMarker: FunctionComponent<MarkerProps> = ({ panoActive }) => {
     } else {
       trackEvent(MARKER_SET)
       history.push({
-        pathname: routing.dataSearchGeo.path,
+        ...toGeoSearch(),
         search: buildQueryString([[locationParam, e.latlng]], [polygonParam]),
       })
     }

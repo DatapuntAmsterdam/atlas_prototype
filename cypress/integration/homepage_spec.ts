@@ -359,7 +359,7 @@ describe('Homepage module', () => {
           // @ts-ignore
           links.forEach(({ testId, id, href }) => {
             cy.get(`[data-testid="footer${section}"]`)
-              .find(`[data-testid="footerLink${testId as string}"]`)
+              .find(`[data-testid="footerLink${testId}"]`)
               .then((element) => {
                 if (id) {
                   cy.wrap(element).first().click()

@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import type { FunctionComponent } from 'react'
 import { getDetailPageData } from '../../../store/redux-first-router/actions'
-import buildDetailUrl from '../../pages/MapPage/detail/buildDetailUrl'
+import buildDetailUrl from '../../pages/MapPage/components/DetailPanel/buildDetailUrl'
 import DataSelectionFormatter from './DataSelectionFormatter/DataSelectionFormatter'
 import type { Data } from './types'
 
@@ -19,7 +19,11 @@ const DataSelectionList: FunctionComponent<DataSelectionListProps> = ({ content 
   <ul data-testid="dataSelectionList">
     {content.body.map((row) => (
       <StyledListItem key={row.id}>
-        <Link as={RouterLink} to={buildDetailUrl(getDetailPageData(row.detailEndpoint))} inList>
+        <Link
+          as={RouterLink}
+          to={buildDetailUrl(getDetailPageData(row.detailEndpoint as string))}
+          inList
+        >
           <DataSelectionFormatter
             variables={row.content[0]}
             formatter={content.formatters[0]}

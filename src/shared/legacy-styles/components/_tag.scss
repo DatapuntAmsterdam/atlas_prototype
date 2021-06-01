@@ -1,0 +1,39 @@
+@use "sass:math";
+
+.o-tag {
+  background: $secondary-gray30;
+  border-radius: 3px 0 0 3px;
+  color: $secondary-gray80;
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  margin: math.div($base-whitespace, 2) 0 math.div($base-whitespace, 2);
+  padding: 0 20px 0 23px;
+  position: relative;
+  text-decoration: none;
+  text-transform: capitalize;
+
+  &::before {
+    background: $primary-light;
+    border-bottom: 13px solid transparent;
+    border-right: 10px solid $secondary-gray30;
+    border-top: 13px solid transparent;
+    content: '';
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+
+.o-tag--small {
+  @include font-size($xs-font);
+  height: 16px;
+  line-height: 17px;
+  padding: 0 5px 0 13px;
+
+  &::before {
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid $secondary-gray30;
+    border-top: 8px solid transparent;
+  }
+}

@@ -1,15 +1,7 @@
-import { screen, cleanup, fireEvent, render } from '@testing-library/react'
-import * as ducks from './SearchPageDucks'
+import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import SearchSort from './SearchSort'
-
-jest.mock('./SearchPageDucks')
-
-const mockDispatch = jest.fn()
-
-jest.mock('react-redux', () => ({
-  useSelector: jest.fn(() => []),
-  useDispatch: () => mockDispatch,
-}))
+import { SortOrder } from './query-params'
+import withAppContext from '../../utils/withAppContext'
 
 const mockTrackEvent = jest.fn()
 
@@ -23,13 +15,19 @@ describe('SearchSort', () => {
   beforeEach(cleanup)
 
   it('should handle changes in the selection', () => {
-    render(<SearchSort sort="date:asc" isOverviewPage={false} disabled={false} />)
+    render(
+      withAppContext(
+        <SearchSort
+          sort={{ field: 'date', order: SortOrder.Ascending }}
+          isOverviewPage={false}
+          disabled={false}
+        />,
+      ),
+    )
 
     const select = screen.getByTestId('sort-select')
 
     fireEvent.change(select)
     expect(mockTrackEvent).toBeCalled()
-    expect(ducks.setSort).toBeCalled()
-    expect(ducks.setPage).toBeCalledWith(1) // And reset the page number
   })
 })

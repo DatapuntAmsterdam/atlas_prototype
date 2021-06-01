@@ -1,16 +1,16 @@
+import usePromise, { isFulfilled, isPending } from '@amsterdam/use-promise'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import type { FunctionComponent } from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import styled, { css } from 'styled-components'
-import usePromise, { isFulfilled, isPending } from '@amsterdam/use-promise'
 import { useHistory } from 'react-router-dom'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { PANO_LABELS } from '../../../../../panorama/ducks/constants'
-import { loadScene } from '../../../../../panorama/services/marzipano/marzipano'
+import styled, { css } from 'styled-components'
+import { toGeoSearch } from '../../../../links'
+import useBuildQueryString from '../../../../utils/useBuildQueryString'
+import useMarzipano from '../../../../utils/useMarzipano'
+import useParam from '../../../../utils/useParam'
+import { useMapContext } from '../../MapContext'
 import {
-  getImageDataById,
-  getImageDataByLocation,
-} from '../../../../../panorama/services/panorama-api/panorama-api'
-import {
+  COORDINATE_PRECISION,
   locationParam,
   panoFovParam,
   panoFullScreenParam,
@@ -18,12 +18,10 @@ import {
   panoPitchParam,
   panoTagParam,
 } from '../../query-params'
-import useMarzipano from '../../../../utils/useMarzipano'
-import useParam from '../../../../utils/useParam'
-import { useMapContext } from '../../MapContext'
-import { HotspotButton } from '../../../../../panorama/components/Hotspot/Hotspot'
-import useBuildQueryString from '../../../../utils/useBuildQueryString'
-import { routing } from '../../../../routes'
+import { PANO_LABELS } from './constants'
+import { HotspotButton } from './Hotspot'
+import { loadScene } from './marzipano/marzipano'
+import { getImageDataById, getImageDataByLocation } from './panorama-api/panorama-api'
 
 const MarzipanoView = styled.div`
   height: 100%;
@@ -32,7 +30,7 @@ const MarzipanoView = styled.div`
 `
 
 const PanoramaStyle = styled.div<{ panoFullScreen: boolean; loading: boolean }>`
-  height: ${({ panoFullScreen }) => (panoFullScreen ? '100%' : '50%')};
+  height: ${({ panoFullScreen }) => (panoFullScreen ? '100%' : '70%')};
   position: relative;
   order: -1; // Put the PanoramaViewer above the Map
   ${({ loading }) =>
@@ -86,14 +84,14 @@ const PanoramaViewer: FunctionComponent = () => {
       [location.lat, location.lng],
       PANO_LABELS.find(({ id }) => id === panoTag)?.tags || [],
     )
-  }, [location, panoTag, marzipanoViewer])
+  }, [location, panoTag])
 
   useEffect(() => {
     setLoading(isPending(hotspotResult))
 
     if (isFulfilled(hotspotResult) && hotspotResult.value !== null) {
       history.push({
-        pathname: routing.dataSearchGeo.path,
+        ...toGeoSearch(),
         search: buildQueryString([
           [
             locationParam,
@@ -154,6 +152,18 @@ const PanoramaViewer: FunctionComponent = () => {
 
     if (isFulfilled(imageDataResult) && imageDataResult.value !== null) {
       fetchPanoramaImage(imageDataResult.value)
+      const panoramaLocation = {
+        lat: parseFloat(imageDataResult.value.location[0].toFixed(COORDINATE_PRECISION)),
+        lng: parseFloat(imageDataResult.value.location[1].toFixed(COORDINATE_PRECISION)),
+      }
+      if (
+        location &&
+        (panoramaLocation.lat !== location.lat || panoramaLocation.lng !== location.lng)
+      ) {
+        history.replace({
+          search: buildQueryString([[locationParam, panoramaLocation]]),
+        })
+      }
     }
   }, [imageDataResult])
 

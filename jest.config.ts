@@ -17,10 +17,10 @@ const config: Config.InitialOptions = {
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
-      statements: 76.23,
-      branches: 51,
-      lines: 75.81,
-      functions: 62,
+      statements: 71,
+      branches: 45,
+      lines: 71,
+      functions: 56,
     },
   },
   coverageReporters: process.env.CI ? ['text'] : ['lcov'],
@@ -35,8 +35,7 @@ const config: Config.InitialOptions = {
   setupFilesAfterEnv: ['./test/mocks.ts', './test/setup-env.ts'],
   testURL: 'http://localhost:3000/',
   testEnvironment: 'jsdom',
-  testPathIgnorePatterns: ['/modules/', '/node_modules/', '/test/'],
-  watchPathIgnorePatterns: ['/modules/'],
+  testPathIgnorePatterns: ['/node_modules/', '/test/'],
   transformIgnorePatterns: ['node_modules/(?!escape-string-regexp)'],
 }
 
