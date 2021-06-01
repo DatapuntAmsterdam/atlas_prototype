@@ -14,7 +14,7 @@ const StyledLink = styled(Link)`
 `
 
 export interface SearchLinkProps {
-  to: LocationDescriptorObject | string
+  to: LocationDescriptorObject
   label: string
   title?: string
 }
