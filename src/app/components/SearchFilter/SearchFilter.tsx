@@ -4,13 +4,13 @@ import { useCallback } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import type { Filter } from '../../models/filter'
 import { FilterType } from '../../models/filter'
+import { activeFiltersParam, pageParam } from '../../pages/SearchPage/query-params'
+import toSearchParams from '../../utils/toSearchParams'
+import useParam from '../../utils/useParam'
 import FilterBox from '../FilterBox'
 import CheckboxFilter from './filters/CheckboxFilter'
 import RadioFilter from './filters/RadioFilter'
 import SelectFilter from './filters/SelectFilter'
-import useParam from '../../utils/useParam'
-import { activeFiltersParam, pageParam } from '../../pages/SearchPage/query-params'
-import useBuildQueryString from '../../utils/useBuildQueryString'
 
 export interface SearchFilterProps {
   filter: Filter
@@ -40,7 +40,6 @@ const SearchFilter: FunctionComponent<SearchFilterProps> = ({ filter, totalCount
   const { trackEvent } = useMatomo()
   const history = useHistory()
   const location = useLocation()
-  const { buildQueryString } = useBuildQueryString()
   const [filterValues] = useParam(activeFiltersParam)
   const selection = filterValues.find(({ type: filterTypes }) => filterTypes === type)?.values ?? []
   const FilterContent = getFilterComponent(filterType)
@@ -60,25 +59,13 @@ const SearchFilter: FunctionComponent<SearchFilterProps> = ({ filter, totalCount
 
       history.replace({
         pathname: location.pathname,
-        search: buildQueryString([
-          [
-            // @ts-ignore
-            activeFiltersParam,
-            values.length
-              ? [
-                  {
-                    type,
-                    values,
-                  },
-                ]
-              : [],
-          ],
-          // @ts-ignore
+        search: toSearchParams([
+          [activeFiltersParam, values.length ? [{ type, values }] : []],
           [pageParam, 1],
-        ]),
+        ]).toString(),
       })
     },
-    [location, selection, trackEvent, type, buildQueryString],
+    [location, selection, type],
   )
 
   return (
