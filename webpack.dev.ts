@@ -1,3 +1,4 @@
+import DeadCodePlugin from 'webpack-deadcode-plugin'
 import { merge } from 'webpack-merge'
 import type { WebpackConfiguration } from './webpack.common'
 import { createConfig, distPath } from './webpack.common'
@@ -26,4 +27,14 @@ export default merge<WebpackConfiguration>(createConfig({ mode: 'development' })
       },
     },
   },
+  optimization: {
+    usedExports: true,
+  },
+  plugins: [
+    new DeadCodePlugin({
+      context: 'src',
+      patterns: ['**/*.(js|jsx|ts|tsx|css|scss)'],
+      exclude: ['**/*.test.*'],
+    }),
+  ],
 })

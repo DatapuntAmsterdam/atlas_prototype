@@ -1,14 +1,10 @@
-import { screen, fireEvent, render } from '@testing-library/react'
-import { CmsType } from '../../../shared/config/cms.config'
-import EditorialResults from './EditorialResults'
-import { LOADING_SPINNER_TEST_ID } from '../LoadingSpinner/LoadingSpinner'
-import withAppContext from '../../utils/withAppContext'
-import {
-  ERROR_MESSAGE_RELOAD_BUTTON_TEST_ID,
-  ERROR_MESSAGE_TEST_ID,
-} from '../ErrorMessage/ErrorMessage'
+import { fireEvent, render, screen } from '@testing-library/react'
 import type { NormalizedFieldItems } from '../../../normalizations/cms/types'
-import { EDITORIAL_CARD_TEST_ID } from '../EditorialCard/EditorialCard'
+import { CmsType } from '../../../shared/config/cms.config'
+import withAppContext from '../../utils/withAppContext'
+import EditorialResults from './EditorialResults'
+
+const EDITORIAL_CARD_TEST_ID = 'editorialCard'
 
 describe('EditorialResults', () => {
   Object.defineProperty(window, 'location', {
@@ -43,11 +39,11 @@ describe('EditorialResults', () => {
     }
     const { rerender } = render(<EditorialResults {...props} loading />)
 
-    expect(screen.queryByTestId(LOADING_SPINNER_TEST_ID)).toBeInTheDocument()
+    expect(screen.queryByTestId('loadingSpinner')).toBeInTheDocument()
 
     rerender(withAppContext(<EditorialResults {...props} loading={false} />))
 
-    expect(screen.queryByTestId(LOADING_SPINNER_TEST_ID)).not.toBeInTheDocument()
+    expect(screen.queryByTestId('loadingSpinner')).not.toBeInTheDocument()
   })
 
   it('should render the cards', () => {
@@ -110,9 +106,9 @@ describe('EditorialResults', () => {
     }
     render(withAppContext(<EditorialResults {...props} />))
 
-    expect(screen.getByTestId(ERROR_MESSAGE_TEST_ID)).toBeInTheDocument()
+    expect(screen.getByTestId('errorMessage')).toBeInTheDocument()
     expect(window.location.reload).not.toHaveBeenCalled()
-    fireEvent.click(screen.getByTestId(ERROR_MESSAGE_RELOAD_BUTTON_TEST_ID))
+    fireEvent.click(screen.getByTestId('buttonReload'))
     expect(window.location.reload).toHaveBeenCalled()
   })
 })

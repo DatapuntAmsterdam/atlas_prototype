@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import type { FunctionComponent, HTMLAttributes } from 'react'
 import type { DetailResultItemLinkList, Link } from '../../legacy/types/details'
 
-export const LinkList = styled.div`
+const LinkList = styled.div`
   display: flex;
   flex-direction: column;
 `

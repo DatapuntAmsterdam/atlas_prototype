@@ -1,10 +1,9 @@
-import { mocked } from 'ts-jest/utils'
 import usePromise from '@amsterdam/use-promise'
 import { fireEvent, render, screen, within } from '@testing-library/react'
+import { mocked } from 'ts-jest/utils'
 import useDownload from '../../utils/useDownload'
-import PublicationDetailPage from './PublicationDetailPage'
 import withAppContext from '../../utils/withAppContext'
-import { LOADING_SPINNER_TEST_ID } from '../../components/LoadingSpinner/LoadingSpinner'
+import PublicationDetailPage from './PublicationDetailPage'
 
 jest.mock('../../utils/useDownload')
 
@@ -53,7 +52,7 @@ describe('PublicationDetailPage', () => {
 
     render(withAppContext(<PublicationDetailPage />))
 
-    expect(screen.getByTestId(LOADING_SPINNER_TEST_ID)).toBeInTheDocument()
+    expect(screen.getByTestId('loadingSpinner')).toBeInTheDocument()
   })
 
   it('should call the useDownload hook when user tries to download publication', () => {

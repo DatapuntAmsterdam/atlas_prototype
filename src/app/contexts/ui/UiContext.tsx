@@ -13,8 +13,6 @@ export interface UiContextProps {
 
 const UiContext = createNamedContext<UiContextProps | null>('Ui', null)
 
-export default UiContext
-
 export const UiProvider: FunctionComponent = ({ children }) => {
   const [isEmbedded] = useParam(isEmbeddedParam)
 

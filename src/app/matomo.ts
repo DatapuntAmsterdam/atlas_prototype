@@ -12,12 +12,6 @@ const MATOMO_CONFIG = {
   },
 }
 
-export const MATOMO_CONSTANTS = {
-  TRACK_EVENT: 'trackEvent',
-  TRACK_SEARCH: 'trackSiteSearch',
-  TRACK_VIEW: 'trackPageView',
-}
-
 // Initialize connection with Matomo
 export default new MatomoTracker({
   urlBase: MATOMO_CONFIG.BASE_URL,

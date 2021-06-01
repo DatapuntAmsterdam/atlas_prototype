@@ -28,7 +28,7 @@ const EDITORIAL_OVERVIEW_ACTIONS = {
   [CmsType.Collection]: toCollectionSearch,
 }
 
-export const IMAGE_SIZE = 144
+const IMAGE_SIZE = 144
 
 const EditorialCardContainer = styled(CardContainer)`
   padding: 0;

@@ -17,10 +17,8 @@ import {
   parkeervak,
   parkeerzones,
   reclamebelasting,
-  societalActivities,
   vastgoed,
   winkelgebied,
-  YEAR_UNKNOWN,
 } from './normalize'
 
 import { listFixture as meetbouwMetingFixture } from '../../../../../../api/meetbouten/meting'
@@ -29,6 +27,26 @@ import * as api from '../../../../../../shared/services/api/api'
 
 jest.mock('../../../../../utils/formatDate')
 jest.mock('../../../../../../shared/services/api/api')
+
+const YEAR_UNKNOWN = 1005
+
+const societalActivities = (result) => {
+  const additionalFields = {
+    activities: (result.activiteiten || []).map((activity) => activity),
+    bijzondereRechtstoestand: {
+      /* eslint-disable no-underscore-dangle */
+      ...(result._bijzondere_rechts_toestand || {}),
+      surseanceVanBetaling:
+        (result._bijzondere_rechts_toestand &&
+          result._bijzondere_rechts_toestand.status === 'Voorlopig') ||
+        (result._bijzondere_rechts_toestand &&
+          result._bijzondere_rechts_toestand.status === 'Definitief'),
+      /* eslint-enable no-underscore-dangle */
+    },
+  }
+
+  return { ...result, ...additionalFields }
+}
 
 describe('normalize', () => {
   // This must be mocked to prevent issues with locale settings of machines

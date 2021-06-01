@@ -2,7 +2,8 @@ import { render } from '@testing-library/react'
 import 'jest-styled-components'
 import withAppContext from '../../../../utils/withAppContext'
 import { DeviceMode } from '../DrawerOverlay'
-import DrawerPanel, { slideInMobile, slideInDesktop } from './DrawerPanel'
+import DrawerPanel from './DrawerPanel'
+import { slideInDesktop, slideInMobile } from './keyframes'
 
 describe('DrawerPanel', () => {
   it('renders the panel', () => {

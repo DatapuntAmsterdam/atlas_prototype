@@ -31,8 +31,6 @@ const DataSelectionContext = createNamedContext<DataSelectionContextProps | null
   null,
 )
 
-export default DataSelectionContext
-
 const DataSelectionProvider: FunctionComponent = ({ children }) => {
   const [activeParamFilters, setActiveParamFilters] = useParam(dataSelectionFiltersParam)
   const [polygon] = useParam(polygonParam)

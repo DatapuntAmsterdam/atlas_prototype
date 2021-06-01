@@ -13,7 +13,7 @@ import useParam from '../../../../utils/useParam'
 import Control from '../Control'
 import { PANORAMA_SELECT } from '../../matomo-events'
 
-export const getLabel = (id: string): string =>
+const getLabel = (id: string): string =>
   PANO_LABELS.find(({ id: labelId }) => labelId === id)?.label || PANO_LABELS[0].label
 
 const StyledContextMenu = styled(ContextMenu)`

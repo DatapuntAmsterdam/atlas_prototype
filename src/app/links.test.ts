@@ -20,7 +20,6 @@ import {
   toMap,
   toMapSearch,
   toNotFound,
-  toPanorama,
   toPublicationDetail,
   toPublicationSearch,
   toSearch,
@@ -203,14 +202,6 @@ describe('toNotFound', () => {
   it('creates a location descriptor', () => {
     expect(toNotFound()).toEqual({
       pathname: routing.notFound.path,
-    })
-  })
-})
-
-describe('toPanorama', () => {
-  it('creates a location descriptor', () => {
-    expect(toPanorama()).toEqual({
-      pathname: routing.panorama.path,
     })
   })
 })

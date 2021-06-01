@@ -1,11 +1,9 @@
 import { ThemeProvider } from '@amsterdam/asc-ui'
 import usePromise from '@amsterdam/use-promise'
-import { screen, fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 import { AuthError } from '../../../shared/services/api/customError'
 import AuthAlert from '../Alerts/AuthAlert'
-import { ERROR_MESSAGE_TEST_ID } from '../ErrorMessage/ErrorMessage'
-import { LOADING_SPINNER_TEST_ID } from '../LoadingSpinner/LoadingSpinner'
 import PromiseResult from './PromiseResult'
 
 jest.mock('@amsterdam/use-promise', () => {
@@ -70,7 +68,7 @@ describe('PromiseResult', () => {
     const factory = () => Promise.resolve(null)
     render(<PromiseResult factory={factory}>{() => null}</PromiseResult>)
 
-    expect(screen.getByTestId(LOADING_SPINNER_TEST_ID)).toBeInTheDocument()
+    expect(screen.getByTestId('loadingSpinner')).toBeInTheDocument()
   })
 
   it('renders an error message when the result is rejected', () => {
@@ -86,7 +84,7 @@ describe('PromiseResult', () => {
       </ThemeProvider>,
     )
 
-    expect(screen.getByTestId(ERROR_MESSAGE_TEST_ID)).toBeInTheDocument()
+    expect(screen.getByTestId('errorMessage')).toBeInTheDocument()
   })
 
   it('increases the retry count when the user clicks the retry button', () => {

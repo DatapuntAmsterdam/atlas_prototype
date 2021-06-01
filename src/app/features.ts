@@ -3,7 +3,7 @@
  */
 export const FEATURE_KEYCLOAK_AUTH = 'KEYCLOAK_AUTH'
 
-export const STORAGE_KEY = 'features'
+const STORAGE_KEY = 'features'
 
 /**
  * Get a list of all features currently enabled.
