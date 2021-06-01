@@ -9,7 +9,7 @@ interface DrawerPanelProps {
   deviceMode?: DeviceMode
 }
 
-const slideInMobile = keyframes`
+export const slideInMobile = keyframes`
   from {
     transform: translateY(100%);
   }
@@ -18,7 +18,7 @@ const slideInMobile = keyframes`
   }
 `
 
-const slideInDesktop = keyframes`
+export const slideInDesktop = keyframes`
   from {
     transform: translateX(-100%);
   }
