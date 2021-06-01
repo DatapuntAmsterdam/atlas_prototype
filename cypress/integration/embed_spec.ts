@@ -4,10 +4,7 @@ import {
   viewParam,
 } from '../../src/app/pages/MapPage/query-params'
 import { routing } from '../../src/app/routes'
-import PARAMETERS from '../../src/store/parameters'
 import { HEADER, MAP } from '../support/selectors'
-
-const { EMBED_PREVIEW } = PARAMETERS
 
 describe('embed module', () => {
   beforeEach(() => {
@@ -22,7 +19,7 @@ describe('embed module', () => {
     cy.get(HEADER.root).should('not.exist')
     cy.url().should(
       'include',
-      `${routing.data.path}?${viewParam.name}=kaart&${EMBED_PREVIEW}=true&${mapLayersParam.name}=themtaxi-bgt%3A1%7Cthemtaxi-tar%3A1%7Cthemtaxi-pvrts%3A1%7Cthemtaxi-mzt%3A1%7Cthemtaxi-oovtig%3A1%7Cthemtaxi-vezips%3A1%7Cthemtaxi-slpnb%3A1%7Cthemtaxi-slpb%3A1%7Cthemtaxi-nlpnb%3A1%7Cthemtaxi-nlpb%3A1&${legendOpenParam.name}=true`,
+      `${routing.data.path}?${viewParam.name}=kaart&embed-preview=true&${mapLayersParam.name}=themtaxi-bgt%3A1%7Cthemtaxi-tar%3A1%7Cthemtaxi-pvrts%3A1%7Cthemtaxi-mzt%3A1%7Cthemtaxi-oovtig%3A1%7Cthemtaxi-vezips%3A1%7Cthemtaxi-slpnb%3A1%7Cthemtaxi-slpb%3A1%7Cthemtaxi-nlpnb%3A1%7Cthemtaxi-nlpb%3A1&${legendOpenParam.name}=true`,
     )
   })
   it('should show the user the embed view of the taxi map', () => {
