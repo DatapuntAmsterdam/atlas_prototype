@@ -3,6 +3,7 @@ import encodeParam from '../../utils/encodeParam'
 import type { PolyDrawing } from './query-params'
 import {
   isEmbeddedParam,
+  mapLayersParam,
   panoFovParam,
   panoHeadingParam,
   panoPitchParam,
@@ -82,6 +83,26 @@ describe('panoFovParam', () => {
     expect(panoFovParam.decode('123')).toBe(123)
     expect(panoFovParam.decode('0')).toBe(0)
     expect(panoFovParam.decode('-123.12312412344')).toBe(-123)
+  })
+})
+
+describe('mapLayersParam', () => {
+  it('should encode the value to parameter value', () => {
+    expect(mapLayersParam.encode(['some_layer', '_foo', 'bar_'])).toBe('some_layer|_foo|bar_')
+  })
+
+  it('should decode the value from the parameter', () => {
+    expect(mapLayersParam.decode('some_legacy_layer:1')).toStrictEqual(['some_legacy_layer'])
+    expect(mapLayersParam.decode('some_legacy_layer_:1|foo:1|bar_baz')).toStrictEqual([
+      'some_legacy_layer_',
+      'foo',
+      'bar_baz',
+    ])
+    expect(mapLayersParam.decode('some_non_legacyLayer|foo|bar')).toStrictEqual([
+      'some_non_legacyLayer',
+      'foo',
+      'bar',
+    ])
   })
 })
 

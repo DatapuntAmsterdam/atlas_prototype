@@ -87,7 +87,7 @@ const DrawTool: FunctionComponent = () => {
   const { activeFilters, setDistanceText, setDrawToolLocked } = useDataSelection()
   const { currentDatasetType } = useLegacyDataselectionConfig()
   const { panToWithPanelOffset } = useMapCenterToMarker()
-  const { setDrawerState } = useMapContext()
+  const { setDrawerState, setLegendActive } = useMapContext()
   const { trackEvent } = useMatomo()
 
   const [initialDrawnItems, setInitialDrawnItems] = useState<ExtendedLayer[]>([])
@@ -121,6 +121,7 @@ const DrawTool: FunctionComponent = () => {
     const geoOrAddressPage = shape.polygon ? routing.addresses.path : location.pathname
     const pathname = config[currentDatasetTypeRef.current?.toUpperCase()]?.path ?? geoOrAddressPage
     if (shape.polygon) {
+      setLegendActive(false)
       history.push({
         pathname,
         search: buildQueryStringRef.current([
