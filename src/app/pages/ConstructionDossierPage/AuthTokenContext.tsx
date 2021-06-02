@@ -69,7 +69,6 @@ const AuthTokenProvider: FunctionComponent = ({ children }) => {
     const rawToken = tokenParam ?? localStorage.getItem(STORAGE_KEY)
     const decodedToken = rawToken ? decodeToken(rawToken) : null
 
-    // Ignore expired tokens.
     if (decodedToken && isExpired(decodedToken)) {
       return true
     }
