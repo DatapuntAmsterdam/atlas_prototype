@@ -2,8 +2,8 @@ import { constants, Map as MapComponent, Scale, useStateRef } from '@amsterdam/a
 import type { FunctionComponent } from 'react'
 import { useCallback, useEffect } from 'react'
 import type { Theme } from '@amsterdam/asc-ui'
-import { Alert, themeSpacing } from '@amsterdam/asc-ui'
-import { Link } from 'react-router-dom'
+import { Alert, Link, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
+import { Link as RouterLink } from 'react-router-dom'
 import styled, { createGlobalStyle, css } from 'styled-components'
 import type L from 'leaflet'
 import PanoramaViewer from './components/PanoramaViewer/PanoramaViewer'
@@ -107,9 +107,14 @@ const MapPage: FunctionComponent = () => {
     <>
       {/* Hide alert for 30 days after dismissing the alert */}
       {!getCookie(ALERT_COOKIE) && (
-        <Alert level="info" dismissible onDismiss={() => createCookie(ALERT_COOKIE, '1', 720)}>
-          De kaartmodule is vernieuwd. Mocht u hier vragen over hebben kunt een mail sturen of de{' '}
-          <Link to={toHelpPage()}>help-pagina raadplegen</Link>
+        <Alert level="warning" dismissible onDismiss={() => createCookie(ALERT_COOKIE, '1', 720)}>
+          <Paragraph>
+            De kaart en de werking van de tekentool zijn vernieuwd. Voor meer info kunt u de{' '}
+            <Link as={RouterLink} to={toHelpPage()}>
+              help-pagina
+            </Link>{' '}
+            raadplegen
+          </Paragraph>
         </Alert>
       )}
       <MapView>
