@@ -9,6 +9,8 @@ import {
 } from '@amsterdam/asc-ui'
 import { MatomoProvider } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
+import type { FunctionComponent } from 'react'
+import { useMemo } from 'react'
 import { matchPath, useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import {
@@ -18,10 +20,8 @@ import {
   fetchExchange,
   Provider as GraphQLProvider,
 } from 'urql'
-import type { FunctionComponent } from 'react'
-import { useMemo } from 'react'
 import environment from '../environment'
-import getState from '../shared/services/redux/get-state'
+import { getAccessToken } from '../shared/services/auth/auth'
 import AppBody, { APP_CONTAINER_ID } from './AppBody'
 import Footer, { FOOTER_ID } from './components/Footer/Footer'
 import Header from './components/Header'
@@ -59,7 +59,8 @@ const SkipNavigationLink = styled(Button)`
 const graphQLClient = createClient({
   url: `${environment.GRAPHQL_ENDPOINT}`,
   fetchOptions: () => {
-    const token = getState().user.accessToken
+    const token = getAccessToken()
+
     return {
       headers: { authorization: token ? `Bearer ${token}` : '' },
     }

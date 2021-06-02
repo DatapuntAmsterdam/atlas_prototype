@@ -10,14 +10,12 @@ import {
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import type { ComponentProps, FunctionComponent } from 'react'
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import environment from '../../../environment'
 import CONSTANTS from '../../../shared/config/constants'
-import { HEADER_LINK_HELP, HEADER_LINKS_ABOUT } from '../../../shared/config/content-links'
-import { authenticateRequest, getUser } from '../../../shared/ducks/user/user'
-import { login, logout } from '../../../shared/services/auth/auth'
+import { HEADER_LINKS_ABOUT, HEADER_LINK_HELP } from '../../../shared/config/content-links'
+import { getName, isAuthenticated, login, logout } from '../../../shared/services/auth/auth'
 import truncateString from '../../../shared/services/truncateString/truncateString'
 import { toArticleDetail, toHelpPage } from '../../links'
 import navigationLinks from '../HomePage/services/navigationLinks'
@@ -52,20 +50,16 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
   type,
   ...otherProps
 }) => {
-  const dispatch = useDispatch()
   const [openFeedbackModal, setOpenFeedbackModal] = useState(false)
-  const user = useSelector(getUser)
   const [menuOpen, setMenuOpen] = useState(false)
   const { trackEvent } = useMatomo()
   const Menu = components[type]
 
   function handleLogin() {
-    dispatch(authenticateRequest('inloggen'))
     login()
   }
 
   function handleLogout() {
-    dispatch(authenticateRequest('uitloggen'))
     logout()
   }
 
@@ -164,7 +158,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
           {HEADER_LINK_HELP.title}
         </MenuButton>
       </MenuItem>
-      {!user.authenticated ? (
+      {!isAuthenticated() ? (
         <MenuItem>
           <MenuButton
             type="button"
@@ -183,7 +177,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
           </MenuButton>
         </MenuItem>
       ) : (
-        <MenuFlyOut data-test="login" label={truncateString(user.name, 9)}>
+        <MenuFlyOut data-test="login" label={truncateString(getName(), 9)}>
           <MenuItem>
             <MenuButton
               type="button"

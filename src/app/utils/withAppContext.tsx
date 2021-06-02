@@ -1,11 +1,6 @@
-import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from '@amsterdam/asc-ui'
 import type { ReactElement } from 'react'
-
-import configureStore from '../../store/store'
-
-const { store } = configureStore()
 
 /**
  * HOC that wraps a component in the necessary providers so that the component can access theming,
@@ -13,9 +8,7 @@ const { store } = configureStore()
  */
 const withAppContext = (WrappedComponent: ReactElement) => (
   <ThemeProvider>
-    <Provider store={store}>
-      <BrowserRouter>{WrappedComponent}</BrowserRouter>
-    </Provider>
+    <BrowserRouter>{WrappedComponent}</BrowserRouter>
   </ThemeProvider>
 )
 

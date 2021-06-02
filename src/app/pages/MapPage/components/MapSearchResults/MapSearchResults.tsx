@@ -1,25 +1,24 @@
 import { Alert, Heading, Link, Paragraph, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import { useSelector } from 'react-redux'
-import { Link as RouterLink } from 'react-router-dom'
-import styled from 'styled-components'
 import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
 import type { FunctionComponent } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
+import styled from 'styled-components'
+import { getScopes } from '../../../../../shared/services/auth/auth'
+import formatNumber from '../../../../../shared/services/number-formatter/number-formatter'
+import { getDetailPageData } from '../../../../../store/redux-first-router/actions'
+import AuthAlert from '../../../../components/Alerts/AuthAlert'
+import LoadingSpinner from '../../../../components/LoadingSpinner/LoadingSpinner'
+import ShowMore from '../../../../components/ShowMore'
+import { toDataDetail } from '../../../../links'
+import useParam from '../../../../utils/useParam'
 import type {
   MapSearchCategory,
   MapSearchResult,
 } from '../../legacy/services/map-search/map-search'
 import mapSearch from '../../legacy/services/map-search/map-search'
-import { getUser } from '../../../../../shared/ducks/user/user'
-import formatNumber from '../../../../../shared/services/number-formatter/number-formatter'
-import { getDetailPageData } from '../../../../../store/redux-first-router/actions'
-import AuthAlert from '../../../../components/Alerts/AuthAlert'
-import ShowMore from '../../../../components/ShowMore'
-import useParam from '../../../../utils/useParam'
 import { locationParam } from '../../query-params'
-import PanoramaPreview from '../PanoramaPreview/PanoramaPreview'
 import useAsyncMapPanelHeader from '../../utils/useAsyncMapPanelHeader'
-import LoadingSpinner from '../../../../components/LoadingSpinner/LoadingSpinner'
-import { toDataDetail } from '../../../../links'
+import PanoramaPreview from '../PanoramaPreview/PanoramaPreview'
 
 const RESULT_LIMIT = 10
 
@@ -66,10 +65,8 @@ const StyledPanoramaPreview = styled(PanoramaPreview)`
 const EXCLUDED_RESULTS = 'vestigingen'
 
 const MapSearchResults: FunctionComponent = () => {
-  const user = useSelector(getUser)
   const [location] = useParam(locationParam)
-
-  const result = usePromise(() => mapSearch(user, location), [location, user])
+  const result = usePromise(() => mapSearch(location), [location])
 
   useAsyncMapPanelHeader(
     result,
@@ -113,7 +110,7 @@ const MapSearchResults: FunctionComponent = () => {
           </CategoryBlock>
         ))
       )}
-      {(!user.scopes.includes('HR/R') || !user.scopes.includes('BRK/RS')) && (
+      {(!getScopes().includes('HR/R') || !getScopes().includes('BRK/RS')) && (
         <StyledAuthAlert excludedResults={EXCLUDED_RESULTS} />
       )}
     </>

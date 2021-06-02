@@ -31,12 +31,6 @@ jest.mock('react-router-dom', () => ({
 
 const dataSelectionBagUrl = joinUrl([environment.API_ROOT, 'dataselectie/bag/'])
 
-jest.mock('react-redux', () => ({
-  // @ts-ignore
-  ...jest.requireActual('react-redux'),
-  useDispatch: jest.fn(() => jest.fn()),
-}))
-
 describe('DataSelection', () => {
   beforeEach(() => {
     server.use(rest.get(dataSelectionBagUrl, async (req, res, ctx) => res(ctx.json(bagFixture))))
