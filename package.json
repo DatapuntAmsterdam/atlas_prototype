@@ -105,7 +105,7 @@
     "@types/openseadragon": "^2.4.5",
     "@types/proj4": "^2.5.0",
     "@types/react": "^17.0.9",
-    "@types/react-dom": "^17.0.5",
+    "@types/react-dom": "^17.0.6",
     "@types/react-helmet": "^6.1.1",
     "@types/react-router-dom": "^5.1.7",
     "@types/resize-observer-browser": "^0.1.5",
