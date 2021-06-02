@@ -11,7 +11,7 @@ export interface LoginAlertProps {
 }
 
 const StyledAlert = styled(Alert)`
-  margin-bottom: ${themeSpacing(5)} !important;
+  margin-bottom: ${themeSpacing(5)};
 `
 
 const LoginAlert: FunctionComponent<LoginAlertProps> = ({ restricted, onRequestLoginLink }) => {

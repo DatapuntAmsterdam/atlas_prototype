@@ -19,10 +19,6 @@ const expiredWrapper: FunctionComponent = ({ children }) =>
   )
 
 describe('LoginAlert', () => {
-  // beforeEach(() => {
-
-  // })
-
   it('renders the alert', () => {
     const { container } = render(<LoginAlert restricted={false} onRequestLoginLink={() => {}} />, {
       wrapper,
