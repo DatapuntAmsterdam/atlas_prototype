@@ -104,19 +104,17 @@ const PanoramaViewer: FunctionComponent = () => {
 
   const fetchPanoramaImage = useCallback(
     (res) => {
-      if (panoPitch && panoHeading) {
-        setPanoImageDate(res.date)
-        loadScene(
-          marzipanoViewer,
-          setHotspotId,
-          res.image,
-          panoHeading,
-          panoPitch || panoPitchParam.initialValue,
-          panoFov || panoFovParam.initialValue,
-          res.hotspots,
-          trackEvent,
-        )
-      }
+      setPanoImageDate(res.date)
+      loadScene(
+        marzipanoViewer,
+        setHotspotId,
+        res.image,
+        panoHeading ?? panoPitchParam.initialValue,
+        panoPitch ?? panoPitchParam.initialValue,
+        panoFov ?? panoFovParam.initialValue,
+        res.hotspots,
+        trackEvent,
+      )
     },
     [panoPitch, panoHeading, setPanoImageDate, marzipanoViewer, setHotspotId],
   )
