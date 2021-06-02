@@ -1,13 +1,11 @@
 import type { FunctionComponent } from 'react'
 import { useEffect, useMemo, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import type { MapCollection, MapLayer } from './legacy/services'
 import {
   getMapLayers as fetchMapLayers,
   getPanelLayers as fetchPanelLayers,
 } from './legacy/services'
-import { getUser } from '../../../shared/ducks/user/user'
 import useParam from '../../utils/useParam'
 import type { MapState } from './MapContext'
 import MapContext from './MapContext'
@@ -37,14 +35,13 @@ const MapContainer: FunctionComponent = ({ children }) => {
   })
   const [panelHeader, setPanelHeader] = useState<MapState['panelHeader']>({ title: 'Resultaten' })
   const [panoFullScreen, setPanoFullScreen] = useParam(panoFullScreenParam)
-  const user = useSelector(getUser)
   const browserLocation = useLocation()
 
   const panoActive = panoHeading !== null && location !== null
 
   const legendLeafletLayers = useMemo(
-    () => buildLeafletLayers(activeMapLayers, layers.mapLayers, user),
-    [activeMapLayers, layers.mapLayers, user],
+    () => buildLeafletLayers(activeMapLayers, layers.mapLayers),
+    [activeMapLayers, layers.mapLayers],
   )
 
   useEffect(() => {

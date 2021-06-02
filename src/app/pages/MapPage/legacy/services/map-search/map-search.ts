@@ -1,9 +1,9 @@
-import type { LatLngLiteral } from 'leaflet'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import type { FeatureCollection, Geometry } from 'geojson'
+import type { LatLngLiteral } from 'leaflet'
 import environment from '../../../../../../environment'
-import type { UserState } from '../../../../../../shared/ducks/user/user'
 import { fetchWithToken } from '../../../../../../shared/services/api/api'
+import { getScopes, isAuthenticated } from '../../../../../../shared/services/auth/auth'
 import {
   fetchByPandId as fetchAddressByPandId,
   fetchHoofdadresByLigplaatsId,
@@ -92,7 +92,7 @@ interface MapFeatureProperties {
 }
 
 export const fetchRelatedForUser =
-  (user: UserState) => (data: FeatureCollection<Geometry, MapFeatureProperties>) => {
+  () => (data: FeatureCollection<Geometry, MapFeatureProperties>) => {
     const relatableFeature = data.features.find(
       (feature) => relatedResourcesByType[feature.properties.type],
     )
@@ -103,7 +103,7 @@ export const fetchRelatedForUser =
 
     const resources = relatedResourcesByType[relatableFeature.properties.type]
     const requests = resources.map((resource) =>
-      resource.authScope && (!user.authenticated || !user.scopes.includes(resource.authScope))
+      resource.authScope && (!isAuthenticated() || !getScopes().includes(resource.authScope))
         ? []
         : resource.fetch(relatableFeature.properties.id).then((results) =>
             results.map((result) => ({
@@ -148,10 +148,7 @@ export interface MapSearchResult {
   statusLabel: string
 }
 
-export default function mapSearch(
-  user: UserState,
-  location: LatLngLiteral | null,
-): Promise<MapSearchResponse> {
+export default function mapSearch(location: LatLngLiteral | null): Promise<MapSearchResponse> {
   const errorType = 'error'
   const allRequests: Promise<any>[] = []
 
@@ -160,7 +157,7 @@ export default function mapSearch(
   }
 
   endpoints.forEach((endpoint) => {
-    const isInScope = !endpoint.authScope || user.scopes.includes(endpoint.authScope)
+    const isInScope = !endpoint.authScope || getScopes().includes(endpoint.authScope)
 
     if (!isInScope) {
       return
@@ -176,7 +173,7 @@ export default function mapSearch(
     const request = fetchWithToken<FeatureCollection<Geometry, MapFeatureProperties>>(
       `${environment.API_ROOT}${endpoint.uri}?${searchParams.toString()}`,
     )
-      .then(fetchRelatedForUser(user))
+      .then(fetchRelatedForUser())
       .then(
         (features) => features.map((feature: any) => transformResultByType(feature)),
         (code) => ({

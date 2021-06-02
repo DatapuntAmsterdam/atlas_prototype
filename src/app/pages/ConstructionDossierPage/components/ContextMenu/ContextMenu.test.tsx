@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import * as reactRedux from 'react-redux'
 import { mocked } from 'ts-jest/utils'
 import socialItems from '../../../../components/ContextMenu/socialItems'
 import withAppContext from '../../../../utils/withAppContext'
@@ -10,14 +9,8 @@ jest.mock('../../../../components/ContextMenu/socialItems')
 const socialItemsMock = mocked(socialItems)
 
 describe('ContextMenu', () => {
-  const useDispatchMock = jest.spyOn(reactRedux, 'useDispatch')
-
   beforeEach(() => {
     socialItemsMock.mockReturnValue([])
-  })
-
-  afterEach(() => {
-    useDispatchMock.mockClear()
   })
 
   it('renders the menu', () => {
@@ -50,10 +43,6 @@ describe('ContextMenu', () => {
   })
 
   it('opens the print mode if the print button is pressed', () => {
-    const dispatchMock = jest.fn()
-
-    useDispatchMock.mockReturnValue(dispatchMock)
-
     render(
       withAppContext(
         <ContextMenu

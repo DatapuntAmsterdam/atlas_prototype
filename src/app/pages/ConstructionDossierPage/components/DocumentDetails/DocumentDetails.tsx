@@ -57,7 +57,6 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
   // Only allow downloads from a signed in user if authenticated with Keycloak.
   // TODO: This logic can be removed once we switch to Keycloak entirely.
   const disableDownload = isAuthenticated() && !isFeatureEnabled(FEATURE_KEYCLOAK_AUTH)
-
   const restricted = dossier.access === 'RESTRICTED' || document.access === 'RESTRICTED'
   const hasRights = useMemo(() => {
     // Only users with extended rights can view restricted documents.

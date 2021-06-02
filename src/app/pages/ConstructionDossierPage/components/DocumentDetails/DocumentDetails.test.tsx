@@ -6,13 +6,14 @@ import withAppContext from '../../../../utils/withAppContext'
 import AuthTokenContext from '../../AuthTokenContext'
 import FilesGallery from '../FilesGallery'
 import DocumentDetails from './DocumentDetails'
-import * as userDuck from '../../../../../shared/ducks/user/user'
 import { SCOPES } from '../../../../../shared/services/auth/auth-legacy'
+import { getScopes } from '../../../../../shared/services/auth/auth'
 
 jest.mock('../FilesGallery')
+jest.mock('../../../../../shared/services/auth/auth')
 
 const FilesGalleryMock = mocked(FilesGallery)
-const getUserScopesMock = jest.spyOn(userDuck, 'getUserScopes')
+const getScopesMock = mocked(getScopes)
 
 const documentFixture = dossierFixture.documenten[0]
 
@@ -31,12 +32,12 @@ describe('DocumentDetails', () => {
       },
     )
 
-    getUserScopesMock.mockReturnValue([])
+    getScopesMock.mockReturnValue([])
   })
 
   afterEach(() => {
     FilesGalleryMock.mockReset()
-    getUserScopesMock.mockReset()
+    getScopesMock.mockReset()
   })
 
   it('renders the title', () => {
@@ -171,7 +172,7 @@ describe('DocumentDetails', () => {
   })
 
   it('renders a message if the dossier is restricted and the user has no extended rights', () => {
-    getUserScopesMock.mockReturnValue([SCOPES['BD/R']])
+    getScopesMock.mockReturnValue([SCOPES['BD/R']])
 
     render(
       <DocumentDetails
@@ -187,7 +188,7 @@ describe('DocumentDetails', () => {
   })
 
   it('renders a message if the document is restricted and the user has no extended rights', () => {
-    getUserScopesMock.mockReturnValue([SCOPES['BD/R']])
+    getScopesMock.mockReturnValue([SCOPES['BD/R']])
 
     render(
       <DocumentDetails
