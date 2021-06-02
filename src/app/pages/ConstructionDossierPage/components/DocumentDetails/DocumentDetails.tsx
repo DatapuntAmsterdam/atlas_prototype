@@ -1,16 +1,14 @@
 import { Download } from '@amsterdam/asc-assets'
 import { Alert, Button, Heading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import { useMemo, useState } from 'react'
-import { useSelector } from 'react-redux'
-import styled from 'styled-components'
 import type { FunctionComponent } from 'react'
+import { useMemo, useState } from 'react'
+import styled from 'styled-components'
 import type {
   Bestand,
   Document,
   Single as Bouwdossier,
 } from '../../../../../api/iiif-metadata/bouwdossier'
-import { getUserScopes, userIsAuthenticated } from '../../../../../shared/ducks/user/user'
-import { SCOPES } from '../../../../../shared/services/auth/auth'
+import { getScopes, isAuthenticated, SCOPES } from '../../../../../shared/services/auth/auth'
 import { FEATURE_KEYCLOAK_AUTH, isFeatureEnabled } from '../../../../features'
 import { useAuthToken } from '../../AuthTokenContext'
 import ContentBlock, { DefinitionList, DefinitionListItem, SubHeading } from '../ContentBlock'
@@ -58,14 +56,12 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
   const [selectedFiles, setSelectedFiles] = useState<Bestand[]>([])
   const [showSelectFilesModal, setShowSelectFilesModal] = useState(false)
   const [showRequestDownloadModal, setShowRequestDownloadModal] = useState(false)
-  const scopes = useSelector(getUserScopes)
+  const scopes = getScopes()
   const token = useAuthToken()
 
   // Only allow downloads from a signed in user if authenticated with Keycloak.
   // TODO: This logic can be removed once we switch to Keycloak entirely.
-  const authenticated = useSelector(userIsAuthenticated)
-  const disableDownload = authenticated && !isFeatureEnabled(FEATURE_KEYCLOAK_AUTH)
-
+  const disableDownload = isAuthenticated() && !isFeatureEnabled(FEATURE_KEYCLOAK_AUTH)
   const restricted = dossier.access === 'RESTRICTED' || document.access === 'RESTRICTED'
   const hasRights = useMemo(() => {
     // Only users with extended rights can view restricted documents.

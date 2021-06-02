@@ -30,11 +30,10 @@ const MapPanel = ({
   activeMapLayers = [],
   isMapPanelVisible = true,
   panelLayers = [],
-  user = {},
   zoomLevel = 0,
 }) => {
   const someLayersRequireZoom = activeMapLayers.some(
-    (mapLayer) => isAuthorised(mapLayer, user) && zoomLevel < mapLayer.minZoom,
+    (mapLayer) => isAuthorised(mapLayer) && zoomLevel < mapLayer.minZoom,
   )
 
   return (
@@ -94,7 +93,6 @@ const MapPanel = ({
             onLayerToggle={onLayerToggle}
             onLayerVisibilityToggle={onLayerVisibilityToggle}
             overlays={overlays}
-            user={user}
             title={title}
             zoomLevel={zoomLevel}
             printMode={printMode}
@@ -111,7 +109,6 @@ MapPanel.defaultProps = {
   map: {},
   mapBaseLayers: {},
   panelLayers: [],
-  user: {},
   zoomLevel: 0,
 }
 
