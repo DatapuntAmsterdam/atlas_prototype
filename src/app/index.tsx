@@ -1,9 +1,17 @@
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import environment from '../environment'
+import { initAuth, getReturnPath } from '../shared/services/auth/auth'
+import { initKeycloak } from '../shared/services/auth/auth-keycloak'
 import App from './App'
 import { UiProvider } from './contexts/ui'
-import { disableFeature, enableFeature, getEnabledFeatures } from './features'
+import {
+  disableFeature,
+  enableFeature,
+  FEATURE_KEYCLOAK_AUTH,
+  getEnabledFeatures,
+  isFeatureEnabled,
+} from './features'
 import resolveRedirects from './redirects'
 import './sentry'
 
@@ -18,12 +26,37 @@ if (searchParams.has('disableFeature')) {
   disableFeature(searchParams.get('disableFeature') as string)
 }
 
-// If there are no redirects for the current url, render the application
 resolveRedirects(window.location)
   .then((hasToRedirect) => {
-    if (!hasToRedirect) {
-      renderApp()
+    // Don't do any bootstrapping if we have to redirect.
+    if (hasToRedirect) {
+      return
     }
+
+    const useKeycloak = isFeatureEnabled(FEATURE_KEYCLOAK_AUTH)
+
+    // If Keycloak is not enabled then initialize AuthZ.
+    if (!useKeycloak) {
+      try {
+        initAuth()
+      } catch (error) {
+        console.warn(error) // eslint-disable-line no-console
+      }
+    }
+
+    const returnPath = getReturnPath()
+
+    // Return to the original path where the user started authentication.
+    if (returnPath) {
+      window.location.href = returnPath
+    }
+
+    // Initialize Keycloak if enabled.
+    if (useKeycloak) {
+      return initKeycloak().then(() => renderApp())
+    }
+
+    renderApp()
   })
   .catch((error: string) => {
     // eslint-disable-next-line no-console
