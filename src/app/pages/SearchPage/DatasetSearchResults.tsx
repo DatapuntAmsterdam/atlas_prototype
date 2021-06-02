@@ -3,8 +3,7 @@ import { themeSpacing } from '@amsterdam/asc-ui'
 import type { GraphQLFormattedError } from 'graphql'
 import type { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import { dcatdScopes } from '../../../shared/services/auth/auth'
-import getState from '../../../shared/services/redux/get-state'
+import { dcatdScopes, getScopes } from '../../../shared/services/auth/auth'
 import ActionButton from '../../components/ActionButton'
 import AuthAlert from '../../components/Alerts/AuthAlert'
 import DatasetCard from '../../components/DatasetCard'
@@ -57,14 +56,9 @@ const DatasetSearchResults: FunctionComponent<DatasetSearchResultsProps> = ({
   isOverviewPage,
 }) => {
   // Check if user has the correct scopes to add or edit datasets
-  const canEdit =
-    getState().user && isOverviewPage
-      ? getState().user.scopes.some((scope) => dcatdScopes.includes(scope))
-      : false
-
+  const canEdit = isOverviewPage ? getScopes().some((scope) => dcatdScopes.includes(scope)) : false
   const matchingErrors = getErrorsForPath(errors, ['datasetSearch'])
   const hasLoadingError = getLoadingErrors(matchingErrors).length > 0
-
   // Get all the labels of the type that the user has no access to
   const unauthorizedLabels = getUnauthorizedLabels(matchingErrors)
 

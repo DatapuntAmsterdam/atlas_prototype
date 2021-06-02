@@ -1,9 +1,6 @@
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import type { AnyAction, Store } from 'redux'
 import environment from '../environment'
-import configureStore from '../store/store'
 import App from './App'
 import { UiProvider } from './contexts/ui'
 import { disableFeature, enableFeature, getEnabledFeatures } from './features'
@@ -25,9 +22,7 @@ if (searchParams.has('disableFeature')) {
 resolveRedirects(window.location)
   .then((hasToRedirect) => {
     if (!hasToRedirect) {
-      const { store } = configureStore()
-
-      renderApp(store)
+      renderApp()
     }
   })
   .catch((error: string) => {
@@ -35,7 +30,7 @@ resolveRedirects(window.location)
     console.error(`Can't resolve redirects: ${error}`)
   })
 
-function renderApp(store: Store<any, AnyAction>) {
+function renderApp() {
   // eslint-disable-next-line no-console
   console.info(
     `Dataportaal: version: ${process.env.VERSION as string}, deploy env: ${environment.DEPLOY_ENV}`,
@@ -49,13 +44,11 @@ function renderApp(store: Store<any, AnyAction>) {
   }
 
   ReactDOM.render(
-    <Provider store={store}>
-      <BrowserRouter>
-        <UiProvider>
-          <App />
-        </UiProvider>
-      </BrowserRouter>
-    </Provider>,
+    <BrowserRouter>
+      <UiProvider>
+        <App />
+      </UiProvider>
+    </BrowserRouter>,
     document.getElementById('root'),
   )
 }

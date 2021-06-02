@@ -1,9 +1,7 @@
 import type { FunctionComponent } from 'react'
 import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import MapPanel from '../../legacy/panel/MapPanel'
-import { getUser } from '../../../../../shared/ducks/user/user'
 import useParam from '../../../../utils/useParam'
 import { useMapContext } from '../../MapContext'
 import { mapLayersParam, zoomParam } from '../../query-params'
@@ -37,7 +35,6 @@ const MapPanelContent = styled.div`
 
 const LegendPanel: FunctionComponent = () => {
   const { panelLayers } = useMapContext()
-  const user = useSelector(getUser)
   const [zoomLevel] = useParam(zoomParam)
   const [activeLayers, setActiveMapLayers] = useParam(mapLayersParam)
 
@@ -63,7 +60,6 @@ const LegendPanel: FunctionComponent = () => {
         }}
         isMapPanelVisible
         zoomLevel={zoomLevel}
-        user={user}
       />
     </MapPanelContent>
   )

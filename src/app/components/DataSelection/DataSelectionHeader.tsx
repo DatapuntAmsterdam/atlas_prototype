@@ -1,19 +1,18 @@
-import { useSelector } from 'react-redux'
-import { Button, Tab, Tabs, themeSpacing } from '@amsterdam/asc-ui'
-import styled from 'styled-components'
 import { Map, Table } from '@amsterdam/asc-assets'
-import { Link as RouterLink, useHistory, useLocation } from 'react-router-dom'
+import { Button, Tab, Tabs, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import type { FunctionComponent } from 'react'
-import { getUser } from '../../../shared/ducks/user/user'
-import useBuildQueryString from '../../utils/useBuildQueryString'
-import { useDataSelection } from './DataSelectionContext'
-import useLegacyDataselectionConfig from './useLegacyDataselectionConfig'
-import { ViewMode, viewParam } from '../../pages/MapPage/query-params'
-import DataSelectionDownloadButton from './DataSelectionDownloadButton'
-import useParam from '../../utils/useParam'
+import { Link as RouterLink, useHistory, useLocation } from 'react-router-dom'
+import styled from 'styled-components'
+import { getScopes } from '../../../shared/services/auth/auth'
 import { DATASELECTION_MAP_BUTTON } from '../../pages/MapPage/matomo-events'
+import { ViewMode, viewParam } from '../../pages/MapPage/query-params'
+import useBuildQueryString from '../../utils/useBuildQueryString'
+import useParam from '../../utils/useParam'
+import { useDataSelection } from './DataSelectionContext'
+import DataSelectionDownloadButton from './DataSelectionDownloadButton'
 import { DatasetType } from './types'
+import useLegacyDataselectionConfig from './useLegacyDataselectionConfig'
 
 const StyledTabs = styled(Tabs)`
   margin-bottom: ${themeSpacing(2)};
@@ -34,7 +33,6 @@ const DATASETS = {
 
 const DataSelectionHeader: FunctionComponent = () => {
   const [view] = useParam(viewParam)
-  const user = useSelector(getUser)
   const location = useLocation()
   const history = useHistory()
   const { buildQueryString } = useBuildQueryString()
@@ -50,7 +48,7 @@ const DataSelectionHeader: FunctionComponent = () => {
   const showDownloadButton =
     view !== ViewMode.Split &&
     totalResults > 0 &&
-    (!currentDatasetConfig.AUTH_SCOPE || user.scopes.includes(currentDatasetConfig.AUTH_SCOPE))
+    (!currentDatasetConfig.AUTH_SCOPE || getScopes().includes(currentDatasetConfig.AUTH_SCOPE))
 
   const showTabs = view === ViewMode.Split
   const tabs = [DATASETS.BAG, DATASETS.HR, DATASETS.BRK].map((ds) => ({

@@ -13,17 +13,15 @@ import {
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
 import marked from 'marked'
+import type { FunctionComponent } from 'react'
 import { useMemo } from 'react'
 import { Helmet } from 'react-helmet'
-import { useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import type { FunctionComponent } from 'react'
 import type { DcatTemporal } from '../../../api/dcatd/datasets'
 import getDatasetData from '../../../api/dcatd/datasets/getDatasetData'
-import { getUserScopes } from '../../../shared/ducks/user/user'
 import { NotFoundError } from '../../../shared/services/api/customError'
-import { dcatdScopes } from '../../../shared/services/auth/auth'
+import { dcatdScopes, getScopes } from '../../../shared/services/auth/auth'
 import type { DatasetFilterOption } from '../../../shared/services/datasets-filters/datasets-filters'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import DefinitionList, { DefinitionListItem } from '../../components/DefinitionList'
@@ -129,7 +127,7 @@ interface DatasetDetailPageParams {
 const DatasetDetailPage: FunctionComponent = () => {
   const { trackEvent } = useMatomo()
   const { id } = useParams<DatasetDetailPageParams>()
-  const userScopes = useSelector(getUserScopes)
+  const userScopes = getScopes()
   const history = useHistory()
   const canEdit = useMemo(
     () => userScopes.some((scope) => dcatdScopes.includes(scope)),

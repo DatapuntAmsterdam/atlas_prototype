@@ -11,6 +11,3 @@ updates:
   - dependency-name: leaflet-draw
     versions:
     - ">= 0"
-  - dependency-name: redux-saga
-    versions:
-    - ">= 0"

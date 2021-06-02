@@ -83,14 +83,6 @@ npm run deploy:demo
 
 - API health checks used in this project buid pipeline: https://github.com/Amsterdam/atlas-health-checks
 
-## Techniques used
-
-- AngularJS
-- React
-- Redux
-- Leaflet
-- D3
-
 ## Conventions used
 
 - John Papa Angular style guide (https://github.com/johnpapa/angular-styleguide/tree/master/a1)

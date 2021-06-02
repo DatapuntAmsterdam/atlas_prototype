@@ -86,7 +86,6 @@ const constructLegendIconUrl = (mapLayer, legendItem) => {
 const MapLegend = ({
   activeMapLayers,
   onLayerVisibilityToggle,
-  user,
   zoomLevel,
   printMode,
   onLayerToggle,
@@ -340,20 +339,18 @@ const MapLegend = ({
                           }
                         />
                       </StyledLabel>
-                      {isAuthorised(mapLayer, user) &&
-                        layerIsChecked &&
-                        zoomLevel < mapLayer.minZoom && (
-                          <div
-                            className={classNames('map-legend__visibility', {
-                              'map-legend__visibility--no-legend-image': hasLegendItems,
-                            })}
-                            title="Kaartlaag zichtbaar bij verder inzoomen"
-                          >
-                            <Icon size={16} color={themeColor('primary', 'main')}>
-                              <SearchPlus />
-                            </Icon>
-                          </div>
-                        )}
+                      {isAuthorised(mapLayer) && layerIsChecked && zoomLevel < mapLayer.minZoom && (
+                        <div
+                          className={classNames('map-legend__visibility', {
+                            'map-legend__visibility--no-legend-image': hasLegendItems,
+                          })}
+                          title="Kaartlaag zichtbaar bij verder inzoomen"
+                        >
+                          <Icon size={16} color={themeColor('primary', 'main')}>
+                            <SearchPlus />
+                          </Icon>
+                        </div>
+                      )}
                       {!hasLegendItems ? (
                         <div className="map-legend__image">
                           <img
@@ -363,12 +360,12 @@ const MapLegend = ({
                         </div>
                       ) : null}
                     </div>
-                    {!isAuthorised(mapLayer, user) && (
+                    {!isAuthorised(mapLayer) && (
                       <StyledAlert level="info">
                         <LoginLink showChevron={false}>Zichtbaar na inloggen</LoginLink>
                       </StyledAlert>
                     )}
-                    {isAuthorised(mapLayer, user) && layerIsChecked && !mapLayer.disabled && (
+                    {isAuthorised(mapLayer) && layerIsChecked && !mapLayer.disabled && (
                       <ul className="map-legend__items">
                         {hasLegendItems
                           ? mapLayer.legendItems.map((legendItem) => {

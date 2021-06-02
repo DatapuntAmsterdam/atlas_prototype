@@ -1,8 +1,8 @@
 import type { TileLayerOptions } from 'leaflet'
+import { createUrlWithToken } from '../../../../shared/services/api/api'
+import { getAccessToken } from '../../../../shared/services/auth/auth'
 import type { MapLayer } from '../legacy/services'
 import MAP_CONFIG from '../legacy/services/map.config'
-import type { UserState } from '../../../../shared/ducks/user/user'
-import { createUrlWithToken } from '../../../../shared/services/api/api'
 import type { Overlay } from '../MapContext'
 
 const findLayer = (layers: MapLayer[], id: string) => {
@@ -53,11 +53,7 @@ function generateUrl(layer: MapLayer, token: string) {
   return url
 }
 
-export default function buildLeafletLayers(
-  activeMapLayers: string[],
-  mapLayers: MapLayer[],
-  user: UserState,
-) {
+export default function buildLeafletLayers(activeMapLayers: string[], mapLayers: MapLayer[]) {
   return activeMapLayers
     .map((activeMapLayer) => {
       const layer = findLayer(mapLayers, activeMapLayer)
@@ -65,6 +61,7 @@ export default function buildLeafletLayers(
       if (!layer) {
         return null
       }
+
       const legendLayers = (layer.legendItems ?? [])
         // eslint-disable-next-line no-underscore-dangle
         .map((legendItem) => (legendItem.__typename === 'MapLayer' ? legendItem.id : null))
@@ -72,7 +69,7 @@ export default function buildLeafletLayers(
         .map((id) => findLayer(mapLayers, id))
         .filter((legendLayer): legendLayer is MapLayer => !!legendLayer)
 
-      return [layer, ...legendLayers].map((item) => generateOverlay(item, user.accessToken))
+      return [layer, ...legendLayers].map((item) => generateOverlay(item, getAccessToken()))
     })
     .flat()
     .filter((layer): layer is Overlay => !!layer)

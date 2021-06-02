@@ -1,13 +1,15 @@
-import { useSelector } from 'react-redux'
-import { getUserScopes } from '../../shared/ducks/user/user'
 import type AuthScope from '../../shared/services/api/authScope'
+import { getScopes } from '../../shared/services/auth/auth'
 
 const useAuthScope = () => {
-  const userScopes = useSelector(getUserScopes)
-  const isUserAuthorized = (authScopes?: AuthScope[]) =>
-    authScopes
-      ? authScopes.every((scope) => (userScopes.length ? userScopes.includes(scope) : false))
-      : true
+  const userScopes = getScopes()
+  const isUserAuthorized = (authScopes?: AuthScope[]) => {
+    if (!authScopes) {
+      return true
+    }
+
+    return authScopes.every((scope) => userScopes.includes(scope))
+  }
 
   return {
     isUserAuthorized,

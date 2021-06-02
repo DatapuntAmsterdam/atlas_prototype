@@ -1,13 +1,12 @@
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Checkbox, Column, Link, Row, themeSpacing } from '@amsterdam/asc-ui'
+import type { FunctionComponent } from 'react'
 import { useMemo, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import styled, { css } from 'styled-components'
-import type { FunctionComponent } from 'react'
 import type { Bestand, Document } from '../../../../../api/iiif-metadata/bouwdossier'
 import { NOT_FOUND_THUMBNAIL } from '../../../../../shared/config/constants'
-import { userIsAuthenticated } from '../../../../../shared/ducks/user/user'
+import { isAuthenticated } from '../../../../../shared/services/auth/auth'
 import ActionButton from '../../../../components/ActionButton'
 import { FEATURE_KEYCLOAK_AUTH, isFeatureEnabled } from '../../../../features'
 import { toConstructionDossier } from '../../../../links'
@@ -99,8 +98,7 @@ const FilesGallery: FunctionComponent<FilesGalleryProps> = ({
 
   // Only allow downloads from a signed in user if authenticated with Keycloak.
   // TODO: This logic can be removed once we switch to Keycloak entirely.
-  const authenticated = useSelector(userIsAuthenticated)
-  const disableDownload = authenticated && !isFeatureEnabled(FEATURE_KEYCLOAK_AUTH)
+  const disableDownload = isAuthenticated() && !isFeatureEnabled(FEATURE_KEYCLOAK_AUTH)
 
   function toggleFile(file: Bestand) {
     if (selectedFiles.includes(file)) {
