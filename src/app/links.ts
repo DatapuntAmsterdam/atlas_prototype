@@ -98,11 +98,6 @@ export const toHome = (): LocationDescriptorObject => ({
   pathname: routing.home.path,
 })
 
-// TODO: Rename this method to match the name of the route.
-export const toMap = (): LocationDescriptorObject => ({
-  pathname: routing.data.path,
-})
-
 export const toMapSearch = (): LocationDescriptorObject => ({
   pathname: routing.mapSearch.path,
 })
