@@ -74,7 +74,7 @@ function formatResponse(
 
   let indexInTotal = -1
 
-  const indexedResponse = sortedResponse.map((item) => ({
+  return sortedResponse.map((item) => ({
     ...item,
     totalResults: item.total_results,
     content: item.content.map((content) => {
@@ -91,8 +91,6 @@ function formatResponse(
       }
     }),
   }))
-
-  return indexedResponse
 }
 
 // TODO: Generate these types from the OpenAPI spec: https://api.data.amsterdam.nl/typeahead/openapi
