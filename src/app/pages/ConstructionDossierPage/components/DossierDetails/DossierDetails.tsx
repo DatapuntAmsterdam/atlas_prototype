@@ -29,7 +29,6 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
   ...otherProps
 }) => {
   const [showLoginLinkRequestModal, setShowLoginLinkRequestModal] = useState(false)
-
   const addresses = useMemo(() => formatAddresses(dossier.adressen), [dossier.adressen])
   const sortedDocuments = useMemo(
     () =>
