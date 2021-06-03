@@ -58,11 +58,14 @@ export interface DataDetailParams {
   id: string
 }
 
-export const toDataDetail = ({ type, subtype, id }: DataDetailParams): LocationDescriptorObject => {
-  return {
-    pathname: generatePath(routing.dataDetail.path, { type, subtype, id }),
-  }
-}
+export const toDataDetail = ({
+  type,
+  subtype,
+  id,
+}: DataDetailParams): LocationDescriptorObject => ({
+  pathname: generatePath(routing.dataDetail.path, { type, subtype, id }),
+  search: window.location.search,
+})
 
 export const toDataSearch = (): LocationDescriptorObject => ({
   pathname: routing.dataSearch.path,
