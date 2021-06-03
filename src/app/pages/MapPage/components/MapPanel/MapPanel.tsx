@@ -23,7 +23,7 @@ const TitleHeading = styled(Heading)`
 `
 
 const SubtitleHeading = styled(Heading)`
-  color: red;
+  color: ${themeColor('secondary')};
   margin: 0;
 `
 
