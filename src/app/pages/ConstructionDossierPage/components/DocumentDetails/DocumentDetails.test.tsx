@@ -18,7 +18,7 @@ const documentFixture = dossierFixture.documenten[0]
 
 const wrapper: FunctionComponent = ({ children }) =>
   withAppContext(
-    <AuthTokenContext.Provider value={{ token: null, isTokenExpired: null }}>
+    <AuthTokenContext.Provider value={{ token: null, decodedToken: null, isTokenExpired: false }}>
       {children}
     </AuthTokenContext.Provider>,
   )

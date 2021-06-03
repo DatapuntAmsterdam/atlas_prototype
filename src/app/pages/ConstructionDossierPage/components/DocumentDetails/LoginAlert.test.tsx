@@ -6,14 +6,14 @@ import LoginAlert from './LoginAlert'
 
 const wrapper: FunctionComponent = ({ children }) =>
   withAppContext(
-    <AuthTokenContext.Provider value={{ token: null, isTokenExpired: null }}>
+    <AuthTokenContext.Provider value={{ token: null, decodedToken: null, isTokenExpired: false }}>
       {children}
     </AuthTokenContext.Provider>,
   )
 
 const expiredWrapper: FunctionComponent = ({ children }) =>
   withAppContext(
-    <AuthTokenContext.Provider value={{ token: null, isTokenExpired: true }}>
+    <AuthTokenContext.Provider value={{ token: null, decodedToken: null, isTokenExpired: true }}>
       {children}
     </AuthTokenContext.Provider>,
   )
