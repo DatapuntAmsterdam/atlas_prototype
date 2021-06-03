@@ -1,19 +1,18 @@
-import { useSelector } from 'react-redux'
 import { useMemo } from 'react'
 import { matchPath, useLocation } from 'react-router-dom'
-import { getUser, getUserScopes } from '../../../shared/ducks/user/user'
 import AuthScope from '../../../shared/services/api/authScope'
 import { AuthError } from '../../../shared/services/api/customError'
+import { getScopes, isAuthenticated } from '../../../shared/services/auth/auth'
 import getFromQuery from '../../../shared/services/data-selection/getFromQuery'
+import PAGES from '../../pages'
 import { ViewMode, viewParam } from '../../pages/MapPage/query-params'
+import { pageParam } from '../../pages/SearchPage/query-params'
+import { routing } from '../../routes'
 import formatCount from '../../utils/formatCount'
 import useParam from '../../utils/useParam'
 import { useDataSelection } from './DataSelectionContext'
 import { DatasetType, LegacyDataSelectionViewTypes } from './types'
 import useLegacyDataselectionConfig from './useLegacyDataselectionConfig'
-import { pageParam } from '../../pages/SearchPage/query-params'
-import PAGES from '../../pages'
-import { routing } from '../../routes'
 
 const DEFAULT_ERROR_MESSAGE = 'Er is een fout opgetreden, probeer het later nog eens.'
 
@@ -38,14 +37,12 @@ const useFetchLegacyDataSelectionData = () => {
       )?.page,
     [location, routing],
   )
-  const user = useSelector(getUser)
   const userHasAccessToPage =
     currentPage === PAGES.ADDRESSES ||
-    (currentPage === PAGES.ESTABLISHMENTS && user.authenticated) ||
-    (currentPage === PAGES.CADASTRAL_OBJECTS && user.scopes.includes('BRK/RSN'))
+    (currentPage === PAGES.ESTABLISHMENTS && isAuthenticated()) ||
+    (currentPage === PAGES.CADASTRAL_OBJECTS && getScopes().includes('BRK/RSN'))
 
   const [page] = useParam(pageParam)
-  const userScopes = useSelector(getUserScopes)
   const { setTotalResults, setAvailableFilters, activeFilters } = useDataSelection()
   const { currentDatasetConfig, currentDatasetType } = useLegacyDataselectionConfig()
 
@@ -57,7 +54,7 @@ const useFetchLegacyDataSelectionData = () => {
       throw new Error(DEFAULT_ERROR_MESSAGE)
     }
     const datasetScope = currentDatasetConfig.AUTH_SCOPE
-    const authScopeError = datasetScope ? !userScopes.includes(datasetScope) : false
+    const authScopeError = datasetScope ? !getScopes().includes(datasetScope) : false
     if (!userHasAccessToPage || authScopeError) {
       throw new AuthError(
         401,

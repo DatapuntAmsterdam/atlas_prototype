@@ -1,22 +1,23 @@
+import { mocked } from 'ts-jest/utils'
 import { fetchWithToken } from '../../../../../../shared/services/api/api'
+import { getScopes, isAuthenticated } from '../../../../../../shared/services/auth/auth'
 import * as address from '../adressen-nummeraanduiding/adressen-nummeraanduiding'
 import * as vestiging from '../vestiging/vestiging'
 import search, { fetchRelatedForUser } from './map-search'
 
 jest.mock('../../../../../../shared/services/api/api')
+jest.mock('../../../../../../shared/services/auth/auth')
 jest.mock('../adressen-nummeraanduiding/adressen-nummeraanduiding')
 jest.mock('../monument/monument')
 jest.mock('../vestiging/vestiging')
 
-describe('mapSearch service', () => {
-  let user
+const mockedIsAuthenticated = mocked(isAuthenticated)
+const mockedGetScopes = mocked(getScopes)
 
+describe('mapSearch service', () => {
   beforeEach(() => {
-    user = {
-      authenticated: true,
-      scopes: ['HR/R'],
-      name: 'user@amsterdam.nl',
-    }
+    mockedIsAuthenticated.mockReturnValue(true)
+    mockedGetScopes.mockReturnValue(['HR/R'])
   })
 
   describe('search action', () => {
@@ -33,16 +34,10 @@ describe('mapSearch service', () => {
         }),
       )
 
-      const data = await search(
-        {
-          authenticated: false,
-          accessToken: '',
-          scopes: [],
-          name: '',
-          error: false,
-        },
-        { lat: 1, lng: 0 },
-      )
+      mockedIsAuthenticated.mockReturnValue(false)
+      mockedGetScopes.mockReturnValue([])
+
+      const data = await search({ lat: 1, lng: 0 })
 
       expect(data.results).toEqual([
         {
@@ -80,16 +75,10 @@ describe('mapSearch service', () => {
         })
       })
 
-      const data = await search(
-        {
-          authenticated: false,
-          accessToken: '',
-          scopes: [],
-          name: '',
-          error: false,
-        },
-        { lat: 1, lng: 0 },
-      )
+      mockedIsAuthenticated.mockReturnValue(false)
+      mockedGetScopes.mockReturnValue([])
+
+      const data = await search({ lat: 1, lng: 0 })
 
       expect(data.results).toEqual([
         {
@@ -112,7 +101,7 @@ describe('mapSearch service', () => {
     })
 
     it('should return results based on user scope', async () => {
-      const data = await search({}, { lat: 1, lng: 0 })
+      const data = await search({ lat: 1, lng: 0 })
 
       expect(data.results[0].results.length).toBe(14) // !!!!IMPORTANT: UPDATE WITH +1 WHEN ADDING NEW GEOSEARCH
     })
@@ -127,12 +116,13 @@ describe('mapSearch service', () => {
           },
         },
       ]
-      const results = await fetchRelatedForUser(user)({ features })
+      const results = await fetchRelatedForUser()({ features })
       expect(results).toEqual(features)
     })
 
     it('should return just the base features when user related features found but user is not authorized', async () => {
-      user.scopes = ['CAT/W', 'CAT/R']
+      mockedGetScopes.mockReturnValue(['CAT/W', 'CAT/R'])
+
       const features = [
         {
           properties: {
@@ -147,7 +137,7 @@ describe('mapSearch service', () => {
           },
         },
       ]
-      const results = await fetchRelatedForUser(user)({ features })
+      const results = await fetchRelatedForUser()({ features })
       expect(results).toEqual(features)
     })
 
@@ -175,7 +165,7 @@ describe('mapSearch service', () => {
       }
       address.fetchHoofdadresByStandplaatsId.mockImplementation(() => Promise.resolve({ id: 2000 }))
       vestiging.fetchByAddressId.mockImplementation(() => Promise.resolve([vestigingResult]))
-      const results = await fetchRelatedForUser(user)({ features })
+      const results = await fetchRelatedForUser()({ features })
       expect(results).toEqual([
         ...features,
         {
@@ -216,7 +206,7 @@ describe('mapSearch service', () => {
       }
       address.fetchHoofdadresByLigplaatsId.mockImplementation(() => Promise.resolve({ id: 1000 }))
       vestiging.fetchByAddressId.mockImplementation(() => Promise.resolve([vestigingResult]))
-      const results = await fetchRelatedForUser(user)({ features })
+      const results = await fetchRelatedForUser()({ features })
       expect(results).toEqual([
         ...features,
         {

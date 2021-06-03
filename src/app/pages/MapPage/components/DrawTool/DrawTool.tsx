@@ -25,7 +25,6 @@ import {
 } from '../../matomo-events'
 import type { PolyDrawing } from '../../query-params'
 import { polygonParam, polylineParam } from '../../query-params'
-import { DrawerState } from '../DrawerOverlay'
 import type { ExtendedLayer, PolygonType, PolylineType } from './BareDrawTool'
 import { BareDrawTool } from './BareDrawTool'
 
@@ -88,7 +87,7 @@ const DrawTool: FunctionComponent = () => {
   const { activeFilters, setDistanceText, setDrawToolLocked } = useDataSelection()
   const { currentDatasetType } = useLegacyDataselectionConfig()
   const { panToWithPanelOffset } = useMapCenterToMarker()
-  const { setDrawerState, setLegendActive } = useMapContext()
+  const { setLegendActive } = useMapContext()
   const { trackEvent } = useMatomo()
 
   const [initialDrawnItems, setInitialDrawnItems] = useState<ExtendedLayer[]>([])
@@ -173,9 +172,6 @@ const DrawTool: FunctionComponent = () => {
       }, 500) // Safari hack: using this arbitrary value because in some cases leaflet is firing the mapmarker click event slightly later, causing the user to navigate to geosearch page instead of showing the polygon
 
       if (layer instanceof Polygon) {
-        // Open the drawer when finishing drawing a polygon (show updated results)
-        setDrawerState(DrawerState.Open)
-
         // Also pan and zoom to the drawing
         panToWithPanelOffset(layer.getBounds())
       }

@@ -1,5 +1,4 @@
-import { logout, getAuthHeaders } from '../auth/auth'
-import getState from '../redux/get-state'
+import { getAccessToken, getAuthHeaders, logout } from '../auth/auth'
 import { AuthError, ForbiddenError, NotFoundError } from './customError'
 
 interface FetchOptions extends RequestInit {
@@ -7,8 +6,6 @@ interface FetchOptions extends RequestInit {
 }
 // TODO: Refactor this type to only allow 'URLSearchParams'.
 export type UrlParams = URLSearchParams | { [key: string]: string }
-
-const getAccessToken = () => getState()?.user?.accessToken
 
 export const fetchWithoutToken = <T = any>(uri: string): Promise<T> =>
   fetch(uri).then((response) => response.json())

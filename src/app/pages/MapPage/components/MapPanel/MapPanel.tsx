@@ -1,4 +1,4 @@
-import { Heading, themeSpacing } from '@amsterdam/asc-ui'
+import { Heading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import type { FunctionComponent } from 'react'
 import { useEffect, useMemo } from 'react'
 import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
@@ -23,7 +23,7 @@ const TitleHeading = styled(Heading)`
 `
 
 const SubtitleHeading = styled(Heading)`
-  color: red;
+  color: ${themeColor('secondary')};
   margin: 0;
 `
 
@@ -33,6 +33,14 @@ const DrawerContainer = styled.div`
 
 const StyledLargeDrawerPanel = styled(LargeDrawerPanel)<{ show: boolean }>`
   display: ${({ show }) => (show ? 'block' : 'none')};
+`
+
+const LegendDrawerPanelHeader = styled(DrawerPanelHeader)`
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  box-shadow: 0 1px 4px ${themeColor('tint', 'level4')};
+  background-color: ${themeColor('tint', 'level1')};
 `
 
 const MapPanel: FunctionComponent = () => {
@@ -125,9 +133,9 @@ const MapPanel: FunctionComponent = () => {
         )}
         {legendActive && (
           <SmallDrawerPanel data-testid="drawerPanel">
-            <DrawerPanelHeader onClose={onCloseLegend}>
+            <LegendDrawerPanelHeader onClose={onCloseLegend}>
               <TitleHeading styleAs="h2">Legenda</TitleHeading>
-            </DrawerPanelHeader>
+            </LegendDrawerPanelHeader>
             <LegendPanel />
           </SmallDrawerPanel>
         )}

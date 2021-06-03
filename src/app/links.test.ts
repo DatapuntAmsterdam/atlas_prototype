@@ -17,7 +17,6 @@ import {
   toGeoSearch,
   toHelpPage,
   toHome,
-  toMap,
   toMapSearch,
   toNotFound,
   toPublicationDetail,
@@ -103,6 +102,7 @@ describe('toDataDetail', () => {
   it('creates a location descriptor', () => {
     expect(toDataDetail({ type, subtype, id })).toEqual({
       pathname: generatePath(routing.dataDetail.path, { type, subtype, id }),
+      search: '',
     })
   })
 
@@ -113,6 +113,7 @@ describe('toDataDetail', () => {
 
     expect(toDataDetail({ type, subtype, id })).toEqual({
       pathname: generatePath(routing.dataDetail.path, { type, subtype, id }),
+      search: '',
     })
 
     locationSpy.mockRestore()
@@ -178,14 +179,6 @@ describe('toHome', () => {
   it('creates a location descriptor', () => {
     expect(toHome()).toEqual({
       pathname: routing.home.path,
-    })
-  })
-})
-
-describe('toMap', () => {
-  it('creates a location descriptor', () => {
-    expect(toMap()).toEqual({
-      pathname: routing.data.path,
     })
   })
 })

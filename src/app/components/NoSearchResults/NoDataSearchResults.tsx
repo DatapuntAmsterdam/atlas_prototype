@@ -1,8 +1,6 @@
 import { Heading, Link, Paragraph } from '@amsterdam/asc-ui'
-import { useDispatch } from 'react-redux'
-import { Link as RouterLink } from 'react-router-dom'
 import type { FunctionComponent } from 'react'
-import { authenticateRequest } from '../../../shared/ducks/user/user'
+import { Link as RouterLink } from 'react-router-dom'
 import { login } from '../../../shared/services/auth/auth'
 import { toAddresses, toCadastralObjects, toEstablishments } from '../../links'
 import { StyledList, StyledListItem } from './NoSearchResults'
@@ -17,11 +15,10 @@ const NoDataSearchResults: FunctionComponent<NoDataSearchResultsProps> = ({
   query,
   unauthorized,
 }) => {
-  const dispatch = useDispatch()
   const handleLogin = () => {
-    dispatch(authenticateRequest('inloggen'))
     login()
   }
+
   return (
     <div>
       <Paragraph>{formatNoResultsMessage(query, 'Data')}</Paragraph>

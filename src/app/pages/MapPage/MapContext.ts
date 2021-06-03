@@ -40,6 +40,7 @@ export interface MapState {
   panoFullScreen: boolean
   legendActive: boolean
   loading: boolean
+  panoActive: boolean
   drawerState: DrawerState
   panoImageDate: string | null
   panelHeader: { type?: string | null; title?: string | null }
