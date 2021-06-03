@@ -22,7 +22,7 @@ describe('useDocumentTitle', () => {
       wrapper: ({ children }) => withAppContext(<div>{children}</div>),
     })
 
-    expect(result.current.documentTitle).toEqual('Home - Data en informatie - Amsterdam')
+    expect(result.current.documentTitle).toEqual('Home - Data verkenner')
   })
 
   it('should set a new title based on parameters passed to setDocumentTitle', () => {
@@ -35,8 +35,6 @@ describe('useDocumentTitle', () => {
     // Todo: eventually test the documentTitle from the hook! Couldn't get this to work now...
     // ({ hook } = wrapper.find('div').props());
     // const { documentTitle } = hook;
-    expect(documentTitle).toEqual(
-      'Overridden Title - Some more - Info - Data en informatie - Amsterdam',
-    )
+    expect(documentTitle).toEqual('Overridden Title - Some more - Info - Data verkenner')
   })
 })

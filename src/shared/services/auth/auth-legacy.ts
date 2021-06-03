@@ -26,9 +26,6 @@ const ERROR_MESSAGES = {
 // success
 const AUTH_PARAMS = ['access_token', 'token_type', 'expires_in', 'state']
 
-// All the scopes this City Daty frontend needs for communication with
-// the backend APIs
-
 // Catalogus (Dcatd) admin
 export const dcatdScopes = [
   'CAT/R', // Redacteursrechten

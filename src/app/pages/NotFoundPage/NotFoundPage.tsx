@@ -28,12 +28,7 @@ const NotFoundPage = () => (
           </Paragraph>
           <Paragraph>
             Of ga door naar de{' '}
-            <Link
-              as={RouterLink}
-              to={toHome()}
-              variant="inline"
-              title="Naar Data en Informatie - Homepage"
-            >
+            <Link as={RouterLink} to={toHome()} variant="inline">
               voorpagina
             </Link>
             .
