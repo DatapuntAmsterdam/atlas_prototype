@@ -34,7 +34,7 @@ const FooterLinks: FunctionComponent<FooterLinksProps> = ({ children, links }) =
       return (
         <ListItem key={linkId}>
           <Link
-            darkBackground
+            $darkBackground
             as={RouterLink}
             to={toArticleDetail(linkId, link.slug)}
             inList

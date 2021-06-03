@@ -11,7 +11,7 @@ import {
   toCollectionDetail,
   toDataDetail,
   toDatasetDetail,
-  toMap,
+  toGeoSearch,
   toPublicationDetail,
   toSpecialDetail,
 } from '../../../app/links'
@@ -116,13 +116,18 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
       const mapLayers = rawMapLayers ? mapLayersParam.decode(rawMapLayers) : []
 
       return {
-        ...toMap(),
-        search: toSearchParams([
-          [viewParam, ViewMode.Map],
-          [queryParam, inputValue],
-          [legendOpenParam, true],
-          [mapLayersParam, mapLayers],
-        ]).toString(),
+        ...toGeoSearch(),
+        search: toSearchParams(
+          [
+            [viewParam, ViewMode.Map],
+            [queryParam, inputValue],
+            [legendOpenParam, true],
+            [mapLayersParam, mapLayers],
+          ],
+          {
+            initialValue: window.location.search,
+          },
+        ).toString(),
       }
     }
 

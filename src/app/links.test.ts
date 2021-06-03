@@ -17,7 +17,6 @@ import {
   toGeoSearch,
   toHelpPage,
   toHome,
-  toMap,
   toMapSearch,
   toNotFound,
   toPublicationDetail,
@@ -178,14 +177,6 @@ describe('toHome', () => {
   it('creates a location descriptor', () => {
     expect(toHome()).toEqual({
       pathname: routing.home.path,
-    })
-  })
-})
-
-describe('toMap', () => {
-  it('creates a location descriptor', () => {
-    expect(toMap()).toEqual({
-      pathname: routing.data.path,
     })
   })
 })
