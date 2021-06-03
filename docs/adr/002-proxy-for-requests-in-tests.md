@@ -8,7 +8,7 @@ Accepted
 
 ## Context
 
-The `atlas` application depends on the output of a plethora of APIs (see [the api fixtures folder](../../src/api)). Components that consume the output, usually transform or normalize that output before rendering. To prevent network requests to be made, some of the unit tests in the project already make use of custom, rudimentary data fixtures to provide components with the necessary data. Integration tests, however, still rely on network requests for the completion of those tests.
+The `data-verkenner` application depends on the output of a plethora of APIs (see [the api fixtures folder](../../src/api)). Components that consume the output, usually transform or normalize that output before rendering. To prevent network requests to be made, some of the unit tests in the project already make use of custom, rudimentary data fixtures to provide components with the necessary data. Integration tests, however, still rely on network requests for the completion of those tests.
 
 Neither type of test makes use of a standardized collection of data fixtures. This increases maintenance, limits the (automated) execution of tests and can lead to false positives, because of tailored data instead of 'true' data.
 

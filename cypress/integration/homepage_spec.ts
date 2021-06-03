@@ -18,8 +18,8 @@ describe('Homepage module', () => {
 
       it('Has the right link text', () => {
         cy.get(HEADER.root).should('be.visible')
-        cy.get(HEADER.logoAmsterdamTitle).should('contain', 'Data en informatie').and('be.visible')
-        cy.get(HEADER.headerTitle).should('contain', 'Data en informatie').and('be.visible')
+        cy.get(HEADER.logoAmsterdamTitle).should('contain', 'Data verkenner').and('be.visible')
+        cy.get(HEADER.headerTitle).should('contain', 'Data verkenner').and('be.visible')
         cy.get(HEADER_MENU.rootDefault).should('exist')
 
         if (size === 'macbook-15') {

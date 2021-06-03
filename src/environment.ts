@@ -7,7 +7,7 @@ const environment = {
   ROOT: 'http://localhost:3000/',
   KEYCLOAK_URL: 'https://iam.amsterdam.nl/auth',
   KEYCLOAK_REALM: 'datapunt-ad-acc',
-  KEYCLOAK_CLIENT: 'dataportaal',
+  KEYCLOAK_CLIENT: 'data-verkenner',
 }
 
 export default environment

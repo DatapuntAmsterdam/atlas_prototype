@@ -65,9 +65,7 @@ resolveRedirects(window.location)
 
 function renderApp() {
   // eslint-disable-next-line no-console
-  console.info(
-    `Dataportaal: version: ${process.env.VERSION as string}, deploy env: ${environment.DEPLOY_ENV}`,
-  )
+  console.info(`Version: ${process.env.VERSION as string}, deploy env: ${environment.DEPLOY_ENV}`)
 
   const enabledFeatures = getEnabledFeatures()
 

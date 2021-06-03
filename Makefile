@@ -15,7 +15,7 @@ _MAKEFILE_VARIABLES := $(foreach make_variable, $(sort $(.VARIABLES)),\
 )
 
 help: ## show this help screen
-	@echo "Atlas Makefile help"
+	@echo "Data verkenner Makefile help"
 	@echo
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
@@ -42,7 +42,7 @@ status: ## show Docker Compose process list
 rebuild: stop build start status ## rebuild Docker Compose
 
 shell: ## execute command on container
-	docker-compose exec atlas sh
+	docker-compose exec data-verkenner sh
 
 logs: ## tail Docker Compose container logs
-	docker-compose logs --tail=100 -f atlas
+	docker-compose logs --tail=100 -f data-verkenner
