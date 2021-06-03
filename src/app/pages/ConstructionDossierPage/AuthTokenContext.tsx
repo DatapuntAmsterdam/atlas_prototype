@@ -1,6 +1,6 @@
 import jwtDecode from 'jwt-decode'
-import { useEffect, useMemo, useState } from 'react'
 import type { FunctionComponent } from 'react'
+import { useEffect, useState } from 'react'
 import { getAccessToken } from '../../../shared/services/auth/auth'
 import createNamedContext from '../../utils/createNamedContext'
 import useInterval from '../../utils/useInterval'
@@ -8,15 +8,7 @@ import useParam from '../../utils/useParam'
 import useRequiredContext from '../../utils/useRequiredContext'
 import { authTokenParam } from './query-params'
 
-export interface AuthTokenContextProps {
-  token: string | null
-}
-
-const AuthTokenContext = createNamedContext<AuthTokenContextProps | null>('AuthToken', null)
-
-export default AuthTokenContext
-
-interface DecodedToken {
+export interface DecodedToken {
   /**
    * A Unix timestamp that indicated when the token expires.
    */
@@ -31,11 +23,25 @@ interface DecodedToken {
   sub: string
 }
 
+export interface AuthTokenContextProps {
+  token: string | null
+  decodedToken: DecodedToken | null
+  isTokenExpired: boolean
+}
+
+const AuthTokenContext = createNamedContext<AuthTokenContextProps | null>('AuthToken', null)
+
+export default AuthTokenContext
+
 const STORAGE_KEY = 'AUTH_TOKEN'
 const EXPIRE_SKEW = 60 * 1000
 
 function decodeToken(token: string) {
-  return jwtDecode<DecodedToken>(token)
+  try {
+    return jwtDecode<DecodedToken>(token)
+  } catch (e) {
+    return false
+  }
 }
 
 function isExpired(token: DecodedToken) {
@@ -44,47 +50,72 @@ function isExpired(token: DecodedToken) {
   return Date.now() > expiresAt
 }
 
+const DEFAULT_VALUE: AuthTokenContextProps = {
+  token: null,
+  decodedToken: null,
+  isTokenExpired: false,
+}
+
 const AuthTokenProvider: FunctionComponent = ({ children }) => {
   const [tokenParam, setTokenParam] = useParam(authTokenParam)
-  const [token, setToken] = useState<string | null>(() => {
+  const [value, setValue] = useState<AuthTokenContextProps>(() => {
     // Use the token from the url or local storage.
-    const rawToken = tokenParam ?? localStorage.getItem(STORAGE_KEY)
-    const decodedToken = rawToken ? decodeToken(rawToken) : null
+    const token = tokenParam ?? localStorage.getItem(STORAGE_KEY)
+    const decodedToken = token ? decodeToken(token) : null
 
-    // Ignore expired tokens.
-    if (!decodedToken || isExpired(decodedToken)) {
-      return null
+    // Ignore tokens that are empty.
+    if (!decodedToken) {
+      return DEFAULT_VALUE
     }
 
-    return rawToken
+    // Return empty token with expiry status if expired.
+    if (isExpired(decodedToken)) {
+      return { ...DEFAULT_VALUE, isTokenExpired: true }
+    }
+
+    // Otherwise return a valid token.
+    return { token, decodedToken, isTokenExpired: false }
   })
 
-  // Store token from url in local storage and clear it from the url.
+  // Keep the value of the token in sync with local storage.
+  useEffect(() => {
+    if (value.token) {
+      localStorage.setItem(STORAGE_KEY, value.token)
+    } else {
+      localStorage.removeItem(STORAGE_KEY)
+    }
+  }, [value.token])
+
+  // Clear the token from the URL if present.
   useEffect(() => {
     if (tokenParam) {
-      localStorage.setItem(STORAGE_KEY, tokenParam)
       setTokenParam(null, 'replace')
     }
   }, [tokenParam])
 
-  const decodedToken = useMemo(() => (token ? decodeToken(token) : null), [token])
-
-  // Clear token if it has expired.
-  function checkExpirity() {
-    if (decodedToken && isExpired(decodedToken)) {
-      localStorage.removeItem(STORAGE_KEY)
-      setToken(null)
+  function checkExpiry() {
+    // Don't do anything if we have a non-expired token.
+    if (!value.decodedToken || !isExpired(value.decodedToken)) {
+      return
     }
+
+    // Otherwise clear the token and set the correct expiry status.
+    setValue({
+      token: null,
+      decodedToken: null,
+      isTokenExpired: true,
+    })
   }
 
-  useInterval(checkExpirity, 1000)
+  // Periodically check if token has expired.
+  useInterval(checkExpiry, 1000)
 
   return (
     <AuthTokenContext.Provider
-      value={{
-        // Only provide the token if the user does not have an authenticated session.
-        token: !getAccessToken() ? token : null,
-      }}
+      value={
+        // Only provide the value if the user does not have an authenticated session.
+        !getAccessToken() ? value : DEFAULT_VALUE
+      }
     >
       {children}
     </AuthTokenContext.Provider>
@@ -94,5 +125,5 @@ const AuthTokenProvider: FunctionComponent = ({ children }) => {
 export { AuthTokenProvider }
 
 export function useAuthToken() {
-  return useRequiredContext(AuthTokenContext).token
+  return useRequiredContext(AuthTokenContext)
 }

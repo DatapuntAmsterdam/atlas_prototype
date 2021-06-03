@@ -1,10 +1,11 @@
 import { fireEvent, render, screen } from '@testing-library/react'
+import { createUnsecuredToken, Json } from 'jsontokens'
 import type { FunctionComponent } from 'react'
 import type { Bestand, Document } from '../../../../../api/iiif-metadata/bouwdossier'
 import { singleFixture as bouwdossierFixture } from '../../../../../api/iiif-metadata/bouwdossier'
 import { NOT_FOUND_THUMBNAIL } from '../../../../../shared/config/constants'
 import withAppContext from '../../../../utils/withAppContext'
-import AuthTokenContext from '../../AuthTokenContext'
+import AuthTokenContext, { DecodedToken } from '../../AuthTokenContext'
 import FilesGallery from './FilesGallery'
 
 jest.mock('../IIIFThumbnail', () => ({ ...props }) => (
@@ -18,16 +19,29 @@ const MOCK_FILES: Bestand[] = Array.from({ length: 10 }).map((_, index) => ({
 }))
 
 const MOCK_DOCUMENT: Document = { ...bouwdossierFixture.documenten[0], bestanden: MOCK_FILES }
-const MOCK_TOKEN = 'faketoken'
+
+const VALID_DECODED_TOKEN: DecodedToken = {
+  scopes: [],
+  sub: 'jane.doe@example.com',
+  exp: Date.now() / 1000 + 120,
+}
+
+const VALID_TOKEN = createUnsecuredToken(VALID_DECODED_TOKEN as unknown as Json)
 
 const wrapper: FunctionComponent = ({ children }) =>
   withAppContext(
-    <AuthTokenContext.Provider value={{ token: null }}>{children}</AuthTokenContext.Provider>,
+    <AuthTokenContext.Provider value={{ token: null, decodedToken: null, isTokenExpired: false }}>
+      {children}
+    </AuthTokenContext.Provider>,
   )
 
 const wrapperWithToken: FunctionComponent = ({ children }) =>
   withAppContext(
-    <AuthTokenContext.Provider value={{ token: MOCK_TOKEN }}>{children}</AuthTokenContext.Provider>,
+    <AuthTokenContext.Provider
+      value={{ token: VALID_TOKEN, decodedToken: VALID_DECODED_TOKEN, isTokenExpired: false }}
+    >
+      {children}
+    </AuthTokenContext.Provider>,
   )
 
 describe('FilesGallery', () => {
@@ -108,7 +122,7 @@ describe('FilesGallery', () => {
 
     expect(screen.getAllByTestId('thumbnail')[0]).toHaveAttribute(
       'src',
-      expect.stringContaining(`?auth=${MOCK_TOKEN}`),
+      expect.stringContaining(`?auth=${VALID_TOKEN}`),
     )
   })
 

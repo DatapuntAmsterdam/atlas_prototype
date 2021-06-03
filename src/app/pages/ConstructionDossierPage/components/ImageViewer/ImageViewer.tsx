@@ -52,7 +52,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
   const [viewer, setViewer] = useState<Viewer>()
   const fileExtension = fileName.split('.').pop()
   const isImage = !!fileExtension?.toLowerCase().match(/(jpg|jpeg|png|gif)/)
-  const token = useAuthToken()
+  const { token } = useAuthToken()
   const tokenQueryString = useMemo(
     () => (token ? `?${new URLSearchParams({ auth: token }).toString()}` : ''),
     [token],
