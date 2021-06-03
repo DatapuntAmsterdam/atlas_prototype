@@ -1,8 +1,9 @@
 import { srOnlyStyle } from '@amsterdam/asc-ui'
+import type { FormEvent, FunctionComponent } from 'react'
 import { useCallback, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import type { FunctionComponent } from 'react'
+import debounce from 'lodash.debounce'
 import SearchBar from '../../app/components/SearchBar'
 import { LOCAL_STORAGE_KEY } from '../../app/components/SearchBarFilter/SearchBarFilter'
 import SEARCH_PAGE_CONFIG from '../../app/pages/SearchPage/config'
@@ -86,8 +87,12 @@ const HeaderSearch: FunctionComponent = () => {
     }
   }
 
+  const onChangeDebounced = debounce(onChange, 300, {
+    trailing: true,
+  })
+
   const onFormSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
+    (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
       e.stopPropagation()
 
@@ -141,7 +146,7 @@ const HeaderSearch: FunctionComponent = () => {
         expanded={showSuggestions}
         onBlur={onBlur}
         onFocus={onFocus}
-        onChange={onChange}
+        onChange={onChangeDebounced}
         onClear={onClear}
         onKeyDown={keyDown}
         value={inputValue}

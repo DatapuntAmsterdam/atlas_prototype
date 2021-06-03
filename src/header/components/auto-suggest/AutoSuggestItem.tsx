@@ -16,10 +16,13 @@ import {
   toSpecialDetail,
 } from '../../../app/links'
 import {
+  centerParam,
   legendOpenParam,
+  locationParam,
   mapLayersParam,
   ViewMode,
   viewParam,
+  zoomParam,
 } from '../../../app/pages/MapPage/query-params'
 import { SearchType } from '../../../app/pages/SearchPage/constants'
 import { queryParam } from '../../../app/pages/SearchPage/query-params'
@@ -52,6 +55,9 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
 }) => {
   const [view] = useParam(viewParam)
   const { trackEvent } = useMatomo()
+  const [locationParameter] = useParam(locationParam)
+  const [zoom] = useParam(zoomParam)
+  const [center] = useParam(centerParam)
   const location = useLocation()
 
   const openEditorialSuggestion = (
@@ -117,17 +123,14 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
 
       return {
         ...toGeoSearch(),
-        search: toSearchParams(
-          [
-            [viewParam, ViewMode.Map],
-            [queryParam, inputValue],
-            [legendOpenParam, true],
-            [mapLayersParam, mapLayers],
-          ],
-          {
-            initialValue: window.location.search,
-          },
-        ).toString(),
+        search: toSearchParams([
+          [viewParam, ViewMode.Map],
+          [queryParam, inputValue],
+          [legendOpenParam, true],
+          [mapLayersParam, mapLayers],
+          [locationParam, locationParameter],
+          [centerParam, center],
+        ]).toString(),
       }
     }
 
@@ -139,16 +142,14 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
     // suggestion.category TRACK
     return {
       ...toDataDetail({ type, subtype, id }),
-      search: toSearchParams(
-        [
-          [viewParam, view],
-          [queryParam, inputValue],
-          [mapLayersParam, mapLayers],
-        ],
-        {
-          initialValue: location.search,
-        },
-      ).toString(),
+      search: toSearchParams([
+        [viewParam, view],
+        [queryParam, inputValue],
+        [mapLayersParam, mapLayers],
+        [locationParam, locationParameter],
+        [zoomParam, zoom],
+        [centerParam, center],
+      ]).toString(),
     }
   }, [extractIdEndpoint, openEditorialSuggestion, highlightValue, location])
 

@@ -102,6 +102,7 @@ describe('toDataDetail', () => {
   it('creates a location descriptor', () => {
     expect(toDataDetail({ type, subtype, id })).toEqual({
       pathname: generatePath(routing.dataDetail.path, { type, subtype, id }),
+      search: '',
     })
   })
 
@@ -112,6 +113,7 @@ describe('toDataDetail', () => {
 
     expect(toDataDetail({ type, subtype, id })).toEqual({
       pathname: generatePath(routing.dataDetail.path, { type, subtype, id }),
+      search: '',
     })
 
     locationSpy.mockRestore()
