@@ -1,11 +1,5 @@
 {
-  "name": "atlas",
-  "license": "MPL-2.0",
-  "author": "Gemeente Amsterdam",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Amsterdam/atlas.git"
-  },
+  "name": "data-verkenner",
   "version": "4.3.3",
   "scripts": {
     "build": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack --config ./webpack.prod.ts",

@@ -68,7 +68,7 @@ export const modificationDateFilter = (input: Date | string) => {
     const daysToMiliseconds = 1000 * 60 * 60 * 24
 
     // Todo: fix, original file:
-    // https://github.com/Amsterdam/atlas/blob/6318bcd7096831a686f8021160f5842871af637e/modules/data-selection/components/formatter/modification-date/modification-date.filter.js
+    // https://github.com/Amsterdam/data-verkenner/blob/6318bcd7096831a686f8021160f5842871af637e/modules/data-selection/components/formatter/modification-date/modification-date.filter.js
     // eslint-disable-next-line no-restricted-globals
     if (ago >= 2 * length) {
       ago = Math.floor(ago / daysToMiliseconds)

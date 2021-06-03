@@ -7,7 +7,7 @@ const defaultEnvironment = {
   ROOT: 'https://data.amsterdam.nl/',
   KEYCLOAK_URL: 'https://iam.amsterdam.nl/auth',
   KEYCLOAK_REALM: 'datapunt-ad',
-  KEYCLOAK_CLIENT: 'dataportaal',
+  KEYCLOAK_CLIENT: 'data-verkenner',
 }
 
 type Environment = typeof defaultEnvironment

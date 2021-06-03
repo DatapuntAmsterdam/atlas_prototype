@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  atlas:
+  data-verkenner:
     build:
       context: .
       args:
@@ -21,4 +21,4 @@ services:
       - ROOT=http://localhost:3000/
       - KEYCLOAK_URL=https://iam.amsterdam.nl/auth
       - KEYCLOAK_REALM=datapunt-ad
-      - KEYCLOAK_CLIENT=dataportaal
+      - KEYCLOAK_CLIENT=data-verkenner

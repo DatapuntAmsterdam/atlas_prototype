@@ -1,6 +1,6 @@
-# Dataportaal
+# Data verkenner
 
-The open-source codebase for the ["Data en Informatie" portal](https://data.amsterdam.nl/) of the City of Amsterdam; the central hub for objective, reliable and actual data, and information about Amsterdam. This portal contains three sections: redactional content including articles, animations, dashboards, and interactive data visualizations; an application part that visualizes data in an interactive map and tables; and a data catalog providing files and APIs for public and private use.
+The open-source codebase for the [Data explorer](https://data.amsterdam.nl/) of the City of Amsterdam; the central hub for objective, reliable and actual data, and information about Amsterdam. This explorer contains interactive data visualizations in an interactive map and tables.
 
 ## Installation
 
