@@ -1,7 +1,7 @@
 import { generatePath } from 'react-router-dom'
 import type { LocationDescriptorObject } from 'history'
 import environment from '../environment'
-import { HEADER_LINK_HELP } from '../shared/config/content-links'
+import { BEDIENING_PAGE, HEADER_LINK_HELP } from '../shared/config/content-links'
 import { fileNameParam, fileUrlParam } from './pages/ConstructionDossierPage/query-params'
 import { ViewMode, viewParam } from './pages/MapPage/query-params'
 import { routing } from './routes'
@@ -96,6 +96,9 @@ export const toGeoSearch = (): LocationDescriptorObject => ({
 
 export const toHelpPage = () =>
   toArticleDetail(HEADER_LINK_HELP.id[environment.DEPLOY_ENV], HEADER_LINK_HELP.slug)
+
+export const toBedieningPage = () =>
+  toArticleDetail(BEDIENING_PAGE.id[environment.DEPLOY_ENV], BEDIENING_PAGE.slug)
 
 export const toHome = (): LocationDescriptorObject => ({
   pathname: routing.home.path,

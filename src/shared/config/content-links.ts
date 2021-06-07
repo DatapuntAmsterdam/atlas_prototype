@@ -99,6 +99,16 @@ export const FOOTER_LINKS_SOCIAL: ContentLinkHref[] = [
   },
 ]
 
+export const BEDIENING_PAGE: ContentLinkArticle = {
+  testId: 'HelpUitlegGebruik',
+  title: 'Uitleg gebruik',
+  id: {
+    acceptance: '5a962d67-ae2d-41b5-9c1a-263591eb5b0c',
+    production: '088c348e-73cd-42e0-9998-4123186feded',
+  },
+  slug: 'wat-kun-je-hier',
+}
+
 export const FOOTER_LINKS_HELP: ContentLinkArticle[] = [
   {
     testId: 'HelpFAQ',
@@ -118,15 +128,7 @@ export const FOOTER_LINKS_HELP: ContentLinkArticle[] = [
     },
     slug: 'contact',
   },
-  {
-    testId: 'HelpUitlegGebruik',
-    title: 'Uitleg gebruik',
-    id: {
-      acceptance: '5a962d67-ae2d-41b5-9c1a-263591eb5b0c',
-      production: '088c348e-73cd-42e0-9998-4123186feded',
-    },
-    slug: 'wat-kun-je-hier',
-  },
+  BEDIENING_PAGE,
 ]
 
 export const FOOTER_LINK_PRIVACY: ContentLinkHref = {

@@ -16,7 +16,7 @@ import MapPanel from './components/MapPanel'
 import { useDataSelection } from '../../components/DataSelection/DataSelectionContext'
 import { useIsEmbedded } from '../../contexts/ui'
 import { createCookie, getCookie } from '../../../shared/services/cookie/cookie'
-import { toHelpPage } from '../../links'
+import { toBedieningPage } from '../../links'
 
 const MapView = styled.div`
   height: 100%;
@@ -110,7 +110,7 @@ const MapPage: FunctionComponent = () => {
         <Alert level="warning" dismissible onDismiss={() => createCookie(ALERT_COOKIE, '1', 720)}>
           <Paragraph>
             De kaart en de werking van de tekentool zijn vernieuwd. Voor meer info kunt u de{' '}
-            <Link as={RouterLink} to={toHelpPage()}>
+            <Link as={RouterLink} to={toBedieningPage()}>
               help-pagina
             </Link>{' '}
             raadplegen
