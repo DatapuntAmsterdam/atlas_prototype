@@ -31,8 +31,14 @@ describe('DataSelectionDownloadButton', () => {
     )
 
     const { href } = screen.getByTestId(DOWNLOAD_BUTTON_TEST_ID) as HTMLAnchorElement
-    const urlParams = href.split('?')[1]
-    expect(urlParams).toBe('woonplaats=Amsterdam&shape=[[456,654],%20[123,312]]')
+    const url = new URL(href)
+
+    expect(url.searchParams.toString()).toBe(
+      new URLSearchParams({
+        woonplaats: 'Amsterdam',
+        shape: '[[456,654], [123,312]]',
+      }).toString(),
+    )
   })
   it('should add a dataset=ves filter when dataset is HR', () => {
     render(
@@ -61,7 +67,14 @@ describe('DataSelectionDownloadButton', () => {
     )
 
     const { href } = screen.getByTestId(DOWNLOAD_BUTTON_TEST_ID) as HTMLAnchorElement
-    const urlParams = href.split('?')[1]
-    expect(urlParams).toBe('woonplaats=Amsterdam&shape=[[456,654],%20[123,312]]&dataset=ves')
+    const url = new URL(href)
+
+    expect(url.searchParams.toString()).toBe(
+      new URLSearchParams({
+        woonplaats: 'Amsterdam',
+        shape: '[[456,654], [123,312]]',
+        dataset: 'ves',
+      }).toString(),
+    )
   })
 })
