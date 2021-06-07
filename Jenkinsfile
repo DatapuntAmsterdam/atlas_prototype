@@ -14,7 +14,7 @@ pipeline {
 
     PLAYBOOK = 'deploy.yml'
 
-    PRODUCTION_BRANCH = 'master'
+    PRODUCTION_BRANCH = 'main'
     ACCEPTANCE_BRANCH = 'develop'
   }
 
