@@ -317,6 +317,7 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   meetboutidentificatie?: string | null
   adres?: string | null
   locatie?: string | null
+  geometry?: Point
   geometrie?: Point
   bouwblok?: string | null
   bouwblok_link?: string | null

@@ -10,16 +10,8 @@ import { path as dealeroverlastPath } from '../../../../../api/overlastgebieden/
 import { path as rondleidingverbodPath } from '../../../../../api/overlastgebieden/rondleidingverbod'
 import { path as taxistandplaatsPath } from '../../../../../api/overlastgebieden/taxistandplaats'
 import type { Single as OverlastgebiedenSingle } from '../../../../../api/overlastgebieden/types'
+import type { Parkeervak } from '../../../../../api/parkeervakken'
 import type { Root as Vastgoed } from '../../../../../api/vsd/vastgoed/types'
-import config, { DataSelectionType } from '../../config'
-import buildDetailUrl from '../../components/DetailPanel/buildDetailUrl'
-import getListFromApi from '../../components/DetailPanel/getListFromApi'
-import { dataSelectionFiltersParam, ViewMode, viewParam } from '../../query-params'
-import formatDate from '../../../../utils/formatDate'
-import getFileName from '../../../../utils/getFileName'
-import toSearchParams from '../../../../utils/toSearchParams'
-import type { Definition } from '../glossary.constant'
-import GLOSSARY from '../glossary.constant'
 import environment from '../../../../../environment'
 import { DEFAULT_LOCALE } from '../../../../../shared/config/locale.config'
 import { fetchWithToken } from '../../../../../shared/services/api/api'
@@ -27,6 +19,15 @@ import AuthScope from '../../../../../shared/services/api/authScope'
 import type { Wsg84Coordinate } from '../../../../../shared/services/coordinate-reference-system/crs-converter'
 import getRdAndWgs84Coordinates from '../../../../../shared/services/coordinate-reference-system/getRdAndWgs84Coordinates'
 import { getDetailPageData } from '../../../../../store/redux-first-router/actions'
+import formatDate from '../../../../utils/formatDate'
+import getFileName from '../../../../utils/getFileName'
+import toSearchParams from '../../../../utils/toSearchParams'
+import buildDetailUrl from '../../components/DetailPanel/buildDetailUrl'
+import getListFromApi from '../../components/DetailPanel/getListFromApi'
+import config, { DataSelectionType } from '../../config'
+import { dataSelectionFiltersParam, ViewMode, viewParam } from '../../query-params'
+import type { Definition } from '../glossary.constant'
+import GLOSSARY from '../glossary.constant'
 import type {
   DetailAuthentication,
   DetailInfo,
@@ -63,12 +64,12 @@ import {
   monument,
   napPeilmerk,
   oplaadpunten,
-  parkeervak,
   parkeerzones,
   reclamebelasting,
   vastgoed,
   winkelgebied,
 } from './normalize/normalize'
+import normalizeParkeervak, { ParkeervakNormalized } from './normalize/parkeervak'
 import vestiging from './vestiging/vestiging'
 
 export const endpointTypes = {
@@ -133,13 +134,14 @@ export const endpointTypes = {
   overlastgebiedenTaxistandplaats: taxistandplaatsPath,
 }
 
-export interface ServiceDefinition extends DetailAuthentication {
+export interface ServiceDefinition<T = PotentialApiResult, N = T & ExtraApiResults>
+  extends DetailAuthentication {
   type: string
   endpoint: string
   definition?: Definition
-  normalization?: (result: PotentialApiResult) => any | Promise<any>
+  normalization?: (result: T) => N | Promise<N>
   mapDetail: (
-    result: PotentialApiResult & ExtraApiResults,
+    result: N,
     detailInfo: DetailInfo,
     location?: LatLngLiteral | Wsg84Coordinate | null,
   ) => DetailResult | Promise<DetailResult>
@@ -573,8 +575,41 @@ const getVerblijfsObjectBlock = (result: PotentialApiResult): DetailResultItemDe
   ],
 })
 
-// Todo: DI-1208 Split this page into seperate files grouped by type
-const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
+const parkeervak: ServiceDefinition<Parkeervak, ParkeervakNormalized> = {
+  type: 'parkeervakken/parkeervakken',
+  endpoint: 'v1/parkeervakken/parkeervakken',
+  normalization: normalizeParkeervak,
+  mapDetail: (result) => ({
+    title: categoryLabels.parkeervak.singular,
+    subTitle: result.id,
+    noPanorama: true,
+    infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.PARKEERVAKKEN),
+    items: [
+      {
+        type: DetailResultItemType.DefinitionList,
+        entries: [{ term: 'Straat', description: result.straatnaam }],
+      },
+      result.regimes
+        ? {
+            type: DetailResultItemType.Table,
+            title: 'Regimes',
+            headings: [
+              { title: 'Dagen', key: 'dagenFormatted' },
+              { title: 'Tijdstip', key: 'tijdstip' },
+              { title: 'Type', key: 'eTypeDescription' },
+              { title: 'Bord', key: 'bord' },
+              { title: 'Einddatum', key: 'eindDatum' },
+              { title: 'Opmerking', key: 'opmerking' },
+              { title: 'Begindatum', key: 'beginDatum' },
+            ],
+            values: result.regimes,
+          }
+        : undefined,
+    ],
+  }),
+}
+
+const servicesByEndpointType: { [type: string]: ServiceDefinition<any, any> } = {
   [endpointTypes.adressenLigplaats]: {
     type: 'bag/ligplaats',
     endpoint: 'bag/v1.1/ligplaats',
@@ -1514,7 +1549,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     authScopes: [AuthScope.BrkRo],
     authExcludedInfo:
       'koopsom, koopjaar en cultuur (on)bebouwd; zakelijke rechten en aantekeningen',
-    mapDetail: (result) => {
+    mapDetail: (result: PotentialApiResult & ExtraApiResults) => {
       const { brkData } = result
       return {
         title: categoryLabels.kadastraalObject.singular,
@@ -1831,39 +1866,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       ],
     }),
   },
-  [endpointTypes.parkeervak]: {
-    type: 'parkeervakken/parkeervakken',
-    endpoint: 'v1/parkeervakken/parkeervakken',
-    normalization: parkeervak,
-    mapDetail: (result) => ({
-      title: categoryLabels.parkeervak.singular,
-      subTitle: result.id,
-      noPanorama: true,
-      infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.PARKEERVAKKEN),
-      items: [
-        {
-          type: DetailResultItemType.DefinitionList,
-          entries: [{ term: 'Straat', description: result.straatnaam }],
-        },
-        result.regimes
-          ? {
-              type: DetailResultItemType.Table,
-              title: 'Regimes',
-              headings: [
-                { title: 'Dagen', key: 'dagenFormatted' },
-                { title: 'Tijdstip', key: 'tijdstip' },
-                { title: 'Type', key: 'eTypeDescription' },
-                { title: 'Bord', key: 'bord' },
-                { title: 'Einddatum', key: 'eindDatum' },
-                { title: 'Opmerking', key: 'opmerking' },
-                { title: 'Begindatum', key: 'beginDatum' },
-              ],
-              values: result.regimes,
-            }
-          : undefined,
-      ],
-    }),
-  },
+  [endpointTypes.parkeervak]: parkeervak,
   [endpointTypes.parkeerzones]: {
     type: 'vsd/parkeerzones',
     endpoint: 'vsd/parkeerzones',
@@ -1976,7 +1979,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     authScopes: [AuthScope.HrR],
     authScopeRequired: true,
     normalization: vestiging,
-    mapDetail: (result) => {
+    mapDetail: (result: PotentialApiResult & ExtraApiResults) => {
       const notifications: DetailResultNotification[] = []
 
       if (result.bijzondereRechtstoestand && result.bijzondereRechtstoestand.title) {
@@ -2305,7 +2308,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
 
       return data
     },
-    mapDetail: (result) => ({
+    mapDetail: (result: PotentialApiResult & ExtraApiResults) => ({
       title: categoryLabels.mac.singular,
       subTitle: result._display,
       infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.MAATSCHAPPELIJKEACTIVITEIT),

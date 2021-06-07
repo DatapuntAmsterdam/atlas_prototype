@@ -1,3 +1,6 @@
+import { listFixture as meetbouwMetingFixture } from '../../../../../../api/meetbouten/meting'
+import environment from '../../../../../../environment'
+import * as api from '../../../../../../shared/services/api/api'
 import formatDate from '../../../../../utils/formatDate'
 import {
   adressenPand,
@@ -14,16 +17,11 @@ import {
   monument,
   napPeilmerk,
   oplaadpunten,
-  parkeervak,
   parkeerzones,
   reclamebelasting,
   vastgoed,
   winkelgebied,
 } from './normalize'
-
-import { listFixture as meetbouwMetingFixture } from '../../../../../../api/meetbouten/meting'
-import environment from '../../../../../../environment'
-import * as api from '../../../../../../shared/services/api/api'
 
 jest.mock('../../../../../utils/formatDate')
 jest.mock('../../../../../../shared/services/api/api')
@@ -684,28 +682,6 @@ ${input.gebruiksdoel[1]}`,
 
     it('should pass along other properties', () => {
       expect(grexProject({ planstatus: 'A', oppervlakte: 12, foo: 'bar' }).foo).toEqual('bar')
-    })
-  })
-
-  describe('normalizes "parkeervakken"', () => {
-    it('returns the formatted days', () => {
-      const output = parkeervak({
-        regimes: [{ dagen: ['ma', 'di', 'do'], beginTijd: '00:00:00', eindTijd: '12:00:00' }],
-      })
-
-      expect(output).toMatchObject({
-        regimes: [{ dagenFormatted: 'ma, di, do' }],
-      })
-    })
-
-    it('returns the formatted time', () => {
-      const output = parkeervak({
-        regimes: [{ beginTijd: '00:00:00', eindTijd: '12:00:00', dagen: [] }],
-      })
-
-      expect(output).toMatchObject({
-        regimes: [{ tijdstip: '00:00 - 12:00', dagen: [] }],
-      })
     })
   })
 
