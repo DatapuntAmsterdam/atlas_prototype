@@ -5,9 +5,6 @@ updates:
   schedule:
     interval: weekly
   ignore:
-  - dependency-name: d3
-    versions:
-    - ">= 0"
   - dependency-name: leaflet-draw
     versions:
     - ">= 0"
