@@ -19,10 +19,9 @@ const StyledCardListBlock = styled(CardListBlock)`
 `
 
 const CollectionDetailPage: FunctionComponent = () => {
-  const { id } =
-    useParams<{
-      id: string
-    }>()
+  const { id } = useParams<{
+    id: string
+  }>()
   const [retryCount, setRetryCount] = useState(0)
 
   const { setDocumentTitle } = useDocumentTitle()
