@@ -1,4 +1,5 @@
 import type { LocationDescriptorObject } from 'history'
+import type { BaseIconOptions } from 'leaflet'
 import environment from '../../../environment'
 import { toAddresses, toCadastralObjects, toEstablishments, toGeoSearch } from '../../links'
 import { MAIN_PATHS, routing } from '../../routes'
@@ -73,4 +74,10 @@ export default {
     endpointData: `${environment.API_ROOT}dataselectie/brk/kot/`,
     endpointMapVisualization: `${environment.API_ROOT}dataselectie/brk/geolocation/`,
   },
+}
+
+export const DETAIL_ICON: BaseIconOptions = {
+  iconUrl: '/assets/images/map/detail.svg',
+  iconSize: [21, 21],
+  iconAnchor: [10, 10],
 }
