@@ -27,7 +27,7 @@ export interface LegacyDataSelectionConfigType {
   ENDPOINT_MARKERS: string
   ENDPOINT_EXPORT: string
   ENDPOINT_DETAIL: string
-  ENDPOINT_EXPORT_PARAM?: string
+  ENDPOINT_EXPORT_PARAM?: [string, string]
   PRIMARY_KEY: 'vestiging_id' | 'landelijk_id' | 'kadastraal_object_id'
   TITLE: string
   TITLE_TAB: string
@@ -317,7 +317,7 @@ const DATA_SELECTION_CONFIG: {
       ENDPOINT_PREVIEW: 'dataselectie/hr/',
       ENDPOINT_MARKERS: 'dataselectie/hr/geolocation/',
       ENDPOINT_EXPORT: 'dataselectie/hr/export/',
-      ENDPOINT_EXPORT_PARAM: 'dataset=ves',
+      ENDPOINT_EXPORT_PARAM: ['dataset', 'ves'],
       ENDPOINT_DETAIL: 'handelsregister/vestiging/',
       PRIMARY_KEY: 'vestiging_id',
       TITLE: 'Vestigingen',
