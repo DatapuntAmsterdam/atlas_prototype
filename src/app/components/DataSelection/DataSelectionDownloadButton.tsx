@@ -9,8 +9,6 @@ import { encodeQueryParams } from '../../../shared/services/query-string-parser/
 import { getAccessToken } from '../../../shared/services/auth/auth'
 import type { ActiveFilter } from './types'
 import { DatasetType } from './types'
-import useParam from '../../utils/useParam'
-import { polygonParam } from '../../pages/MapPage/query-params'
 
 export interface DataSelectionDownloadButtonProps {
   dataset: DatasetType
@@ -25,7 +23,6 @@ const DataSelectionDownloadButton: FunctionComponent<DataSelectionDownloadButton
   dataset,
   activeFilters,
 }) => {
-  const [polygon] = useParam(polygonParam)
   const { trackEvent } = useMatomo()
   const filterParams = []
   let url = `${environment.API_ROOT}${
@@ -33,13 +30,15 @@ const DataSelectionDownloadButton: FunctionComponent<DataSelectionDownloadButton
   }`
 
   DATA_SELECTION_CONFIG.datasets[dataset].FILTERS.forEach((filter: { slug: string }) => {
-    if (typeof activeFilters[filter.slug] === 'string') {
-      filterParams.push(`${filter.slug}=${window.encodeURIComponent(activeFilters[filter.slug])}`)
+    const activeFilter = activeFilters.find(({ key }) => key === filter.slug)
+    if (activeFilter) {
+      filterParams.push(`${filter.slug}=${window.encodeURIComponent(activeFilter.value)}`)
     }
   })
 
-  if (polygon?.polygon.length) {
-    filterParams.push(`shape=${JSON.stringify(polygon?.polygon.map(({ lat, lng }) => [lng, lat]))}`)
+  const shape = activeFilters.find(({ key }) => key === 'shape')
+  if (shape) {
+    filterParams.push(`shape=${shape.value}`)
   }
 
   if (dataset === DatasetType.Hr) {
