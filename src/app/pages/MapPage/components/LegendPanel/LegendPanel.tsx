@@ -1,7 +1,7 @@
 import type { FunctionComponent } from 'react'
 import { useMemo } from 'react'
 import styled from 'styled-components'
-import MapPanel from '../../legacy/panel/MapPanel'
+import MapPanel, { MapPanelOverlay } from '../../legacy/panel/MapPanel'
 import useParam from '../../../../utils/useParam'
 import { useMapContext } from '../../MapContext'
 import { mapLayersParam, zoomParam } from '../../query-params'
@@ -38,7 +38,7 @@ const LegendPanel: FunctionComponent = () => {
   const [zoomLevel] = useParam(zoomParam)
   const [activeLayers, setActiveMapLayers] = useParam(mapLayersParam)
 
-  const overlays = useMemo(
+  const overlays = useMemo<MapPanelOverlay[]>(
     () => activeLayers.map((layer) => ({ id: layer, isVisible: true })),
     [activeLayers],
   )
@@ -46,7 +46,6 @@ const LegendPanel: FunctionComponent = () => {
   // TODO: Replace 'MapPanel' with something better.
   return (
     <MapPanelContent data-testid="legendPanel">
-      {/* @ts-ignore */}
       <MapPanel
         panelLayers={panelLayers}
         overlays={overlays}
@@ -58,7 +57,6 @@ const LegendPanel: FunctionComponent = () => {
         onRemoveLayers={(mapLayers: string[]) => {
           setActiveMapLayers(activeLayers.filter((layer) => !mapLayers.includes(layer)))
         }}
-        isMapPanelVisible
         zoomLevel={zoomLevel}
       />
     </MapPanelContent>
