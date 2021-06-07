@@ -19,6 +19,8 @@ const StyledButton = styled(Button)`
   margin-left: ${themeSpacing(4)};
 `
 
+export const DOWNLOAD_BUTTON_TEST_ID = 'dataSelectionDownloadButton'
+
 const DataSelectionDownloadButton: FunctionComponent<DataSelectionDownloadButtonProps> = ({
   dataset,
   activeFilters,
@@ -64,6 +66,7 @@ const DataSelectionDownloadButton: FunctionComponent<DataSelectionDownloadButton
 
   return (
     <StyledButton
+      data-testid={DOWNLOAD_BUTTON_TEST_ID}
       forwardedAs="a"
       variant="primary"
       href={downloadUrl}
