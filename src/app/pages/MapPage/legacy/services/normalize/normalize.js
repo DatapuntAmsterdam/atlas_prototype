@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
+import environment from '../../../../../../environment'
+import { fetchWithToken } from '../../../../../../shared/services/api/api'
+import formatNumber from '../../../../../../shared/services/number-formatter/number-formatter'
 import formatCount from '../../../../../utils/formatCount'
 import formatDate from '../../../../../utils/formatDate'
-import formatNumber from '../../../../../../shared/services/number-formatter/number-formatter'
 import { NORMAL_PAND_STATUSSES, NORMAL_VBO_STATUSSES } from '../map-search/status-labels'
-import { fetchWithToken } from '../../../../../../shared/services/api/api'
-import environment from '../../../../../../environment'
 
 const YEAR_UNKNOWN = 1005 // The API returns 1005 when a year is unknown
 
@@ -257,29 +257,6 @@ export const grexProject = (result) => {
   const oppervlakteFormatted = formatSquareMetre(result.oppervlakte)
 
   return { ...result, planstatusFormatted, oppervlakteFormatted }
-}
-
-export const parkeervak = (result) => {
-  const TIME_SEPERATOR = ':'
-
-  function formatTime(time) {
-    const parts = time.split(TIME_SEPERATOR)
-
-    // Remove seconds from time if present (e.g. 20:00:00 => 20:00)
-    if (parts.length === 3) {
-      return parts.slice(0, -1).join(TIME_SEPERATOR)
-    }
-
-    return time
-  }
-
-  const regimes = result.regimes.map((regime) => ({
-    ...regime,
-    tijdstip: `${formatTime(regime.beginTijd)} - ${formatTime(regime.eindTijd)}`,
-    dagenFormatted: regime.dagen.join(', '),
-  }))
-
-  return { ...result, regimes }
 }
 
 export function formatSquareMetre(value) {
