@@ -1,6 +1,5 @@
 import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
-import queryStringParser from '../query-string-parser/query-string-parser'
 import stateTokenGenerator from '../state-token-generator/state-token-generator'
 import parseAccessToken from './parseAccessToken'
 
@@ -137,13 +136,16 @@ function handleError(code: ErrorCode, description: string) {
  * service.
  */
 function catchError() {
-  /* istanbul ignore else */
-  if (typeof window !== 'undefined') {
-    const params = queryStringParser(window.location.search)
+  if (typeof window === 'undefined') {
+    return
+  }
 
-    if (params && params.error) {
-      handleError(params.error as ErrorCode, params.error_description)
-    }
+  const params = new URLSearchParams(window.location.search)
+  const error = params.get('error')
+  const errorDescription = params.get('error_description')
+
+  if (error && errorDescription) {
+    handleError(error as ErrorCode, errorDescription)
   }
 }
 
@@ -157,13 +159,9 @@ function catchError() {
  * @return The access token in case the params for a valid callback,
  * null otherwise.
  */
-function getAccessTokenFromParams(params: { [key: string]: string }) {
+function getAccessTokenFromParams(params: URLSearchParams) {
   /* istanbul ignore next */
   if (typeof window === 'undefined') {
-    return null
-  }
-
-  if (!params) {
     return null
   }
 
@@ -171,21 +169,22 @@ function getAccessTokenFromParams(params: { [key: string]: string }) {
 
   // The state param must be exactly the same as the state token we
   // have saved in the session (to prevent CSRF)
-  const stateTokenValid = params?.state === stateToken
+  const stateParam = params.get('state')
+  const stateTokenValid = stateParam === stateToken
 
   // It is a callback when all authorization parameters are defined
   // in the params the fastest check is not to check if all
   // parameters are defined but to check that no undefined parameter
   // can be found
-  const paramsValid = !AUTH_PARAMS.some((param) => params[param] === undefined)
+  const paramsValid = AUTH_PARAMS.every((param) => params.get(param) !== null)
 
   if (paramsValid && !stateTokenValid) {
     // This is a callback, but the state token does not equal the
     // one we have saved; report to Sentry
-    throw new Error(`Authenticator encountered an invalid state token (${params.state})`)
+    throw new Error(`Authenticator encountered an invalid state token (${stateParam ?? ''})`)
   }
 
-  return stateTokenValid && paramsValid ? params.access_token : null
+  return stateTokenValid && paramsValid ? params.get('access_token') : null
 }
 
 /**
@@ -197,7 +196,7 @@ function handleCallback() {
     return
   }
 
-  const params = queryStringParser(window.location.hash.substring(1)) // Remove # from hash string
+  const params = new URLSearchParams(window.location.hash.substring(1)) // Remove # from hash string
   const accessToken = getAccessTokenFromParams(params)
 
   if (accessToken) {
