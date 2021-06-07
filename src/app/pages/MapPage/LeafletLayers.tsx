@@ -1,15 +1,15 @@
 import { NonTiledLayer } from '@amsterdam/arm-nontiled'
 import { GeoJSON, TileLayer } from '@amsterdam/react-maps'
-import type { BaseIconOptions, GeoJSON as GeoJSONType, GeoJSONOptions } from 'leaflet'
+import type { GeoJSON as GeoJSONType, GeoJSONOptions } from 'leaflet'
 import { Icon, Marker } from 'leaflet'
 import type { FunctionComponent } from 'react'
 import { useMemo } from 'react'
-import ICON_CONFIG from './legacy/leaflet/services/icon-config.constant'
+import useMapCenterToMarker from '../../utils/useMapCenterToMarker'
+import DrawMapVisualization from './components/DrawTool/DrawMapVisualization'
+import { DETAIL_ICON } from './config'
 import MAP_CONFIG from './legacy/services/map.config'
 import type { TmsOverlay, WmsOverlay } from './MapContext'
 import { useMapContext } from './MapContext'
-import DrawMapVisualization from './components/DrawTool/DrawMapVisualization'
-import useMapCenterToMarker from '../../utils/useMapCenterToMarker'
 
 const detailGeometryStyle = {
   color: 'red',
@@ -22,7 +22,7 @@ const detailGeometryStyle = {
 const detailGeometryOptions: GeoJSONOptions = {
   style: detailGeometryStyle,
   pointToLayer(feature, latLng) {
-    const icon = new Icon(ICON_CONFIG.DETAIL as BaseIconOptions)
+    const icon = new Icon(DETAIL_ICON)
 
     return new Marker(latLng, {
       icon,

@@ -1,32 +1,60 @@
 import { MarkerClusterGroup } from '@amsterdam/arm-cluster'
 import { GeoJSON } from '@amsterdam/react-maps'
-import { createGlobalStyle } from 'styled-components'
+import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
 import type { BaseIconOptions } from 'leaflet'
 import { Icon, LatLng, Marker } from 'leaflet'
-import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
-import { useHistory } from 'react-router-dom'
 import type { FunctionComponent } from 'react'
 import { useCallback } from 'react'
-import geoJsonConfig from '../../legacy/leaflet/services/geo-json-config.constant'
-import type { DataSelectionType } from '../../config'
-import config, { DataSelectionMapVisualizationType } from '../../config'
+import { useHistory } from 'react-router-dom'
+import { createGlobalStyle } from 'styled-components'
 import { fetchWithToken } from '../../../../../shared/services/api/api'
-import { normalizeMapVisualization } from './normalize'
-import useLegacyDataselectionConfig from '../../../../components/DataSelection/useLegacyDataselectionConfig'
-import useParam from '../../../../utils/useParam'
-import { polygonParam } from '../../query-params'
-import { useDataSelection } from '../../../../components/DataSelection/DataSelectionContext'
 import { createFiltersObject } from '../../../../../shared/services/data-selection/normalizations'
-import { useMapContext } from '../../MapContext'
-import ICON_CONFIG from '../../legacy/leaflet/services/icon-config.constant'
+import { useDataSelection } from '../../../../components/DataSelection/DataSelectionContext'
+import useLegacyDataselectionConfig from '../../../../components/DataSelection/useLegacyDataselectionConfig'
 import useBuildQueryString from '../../../../utils/useBuildQueryString'
 import useMapCenterToMarker from '../../../../utils/useMapCenterToMarker'
+import useParam from '../../../../utils/useParam'
+import config, {
+  DataSelectionMapVisualizationType,
+  DataSelectionType,
+  DETAIL_ICON,
+} from '../../config'
+import { useMapContext } from '../../MapContext'
+import { polygonParam } from '../../query-params'
+import { normalizeMapVisualization } from './normalize'
 
 const GlobalStyle = createGlobalStyle`
   .dataselection-detail-marker {
     cursor: pointer !important;
   }
 `
+
+const geoJsonConfig = {
+  dataSelection: {
+    style: {
+      color: '#ec0000',
+      fillOpacity: 0.33,
+      weight: 1,
+    },
+  },
+  dataSelectionAlternate: {
+    style: {
+      color: '#ec0000',
+      dashArray: '3 6',
+      fillOpacity: 0.17,
+      weight: 2,
+    },
+  },
+  dataSelectionBounds: {
+    style: {
+      color: '#ec0000',
+      fillOpacity: 0,
+      opacity: 0,
+      weight: 1,
+    },
+    requestFocus: true,
+  },
+}
 
 const DrawMapVisualization: FunctionComponent = () => {
   const { currentDatasetType } = useLegacyDataselectionConfig()
@@ -107,7 +135,7 @@ const DrawMapVisualization: FunctionComponent = () => {
             const lng = latLng[1]
             const marker = new Marker(new LatLng(lat, lng), {
               icon: new Icon({
-                ...ICON_CONFIG.DETAIL,
+                ...DETAIL_ICON,
                 className: 'dataselection-detail-marker',
               } as BaseIconOptions),
             })
