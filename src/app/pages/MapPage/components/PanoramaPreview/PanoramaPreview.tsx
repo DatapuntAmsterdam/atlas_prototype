@@ -3,6 +3,7 @@ import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import type { FunctionComponent } from 'react'
+import { useMemo } from 'react'
 import type { LatLngLiteral } from 'leaflet'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import type { FetchPanoramaOptions } from '../../../../../api/panorama/thumbnail'
@@ -17,8 +18,10 @@ import {
   panoFovParam,
   panoHeadingParam,
   panoPitchParam,
+  zoomParam,
 } from '../../query-params'
 import { PANORAMA_THUMBNAIL } from '../../matomo-events'
+import { PANO_LAYERS } from '../PanoramaViewer/PanoramaViewer'
 
 export interface PanoramaPreviewProps extends FetchPanoramaOptions {
   location: LatLngLiteral
@@ -61,6 +64,8 @@ const PreviewMessage = styled.div`
   background-color: ${themeColor('tint', 'level3')};
 `
 
+const MIN_ZOOM_LEVEL_PANO_LAYERS = 11
+
 // TODO: Link to panorama detail panel
 // TODO: Wait for image to load and decode to prevent flickering.
 // TODO: AfterBeta: Remove legacy link
@@ -74,6 +79,7 @@ const PanoramaPreview: FunctionComponent<PanoramaPreviewProps> = ({
   ...otherProps
 }) => {
   const [activeLayers] = useParam(mapLayersParam)
+  const [zoom] = useParam(zoomParam)
   const browserLocation = useLocation()
   const { trackEvent } = useMatomo()
 
@@ -87,6 +93,11 @@ const PanoramaPreview: FunctionComponent<PanoramaPreviewProps> = ({
         radius,
       }),
     [location],
+  )
+
+  const activeLayersWithPanorama = useMemo(
+    () => [...activeLayers, ...PANO_LAYERS],
+    [activeLayers, PANO_LAYERS],
   )
 
   const { buildQueryString } = useBuildQueryString()
@@ -113,7 +124,8 @@ const PanoramaPreview: FunctionComponent<PanoramaPreviewProps> = ({
       [panoFovParam, panoFovParam.initialValue],
       [panoHeadingParam, result?.value?.heading ?? panoHeadingParam.initialValue],
       [locationParam, location],
-      [mapLayersParam, activeLayers],
+      [mapLayersParam, activeLayersWithPanorama],
+      [zoomParam, zoom < MIN_ZOOM_LEVEL_PANO_LAYERS ? MIN_ZOOM_LEVEL_PANO_LAYERS : zoom],
     ]),
   }
   return (

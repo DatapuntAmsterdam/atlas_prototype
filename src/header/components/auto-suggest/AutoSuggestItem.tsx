@@ -3,7 +3,7 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import escapeStringRegexp from 'escape-string-regexp'
 import type { FunctionComponent } from 'react'
 import { useMemo } from 'react'
-import { Link as RouterLink, useLocation } from 'react-router-dom'
+import { Link as RouterLink, matchPath, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import type { LocationDescriptorObject } from 'history'
 import {
@@ -17,7 +17,6 @@ import {
 } from '../../../app/links'
 import {
   centerParam,
-  legendOpenParam,
   locationParam,
   mapLayersParam,
   ViewMode,
@@ -32,6 +31,7 @@ import { CmsType } from '../../../shared/config/cms.config'
 import { extractIdEndpoint, getDetailPageData } from '../../../store/redux-first-router/actions'
 import type { AutoSuggestSearchContent } from '../../services/auto-suggest/auto-suggest'
 import useParam from '../../../app/utils/useParam'
+import { routing } from '../../../app/routes'
 
 export interface AutoSuggestItemProps {
   content: string
@@ -121,16 +121,26 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
       const rawMapLayers = searchParams.get(mapLayersParam.name)
       const mapLayers = rawMapLayers ? mapLayersParam.decode(rawMapLayers) : []
 
+      // Set detail-page path if current route is on a detail page or on data-selection page, otherwise navigate to geosearch page
+      const pathname =
+        matchPath(location.pathname, { path: routing.dataDetail.path, exact: true })?.url ??
+        view === ViewMode.Map
+          ? matchPath(location.pathname, { path: routing.addresses.path, exact: true })?.url ??
+            matchPath(location.pathname, { path: routing.cadastralObjects.path, exact: true })
+              ?.url ??
+            matchPath(location.pathname, { path: routing.establishments.path, exact: true })?.url
+          : toGeoSearch().pathname
       return {
-        ...toGeoSearch(),
-        search: toSearchParams([
-          [viewParam, ViewMode.Map],
-          [queryParam, inputValue],
-          [legendOpenParam, true],
-          [mapLayersParam, mapLayers],
-          [locationParam, locationParameter],
-          [centerParam, center],
-        ]).toString(),
+        pathname,
+        search: toSearchParams(
+          [
+            [viewParam, ViewMode.Map],
+            [queryParam, inputValue],
+            [mapLayersParam, mapLayers],
+            [locationParam, locationParameter],
+          ],
+          { initialValue: location.search },
+        ).toString(),
       }
     }
 

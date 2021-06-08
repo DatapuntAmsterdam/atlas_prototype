@@ -113,7 +113,7 @@ const MapPage: FunctionComponent = () => {
             <Link as={RouterLink} to={toBedieningPage()}>
               help-pagina
             </Link>{' '}
-            raadplegen
+            raadplegen.
           </Paragraph>
         </Alert>
       )}
