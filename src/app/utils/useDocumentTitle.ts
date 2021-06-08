@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { routing } from '../routes'
 
-const TITLE = 'Data verkenner'
+const TITLE = 'Data en informatie'
 
 function useDocumentTitle() {
   const location = useLocation()
