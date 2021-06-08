@@ -5,6 +5,7 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import type { FunctionComponent } from 'react'
 import { useState } from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 import { PANO_LABELS } from './constants'
 import { getStreetViewUrl } from './panorama-api/panorama-api'
 import Clock from '../../../../../shared/assets/icons/Clock.svg'
@@ -12,6 +13,8 @@ import { locationParam, panoHeadingParam, panoTagParam } from '../../query-param
 import useParam from '../../../../utils/useParam'
 import Control from '../Control'
 import { PANORAMA_SELECT } from '../../matomo-events'
+import useBuildQueryString from '../../../../utils/useBuildQueryString'
+import { toGeoSearch } from '../../../../links'
 
 const getLabel = (id: string): string =>
   PANO_LABELS.find(({ id: labelId }) => labelId === id)?.label || PANO_LABELS[0].label
@@ -52,9 +55,11 @@ const StyledControl = styled(Control)`
 const PanoramaMenuControl: FunctionComponent = () => {
   const [location] = useParam(locationParam)
   const [panoHeading] = useParam(panoHeadingParam)
-  const [panoTag, setPanoTag] = useParam(panoTagParam)
+  const [panoTag] = useParam(panoTagParam)
   const [open, setOpen] = useState(false)
   const { trackEvent } = useMatomo()
+  const history = useHistory()
+  const { buildQueryString } = useBuildQueryString()
 
   const handleOpenPanoramaExternal = () => {
     setOpen(false)
@@ -97,8 +102,12 @@ const PanoramaMenuControl: FunctionComponent = () => {
                 ...PANORAMA_SELECT,
                 name: id,
               })
+              // We always have to navigate back to geosearch, since the panorama images might not match the location of a detail-page
+              history.push({
+                ...toGeoSearch(),
+                search: buildQueryString([[panoTagParam, id]]),
+              })
               setOpen(false)
-              setPanoTag(id)
             }}
             icon={
               panoTag === id ? (
