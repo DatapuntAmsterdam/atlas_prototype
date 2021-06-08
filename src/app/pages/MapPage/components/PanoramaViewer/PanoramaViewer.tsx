@@ -44,9 +44,14 @@ const PanoramaStyle = styled.div<{ panoFullScreen: boolean; loading: boolean }>`
 `
 
 export const PANO_LAYERS = [
+  'pano-pano2021bi',
+  'pano-pano2020woz',
   'pano-pano2020bi',
+  'pano-pano2019woz',
   'pano-pano2019bi',
+  'pano-pano2018woz',
   'pano-pano2018bi',
+  'pano-pano2017woz',
   'pano-pano2017bi',
   'pano-pano2016bi',
 ]
