@@ -85,10 +85,8 @@ const constructLegendIconUrl = (mapLayer, legendItem) => {
 
 const MapLegend = ({
   activeMapLayers,
-  onLayerVisibilityToggle,
   zoomLevel,
   printMode,
-  onLayerToggle,
   title,
   overlays,
   onRemoveLayers,
@@ -96,8 +94,7 @@ const MapLegend = ({
 }) => {
   const ref = createRef()
   const { trackEvent } = useMatomo()
-  const isEmbeddedUi = useIsEmbedded()
-  const isPrintOrEmbedView = isEmbeddedUi
+  const isEmbedView = useIsEmbedded()
   const testId = title
     .split(' ')
     .map((word) => `${word.charAt(0).toUpperCase()}${word.substring(1)}`)
@@ -145,14 +142,14 @@ const MapLegend = ({
         ),
         isEmbedded: overlays.some((overlay) =>
           [{ id: mapLayer.id }, ...(mapLayer.legendItems || [])].some(
-            (legendItem) => overlay.id === legendItem.id && isPrintOrEmbedView,
+            (legendItem) => overlay.id === legendItem.id && isEmbedView,
           ),
         ),
       })),
     [overlays, activeMapLayers],
   )
 
-  const [isOpen, setOpen] = useState(isPrintOrEmbedView ?? false)
+  const [isOpen, setOpen] = useState(isEmbedView ?? false)
 
   const allVisible = mapLayers.every(({ isVisible }) => isVisible)
   const someVisible = mapLayers.some(({ isVisible }) => isVisible)
@@ -163,8 +160,6 @@ const MapLegend = ({
     ) && someVisible
 
   const handleLayerToggle = (checked, mapLayer) => {
-    onLayerToggle(mapLayer)
-
     // Only track the event when the mapLayer gets checked
     if (checked) {
       trackLayerEnabled(mapLayer)
@@ -225,15 +220,6 @@ const MapLegend = ({
         .forEach((mapLayer) => {
           handleLayerToggle(e.currentTarget.checked, mapLayer)
         })
-
-      mapLayers.forEach((mapLayer) => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        mapLayer.legendItems?.length > 0
-          ? mapLayer.legendItems
-              .filter(({ isVisible }) => !isVisible)
-              .forEach((legendItem) => onLayerVisibilityToggle(legendItem.id, false))
-          : null
-      })
       setOpen(true)
     } else {
       activeMapLayers.forEach((mapLayer) => {
@@ -246,8 +232,7 @@ const MapLegend = ({
 
   return (
     <>
-      {(!isPrintOrEmbedView ||
-        (isPrintOrEmbedView && mapLayers.some(({ isEmbedded }) => isEmbedded))) && ( // Also display the collection title when maplayer is embedded
+      {(!isEmbedView || (isEmbedView && mapLayers.some(({ isEmbedded }) => isEmbedded))) && ( // Also display the collection title when maplayer is embedded
         <LayerButton
           data-testid={`mapLegendLayerButton${testId}`}
           ref={ref}
@@ -255,7 +240,7 @@ const MapLegend = ({
           isOpen={isOpen}
         >
           <TitleWrapper>
-            {!isPrintOrEmbedView ? (
+            {!isEmbedView ? (
               <StyledCheckbox
                 className="checkbox"
                 name={title}
@@ -276,7 +261,7 @@ const MapLegend = ({
         <ul className="map-legend">
           {mapLayers &&
             mapLayers
-              .filter(({ isEmbedded }) => (isPrintOrEmbedView ? isEmbedded : true)) // Only include the embedded layers when in certain views
+              .filter(({ isEmbedded }) => (isEmbedView ? isEmbedded : true)) // Only include the embedded layers when in certain views
               .map((mapLayer, mapLayerIndex) => {
                 const layerIsChecked = mapLayer.isVisible
                 const layerIsIndeterminate =
@@ -319,20 +304,14 @@ const MapLegend = ({
                             (e) => {
                               addOrRemoveLayer(e.currentTarget.checked, [mapLayer])
                               // Sometimes we dont want the active maplayers to be deleted from the query parameters in the url
-                              if (isPrintOrEmbedView || layerIsIndeterminate) {
-                                return mapLayer.legendItems.length > 0 &&
-                                  mapLayer.legendItems.some(({ id }) => id !== null)
-                                  ? mapLayer.legendItems
-                                      .filter(({ isVisible }) =>
-                                        layerIsIndeterminate ? !isVisible : true,
-                                      )
-                                      .forEach(({ id }) => {
-                                        onLayerVisibilityToggle(
-                                          id,
-                                          layerIsIndeterminate ? false : !e.currentTarget.checked,
-                                        )
-                                      })
-                                  : onLayerVisibilityToggle(mapLayer.id, !e.currentTarget.checked)
+                              if (isEmbedView || layerIsIndeterminate) {
+                                return (
+                                  mapLayer.legendItems.length > 0 &&
+                                  mapLayer.legendItems.some(({ id }) => id !== null) &&
+                                  mapLayer.legendItems.filter(({ isVisible }) =>
+                                    layerIsIndeterminate ? !isVisible : true,
+                                  )
+                                )
                               }
                               return handleLayerToggle(e.currentTarget.checked, mapLayer)
                             }
@@ -390,11 +369,6 @@ const MapLegend = ({
                                         onChange={
                                           /* istanbul ignore next */
                                           () => {
-                                            onLayerVisibilityToggle(
-                                              legendItem.id,
-                                              legendItemIsVisible,
-                                            )
-
                                             if (!legendItemIsVisible) {
                                               if (onAddLayers) {
                                                 onAddLayers([legendItem.id])
