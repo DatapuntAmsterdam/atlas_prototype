@@ -15,6 +15,15 @@ describe('LoginLinkRequestFlow', () => {
   })
 
   it('requests a login link', () => {
+    const origin = 'http://localhost:3000'
+    const pathname = '/data/bouwdossiers/bouwdossier/ID123456'
+    const locationSpy = jest.spyOn(window, 'location', 'get').mockReturnValue({
+      origin,
+      pathname,
+      // Add the search to ensure it does not accidentally end up in the request.
+      search: '?foo=bar',
+    } as Location)
+
     requestLoginLinkMock.mockReturnValue(new Promise(() => {}))
 
     render(
@@ -25,8 +34,10 @@ describe('LoginLinkRequestFlow', () => {
 
     expect(requestLoginLinkMock).toHaveBeenCalledWith({
       email: MOCK_EMAIL,
-      originUrl: 'http://localhost:3000/',
+      originUrl: origin + pathname,
     })
+
+    locationSpy.mockRestore()
   })
 
   it('shows the loading message', () => {
