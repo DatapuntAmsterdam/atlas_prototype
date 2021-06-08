@@ -10,7 +10,7 @@ import useParam from '../../../../utils/useParam'
 import DetailPanel from '../DetailPanel/DetailPanel'
 import MapSearchResults from '../MapSearchResults/MapSearchResults'
 import { useMapContext } from '../../MapContext'
-import { locationParam } from '../../query-params'
+import { locationParam, mapLayersParam } from '../../query-params'
 import DrawerOverlay, { DeviceMode, DrawerState } from '../DrawerOverlay'
 import { DrawerPanelHeader, LargeDrawerPanel, SmallDrawerPanel } from '../DrawerPanel'
 import DrawResults from '../DrawTool/DrawResults'
@@ -46,6 +46,7 @@ const LegendDrawerPanelHeader = styled(DrawerPanelHeader)`
 const MapPanel: FunctionComponent = () => {
   const { setDrawerState, panelHeader, legendActive, drawerState, setLegendActive } =
     useMapContext()
+  const [activeMapLayers] = useParam(mapLayersParam)
   const [locationParameter] = useParam(locationParam)
   const location = useLocation()
   const { activeFilters } = useDataSelection()
@@ -61,6 +62,13 @@ const MapPanel: FunctionComponent = () => {
     () => matchPath(location.pathname, routing.dataSearchGeo.path),
     [location.pathname, routing.dataSearchGeo.path],
   )
+  const dataSelectionMatch = useMemo(
+    () =>
+      matchPath(location.pathname, routing.addresses.path) ||
+      matchPath(location.pathname, routing.establishments.path) ||
+      matchPath(location.pathname, routing.cadastralObjects.path),
+    [location.pathname, routing],
+  )
 
   const onCloseLegend = () => {
     setLegendActive(false)
@@ -72,8 +80,12 @@ const MapPanel: FunctionComponent = () => {
   // - The user selects a point on the map, navigating to a geo search panel.
   // - The users moves the point on the map, whilst already having the geo search panel open.
   useEffect(() => {
-    if (dataDetailMatch || dataSearchGeoMatch) {
+    if (dataDetailMatch || (dataSearchGeoMatch && locationParameter) || dataSelectionMatch) {
       setLegendActive(false)
+    } else if (activeMapLayers.length) {
+      // Show the legend explicitly when the user activates a map layer from outside the legend eg. clicking on a AutoSuggest / searchbar dropdown result
+      setLegendActive(true)
+      setDrawerState(DrawerState.Open)
     }
   }, [dataDetailMatch, dataSearchGeoMatch, locationParameter])
 
