@@ -15,6 +15,8 @@ Object.defineProperty(window, 'innerWidth', {
   value: WINDOW_INNERWIDTH,
 })
 
+jest.useFakeTimers()
+
 jest.mock('@amsterdam/react-maps', () => ({
   useMapInstance: () => ({
     fitBounds: fitBoundsMock,
@@ -71,6 +73,7 @@ describe('useMapCenterToMarker', () => {
       return <div data-testid="drawerPanel" />
     }
     render(<Component />)
+    jest.runAllTimers()
 
     expect(panToMock).toHaveBeenCalledWith([newLat - DRAWER_WIDTH / 2, 1000])
   })
