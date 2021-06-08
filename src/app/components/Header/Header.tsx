@@ -70,7 +70,7 @@ const Header: FunctionComponent<HeaderProps> = ({ homePage, hasMaxWidth }) => (
   <HeaderWrapper isHomePage={homePage} data-testid="header">
     <StyledHeader
       tall={homePage}
-      title="Data verkenner"
+      title="Data en informatie"
       homeLink="/"
       className="styled-header"
       fullWidth={!hasMaxWidth}

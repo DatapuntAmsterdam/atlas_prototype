@@ -241,9 +241,9 @@ export function createConfig(additionalOptions: CreateConfigOptions): WebpackCon
       new HtmlWebpackPlugin({
         template: 'index.ejs',
         lang: 'nl',
-        title: 'Data verkenner',
+        title: 'Data en informatie',
         description:
-          'Data verkenner is dé website voor iedereen die op zoek is naar objectieve, betrouwbare en actuele data over Amsterdam.',
+          'Data en informatie is dé website voor iedereen die op zoek is naar objectieve, betrouwbare en actuele data over Amsterdam.',
         favicon: './favicon.png',
         styles: ['https://static.amsterdam.nl/fonts/fonts.css'],
         scripts: ['https://static.amsterdam.nl/fonts/mtiFontTrackingCode.min.js'],
