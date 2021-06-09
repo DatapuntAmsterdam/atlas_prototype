@@ -1,7 +1,8 @@
+import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import environment from '../environment'
-import { initAuth, getReturnPath } from '../shared/services/auth/auth'
+import { getReturnPath, initAuth } from '../shared/services/auth/auth'
 import { initKeycloak } from '../shared/services/auth/auth-keycloak'
 import App from './App'
 import { UiProvider } from './contexts/ui'
@@ -75,11 +76,13 @@ function renderApp() {
   }
 
   ReactDOM.render(
-    <BrowserRouter>
-      <UiProvider>
-        <App />
-      </UiProvider>
-    </BrowserRouter>,
+    <StrictMode>
+      <BrowserRouter>
+        <UiProvider>
+          <App />
+        </UiProvider>
+      </BrowserRouter>
+    </StrictMode>,
     document.getElementById('root'),
   )
 }
