@@ -11,6 +11,8 @@ import { path as rondleidingverbodPath } from '../../../../../api/overlastgebied
 import { path as taxistandplaatsPath } from '../../../../../api/overlastgebieden/taxistandplaats'
 import type { Single as OverlastgebiedenSingle } from '../../../../../api/overlastgebieden/types'
 import type { Parkeervak } from '../../../../../api/parkeervakken'
+import type { Ligplaats, OpAfstapplaats } from '../../../../../api/varen'
+import { varenLigplaatsPath, varenOpafstapplaatsPath } from '../../../../../api/varen'
 import type { Root as Vastgoed } from '../../../../../api/vsd/vastgoed/types'
 import environment from '../../../../../environment'
 import { DEFAULT_LOCALE } from '../../../../../shared/config/locale.config'
@@ -120,6 +122,8 @@ export const endpointTypes = {
   tunnels: 'hoofdroutes/tunnels_gevaarlijke_stoffen',
   vastgoed: 'vsd/vastgoed',
   vestiging: 'handelsregister/vestiging/',
+  varenOpAfstapplaats: varenOpafstapplaatsPath,
+  varenLigplaats: varenLigplaatsPath,
   winkelgebied: 'vsd/winkgeb',
   woonplaats: woonplaatsenPath,
   woningbouwplannen: 'v1/woningbouwplannen/woningbouwplan/',
@@ -605,6 +609,51 @@ const parkeervak: ServiceDefinition<Parkeervak, ParkeervakNormalized> = {
             values: result.regimes,
           }
         : undefined,
+    ],
+  }),
+}
+
+const varenLigplaatsen: ServiceDefinition<Ligplaats> = {
+  type: 'varen/ligplaats',
+  endpoint: varenLigplaatsPath,
+  mapDetail: (result) => ({
+    title: categoryLabels.varenLigplaats.singular,
+    subTitle: result.id,
+    noPanorama: true,
+    items: [
+      {
+        type: DetailResultItemType.DefinitionList,
+        entries: [
+          { term: 'ID', description: result.id },
+          { term: 'Naam vaartuig', description: result.naamVaartuig },
+          { term: 'Rederij', description: result.naamKlantKvk },
+          { term: 'Ligplaats segment', description: result.ligplaatsSegment },
+          { term: 'Locatie ID', description: result.idLigplaats },
+        ],
+      },
+    ],
+  }),
+}
+const varenOpAfstapplaats: ServiceDefinition<OpAfstapplaats> = {
+  type: 'varen/opafstapplaats',
+  endpoint: varenOpafstapplaatsPath,
+  mapDetail: (result) => ({
+    title: categoryLabels.varenOpafstapplaats.singular,
+    subTitle: result.id,
+    noPanorama: true,
+    items: [
+      {
+        type: DetailResultItemType.DefinitionList,
+        entries: [
+          { term: 'ID', description: result.id },
+          { term: 'Volgnummer', description: result.volgnr },
+          { term: 'Indicatie over opstap of afstaplocatie', description: result.opEnAfstap },
+          { term: 'Indicatie voor laden en lossen', description: result.laadLos },
+          { term: 'Indicatie elektrische laadpunt', description: result.eLaadpunt },
+          { term: 'Volgnummer + locatiebeschrijving', description: result.tekstOnMouseover },
+          { term: 'Soort op- en afstaplocatie', description: result.kleurOpKaart },
+        ],
+      },
     ],
   }),
 }
@@ -1972,6 +2021,8 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition<any, any> } = 
       }
     },
   },
+  [endpointTypes.varenLigplaats]: varenLigplaatsen,
+  [endpointTypes.varenOpAfstapplaats]: varenOpAfstapplaats,
   [endpointTypes.vestiging]: {
     type: 'handelsregister/vestiging',
     endpoint: 'handelsregister/vestiging',

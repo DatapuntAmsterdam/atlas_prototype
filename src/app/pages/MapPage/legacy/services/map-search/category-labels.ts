@@ -135,6 +135,14 @@ const categoryLabels = {
     singular: 'Vastgoed',
     plural: 'Vastgoed',
   },
+  varenLigplaats: {
+    singular: 'Ligplaats passagiersvaartuig',
+    plural: 'Ligplaatsen passagiersvaartuigen',
+  },
+  varenOpafstapplaats: {
+    singular: 'Op- en afstaplocatie beroepsvaart',
+    plural: 'Op- en afstaplocaties beroepsvaart',
+  },
   vestiging: {
     singular: 'Vestiging',
     plural: 'Vestigingen',
