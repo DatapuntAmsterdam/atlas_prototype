@@ -1,11 +1,11 @@
-import { shallow } from 'enzyme'
+import { render, screen } from '@testing-library/react'
+import withAppContext from '../../utils/withAppContext'
 import AuthAlert from './AuthAlert'
 
 describe('AuthAlert', () => {
   it('should render with an additional message', () => {
-    const excludedResults = 'Lorem ipsum'
-    const component = shallow(<AuthAlert excludedResults={excludedResults} />)
+    render(withAppContext(<AuthAlert excludedResults="Lorem ipsum" />))
 
-    expect(component.find('Paragraph').at(0).props().children).toContain('over: Lorem ipsum.')
+    expect(screen.getByText('over: Lorem ipsum.', { exact: false })).toBeInTheDocument()
   })
 })

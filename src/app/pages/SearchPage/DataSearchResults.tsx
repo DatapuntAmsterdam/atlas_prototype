@@ -68,12 +68,12 @@ const DataSearchResults: FunctionComponent<DataSearchResultsProps> = ({
       })}
       <>
         {unauthorizedLabels.length > 0 && (
-          <AuthAlert excludedResults={unauthorizedLabels.join(', ')} />
+          <AuthAlert data-testid="authAlert" excludedResults={unauthorizedLabels.join(', ')} />
         )}
       </>
     </>
   ) : (
-    <NoDataSearchResults query={query} unauthorized={unauthorizedLabels} />
+    <NoDataSearchResults data-testid="noResults" query={query} unauthorized={unauthorizedLabels} />
   )
 }
 export default DataSearchResults

@@ -1,25 +1,26 @@
-import { shallow } from 'enzyme'
-import ToggleFullscreen, { StyledControlButton } from './ToggleFullscreen'
+import { fireEvent, render, screen } from '@testing-library/react'
+import ToggleFullscreen from './ToggleFullscreen'
 
 describe('ToggleFullscreen', () => {
   const onToggleFullscreen = jest.fn()
   const props = {
-    isFullscreen: true,
     title: 'ABC',
     onToggleFullscreen,
   }
 
-  describe('actions', () => {
-    it('should trigger toggle off when clicked', () => {
-      const wrapper = shallow(<ToggleFullscreen {...props} />)
-      wrapper.find(StyledControlButton).at(0).simulate('click')
-      expect(onToggleFullscreen).toHaveBeenCalled()
-    })
+  it('triggers maximization', () => {
+    render(<ToggleFullscreen {...props} isFullscreen={false} />)
 
-    it('should trigger toggle on when clicked', () => {
-      const wrapper = shallow(<ToggleFullscreen {...props} />)
-      wrapper.find(StyledControlButton).at(0).simulate('click')
-      expect(onToggleFullscreen).toHaveBeenCalled()
-    })
+    fireEvent.click(screen.getByLabelText('vergroten', { exact: false }))
+
+    expect(onToggleFullscreen).toHaveBeenCalled()
+  })
+
+  it('triggers minimization', () => {
+    render(<ToggleFullscreen {...props} isFullscreen />)
+
+    fireEvent.click(screen.getByLabelText('verkleinen', { exact: false }))
+
+    expect(onToggleFullscreen).toHaveBeenCalled()
   })
 })

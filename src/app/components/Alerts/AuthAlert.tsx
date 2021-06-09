@@ -33,7 +33,7 @@ const AuthAlert: FunctionComponent<AuthAlertProps> = ({
   hideHeader,
   ...otherProps
 }) => (
-  <StyledAlert level="info" dismissible {...otherProps} data-testid="auth-alert">
+  <StyledAlert level="info" dismissible data-testid="auth-alert" {...otherProps}>
     {!hideHeader && <Heading forwardedAs="h3">Meer resultaten na inloggen</Heading>}
     <Paragraph>
       {specialAuthLevel

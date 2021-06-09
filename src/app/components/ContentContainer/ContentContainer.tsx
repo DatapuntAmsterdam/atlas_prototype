@@ -18,12 +18,9 @@ export interface ContentContainerProps {
   className?: string
 }
 
-const ContentContainer: FunctionComponent<ContentContainerProps> = ({ children, className }) => (
-  <StyledContainer className={className}>{children}</StyledContainer>
-)
-
-ContentContainer.defaultProps = {
-  className: 'content-container',
-}
+const ContentContainer: FunctionComponent<ContentContainerProps> = ({
+  children,
+  className = 'content-container',
+}) => <StyledContainer className={className}>{children}</StyledContainer>
 
 export default ContentContainer

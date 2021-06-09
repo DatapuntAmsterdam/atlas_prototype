@@ -1,26 +1,24 @@
-import { shallow } from 'enzyme'
-import type { ShallowWrapper } from 'enzyme'
+import { render, screen } from '@testing-library/react'
 import ContentContainer from './ContentContainer'
 
 describe('ContentContainer', () => {
-  let component: ShallowWrapper
-
-  beforeEach(() => {
-    component = shallow(
+  it('renders with children', () => {
+    render(
       <ContentContainer>
-        <div />
+        <h1>Hello World!</h1>
       </ContentContainer>,
     )
+
+    expect(screen.getByText('Hello World!')).toBeInTheDocument()
   })
 
-  it('should render', () => {
-    expect(component.find('.content-container').props().children).toStrictEqual(<div />)
+  it('adds a default class', () => {
+    const { container } = render(<ContentContainer />)
+    expect(container.firstChild).toHaveClass('content-container')
   })
 
-  it('should pass the className and beamColor to the styled component', () => {
-    component.setProps({ className: 'my-class', beamColor: 'valid' })
-
-    expect(component.find('.content-container').exists()).toBeFalsy()
-    expect(component.find('.my-class').exists()).toBeTruthy()
+  it('passes the the className prop', () => {
+    const { container } = render(<ContentContainer className="my-class" />)
+    expect(container.firstChild).toHaveClass('my-class')
   })
 })

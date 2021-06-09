@@ -1,12 +1,14 @@
+import { render, screen } from '@testing-library/react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { mount, shallow } from 'enzyme'
 import { useHistory } from 'react-router-dom'
 import { mocked } from 'ts-jest/utils'
 import type { History } from 'history'
+import type { PropsWithChildren } from 'react'
 import environment from '../../../environment'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import EditorialPage from './EditorialPage'
 
+jest.mock('react-helmet', () => ({ Helmet: ({ children }: PropsWithChildren<any>) => children }))
 jest.mock('@datapunt/matomo-tracker-react')
 jest.mock('react-router')
 jest.mock('../../utils/useDocumentTitle')
@@ -40,26 +42,27 @@ describe('EditorialPage', () => {
     useDocumentTitleMock.mockReset()
   })
 
-  it('should display the loading indicator', () => {
-    const component = shallow(<EditorialPage loading error={false} />).dive()
-    expect(component.find('LoadingIndicator')).toBeTruthy()
+  it('displays the loading indicator', () => {
+    render(<EditorialPage loading error={false} />)
+    expect(screen.getByTestId('loadingSpinner')).toBeInTheDocument()
   })
 
-  it('should set the canonical url', () => {
-    const component = shallow(
-      <EditorialPage loading={false} error={false} link={{ pathname: '/this.is.alink' }} />,
-    ).dive()
+  it('sets the canonical url', () => {
+    render(<EditorialPage loading={false} error={false} link={{ pathname: '/this.is.alink' }} />)
 
-    expect(component.find('link').props().href).toBe(`${environment.ROOT}this.is.alink`)
+    expect(screen.getByTestId('canonicalUrl')).toHaveAttribute(
+      'href',
+      `${environment.ROOT}this.is.alink`,
+    )
   })
 
-  it('should set the document title and send to analytics', () => {
-    const component = mount(<EditorialPage loading={false} error={false} documentTitle="" />)
+  it('sets the document title and send to analytics', () => {
+    const { rerender } = render(<EditorialPage loading={false} error={false} documentTitle="" />)
 
     expect(mockSetDocumentTitle).not.toHaveBeenCalled()
     expect(mockTrackPageView).not.toHaveBeenCalled()
 
-    component.setProps({ documentTitle: 'foo' })
+    rerender(<EditorialPage loading={false} error={false} documentTitle="foo" />)
 
     expect(mockSetDocumentTitle).toHaveBeenCalledWith('foo')
     expect(mockTrackPageView).toHaveBeenCalledWith({ documentTitle: 'foo' })
