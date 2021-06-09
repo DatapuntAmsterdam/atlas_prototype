@@ -1,3 +1,5 @@
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
+import { HotModuleReplacementPlugin } from 'webpack'
 import DeadCodePlugin from 'webpack-deadcode-plugin'
 import { merge } from 'webpack-merge'
 import type { WebpackConfiguration } from './webpack.common'
@@ -31,6 +33,8 @@ export default merge<WebpackConfiguration>(createConfig({ mode: 'development' })
     usedExports: true,
   },
   plugins: [
+    new HotModuleReplacementPlugin(),
+    new ReactRefreshWebpackPlugin(),
     new DeadCodePlugin({
       context: 'src',
       patterns: ['**/*.(js|jsx|ts|tsx|css|scss)'],
