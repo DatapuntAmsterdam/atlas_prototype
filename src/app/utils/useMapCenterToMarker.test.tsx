@@ -2,18 +2,15 @@ import { render } from '@testing-library/react'
 import { useEffect } from 'react'
 import type { LatLngLiteral, LatLngTuple } from 'leaflet'
 import useMapCenterToMarker from './useMapCenterToMarker'
+import withAppContext from './withAppContext'
+import {
+  LAPTOP_L_WIDTH,
+  LAPTOP_WIDTH,
+  TABLET_M_WIDTH,
+} from '../pages/MapPage/components/DrawerPanel/LargeDrawerPanel'
 
 const fitBoundsMock = jest.fn()
 const panToMock = jest.fn()
-
-const WINDOW_INNERWIDTH = 1500
-const DRAWER_WIDTH = 500
-
-Object.defineProperty(window, 'innerWidth', {
-  writable: true,
-  configurable: true,
-  value: WINDOW_INNERWIDTH,
-})
 
 jest.useFakeTimers()
 
@@ -29,6 +26,18 @@ jest.mock('@amsterdam/react-maps', () => ({
   }),
 }))
 
+function mockMatchMedia(width = 400) {
+  window.matchMedia = jest.fn().mockImplementation((query) => {
+    return {
+      matches: !!query.includes(`${width}px`),
+      media: () => {},
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+    }
+  })
+}
+
 describe('useMapCenterToMarker', () => {
   const originalOffsetHeight = Object.getOwnPropertyDescriptor(
     HTMLElement.prototype,
@@ -36,15 +45,9 @@ describe('useMapCenterToMarker', () => {
   )
   const originalOffsetWidth = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetWidth')
 
-  beforeAll(() => {
-    Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
-      configurable: true,
-      value: DRAWER_WIDTH,
-    })
-    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
-      configurable: true,
-      value: DRAWER_WIDTH,
-    })
+  afterEach(() => {
+    jest.clearAllMocks()
+    jest.resetAllMocks()
   })
 
   afterAll(() => {
@@ -60,7 +63,8 @@ describe('useMapCenterToMarker', () => {
     )
   })
 
-  it('should pan to the middle of the map', () => {
+  it('should pan to the middle of the map when media matches size < laptop', () => {
+    mockMatchMedia(1023)
     const newLat = 1000
     const Component = () => {
       const { panToWithPanelOffset } = useMapCenterToMarker()
@@ -72,9 +76,44 @@ describe('useMapCenterToMarker', () => {
       }, [])
       return <div data-testid="drawerPanel" />
     }
-    render(<Component />)
-    jest.runAllTimers()
+    render(withAppContext(<Component />))
 
-    expect(panToMock).toHaveBeenCalledWith([newLat - DRAWER_WIDTH / 2, 1000])
+    expect(panToMock).toHaveBeenCalledWith([newLat - TABLET_M_WIDTH / 2, 1000])
+  })
+
+  it('should pan to the middle of the map when media matches size >= laptop', () => {
+    mockMatchMedia(1024)
+    const newLat = 1000
+    const Component = () => {
+      const { panToWithPanelOffset } = useMapCenterToMarker()
+      useEffect(() => {
+        panToWithPanelOffset({
+          lat: newLat, // presume user clicks on the far right edge of the map
+          lng: 1000,
+        })
+      }, [])
+      return <div data-testid="drawerPanel" />
+    }
+    render(withAppContext(<Component />))
+
+    expect(panToMock).toHaveBeenCalledWith([newLat - LAPTOP_WIDTH / 2, 1000])
+  })
+
+  it('should pan to the middle of the map when media matches size >= laptopL', () => {
+    mockMatchMedia(1430)
+    const newLat = 1000
+    const Component = () => {
+      const { panToWithPanelOffset } = useMapCenterToMarker()
+      useEffect(() => {
+        panToWithPanelOffset({
+          lat: newLat, // presume user clicks on the far right edge of the map
+          lng: 1000,
+        })
+      }, [])
+      return <div data-testid="drawerPanel" />
+    }
+    render(withAppContext(<Component />))
+
+    expect(panToMock).toHaveBeenCalledWith([newLat - LAPTOP_L_WIDTH / 2, 1000])
   })
 })
