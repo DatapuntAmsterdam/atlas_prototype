@@ -17,6 +17,7 @@ import DrawResults from '../DrawTool/DrawResults'
 import LegendPanel from '../LegendPanel/LegendPanel'
 import useMapControls from './useMapControls'
 import { LEGEND_CLOSE } from '../../matomo-events'
+import DetailInfoBox from '../DetailPanel/DetailInfoBox'
 
 const TitleHeading = styled(Heading)`
   margin: 0;
@@ -43,8 +44,14 @@ const LegendDrawerPanelHeader = styled(DrawerPanelHeader)`
   background-color: ${themeColor('tint', 'level1')};
 `
 
+const StyledDetailInfoBox = styled(DetailInfoBox)`
+  position: absolute;
+  right: 0;
+  top: 0;
+`
+
 const MapPanel: FunctionComponent = () => {
-  const { setDrawerState, panelHeader, legendActive, drawerState, setLegendActive } =
+  const { setDrawerState, panelHeader, legendActive, drawerState, setLegendActive, infoBox } =
     useMapContext()
   const [activeMapLayers] = useParam(mapLayersParam)
   const [locationParameter] = useParam(locationParam)
@@ -120,6 +127,7 @@ const MapPanel: FunctionComponent = () => {
             <DrawerPanelHeader>
               {panelHeader.type && <SubtitleHeading as="h6">{panelHeader.type}</SubtitleHeading>}
               <TitleHeading styleAs="h2">{panelHeader.title}</TitleHeading>
+              {infoBox && <StyledDetailInfoBox {...infoBox} />}
             </DrawerPanelHeader>
             <DrawerContainer>
               <Switch>

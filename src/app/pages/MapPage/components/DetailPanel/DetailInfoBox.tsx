@@ -1,4 +1,4 @@
-import type { FunctionComponent } from 'react'
+import type { FunctionComponent, HTMLAttributes } from 'react'
 import { useState } from 'react'
 import {
   Alert,
@@ -23,11 +23,18 @@ const StyledButton = styled(Button)`
   border: 1px solid ${themeColor('tint', 'level3')};
 `
 
-const DetailInfoBox: FunctionComponent<InfoBoxProps> = ({ plural, description, url, meta }) => {
+const DetailInfoBox: FunctionComponent<InfoBoxProps & HTMLAttributes<HTMLButtonElement>> = ({
+  className,
+  plural,
+  description,
+  url,
+  meta,
+}) => {
   const [open, setOpen] = useState(false)
   return (
     <>
       <StyledButton
+        className={className}
         type="button"
         variant="blank"
         data-testid="detail-infobox"

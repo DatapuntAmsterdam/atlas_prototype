@@ -6,6 +6,7 @@ import type { MapCollection, MapLayer } from './legacy/services'
 import type { DrawerState } from './components/DrawerOverlay'
 import createNamedContext from '../../utils/createNamedContext'
 import useRequiredContext from '../../utils/useRequiredContext'
+import type { InfoBoxProps } from './legacy/types/details'
 
 export interface WmsOverlay {
   type: 'wms'
@@ -44,6 +45,7 @@ export interface MapState {
   drawerState: DrawerState
   panoImageDate: string | null
   panelHeader: { type?: string | null; title?: string | null }
+  infoBox?: InfoBoxProps
 }
 
 type Action<T extends keyof MapState> = Dispatch<SetStateAction<MapState[T]>>
@@ -57,6 +59,7 @@ export interface MapContextProps extends MapState {
   setLegendActive: Action<'legendActive'>
   setDrawerState: Action<'drawerState'>
   setLoading: Action<'loading'>
+  setInfoBox: Action<'infoBox'>
 }
 
 const MapContext = createNamedContext<MapContextProps | null>('Map', null)

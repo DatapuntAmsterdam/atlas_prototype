@@ -326,6 +326,15 @@ const RenderDetails: FunctionComponent<RenderDetailsProps> = ({
   details,
   showNoMapObjectsAlert,
 }) => {
+  const { setInfoBox } = useMapContext()
+  useEffect(() => {
+    if (details?.data.infoBox) {
+      setInfoBox(details?.data.infoBox)
+    }
+    return () => {
+      setInfoBox(undefined)
+    }
+  }, [details, setInfoBox])
   if (!details) {
     // Todo: redirect to 404?
     return <Message>Geen detailweergave beschikbaar.</Message>

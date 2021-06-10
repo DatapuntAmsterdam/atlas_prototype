@@ -18,12 +18,14 @@ import {
 import buildLeafletLayers from './utils/buildLeafletLayers'
 import { DrawerState } from './components/DrawerOverlay'
 import useCompare from '../../utils/useCompare'
+import type { InfoBoxProps } from './legacy/types/details'
 
 const MapContainer: FunctionComponent = ({ children }) => {
   const [activeMapLayers] = useParam(mapLayersParam)
   const [location] = useParam(locationParam)
   const [panoHeading] = useParam(panoHeadingParam)
   const [legendActive, setLegendActive] = useState(false)
+  const [infoBox, setInfoBox] = useState<InfoBoxProps>()
   const [loading, setLoading] = useState(false)
   const [drawerState, setDrawerState] = useState(DrawerState.Open)
   const [detailFeature, setDetailFeature] = useState<MapState['detailFeature']>(null)
@@ -91,6 +93,8 @@ const MapContainer: FunctionComponent = ({ children }) => {
         drawerState,
         setLoading,
         loading,
+        infoBox,
+        setInfoBox,
       }}
     >
       {children}
