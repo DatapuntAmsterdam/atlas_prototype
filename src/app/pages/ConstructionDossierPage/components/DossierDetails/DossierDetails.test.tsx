@@ -1,42 +1,68 @@
-import { screen, fireEvent, render, within } from '@testing-library/react'
+import { screen, render, within } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
+import { createUnsecuredToken, Json } from 'jsontokens'
+import type { FunctionComponent } from 'react'
 import { singleFixture as bouwdossierFixture } from '../../../../../api/iiif-metadata/bouwdossier'
 import withAppContext from '../../../../utils/withAppContext'
+import AuthTokenContext, { DecodedToken } from '../../AuthTokenContext'
 import FilesGallery from '../FilesGallery'
-import LoginLinkRequestModal from '../LoginLinkRequestModal'
 import DossierDetails from './DossierDetails'
 
 jest.mock('../FilesGallery')
-jest.mock('../LoginLinkRequestModal')
 
 const FilesGalleryMock = mocked(FilesGallery)
-const LoginLinkRequestModalMock = mocked(LoginLinkRequestModal)
 
-describe.skip('DossierDetails', () => {
+const VALID_DECODED_TOKEN: DecodedToken = {
+  scopes: [],
+  sub: 'jane.doe@example.com',
+  exp: Date.now() / 1000 + 120,
+}
+
+const VALID_TOKEN = createUnsecuredToken(VALID_DECODED_TOKEN as unknown as Json)
+
+// DossierDetails requires the AuthToken context
+const wrapper: FunctionComponent = ({ children }) =>
+  withAppContext(
+    <AuthTokenContext.Provider value={{ token: null, decodedToken: null, isTokenExpired: false }}>
+      {children}
+    </AuthTokenContext.Provider>,
+  )
+
+const wrapperWithToken: FunctionComponent = ({ children }) =>
+  withAppContext(
+    <AuthTokenContext.Provider
+      value={{ token: VALID_TOKEN, decodedToken: VALID_DECODED_TOKEN, isTokenExpired: false }}
+    >
+      {children}
+    </AuthTokenContext.Provider>,
+  )
+
+describe('DossierDetails', () => {
   beforeEach(() => {
-    FilesGalleryMock.mockImplementation(({ dossierId, document, ...otherProps }) => {
-      return <div {...otherProps} />
-    })
-
-    LoginLinkRequestModalMock.mockImplementation(({ onClose, ...otherProps }) => {
-      return <div {...otherProps} />
-    })
+    FilesGalleryMock.mockImplementation(
+      ({ dossierId, document, selectedFiles, onFileSelectionChange, ...otherProps }) => {
+        return <div {...otherProps} />
+      },
+    )
   })
 
   afterEach(() => {
     FilesGalleryMock.mockReset()
-    LoginLinkRequestModalMock.mockReset()
   })
 
-  it('sets the title', () => {
-    render(withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />))
+  it('renders the title', () => {
+    render(withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />), {
+      wrapper,
+    })
 
     expect(screen.getByText('Bouw- en omgevingsdossiers')).toBeInTheDocument()
-    expect(screen.getByText(bouwdossierFixture.titel)).toBeInTheDocument()
+    expect(screen.getAllByText(bouwdossierFixture.titel)[0]).toBeInTheDocument()
   })
 
   it('renders a definition list', () => {
-    render(withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />))
+    render(withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />), {
+      wrapper,
+    })
 
     const definitionList = screen.getByTestId('definitionList')
     const listElements = ['titel', 'datering', 'dossier_type', 'dossiernr', 'access']
@@ -57,6 +83,7 @@ describe.skip('DossierDetails', () => {
           dossier={{ ...bouwdossierFixture, olo_liaan_nummer: undefined }}
         />,
       ),
+      { wrapper },
     )
 
     expect(screen.queryByTestId('oloLiaanNumber')).not.toBeInTheDocument()
@@ -84,23 +111,25 @@ describe.skip('DossierDetails', () => {
           dossier={{ ...bouwdossierFixture, olo_liaan_nummer: undefined }}
         />,
       ),
+      { wrapper },
     )
-
-    expect(screen.getByTestId('DocumentsHeading')).toBeInTheDocument()
 
     bouwdossierFixture.documenten.forEach((doc, index) => {
       expect(
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         screen.getByText(`${doc.subdossier_titel} (${doc.bestanden.length})`),
       ).toBeInTheDocument()
-      const filesGallery = within(screen.getByTestId(`constructionDocuments-${index}`)).getByTestId(
-        'filesGallery',
-      )
+
+      expect(screen.getByTestId(`constructionDocuments-${index}`).parentElement).toBeInTheDocument()
+
+      const filesGallery = within(
+        screen.getByTestId(`constructionDocuments-${index}`).parentElement as HTMLElement,
+      ).getByTestId('filesGallery')
       expect(filesGallery).toBeInTheDocument()
       expect(
-        within(screen.getByTestId(`constructionDocuments-${index}`)).queryAllByTestId(
-          'oloLiaanNumberDocumentDescription',
-        ),
+        within(
+          screen.getByTestId(`constructionDocuments-${index}`).parentElement as HTMLElement,
+        ).queryByTestId('oloLiaanNumberDescription'),
       ).not.toBeInTheDocument()
     })
 
@@ -116,7 +145,7 @@ describe.skip('DossierDetails', () => {
       ),
     )
 
-    expect(screen.getAllByTestId('oloLiaanNumberDocumentDescription')).toHaveLength(
+    expect(screen.getAllByTestId('oloLiaanNumberDescription')).toHaveLength(
       bouwdossierFixture.documenten.length,
     )
   })
@@ -126,6 +155,7 @@ describe.skip('DossierDetails', () => {
       withAppContext(
         <DossierDetails dossierId="SDC9999" dossier={{ ...bouwdossierFixture, adressen: [] }} />,
       ),
+      { wrapper },
     )
 
     expect(screen.queryByTestId('constructionDossierAddresses')).not.toBeInTheDocument()
@@ -135,18 +165,33 @@ describe.skip('DossierDetails', () => {
     expect(screen.getByTestId('constructionDossierAddresses')).toBeInTheDocument()
   })
 
-  it('opens and closes the login link request modal', () => {
-    LoginLinkRequestModalMock.mockImplementation(({ onClose }) => {
-      return <button data-testid="closeModal" onClick={onClose} type="button" />
+  it('renders the download all button if the document is public and the user has a valid session', () => {
+    render(withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />), {
+      wrapper: wrapperWithToken,
     })
 
-    render(withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />))
+    expect(screen.queryByTestId('downloadAllButton')).toBeInTheDocument()
+  })
 
-    expect(screen.queryByTestId('loginLinkRequestModal')).not.toBeInTheDocument()
-    fireEvent.click(screen.getByTestId('requestLoginLink'))
-    expect(screen.queryByTestId('loginLinkRequestModal')).toBeInTheDocument()
+  it('renders no download all button if the document is public and the user has no session', () => {
+    render(withAppContext(<DossierDetails dossierId="SDC9999" dossier={bouwdossierFixture} />), {
+      wrapper,
+    })
 
-    fireEvent.click(screen.getByTestId('closeModal'))
-    expect(screen.queryByTestId('loginLinkRequestModal')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('downloadAllButton')).not.toBeInTheDocument()
+  })
+
+  it('renders no download all button if the document is restricted and the user has no extended rights', () => {
+    render(
+      withAppContext(
+        <DossierDetails
+          dossierId="SDC9999"
+          dossier={{ ...bouwdossierFixture, access: 'RESTRICTED' }}
+        />,
+      ),
+      { wrapper: wrapperWithToken },
+    )
+
+    expect(screen.queryByTestId('downloadAllButton')).not.toBeInTheDocument()
   })
 })

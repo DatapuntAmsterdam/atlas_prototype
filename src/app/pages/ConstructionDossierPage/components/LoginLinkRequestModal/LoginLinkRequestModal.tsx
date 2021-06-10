@@ -78,7 +78,7 @@ const LoginLinkRequestModal: FunctionComponent<LoginLinkRequestModalProps> = ({ 
                 />
               </FormGroup>
               <ButtonBar>
-                <Button type="submit" variant="primary">
+                <Button type="submit" variant="primary" data-testid="requestLoginLink">
                   Versturen
                 </Button>
                 <Button type="button" onClick={onClose}>

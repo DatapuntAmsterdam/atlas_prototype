@@ -1,9 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
+import { createUnsecuredToken, Json } from 'jsontokens'
 import type { FunctionComponent } from 'react'
 import { singleFixture as dossierFixture } from '../../../../../api/iiif-metadata/bouwdossier'
 import withAppContext from '../../../../utils/withAppContext'
-import AuthTokenContext from '../../AuthTokenContext'
+import AuthTokenContext, { DecodedToken } from '../../AuthTokenContext'
 import FilesGallery from '../FilesGallery'
 import DocumentDetails from './DocumentDetails'
 import { SCOPES } from '../../../../../shared/services/auth/auth-legacy'
@@ -14,12 +15,28 @@ jest.mock('../../../../../shared/services/auth/auth')
 
 const FilesGalleryMock = mocked(FilesGallery)
 const getScopesMock = mocked(getScopes)
-
 const documentFixture = dossierFixture.documenten[0]
+
+const VALID_DECODED_TOKEN: DecodedToken = {
+  scopes: [],
+  sub: 'jane.doe@example.com',
+  exp: Date.now() / 1000 + 120,
+}
+
+const VALID_TOKEN = createUnsecuredToken(VALID_DECODED_TOKEN as unknown as Json)
 
 const wrapper: FunctionComponent = ({ children }) =>
   withAppContext(
     <AuthTokenContext.Provider value={{ token: null, decodedToken: null, isTokenExpired: false }}>
+      {children}
+    </AuthTokenContext.Provider>,
+  )
+
+const wrapperWithToken: FunctionComponent = ({ children }) =>
+  withAppContext(
+    <AuthTokenContext.Provider
+      value={{ token: VALID_TOKEN, decodedToken: VALID_DECODED_TOKEN, isTokenExpired: false }}
+    >
       {children}
     </AuthTokenContext.Provider>,
   )
@@ -43,10 +60,12 @@ describe('DocumentDetails', () => {
   it('renders the title', () => {
     render(
       <DocumentDetails
+        index={0}
         dossierId="SDC9999"
         dossier={dossierFixture}
         document={documentFixture}
         onRequestLoginLink={() => {}}
+        onDownloadFiles={() => {}}
       />,
       { wrapper },
     )
@@ -61,10 +80,12 @@ describe('DocumentDetails', () => {
   it('renders olo_liaan_nummer description', () => {
     const { rerender } = render(
       <DocumentDetails
+        index={0}
         dossierId="SDC9999"
         dossier={{ ...dossierFixture, olo_liaan_nummer: undefined }}
         document={documentFixture}
         onRequestLoginLink={() => {}}
+        onDownloadFiles={() => {}}
       />,
       { wrapper },
     )
@@ -73,10 +94,12 @@ describe('DocumentDetails', () => {
 
     rerender(
       <DocumentDetails
+        index={0}
         dossierId="SDC9999"
         dossier={{ ...dossierFixture, olo_liaan_nummer: 1 }}
         document={documentFixture}
         onRequestLoginLink={() => {}}
+        onDownloadFiles={() => {}}
       />,
     )
 
@@ -86,10 +109,12 @@ describe('DocumentDetails', () => {
   it('renders the document description', () => {
     const { rerender } = render(
       <DocumentDetails
+        index={0}
         dossierId="SDC9999"
         dossier={{ ...dossierFixture, olo_liaan_nummer: 1 }}
         document={{ ...documentFixture, document_omschrijving: null }}
         onRequestLoginLink={() => {}}
+        onDownloadFiles={() => {}}
       />,
       { wrapper },
     )
@@ -100,10 +125,12 @@ describe('DocumentDetails', () => {
 
     rerender(
       <DocumentDetails
+        index={0}
         dossierId="SDC9999"
         dossier={{ ...dossierFixture, olo_liaan_nummer: 1 }}
         document={{ ...documentFixture, document_omschrijving: description }}
         onRequestLoginLink={() => {}}
+        onDownloadFiles={() => {}}
       />,
     )
 
@@ -114,10 +141,12 @@ describe('DocumentDetails', () => {
   it('renders the original paths', () => {
     const { rerender } = render(
       <DocumentDetails
+        index={0}
         dossierId="SDC9999"
         dossier={{ ...dossierFixture, olo_liaan_nummer: 1 }}
         document={{ ...documentFixture, oorspronkelijk_pad: [] }}
         onRequestLoginLink={() => {}}
+        onDownloadFiles={() => {}}
       />,
       { wrapper },
     )
@@ -128,10 +157,12 @@ describe('DocumentDetails', () => {
 
     rerender(
       <DocumentDetails
+        index={0}
         dossierId="SDC9999"
         dossier={{ ...dossierFixture, olo_liaan_nummer: 1 }}
         document={{ ...documentFixture, oorspronkelijk_pad: path }}
         onRequestLoginLink={() => {}}
+        onDownloadFiles={() => {}}
       />,
     )
 
@@ -142,10 +173,12 @@ describe('DocumentDetails', () => {
   it('renders a message if the user has no rights', () => {
     render(
       <DocumentDetails
+        index={0}
         dossierId="SDC9999"
         dossier={dossierFixture}
         document={documentFixture}
         onRequestLoginLink={() => {}}
+        onDownloadFiles={() => {}}
       />,
       { wrapper },
     )
@@ -158,10 +191,12 @@ describe('DocumentDetails', () => {
 
     render(
       <DocumentDetails
+        index={0}
         dossierId="SDC9999"
         dossier={dossierFixture}
         document={documentFixture}
         onRequestLoginLink={onRequestLoginLinkMock}
+        onDownloadFiles={() => {}}
       />,
       { wrapper },
     )
@@ -176,10 +211,12 @@ describe('DocumentDetails', () => {
 
     render(
       <DocumentDetails
+        index={0}
         dossierId="SDC9999"
         dossier={{ ...dossierFixture, access: 'RESTRICTED' }}
         document={documentFixture}
         onRequestLoginLink={() => {}}
+        onDownloadFiles={() => {}}
       />,
       { wrapper },
     )
@@ -192,10 +229,12 @@ describe('DocumentDetails', () => {
 
     render(
       <DocumentDetails
+        index={0}
         dossierId="SDC9999"
         dossier={dossierFixture}
         document={{ ...documentFixture, access: 'RESTRICTED' }}
         onRequestLoginLink={() => {}}
+        onDownloadFiles={() => {}}
       />,
       { wrapper },
     )
@@ -206,10 +245,12 @@ describe('DocumentDetails', () => {
   it('renders the the files gallery', () => {
     render(
       <DocumentDetails
+        index={0}
         dossierId="SDC9999"
         dossier={dossierFixture}
         document={documentFixture}
         onRequestLoginLink={() => {}}
+        onDownloadFiles={() => {}}
       />,
       { wrapper },
     )
@@ -220,15 +261,72 @@ describe('DocumentDetails', () => {
   it('renders a message if there are no files', () => {
     render(
       <DocumentDetails
+        index={0}
         dossierId="SDC9999"
         dossier={dossierFixture}
         document={{ ...documentFixture, bestanden: [] }}
         onRequestLoginLink={() => {}}
+        onDownloadFiles={() => {}}
       />,
       { wrapper },
     )
 
     expect(screen.queryByTestId('filesGallery')).not.toBeInTheDocument()
     expect(screen.queryByTestId('noResults')).toBeInTheDocument()
+  })
+
+  it('renders the select all checkbox if the user has rights', () => {
+    render(
+      <DocumentDetails
+        index={0}
+        dossierId="SDC9999"
+        dossier={dossierFixture}
+        document={documentFixture}
+        onRequestLoginLink={() => {}}
+        onDownloadFiles={() => {}}
+      />,
+      { wrapper: wrapperWithToken },
+    )
+
+    expect(screen.queryByTestId('allFilesToggle')).toBeInTheDocument()
+  })
+
+  it('renders no select all checkbox if the user has insufficient rights', () => {
+    render(
+      <DocumentDetails
+        index={0}
+        dossierId="SDC9999"
+        dossier={{ ...dossierFixture, access: 'RESTRICTED' }}
+        document={documentFixture}
+        onRequestLoginLink={() => {}}
+        onDownloadFiles={() => {}}
+      />,
+      { wrapper: wrapperWithToken },
+    )
+
+    expect(screen.queryByTestId('allFilesToggle')).not.toBeInTheDocument()
+  })
+
+  it('checking the select all checkbox updates the label accordingly', () => {
+    render(
+      <DocumentDetails
+        index={0}
+        dossierId="SDC9999"
+        dossier={dossierFixture}
+        document={documentFixture}
+        onRequestLoginLink={() => {}}
+        onDownloadFiles={() => {}}
+      />,
+      { wrapper: wrapperWithToken },
+    )
+
+    expect(screen.getByText('Alles selecteren (0)')).toBeInTheDocument()
+
+    const checkbox = screen.queryByTestId('allFilesToggle') as HTMLElement
+    fireEvent.click(checkbox)
+
+    expect(
+      screen.getByText(`Alles selecteren (${documentFixture.bestanden.length})`),
+    ).toBeInTheDocument()
   })
 })
