@@ -1,6 +1,6 @@
 {
   "name": "data-verkenner",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "scripts": {
     "build": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack --config ./webpack.prod.ts",
     "clean": "npm run clean:dirs",
