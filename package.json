@@ -66,7 +66,7 @@
     "@babel/plugin-transform-runtime": "^7.14.3",
     "@babel/preset-env": "^7.14.4",
     "@babel/preset-react": "^7.13.13",
-    "@babel/preset-typescript": "^7.13.0",
+    "@babel/preset-typescript": "^7.14.5",
     "@jest/types": "^27.0.2",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@svgr/webpack": "^5.5.0",
