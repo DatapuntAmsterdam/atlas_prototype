@@ -73,10 +73,8 @@ import {
 } from './normalize/normalize'
 import normalizeParkeervak, { ParkeervakNormalized } from './normalize/parkeervak'
 import vestiging from './vestiging/vestiging'
-import {
-  HistorischeOnderzoeken,
-  historischeOnderzoekenPath,
-} from '../../../../../api/ondergrond/historischeonderzoeken'
+import { historischeOnderzoekenPath } from '../../../../../api/ondergrond/historischeonderzoeken'
+import historischeOnderzoeken from './map-services-configurations/historischeOnderzoeken'
 
 export const endpointTypes = {
   adressenLigplaats: 'bag/v1.1/ligplaats/',
@@ -2841,62 +2839,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition<any, any> } = 
       }
     },
   },
-  [endpointTypes.historischeOnderzoeken]: {
-    type: 'ondergrond/historischeonderzoeken',
-    endpoint: endpointTypes.historischeOnderzoeken,
-    mapDetail: (result) => {
-      const typedResult = result as unknown as HistorischeOnderzoeken
-      return {
-        title: 'Historische Onderzoeken',
-        subTitle: typedResult.naamRapport,
-        items: [
-          {
-            type: DetailResultItemType.DefinitionList,
-            entries: [
-              {
-                term: 'ID',
-                description: typedResult.id,
-              },
-              {
-                term: 'Rapport',
-                description: typedResult.naamRapport,
-                href: result.permalink,
-                external: true,
-              },
-              {
-                term: 'Datum rapport',
-                description: typedResult.datumRapport,
-              },
-              {
-                term: 'Nummer rapport',
-                description: typedResult.nummerRapport,
-              },
-              {
-                term: 'Beschrijving',
-                description: typedResult.beschrijving,
-              },
-              {
-                term: 'Opdrachtgever',
-                description: typedResult.opdrachtgever,
-              },
-              {
-                term: 'Opdrachtnemer',
-                description: typedResult.opdrachtnemer,
-              },
-              {
-                term: 'Type onderzoek',
-                description: typedResult.typeOnderzoek,
-              },
-              {
-                term: 'Locatie of adres',
-                description: typedResult.locatieOfAdres,
-              },
-            ],
-          },
-        ],
-      }
-    },
-  },
+  [endpointTypes.historischeOnderzoeken]: historischeOnderzoeken,
   [endpointTypes.overlastgebiedenDealeroverlast]: {
     type: 'overlastgebieden/dealeroverlast',
     endpoint: endpointTypes.overlastgebiedenDealeroverlast,
