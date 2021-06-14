@@ -18,7 +18,7 @@ describe('DossierDetailsModal', () => {
     render(
       <ThemeProvider>
         <DossierDetailsModal
-          currentModal=""
+          currentModal={null}
           setModal={() => {}}
           selectedFiles={[]}
           restrictedFiles={[]}
