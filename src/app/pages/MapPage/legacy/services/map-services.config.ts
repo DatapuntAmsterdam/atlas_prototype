@@ -73,6 +73,10 @@ import {
 } from './normalize/normalize'
 import normalizeParkeervak, { ParkeervakNormalized } from './normalize/parkeervak'
 import vestiging from './vestiging/vestiging'
+import {
+  HistorischeOnderzoeken,
+  historischeOnderzoekenPath,
+} from '../../../../../api/ondergrond/historischeonderzoeken'
 
 export const endpointTypes = {
   adressenLigplaats: 'bag/v1.1/ligplaats/',
@@ -103,6 +107,7 @@ export const endpointTypes = {
   gebiedenUnesco: 'gebieden/unesco/',
   gebiedenWijk: 'gebieden/buurtcombinatie/',
   grondexploitaties: 'grex/projecten',
+  historischeOnderzoeken: historischeOnderzoekenPath,
   kadastraalObject: 'brk/object/',
   kadastraalSubject: 'brk/subject/',
   maatschappelijkeActiviteiten: 'handelsregister/maatschappelijkeactiviteit/',
@@ -2833,6 +2838,62 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition<any, any> } = 
         title: 'Overlastgebieden Algemeenoverlast',
         subTitle: typedResult.oovNaam,
         items: [getOverlastgebiedenBlock(typedResult)],
+      }
+    },
+  },
+  [endpointTypes.historischeOnderzoeken]: {
+    type: 'ondergrond/historischeonderzoeken',
+    endpoint: endpointTypes.historischeOnderzoeken,
+    mapDetail: (result) => {
+      const typedResult = result as unknown as HistorischeOnderzoeken
+      return {
+        title: 'Historische Onderzoeken',
+        subTitle: typedResult.naamRapport,
+        items: [
+          {
+            type: DetailResultItemType.DefinitionList,
+            entries: [
+              {
+                term: 'ID',
+                description: typedResult.id,
+              },
+              {
+                term: 'Rapport',
+                description: typedResult.naamRapport,
+                href: result.permalink,
+                external: true,
+              },
+              {
+                term: 'Datum rapport',
+                description: typedResult.datumRapport,
+              },
+              {
+                term: 'Nummer rapport',
+                description: typedResult.nummerRapport,
+              },
+              {
+                term: 'Beschrijving',
+                description: typedResult.beschrijving,
+              },
+              {
+                term: 'Opdrachtgever',
+                description: typedResult.opdrachtgever,
+              },
+              {
+                term: 'Opdrachtnemer',
+                description: typedResult.opdrachtnemer,
+              },
+              {
+                term: 'Type onderzoek',
+                description: typedResult.typeOnderzoek,
+              },
+              {
+                term: 'Locatie of adres',
+                description: typedResult.locatieOfAdres,
+              },
+            ],
+          },
+        ],
       }
     },
   },

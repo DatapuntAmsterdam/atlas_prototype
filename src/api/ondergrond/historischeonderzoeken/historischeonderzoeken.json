@@ -1,0 +1,61 @@
+{
+  "_links": {
+    "schema": "https://schemas.data.amsterdam.nl/datasets/ondergrond/ondergrond#historischeonderzoeken",
+    "self": {
+      "href": "https://acc.api.data.amsterdam.nl/v1/ondergrond/historischeonderzoeken/12/",
+      "title": "12"
+    }
+  },
+  "id": 12,
+  "geometrie": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            4.887444250528341,
+            52.36874902636414
+          ],
+          [
+            4.887743178773784,
+            52.36875363542384
+          ],
+          [
+            4.887876035771759,
+            52.368512120046
+          ],
+          [
+            4.889328404317796,
+            52.367468610945785
+          ],
+          [
+            4.88909590457134,
+            52.36734508438527
+          ],
+          [
+            4.887557480924342,
+            52.36848999643392
+          ],
+          [
+            4.887513698504555,
+            52.36855728905294
+          ],
+          [
+            4.887444250528341,
+            52.36874902636414
+          ]
+        ]
+      ]
+    ]
+  },
+  "permalink": "http://archief.amsterdam/archief/31286/7",
+  "naamRapport": "Historisch bodemonderzoek Singel 412-466",
+  "beschrijving": "Titel: Historisch bodemonderzoek Singel 412-466, Toelichting: Historisch onderzoek naar aanleiding van vernieuwing kademuur, Locatie: Singel 412-466",
+  "datumRapport": "2020-03-17",
+  "nummerRapport": "34465-1119",
+  "opdrachtgever": "Ingenieursbureau",
+  "opdrachtnemer": "Ingenieursbureau",
+  "typeOnderzoek": "ABCDOO",
+  "locatieOfAdres": "Singel 412-466",
+  "indicatieKwaliteit": "+++"
+}
