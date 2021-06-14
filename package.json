@@ -62,7 +62,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.3",
+    "@babel/core": "^7.14.5",
     "@babel/plugin-transform-runtime": "^7.14.3",
     "@babel/preset-env": "^7.14.4",
     "@babel/preset-react": "^7.13.13",
@@ -70,7 +70,7 @@
     "@jest/types": "^27.0.2",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@svgr/webpack": "^5.5.0",
-    "@testing-library/jest-dom": "^5.13.0",
+    "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/react-hooks": "7.0.0",
     "@types/body-scroll-lock": "^2.6.1",
@@ -115,7 +115,7 @@
     "copy-webpack-plugin": "^9.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.6",
-    "cssnano": "^5.0.5",
+    "cssnano": "^5.0.6",
     "cypress": "^7.5.0",
     "eslint": "^7.28.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
