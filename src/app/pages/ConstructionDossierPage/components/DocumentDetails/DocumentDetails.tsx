@@ -82,7 +82,7 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
 
     // Only users with read rights, or with a login link token can view public documents.
     return scopes.includes(SCOPES['BD/R']) || (token && !isTokenExpired)
-  }, [restricted, scopes, token])
+  }, [scopes, token])
 
   function onSelectAllClick(files: Bestand[]) {
     setAllFilesSelected(!allFilesSelected)

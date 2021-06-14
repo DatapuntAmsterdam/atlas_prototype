@@ -61,13 +61,12 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
   // Only allow downloads from a signed in user if authenticated with Keycloak.
   // TODO: This logic can be removed once we switch to Keycloak entirely.
   const disableDownload = isAuthenticated() && !isFeatureEnabled(FEATURE_KEYCLOAK_AUTH)
-
-  // Check user rights by the primary dossier object's access prop or if every child document is 'RESTRICTED'
-  const restricted =
-    dossier.access === 'RESTRICTED' ||
-    dossier.documenten.every((doc) => doc.access === 'RESTRICTED')
-
   const hasRights = useMemo(() => {
+    // Check user rights by the primary dossier object's access prop or if every child document is 'RESTRICTED'
+    const restricted =
+      dossier.access === 'RESTRICTED' ||
+      dossier.documenten.every((doc) => doc.access === 'RESTRICTED')
+
     // Only users with extended rights can view restricted documents.
     if (restricted) {
       return scopes.includes(SCOPES['BD/X'])
@@ -75,7 +74,7 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
 
     // Only users with read rights, or with a login link token can view public documents.
     return scopes.includes(SCOPES['BD/R']) || (token && !isTokenExpired)
-  }, [restricted, scopes, token])
+  }, [scopes, token])
 
   function onDownloadFiles(files: Bestand[]) {
     if (files.length === 0) {
