@@ -4,7 +4,11 @@ import type { FunctionComponent } from 'react'
 import { useMemo, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
-import type { Bestand, Single as Bouwdossier } from '../../../../../api/iiif-metadata/bouwdossier'
+import type {
+  Bestand,
+  BouwdossierAccess,
+  Single as Bouwdossier,
+} from '../../../../../api/iiif-metadata/bouwdossier'
 import { getScopes, isAuthenticated, SCOPES } from '../../../../../shared/services/auth/auth'
 import { FEATURE_KEYCLOAK_AUTH, isFeatureEnabled } from '../../../../features'
 import { toDataDetail } from '../../../../links'
@@ -98,19 +102,18 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
     return files
   }
 
+  function hasDocumentAccess(access: BouwdossierAccess) {
+    if (access === 'PUBLIC') {
+      return true
+    }
+
+    return scopes.includes(SCOPES['BD/X'])
+  }
+
   function handleDownloadAllClick() {
     // For each dossier document - get the files and then merge each document's results into a single array
     const files = dossier.documenten
-      .filter((doc) => {
-        let userRights = ['PUBLIC']
-
-        // Extended rights users
-        if (scopes.includes(SCOPES['BD/X'])) {
-          userRights = ['PUBLIC', 'RESTRICTED']
-        }
-
-        return userRights.indexOf(doc.access) > -1
-      })
+      .filter((doc) => hasDocumentAccess(doc.access))
       .map((doc) => doc.bestanden)
       .flat()
 
