@@ -28,6 +28,8 @@ const DownloadButton = styled(Button)`
   flex-shrink: 0;
 `
 
+export type DossierDetailsModalType = 'login' | 'select' | 'download' | 'restricted'
+
 export interface DossierDetailsProps {
   dossierId: string
   dossier: Bouwdossier
@@ -39,7 +41,7 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
   ...otherProps
 }) => {
   const [selectedFiles, setSelectedFiles] = useState<Bestand[]>([])
-  const [currentModal, setCurrentModal] = useState<string | null>(null)
+  const [currentModal, setCurrentModal] = useState<DossierDetailsModalType | null>(null)
   const [restrictedDownloadFiles, setRestrictedDownloadFiles] = useState<Bestand[]>([])
   const scopes = getScopes()
   const { token, isTokenExpired } = useAuthToken()

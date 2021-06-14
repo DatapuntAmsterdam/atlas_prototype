@@ -1,13 +1,14 @@
 import type { FunctionComponent } from 'react'
 import type { Bestand } from '../../../../../api/iiif-metadata/bouwdossier'
+import type { DossierDetailsModalType } from '../DossierDetails/DossierDetails'
 import LoginLinkRequestModal from '../LoginLinkRequestModal'
 import SelectFilesModal from '../SelectFilesModal'
 import RequestDownloadModal from '../RequestDownloadModal'
 import RestrictedFilesModal from '../RestrictedFilesModal'
 
 export interface DossierDetailsModalProps {
-  currentModal: string | null
-  setModal: (name: string | null) => void
+  currentModal: DossierDetailsModalType | null
+  setModal: (name: DossierDetailsModalType | null) => void
   selectedFiles: Bestand[]
   restrictedFiles: Bestand[]
 }
