@@ -6,9 +6,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import type { Bestand, Document } from '../../../../../api/iiif-metadata/bouwdossier'
 import { NOT_FOUND_THUMBNAIL } from '../../../../../shared/config/constants'
-import { isAuthenticated } from '../../../../../shared/services/auth/auth'
 import ActionButton from '../../../../components/ActionButton'
-import { FEATURE_KEYCLOAK_AUTH, isFeatureEnabled } from '../../../../features'
 import { toConstructionDossier } from '../../../../links'
 import { useAuthToken } from '../../AuthTokenContext'
 import IIIFThumbnail from '../IIIFThumbnail'
@@ -98,10 +96,6 @@ const FilesGallery: FunctionComponent<FilesGalleryProps> = ({
     [token],
   )
 
-  // Only allow downloads from a signed in user if authenticated with Keycloak.
-  // TODO: This logic can be removed once we switch to Keycloak entirely.
-  const disableDownload = isAuthenticated() && !isFeatureEnabled(FEATURE_KEYCLOAK_AUTH)
-
   function toggleFile(file: Bestand) {
     if (selectedFiles.includes(file)) {
       onFileSelectionChange(selectedFiles.filter((selectedFile) => selectedFile.url !== file.url))
@@ -138,7 +132,7 @@ const FilesGallery: FunctionComponent<FilesGalleryProps> = ({
                   data-testid="thumbnail"
                 />
               </StyledLink>
-              {!disabled && !disableDownload && !restricted && (
+              {!disabled && !restricted && (
                 <StyledCheckbox
                   data-testid="fileToggle"
                   checked={selectedFiles.includes(file)}

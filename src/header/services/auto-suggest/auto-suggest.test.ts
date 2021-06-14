@@ -1,21 +1,11 @@
 import typeaheadFixture from '../../../api/typeahead/typeahead.json'
-import typeaheadAuthFixture from '../../../api/typeahead/typeahead_auth.json'
-import autoSuggestSearch, { SORT_ORDER, sortResponse, TypeaheadItem } from './auto-suggest'
+import autoSuggestSearch, { sortResponse, SORT_ORDER, TypeaheadItem } from './auto-suggest'
 
 describe('The auto-suggest service', () => {
-  it('returns unauthenticated data', async () => {
+  it('returns data', async () => {
     const suggestions = await autoSuggestSearch({ query: 'linnae' })
 
     expect(suggestions.length).toBe(typeaheadFixture.length)
-  })
-
-  it('returns authenticated data', async () => {
-    // @ts-ignore
-    global.setValidAuthentication()
-
-    const suggestions = await autoSuggestSearch({ query: 'linnae' })
-
-    expect(suggestions.length).toBe(typeaheadAuthFixture.length)
   })
 
   describe('sortResponse', () => {

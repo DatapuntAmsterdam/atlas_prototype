@@ -1,4 +1,4 @@
-import stateTokenGenerator from '../../src/shared/services/state-token-generator'
+import { v4 as uuid } from 'uuid'
 import { HEADER_MENU } from './selectors'
 
 declare global {
@@ -26,7 +26,7 @@ Cypress.Commands.add('login', (type = 'EMPLOYEE_PLUS') => {
       .then(() => cy.visit(baseUrl))
   }
 
-  const stateToken = stateTokenGenerator()
+  const stateToken = uuid()
 
   cy.window().its('sessionStorage').invoke('setItem', 'returnPath', '#')
   cy.window().its('sessionStorage').invoke('setItem', 'stateToken', stateToken)

@@ -1,7 +1,7 @@
+import { v4 as uuid } from 'uuid'
+import type { BoundingBox, FilterObject } from '../../../app/components/DataSelection/types'
 import environment from '../../../environment'
 import { fetchWithToken } from '../api/api'
-import generateId from '../state-token-generator/state-token-generator'
-import type { BoundingBox, FilterObject } from '../../../app/components/DataSelection/types'
 import type { LegacyDataSelectionConfigType } from './data-selection-config'
 
 function getBrkMarkers(
@@ -34,12 +34,12 @@ function getBrkMarkers(
         geoJsons: [
           data.eigenpercelen && {
             geoJson: data.eigenpercelen,
-            id: generateId(),
+            id: uuid(),
             type: 'dataSelection',
           },
           data.niet_eigenpercelen && {
             geoJson: data.niet_eigenpercelen,
-            id: generateId(),
+            id: uuid(),
             type: 'dataSelectionAlternate',
           },
           {
@@ -52,7 +52,7 @@ function getBrkMarkers(
               ],
               type: 'Polygon',
             },
-            id: generateId(),
+            id: uuid(),
             type: 'dataSelectionBounds',
           },
         ].filter((item) => item),

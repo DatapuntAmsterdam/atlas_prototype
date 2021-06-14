@@ -8,10 +8,9 @@ import type {
   Document,
   Single as Bouwdossier,
 } from '../../../../../api/iiif-metadata/bouwdossier'
-import { getScopes, isAuthenticated } from '../../../../../shared/services/auth/auth'
-import hasUserRights from '../../utils/hasUserRights'
-import { FEATURE_KEYCLOAK_AUTH, isFeatureEnabled } from '../../../../features'
+import { getScopes } from '../../../../../shared/services/auth/auth'
 import { useAuthToken } from '../../AuthTokenContext'
+import hasUserRights from '../../utils/hasUserRights'
 import ContentBlock, { DefinitionList, DefinitionListItem, SubHeading } from '../ContentBlock'
 import FilesGallery from '../FilesGallery'
 import LoginAlert from './LoginAlert'
@@ -73,10 +72,6 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
   )
   const scopes = getScopes()
   const { token, isTokenExpired } = useAuthToken()
-
-  // Only allow downloads from a signed in user if authenticated with Keycloak.
-  // TODO: This logic can be removed once we switch to Keycloak entirely.
-  const disableDownload = isAuthenticated() && !isFeatureEnabled(FEATURE_KEYCLOAK_AUTH)
   const restricted = dossier.access === 'RESTRICTED' || document.access === 'RESTRICTED'
   const hasRights = useMemo(
     () => hasUserRights(restricted, scopes, token, isTokenExpired),
@@ -91,7 +86,7 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
             <DocumentHeading forwardedAs="h3">
               {`${document.subdossier_titel} (${document.bestanden.length})`}
             </DocumentHeading>
-            {hasRights && !disableDownload && !restricted && (
+            {hasRights && !restricted && (
               <>
                 <StyledLabel data-testid="allFilesToggle">
                   Alles selecteren ({selectedFiles.length})
