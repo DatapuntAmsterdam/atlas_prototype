@@ -33,11 +33,11 @@ enum AuthScope {
 export const defaultPanoramaUrl: LocationDescriptorObject = {
   ...toGeoSearch(),
   search: toSearchParams([
-    [centerParam, [52.373308, 4.8749081]],
+    [centerParam, { lat: 52.373308, lng: 4.8749081 }],
     [panoPitchParam, 4],
     [panoHeadingParam, -144],
     [panoFovParam, 27],
-    [locationParam, [52.3733935, 4.8935746]],
+    [locationParam, { lat: 52.3733935, lng: 4.8935746 }],
   ]).toString(),
 }
 

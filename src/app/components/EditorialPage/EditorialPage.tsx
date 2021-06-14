@@ -65,7 +65,7 @@ const EditorialPage: FunctionComponent<EditorialPageProps> = ({
     <Container>
       <Helmet>
         <html lang={lang || 'nl'} />
-        {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+        {canonicalUrl && <link data-testid="canonicalUrl" rel="canonical" href={canonicalUrl} />}
         {description && <meta name="description" content={description} />}
 
         {title && <meta name="og:title" content={title} />}
@@ -82,7 +82,7 @@ const EditorialPage: FunctionComponent<EditorialPageProps> = ({
         {ogImage && <meta name="twitter:image" content={ogImage} />}
       </Helmet>
       <BodyStyle>
-        {loading && <LoadingSpinner />}
+        {loading && <LoadingSpinner data-testid="loadingSpinner" />}
         {children}
       </BodyStyle>
     </Container>

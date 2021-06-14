@@ -28,6 +28,8 @@ const initialState: MapContextProps = {
   setLegendActive: () => {},
   setDrawerState: () => {},
   setLoading: () => {},
+  setInfoBox: () => {},
+  infoBox: undefined,
 }
 
 const withMapContext = (component: ReactNode, mapContextProps?: Partial<MapContextProps>) =>

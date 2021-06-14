@@ -73,6 +73,8 @@ import {
 } from './normalize/normalize'
 import normalizeParkeervak, { ParkeervakNormalized } from './normalize/parkeervak'
 import vestiging from './vestiging/vestiging'
+import { historischeOnderzoekenPath } from '../../../../../api/ondergrond/historischeonderzoeken'
+import historischeOnderzoeken from './map-services-configurations/historischeOnderzoeken'
 
 export const endpointTypes = {
   adressenLigplaats: 'bag/v1.1/ligplaats/',
@@ -103,6 +105,7 @@ export const endpointTypes = {
   gebiedenUnesco: 'gebieden/unesco/',
   gebiedenWijk: 'gebieden/buurtcombinatie/',
   grondexploitaties: 'grex/projecten',
+  historischeOnderzoeken: historischeOnderzoekenPath,
   kadastraalObject: 'brk/object/',
   kadastraalSubject: 'brk/subject/',
   maatschappelijkeActiviteiten: 'handelsregister/maatschappelijkeactiviteit/',
@@ -2836,6 +2839,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition<any, any> } = 
       }
     },
   },
+  [endpointTypes.historischeOnderzoeken]: historischeOnderzoeken,
   [endpointTypes.overlastgebiedenDealeroverlast]: {
     type: 'overlastgebieden/dealeroverlast',
     endpoint: endpointTypes.overlastgebiedenDealeroverlast,

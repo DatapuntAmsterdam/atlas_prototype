@@ -17,10 +17,10 @@ const config: Config.InitialOptions = {
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
-      statements: 72.18,
-      branches: 44.88,
-      lines: 72.05,
-      functions: 57.47,
+      statements: 71,
+      branches: 44,
+      lines: 71,
+      functions: 57,
     },
   },
   coverageReporters: process.env.CI ? ['text'] : ['lcov'],
@@ -31,7 +31,6 @@ const config: Config.InitialOptions = {
     '\\.(svg)$': '<rootDir>/test/file-svg-mock.ts',
   },
   setupFiles: ['./test/setup-jest.ts'],
-  snapshotSerializers: ['enzyme-to-json/serializer'],
   setupFilesAfterEnv: ['./test/mocks.ts', './test/setup-env.ts'],
   testURL: 'http://localhost:3000/',
   testEnvironment: 'jsdom',

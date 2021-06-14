@@ -1,7 +1,7 @@
 import type { AlertLevel } from '@amsterdam/asc-ui'
 import type { Point } from 'geojson'
 import type { LocationDescriptor, LocationDescriptorObject } from 'history'
-import type { ReactNode } from 'react'
+import type { FunctionComponent, ReactNode } from 'react'
 import type AuthScope from '../../../../../shared/services/api/authScope'
 import type { Definition } from '../glossary.constant'
 
@@ -131,6 +131,7 @@ export interface DetailResultItemDefinitionListEntry {
   external?: boolean
   to?: LocationDescriptor
   alert?: string
+  CustomComponent?: FunctionComponent<any>
 }
 
 export interface DetailResultItemTable extends DefaultDetailResultItem {

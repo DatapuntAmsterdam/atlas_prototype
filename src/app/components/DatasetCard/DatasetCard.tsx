@@ -107,7 +107,7 @@ const DatasetCard: FunctionComponent<DatasetCardProps & Partial<HTMLAnchorElemen
         </div>
 
         <div>
-          <MetaText as="time" data-test="metaText" dateTime={modified}>
+          <MetaText as="time" dateTime={modified}>
             {lastModified}
           </MetaText>
         </div>
@@ -117,7 +117,7 @@ const DatasetCard: FunctionComponent<DatasetCardProps & Partial<HTMLAnchorElemen
         </div>
 
         <div>
-          <MetaText data-test="metaText">
+          <MetaText data-testid="distributionTypes">
             {distributionTypes &&
               distributionTypes.length > 0 &&
               distributionTypes.map((distributionType) => (

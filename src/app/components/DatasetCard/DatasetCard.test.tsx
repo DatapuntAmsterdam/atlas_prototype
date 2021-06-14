@@ -1,8 +1,9 @@
-import { shallow } from 'enzyme'
+import { render, screen } from '@testing-library/react'
+import withAppContext from '../../utils/withAppContext'
 import DatasetCard from './DatasetCard'
 
 describe('DatasetCard', () => {
-  const mockDatasetItem = {
+  const props = {
     id: '1',
     to: { pathname: '/' },
     shortTitle: 'title',
@@ -12,43 +13,22 @@ describe('DatasetCard', () => {
     distributionTypes: ['format1', 'format2'],
   }
 
-  it('should display the title and teaser', () => {
-    const component = shallow(<DatasetCard href="link" {...mockDatasetItem} />).dive()
-
-    const heading = component.find('Styled(Heading)')
-    expect(heading.exists()).toBeTruthy()
-    expect(heading.props().children).toBe(mockDatasetItem.shortTitle)
-
-    const paragraph = component.find('Styled(Paragraph)')
-    expect(paragraph.exists()).toBeTruthy()
-    // eslint-disable-next-line no-underscore-dangle
-    expect(paragraph.props()?.dangerouslySetInnerHTML?.__html).toBe(mockDatasetItem.teaser)
+  it('displays the title and teaser', () => {
+    render(withAppContext(<DatasetCard href="link" {...props} />))
+    expect(screen.getByText(props.shortTitle)).toBeInTheDocument()
+    expect(screen.getByText(props.teaser)).toBeInTheDocument()
   })
 
-  it('should display the date', () => {
-    const component = shallow(<DatasetCard href="link" {...mockDatasetItem} />).dive()
-
-    const metaText = component.find("[data-test='metaText']").at(0)
-
-    expect(metaText.exists()).toBeTruthy()
-    expect(metaText.props().dateTime).toBe(mockDatasetItem.modified)
-    expect(metaText.props().children).toBe(mockDatasetItem.lastModified)
+  it('displays the date', () => {
+    render(withAppContext(<DatasetCard href="link" {...props} />))
+    expect(screen.getByText(props.lastModified)).toHaveAttribute('dateTime', props.modified)
   })
 
-  it('should display the formats', () => {
-    const component = shallow(<DatasetCard href="link" {...mockDatasetItem} />).dive()
+  it('displays the formats', () => {
+    render(withAppContext(<DatasetCard href="link" {...props} />))
 
-    const metaText = component.find("[data-test='metaText']").at(1)
-
-    expect(metaText.exists()).toBeTruthy()
-
-    const tags = metaText.find('Styled(Tag)')
-
-    expect(tags.at(0).exists()).toBe(true)
-    expect(tags.at(1).exists()).toBe(true)
-
-    expect(tags.at(0).props().children).toEqual(mockDatasetItem.distributionTypes[0])
-
-    expect(tags.at(1).props().children).toEqual(mockDatasetItem.distributionTypes[1])
+    expect(screen.getByTestId('distributionTypes')).toBeInTheDocument()
+    expect(screen.getByText(props.distributionTypes[0])).toBeInTheDocument()
+    expect(screen.getByText(props.distributionTypes[1])).toBeInTheDocument()
   })
 })

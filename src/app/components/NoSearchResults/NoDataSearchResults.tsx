@@ -14,13 +14,14 @@ export interface NoDataSearchResultsProps {
 const NoDataSearchResults: FunctionComponent<NoDataSearchResultsProps> = ({
   query,
   unauthorized,
+  ...otherProps
 }) => {
   const handleLogin = () => {
     login()
   }
 
   return (
-    <div>
+    <div {...otherProps}>
       <Paragraph>{formatNoResultsMessage(query, 'Data')}</Paragraph>
       <Heading as="h2">Algemene zoeksuggesties</Heading>
       <Paragraph>Maak de zoekcriteria eventueel minder specifiek. </Paragraph>

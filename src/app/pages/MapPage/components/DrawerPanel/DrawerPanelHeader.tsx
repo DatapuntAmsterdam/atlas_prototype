@@ -12,6 +12,11 @@ const CloseButton = styled(Button)`
   margin-left: auto;
 `
 
+const Wrapper = styled.div`
+  position: relative;
+  width: 100%;
+`
+
 interface DrawerPanelHeaderProps {
   onClose?: () => void
 }
@@ -20,7 +25,7 @@ const DrawerPanelHeader: FunctionComponent<
   DrawerPanelHeaderProps & HTMLAttributes<HTMLDivElement>
 > = ({ children, onClose, className }) => (
   <HeaderContainer className={className}>
-    <div>{children}</div>
+    <Wrapper>{children}</Wrapper>
     {onClose && (
       <CloseButton
         data-testid="closePanelButton"
