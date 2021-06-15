@@ -53,28 +53,6 @@ export const rootPath = path.resolve(__dirname)
 export const srcPath = path.resolve(__dirname, 'src')
 export const distPath = path.resolve(__dirname, 'dist')
 
-const svgoConfig = {
-  removeXMLNS: true,
-  removeViewBox: false,
-  removeDimensions: true,
-  removeDoctype: true,
-  removeComments: true,
-  removeMetadata: true,
-  removeEditorsNSData: true,
-  cleanupIDs: true,
-  removeRasterImages: true,
-  removeUselessDefs: true,
-  removeUnknownsAndDefaults: true,
-  removeUselessStrokeAndFill: true,
-  removeHiddenElems: true,
-  removeEmptyText: true,
-  removeEmptyAttrs: true,
-  removeEmptyContainers: true,
-  removeUnusedNS: true,
-  removeDesc: true,
-  prefixIds: true,
-}
-
 export interface WebpackConfiguration extends Configuration {
   devServer?: DevServerConfiguration
 }
@@ -200,8 +178,8 @@ export function createConfig(additionalOptions: CreateConfigOptions): WebpackCon
             {
               loader: '@svgr/webpack',
               options: {
-                svgo: isProd,
-                svgoConfig,
+                // SVGO ignores svg's from node_modules, disable for all until we can also process the svg's from the node_modules dir
+                svgo: false,
               },
             },
           ],
