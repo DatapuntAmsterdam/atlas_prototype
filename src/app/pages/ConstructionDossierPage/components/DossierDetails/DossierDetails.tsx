@@ -13,6 +13,7 @@ import { getScopes, isAuthenticated, SCOPES } from '../../../../../shared/servic
 import { FEATURE_KEYCLOAK_AUTH, isFeatureEnabled } from '../../../../features'
 import { toDataDetail } from '../../../../links'
 import formatAddresses from '../../utils/formatAddresses'
+import hasUserRights from '../../utils/hasUserRights'
 import { useAuthToken } from '../../AuthTokenContext'
 import ContentBlock, { DefinitionList, DefinitionListItem, SubHeading } from '../ContentBlock'
 import DocumentDetails from '../DocumentDetails'
@@ -46,7 +47,6 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
 }) => {
   const [selectedFiles, setSelectedFiles] = useState<Bestand[]>([])
   const [currentModal, setCurrentModal] = useState<DossierDetailsModalType | null>(null)
-  const [restrictedDownloadFiles, setRestrictedDownloadFiles] = useState<Bestand[]>([])
   const scopes = getScopes()
   const { token, isTokenExpired } = useAuthToken()
   const addresses = useMemo(() => formatAddresses(dossier.adressen), [dossier.adressen])
@@ -61,20 +61,20 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
   // Only allow downloads from a signed in user if authenticated with Keycloak.
   // TODO: This logic can be removed once we switch to Keycloak entirely.
   const disableDownload = isAuthenticated() && !isFeatureEnabled(FEATURE_KEYCLOAK_AUTH)
-  const hasRights = useMemo(() => {
-    // Check user rights by the primary dossier object's access prop or if every child document is 'RESTRICTED'
-    const restricted =
-      dossier.access === 'RESTRICTED' ||
-      dossier.documenten.every((doc) => doc.access === 'RESTRICTED')
-
-    // Only users with extended rights can view restricted documents.
-    if (restricted) {
-      return scopes.includes(SCOPES['BD/X'])
-    }
-
-    // Only users with read rights, or with a login link token can view public documents.
-    return scopes.includes(SCOPES['BD/R']) || (token && !isTokenExpired)
-  }, [scopes, token])
+  // Check user rights by the primary dossier object's access prop or if every child document is 'RESTRICTED'
+  const restricted =
+    dossier.access === 'RESTRICTED' ||
+    dossier.documenten.every((doc) => doc.access === 'RESTRICTED')
+  const hasRights = useMemo(
+    () => hasUserRights(restricted, scopes, token, isTokenExpired),
+    [scopes, token],
+  )
+  const restrictedFiles = useMemo(() => {
+    return dossier.documenten
+      .filter((document) => !hasDocumentAccess(document.access))
+      .map((document) => document.bestanden)
+      .flat()
+  }, [dossier])
 
   function onDownloadFiles(files: Bestand[]) {
     if (files.length === 0) {
@@ -83,22 +83,6 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
       setSelectedFiles(files)
       setCurrentModal('download')
     }
-  }
-
-  function getRestrictedFiles(): Array<Bestand> {
-    let files: Array<Bestand> = []
-
-    // If user doesn't have full permissions check if we have to exclude any files
-    if (!scopes.includes(SCOPES['BD/X'])) {
-      files = dossier.documenten
-        .filter((doc) => doc.access === 'RESTRICTED')
-        .map((doc) => doc.bestanden)
-        .flat()
-
-      setRestrictedDownloadFiles(files)
-    }
-
-    return files
   }
 
   function hasDocumentAccess(access: BouwdossierAccess) {
@@ -118,8 +102,6 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
 
     setSelectedFiles(files)
 
-    const restrictedFiles = getRestrictedFiles()
-
     // If we have excluded files we need to list them in a modal
     if (!restrictedFiles.length) {
       setCurrentModal('download')
@@ -134,7 +116,7 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
         currentModal={currentModal}
         setModal={setCurrentModal}
         selectedFiles={selectedFiles}
-        restrictedFiles={restrictedDownloadFiles}
+        restrictedFiles={restrictedFiles}
       />
 
       <PageWrapper {...otherProps}>
