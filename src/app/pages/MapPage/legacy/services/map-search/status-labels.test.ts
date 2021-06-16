@@ -1,4 +1,5 @@
-import { getStatusLabelAddress, getStatusLabel } from './status-labels'
+import { getStatusLabel, getStatusLabelAddress } from './status-labels'
+import type { GeoSearchFeature } from '../../../../../../api/geosearch'
 
 describe('getStatusLabel', () => {
   it('should get een empty label when the type is not found', () => {
@@ -19,7 +20,7 @@ describe('getStatusLabelAddress', () => {
     const result = {
       type_adres: 'Not a Hoofdadres',
       vbo_status: 'Verblijfsobject in gebruik',
-    }
+    } as unknown as GeoSearchFeature
     expect(getStatusLabelAddress(result)).toEqual('Nevenadres')
   })
 
@@ -27,7 +28,7 @@ describe('getStatusLabelAddress', () => {
     const result = {
       type_adres: 'Hoofdadres',
       vbo_status: 'a random, not normal status',
-    }
+    } as unknown as GeoSearchFeature
     expect(getStatusLabelAddress(result)).toEqual('a random, not normal status')
   })
 
@@ -35,7 +36,7 @@ describe('getStatusLabelAddress', () => {
     const result = {
       type_adres: 'Not a Hoofdadres',
       vbo_status: 'a random, not normal status',
-    }
+    } as unknown as GeoSearchFeature
     expect(getStatusLabelAddress(result)).toEqual('a random, not normal status Nevenadres')
   })
 })

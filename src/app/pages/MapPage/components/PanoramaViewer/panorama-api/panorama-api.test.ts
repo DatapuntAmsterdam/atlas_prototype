@@ -1,3 +1,4 @@
+import type { LatLngTuple } from 'leaflet'
 import { fetchWithToken } from '../../../../../../shared/services/api/api'
 import {
   getImageDataById,
@@ -12,6 +13,7 @@ jest.mock('../../../../../../shared/services/api/api')
 
 describe('The Panorama Api', () => {
   beforeEach(() => {
+    // @ts-ignore
     fetchWithToken.mockImplementation((url) => {
       if (url.includes('near=999,999') || url.includes('###')) {
         return Promise.reject()
@@ -118,7 +120,7 @@ describe('The Panorama Api', () => {
 
   describe('calls the API for panorama', () => {
     it('with the correct endpoint for id', () => {
-      getImageDataById('ABC', {})
+      getImageDataById('ABC')
 
       const { newestInRange } = getLocationHistoryParams(null, undefined)
 
@@ -129,7 +131,7 @@ describe('The Panorama Api', () => {
 
     it('and returns error if failing for id', () => {
       let response
-      getImageDataById('###', {})
+      getImageDataById('###')
         .then((_response_) => {
           response = _response_
         })
@@ -144,10 +146,9 @@ describe('The Panorama Api', () => {
     it('with the correct endpoint for location', () => {
       getImageDataByLocation([52, 4])
 
-      const { locationRange, standardRadius, tagsQuery, newestInRange } = getLocationHistoryParams(
-        [52, 4],
-        null,
-      )
+      const { locationRange, standardRadius, tagsQuery, newestInRange } = getLocationHistoryParams([
+        52, 4,
+      ])
 
       expect(fetchWithToken).toHaveBeenCalledWith(
         `${environment.API_ROOT}${prefix}` +
@@ -158,10 +159,9 @@ describe('The Panorama Api', () => {
     it('with the correct endpoint for location if not found, ', () => {
       getImageDataByLocation([1, 1])
 
-      const { locationRange, tagsQuery, standardRadius, newestInRange } = getLocationHistoryParams(
-        [1, 1],
-        null,
-      )
+      const { locationRange, tagsQuery, standardRadius, newestInRange } = getLocationHistoryParams([
+        1, 1,
+      ])
 
       expect(fetchWithToken).toHaveBeenCalledWith(
         `${environment.API_ROOT}${prefix}` +
@@ -169,13 +169,9 @@ describe('The Panorama Api', () => {
       )
     })
 
-    it('and rejects without location array', () => {
-      expect(getImageDataByLocation(null)).toBe(null)
-    })
-
     it('and returns error if failing for location', () => {
       let response
-      getImageDataByLocation([999, 999], {})
+      getImageDataByLocation([999, 999])
         .then((_response_) => {
           response = _response_
         })
@@ -187,10 +183,10 @@ describe('The Panorama Api', () => {
   })
 
   describe('the API will be mapped to the state structure', () => {
-    let response
+    let response: any
 
     beforeEach(() => {
-      getImageDataById('ABC', {}).then((_response_) => {
+      getImageDataById('ABC').then((_response_) => {
         response = _response_
       })
     })
@@ -225,7 +221,7 @@ describe('The Panorama Api', () => {
 
   describe('the history selection', () => {
     it("will make 'getImageDataByLocation' use another endpoint", () => {
-      const history = { year: 2020, missionType: 'WOZ' }
+      const history = ['mission-wox', 'mission-2020']
       getImageDataByLocation([52, 4], history)
 
       const { tagsQuery, locationRange, standardRadius, newestInRange } = getLocationHistoryParams(
@@ -240,7 +236,7 @@ describe('The Panorama Api', () => {
     })
 
     it("will make 'getImageDataById' use another endpoint", () => {
-      const history = { year: 2020, missionType: 'WOZ' }
+      const history = ['mission-wox', 'mission-2020']
       getImageDataById('ABC', history)
 
       const { tagsQuery, newestInRange } = getLocationHistoryParams(null, history)
@@ -251,18 +247,17 @@ describe('The Panorama Api', () => {
     })
 
     it('will not change the endpoint when falsy', () => {
-      getImageDataByLocation([42, 4], null)
-      const { locationRange, standardRadius, newestInRange, tagsQuery } = getLocationHistoryParams(
-        [52, 4],
-        null,
-      )
+      getImageDataByLocation([42, 4])
+      const { locationRange, standardRadius, newestInRange, tagsQuery } = getLocationHistoryParams([
+        52, 4,
+      ])
 
       expect(fetchWithToken).toHaveBeenCalledWith(
         `${environment.API_ROOT}${prefix}` +
           `/?${locationRange}${tagsQuery}&${standardRadius}&${newestInRange}&limit_results=1`,
       )
 
-      getImageDataById('ABC', 0)
+      getImageDataById('ABC')
 
       expect(fetchWithToken).toHaveBeenCalledWith(
         `${environment.API_ROOT}${prefix}/ABC/${suffix}/?${newestInRange}`,
@@ -271,7 +266,7 @@ describe('The Panorama Api', () => {
   })
 
   describe('the external streeview url', () => {
-    const location = [2, 3]
+    const location: LatLngTuple = [2, 3]
     const heading = 10
 
     it('should return an url to google streeview', () => {

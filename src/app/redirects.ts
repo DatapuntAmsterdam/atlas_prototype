@@ -104,12 +104,12 @@ export const legacyRoutes: Redirect[] = [
           .split('/')
           .filter((part) => part !== '')
           .pop()
-        const result = await getImageDataById(panoramaId)
+        const result = await getImageDataById(panoramaId as string)
         const currentParams = new URLSearchParams(location.search)
         const query = new URLSearchParams({
           [locationParam.name]: locationParam.encode({
-            lat: result.location[0] as number,
-            lng: result.location[1] as number,
+            lat: result.location[0],
+            lng: result.location[1],
           }),
           [panoHeadingParam.name]: (panoHeadingParam.initialValue as number).toString(),
           [panoFovParam.name]: (panoFovParam.initialValue as number).toString(),

@@ -36,8 +36,10 @@ export interface Single extends APIReference {
 export interface List {
   _links: Links
   count: number
-  results: Pick<
-    APIReference,
-    '_links' | '_display' | 'landelijk_id' | 'type_adres' | 'vbo_status' | 'dataset'
-  >[]
+  results: Array<
+    Pick<
+      APIReference,
+      '_links' | '_display' | 'landelijk_id' | 'type_adres' | 'vbo_status' | 'dataset'
+    > & { hoofdadres?: string }
+  >
 }

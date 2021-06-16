@@ -1,9 +1,10 @@
 import { mocked } from 'ts-jest/utils'
+import type { FeatureCollection, Geometry } from 'geojson'
 import { fetchWithToken } from '../../../../../../shared/services/api/api'
 import { getScopes, isAuthenticated } from '../../../../../../shared/services/auth/auth'
 import * as address from '../adressen-nummeraanduiding/adressen-nummeraanduiding'
 import * as vestiging from '../vestiging/vestiging'
-import search, { fetchRelatedForUser } from './map-search'
+import search, { fetchRelatedForUser, MapFeatureProperties } from './map-search'
 
 jest.mock('../../../../../../shared/services/api/api')
 jest.mock('../../../../../../shared/services/auth/auth')
@@ -22,6 +23,7 @@ describe('mapSearch service', () => {
 
   describe('search action', () => {
     it('should return results from search for bommen', async () => {
+      // @ts-ignore
       fetchWithToken.mockReturnValue(
         Promise.resolve({
           features: [
@@ -59,7 +61,8 @@ describe('mapSearch service', () => {
       ])
     })
 
-    it('should return results and ignore the ignore the failing calls (http 500 errors)', async () => {
+    it('should return results and ignore the failing calls (http 500 errors)', async () => {
+      // @ts-ignore
       fetchWithToken.mockImplementation((url) => {
         if (url.indexOf('/nap/') > 0) {
           return Promise.reject()
@@ -67,6 +70,11 @@ describe('mapSearch service', () => {
         return Promise.resolve({
           features: [
             {
+              type: 'Feature',
+              geometry: {
+                type: 'Point',
+                coordinates: [123, 321],
+              },
               properties: {
                 type: 'bommenkaart/verdachtgebied', // not in map-search
               },
@@ -109,48 +117,61 @@ describe('mapSearch service', () => {
 
   describe('fetchRelatedForUser', () => {
     it('should return just the base features when no user related features found', async () => {
-      const features = [
-        {
-          properties: {
-            type: 'bommenkaart/verdachtgebied', // not in map-search
+      const data: FeatureCollection<Geometry, MapFeatureProperties> = {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [123, 321],
+            },
+            properties: {
+              id: '123',
+              type: 'bommenkaart/verdachtgebied', // not in map-search
+            },
           },
-        },
-      ]
-      const results = await fetchRelatedForUser()({ features })
-      expect(results).toEqual(features)
+        ],
+      }
+      const results = await fetchRelatedForUser()(data)
+      expect(results).toEqual(data.features)
     })
 
     it('should return just the base features when user related features found but user is not authorized', async () => {
       mockedGetScopes.mockReturnValue(['CAT/W', 'CAT/R'])
 
-      const features = [
-        {
-          properties: {
-            type: 'bommenkaart/verdachtgebied', // not in map-search
+      const data: FeatureCollection<Geometry, MapFeatureProperties> = {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [123, 321],
+            },
+            properties: {
+              id: '123',
+              type: 'bommenkaart/verdachtgebied', // not in map-search
+            },
           },
-        },
-        {
-          properties: {
-            id: '0363020012061429',
-            type: 'bag/ligplaats',
-            uri: 'https://acc.api.data.amsterdam.nl/bag/ligplaats/0363020012061429/',
+          {
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [123, 321],
+            },
+            properties: {
+              id: '0363020012061429',
+              type: 'bag/ligplaats',
+            },
           },
-        },
-      ]
-      const results = await fetchRelatedForUser()({ features })
-      expect(results).toEqual(features)
+        ],
+      }
+      const results = await fetchRelatedForUser()(data)
+      expect(results).toEqual(data.features)
     })
 
     it('should return the user related features for the standplaats', async () => {
-      const features = [
-        {
-          properties: {
-            id: '0363020012061429',
-            type: 'bag/standplaats',
-            uri: 'https://acc.api.data.amsterdam.nl/bag/ligplaats/0363020012061429/',
-          },
-        },
-      ]
       const vestigingResult = {
         _links: {
           self: {
@@ -163,11 +184,30 @@ describe('mapSearch service', () => {
         vbo_status: { code: '33', omschrijving: 'Plaats aangewezen' },
         dataset: 'bag',
       }
+      // @ts-ignore
       address.fetchHoofdadresByStandplaatsId.mockImplementation(() => Promise.resolve({ id: 2000 }))
+      // @ts-ignore
       vestiging.fetchByAddressId.mockImplementation(() => Promise.resolve([vestigingResult]))
-      const results = await fetchRelatedForUser()({ features })
+      const data: FeatureCollection<Geometry, MapFeatureProperties> = {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [123, 321],
+            },
+            properties: {
+              id: '0363020012061429',
+              type: 'bag/standplaats',
+              // uri: 'https://acc.api.data.amsterdam.nl/bag/ligplaats/0363020012061429/',
+            },
+          },
+        ],
+      }
+      const results = await fetchRelatedForUser()(data)
       expect(results).toEqual([
-        ...features,
+        ...data.features,
         {
           ...vestigingResult,
           properties: {
@@ -183,15 +223,6 @@ describe('mapSearch service', () => {
     })
 
     it('should return the user related features for the ligplaats', async () => {
-      const features = [
-        {
-          properties: {
-            id: '0363020012061429',
-            type: 'bag/ligplaats',
-            uri: 'https://acc.api.data.amsterdam.nl/bag/ligplaats/0363020012061429/',
-          },
-        },
-      ]
       const vestigingResult = {
         _links: {
           self: {
@@ -204,11 +235,30 @@ describe('mapSearch service', () => {
         vbo_status: { code: '33', omschrijving: 'Plaats aangewezen' },
         dataset: 'bag',
       }
+      // @ts-ignore
       address.fetchHoofdadresByLigplaatsId.mockImplementation(() => Promise.resolve({ id: 1000 }))
+      // @ts-ignore
       vestiging.fetchByAddressId.mockImplementation(() => Promise.resolve([vestigingResult]))
-      const results = await fetchRelatedForUser()({ features })
+      const data: FeatureCollection<Geometry, MapFeatureProperties> = {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [123, 321],
+            },
+            properties: {
+              id: '0363020012061429',
+              type: 'bag/ligplaats',
+              // uri: 'https://acc.api.data.amsterdam.nl/bag/ligplaats/0363020012061429/',
+            },
+          },
+        ],
+      }
+      const results = await fetchRelatedForUser()(data)
       expect(results).toEqual([
-        ...features,
+        ...data.features,
         {
           ...vestigingResult,
           properties: {

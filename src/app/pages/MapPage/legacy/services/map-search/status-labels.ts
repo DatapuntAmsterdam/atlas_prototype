@@ -1,3 +1,5 @@
+import type { GeoSearchFeature } from '../../../../../../api/geosearch'
+
 const subTypesLabels = {
   bominslag: 'inslag',
   buurtcombinatie: 'wijk',
@@ -34,8 +36,8 @@ export const NORMAL_VBO_STATUSSES = [
 const shouldShowStatus = (result: { vbo_status?: string }) =>
   result.vbo_status && !NORMAL_VBO_STATUSSES.includes(result.vbo_status)
 
-export const getStatusLabelAddress = (result: { type_adres?: string; vbo_status: string }) =>
-  `${shouldShowStatus(result) ? `${result.vbo_status}` : ''}` +
+export const getStatusLabelAddress = (result: GeoSearchFeature) =>
+  `${shouldShowStatus(result) ? `${result.vbo_status ?? ''}` : ''}` +
   `${
     shouldShowStatus(result) && result.type_adres && result.type_adres !== 'Hoofdadres' ? ' ' : ''
   }` +

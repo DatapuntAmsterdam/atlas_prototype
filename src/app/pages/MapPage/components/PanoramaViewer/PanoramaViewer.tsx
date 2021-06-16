@@ -76,7 +76,7 @@ const PanoramaViewer: FunctionComponent = () => {
       return null
     }
     return getImageDataById(
-      hotspotId,
+      hotspotId as any,
       PANO_LABELS.find(({ id: labelId }) => labelId === panoTag)?.tags,
     )
   }, [hotspotId])

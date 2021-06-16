@@ -1,5 +1,5 @@
 import type { AlertLevel } from '@amsterdam/asc-ui'
-import type { Point } from 'geojson'
+import type { Geometry, Point } from 'geojson'
 import type { LocationDescriptor, LocationDescriptorObject } from 'history'
 import type { FunctionComponent, ReactNode } from 'react'
 import type AuthScope from '../../../../../shared/services/api/authScope'
@@ -186,8 +186,16 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   } | null
   buurt?: string | null
   eigenaar?: string | null
-  oppervlakte?: string | null
+  rollaag?: string | null
+  zakkingssnelheid?: number | null
+  oppervlakte?: number | string | null
   datering?: string | null
+  street?: string | null
+  housenumber?: string | null
+  charging_point?: number | null
+  housenumberext?: string | null
+  city?: string | null
+  charging_cap_max?: number | null
   hoort_bij_monument?: { _links: { self: ApiLink } } | null
   dossiernr?: string | null
   dossier_type?: string | null
@@ -238,12 +246,14 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   bouwlagen?: string | null
   hoogste_bouwlaag?: string | null
   laagste_bouwlaag?: string | null
+  bouwjaar?: number | null
   pandidentificatie?: string | null
   indicatie_geconstateerd?: string | null
   aanduiding_in_onderzoek?: string | null
   standplaatsidentificatie?: string | null
   ligplaatsidentificatie?: string | null
   hoofdadres?: {
+    type_adres?: string | null
     landelijk_id?: string | null
     _links?: {
       self?: ApiLink
@@ -276,9 +286,12 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   opdrachtgever?: string | null
   verdacht_gebied?: string | null
   datum?: string | null
+  wkb_geometry?: Geometry | null
   subtype?: string | null
+  planstatus?: string | null
   kaliber?: string | null
   aantal?: string | null
+  bag_pand_geometrie?: Geometry | null
   verschijning?: string | null
   afbakening?: string | null
   horizontaal?: string | null
@@ -343,10 +356,10 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   beschrijving_complex?: string | null
   monumenten?: ApiLink | null
   peilmerkidentificatie?: string | null
-  hoogte_nap?: string | null
+  hoogte_nap?: string | number | null
   windrichting?: string | null
-  x_muurvlak?: string | null
-  y_muurvlak?: string | null
+  x_muurvlak?: string | number | null
+  y_muurvlak?: string | number | null
   merk?: string | null
   rws_nummer?: string | null
   address?: string | null
@@ -414,7 +427,7 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   perceelnummer?: string | null
   indexletter?: string | null
   indexnummer?: string | null
-  grootte?: string | null
+  grootte?: string | number | null
   toestandsdatum?: string | null
   beperkingen?: Array<{
     inschrijfnummer?: string
@@ -475,6 +488,7 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   monumentnummer?: string | null
   monumentnaam?: string | null
   monumentstatus?: string | null
+  einddatum?: string | null
   metingen?: ApiLink | null
   monumenttype?: string | null
   architect_ontwerp_monument?: string | null

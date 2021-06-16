@@ -1,7 +1,7 @@
 import { fetchWithToken } from '../../../../../../shared/services/api/api'
 import environment from '../../../../../../environment'
 
-export function fetchByPandId(pandId) {
+export function fetchByPandId(pandId: string) {
   const searchParams = {
     betreft_pand: pandId,
   }

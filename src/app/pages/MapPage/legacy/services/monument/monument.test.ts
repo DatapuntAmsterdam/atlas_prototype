@@ -1,15 +1,9 @@
-import { fetchWithToken } from '../../../../../../shared/services/api/api'
+import * as api from '../../../../../../shared/services/api/api'
 import { fetchByPandId } from './monument'
 
-jest.mock('../../../../../../shared/services/api/api')
-
 describe('The monument resource', () => {
-  afterEach(() => {
-    fetchWithToken.mockReset()
-  })
-
   it('can fetch monumenten by pand id', () => {
-    fetchWithToken.mockReturnValueOnce(
+    const fetchWithTokenMock = jest.spyOn(api, 'fetchWithToken').mockReturnValueOnce(
       Promise.resolve({
         results: [
           {
@@ -24,7 +18,7 @@ describe('The monument resource', () => {
       }),
     )
 
-    const promise = fetchByPandId(1).then((response) => {
+    const promise = fetchByPandId('1').then((response) => {
       expect(response).toEqual([
         {
           _display: 'Monument display name 1',
@@ -37,7 +31,7 @@ describe('The monument resource', () => {
       ])
     })
 
-    expect(fetchWithToken.mock.calls[0][0]).toContain('betreft_pand=1')
+    expect(fetchWithTokenMock).toHaveBeenCalledWith(expect.stringContaining('betreft_pand=1'))
     return promise
   })
 })

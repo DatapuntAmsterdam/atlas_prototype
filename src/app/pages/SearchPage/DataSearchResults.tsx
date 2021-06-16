@@ -17,7 +17,7 @@ const CardWrapper = styled.div<{ compact: boolean }>`
   margin-bottom: ${({ compact }) => (compact ? themeSpacing(2) : themeSpacing(8))};
 `
 
-interface CombinedDataResult {
+export interface CombinedDataResult {
   count: number
   label: string
   results: DataResult[]

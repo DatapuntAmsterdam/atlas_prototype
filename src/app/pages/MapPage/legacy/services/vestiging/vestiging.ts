@@ -1,7 +1,8 @@
 import { fetchWithToken } from '../../../../../../shared/services/api/api'
 import environment from '../../../../../../environment'
+import type { PotentialApiResult } from '../../types/details'
 
-const normalize = async (result) => {
+const normalize = async (result: PotentialApiResult) => {
   let societalActivities
 
   if (result.maatschappelijke_activiteit) {
@@ -11,13 +12,16 @@ const normalize = async (result) => {
   const additionalFields = {
     ...(societalActivities ? { kvkNumber: societalActivities.kvk_nummer } : {}),
     activities: (result.activiteiten || [])
-      .map((item) => `${item.sbi_code}${item.sbi_omschrijving ? `: ${item.sbi_omschrijving}` : ''}`)
+      .map(
+        (item) =>
+          `${item.sbi_code ?? ''}${item.sbi_omschrijving ? `: ${item.sbi_omschrijving}` : ''}`,
+      )
       .join('\n'),
     type: result.hoofdvestiging ? 'Hoofdvestiging' : 'Nevenvestiging',
     // eslint-disable-next-line no-underscore-dangle
-    ...(result._bijzondere_rechts_toestand.faillissement ||
+    ...(result._bijzondere_rechts_toestand?.faillissement ||
     // eslint-disable-next-line no-underscore-dangle
-    result._bijzondere_rechts_toestand.status
+    result._bijzondere_rechts_toestand?.status
       ? {
           bijzondereRechtstoestand: {
             // eslint-disable-next-line no-underscore-dangle
@@ -27,13 +31,13 @@ const normalize = async (result) => {
           },
         }
       : {}),
-    geometry: result.bezoekadres.geometrie || result.geometrie,
+    geometry: result.bezoekadres?.geometrie || result.geometrie,
   }
 
   return { ...result, ...additionalFields }
 }
 
-export function fetchByPandId(pandId) {
+export function fetchByPandId(pandId: string) {
   const searchParams = {
     pand: pandId,
   }
@@ -47,7 +51,7 @@ export function fetchByPandId(pandId) {
   )
 }
 
-export function fetchByAddressId(addressId) {
+export function fetchByAddressId(addressId: string) {
   const searchParams = {
     nummeraanduiding: addressId,
   }

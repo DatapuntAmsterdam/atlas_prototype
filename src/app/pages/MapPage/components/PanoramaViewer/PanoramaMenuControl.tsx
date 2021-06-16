@@ -66,7 +66,7 @@ const PanoramaMenuControl: FunctionComponent = () => {
   const handleOpenPanoramaExternal = () => {
     setOpen(false)
     if (location) {
-      const url = getStreetViewUrl([location.lat, location.lng], panoHeading)
+      const url = getStreetViewUrl([location.lat, location.lng], panoHeading as number)
 
       trackEvent({
         category: 'panorama-set',

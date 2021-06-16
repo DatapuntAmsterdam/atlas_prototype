@@ -1,11 +1,13 @@
 import { fetchWithToken } from '../../../../../../shared/services/api/api'
 import normalize, { fetchByAddressId, fetchByPandId } from './vestiging'
+import type { PotentialApiResult } from '../../types/details'
 
 jest.mock('../../../../../../shared/services/api/api')
 jest.mock('../map-fetch/map-fetch')
 
 describe('The vestiging resource', () => {
   afterEach(() => {
+    // @ts-ignore
     fetchWithToken.mockReset()
   })
 
@@ -26,14 +28,14 @@ describe('The vestiging resource', () => {
         status: 'Voorlopig',
       },
       hoofdvestiging: true,
-    }
+    } as unknown as PotentialApiResult
 
     const result = await normalize(mockVestiging)
 
     expect(fetchWithToken).toHaveBeenCalledWith(mockVestiging.maatschappelijke_activiteit)
 
     expect(result).toMatchObject({
-      activities: `${mockVestiging.activiteiten[0].sbi_code}: ${mockVestiging.activiteiten[0].sbi_omschrijving}`,
+      activities: `123: foo`,
       type: 'Hoofdvestiging',
       bijzondereRechtstoestand: {
         label: 'Faillissement',
@@ -43,6 +45,7 @@ describe('The vestiging resource', () => {
   })
 
   it('can fetch a vestiging by pand id', () => {
+    // @ts-ignore
     fetchWithToken.mockReturnValueOnce(
       Promise.resolve({
         results: [
@@ -58,7 +61,7 @@ describe('The vestiging resource', () => {
       }),
     )
 
-    const promise = fetchByPandId(1).then((response) => {
+    const promise = fetchByPandId('1').then((response) => {
       expect(response).toEqual([
         {
           _display: 'Vestiging display name 1',
@@ -71,11 +74,13 @@ describe('The vestiging resource', () => {
       ])
     })
 
+    // @ts-ignore
     expect(fetchWithToken.mock.calls[0][0]).toContain('pand=1')
     return promise
   })
 
   it('can fetch a vestiging by address id', () => {
+    // @ts-ignore
     fetchWithToken.mockReturnValueOnce(
       Promise.resolve({
         results: [
@@ -91,7 +96,7 @@ describe('The vestiging resource', () => {
       }),
     )
 
-    const promise = fetchByAddressId(0).then((response) => {
+    const promise = fetchByAddressId('0').then((response) => {
       expect(response).toEqual([
         {
           _display: 'Vestiging display name 1',
@@ -104,6 +109,7 @@ describe('The vestiging resource', () => {
       ])
     })
 
+    // @ts-ignore
     expect(fetchWithToken.mock.calls[0][0]).toContain('nummeraanduiding=0')
     return promise
   })

@@ -13,6 +13,7 @@ import { createMapSearchResultsModel } from '../map-search-results/map-search-re
 import { fetchByPandId as fetchMonumentByPandId } from '../monument/monument'
 import { fetchByAddressId, fetchByPandId as fetchVestigingByPandId } from '../vestiging/vestiging'
 import transformResultByType from './transform-result-by-type'
+import type { GeoSearchFeature } from '../../../../../../api/geosearch'
 
 interface Endpoint {
   uri: string
@@ -56,7 +57,9 @@ const relatedResourcesByType: { [key: string]: RelatedResource[] } = {
   'bag/ligplaats': [
     {
       fetch: (ligplaatsId: string) =>
-        fetchHoofdadresByLigplaatsId(ligplaatsId).then((result) => fetchByAddressId(result?.id)),
+        fetchHoofdadresByLigplaatsId(ligplaatsId).then((result) =>
+          fetchByAddressId(result?.id as string),
+        ),
       type: 'vestiging',
       authScope: 'HR/R',
     },
@@ -80,7 +83,7 @@ const relatedResourcesByType: { [key: string]: RelatedResource[] } = {
     {
       fetch: (standplaatsId: string) =>
         fetchHoofdadresByStandplaatsId(standplaatsId).then((result) =>
-          fetchByAddressId(result?.id),
+          fetchByAddressId(result?.id as string),
         ),
       type: 'vestiging',
       authScope: 'HR/R',
@@ -88,7 +91,7 @@ const relatedResourcesByType: { [key: string]: RelatedResource[] } = {
   ],
 }
 
-interface MapFeatureProperties {
+export interface MapFeatureProperties {
   id: string
   type: string
 }
@@ -178,7 +181,7 @@ export default function mapSearch(location: LatLngLiteral | null): Promise<MapSe
     )
       .then(fetchRelatedForUser())
       .then(
-        (features) => features.map((feature: any) => transformResultByType(feature)),
+        (features) => features.map((feature: GeoSearchFeature) => transformResultByType(feature)),
         (code) => ({
           type: errorType,
           code,

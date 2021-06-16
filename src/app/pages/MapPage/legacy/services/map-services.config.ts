@@ -1629,7 +1629,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition<any, any> } = 
               },
               {
                 term: 'Grootte',
-                description: result.grootte && `${result.grootte} m²`,
+                description: result.grootte ? `${result.grootte ?? ''} m²` : undefined,
               },
               {
                 term: 'Koopsom',

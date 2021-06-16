@@ -1,7 +1,8 @@
 import fixtureSingle from './nummeraanduiding.json'
 import fixtureList from './nummeraanduiding-list.json'
-import type { Single, List } from './types'
+import type { List, Single } from './types'
 
+export type { Single, List }
 export const singleFixture = fixtureSingle as Single
 export const listFixture = fixtureList as List
 export const path = 'bag/v1.1/nummeraanduiding/'

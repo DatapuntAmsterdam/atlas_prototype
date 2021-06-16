@@ -2,12 +2,29 @@ import { render, screen } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 import DataCard, { DataList } from '../../components/DataCard'
 import withAppContext from '../../utils/withAppContext'
-import DataSearchResults from './DataSearchResults'
+import DataSearchResults, { CombinedDataResult } from './DataSearchResults'
 
 jest.mock('../../components/DataCard')
 
 const mockedDataCard = mocked(DataCard)
 const mockedDataList = mocked(DataList)
+
+const mockDataResult: CombinedDataResult = {
+  count: 1,
+  label: 'any label',
+  results: [
+    {
+      endpoint: 'string',
+      id: 'string',
+      label: 'string',
+      subtype: 'string',
+      type: 'string',
+      __typename: 'DataResult',
+    },
+  ],
+  type: 'adressen',
+  __typename: 'CombinedDataResult',
+}
 
 describe('DataSearchResults', () => {
   beforeEach(() => {
@@ -24,13 +41,11 @@ describe('DataSearchResults', () => {
     render(
       withAppContext(
         <DataSearchResults
+          page="1"
+          withPagination={false}
+          query="some query"
           compact
-          results={[
-            {
-              count: 1,
-              results: [1, 2, 3],
-            },
-          ]}
+          results={[mockDataResult]}
           errors={[]}
         />,
       ),
@@ -44,12 +59,11 @@ describe('DataSearchResults', () => {
     render(
       withAppContext(
         <DataSearchResults
-          results={[
-            {
-              count: 1,
-              results: [1, 2, 3],
-            },
-          ]}
+          page="1"
+          withPagination={false}
+          query="some query"
+          compact={false}
+          results={[mockDataResult]}
           errors={[]}
         />,
       ),
@@ -64,19 +78,25 @@ describe('DataSearchResults', () => {
       {
         message: '',
         path: ['dataSearch'],
-        extensions: { code: 'UNAUTHORIZED', label: 'foo' },
+        extensions: { code: 'UNAUTHORIZED', label: 'foo', type: 'type' },
       },
     ]
 
     render(
       withAppContext(
         <DataSearchResults
+          page="1"
+          withPagination={false}
+          query="some query"
+          compact={false}
           errors={errors}
           results={[
             {
               count: 1,
-              type: 'foo',
               results: [],
+              type: 'adressen',
+              label: 'some label',
+              __typename: 'CombinedDataResult',
             },
           ]}
         />,
@@ -88,7 +108,16 @@ describe('DataSearchResults', () => {
 
   it('shows the no results component', () => {
     const { rerender } = render(
-      withAppContext(<DataSearchResults query="Fubar" results={[]} errors={[]} />),
+      withAppContext(
+        <DataSearchResults
+          page="1"
+          compact={false}
+          withPagination={false}
+          query="Fubar"
+          results={[]}
+          errors={[]}
+        />,
+      ),
     )
 
     expect(screen.getByTestId('noResults')).toBeInTheDocument()
@@ -97,10 +126,17 @@ describe('DataSearchResults', () => {
     rerender(
       withAppContext(
         <DataSearchResults
+          page="1"
+          query="Fubar"
+          compact={false}
+          withPagination={false}
           results={[
             {
               count: 1,
               results: [],
+              type: 'adressen',
+              label: 'some label',
+              __typename: 'CombinedDataResult',
             },
           ]}
           errors={[]}

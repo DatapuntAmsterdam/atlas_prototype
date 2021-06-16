@@ -5,10 +5,12 @@ import formatNumber from '../../../../../../shared/services/number-formatter/num
 import formatCount from '../../../../../utils/formatCount'
 import formatDate from '../../../../../utils/formatDate'
 import { NORMAL_PAND_STATUSSES, NORMAL_VBO_STATUSSES } from '../map-search/status-labels'
+import type { PotentialApiResult } from '../../types/details'
+import type { List as MetingList } from '../../../../../../api/meetbouten/meting'
 
 const YEAR_UNKNOWN = 1005 // The API returns 1005 when a year is unknown
 
-export const oplaadpunten = (result) => {
+export const oplaadpunten = (result: PotentialApiResult) => {
   const CHARGER_TYPES = {
     REGULAR: 'Gewoon laadpunt',
     FAST: 'Snellaadpunt',
@@ -20,7 +22,7 @@ export const oplaadpunten = (result) => {
           result.housenumber
             ? ` ${result.housenumber}${result.housenumberext ? ` ${result.housenumberext}` : ''}`
             : ''
-        }, ${result.city}`
+        }, ${result.city ?? ''}`
       : null,
 
     // eslint-disable-next-line no-nested-ternary
@@ -33,7 +35,7 @@ export const oplaadpunten = (result) => {
     currentStatus:
       // eslint-disable-next-line no-nested-ternary
       result.status === 'Available'
-        ? result.charging_point >= 2
+        ? result.charging_point && result.charging_point >= 2
           ? 'Eén of meerdere beschikbaar'
           : 'Beschikbaar'
         : 'Niet beschikbaar',
@@ -44,7 +46,7 @@ export const oplaadpunten = (result) => {
   return { ...result, ...additionalFields }
 }
 
-export const meetbout = async (result) => {
+export const meetbout = async (result: PotentialApiResult) => {
   let rollaagImage
   if (result.rollaag) {
     const rollaag = await fetchWithToken(result.rollaag)
@@ -59,7 +61,7 @@ export const meetbout = async (result) => {
   return { ...result, ...additionalFields }
 }
 
-export const meetboutTable = (data) =>
+export const meetboutTable = (data: MetingList['results']) =>
   data.map((item) =>
     Object.entries(item).reduce((acc, [key, value]) => {
       let newValue = value
@@ -67,7 +69,8 @@ export const meetboutTable = (data) =>
       if (['hoogte_nap', 'zakking', 'zakkingssnelheid', 'zakking_cumulatief'].includes(key)) {
         newValue = parseFloat(value).toFixed(3)
         if (newValue >= 0) {
-          newValue = `+${newValue}`
+          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+          newValue = `+${newValue.toString()}`
         }
       }
 
@@ -86,7 +89,7 @@ export const meetboutTable = (data) =>
     }, {}),
   )
 
-export const napPeilmerk = (result) => {
+export const napPeilmerk = (result: PotentialApiResult) => {
   const additionalFields = {
     wallCoordinates:
       (result.x_muurvlak || result.x_muurvlak === 0) &&
@@ -94,26 +97,28 @@ export const napPeilmerk = (result) => {
         ? `${result.x_muurvlak}, ${result.y_muurvlak}`
         : '',
     height:
-      result.hoogte_nap || result.hoogte_nap === 0 ? `${formatNumber(result.hoogte_nap)} m` : '',
+      result.hoogte_nap || result.hoogte_nap === 0
+        ? `${formatNumber(result.hoogte_nap as number)} m`
+        : '',
   }
 
   return { ...result, ...additionalFields }
 }
 
-export const getGarbageContainersByBagObject = async (id, type) =>
+export const getGarbageContainersByBagObject = async (id: string, type: string) =>
   fetchWithToken(`${environment.API_ROOT}v1/huishoudelijkafval/bag_object_loopafstand/`, {
     format: 'json',
     bagObjectType: type,
     bagObjectId: id,
   })
 
-export const getGarbageContainersByAddress = async (id) =>
+export const getGarbageContainersByAddress = async (id: string) =>
   fetchWithToken(`${environment.API_ROOT}v1/huishoudelijkafval/adres_loopafstand/`, {
     format: 'json',
     adresseerbaarobjectId: id,
   })
 
-export const adressenPand = (result) => {
+export const adressenPand = (result: PotentialApiResult) => {
   const additionalFields = {
     statusLevel:
       result.status && !NORMAL_PAND_STATUSSES.includes(result.status) ? 'info' : undefined,
@@ -127,7 +132,7 @@ export const adressenPand = (result) => {
   return { ...result, ...additionalFields }
 }
 
-export const adressenVerblijfsobject = (result) => {
+export const adressenVerblijfsobject = (result: PotentialApiResult) => {
   const additionalFields = {
     statusLevel:
       result.status && !NORMAL_VBO_STATUSSES.includes(result.status) ? 'error' : undefined,
@@ -136,25 +141,27 @@ export const adressenVerblijfsobject = (result) => {
     gebruiksdoelen: ((result.gebruiksdoel && result.gebruiksdoel.slice(0, 5)) || [])
       .map((item) => item)
       .join('\n'),
-    size: result.oppervlakte > 1 ? formatSquareMetre(result.oppervlakte) : 'onbekend',
+    size:
+      result.oppervlakte && result.oppervlakte > 1
+        ? formatSquareMetre(result.oppervlakte as number)
+        : 'onbekend',
   }
 
   return { ...result, ...additionalFields }
 }
 
-export const kadastraalObject = async (result) => {
-  const brk = await fetchWithToken(
-    // eslint-disable-next-line no-underscore-dangle
-    result?._links?.self?.href?.replace('brk/object', 'brk/object-expand'),
-  )
+export const kadastraalObject = async (result: PotentialApiResult) => {
+  // eslint-disable-next-line no-underscore-dangle
+  const newLink = result?._links?.self?.href?.replace('brk/object', 'brk/object-expand')
+  const brk = newLink ? await fetchWithToken(newLink) : {}
   const additionalFields = {
-    size: result.grootte || result.grootte === 0 ? formatSquareMetre(result.grootte) : '',
+    size: result.grootte || result.grootte === 0 ? formatSquareMetre(result.grootte as number) : '',
     cadastralName: result.kadastrale_gemeente ? result.kadastrale_gemeente.naam : false,
     // eslint-disable-next-line no-underscore-dangle
     name: result.kadastrale_gemeente ? result.kadastrale_gemeente.gemeente._display : false,
     brkData: {
       ...brk,
-      rechten: brk?.rechten?.map((recht) => ({
+      rechten: brk?.rechten?.map((recht: any) => ({
         ...recht.kadastraal_subject,
         // eslint-disable-next-line no-underscore-dangle
         _display: recht?._display,
@@ -165,16 +172,16 @@ export const kadastraalObject = async (result) => {
   return { ...result, ...additionalFields }
 }
 
-export const bekendmakingen = (result) => {
+export const bekendmakingen = (result: PotentialApiResult) => {
   const additionalFields = {
-    date: formatDate(new Date(result.datum)),
+    date: result.datum ? formatDate(new Date(result.datum)) : undefined,
     geometry: result.wkb_geometry,
   }
 
   return { ...result, ...additionalFields }
 }
 
-export const explosieven = (result) => {
+export const explosieven = (result: PotentialApiResult) => {
   const additionalFields = {
     datum: result.datum ? new Date(result.datum) : null,
     datum_inslag: result.datum_inslag ? new Date(result.datum_inslag) : null,
@@ -183,16 +190,16 @@ export const explosieven = (result) => {
   return { ...result, ...additionalFields }
 }
 
-export const evenementen = (result) => {
+export const evenementen = (result: PotentialApiResult) => {
   const additionalFields = {
-    startDate: formatDate(new Date(result.startdatum)),
+    startDate: result.startdatum && formatDate(new Date(result.startdatum)),
     endDate: result.einddatum ? formatDate(new Date(result.einddatum)) : false,
   }
 
   return { ...result, ...additionalFields }
 }
 
-export const vastgoed = (result) => {
+export const vastgoed = (result: PotentialApiResult) => {
   const additionalFields = {
     geometry: result.bag_pand_geometrie,
     construction_year:
@@ -203,7 +210,7 @@ export const vastgoed = (result) => {
   return { ...result, ...additionalFields }
 }
 
-export const winkelgebied = (result) => {
+export const winkelgebied = (result: PotentialApiResult) => {
   const additionalFields = {
     geometry: result.wkb_geometry,
   }
@@ -211,7 +218,7 @@ export const winkelgebied = (result) => {
   return { ...result, ...additionalFields }
 }
 
-export const parkeerzones = (result) => {
+export const parkeerzones = (result: PotentialApiResult) => {
   const additionalFields = {
     geometry: result.wkb_geometry,
   }
@@ -219,7 +226,7 @@ export const parkeerzones = (result) => {
   return { ...result, ...additionalFields }
 }
 
-export const monument = (result) => {
+export const monument = (result: PotentialApiResult) => {
   const additionalFields = {
     geometry: result.monumentcoordinaten,
   }
@@ -227,7 +234,7 @@ export const monument = (result) => {
   return { ...result, ...additionalFields }
 }
 
-export const reclamebelasting = (result) => {
+export const reclamebelasting = (result: PotentialApiResult) => {
   const additionalFields = {
     geometry: result.wkb_geometry,
     localeDate: '1 januari 2020',
@@ -236,7 +243,7 @@ export const reclamebelasting = (result) => {
   return { ...result, ...additionalFields }
 }
 
-export const grexProject = (result) => {
+export const grexProject = (result: PotentialApiResult) => {
   const planstatusFormatted = (() => {
     switch (result.planstatus) {
       case 'A':
@@ -249,16 +256,16 @@ export const grexProject = (result) => {
         return 'Financieel'
       default:
         // eslint-disable-next-line no-console
-        console.warn(`Unable to format planstatus, unknown value '${result.planstatus}'.`)
+        console.warn(`Unable to format planstatus, unknown value '${result.planstatus ?? ''}'.`)
         return result.planstatus
     }
   })()
 
-  const oppervlakteFormatted = formatSquareMetre(result.oppervlakte)
+  const oppervlakteFormatted = formatSquareMetre(result.oppervlakte as number)
 
   return { ...result, planstatusFormatted, oppervlakteFormatted }
 }
 
-export function formatSquareMetre(value) {
-  return `${formatCount(value)} m²`
+export function formatSquareMetre(count: number) {
+  return `${formatCount(count)} m²`
 }

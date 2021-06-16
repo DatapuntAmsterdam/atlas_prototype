@@ -22,13 +22,14 @@ import {
   vastgoed,
   winkelgebied,
 } from './normalize'
+import type { PotentialApiResult } from '../../types/details'
 
 jest.mock('../../../../../utils/formatDate')
 jest.mock('../../../../../../shared/services/api/api')
 
 const YEAR_UNKNOWN = 1005
 
-const societalActivities = (result) => {
+const societalActivities = (result: Partial<PotentialApiResult>) => {
   const additionalFields = {
     activities: (result.activiteiten || []).map((activity) => activity),
     bijzondereRechtstoestand: {
@@ -60,12 +61,12 @@ describe('normalize', () => {
         housenumberext: 'A',
         city: 'city',
         wkb_geometry: 'wkb_geometry',
-      }
+      } as unknown as PotentialApiResult
 
       output = oplaadpunten(input)
 
       expect(output).toMatchObject({
-        address: `${input.street} ${input.housenumber} ${input.housenumberext}, ${input.city}`,
+        address: 'street 1 A, city',
         geometry: input.wkb_geometry,
       })
 
@@ -73,30 +74,30 @@ describe('normalize', () => {
         street: 'street',
         housenumber: '1',
         city: 'city',
-      }
+      } as unknown as PotentialApiResult
 
       output = oplaadpunten(input)
 
       expect(output).toMatchObject({
-        address: `${input.street} ${input.housenumber}, ${input.city}`,
+        address: 'street 1, city',
       })
 
       input = {
         street: 'street',
         city: 'city',
-      }
+      } as unknown as PotentialApiResult
 
       output = oplaadpunten(input)
 
       expect(output).toMatchObject({
-        address: `${input.street}, ${input.city}`,
+        address: 'street, city',
       })
     })
 
     it('returns the charger type', () => {
       input = {
         charging_cap_max: 1,
-      }
+      } as unknown as PotentialApiResult
 
       output = oplaadpunten(input)
       expect(output).toMatchObject({
@@ -105,7 +106,7 @@ describe('normalize', () => {
 
       input = {
         charging_cap_max: 51,
-      }
+      } as unknown as PotentialApiResult
 
       output = oplaadpunten(input)
       expect(output).toMatchObject({
@@ -114,7 +115,7 @@ describe('normalize', () => {
 
       input = {
         charging_cap_max: 0,
-      }
+      } as unknown as PotentialApiResult
 
       output = oplaadpunten(input)
       expect(output).toMatchObject({
@@ -126,7 +127,7 @@ describe('normalize', () => {
       input = {
         status: 'Available',
         charging_point: 1,
-      }
+      } as unknown as PotentialApiResult
 
       output = oplaadpunten(input)
       expect(output).toMatchObject({
@@ -136,7 +137,7 @@ describe('normalize', () => {
       input = {
         status: 'Available',
         charging_point: 2,
-      }
+      } as unknown as PotentialApiResult
 
       output = oplaadpunten(input)
       expect(output).toMatchObject({
@@ -146,7 +147,7 @@ describe('normalize', () => {
       input = {
         status: 'Something else',
         charging_point: 2,
-      }
+      } as unknown as PotentialApiResult
 
       output = oplaadpunten(input)
       expect(output).toMatchObject({
@@ -163,20 +164,20 @@ describe('normalize', () => {
         x_muurvlak: 0,
         y_muurvlak: 0,
         hoogte_nap: 0,
-      }
+      } as unknown as PotentialApiResult
 
       output = napPeilmerk(input)
 
       expect(output).toMatchObject({
-        wallCoordinates: `${input.x_muurvlak}, ${input.y_muurvlak}`,
-        height: `${input.hoogte_nap} m`,
+        wallCoordinates: `0, 0`,
+        height: `0 m`,
       })
 
       input = {
         x_muurvlak: false,
         y_muurvlak: 0,
         hoogte_nap: false,
-      }
+      } as unknown as PotentialApiResult
 
       output = napPeilmerk(input)
 
@@ -190,16 +191,16 @@ describe('normalize', () => {
   describe('normalizes "adressenPand', () => {
     let input
     let output
-    it('returns the statusLevel and year', async () => {
+    it('returns the statusLevel and year', () => {
       input = {
         status: {
           code: 26,
           omschrijving: 'a random, not normal status',
         },
         oorspronkelijk_bouwjaar: 2012,
-      }
+      } as unknown as PotentialApiResult
 
-      output = await adressenPand(input)
+      output = adressenPand(input)
 
       expect(output).toMatchObject({
         statusLevel: 'info',
@@ -208,9 +209,9 @@ describe('normalize', () => {
 
       input = {
         oorspronkelijk_bouwjaar: `${YEAR_UNKNOWN}`,
-      }
+      } as unknown as PotentialApiResult
 
-      output = await adressenPand(input)
+      output = adressenPand(input)
 
       expect(output).toMatchObject({
         statusLevel: undefined,
@@ -232,21 +233,21 @@ describe('normalize', () => {
           type_adres: 'foo',
         },
         oppervlakte: 0,
-      }
+      } as unknown as PotentialApiResult
 
       output = adressenVerblijfsobject(input)
 
       expect(output).toMatchObject({
         statusLevel: 'error',
         isNevenadres: false,
-        typeAdres: input.hoofdadres.type_adres,
+        typeAdres: input.hoofdadres?.type_adres,
         size: 'onbekend',
       })
 
       input = {
         hoofdadres: false,
         oppervlakte: 1000,
-      }
+      } as unknown as PotentialApiResult
 
       const mockedLocaleString = '1,000'
       localeStringMock.mockImplementationOnce(() => mockedLocaleString)
@@ -264,27 +265,27 @@ describe('normalize', () => {
     it('returns the "gebruiksdoelen', () => {
       input = {
         gebruiksdoel: ['omschrijving'],
-      }
+      } as unknown as PotentialApiResult
 
       output = adressenVerblijfsobject(input)
 
       expect(output).toMatchObject({
-        gebruiksdoelen: input.gebruiksdoel[0],
+        gebruiksdoelen: input.gebruiksdoel?.[0],
       })
 
       // Checks if multiple lines are used
       input = {
         gebruiksdoel: ['omschrijving 1', 'omschrijving 2'],
-      }
+      } as unknown as PotentialApiResult
 
       output = adressenVerblijfsobject(input)
 
       expect(output).toMatchObject({
-        gebruiksdoelen: `${input.gebruiksdoel[0]}
-${input.gebruiksdoel[1]}`,
+        gebruiksdoelen: `omschrijving 1
+omschrijving 2`,
       })
 
-      input = {}
+      input = {} as unknown as PotentialApiResult
 
       output = adressenVerblijfsobject(input)
 
@@ -300,7 +301,7 @@ ${input.gebruiksdoel[1]}`,
     it('returns the size', async () => {
       input = {
         grootte: 0,
-      }
+      } as unknown as PotentialApiResult
 
       output = await kadastraalObject(input)
 
@@ -310,7 +311,7 @@ ${input.gebruiksdoel[1]}`,
 
       input = {
         grootte: 1.12121121212,
-      }
+      } as unknown as PotentialApiResult
 
       const mockedLocaleString = '1,21212'
       localeStringMock.mockImplementationOnce(() => mockedLocaleString)
@@ -321,7 +322,7 @@ ${input.gebruiksdoel[1]}`,
         size: `${mockedLocaleString} m²`, // mocked
       })
 
-      input = {}
+      input = {} as unknown as PotentialApiResult
 
       output = await kadastraalObject(input)
 
@@ -338,17 +339,17 @@ ${input.gebruiksdoel[1]}`,
             _display: '_display',
           },
         },
-      }
+      } as unknown as PotentialApiResult
 
       output = await kadastraalObject(input)
 
       expect(output).toMatchObject({
-        cadastralName: input.kadastrale_gemeente.naam,
+        cadastralName: input.kadastrale_gemeente?.naam,
         // eslint-disable-next-line no-underscore-dangle
-        name: input.kadastrale_gemeente.gemeente._display,
+        name: input.kadastrale_gemeente?.gemeente._display,
       })
 
-      input = {}
+      input = {} as unknown as PotentialApiResult
 
       output = await kadastraalObject(input)
 
@@ -364,19 +365,19 @@ ${input.gebruiksdoel[1]}`,
       const input = {
         datum: '2019-12-12',
         datum_inslag: '2019-12-16',
-      }
+      } as unknown as PotentialApiResult
 
       const output = explosieven(input)
 
-      expect(output.datum.getTime()).toEqual(new Date('2019-12-12').getTime())
-      expect(output.datum_inslag.getTime()).toEqual(new Date('2019-12-16').getTime())
+      expect(output.datum?.getTime()).toEqual(new Date('2019-12-12').getTime())
+      expect(output.datum_inslag?.getTime()).toEqual(new Date('2019-12-16').getTime())
     })
 
     it('ingores the dates when empty', () => {
       const input = {
         datum: null,
         datum_inslag: null,
-      }
+      } as unknown as PotentialApiResult
 
       const output = explosieven(input)
 
@@ -391,7 +392,7 @@ ${input.gebruiksdoel[1]}`,
     it('returns the geometry', () => {
       input = {
         wkb_geometry: 'wkb_geometry',
-      }
+      } as unknown as PotentialApiResult
 
       output = bekendmakingen(input)
 
@@ -402,11 +403,12 @@ ${input.gebruiksdoel[1]}`,
 
     it('returns the date', () => {
       const date = '12 december 2019'
+      // @ts-ignore
       formatDate.mockImplementationOnce(() => date)
 
       input = {
         datum: 'datum',
-      }
+      } as unknown as PotentialApiResult
 
       output = bekendmakingen(input)
 
@@ -414,7 +416,7 @@ ${input.gebruiksdoel[1]}`,
         date,
       })
 
-      input = {}
+      input = {} as unknown as PotentialApiResult
 
       output = bekendmakingen(input)
 
@@ -427,16 +429,17 @@ ${input.gebruiksdoel[1]}`,
   describe('normalizes dates', () => {
     let input
     let output
-    let date
+    let date: string
 
     it('for "evenementen', () => {
       date = '11 december 2019'
+      // @ts-ignore
       formatDate.mockImplementation(() => date)
 
       input = {
         startdatum: 'datum',
         einddatum: 'datum',
-      }
+      } as unknown as PotentialApiResult
 
       output = evenementen(input)
 
@@ -445,9 +448,10 @@ ${input.gebruiksdoel[1]}`,
         endDate: date,
       })
 
+      // @ts-ignore
       formatDate.mockReset()
 
-      input = {}
+      input = {} as unknown as PotentialApiResult
 
       output = evenementen(input)
 
@@ -465,7 +469,7 @@ ${input.gebruiksdoel[1]}`,
     it('returns the geometry', () => {
       input = {
         bag_pand_geometrie: 'bag_pand_geometrie',
-      }
+      } as unknown as PotentialApiResult
 
       output = vastgoed(input)
 
@@ -478,7 +482,7 @@ ${input.gebruiksdoel[1]}`,
       input = {
         monumentstatus: 'monumental_status',
         bouwjaar: 1900,
-      }
+      } as unknown as PotentialApiResult
 
       output = vastgoed(input)
 
@@ -489,7 +493,7 @@ ${input.gebruiksdoel[1]}`,
 
       input = {
         bouwjaar: YEAR_UNKNOWN,
-      }
+      } as unknown as PotentialApiResult
 
       output = vastgoed(input)
 
@@ -506,7 +510,7 @@ ${input.gebruiksdoel[1]}`,
     it('returns the activities', () => {
       input = {
         activiteiten: [{ field: 'foo' }],
-      }
+      } as unknown as PotentialApiResult
 
       output = societalActivities(input)
 
@@ -514,7 +518,7 @@ ${input.gebruiksdoel[1]}`,
         activities: input.activiteiten,
       })
 
-      input = {}
+      input = {} as unknown as PotentialApiResult
 
       output = societalActivities(input)
 
@@ -529,7 +533,7 @@ ${input.gebruiksdoel[1]}`,
           field: 'foo',
           status: 'Voorlopig',
         },
-      }
+      } as unknown as PotentialApiResult
 
       output = societalActivities(input)
 
@@ -545,7 +549,7 @@ ${input.gebruiksdoel[1]}`,
         _bijzondere_rechts_toestand: {
           status: 'Definitief',
         },
-      }
+      } as unknown as PotentialApiResult
 
       output = societalActivities(input)
 
@@ -559,7 +563,7 @@ ${input.gebruiksdoel[1]}`,
         _bijzondere_rechts_toestand: {
           field: 'foo',
         },
-      }
+      } as unknown as PotentialApiResult
 
       output = societalActivities(input)
 
@@ -577,7 +581,7 @@ ${input.gebruiksdoel[1]}`,
     it('returns the geometry', () => {
       input = {
         wkb_geometry: 'wkb_geometry',
-      }
+      } as unknown as PotentialApiResult
 
       output = winkelgebied(input)
 
@@ -593,7 +597,7 @@ ${input.gebruiksdoel[1]}`,
     it('returns the geometry', () => {
       input = {
         wkb_geometry: 'wkb_geometry',
-      }
+      } as unknown as PotentialApiResult
 
       output = parkeerzones(input)
 
@@ -609,7 +613,7 @@ ${input.gebruiksdoel[1]}`,
     it('returns the geometry', () => {
       input = {
         monumentcoordinaten: 'monumentcoordinaten',
-      }
+      } as unknown as PotentialApiResult
 
       output = monument(input)
 
@@ -625,7 +629,7 @@ ${input.gebruiksdoel[1]}`,
     it('returns the speed', async () => {
       input = {
         zakkingssnelheid: 0.1212121212,
-      }
+      } as unknown as PotentialApiResult
 
       output = await meetbout(input)
 
@@ -641,7 +645,7 @@ ${input.gebruiksdoel[1]}`,
     it('returns the geometry', () => {
       input = {
         wkb_geometry: 'wkb_geometry',
-      }
+      } as unknown as PotentialApiResult
 
       output = reclamebelasting(input)
 
@@ -651,7 +655,7 @@ ${input.gebruiksdoel[1]}`,
     })
 
     it('returns the localeDate', () => {
-      input = {}
+      input = {} as unknown as PotentialApiResult
 
       output = reclamebelasting(input)
 
@@ -663,25 +667,36 @@ ${input.gebruiksdoel[1]}`,
 
   describe('normalize grex projects', () => {
     it('should format the planstatus', () => {
-      expect(grexProject({ planstatus: 'A', oppervlakte: 0 }).planstatusFormatted).toEqual(
-        'Actueel',
-      )
-      expect(grexProject({ planstatus: 'T', oppervlakte: 0 }).planstatusFormatted).toEqual(
-        'Toekomstig',
-      )
-      expect(grexProject({ planstatus: 'NOPE', oppervlakte: 0 }).planstatusFormatted).toEqual(
-        'NOPE',
-      )
+      expect(
+        grexProject({ planstatus: 'A', oppervlakte: 0 } as unknown as PotentialApiResult)
+          .planstatusFormatted,
+      ).toEqual('Actueel')
+      expect(
+        grexProject({ planstatus: 'T', oppervlakte: 0 } as unknown as PotentialApiResult)
+          .planstatusFormatted,
+      ).toEqual('Toekomstig')
+      expect(
+        grexProject({ planstatus: 'NOPE', oppervlakte: 0 } as unknown as PotentialApiResult)
+          .planstatusFormatted,
+      ).toEqual('NOPE')
     })
 
     it('should format the oppervlakte', () => {
-      expect(grexProject({ planstatus: 'A', oppervlakte: 12 }).oppervlakteFormatted).toEqual(
-        '12 m²',
-      )
+      expect(
+        grexProject({ planstatus: 'A', oppervlakte: 12 } as unknown as PotentialApiResult)
+          .oppervlakteFormatted,
+      ).toEqual('12 m²')
     })
 
     it('should pass along other properties', () => {
-      expect(grexProject({ planstatus: 'A', oppervlakte: 12, foo: 'bar' }).foo).toEqual('bar')
+      expect(
+        grexProject({
+          planstatus: 'A',
+          oppervlakte: 12,
+          foo: 'bar',
+          // @ts-ignore
+        } as any).foo,
+      ).toEqual('bar')
     })
   })
 

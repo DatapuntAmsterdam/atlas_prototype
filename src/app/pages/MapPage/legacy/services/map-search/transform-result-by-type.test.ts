@@ -1,4 +1,5 @@
 import transformResultByType from './transform-result-by-type'
+import type { GeoSearchFeature } from '../../../../../../api/geosearch'
 
 describe('transformResultByType', () => {
   it('should get the default description when the results are not adress or openbareruimte', () => {
@@ -24,18 +25,17 @@ describe('transformResultByType', () => {
   })
 
   it('should get the address description', () => {
-    const result = {
-      dataset: 'bag',
-      hoofdadres: true,
-      landelijk_id: '0363200000391071',
+    const result: GeoSearchFeature = {
+      hoofdadres: 'some value',
       properties: {
+        id: '12',
+        distance: 12,
         uri: 'https://acc.api.data.amsterdam.nl/bag/nummeraanduiding/0363200000391071/',
         display: 'Singel 190-2',
         type: 'pand/address',
         parent: 'bag/pand',
       },
       vbo_status: 'Verblijfsobject in gebruik',
-      _display: 'Singel 190-2',
     }
     expect(transformResultByType(result)).toEqual({
       categoryLabel: 'Adres',

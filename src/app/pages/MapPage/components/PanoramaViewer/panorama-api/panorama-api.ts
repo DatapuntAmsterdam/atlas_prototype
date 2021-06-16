@@ -1,3 +1,4 @@
+import type { LatLngTuple } from 'leaflet'
 import { fetchWithToken } from '../../../../../../shared/services/api/api'
 import getCenter from '../../../../../../shared/services/geo-json/geo-json'
 import environment from '../../../../../../environment'
@@ -36,8 +37,8 @@ export const PANORAMA_CONFIG = {
 const prefix = PANORAMA_CONFIG.PANORAMA_ENDPOINT_PREFIX
 const suffix = PANORAMA_CONFIG.PANORAMA_ENDPOINT_SUFFIX
 
-export const getLocationHistoryParams = (location, tags) => {
-  const tagsQuery = Array.isArray(tags) ? `&tags=${tags}` : ''
+export const getLocationHistoryParams = (location: LatLngTuple | null, tags?: string[]) => {
+  const tagsQuery = Array.isArray(tags) ? `&tags=${tags.toString()}` : ''
   const newestInRange = 'newest_in_range=true'
   const pageSize = 'page_size=1'
 
@@ -53,7 +54,7 @@ export const getLocationHistoryParams = (location, tags) => {
   }
 }
 
-const imageData = (response) => {
+const imageData = (response: any[]) => {
   const panorama = response[0]
   const adjacencies = response.filter((adjacency) => adjacency !== response[0])
 
@@ -85,28 +86,21 @@ const imageData = (response) => {
   }
 }
 
-function fetchPanorama(url) {
-  return new Promise((resolve, reject) => {
+function fetchPanorama(url: string) {
+  return (
     fetchWithToken(url)
       // eslint-disable-next-line no-underscore-dangle
       .then((json) => json._embedded.adjacencies)
-      .then((data) => {
-        resolve(imageData(data))
-      })
-      .catch((error) => reject(error))
-  })
+      .then((data) => imageData(data))
+  )
 }
 
-function getAdjacencies(url, params) {
+function getAdjacencies(url: string, params: string) {
   const getAdjacenciesUrl = `${url}?${params}`
   return fetchPanorama(getAdjacenciesUrl)
 }
 
-export function getImageDataByLocation(location, tags) {
-  if (!Array.isArray(location)) {
-    return null
-  }
-
+export function getImageDataByLocation(location: LatLngTuple, tags?: string[]) {
   const {
     adjacenciesParams,
     largeRadius,
@@ -118,7 +112,7 @@ export function getImageDataByLocation(location, tags) {
   const getLocationUrl = `${environment.API_ROOT}${prefix}/?${locationRange}${tagsQuery}`
   const limitResults = 'limit_results=1'
 
-  return new Promise((resolve, reject) => {
+  return (
     fetchWithToken(`${getLocationUrl}&${standardRadius}&${newestInRange}&${limitResults}`)
       // eslint-disable-next-line no-underscore-dangle
       .then((json) => json._embedded.panoramas[0])
@@ -126,29 +120,27 @@ export function getImageDataByLocation(location, tags) {
         if (data) {
           // we found a pano nearby go to it
           // eslint-disable-next-line no-underscore-dangle
-          resolve(getAdjacencies(data._links.adjacencies.href, adjacenciesParams))
-        } else {
-          // there is no pano nearby search with a large radius and go to it
-          resolve(
-            fetchWithToken(`${getLocationUrl}&${largeRadius}&${limitResults}`)
-              // eslint-disable-next-line no-underscore-dangle
-              .then((json) => json._embedded.panoramas[0])
-              // eslint-disable-next-line no-underscore-dangle
-              .then((_data) => getAdjacencies(_data._links.adjacencies.href, adjacenciesParams)),
-          )
+          return getAdjacencies(data._links.adjacencies.href, adjacenciesParams)
         }
+        // there is no pano nearby search with a large radius and go to it
+        return (
+          fetchWithToken(`${getLocationUrl}&${largeRadius}&${limitResults}`)
+            // eslint-disable-next-line no-underscore-dangle
+            .then((json) => json._embedded.panoramas[0])
+            // eslint-disable-next-line no-underscore-dangle
+            .then((_data) => getAdjacencies(_data._links.adjacencies.href, adjacenciesParams))
+        )
       })
-      .catch((error) => reject(error))
-  })
+  )
 }
 
-export function getImageDataById(id, tags) {
+export function getImageDataById(id: string, tags?: string[]) {
   const { adjacenciesParams } = getLocationHistoryParams(null, tags)
 
   return fetchPanorama(`${environment.API_ROOT}${prefix}/${id}/${suffix}/?${adjacenciesParams}`)
 }
 
-export function getStreetViewUrl(location, heading) {
+export function getStreetViewUrl(location: LatLngTuple, heading: number) {
   const [latitude, longitude] = location
   const path = 'http://maps.google.com/maps?q=&layer=c&'
   const parameters = `cbll=${latitude},${longitude}&cbp=11,${heading},0,0,0`

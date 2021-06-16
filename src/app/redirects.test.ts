@@ -135,6 +135,7 @@ describe('redirects', () => {
     it('should redirect legacy panorama urls', async () => {
       jest
         .spyOn(panoramaApi, 'getImageDataById')
+        // @ts-ignore
         .mockReturnValue(Promise.resolve({ location: [321, 123] }))
       const { pathname, hash, search, href } = new URL(
         `https://www.someurl.com/${MAIN_PATHS.DATA}/panorama/123?heading=30`,
