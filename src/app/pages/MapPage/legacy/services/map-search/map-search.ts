@@ -56,7 +56,7 @@ const relatedResourcesByType: { [key: string]: RelatedResource[] } = {
   'bag/ligplaats': [
     {
       fetch: (ligplaatsId: string) =>
-        fetchHoofdadresByLigplaatsId(ligplaatsId).then((result) => fetchByAddressId(result.id)),
+        fetchHoofdadresByLigplaatsId(ligplaatsId).then((result) => fetchByAddressId(result?.id)),
       type: 'vestiging',
       authScope: 'HR/R',
     },
@@ -79,7 +79,9 @@ const relatedResourcesByType: { [key: string]: RelatedResource[] } = {
   'bag/standplaats': [
     {
       fetch: (standplaatsId: string) =>
-        fetchHoofdadresByStandplaatsId(standplaatsId).then((result) => fetchByAddressId(result.id)),
+        fetchHoofdadresByStandplaatsId(standplaatsId).then((result) =>
+          fetchByAddressId(result?.id),
+        ),
       type: 'vestiging',
       authScope: 'HR/R',
     },
@@ -137,6 +139,7 @@ export interface MapSearchCategory {
   categoryLabelPlural: string
   subCategories: MapSearchCategory[]
   results: MapSearchResult[]
+  parent?: string
 }
 
 export interface MapSearchResult {
