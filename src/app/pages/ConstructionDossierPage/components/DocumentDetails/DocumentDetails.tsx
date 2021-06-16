@@ -113,7 +113,7 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
           </>
         )}
       </DocumentHeaderBlock>
-      {dossier.olo_liaan_nummer && (
+      {dossier.olo_liaan_nummer ? (
         <DefinitionList data-testid="oloLiaanNumberDescription">
           {document.document_omschrijving && (
             <DefinitionListItem term="Beschrijving">
@@ -127,7 +127,7 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
           )}
           <DefinitionListItem term="Openbaarheid">{document.access}</DefinitionListItem>
         </DefinitionList>
-      )}
+      ) : null}
       <GalleryContainer data-testid="filesGalleryContainer">
         {document.bestanden.length > 0 ? (
           <>

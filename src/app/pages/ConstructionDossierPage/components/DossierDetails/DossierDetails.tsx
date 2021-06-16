@@ -131,11 +131,11 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
           <DefinitionListItem term="Type">{dossier.dossier_type}</DefinitionListItem>
           <DefinitionListItem term="Dossiernummer">{dossier.dossiernr}</DefinitionListItem>
           <DefinitionListItem term="Openbaarheid">{dossier.access}</DefinitionListItem>
-          {dossier.olo_liaan_nummer && (
+          {dossier.olo_liaan_nummer ? (
             <DefinitionListItem term="OLO of liaan nummer" data-testid="oloLiaanNumber">
               {dossier.olo_liaan_nummer}
             </DefinitionListItem>
-          )}
+          ) : null}
         </DefinitionList>
 
         {hasRights && !disableDownload && (
