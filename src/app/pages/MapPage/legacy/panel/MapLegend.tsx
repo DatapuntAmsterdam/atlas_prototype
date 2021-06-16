@@ -3,17 +3,22 @@ import { Alert, Checkbox, Icon, Label, styles, themeColor, themeSpacing } from '
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
 import queryString from 'querystring'
+import type { ParsedUrlQueryInput } from 'querystring'
+import type { FunctionComponent } from 'react'
 import { createRef, useEffect, useMemo, useState } from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import LoginLink from '../../../../components/Links/LoginLink/LoginLink'
 import { useIsEmbedded } from '../../../../contexts/ui'
 import SearchPlus from '../../../../../shared/assets/icons/search-plus.svg'
 import MAP_CONFIG from '../services/map.config'
 import { isAuthorised } from '../utils/map-layer'
+import type { MapLayer } from '../services'
+import type { MapPanelOverlay } from './MapPanel'
 
 const TitleWrapper = styled.div`
   display: flex;
 `
+
 const StyledLabel = styled(Label)`
   width: 100%;
 `
@@ -42,7 +47,7 @@ const StyledAlert = styled(Alert)`
 // We cannot use a button because of IE11
 const LayerButton = styled.div.attrs({
   role: 'button',
-})`
+})<{ isOpen?: boolean }>`
   display: flex;
   cursor: pointer;
   justify-content: space-between;
@@ -56,34 +61,47 @@ const LayerButton = styled.div.attrs({
     transition: transform 0.2s ease-in-out;
     ${({ isOpen }) =>
       isOpen &&
-      css`
+      `
         transform: rotate(180deg);
       `}
   }
 `
 
-const constructLegendIconUrl = (mapLayer, legendItem) => {
+const constructLegendIconUrl = (mapLayer: MapLayer, legendItem: MapLayer) => {
   if (legendItem.iconUrl) {
     return legendItem.iconUrl
   }
 
+  const legendIconUrl = mapLayer.url || legendItem.url
+  const layerParam =
+    (legendItem.layers && legendItem.layers[0]) || (mapLayer.layers && mapLayer.layers[0])
   return [
     MAP_CONFIG.OVERLAY_ROOT,
-    `${mapLayer.url || legendItem.url}?`,
+    `${legendIconUrl as string}?`,
     `version=${MAP_CONFIG.VERSION_NUMBER}&`,
     'service=WMS&',
     'request=GetLegendGraphic&',
     `sld_version=${MAP_CONFIG.SLD_VERSION}&`,
-    `layer=${
-      (legendItem.layers && legendItem.layers[0]) || (mapLayer.layers && mapLayer.layers[0])
-    }&`,
+    `layer=${layerParam as string}&`,
     'format=image/svg%2Bxml&',
-    legendItem.params ? `${queryString.stringify(legendItem.params)}&` : '',
+    legendItem.params
+      ? `${queryString.stringify(legendItem.params as unknown as ParsedUrlQueryInput)}&` // not sure this is necessary as params is `id=1234`
+      : '', // this stringify arg works?
     `rule=${encodeURIComponent(legendItem.imageRule || legendItem.title)}`,
   ].join('')
 }
 
-const MapLegend = ({
+export interface MapLegendProps {
+  activeMapLayers: MapLayer[]
+  zoomLevel: number
+  printMode: boolean | null // where/when is this prop passed?
+  title: string
+  overlays: MapPanelOverlay[]
+  onAddLayers: (layers: string[]) => void
+  onRemoveLayers: (layers: string[]) => void
+}
+
+const MapLegend: FunctionComponent<MapLegendProps> = ({
   activeMapLayers,
   zoomLevel,
   printMode,
@@ -92,15 +110,15 @@ const MapLegend = ({
   onRemoveLayers,
   onAddLayers,
 }) => {
-  const ref = createRef()
+  const ref = createRef<HTMLDivElement>()
   const { trackEvent } = useMatomo()
   const isEmbedView = useIsEmbedded()
   const testId = title
     .split(' ')
-    .map((word) => `${word.charAt(0).toUpperCase()}${word.substring(1)}`)
+    .map((word: string) => `${word.charAt(0).toUpperCase()}${word.substring(1)}`)
     .join('')
 
-  function trackLayerEnabled(mapLayer) {
+  function trackLayerEnabled(mapLayer: MapLayer) {
     // Sanitize the collection title to use it as action
     const action = mapLayer.title.toLowerCase().replace(/[: ][ ]*/g, '_')
 
@@ -159,7 +177,7 @@ const MapLegend = ({
         !isVisible || legendItems.some(({ isVisible: legendVisibility }) => !legendVisibility),
     ) && someVisible
 
-  const handleLayerToggle = (checked, mapLayer) => {
+  const handleLayerToggle = (checked: boolean, mapLayer: MapLayer) => {
     // Only track the event when the mapLayer gets checked
     if (checked) {
       trackLayerEnabled(mapLayer)
@@ -169,7 +187,11 @@ const MapLegend = ({
   useEffect(() => {
     if (isOpen && ref.current) {
       // Since our application can be embedded on other sites as a iFrame, we cannot use `scrollIntoView`, as this will cause the parent's document to scroll too
-      document.querySelector('.scroll-wrapper').scrollTop = ref.current.offsetTop
+      const scrollWrapper = document.querySelector('.scroll-wrapper')
+
+      if (scrollWrapper) {
+        scrollWrapper.scrollTop = ref.current.offsetTop
+      }
     }
   }, [ref.current, isOpen])
 
@@ -179,7 +201,7 @@ const MapLegend = ({
       mapLayers.some(
         ({ isVisible, legendItems }) =>
           isVisible === true ||
-          (isVisible === true &&
+          (isVisible !== false &&
             legendItems.some(({ isVisible: legendItemIsVisible }) => legendItemIsVisible === true)), // legenditems could be visible in another MapLegend
       ),
     [mapLayers],
@@ -190,7 +212,8 @@ const MapLegend = ({
     if (hasOpenMapLayers) setOpen(true)
   }, [hasOpenMapLayers])
 
-  const addOrRemoveLayer = (checked, layers, onlyInvisible = false) => {
+  const addOrRemoveLayer = (checked: boolean, layers: MapLayer[], onlyInvisible = false) => {
+    // @ts-ignore
     const layersToFilter = onlyInvisible ? layers.filter(({ isVisible }) => !isVisible) : layers
     const filteredMapLayers = layersToFilter
       .map((mapLayer) => {
@@ -211,7 +234,7 @@ const MapLegend = ({
     }
   }
 
-  const handleOnChangeCollection = (e) => {
+  const handleOnChangeCollection = (e: React.ChangeEvent<HTMLInputElement>) => {
     // We want to check all the layers when user clicks on an indeterminate checkbox
     if (collectionIndeterminate) {
       addOrRemoveLayer(e.currentTarget.checked, mapLayers, true)
@@ -243,6 +266,7 @@ const MapLegend = ({
             {!isEmbedView ? (
               <StyledCheckbox
                 className="checkbox"
+                // @ts-ignore
                 name={title}
                 indeterminate={collectionIndeterminate}
                 checked={allVisible}
@@ -295,6 +319,7 @@ const MapLegend = ({
                         <StyledCheckbox
                           id={mapLayer.id}
                           className="checkbox"
+                          // @ts-ignore
                           variant="tertiary"
                           checked={layerIsChecked && !layerIsIndeterminate}
                           indeterminate={layerIsIndeterminate}
@@ -325,6 +350,7 @@ const MapLegend = ({
                           })}
                           title="Kaartlaag zichtbaar bij verder inzoomen"
                         >
+                          {/* @ts-ignore */}
                           <Icon size={16} color={themeColor('primary', 'main')}>
                             <SearchPlus />
                           </Icon>
@@ -344,14 +370,16 @@ const MapLegend = ({
                         <LoginLink showChevron={false}>Zichtbaar na inloggen</LoginLink>
                       </StyledAlert>
                     )}
+                    {/* mapLayer.disabled is not a prop on MapLayer */}
+                    {/* @ts-ignore */}
                     {isAuthorised(mapLayer) && layerIsChecked && !mapLayer.disabled && (
                       <ul className="map-legend__items">
                         {hasLegendItems
                           ? mapLayer.legendItems.map((legendItem) => {
                               const legendItemIsVisible = legendItem.isVisible
                               const LegendLabel = !legendItem.notSelectable
-                                ? StyledLabel
-                                : NonSelectableLegendParagraph
+                                ? (StyledLabel as React.ElementType)
+                                : (NonSelectableLegendParagraph as React.ElementType)
                               return !legendItemIsVisible && printMode ? null : (
                                 <li className="map-legend__item" key={legendItem.id}>
                                   <LegendLabel
@@ -363,6 +391,7 @@ const MapLegend = ({
                                       <StyledCheckbox
                                         id={legendItem.id}
                                         className="checkbox"
+                                        // @ts-ignore
                                         variant="tertiary"
                                         checked={legendItemIsVisible}
                                         name={legendItem.title}
@@ -386,6 +415,7 @@ const MapLegend = ({
                                   <div className="map-legend__image">
                                     <img
                                       alt={legendItem.title}
+                                      // @ts-ignore
                                       src={constructLegendIconUrl(mapLayer, legendItem)}
                                     />
                                   </div>

@@ -33,6 +33,7 @@ export interface MapLayer {
 
 export interface LegendItem {
   __typename: 'LegendItem'
+  id: string
   title: string
   iconUrl?: string
   imageRule?: string
