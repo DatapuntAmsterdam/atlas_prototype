@@ -114,9 +114,9 @@ const PanoramaViewer: FunctionComponent = () => {
         marzipanoViewer,
         setHotspotId,
         res.image,
-        panoHeading ?? panoPitchParam.initialValue,
-        panoPitch ?? panoPitchParam.initialValue,
-        panoFov ?? panoFovParam.initialValue,
+        panoHeading ?? (panoPitchParam.initialValue as number),
+        panoPitch ?? (panoPitchParam.initialValue as number),
+        panoFov ?? (panoFovParam.initialValue as number),
         res.hotspots,
         trackEvent,
       )

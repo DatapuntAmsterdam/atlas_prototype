@@ -1,5 +1,7 @@
-import Marzipano from 'marzipano'
+import Marzipano, { Scene, Viewer } from 'marzipano'
 import { renderToStaticMarkup } from 'react-dom/server'
+import type { Dispatch, SetStateAction } from 'react'
+import type { TrackEventParams } from '@datapunt/matomo-tracker-react/lib/types'
 import { PANORAMA_CONFIG } from '../panorama-api/panorama-api'
 import {
   degreesToRadians,
@@ -11,14 +13,22 @@ import Hotspot from '../Hotspot'
   Calculate height of the hotspots
   TODO: DP-6135 replace with height returned from the api
 */
-function calculateHotspotPitch(height, distance) {
+function calculateHotspotPitch(height: number, distance: number) {
   return Math.atan(height / distance)
 }
+
+type TrackEvent = (params: TrackEventParams) => void | undefined
 
 /*
   Create hotspot element that will be placed in the hotspot container
 */
-function createHotspotTemplate(viewer, scene, view, hotspot, onClickHandler, trackEvent) {
+function createHotspotTemplate(
+  viewer: Viewer,
+  scene: Scene,
+  hotspot: any,
+  onClickHandler: Dispatch<SetStateAction<null>>,
+  trackEvent: TrackEvent,
+) {
   const hotspotPitch = calculateHotspotPitch(PANORAMA_CONFIG.CAMERA_HEIGHT, hotspot.distance)
 
   const realLifeHotspotSize = 0.6
@@ -62,7 +72,7 @@ function createHotspotTemplate(viewer, scene, view, hotspot, onClickHandler, tra
         action: 'panorama-hotspot',
       })
     }
-    onClickHandler(hotspot.id, hotspot.heading)
+    onClickHandler(hotspot.id)
   })
 
   const position = {
@@ -76,29 +86,32 @@ function createHotspotTemplate(viewer, scene, view, hotspot, onClickHandler, tra
 /*
   Set the initial Marzipano viewer that is tied to the ref in the PanoramaContainer
 */
-export function initialize(domElement) {
-  const viewer = new Marzipano.Viewer(domElement, {
+export function initialize(domElement: HTMLElement) {
+  return new Marzipano.Viewer(domElement, {
     stage: {
       preserveDrawingBuffer: true,
       width: 960,
     },
   })
-
-  return viewer
 }
 
 /*
   Load the Marzipano viewer into its view components
 */
 export function loadScene(
-  viewer,
-  onClickHandler,
-  image,
-  heading,
-  pitch,
-  fov,
-  hotspots,
-  trackEvent,
+  viewer: Viewer,
+  onClickHandler: Dispatch<SetStateAction<null>>,
+  image: {
+    preview: string
+    pattern: string
+  },
+  heading: number,
+  pitch: number,
+  fov: number,
+  hotspots: Array<{
+    distance: number
+  }>,
+  trackEvent: TrackEvent,
 ) {
   const source = Marzipano.ImageUrlSource.fromString(image.pattern, {
     cubeMapPreviewUrl: image.preview,
@@ -118,14 +131,9 @@ export function loadScene(
     pinFirstLevel: true,
   })
 
-  // Do not mutate someone else's data collection!
-  const hotspotsObject = JSON.parse(JSON.stringify(hotspots))
-
-  hotspotsObject
+  hotspots
     .sort((hotspotA, hotspotB) => hotspotB.distance - hotspotA.distance)
-    .forEach((hotspot) =>
-      createHotspotTemplate(viewer, scene, view, hotspot, onClickHandler, trackEvent),
-    )
+    .forEach((hotspot) => createHotspotTemplate(viewer, scene, hotspot, onClickHandler, trackEvent))
 
   view.setYaw(degreesToRadians(heading))
   view.setPitch(degreesToRadians(pitch))
@@ -137,7 +145,7 @@ export function loadScene(
 /*
   Return the orientation values according to the view in Marzipano
 */
-export function getOrientation(viewer) {
+export function getOrientation(viewer: Viewer) {
   if (!viewer.view()) {
     // eslint-disable-next-line no-console
     console.warn('Viewer needs a view by creating a scene')
@@ -152,8 +160,4 @@ export function getOrientation(viewer) {
     pitch,
     fov,
   }
-}
-
-export function getHeadingDegrees([x1, y1], [x2, y2]) {
-  return (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI
 }
