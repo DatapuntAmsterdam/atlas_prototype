@@ -1,7 +1,11 @@
+// @ts-ignore
 import normalize from 'json-api-normalize'
+import { mocked } from 'ts-jest/utils'
 import cmsJsonApiNormalizer, { getType } from './cms-json-api-normalizer'
 
 jest.mock('json-api-normalize')
+
+const mockedNormalize = mocked(normalize)
 
 describe('jsonApiNormalizer', () => {
   const mockImageUrl = 'path/to/file'
@@ -31,7 +35,7 @@ describe('jsonApiNormalizer', () => {
   }
 
   afterEach(() => {
-    normalize.mockReset()
+    mockedNormalize.mockReset()
   })
 
   it('should return the correct type', () => {
@@ -41,11 +45,11 @@ describe('jsonApiNormalizer', () => {
   })
 
   it('should return a normalized json for a single result', () => {
-    normalize.mockImplementation(() => ({
+    mockedNormalize.mockImplementation(() => ({
       get: () => mockData,
     }))
 
-    const normalizedData = cmsJsonApiNormalizer(mockData, ['field_title', 'field_intro'])
+    const normalizedData = cmsJsonApiNormalizer(mockData as any, ['field_title', 'field_intro'])
 
     expect(normalizedData).toEqual({
       ...mockData,
@@ -53,7 +57,7 @@ describe('jsonApiNormalizer', () => {
       teaser_url: mockImageUrl,
       type: getType(mockData.type),
       intro: mockData.field_intro,
-      uuid: mockData.id,
+      uuid: (mockData as any).id,
       media_image_url: mockImageUrl,
     })
   })
@@ -65,21 +69,21 @@ describe('jsonApiNormalizer', () => {
           ...mockData,
         },
       ],
-    }
+    } as any
 
-    normalize.mockImplementation(() => ({
+    mockedNormalize.mockImplementation(() => ({
       get: () => mockData,
     }))
 
-    const normalizedData = cmsJsonApiNormalizer(mockData, ['field_title', 'field_intro'])
+    const normalizedData = cmsJsonApiNormalizer(mockData as any, ['field_title', 'field_intro'])
 
     expect(normalizedData).toEqual([
       {
         ...mockData,
-        type: getType(mockData.field_items[0].type),
+        type: getType((mockData as any).field_items[0].type),
         media_image_url: mockImageUrl,
         intro: mockData.field_intro,
-        uuid: mockData.id,
+        uuid: (mockData as any).id,
         short_title: mockData.field_short_title,
         teaser_url: mockImageUrl,
       },
