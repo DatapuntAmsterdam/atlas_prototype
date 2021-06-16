@@ -51,7 +51,7 @@
     "marked": "^2.0.7",
     "marzipano": "^0.10.2",
     "openseadragon": "2.4.2",
-    "proj4": "2.7.2",
+    "proj4": "2.7.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "6.1.0",
