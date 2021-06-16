@@ -1,19 +1,10 @@
 import type { Config } from '@jest/types'
 
 const config: Config.InitialOptions = {
-  preset: 'ts-jest/presets/js-with-ts',
+  preset: 'ts-jest',
   displayName: 'unit',
   rootDir: './',
-  collectCoverageFrom: [
-    'src/**/*.{js,jsx,ts,tsx}',
-    '!**/*.constant.js',
-    '!**/*.config.js',
-    '!**/*.{integration}.test.{js,jsx}',
-    '!**/*.mock.js',
-    '!**/index.ts',
-    '!src/*.js',
-    '!src/.*.js',
-  ],
+  collectCoverageFrom: ['src/**/*.{ts,tsx}'],
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {

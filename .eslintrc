@@ -24,8 +24,7 @@
   },
   "root": true,
   "globals": {
-    "jsdom": true,
-    "jasmine": true
+    "jsdom": true
   },
   "ignorePatterns": ["public/*"],
   "rules": {
@@ -82,14 +81,6 @@
     ]
   },
   "overrides": [
-    {
-      "files": ["*.js", "*.jsx"],
-      "rules": {
-        "@typescript-eslint/restrict-template-expressions": "off",
-        "@typescript-eslint/restrict-plus-operands": "off",
-        "@typescript-eslint/explicit-module-boundary-types": "off"
-      }
-    },
     {
       "files": ["*.test.*"],
       "rules": {

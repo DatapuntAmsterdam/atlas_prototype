@@ -7,14 +7,14 @@
     "clean:dirs": "rimraf ./node_modules ./coverage ./coverage-legacy ./dist ./build",
     "deploy:demo": "./scripts/deploy-demo.sh",
     "generate:sitemap": "node ./sitemap-generator/index.js",
-    "lint": "eslint --format=node_modules/eslint-formatter-pretty ./ --ext js,jsx,ts,tsx",
+    "lint": "eslint ./ --ext ts,tsx",
     "start": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack serve --config webpack.dev.ts",
     "start:prod": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack serve --config webpack.prod.ts",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
     "test:watch": "npm run test -- --watch --onlyChanged",
     "test:e2e": "cypress run",
     "test:e2e:watch": "cypress open",
-    "prettier": "prettier --write \"./**/*.{js,jsx,ts,tsx,scss,css}\"",
+    "prettier": "prettier --write \"./**/*.{ts,tsx,scss,css}\"",
     "analyze": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack --config webpack.analyze.ts",
     "prepare": "husky install"
   },
@@ -176,7 +176,7 @@
     "node": "^16"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "*.{ts,tsx}": [
       "eslint --fix"
     ],
     "*.scss": [

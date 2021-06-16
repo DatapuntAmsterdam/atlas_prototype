@@ -37,7 +37,7 @@ export default merge<WebpackConfiguration>(createConfig({ mode: 'development' })
     new ReactRefreshWebpackPlugin(),
     new DeadCodePlugin({
       context: 'src',
-      patterns: ['**/*.(js|jsx|ts|tsx|css|scss)'],
+      patterns: ['**/*.(ts|tsx|css|scss)'],
       exclude: ['**/*.test.*'],
     }),
   ],

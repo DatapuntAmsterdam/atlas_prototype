@@ -75,7 +75,7 @@ export function createConfig(additionalOptions: CreateConfigOptions): WebpackCon
       publicPath: '/',
     },
     resolve: {
-      extensions: ['.ts', '.tsx', '.mjs', '.js', '.jsx'],
+      extensions: ['.ts', '.tsx', '.js'],
     },
     module: {
       rules: [

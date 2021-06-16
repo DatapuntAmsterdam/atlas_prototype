@@ -13,7 +13,6 @@
     "module": "ES2020",
     "moduleResolution": "node",
     "jsx": "react-jsx",
-    "allowJs": true,
     "esModuleInterop": true,
     "downlevelIteration": true,
     "suppressImplicitAnyIndexErrors": true,
