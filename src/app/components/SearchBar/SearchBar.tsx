@@ -8,9 +8,9 @@ import {
   showAboveBackDrop,
   styles,
 } from '@amsterdam/asc-ui'
+import type { FunctionComponent, InputHTMLAttributes } from 'react'
 import { useState } from 'react'
 import styled, { css } from 'styled-components'
-import type { FunctionComponent, InputHTMLAttributes } from 'react'
 import CONSTANTS from '../../../shared/config/constants'
 import SearchBarFilter from '../SearchBarFilter'
 
@@ -90,7 +90,7 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({
     value,
   }
 
-  const placeHolder = 'Zoek in datasets, artikelen en publicaties'
+  const placeHolder = 'Zoek op adressen, datasets, artikelen en publicaties'
   const inputProps = {
     autoCapitalize: 'off',
     autoComplete: 'off',
