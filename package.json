@@ -37,7 +37,7 @@
     "core-js": "^3.14.0",
     "escape-string-regexp": "^5.0.0",
     "file-saver": "^2.0.5",
-    "graphql": "^15.5.0",
+    "graphql": "^15.5.1",
     "graphql-tag": "^2.12.4",
     "history": "4.10.1",
     "json-api-normalize": "1.1.5",
