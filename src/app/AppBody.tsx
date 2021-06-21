@@ -51,6 +51,16 @@ const StyledLoadingSpinner = styled(LoadingSpinner)`
   top: 200px;
 `
 
+const FullHeightContainer = styled.div`
+  height: 100%;
+  overflow-y: auto;
+`
+
+const FullHeightBlock = styled.div`
+  position: relative;
+  height: 100%;
+`
+
 export interface AppBodyProps {
   hasGrid: boolean
 }
@@ -110,8 +120,8 @@ const AppBody: FunctionComponent<AppBodyProps> = ({ hasGrid }) => {
                   <div className="c-dashboard__body">
                     <NotificationAlert />
 
-                    <div className="u-full-height u-overflow--y-auto">
-                      <div className="u-full-height">
+                    <FullHeightContainer>
+                      <FullHeightBlock>
                         <Switch>
                           <Route
                             path={routing.constructionDossier.path}
@@ -124,8 +134,8 @@ const AppBody: FunctionComponent<AppBodyProps> = ({ hasGrid }) => {
                             component={DatasetDetailPage}
                           />
                         </Switch>
-                      </div>
-                    </div>
+                      </FullHeightBlock>
+                    </FullHeightContainer>
                   </div>
                 </Route>
                 <Route path={[routing.data.path]}>
