@@ -1,5 +1,5 @@
 import { Row, themeSpacing } from '@amsterdam/asc-ui'
-import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
+import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
 import { lazy, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
@@ -37,7 +37,11 @@ const ConstructionDossierPage: FunctionComponent = () => {
 
   useEffect(() => {
     setDocumentTitle(fileName ? 'Bouwtekening' : false)
-  }, [fileName])
+
+    if (!fileName && isFulfilled(result)) {
+      setDocumentTitle(result.value.titel)
+    }
+  }, [fileName, result])
 
   if (isPending(result)) {
     return (
