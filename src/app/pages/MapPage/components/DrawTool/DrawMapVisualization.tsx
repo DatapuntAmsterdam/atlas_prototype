@@ -22,10 +22,15 @@ import config, {
 import { useMapContext } from '../../MapContext'
 import { polygonParam } from '../../query-params'
 import { normalizeMapVisualization } from './normalize'
+import { DRAWN_ITEM_CLASS } from './DrawTool'
 
 const GlobalStyle = createGlobalStyle`
   .dataselection-detail-marker {
     cursor: pointer !important;
+  }
+
+  .${DRAWN_ITEM_CLASS} {
+    cursor: url('/assets/cursors/edit.cur'), auto
   }
 `
 

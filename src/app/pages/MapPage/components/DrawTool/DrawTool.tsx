@@ -77,6 +77,8 @@ const createPolyLayer = (drawing: PolyDrawing, line = false): PolylineType | Pol
   return polygon
 }
 
+export const DRAWN_ITEM_CLASS = 'drawtool-drawn-item'
+
 const DrawTool: FunctionComponent = () => {
   const { buildQueryString } = useBuildQueryString()
 
@@ -148,6 +150,9 @@ const DrawTool: FunctionComponent = () => {
     const distanceText = getDistanceLabel(layer)
     getDrawingData(layer, distanceText)
     bindDistanceAndAreaToTooltip(layer, distanceText)
+    if (layer.getElement()) {
+      L.DomUtil.addClass(layer.getElement() as HTMLElement, DRAWN_ITEM_CLASS)
+    }
   }
 
   /**
