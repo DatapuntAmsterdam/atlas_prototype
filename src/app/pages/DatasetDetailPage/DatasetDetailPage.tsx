@@ -124,6 +124,10 @@ interface DatasetDetailPageParams {
   slug: string
 }
 
+const TagListItem = styled.li`
+  display: inline;
+`
+
 const DatasetDetailPage: FunctionComponent = () => {
   const { trackEvent } = useMatomo()
   const { id } = useParams<DatasetDetailPageParams>()
@@ -456,12 +460,12 @@ const DatasetDetailPage: FunctionComponent = () => {
                       <h2 className="o-header__subtitle">Tags</h2>
                       <ul>
                         {dataset['dcat:keyword'].map((tag: string) => (
-                          <li className="u-inline" key={tag}>
+                          <TagListItem key={tag}>
                             <div className="dataset-tag">
                               <i className="dataset-tag__arrow" />
                               <span className="dataset-tag__label">{tag}</span>
                             </div>
-                          </li>
+                          </TagListItem>
                         ))}
                       </ul>
                     </div>

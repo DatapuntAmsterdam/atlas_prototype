@@ -26,7 +26,8 @@ export const aggregateFilter = (input: (string | undefined)[]) => {
   })
 }
 
-export const alignRightFilter = (input: string) => `<div class='u-align--right'>${input}</div>`
+export const alignRightFilter = (input: string) =>
+  `<div style='text-align: right !important;'>${input}</div>`
 
 export const bagAddressFilter = (
   input: Pick<

@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import type { FunctionComponent } from 'react'
+import styled from 'styled-components'
 import type { DataBodyContent } from '../types'
 
 interface FormattedValue {
@@ -46,12 +47,16 @@ const SBIOmschrijving: FunctionComponent<Props> = ({ variables }) => (
   <span className="c-sbi-omschrijving">{variables?.[0]?.value}</span>
 )
 
+const TagWrapper = styled.div`
+  display: inline;
+`
+
 const Tags: FunctionComponent<Props> = ({ formattedValue }) => (
   <div>
     {formattedValue.map((tag) => (
-      <div className="u-inline">
+      <TagWrapper>
         <span className="o-tag o-tag--small">{tag.name}</span>
-      </div>
+      </TagWrapper>
     ))}
   </div>
 )

@@ -16,7 +16,6 @@ import type { AutoSuggestSearchResult } from '../services/auto-suggest/auto-sugg
 import autoSuggestSearch, { MIN_QUERY_LENGTH } from '../services/auto-suggest/auto-suggest'
 import AutoSuggest from './auto-suggest/AutoSuggest'
 
-// TODO: Add the screen reader only "styling" to asc-ui
 const StyledLegend = styled.legend`
   ${srOnlyStyle}
 `
@@ -141,7 +140,7 @@ const HeaderSearch: FunctionComponent = () => {
 
   return (
     <form onSubmit={onFormSubmit} className="auto-suggest" data-test="search-form">
-      <StyledLegend className="u-sr-only">Data zoeken</StyledLegend>
+      <StyledLegend>Data zoeken</StyledLegend>
       <SearchBar
         expanded={showSuggestions}
         onBlur={onBlur}

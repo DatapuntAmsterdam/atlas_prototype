@@ -1,5 +1,6 @@
-import styled, { css, keyframes } from 'styled-components'
+import { srOnlyStyle } from '@amsterdam/asc-ui'
 import type { FunctionComponent } from 'react'
+import styled, { css, keyframes } from 'styled-components'
 
 interface HotSpotProps {
   year: string
@@ -39,6 +40,10 @@ export const HotspotButton = styled.button`
   }
 `
 
+const SrOnlySpan = styled.span`
+  ${srOnlyStyle}
+`
+
 const Hotspot: FunctionComponent<HotSpotProps> = ({ year, size, angle }) => (
   <HotspotButton className="panorama-hotspot" type="button" tabIndex={-1}>
     <HotspotImage
@@ -47,7 +52,7 @@ const Hotspot: FunctionComponent<HotSpotProps> = ({ year, size, angle }) => (
       style={{ width: `${size}px`, height: `${size}px`, transform: `rotateX(${angle}deg)` }}
     />
 
-    <span className="u-sr-only">Navigeer naar deze locatie</span>
+    <SrOnlySpan>Navigeer naar deze locatie</SrOnlySpan>
   </HotspotButton>
 )
 

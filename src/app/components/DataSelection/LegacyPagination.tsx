@@ -1,18 +1,22 @@
+import { Button, srOnlyStyle, themeSpacing } from '@amsterdam/asc-ui'
+import type { FunctionComponent } from 'react'
 import { useState } from 'react'
 import styled from 'styled-components'
-import { Button, themeSpacing } from '@amsterdam/asc-ui'
-import type { FunctionComponent } from 'react'
 import First from '../../../shared/assets/icons/first.svg'
-import Previous from '../../../shared/assets/icons/previous.svg'
-import Next from '../../../shared/assets/icons/next.svg'
 import Last from '../../../shared/assets/icons/last.svg'
-import useParam from '../../utils/useParam'
+import Next from '../../../shared/assets/icons/next.svg'
+import Previous from '../../../shared/assets/icons/previous.svg'
 import { pageParam } from '../../pages/SearchPage/query-params'
+import useParam from '../../utils/useParam'
 
 const PaginationButton = styled(Button)`
   &:last-of-type {
     margin-left: ${themeSpacing(1)};
   }
+`
+
+const SrOnlySpan = styled.span`
+  ${srOnlyStyle}
 `
 
 export interface LegacyPaginationProps {
@@ -89,7 +93,7 @@ const LegacyPagination: FunctionComponent<LegacyPaginationProps> = ({
           />
           <PaginationButton type="submit" title="Ga naar ingevoerde pagina">
             Ga
-            <span className="u-sr-only">Ga naar ingevoerde pagina</span>
+            <SrOnlySpan>Ga naar ingevoerde pagina</SrOnlySpan>
           </PaginationButton>
           <span className="u-margin__left--1 c-data-selection-pagination-link-text">
             van {numberOfPages}
