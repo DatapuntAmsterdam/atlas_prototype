@@ -1,12 +1,13 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { Alert } from '@amsterdam/asc-ui'
+import usePromise, { isFulfilled } from '@amsterdam/use-promise'
 import type { FunctionComponent } from 'react'
-import { useEffect } from 'react'
 import styled from 'styled-components'
+import type { AttributesObject, CollectionResourceDoc } from '../../../api/cms'
 import environment from '../../../environment'
+import { fetchWithoutToken } from '../../../shared/services/api/api'
 import { createCookie, getCookie } from '../../../shared/services/cookie/cookie'
 import { useIsEmbedded } from '../../contexts/ui'
-import useDataFetching from '../../utils/useDataFetching'
+import joinUrl from '../../utils/joinUrl'
 import { InfoModal } from '../Modal'
 
 const COOKIE_NAME = 'showNotificationAlert'
@@ -27,48 +28,82 @@ const StyledAlert = styled(Alert)`
   }
 `
 
-const NotificationAlert: FunctionComponent = () => {
-  const { fetchData, results } = useDataFetching()
-  const isEmbedded = useIsEmbedded()
+export type PathAttributes = AttributesObject<{
+  alias: string
+  pid: null
+  langcode: string
+}>
 
-  useEffect(() => {
-    // Limit = 1 because this prevents us from getting multiple notifications
-    const endpoint = `${environment.CMS_ROOT}jsonapi/node/notification?filter[field_active]=1&page[limit]=1`
-    ;(() => {
-      fetchData(endpoint)
-        .then(() => {})
-        .catch(() => {})
-    })()
+export type BodyAttributes = AttributesObject<{
+  value: string
+  format: string
+  processed: string
+  summary: string
+}>
+
+export type NotificationAttributes = AttributesObject<{
+  drupal_internal__nid: number
+  drupal_internal__vid: number
+  langcode: string
+  revision_timestamp: string
+  revision_log: null
+  status: boolean
+  title: string
+  created: string
+  changed: string
+  promote: boolean
+  sticky: boolean
+  default_langcode: boolean
+  revision_translation_affected: boolean
+  path: PathAttributes
+  body: BodyAttributes
+  field_active: boolean
+  field_notification_title: string
+  field_notification_type: 'error' | 'info' | 'neutral' | 'warning'
+  field_position: string
+}>
+
+const NotificationAlert: FunctionComponent = () => {
+  const isEmbedded = useIsEmbedded()
+  const result = usePromise((signal) => {
+    const url = new URL(joinUrl([environment.CMS_ROOT, 'jsonapi/node/notification']))
+
+    url.searchParams.set('filter[field_active]', '1')
+    url.searchParams.set('page[limit]', '1')
+
+    return fetchWithoutToken<CollectionResourceDoc<'node--notification', NotificationAttributes>>(
+      url.toString(),
+      { signal },
+    )
   }, [])
 
-  if (!isEmbedded && !getCookie(COOKIE_NAME) && results) {
-    const { title, body, field_notification_type, field_position, field_notification_title } =
-      results?.data[0]?.attributes || {}
-
-    if (body) {
-      return field_position === 'header' ? (
-        <StyledAlert
-          dismissible
-          heading={field_notification_title}
-          level={field_notification_type || 'info'}
-          onDismiss={() => createCookie(COOKIE_NAME, '8')}
-        >
-          <Content dangerouslySetInnerHTML={{ __html: body.value }} />
-        </StyledAlert>
-      ) : (
-        <InfoModal
-          open={!isEmbedded}
-          title={field_notification_title ?? title}
-          body={body.value}
-          handleClose={() => createCookie(COOKIE_NAME, '8')}
-        />
-      )
-    }
-
+  if (!isFulfilled(result) || isEmbedded || getCookie(COOKIE_NAME)) {
     return null
   }
 
-  return null
+  const { attributes } = result.value.data[0]
+
+  if (!attributes) {
+    return null
+  }
+
+  return attributes.field_position === 'header' ? (
+    <StyledAlert
+      dismissible
+      heading={attributes.field_notification_title}
+      level={attributes.field_notification_type || 'info'}
+      onDismiss={() => createCookie(COOKIE_NAME, '8')}
+    >
+      <Content dangerouslySetInnerHTML={{ __html: attributes.body.value }} />
+    </StyledAlert>
+  ) : (
+    <InfoModal
+      open={!isEmbedded}
+      title={attributes.field_notification_title ?? attributes.title}
+      body={attributes.body.value}
+      handleClose={() => createCookie(COOKIE_NAME, '8')}
+    />
+  )
 }
 
 export default NotificationAlert

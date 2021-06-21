@@ -7,8 +7,8 @@ interface FetchOptions extends RequestInit {
 // TODO: Refactor this type to only allow 'URLSearchParams'.
 export type UrlParams = URLSearchParams | { [key: string]: string }
 
-export const fetchWithoutToken = <T = any>(uri: string): Promise<T> =>
-  fetch(uri).then((response) => response.json())
+export const fetchWithoutToken = <T = any>(uri: string, init?: RequestInit): Promise<T> =>
+  fetch(uri, init).then((response) => response.json())
 
 const handleErrors = (response: Response, reloadOnUnauthorized = false) => {
   if (response.status >= 400 && response.status <= 401 && reloadOnUnauthorized) {
