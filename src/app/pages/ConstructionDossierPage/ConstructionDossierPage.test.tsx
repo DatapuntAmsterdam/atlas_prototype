@@ -119,4 +119,19 @@ describe('ConstructionDossierPage', () => {
 
     await waitFor(() => expect(screen.queryByTestId('dossierDetails')).not.toBeInTheDocument())
   })
+
+  it('displays the dossier title as the page title when displaying the file details', async () => {
+    const mockedSetDocumentTitle = jest.fn()
+
+    mockedUseDocumentTitle.mockReturnValue({
+      documentTitle: '',
+      setDocumentTitle: mockedSetDocumentTitle,
+    })
+
+    mockedGetBouwdossierById.mockResolvedValue(singleFixture)
+
+    render(renderWithHistory())
+
+    await waitFor(() => expect(mockedSetDocumentTitle).toHaveBeenCalledWith(singleFixture.titel))
+  })
 })
