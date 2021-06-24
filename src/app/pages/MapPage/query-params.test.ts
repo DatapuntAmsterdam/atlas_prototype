@@ -1,5 +1,7 @@
+import { isEmbeddedParam } from './query-params'
+
 describe('isEmbeddedParam', () => {
   it('should bla', () => {
-    expect(true).toBe(true)
+    expect(isEmbeddedParam).toBe(expect.any)
   })
 })
