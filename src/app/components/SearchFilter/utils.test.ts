@@ -3,7 +3,7 @@ import { formatAllOptionLabel, formatOptionLabel } from './utils'
 
 describe('SearchFilter - Utilities', () => {
   describe('formatOptionLabel', () => {
-    it.only('should format a label with a count', () => {
+    it('should format a label with a count', () => {
       expect(formatOptionLabel({ count: 10, label: 'Test' } as FilterOption, false)).toEqual(
         'Test (10)',
       )
