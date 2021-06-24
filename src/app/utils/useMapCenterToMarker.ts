@@ -3,7 +3,6 @@ import { useMapInstance } from '@amsterdam/react-maps'
 import type { LatLngLiteral } from 'leaflet'
 import { LatLngBounds } from 'leaflet'
 import {
-  LAPTOP_L_WIDTH,
   LAPTOP_WIDTH,
   TABLET_M_WIDTH,
 } from '../pages/MapPage/components/DrawerPanel/LargeDrawerPanel'
@@ -15,12 +14,10 @@ const useMapCenterToMarker = () => {
 
   const panToWithPanelOffset = (boundOrLatLng: LatLngBounds | LatLngLiteral) => {
     let drawerWidth = TABLET_M_WIDTH
-    if (window.matchMedia(breakpoint('min-width', 'laptop')({ theme: ascDefaultTheme })).matches) {
+    if (window.matchMedia(breakpoint('min-width', 'laptopM')({ theme: ascDefaultTheme })).matches) {
       drawerWidth = LAPTOP_WIDTH
     }
-    if (window.matchMedia(breakpoint('min-width', 'laptopL')({ theme: ascDefaultTheme })).matches) {
-      drawerWidth = LAPTOP_L_WIDTH
-    }
+
     if (boundOrLatLng instanceof LatLngBounds) {
       const boundsZoom = mapInstance.getBoundsZoom(boundOrLatLng)
       mapInstance.fitBounds(boundOrLatLng, {

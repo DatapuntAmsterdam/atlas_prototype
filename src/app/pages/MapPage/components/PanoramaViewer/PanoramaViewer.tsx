@@ -30,7 +30,7 @@ const MarzipanoView = styled.div`
 `
 
 const PanoramaStyle = styled.div<{ panoFullScreen: boolean; loading: boolean }>`
-  height: ${({ panoFullScreen }) => (panoFullScreen ? '100%' : '70%')};
+  height: ${({ panoFullScreen }) => (panoFullScreen ? '100%' : '50%')};
   position: relative;
   order: -1; // Put the PanoramaViewer above the Map
   ${({ loading }) =>

@@ -4,7 +4,6 @@ import type { LatLngLiteral, LatLngTuple } from 'leaflet'
 import useMapCenterToMarker from './useMapCenterToMarker'
 import withAppContext from './withAppContext'
 import {
-  LAPTOP_L_WIDTH,
   LAPTOP_WIDTH,
   TABLET_M_WIDTH,
 } from '../pages/MapPage/components/DrawerPanel/LargeDrawerPanel'
@@ -63,8 +62,8 @@ describe('useMapCenterToMarker', () => {
     )
   })
 
-  it('should pan to the middle of the map when media matches size < laptop', () => {
-    mockMatchMedia(1023)
+  it('should pan to the middle of the map when media matches size < laptopM', () => {
+    mockMatchMedia(1199)
     const newLat = 1000
     const Component = () => {
       const { panToWithPanelOffset } = useMapCenterToMarker()
@@ -81,8 +80,8 @@ describe('useMapCenterToMarker', () => {
     expect(panToMock).toHaveBeenCalledWith([newLat - TABLET_M_WIDTH / 2, 1000])
   })
 
-  it('should pan to the middle of the map when media matches size >= laptop', () => {
-    mockMatchMedia(1024)
+  it('should pan to the middle of the map when media matches size >= laptopM', () => {
+    mockMatchMedia(1200)
     const newLat = 1000
     const Component = () => {
       const { panToWithPanelOffset } = useMapCenterToMarker()
@@ -97,23 +96,5 @@ describe('useMapCenterToMarker', () => {
     render(withAppContext(<Component />))
 
     expect(panToMock).toHaveBeenCalledWith([newLat - LAPTOP_WIDTH / 2, 1000])
-  })
-
-  it('should pan to the middle of the map when media matches size >= laptopL', () => {
-    mockMatchMedia(1430)
-    const newLat = 1000
-    const Component = () => {
-      const { panToWithPanelOffset } = useMapCenterToMarker()
-      useEffect(() => {
-        panToWithPanelOffset({
-          lat: newLat, // presume user clicks on the far right edge of the map
-          lng: 1000,
-        })
-      }, [])
-      return <div data-testid="drawerPanel" />
-    }
-    render(withAppContext(<Component />))
-
-    expect(panToMock).toHaveBeenCalledWith([newLat - LAPTOP_L_WIDTH / 2, 1000])
   })
 })

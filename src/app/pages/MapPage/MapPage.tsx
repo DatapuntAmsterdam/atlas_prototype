@@ -49,7 +49,7 @@ const GlobalStyle = createGlobalStyle<{
   .leaflet-container {
     position: sticky !important;
     cursor: default;
-    height: ${({ panoActive }) => (panoActive ? '30%' : '100%')};
+    height: ${({ panoActive }) => (panoActive ? '50%' : '100%')};
     ${({ panoActive }) =>
       panoActive &&
       css`
