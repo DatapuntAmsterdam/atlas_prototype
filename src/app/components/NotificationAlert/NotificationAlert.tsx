@@ -81,7 +81,7 @@ const NotificationAlert: FunctionComponent = () => {
     return null
   }
 
-  const { attributes } = result.value.data[0]
+  const attributes = result.value.data[0]?.attributes
 
   if (!attributes) {
     return null
