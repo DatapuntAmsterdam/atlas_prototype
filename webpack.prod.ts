@@ -12,11 +12,12 @@ export default merge(createConfig({ mode: 'production' }), {
     },
   },
   output: {
-    filename: '[name].js',
-    chunkFilename: '[name].js',
+    filename: '[name].[contenthash].js',
   },
   devtool: 'source-map',
   optimization: {
+    moduleIds: 'deterministic',
+    runtimeChunk: 'single',
     minimizer: [
       new TerserPlugin({
         terserOptions: {
@@ -27,7 +28,5 @@ export default merge(createConfig({ mode: 'production' }), {
         },
       }),
     ],
-    moduleIds: 'deterministic',
-    chunkIds: 'deterministic',
   },
 })

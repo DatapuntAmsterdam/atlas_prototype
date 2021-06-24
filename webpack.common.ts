@@ -214,8 +214,7 @@ export function createConfig(additionalOptions: CreateConfigOptions): WebpackCon
         'process.env.VERSION': JSON.stringify(require('./package.json').version),
       }),
       new MiniCssExtractPlugin({
-        filename: '[name].css',
-        chunkFilename: '[name].css',
+        filename: '[name].[contenthash].css',
       }),
       new HtmlWebpackPlugin({
         template: 'index.ejs',
