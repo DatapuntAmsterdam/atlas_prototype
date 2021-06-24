@@ -104,7 +104,6 @@
     "@types/webpack-bundle-analyzer": "^4.4.0",
     "@types/webpack-dev-server": "^3.11.4",
     "@types/webpack-env": "^1.16.0",
-    "@types/workbox-webpack-plugin": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "@typescript-eslint/parser": "^4.28.0",
     "autoprefixer": "^10.2.6",
@@ -169,8 +168,7 @@
     "webpack-cli": "^4.7.2",
     "webpack-deadcode-plugin": "^0.1.14",
     "webpack-dev-server": "3.11.2",
-    "webpack-merge": "^5.8.0",
-    "workbox-webpack-plugin": "^6.1.5"
+    "webpack-merge": "^5.8.0"
   },
   "engines": {
     "node": "^16"

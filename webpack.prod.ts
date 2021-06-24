@@ -2,7 +2,6 @@ import path from 'path'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import TerserPlugin from 'terser-webpack-plugin'
 import { merge } from 'webpack-merge'
-import { GenerateSW } from 'workbox-webpack-plugin'
 import { createConfig, srcPath } from './webpack.common'
 
 const debugMode = process.env.DEBUG === 'true'
@@ -41,22 +40,4 @@ export default merge(createConfig({ mode: 'production' }), {
     moduleIds: 'deterministic',
     chunkIds: 'deterministic',
   },
-  plugins: [
-    new GenerateSW({
-      mode: debugMode ? 'development' : 'production',
-      swDest: 'sw.js',
-      clientsClaim: true,
-      skipWaiting: true,
-      sourcemap: true,
-      inlineWorkboxRuntime: false,
-      exclude: [
-        // Don't pre-cache any font files or images; we need a more fine-grained caching strategy (see below in runtimeCaching)
-        /.+\.(?:woff|woff2|eot|ttf)$/,
-        /.+\.(?:png|jpg|jpeg|svg|webp)$/,
-        /.*\.(?:html|map|txt|htaccess)$/,
-        /manifest$/,
-      ],
-      cleanupOutdatedCaches: true,
-    }),
-  ],
 })
