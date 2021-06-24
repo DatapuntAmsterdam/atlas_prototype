@@ -2,7 +2,11 @@ import { generatePath } from 'react-router-dom'
 import type { LocationDescriptorObject } from 'history'
 import environment from '../environment'
 import { BEDIENING_PAGE, HEADER_LINK_HELP } from '../shared/config/content-links'
-import { fileNameParam, fileUrlParam } from './pages/ConstructionDossierPage/query-params'
+import {
+  documentCodeParam,
+  fileNameParam,
+  fileUrlParam,
+} from './pages/ConstructionDossierPage/query-params'
 import { ViewMode, viewParam } from './pages/MapPage/query-params'
 import { routing } from './routes'
 import toSearchParams from './utils/toSearchParams'
@@ -37,6 +41,7 @@ export const toConstructionDossier = (
   id: string,
   fileName?: string,
   fileUrl?: string,
+  documentCode?: string,
 ): LocationDescriptorObject => {
   const pathname = generatePath(routing.constructionDossier.path, { id })
   const searchParams = new URLSearchParams()
@@ -47,6 +52,10 @@ export const toConstructionDossier = (
 
   if (fileUrl) {
     searchParams.set(fileUrlParam.name, fileUrl)
+  }
+
+  if (documentCode) {
+    searchParams.set(documentCodeParam.name, documentCode)
   }
 
   return { pathname, search: searchParams.toString() }

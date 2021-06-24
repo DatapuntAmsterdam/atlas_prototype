@@ -121,7 +121,12 @@ const FilesGallery: FunctionComponent<FilesGalleryProps> = ({
               {/* @ts-ignore */}
               <StyledLink
                 forwardedAs={disabled ? 'span' : RouterLink}
-                to={toConstructionDossier(dossierId, file.filename, file.url)}
+                to={toConstructionDossier(
+                  dossierId,
+                  file.filename,
+                  file.url,
+                  document.barcode as string, // TODO why do i need to define string here but not file args above?
+                )}
                 title={file.filename}
                 disabled={disabled}
                 data-testid="detailLink"
