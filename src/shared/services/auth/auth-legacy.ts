@@ -42,6 +42,7 @@ export const SCOPES = {
   'HR/R': 'HR/R',
   'BD/R': 'BD/R',
   'BD/X': 'BD/X',
+  'FP/MDW': 'FP/MDW',
 }
 
 const scopes = [
@@ -71,6 +72,7 @@ const scopes = [
   // Bouwdossiers
   SCOPES['BD/R'], // basis rechten
   SCOPES['BD/X'], // extra rechten
+  SCOPES['FP/MDW'], // functie profiel
 
   // Bouwdossiers
   'BD/R',
