@@ -4,8 +4,6 @@ import TerserPlugin from 'terser-webpack-plugin'
 import { merge } from 'webpack-merge'
 import { createConfig, srcPath } from './webpack.common'
 
-const debugMode = process.env.DEBUG === 'true'
-
 export default merge(createConfig({ mode: 'production' }), {
   bail: true,
   resolve: {
@@ -24,7 +22,7 @@ export default merge(createConfig({ mode: 'production' }), {
         terserOptions: {
           compress: {
             // Do not drop debugger statements, we might want to run a production build locally for testing.
-            drop_debugger: !debugMode,
+            drop_debugger: false,
           },
         },
       }),
