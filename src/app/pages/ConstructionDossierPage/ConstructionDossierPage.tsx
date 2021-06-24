@@ -1,5 +1,5 @@
 import { Row, themeSpacing } from '@amsterdam/asc-ui'
-import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
+import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
 import { lazy, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
@@ -11,7 +11,7 @@ import useDocumentTitle from '../../utils/useDocumentTitle'
 import useParam from '../../utils/useParam'
 import { AuthTokenProvider } from './AuthTokenContext'
 import DossierDetails from './components/DossierDetails'
-import { fileNameParam, fileUrlParam } from './query-params'
+import { documentCodeParam, fileNameParam, fileUrlParam } from './query-params'
 import GeneralErrorAlert from '../../components/Alerts/GeneralErrorAlert'
 
 const ImageViewer = lazy(
@@ -33,15 +33,12 @@ const ConstructionDossierPage: FunctionComponent = () => {
   const { id } = useParams<ConstructionDossierPageParams>()
   const [fileName] = useParam(fileNameParam)
   const [fileUrl] = useParam(fileUrlParam)
+  const [documentBarcode] = useParam(documentCodeParam)
   const result = usePromise(() => getBouwdossierById(id), [id])
 
   useEffect(() => {
     setDocumentTitle(fileName ? 'Bouwtekening' : false)
-
-    if (!fileName && isFulfilled(result)) {
-      setDocumentTitle(result.value.titel)
-    }
-  }, [fileName, result])
+  }, [fileName])
 
   if (isPending(result)) {
     return (
@@ -57,11 +54,16 @@ const ConstructionDossierPage: FunctionComponent = () => {
 
   const dossierId = `${result.value.stadsdeel}${result.value.dossiernr}`
 
+  // TODO cleanup?
+  const matchingDoc = result.value.documenten.find((doc) => doc.barcode === documentBarcode)
+
   return (
     <AuthTokenProvider>
+      {/* TODO better prop names */}
       {fileName && fileUrl && (
         <ImageViewer
           title={result.value.titel}
+          files={matchingDoc ? matchingDoc.bestanden.map((file) => file.url) : []}
           fileName={fileName}
           fileUrl={fileUrl}
           onClose={() => history.replace(toConstructionDossier(dossierId))}

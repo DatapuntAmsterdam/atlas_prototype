@@ -87,9 +87,9 @@ describe('toConstructionDossier', () => {
   it('creates a location descriptor', () => {
     const id = '123456'
 
-    expect(toConstructionDossier(id, 'file.ext', 'http://foo.bar')).toEqual({
+    expect(toConstructionDossier(id, 'file.ext', 'http://foo.bar', 'ABC1234')).toEqual({
       pathname: generatePath(routing.constructionDossier.path, { id }),
-      search: 'bestand=file.ext&bestandUrl=http%3A%2F%2Ffoo.bar',
+      search: 'bestand=file.ext&bestandUrl=http%3A%2F%2Ffoo.bar&documentCode=ABC1234',
     })
   })
 })

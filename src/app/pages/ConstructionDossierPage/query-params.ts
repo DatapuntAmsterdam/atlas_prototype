@@ -7,6 +7,13 @@ export const authTokenParam: UrlParam<string | null> = {
   encode: (value) => value,
 }
 
+export const documentCodeParam: UrlParam<string | null> = {
+  name: 'documentCode',
+  defaultValue: null,
+  decode: (value) => value,
+  encode: (value) => value,
+}
+
 export const fileNameParam: UrlParam<string | null> = {
   name: 'bestand',
   defaultValue: null,
