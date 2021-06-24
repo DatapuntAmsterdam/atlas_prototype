@@ -10,7 +10,7 @@
     "lint": "eslint ./ --ext ts,tsx",
     "start": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack serve --config webpack.dev.ts",
     "start:prod": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack serve --config webpack.prod.ts",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest ./src/app/pages/MapPage/MapPage.test.tsx",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest ./src/app/pages/MapPage/query-params.test.ts",
     "test:watch": "npm run test -- --watch --onlyChanged",
     "test:e2e": "cypress run",
     "test:e2e:watch": "cypress open",
