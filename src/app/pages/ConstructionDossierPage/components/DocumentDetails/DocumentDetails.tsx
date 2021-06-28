@@ -91,7 +91,7 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
             <DocumentHeading forwardedAs="h3">
               {`${document.subdossier_titel} (${document.bestanden.length})`}
             </DocumentHeading>
-            {hasRights && !disableDownload && (
+            {hasRights && !disableDownload && !restricted && (
               <>
                 <StyledLabel data-testid="allFilesToggle">
                   Alles selecteren ({selectedFiles.length})
@@ -141,6 +141,7 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
               selectedFiles={selectedFiles}
               onFileSelectionChange={(files: Bestand[]) => setSelectedFiles(files)}
               disabled={!hasRights}
+              restricted={restricted}
             />
           </>
         ) : (
