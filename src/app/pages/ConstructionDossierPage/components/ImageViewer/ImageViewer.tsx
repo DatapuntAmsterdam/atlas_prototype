@@ -37,6 +37,10 @@ const ImageViewerContainer = styled(OSDViewer)`
   }
 `
 
+const NavigationButtons = styled.div`
+  display: flex;
+`
+
 interface File {
   url: string
   filename: string
@@ -62,6 +66,9 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [viewer, setViewer] = useState<Viewer>()
+  const [selectedFileIndex, setSelectedFileIndex] = useState(
+    () => files.findIndex((file) => file.filename === selectedFileName) || 0,
+  )
   const fileExtension = selectedFileName.split('.').pop()
   const isImage = !!fileExtension?.toLowerCase().match(/(jpg|jpeg|png|gif)/)
   const { token } = useAuthToken()
@@ -69,12 +76,6 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     () => (token ? `?${new URLSearchParams({ auth: token }).toString()}` : ''),
     [token],
   )
-
-  const [selectedFileIndex, setSelectedFileIndex] = useState(() => {
-    const idx = files.findIndex((file) => file.filename === selectedFileName)
-
-    return idx || 0
-  })
 
   async function fetchTileSourceData(file: string) {
     const tileOptions = await fetchWithToken(`${file}/info.json${tokenQueryString}`)
@@ -113,9 +114,6 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     }
 
     if (files.length > 1) {
-      // If the user didn't select the first image in the collection set the correct starting index
-      // const selectedFileIndex = files.findIndex((file) => file.filename === fileName)
-
       return {
         ...options,
         sequenceMode: true,
@@ -166,6 +164,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     viewer?.viewport.zoomBy(0.5)
   }
 
+  // TODO make filename dynamic
   function handleDownload(imageUrl: string, size: string) {
     downloadFile(imageUrl + tokenQueryString, { method: 'get', headers }, selectedFileName)
 
@@ -219,7 +218,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
           metaData={[title, files[selectedFileIndex].filename]}
           topLeftComponent={
             files.length > 1 ? (
-              <>
+              <NavigationButtons>
                 <Button
                   type="button"
                   variant="blank"
@@ -240,7 +239,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
                   disabled={selectedFileIndex === files.length - 1}
                   onClick={nextSlide}
                 />
-              </>
+              </NavigationButtons>
             ) : null
           }
           topRightComponent={

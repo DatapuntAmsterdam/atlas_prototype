@@ -30,9 +30,15 @@ const ViewerControlsItem = styled.div<{
     border: 1px solid #ccc;
     box-shadow: 2px 2px 0 0 #999;
 
-    & + button {
-      margin-top: 2px;
-    }
+    ${({ $topLeft }) => {
+      if (!$topLeft) {
+        return css`
+          & + button {
+            margin-top: 2px;
+          }
+        `
+      }
+    }}
   }
 
   & > * + * {
