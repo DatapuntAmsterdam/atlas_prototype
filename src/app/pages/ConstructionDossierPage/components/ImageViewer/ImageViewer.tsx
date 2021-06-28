@@ -37,18 +37,21 @@ const ImageViewerContainer = styled(OSDViewer)`
   }
 `
 
+interface File {
+  url: string
+  filename: string
+}
+
 export interface ImageViewerProps {
   title: string
-  fileName: string
-  fileUrl: string
-  files: string[]
+  selectedFileName: string
+  files: File[]
   onClose: () => void
 }
 
 const ImageViewer: FunctionComponent<ImageViewerProps> = ({
   title,
-  fileName,
-  fileUrl,
+  selectedFileName,
   files,
   onClose,
 }) => {
@@ -59,8 +62,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [viewer, setViewer] = useState<Viewer>()
-  // const [sequenceControlDisabled, setSequenceControlDisabled] = useState(false)
-  const fileExtension = fileName.split('.').pop()
+  const fileExtension = selectedFileName.split('.').pop()
   const isImage = !!fileExtension?.toLowerCase().match(/(jpg|jpeg|png|gif)/)
   const { token } = useAuthToken()
   const tokenQueryString = useMemo(
@@ -68,7 +70,13 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     [token],
   )
 
-  async function getTileSourceData(file: string) {
+  const [selectedFileIndex, setSelectedFileIndex] = useState(() => {
+    const idx = files.findIndex((file) => file.filename === selectedFileName)
+
+    return idx || 0
+  })
+
+  async function fetchTileSourceData(file: string) {
     const tileOptions = await fetchWithToken(`${file}/info.json${tokenQueryString}`)
     const tileSource = new IIIFTileSource(tileOptions)
 
@@ -80,10 +88,12 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     return tileSource
   }
 
-  async function getMultipleViewerOptions() {
+  async function getMultipleTileSourceData() {
     const tileSources: any[] = []
 
-    await Promise.all(files.map(async (file) => tileSources.push(await getTileSourceData(file))))
+    await Promise.all(
+      files.map(async (file) => tileSources.push(await fetchTileSourceData(file.url))),
+    )
 
     return tileSources
   }
@@ -103,16 +113,20 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     }
 
     if (files.length > 1) {
+      // If the user didn't select the first image in the collection set the correct starting index
+      // const selectedFileIndex = files.findIndex((file) => file.filename === fileName)
+
       return {
         ...options,
         sequenceMode: true,
-        tileSources: await getMultipleViewerOptions(),
+        initialPage: selectedFileIndex > -1 ? selectedFileIndex : 0,
+        tileSources: await getMultipleTileSourceData(),
       }
     }
 
     return {
       ...options,
-      tileSources: [await getTileSourceData(fileUrl)],
+      tileSources: [await fetchTileSourceData(files[0].url)],
     }
   }
 
@@ -126,11 +140,12 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
   }, [viewerOptions.status])
 
   function nextSlide() {
-    const maxPages = 3 - 1 // TODO make dynamic
+    const maxPages = files.length > 1 ? files.length - 1 : 1
     const currentPage = viewer?.currentPage() as number
 
     if (currentPage <= maxPages) {
       viewer?.goToPage(currentPage + 1)
+      setSelectedFileIndex(selectedFileIndex + 1)
     }
   }
 
@@ -139,6 +154,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
 
     if (currentPage > 0) {
       viewer?.goToPage(currentPage - 1)
+      setSelectedFileIndex(selectedFileIndex - 1)
     }
   }
 
@@ -151,12 +167,12 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
   }
 
   function handleDownload(imageUrl: string, size: string) {
-    downloadFile(imageUrl + tokenQueryString, { method: 'get', headers }, fileName)
+    downloadFile(imageUrl + tokenQueryString, { method: 'get', headers }, selectedFileName)
 
     trackEvent({
       category: 'download-bouwtekening',
       action: `bouwtekening-download-${size}`,
-      name: fileName,
+      name: selectedFileName,
     })
   }
 
@@ -191,7 +207,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
               ? () => window.location.reload()
               : () =>
                   handleDownload(
-                    `${fileUrl}?source_file=true`, // If the file is not an image the source file should be downloadable
+                    `${files[selectedFileIndex].url}?source_file=true`, // If the file is not an image the source file should be downloadable
                     'origineel',
                   )
           }
@@ -200,9 +216,9 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
 
       {!loading && (
         <ViewerControls
-          metaData={[title, fileName]}
+          metaData={[title, files[selectedFileIndex].filename]}
           topLeftComponent={
-            files.length > 1 ? ( // TODO useState/find a more reliable bool?
+            files.length > 1 ? (
               <>
                 <Button
                   type="button"
@@ -211,6 +227,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
                   size={32}
                   icon={<ChevronLeft />}
                   iconSize={15}
+                  disabled={selectedFileIndex === 0}
                   onClick={prevSlide}
                 />
                 <Button
@@ -220,6 +237,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
                   size={32}
                   icon={<ChevronRight />}
                   iconSize={15}
+                  disabled={selectedFileIndex === files.length - 1}
                   onClick={nextSlide}
                 />
               </>
@@ -265,7 +283,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
               <ContextMenu
                 handleDownload={handleDownload}
                 downloadLoading={downloadLoading}
-                fileUrl={fileUrl}
+                fileUrl={files[selectedFileIndex].url}
                 isImage={isImage}
                 data-testid="contextMenu"
               />
