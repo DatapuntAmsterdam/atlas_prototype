@@ -41,7 +41,7 @@ const NavigationButtons = styled.div`
   display: flex;
 `
 
-interface File {
+export interface DossierFile {
   url: string
   filename: string
 }
@@ -49,7 +49,7 @@ interface File {
 export interface ImageViewerProps {
   title: string
   selectedFileName: string
-  files: File[]
+  files: DossierFile[]
   onClose: () => void
 }
 
@@ -66,7 +66,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [viewer, setViewer] = useState<Viewer>()
-  const [selectedFileIndex, setSelectedFileIndex] = useState(
+  const [selectedFileIndex, setSelectedFileIndex] = useState<number>(
     () => files.findIndex((file) => file.filename === selectedFileName) || 0,
   )
   const fileExtension = selectedFileName.split('.').pop()
@@ -76,6 +76,11 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     () => (token ? `?${new URLSearchParams({ auth: token }).toString()}` : ''),
     [token],
   )
+
+  // The OSD ReferenceStrip provides no event listeners so use the parent viewer object
+  useEffect(() => {
+    viewer?.addHandler('page', () => setSelectedFileIndex(viewer.currentPage()))
+  }, [viewer])
 
   async function fetchTileSourceData(file: string) {
     const tileOptions = await fetchWithToken(`${file}/info.json${tokenQueryString}`)
@@ -89,12 +94,21 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     return tileSource
   }
 
+  // TODO
   async function getMultipleTileSourceData() {
-    const tileSources: any[] = []
+    const tileSources: any[] = [] // TODO fix any type
 
+    // TODO makes a request per image - AND the order can get screwed up here if secondary image requests complete before the first image request
     await Promise.all(
-      files.map(async (file) => tileSources.push(await fetchTileSourceData(file.url))),
+      files.map(async (file) => {
+        // console.log('url', file.url, `${file.url}/info.json${tokenQueryString}`)
+        tileSources.push(await fetchTileSourceData(file.url))
+      }),
     )
+
+    // TODO ideal way - but this won't work as AJAX requests are made without the tokenQueryString URL param
+    // const tileSources = files.map((file) => `${file.url}/info.json${tokenQueryString}`)
+    // console.log('tilesources', tileSources)
 
     return tileSources
   }
@@ -117,7 +131,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
       return {
         ...options,
         sequenceMode: true,
-        initialPage: selectedFileIndex > -1 ? selectedFileIndex : 0,
+        initialPage: selectedFileIndex > -1 ? selectedFileIndex : 1,
         tileSources: await getMultipleTileSourceData(),
       }
     }
@@ -143,7 +157,6 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
 
     if (currentPage <= maxPages) {
       viewer?.goToPage(currentPage + 1)
-      setSelectedFileIndex(selectedFileIndex + 1)
     }
   }
 
@@ -152,7 +165,6 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
 
     if (currentPage > 0) {
       viewer?.goToPage(currentPage - 1)
-      setSelectedFileIndex(selectedFileIndex - 1)
     }
   }
 
@@ -164,14 +176,13 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     viewer?.viewport.zoomBy(0.5)
   }
 
-  // TODO make filename dynamic
-  function handleDownload(imageUrl: string, size: string) {
-    downloadFile(imageUrl + tokenQueryString, { method: 'get', headers }, selectedFileName)
+  function handleDownload(imageUrl: string, filename: string, size: string) {
+    downloadFile(imageUrl + tokenQueryString, { method: 'get', headers }, filename)
 
     trackEvent({
       category: 'download-bouwtekening',
       action: `bouwtekening-download-${size}`,
-      name: selectedFileName,
+      name: filename,
     })
   }
 
@@ -207,6 +218,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
               : () =>
                   handleDownload(
                     `${files[selectedFileIndex].url}?source_file=true`, // If the file is not an image the source file should be downloadable
+                    files[selectedFileIndex].filename,
                     'origineel',
                   )
           }
@@ -282,7 +294,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
               <ContextMenu
                 handleDownload={handleDownload}
                 downloadLoading={downloadLoading}
-                fileUrl={files[selectedFileIndex].url}
+                file={files[selectedFileIndex]}
                 isImage={isImage}
                 data-testid="contextMenu"
               />
