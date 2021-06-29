@@ -38,6 +38,7 @@ export async function initKeycloak() {
     checkLoginIframe: false,
     pkceMethod: 'S256',
     onLoad: 'check-sso',
+    silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
   })
 
   if (authenticated) {
