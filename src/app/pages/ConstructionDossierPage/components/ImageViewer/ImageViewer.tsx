@@ -10,7 +10,7 @@ import {
 import { Button, themeColor } from '@amsterdam/asc-ui'
 import usePromise, { isFulfilled, isRejected } from '@amsterdam/use-promise'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import type { Options, Viewer } from 'openseadragon'
+import type { Options, TileSourceOptions, Viewer } from 'openseadragon'
 import { IIIFTileSource } from 'openseadragon'
 import type { FunctionComponent } from 'react'
 import { useEffect, useMemo, useState } from 'react'
@@ -82,9 +82,8 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     viewer?.addHandler('page', () => setSelectedFileIndex(viewer.currentPage()))
   }, [viewer])
 
-  async function fetchTileSourceData(file: string) {
-    const tileOptions = await fetchWithToken(`${file}/info.json${tokenQueryString}`)
-    const tileSource = new IIIFTileSource(tileOptions)
+  function createTileSource(options: TileSourceOptions): IIIFTileSource {
+    const tileSource = new IIIFTileSource(options)
 
     // Monkey patch the 'getTileUrl' method to return the URL including the token.
     tileSource.getTileUrl = function getTileUrlWithToken(...args) {
@@ -94,21 +93,20 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     return tileSource
   }
 
-  // TODO
-  async function getMultipleTileSourceData() {
-    const tileSources: any[] = [] // TODO fix any type
+  async function fetchTileSourceData(file: string) {
+    const tileOptions = await fetchWithToken(`${file}/info.json${tokenQueryString}`)
+    const tileSource = createTileSource(tileOptions)
 
-    // TODO makes a request per image - AND the order can get screwed up here if secondary image requests complete before the first image request
-    await Promise.all(
-      files.map(async (file) => {
-        // console.log('url', file.url, `${file.url}/info.json${tokenQueryString}`)
-        tileSources.push(await fetchTileSourceData(file.url))
-      }),
+    return tileSource
+  }
+
+  async function fetchMultipleTileSourceData() {
+    const tileSources: IIIFTileSource[] = []
+    const requests = files.map((file) => fetchWithToken(`${file.url}/info.json${tokenQueryString}`))
+
+    await Promise.all(requests).then((results) =>
+      results.forEach((result) => tileSources.push(createTileSource(result))),
     )
-
-    // TODO ideal way - but this won't work as AJAX requests are made without the tokenQueryString URL param
-    // const tileSources = files.map((file) => `${file.url}/info.json${tokenQueryString}`)
-    // console.log('tilesources', tileSources)
 
     return tileSources
   }
@@ -132,7 +130,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
         ...options,
         sequenceMode: true,
         initialPage: selectedFileIndex > -1 ? selectedFileIndex : 1,
-        tileSources: await getMultipleTileSourceData(),
+        tileSources: await fetchMultipleTileSourceData(),
       }
     }
 
