@@ -29,6 +29,11 @@ const FILE_NAME = 'file.png'
 const FILE_URL = joinUrl([environment.IIIF_ROOT, FILE_NAME])
 const INFO_FILE_URL = joinUrl([FILE_URL, 'info.json'])
 
+const FILE_OBJ = {
+  filename: FILE_NAME,
+  url: FILE_URL,
+}
+
 describe('ImageViewer', () => {
   const IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif']
 
@@ -37,7 +42,9 @@ describe('ImageViewer', () => {
     mockedUseMatomo.mockReturnValue({ trackEvent: () => {} } as any)
     mockedUseDownload.mockReturnValue([false, () => {}])
     mockedOSDViewer.mockImplementation(
-      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => <div {...otherProps} />,
+      ({ options, onInit, onOpen, onOpenFailed, onPageChange, ...otherProps }) => (
+        <div {...otherProps} />
+      ),
     )
 
     server.use(
@@ -61,9 +68,9 @@ describe('ImageViewer', () => {
       withAppContext(
         <AuthTokenProvider>
           <ImageViewer
-            fileName={FILE_NAME}
+            files={[FILE_OBJ]}
+            selectedFileName={FILE_NAME}
             title="Some file"
-            fileUrl={FILE_URL}
             onClose={() => {}}
           />
         </AuthTokenProvider>,
@@ -75,7 +82,7 @@ describe('ImageViewer', () => {
 
   it('renders an error message if the image cannot be opened', async () => {
     mockedOSDViewer.mockImplementation(
-      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
+      ({ options, onInit, onOpen, onOpenFailed, onPageChange, ...otherProps }) => {
         useEffect(() => {
           onOpenFailed?.({} as ViewerEvent)
         }, [])
@@ -88,9 +95,9 @@ describe('ImageViewer', () => {
       withAppContext(
         <AuthTokenProvider>
           <ImageViewer
-            fileName={FILE_NAME}
+            files={[FILE_OBJ]}
+            selectedFileName={FILE_NAME}
             title="Some file"
-            fileUrl={FILE_URL}
             onClose={() => {}}
           />
         </AuthTokenProvider>,
@@ -102,7 +109,7 @@ describe('ImageViewer', () => {
 
   it('renders the correct error message if the file is an image', async () => {
     mockedOSDViewer.mockImplementation(
-      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
+      ({ options, onInit, onOpen, onOpenFailed, onPageChange, ...otherProps }) => {
         useEffect(() => {
           onOpenFailed?.({} as ViewerEvent)
         }, [])
@@ -115,9 +122,14 @@ describe('ImageViewer', () => {
       withAppContext(
         <AuthTokenProvider>
           <ImageViewer
-            fileName="filename.png"
+            files={[
+              {
+                filename: 'filename.png',
+                url: FILE_URL,
+              },
+            ]}
+            selectedFileName="filename.png"
             title="Some file"
-            fileUrl={FILE_URL}
             onClose={() => {}}
           />
         </AuthTokenProvider>,
@@ -133,7 +145,7 @@ describe('ImageViewer', () => {
 
   it('renders the correct error message if the file is not an image', async () => {
     mockedOSDViewer.mockImplementation(
-      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
+      ({ options, onInit, onOpen, onOpenFailed, onPageChange, ...otherProps }) => {
         useEffect(() => {
           onOpenFailed?.({} as ViewerEvent)
         }, [])
@@ -146,9 +158,14 @@ describe('ImageViewer', () => {
       withAppContext(
         <AuthTokenProvider>
           <ImageViewer
-            fileName="filename.foobar"
+            files={[
+              {
+                filename: 'filename.foobar',
+                url: FILE_URL,
+              },
+            ]}
+            selectedFileName="filename.foobar"
             title="Some file"
-            fileUrl={FILE_URL}
             onClose={() => {}}
           />
         </AuthTokenProvider>,
@@ -164,7 +181,7 @@ describe('ImageViewer', () => {
 
   it('reloads the page if the error button is clicked when viewing an image', async () => {
     mockedOSDViewer.mockImplementation(
-      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
+      ({ options, onInit, onOpen, onOpenFailed, onPageChange, ...otherProps }) => {
         useEffect(() => {
           onOpenFailed?.({} as ViewerEvent)
         }, [])
@@ -179,9 +196,14 @@ describe('ImageViewer', () => {
         withAppContext(
           <AuthTokenProvider>
             <ImageViewer
-              fileName={`filename.${extension}`}
+              files={[
+                {
+                  filename: `filename.${extension}`,
+                  url: FILE_URL,
+                },
+              ]}
+              selectedFileName={`filename.${extension}`}
               title="Some file"
-              fileUrl={FILE_URL}
               onClose={() => {}}
             />
           </AuthTokenProvider>,
@@ -212,7 +234,7 @@ describe('ImageViewer', () => {
     mockedUseMatomo.mockReturnValue({ trackEvent: mockedTrackEvent } as any)
     mockedUseDownload.mockReturnValue([false, mockedDownloadFile])
     mockedOSDViewer.mockImplementation(
-      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
+      ({ options, onInit, onOpen, onOpenFailed, onPageChange, ...otherProps }) => {
         useEffect(() => {
           onOpenFailed?.({} as ViewerEvent)
         }, [])
@@ -225,9 +247,14 @@ describe('ImageViewer', () => {
       withAppContext(
         <AuthTokenProvider>
           <ImageViewer
-            fileName="filename.foobar"
+            files={[
+              {
+                filename: 'filename.foobar',
+                url: '/somefile/url/filename.foobar',
+              },
+            ]}
+            selectedFileName="filename.foobar"
             title="Some file"
-            fileUrl="/somefile/url/filename.foobar"
             onClose={() => {}}
           />
         </AuthTokenProvider>,
@@ -251,7 +278,7 @@ describe('ImageViewer', () => {
 
   it('renders the viewer controls without zoom and context menu if the image cannot be opened', async () => {
     mockedOSDViewer.mockImplementation(
-      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
+      ({ options, onInit, onOpen, onOpenFailed, onPageChange, ...otherProps }) => {
         useEffect(() => {
           onOpenFailed?.({} as ViewerEvent)
         }, [])
@@ -264,9 +291,14 @@ describe('ImageViewer', () => {
       withAppContext(
         <AuthTokenProvider>
           <ImageViewer
-            fileName="filename.png"
+            files={[
+              {
+                filename: 'filename.png',
+                url: FILE_URL,
+              },
+            ]}
+            selectedFileName="filename.png"
             title="Some file"
-            fileUrl={FILE_URL}
             onClose={() => {}}
           />
         </AuthTokenProvider>,
@@ -282,7 +314,7 @@ describe('ImageViewer', () => {
 
   it('renders the viewer controls when the image is opened', async () => {
     mockedOSDViewer.mockImplementation(
-      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
+      ({ options, onInit, onOpen, onOpenFailed, onPageChange, ...otherProps }) => {
         useEffect(() => {
           onOpen?.({} as ViewerEvent)
         }, [])
@@ -295,9 +327,14 @@ describe('ImageViewer', () => {
       withAppContext(
         <AuthTokenProvider>
           <ImageViewer
-            fileName="filename.png"
+            files={[
+              {
+                filename: 'filename.png',
+                url: FILE_URL,
+              },
+            ]}
+            selectedFileName="filename.png"
             title="Some file"
-            fileUrl={FILE_URL}
             onClose={() => {}}
           />
         </AuthTokenProvider>,
@@ -313,7 +350,7 @@ describe('ImageViewer', () => {
 
   it('calls the onClose prop when the viewer is closed', async () => {
     mockedOSDViewer.mockImplementation(
-      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
+      ({ options, onInit, onOpen, onOpenFailed, onPageChange, ...otherProps }) => {
         useEffect(() => {
           onOpen?.({} as ViewerEvent)
         }, [])
@@ -328,9 +365,14 @@ describe('ImageViewer', () => {
       withAppContext(
         <AuthTokenProvider>
           <ImageViewer
-            fileName="filename.png"
+            files={[
+              {
+                filename: 'filename.png',
+                url: FILE_URL,
+              },
+            ]}
+            selectedFileName="filename.png"
             title="Some file"
-            fileUrl={FILE_URL}
             onClose={onClose}
           />
         </AuthTokenProvider>,
@@ -347,7 +389,7 @@ describe('ImageViewer', () => {
     const zoomBy = jest.fn()
 
     mockedOSDViewer.mockImplementation(
-      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
+      ({ options, onInit, onOpen, onOpenFailed, onPageChange, ...otherProps }) => {
         useEffect(() => {
           onInit?.({ viewport: { zoomBy } } as unknown as Viewer)
           onOpen?.({} as ViewerEvent)
@@ -361,9 +403,14 @@ describe('ImageViewer', () => {
       withAppContext(
         <AuthTokenProvider>
           <ImageViewer
-            fileName="filename.png"
+            files={[
+              {
+                filename: 'filename.png',
+                url: FILE_URL,
+              },
+            ]}
+            selectedFileName="filename.png"
             title="Some file"
-            fileUrl={FILE_URL}
             onClose={() => {}}
           />
         </AuthTokenProvider>,
@@ -380,7 +427,7 @@ describe('ImageViewer', () => {
     const zoomBy = jest.fn()
 
     mockedOSDViewer.mockImplementation(
-      ({ options, onInit, onOpen, onOpenFailed, ...otherProps }) => {
+      ({ options, onInit, onOpen, onOpenFailed, onPageChange, ...otherProps }) => {
         useEffect(() => {
           onInit?.({ viewport: { zoomBy } } as unknown as Viewer)
           onOpen?.({} as ViewerEvent)
@@ -394,9 +441,14 @@ describe('ImageViewer', () => {
       withAppContext(
         <AuthTokenProvider>
           <ImageViewer
-            fileName="filename.png"
+            files={[
+              {
+                filename: 'filename.png',
+                url: FILE_URL,
+              },
+            ]}
+            selectedFileName="filename.png"
             title="Some file"
-            fileUrl={FILE_URL}
             onClose={() => {}}
           />
         </AuthTokenProvider>,

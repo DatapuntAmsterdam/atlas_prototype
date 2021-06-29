@@ -77,11 +77,6 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     [token],
   )
 
-  // The OSD ReferenceStrip provides no event listeners so use the parent viewer object
-  useEffect(() => {
-    viewer?.addHandler('page', () => setSelectedFileIndex(viewer.currentPage()))
-  }, [viewer])
-
   function createTileSource(options: TileSourceOptions): IIIFTileSource {
     const tileSource = new IIIFTileSource(options)
 
@@ -174,6 +169,12 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     viewer?.viewport.zoomBy(0.5)
   }
 
+  function onPageChange() {
+    if (viewer) {
+      setSelectedFileIndex(viewer.currentPage())
+    }
+  }
+
   function handleDownload(imageUrl: string, filename: string, size: string) {
     downloadFile(imageUrl + tokenQueryString, { method: 'get', headers }, filename)
 
@@ -195,6 +196,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
             setLoading(false)
             setError(true)
           }}
+          onPageChange={onPageChange}
           data-testid="imageViewer"
         />
       )}
