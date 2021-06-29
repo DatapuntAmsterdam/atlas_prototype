@@ -9,6 +9,7 @@ export interface OSDViewerProps {
   onInit?: (viewer: Viewer) => void
   onOpen?: EventHandler<ViewerEvent>
   onOpenFailed?: EventHandler<ViewerEvent>
+  onPageChange?: EventHandler<ViewerEvent>
 }
 
 const OSDViewer: FunctionComponent<OSDViewerProps> = ({
@@ -16,6 +17,7 @@ const OSDViewer: FunctionComponent<OSDViewerProps> = ({
   onInit,
   onOpen,
   onOpenFailed,
+  onPageChange,
   ...otherProps
 }) => {
   const [viewer, setViewer] = useState<Viewer | null>(null)
@@ -41,6 +43,7 @@ const OSDViewer: FunctionComponent<OSDViewerProps> = ({
 
   useBindHandler('open', viewer, onOpen)
   useBindHandler('open-failed', viewer, onOpenFailed)
+  useBindHandler('page', viewer, onPageChange)
 
   return <div ref={viewerRef} {...otherProps} />
 }
