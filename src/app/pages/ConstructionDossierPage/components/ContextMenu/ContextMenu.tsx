@@ -1,17 +1,18 @@
 import { ChevronDown, Download, Ellipsis, Print } from '@amsterdam/asc-assets'
 import { ContextMenu as AscContextMenu, ContextMenuItem, Icon } from '@amsterdam/asc-ui'
 import type { FunctionComponent } from 'react'
+import type { DossierFile } from '../ImageViewer/ImageViewer'
 import socialItems from '../../../../components/ContextMenu/socialItems'
 
 export interface ContextMenuProps {
-  handleDownload: (imageUrl: string, size: string) => void
-  fileUrl: string
+  handleDownload: (imageUrl: string, fileName: string, size: string) => void
+  file: DossierFile
   isImage: boolean
   downloadLoading: boolean
 }
 
 const ContextMenu: FunctionComponent<ContextMenuProps> = ({
-  fileUrl,
+  file,
   handleDownload,
   downloadLoading,
   isImage,
@@ -46,7 +47,9 @@ const ContextMenu: FunctionComponent<ContextMenuProps> = ({
       {isImage && (
         <ContextMenuItem
           disabled={downloadLoading}
-          onClick={() => handleDownload(`${fileUrl}/full/800,/0/default.jpg`, 'klein')}
+          onClick={() =>
+            handleDownload(`${file.url}/full/800,/0/default.jpg`, file.filename, 'klein')
+          }
           icon={
             <Icon inline size={24} padding={4}>
               <Download />
@@ -59,7 +62,9 @@ const ContextMenu: FunctionComponent<ContextMenuProps> = ({
       {isImage && (
         <ContextMenuItem
           disabled={downloadLoading}
-          onClick={() => handleDownload(`${fileUrl}/full/1600,/0/default.jpg`, 'groot')}
+          onClick={() =>
+            handleDownload(`${file.url}/full/1600,/0/default.jpg`, file.filename, 'groot')
+          }
           icon={
             <Icon inline size={24} padding={4}>
               <Download />
@@ -74,7 +79,8 @@ const ContextMenu: FunctionComponent<ContextMenuProps> = ({
         divider
         onClick={() =>
           handleDownload(
-            isImage ? `${fileUrl}/full/full/0/default.jpg` : `${fileUrl}?source_file=true`, // If the file is not an image the source file should be downloadable
+            isImage ? `${file.url}/full/full/0/default.jpg` : `${file.url}?source_file=true`, // If the file is not an image the source file should be downloadable
+            file.filename,
             'origineel',
           )
         }
