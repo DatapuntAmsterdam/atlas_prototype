@@ -8,6 +8,11 @@ jest.mock('../../../../components/ContextMenu/socialItems')
 
 const socialItemsMock = mocked(socialItems)
 
+const file = {
+  url: 'test.png',
+  filename: 'test.png',
+}
+
 describe('ContextMenu', () => {
   beforeEach(() => {
     socialItemsMock.mockReturnValue([])
@@ -16,12 +21,7 @@ describe('ContextMenu', () => {
   it('renders the menu', () => {
     const { container } = render(
       withAppContext(
-        <ContextMenu
-          handleDownload={() => {}}
-          fileUrl="test.png"
-          isImage
-          downloadLoading={false}
-        />,
+        <ContextMenu handleDownload={() => {}} file={file} isImage downloadLoading={false} />,
       ),
     )
     expect(container.firstChild).toBeDefined()
@@ -32,7 +32,7 @@ describe('ContextMenu', () => {
       withAppContext(
         <ContextMenu
           handleDownload={() => {}}
-          fileUrl="test.png"
+          file={file}
           isImage
           downloadLoading={false}
           data-testid="root"
@@ -43,14 +43,11 @@ describe('ContextMenu', () => {
   })
 
   it('opens the print mode if the print button is pressed', () => {
+    global.print = jest.fn()
+
     render(
       withAppContext(
-        <ContextMenu
-          handleDownload={() => {}}
-          fileUrl="test.png"
-          isImage
-          downloadLoading={false}
-        />,
+        <ContextMenu handleDownload={() => {}} file={file} isImage downloadLoading={false} />,
       ),
     )
 
@@ -62,7 +59,7 @@ describe('ContextMenu', () => {
       withAppContext(
         <ContextMenu
           handleDownload={() => {}}
-          fileUrl="test.png"
+          file={file}
           isImage={false}
           downloadLoading={false}
         />,
@@ -74,12 +71,7 @@ describe('ContextMenu', () => {
 
     rerender(
       withAppContext(
-        <ContextMenu
-          handleDownload={() => {}}
-          fileUrl="test.png"
-          isImage
-          downloadLoading={false}
-        />,
+        <ContextMenu handleDownload={() => {}} file={file} isImage downloadLoading={false} />,
       ),
     )
 
@@ -89,9 +81,7 @@ describe('ContextMenu', () => {
 
   it('disables the download items if the download is loading', () => {
     render(
-      withAppContext(
-        <ContextMenu handleDownload={() => {}} fileUrl="test.png" isImage downloadLoading />,
-      ),
+      withAppContext(<ContextMenu handleDownload={() => {}} file={file} isImage downloadLoading />),
     )
 
     expect(screen.getByText('Download klein')).toBeDisabled()
@@ -105,7 +95,7 @@ describe('ContextMenu', () => {
       withAppContext(
         <ContextMenu
           handleDownload={handleDownloadMock}
-          fileUrl="test.png"
+          file={file}
           isImage
           downloadLoading={false}
         />,
@@ -116,9 +106,21 @@ describe('ContextMenu', () => {
     fireEvent.click(screen.getByText('Download groot'))
     fireEvent.click(screen.getByText('Download origineel'))
 
-    expect(handleDownloadMock).toHaveBeenCalledWith('test.png/full/800,/0/default.jpg', 'klein')
-    expect(handleDownloadMock).toHaveBeenCalledWith('test.png/full/1600,/0/default.jpg', 'groot')
-    expect(handleDownloadMock).toHaveBeenCalledWith('test.png/full/full/0/default.jpg', 'origineel')
+    expect(handleDownloadMock).toHaveBeenCalledWith(
+      'test.png/full/800,/0/default.jpg',
+      'test.png',
+      'klein',
+    )
+    expect(handleDownloadMock).toHaveBeenCalledWith(
+      'test.png/full/1600,/0/default.jpg',
+      'test.png',
+      'groot',
+    )
+    expect(handleDownloadMock).toHaveBeenCalledWith(
+      'test.png/full/full/0/default.jpg',
+      'test.png',
+      'origineel',
+    )
   })
 
   it('triggers the download of the original if the file is an image', () => {
@@ -127,7 +129,7 @@ describe('ContextMenu', () => {
       withAppContext(
         <ContextMenu
           handleDownload={handleDownloadMock}
-          fileUrl="test.png"
+          file={file}
           isImage={false}
           downloadLoading={false}
         />,
@@ -136,6 +138,10 @@ describe('ContextMenu', () => {
 
     fireEvent.click(screen.getByText('Download origineel'))
 
-    expect(handleDownloadMock).toHaveBeenCalledWith('test.png?source_file=true', 'origineel')
+    expect(handleDownloadMock).toHaveBeenCalledWith(
+      'test.png?source_file=true',
+      'test.png',
+      'origineel',
+    )
   })
 })
