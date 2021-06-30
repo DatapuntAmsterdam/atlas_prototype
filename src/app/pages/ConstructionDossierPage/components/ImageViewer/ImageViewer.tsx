@@ -230,7 +230,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
           metaData={[title, files[selectedFileIndex].filename]}
           topLeftComponent={
             files.length > 1 ? (
-              <NavigationButtons>
+              <NavigationButtons data-testid="navigationControls">
                 <Button
                   type="button"
                   variant="blank"

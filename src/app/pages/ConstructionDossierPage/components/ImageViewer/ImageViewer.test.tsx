@@ -13,6 +13,7 @@ import useDownload from '../../../../utils/useDownload'
 import withAppContext from '../../../../utils/withAppContext'
 import { AuthTokenProvider } from '../../AuthTokenContext'
 import OSDViewer from '../OSDViewer'
+import type { DossierFile } from './ImageViewer'
 import ImageViewer from './ImageViewer'
 
 jest.mock('@datapunt/matomo-tracker-react')
@@ -25,13 +26,20 @@ const mockedGetAccessToken = mocked(getAccessToken)
 const mockedUseDownload = mocked(useDownload)
 const mockedOSDViewer = mocked(OSDViewer)
 
-const FILE_NAME = 'file.png'
-const FILE_URL = joinUrl([environment.IIIF_ROOT, FILE_NAME])
-const INFO_FILE_URL = joinUrl([FILE_URL, 'info.json'])
+// Create a selection of fake files
+const MOCK_FILE_NAMES: string[] = []
+const MOCK_FILE_URLS: string[] = []
+const MOCK_INFO_FILE_URLS: string[] = []
+const MOCK_FILES: DossierFile[] = []
 
-const FILE_OBJ = {
-  filename: FILE_NAME,
-  url: FILE_URL,
+for (let i = 0; i < 3; i += 1) {
+  const filename = `files${i}.png`
+  const url = joinUrl([environment.IIIF_ROOT, filename])
+
+  MOCK_FILE_NAMES.push(filename)
+  MOCK_FILE_URLS.push(url)
+  MOCK_INFO_FILE_URLS.push(joinUrl([url, 'info.json']))
+  MOCK_FILES.push({ filename, url })
 }
 
 describe('ImageViewer', () => {
@@ -48,7 +56,17 @@ describe('ImageViewer', () => {
     )
 
     server.use(
-      rest.get(INFO_FILE_URL, (request, response, context) => {
+      rest.get(MOCK_INFO_FILE_URLS[0], (request, response, context) => {
+        const fakeFile = readFileSync(path.resolve(__dirname, `./fakeinfofile.json`))
+
+        return response(context.json(JSON.parse(fakeFile.toString())))
+      }),
+      rest.get(MOCK_INFO_FILE_URLS[1], (request, response, context) => {
+        const fakeFile = readFileSync(path.resolve(__dirname, './fakeinfofile.json'))
+
+        return response(context.json(JSON.parse(fakeFile.toString())))
+      }),
+      rest.get(MOCK_INFO_FILE_URLS[2], (request, response, context) => {
         const fakeFile = readFileSync(path.resolve(__dirname, './fakeinfofile.json'))
 
         return response(context.json(JSON.parse(fakeFile.toString())))
@@ -68,8 +86,8 @@ describe('ImageViewer', () => {
       withAppContext(
         <AuthTokenProvider>
           <ImageViewer
-            files={[FILE_OBJ]}
-            selectedFileName={FILE_NAME}
+            files={[MOCK_FILES[0]]}
+            selectedFileName={MOCK_FILE_NAMES[0]}
             title="Some file"
             onClose={() => {}}
           />
@@ -95,8 +113,8 @@ describe('ImageViewer', () => {
       withAppContext(
         <AuthTokenProvider>
           <ImageViewer
-            files={[FILE_OBJ]}
-            selectedFileName={FILE_NAME}
+            files={[MOCK_FILES[0]]}
+            selectedFileName={MOCK_FILE_NAMES[0]}
             title="Some file"
             onClose={() => {}}
           />
@@ -122,13 +140,8 @@ describe('ImageViewer', () => {
       withAppContext(
         <AuthTokenProvider>
           <ImageViewer
-            files={[
-              {
-                filename: 'filename.png',
-                url: FILE_URL,
-              },
-            ]}
-            selectedFileName="filename.png"
+            files={[MOCK_FILES[0]]}
+            selectedFileName={MOCK_FILE_NAMES[0]}
             title="Some file"
             onClose={() => {}}
           />
@@ -161,7 +174,7 @@ describe('ImageViewer', () => {
             files={[
               {
                 filename: 'filename.foobar',
-                url: FILE_URL,
+                url: MOCK_FILE_URLS[0],
               },
             ]}
             selectedFileName="filename.foobar"
@@ -199,7 +212,7 @@ describe('ImageViewer', () => {
               files={[
                 {
                   filename: `filename.${extension}`,
-                  url: FILE_URL,
+                  url: MOCK_FILE_URLS[0],
                 },
               ]}
               selectedFileName={`filename.${extension}`}
@@ -291,13 +304,8 @@ describe('ImageViewer', () => {
       withAppContext(
         <AuthTokenProvider>
           <ImageViewer
-            files={[
-              {
-                filename: 'filename.png',
-                url: FILE_URL,
-              },
-            ]}
-            selectedFileName="filename.png"
+            files={[MOCK_FILES[0]]}
+            selectedFileName={MOCK_FILE_NAMES[0]}
             title="Some file"
             onClose={() => {}}
           />
@@ -327,13 +335,8 @@ describe('ImageViewer', () => {
       withAppContext(
         <AuthTokenProvider>
           <ImageViewer
-            files={[
-              {
-                filename: 'filename.png',
-                url: FILE_URL,
-              },
-            ]}
-            selectedFileName="filename.png"
+            files={[MOCK_FILES[0]]}
+            selectedFileName={MOCK_FILE_NAMES[0]}
             title="Some file"
             onClose={() => {}}
           />
@@ -365,13 +368,8 @@ describe('ImageViewer', () => {
       withAppContext(
         <AuthTokenProvider>
           <ImageViewer
-            files={[
-              {
-                filename: 'filename.png',
-                url: FILE_URL,
-              },
-            ]}
-            selectedFileName="filename.png"
+            files={[MOCK_FILES[0]]}
+            selectedFileName={MOCK_FILE_NAMES[0]}
             title="Some file"
             onClose={onClose}
           />
@@ -403,13 +401,8 @@ describe('ImageViewer', () => {
       withAppContext(
         <AuthTokenProvider>
           <ImageViewer
-            files={[
-              {
-                filename: 'filename.png',
-                url: FILE_URL,
-              },
-            ]}
-            selectedFileName="filename.png"
+            files={[MOCK_FILES[0]]}
+            selectedFileName={MOCK_FILE_NAMES[0]}
             title="Some file"
             onClose={() => {}}
           />
@@ -443,11 +436,11 @@ describe('ImageViewer', () => {
           <ImageViewer
             files={[
               {
-                filename: 'filename.png',
-                url: FILE_URL,
+                filename: MOCK_FILE_NAMES[0],
+                url: MOCK_FILE_URLS[0],
               },
             ]}
-            selectedFileName="filename.png"
+            selectedFileName={MOCK_FILE_NAMES[0]}
             title="Some file"
             onClose={() => {}}
           />
@@ -458,6 +451,125 @@ describe('ImageViewer', () => {
     await waitFor(() => {
       fireEvent.click(screen.getByTitle('Uitzoomen'))
       expect(zoomBy).toHaveBeenCalledWith(0.5)
+    })
+  })
+
+  it('displays the previous and next button if there are multiple images', async () => {
+    mockedOSDViewer.mockImplementation(
+      ({ options, onInit, onOpen, onOpenFailed, onPageChange, ...otherProps }) => {
+        useEffect(() => {
+          onOpen?.({} as ViewerEvent)
+        }, [])
+
+        return <div {...otherProps} />
+      },
+    )
+
+    render(
+      withAppContext(
+        <AuthTokenProvider>
+          <ImageViewer
+            files={MOCK_FILES}
+            selectedFileName={MOCK_FILE_NAMES[0]}
+            title="Some file"
+            onClose={() => {}}
+          />
+        </AuthTokenProvider>,
+      ),
+    )
+
+    await waitFor(() => expect(screen.getByTestId('navigationControls')).toBeInTheDocument())
+  })
+
+  it('disables the prev button if user selects the start of the collection', async () => {
+    mockedOSDViewer.mockImplementation(
+      ({ options, onInit, onOpen, onOpenFailed, onPageChange, ...otherProps }) => {
+        useEffect(() => {
+          onOpen?.({} as ViewerEvent)
+        }, [])
+
+        return <div {...otherProps} />
+      },
+    )
+
+    render(
+      withAppContext(
+        <AuthTokenProvider>
+          <ImageViewer
+            files={MOCK_FILES}
+            selectedFileName={MOCK_FILE_NAMES[0]}
+            title="Some file"
+            onClose={() => {}}
+          />
+        </AuthTokenProvider>,
+      ),
+    )
+
+    await waitFor(() => {
+      expect(screen.getByTestId('navigationControls').children[0]).toBeDisabled()
+      expect(screen.getByTestId('navigationControls').children[1]).toBeEnabled()
+    })
+  })
+
+  it('disables the next button if user selects the end of the collection', async () => {
+    mockedOSDViewer.mockImplementation(
+      ({ options, onInit, onOpen, onOpenFailed, onPageChange, ...otherProps }) => {
+        useEffect(() => {
+          onOpen?.({} as ViewerEvent)
+        }, [])
+
+        return <div {...otherProps} />
+      },
+    )
+
+    render(
+      withAppContext(
+        <AuthTokenProvider>
+          <ImageViewer
+            files={MOCK_FILES}
+            selectedFileName={MOCK_FILE_NAMES[2]}
+            title="Some file"
+            onClose={() => {}}
+          />
+        </AuthTokenProvider>,
+      ),
+    )
+
+    await waitFor(() => {
+      const prevBtn = screen.getByTestId('navigationControls').children[0]
+      const nextBtn = screen.getByTestId('navigationControls').children[1]
+
+      expect(nextBtn).toBeDisabled()
+      expect(prevBtn).toBeEnabled()
+    })
+  })
+
+  it('displays the correct filename in the context menu', async () => {
+    mockedOSDViewer.mockImplementation(
+      ({ options, onInit, onOpen, onOpenFailed, onPageChange, ...otherProps }) => {
+        useEffect(() => {
+          onOpen?.({} as ViewerEvent)
+        }, [])
+
+        return <div {...otherProps} />
+      },
+    )
+
+    render(
+      withAppContext(
+        <AuthTokenProvider>
+          <ImageViewer
+            files={MOCK_FILES}
+            selectedFileName={MOCK_FILE_NAMES[0]}
+            title="Some file"
+            onClose={() => {}}
+          />
+        </AuthTokenProvider>,
+      ),
+    )
+
+    await waitFor(() => {
+      expect(screen.getByTestId('controlsMeta')).toHaveTextContent(MOCK_FILE_NAMES[0])
     })
   })
 })
