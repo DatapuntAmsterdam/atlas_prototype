@@ -53,6 +53,7 @@ describe('FilesGallery', () => {
         selectedFiles={[]}
         onFileSelectionChange={() => {}}
         disabled={false}
+        restricted={false}
       />,
       { wrapper },
     )
@@ -68,6 +69,7 @@ describe('FilesGallery', () => {
         selectedFiles={[]}
         onFileSelectionChange={() => {}}
         disabled={false}
+        restricted={false}
       />,
       { wrapper },
     )
@@ -83,6 +85,7 @@ describe('FilesGallery', () => {
         selectedFiles={[]}
         onFileSelectionChange={() => {}}
         disabled
+        restricted={false}
       />,
       { wrapper },
     )
@@ -98,6 +101,7 @@ describe('FilesGallery', () => {
         selectedFiles={[]}
         onFileSelectionChange={() => {}}
         disabled={false}
+        restricted={false}
       />,
       { wrapper },
     )
@@ -116,6 +120,7 @@ describe('FilesGallery', () => {
         selectedFiles={[]}
         onFileSelectionChange={() => {}}
         disabled={false}
+        restricted={false}
       />,
       { wrapper: wrapperWithToken },
     )
@@ -134,6 +139,7 @@ describe('FilesGallery', () => {
         selectedFiles={[]}
         onFileSelectionChange={() => {}}
         disabled
+        restricted={false}
       />,
       { wrapper },
     )
@@ -149,6 +155,7 @@ describe('FilesGallery', () => {
         selectedFiles={[]}
         onFileSelectionChange={() => {}}
         disabled={false}
+        restricted={false}
       />,
       { wrapper },
     )
@@ -166,6 +173,7 @@ describe('FilesGallery', () => {
         selectedFiles={[]}
         onFileSelectionChange={onFileSelectionChangeMock}
         disabled={false}
+        restricted={false}
       />,
       { wrapper },
     )
@@ -180,6 +188,7 @@ describe('FilesGallery', () => {
         selectedFiles={[MOCK_FILES[0]]}
         onFileSelectionChange={onFileSelectionChangeMock}
         disabled={false}
+        restricted={false}
       />,
     )
 
@@ -195,6 +204,7 @@ describe('FilesGallery', () => {
         selectedFiles={[]}
         onFileSelectionChange={() => {}}
         disabled={false}
+        restricted={false}
       />,
       { wrapper },
     )
@@ -210,6 +220,7 @@ describe('FilesGallery', () => {
         selectedFiles={[]}
         onFileSelectionChange={() => {}}
         disabled={false}
+        restricted={false}
       />,
       { wrapper },
     )
@@ -229,6 +240,7 @@ describe('FilesGallery', () => {
         selectedFiles={[]}
         onFileSelectionChange={() => {}}
         disabled={false}
+        restricted={false}
       />,
       { wrapper },
     )

@@ -78,6 +78,7 @@ export interface FilesGalleryProps {
   selectedFiles: Bestand[]
   onFileSelectionChange: (files: Bestand[]) => void
   disabled: boolean
+  restricted: boolean
 }
 
 const FilesGallery: FunctionComponent<FilesGalleryProps> = ({
@@ -86,6 +87,7 @@ const FilesGallery: FunctionComponent<FilesGalleryProps> = ({
   selectedFiles,
   onFileSelectionChange,
   disabled,
+  restricted,
 }) => {
   const lessFiles = useMemo(() => document.bestanden.slice(0, MAX_LENGTH), [document.bestanden])
   const [files, setFiles] = useState(lessFiles)
@@ -141,7 +143,7 @@ const FilesGallery: FunctionComponent<FilesGalleryProps> = ({
                   data-testid="thumbnail"
                 />
               </StyledLink>
-              {!disabled && !disableDownload && (
+              {!disabled && !disableDownload && !restricted && (
                 <StyledCheckbox
                   data-testid="fileToggle"
                   checked={selectedFiles.includes(file)}

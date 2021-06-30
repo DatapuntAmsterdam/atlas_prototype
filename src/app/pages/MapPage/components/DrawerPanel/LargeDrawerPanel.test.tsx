@@ -10,24 +10,14 @@ describe('LargeDrawerPanel', () => {
   it('should set the width for a medium tablet', () => {
     const { container } = render(withAppContext(<LargeDrawerPanel />))
 
-    expect(container.firstChild).toHaveStyleRule('width', '356px', {
-      media: `screen and ${breakpoints.tabletM('min-width')}`,
-    })
+    expect(container.firstChild).toHaveStyleRule('width', '356px')
   })
 
   it('should set the width for a laptop', () => {
     const { container } = render(withAppContext(<LargeDrawerPanel />))
 
     expect(container.firstChild).toHaveStyleRule('width', '596px', {
-      media: `screen and ${breakpoints.laptop('min-width')}`,
-    })
-  })
-
-  it('should set the width for a large laptop', () => {
-    const { container } = render(withAppContext(<LargeDrawerPanel />))
-
-    expect(container.firstChild).toHaveStyleRule('width', '756px', {
-      media: `screen and ${breakpoints.laptopL('min-width')}`,
+      media: `screen and ${breakpoints.laptopM('min-width')}`,
     })
   })
 })

@@ -7,6 +7,16 @@ const keycloak = Keycloak({
   clientId: environment.KEYCLOAK_CLIENT,
 })
 
+const MIN_VALIDITY = 5
+
+keycloak.onTokenExpired = async () => {
+  try {
+    await keycloak.updateToken(MIN_VALIDITY)
+  } catch (error) {
+    // For some reason the token could not be updated.
+  }
+}
+
 export function getAccessToken() {
   return keycloak.token ?? ''
 }
@@ -28,6 +38,7 @@ export async function initKeycloak() {
     checkLoginIframe: false,
     pkceMethod: 'S256',
     onLoad: 'check-sso',
+    silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
   })
 
   if (authenticated) {
@@ -82,5 +93,14 @@ export const getAuthHeaders = () => {
 }
 
 export function isAuthenticated() {
+  try {
+    if (keycloak.isTokenExpired()) {
+      return false
+    }
+  } catch (error) {
+    // Unable to check if the token is expired, this means that we probably don't have a token so let's return false.
+    return false
+  }
+
   return keycloak.authenticated ?? false
 }

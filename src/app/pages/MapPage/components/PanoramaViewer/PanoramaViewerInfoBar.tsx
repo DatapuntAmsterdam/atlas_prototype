@@ -10,8 +10,7 @@ import { useMapContext } from '../../MapContext'
 const StyledControl = styled(Control)`
   order: 2;
   align-self: flex-end;
-  position: absolute;
-  top: calc(70% - ${themeSpacing(13)});
+  transform: translateY(-${themeSpacing(10)});
 `
 
 const PanoramaViewerInfoBar: FunctionComponent = () => {

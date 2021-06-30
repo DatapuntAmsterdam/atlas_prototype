@@ -138,7 +138,7 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
           ) : null}
         </DefinitionList>
 
-        {hasRights && !disableDownload && (
+        {hasRights && !disableDownload && !restricted && (
           <DownloadButton
             type="button"
             variant="primary"

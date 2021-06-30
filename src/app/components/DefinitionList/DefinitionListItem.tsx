@@ -9,7 +9,7 @@ const DefinitionListItemWrapper = styled.div`
     border-bottom: 1px solid ${themeColor('tint', 'level4')};
   }
 
-  @media screen and ${breakpoint('max-width', 'mobileL')} {
+  @media screen and ${breakpoint('max-width', 'laptopM')} {
     flex-direction: column;
   }
 `
@@ -20,7 +20,10 @@ const DefinitionListTerm = styled.dt`
   font-weight: 500;
   white-space: normal;
   word-break: break-word;
-  width: 30%;
+
+  @media screen and ${breakpoint('min-width', 'laptopM')} {
+    width: 30%;
+  }
 `
 
 const DefinitionListDescription = styled.dd`
