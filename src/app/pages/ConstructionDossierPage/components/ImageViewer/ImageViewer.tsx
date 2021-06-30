@@ -41,6 +41,10 @@ const NavigationButtons = styled.div`
   display: flex;
 `
 
+const ZoomControls = styled.div`
+  pointer-events: all;
+`
+
 export interface DossierFile {
   url: string
   filename: string
@@ -267,7 +271,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
           }
           bottomRightComponent={
             !error && (
-              <div data-testid="zoomControls">
+              <ZoomControls data-testid="zoomControls">
                 <Button
                   type="button"
                   variant="blank"
@@ -286,7 +290,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
                   onClick={zoomOut}
                   icon={<Minimise />}
                 />
-              </div>
+              </ZoomControls>
             )
           }
           bottomLeftComponent={

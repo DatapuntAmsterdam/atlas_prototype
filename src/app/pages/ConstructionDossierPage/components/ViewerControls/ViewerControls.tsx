@@ -21,7 +21,7 @@ const ViewerControlsItem = styled.div<{
   align-items: flex-end;
   display: flex;
   flex-direction: column;
-  pointer-events: all;
+  pointer-events: none;
   position: absolute;
 
   // These styles are temporary, until we move to the new amsterdam style
@@ -85,6 +85,7 @@ const ViewerControlsMeta = styled.div`
   margin-right: ${CONTROL_OFFSET * -0.5}px;
   max-width: 70vw;
   overflow: hidden;
+  pointer-events: all;
   width: 100%;
 `
 
