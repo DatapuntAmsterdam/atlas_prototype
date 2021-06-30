@@ -132,7 +132,7 @@ const ViewerControls: FunctionComponent<ViewerControlsProps> = ({
     <ViewerControlsItem $bottomRight>
       {bottomRightComponent}
       {metaData && (
-        <ViewerControlsMeta>
+        <ViewerControlsMeta data-testid="controlsMeta">
           {metaData.map((name) => (
             <ViewerControlsMetaItem key={name}>
               <span>{name}</span>
