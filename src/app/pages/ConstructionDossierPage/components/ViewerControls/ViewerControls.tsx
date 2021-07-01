@@ -72,6 +72,7 @@ const ViewerControlsItem = styled.div<{
       return css`
         bottom: ${CONTROL_OFFSET}px;
         left: ${CONTROL_OFFSET}px;
+        pointer-events: all;
       `
     }
   }}

@@ -39,6 +39,7 @@ const ImageViewerContainer = styled(OSDViewer)`
 
 const NavigationButtons = styled.div`
   display: flex;
+  pointer-events: all;
 `
 
 const ZoomControls = styled.div`
