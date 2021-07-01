@@ -10,6 +10,9 @@ import type { FunctionComponent } from 'react'
 import HeaderSearch from '../../../header/components/HeaderSearch'
 import HeaderMenu from './HeaderMenu'
 
+// TODO relative to this src/app/components/header/Header.tsx this dir structure is rather confusing
+import { HeaderSearchProvider } from '../../../header/components/HeaderSearchProvider'
+
 const stickyStyle = css`
   position: sticky;
   top: 0;
@@ -77,7 +80,9 @@ const Header: FunctionComponent<HeaderProps> = ({ homePage, hasMaxWidth }) => (
       logo={AmsterdamLogo}
       navigation={
         <>
-          <HeaderSearch />
+          <HeaderSearchProvider>
+            <HeaderSearch />
+          </HeaderSearchProvider>
           <HeaderMenu
             type="default"
             data-test="header-menu-default"

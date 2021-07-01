@@ -10,7 +10,8 @@ import SEARCH_PAGE_CONFIG from '../../app/pages/SearchPage/config'
 import { SearchType } from '../../app/pages/SearchPage/constants'
 import { queryParam } from '../../app/pages/SearchPage/query-params'
 import toSearchParams from '../../app/utils/toSearchParams'
-import useParam from '../../app/utils/useParam'
+// import useParam from '../../app/utils/useParam'
+import { useHeaderSearch } from './HeaderSearchProvider'
 import useTraverseList from '../../app/utils/useTraverseList'
 import type { AutoSuggestSearchResult } from '../services/auto-suggest/auto-suggest'
 import autoSuggestSearch, { MIN_QUERY_LENGTH } from '../services/auto-suggest/auto-suggest'
@@ -25,12 +26,13 @@ const ACTIVE_ITEM_CLASS = 'auto-suggest__dropdown-item--active'
 const HeaderSearch: FunctionComponent = () => {
   const history = useHistory()
 
-  const [searchQuery, setSearchQuery] = useParam(queryParam)
+  // const [searchQuery, setSearchQuery] = useParam(queryParam)
+  const { searchQuery, updateSearchQuery } = useHeaderSearch()
 
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState<AutoSuggestSearchResult[]>([])
-  const [inputValue, setInputValue] = useState(searchQuery)
+  const [inputValue, setInputValue] = useState(searchQuery) // TODO replace inputValue with searchQuery provider?
   const [highlightValue, setHighlightValue] = useState(searchQuery)
   const [selectedElement, setSelectedElement] = useState<HTMLElement | null>(null)
   const [searchBarFilterValue, setSearchBarFilterValue] = useState(
@@ -45,7 +47,8 @@ const HeaderSearch: FunctionComponent = () => {
         el.classList.remove(ACTIVE_ITEM_CLASS)
       })
       activeElement.classList.add(ACTIVE_ITEM_CLASS)
-      setInputValue(activeElement.innerText)
+      // setInputValue(activeElement.innerText)
+      updateSearchQuery(activeElement.innerText)
       setSelectedElement(activeElement)
     },
     {
@@ -75,7 +78,8 @@ const HeaderSearch: FunctionComponent = () => {
   )
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value)
+    // setInputValue(e.target.value)
+    updateSearchQuery(e.target.value)
     setSelectedElement(null)
 
     if (e.target.value?.length >= MIN_QUERY_LENGTH) {
@@ -126,7 +130,7 @@ const HeaderSearch: FunctionComponent = () => {
   }
 
   const onFocus = () => {
-    if (inputValue.length > 2) {
+    if (`inputValue`.length > 2) {
       setShowSuggestions(true)
       fetchResults(inputValue)
     }
@@ -134,7 +138,7 @@ const HeaderSearch: FunctionComponent = () => {
 
   const onClear = () => {
     setShowSuggestions(false)
-    setSearchQuery('')
+    updateSearchQuery('')
     setInputValue('')
   }
 
@@ -148,7 +152,7 @@ const HeaderSearch: FunctionComponent = () => {
         onChange={onChangeDebounced}
         onClear={onClear}
         onKeyDown={keyDown}
-        value={inputValue}
+        value={searchQuery}
         setSearchBarFilterValue={setSearchBarFilterValue}
         searchBarFilterValue={searchBarFilterValue}
       >

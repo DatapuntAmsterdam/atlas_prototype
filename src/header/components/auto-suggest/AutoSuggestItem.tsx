@@ -28,10 +28,11 @@ import { queryParam } from '../../../app/pages/SearchPage/query-params'
 import toSearchParams from '../../../app/utils/toSearchParams'
 import toSlug from '../../../app/utils/toSlug'
 import { CmsType } from '../../../shared/config/cms.config'
-import { extractIdEndpoint, getDetailPageData } from '../../../store/redux-first-router/actions'
+import { extractIdEndpoint, getDetailPageData } from '../../../store/redux-first-router/actions' // TODO is this still required?
 import type { AutoSuggestSearchContent } from '../../services/auto-suggest/auto-suggest'
 import useParam from '../../../app/utils/useParam'
 import { routing } from '../../../app/routes'
+import { useHeaderSearch } from '../HeaderSearchProvider'
 
 export interface AutoSuggestItemProps {
   content: string
@@ -59,6 +60,8 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
   const [zoom] = useParam(zoomParam)
   const [center] = useParam(centerParam)
   const location = useLocation()
+
+  const { updateSearchQuery } = useHeaderSearch()
 
   const openEditorialSuggestion = (
     { id, slug }: { id: string; slug: string },
@@ -175,6 +178,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
         inList
         className="auto-suggest__dropdown-item"
         onClick={() => {
+          updateSearchQuery(content)
           trackEvent({
             category: 'auto-suggest',
             name: content,
