@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import type { FunctionComponent } from 'react'
-import createNamedContext from '../../app/utils/createNamedContext'
-import useRequiredContext from '../../app/utils/useRequiredContext'
-import { queryParam } from '../../app/pages/SearchPage/query-params'
-import useParam from '../../app/utils/useParam'
+import createNamedContext from '../../utils/createNamedContext'
+import useRequiredContext from '../../utils/useRequiredContext'
+import { queryParam } from '../../pages/SearchPage/query-params'
+import useParam from '../../utils/useParam'
 
 export interface HeaderSearchContextProps {
   searchInputValue: string

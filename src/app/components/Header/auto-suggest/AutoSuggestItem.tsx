@@ -14,7 +14,7 @@ import {
   toGeoSearch,
   toPublicationDetail,
   toSpecialDetail,
-} from '../../../app/links'
+} from '../../../links'
 import {
   centerParam,
   locationParam,
@@ -22,16 +22,17 @@ import {
   ViewMode,
   viewParam,
   zoomParam,
-} from '../../../app/pages/MapPage/query-params'
-import { SearchType } from '../../../app/pages/SearchPage/constants'
-import { queryParam } from '../../../app/pages/SearchPage/query-params'
-import toSearchParams from '../../../app/utils/toSearchParams'
-import toSlug from '../../../app/utils/toSlug'
-import { CmsType } from '../../../shared/config/cms.config'
-import { extractIdEndpoint, getDetailPageData } from '../../../store/redux-first-router/actions' // TODO is this still required?
-import type { AutoSuggestSearchContent } from '../../services/auto-suggest/auto-suggest'
-import useParam from '../../../app/utils/useParam'
-import { routing } from '../../../app/routes'
+} from '../../../pages/MapPage/query-params'
+import { SearchType } from '../../../pages/SearchPage/constants'
+import { queryParam } from '../../../pages/SearchPage/query-params'
+import toSearchParams from '../../../utils/toSearchParams'
+import toSlug from '../../../utils/toSlug'
+import { CmsType } from '../../../../shared/config/cms.config'
+import getIdEndpoint from '../../../utils/getIdEndpoint'
+import getDetailPageData from '../../../utils/getDetailPageData'
+import type { AutoSuggestSearchContent } from '../services/auto-suggest/auto-suggest'
+import useParam from '../../../utils/useParam'
+import { routing } from '../../../routes'
 import { useHeaderSearch } from '../HeaderSearchProvider'
 
 export interface AutoSuggestItemProps {
@@ -84,7 +85,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
 
   const to: LocationDescriptorObject = useMemo(() => {
     if (suggestion.type === SearchType.Dataset) {
-      const [, , id] = extractIdEndpoint(suggestion.uri)
+      const [, , id] = getIdEndpoint(suggestion.uri)
       const slug = toSlug(suggestion.label)
 
       return {
@@ -100,7 +101,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
       suggestion.type === CmsType.Collection ||
       suggestion.type === CmsType.Special
     ) {
-      const [, , id] = extractIdEndpoint(suggestion.uri)
+      const [, , id] = getIdEndpoint(suggestion.uri)
       const slug = toSlug(suggestion.label)
 
       let subType = ''
@@ -164,7 +165,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
         [centerParam, center],
       ]).toString(),
     }
-  }, [extractIdEndpoint, openEditorialSuggestion, highlightValue, location])
+  }, [getIdEndpoint, openEditorialSuggestion, highlightValue, location])
 
   const htmlContent = useMemo(
     () => highlightSuggestion(content, highlightValue),

@@ -1,4 +1,4 @@
-import { getDetailPageData } from './actions'
+import getDetailPageData from './getDetailPageData'
 
 describe('getDetailPageData', () => {
   it('extract the type, subtype and id from a detail endpoint', () => {

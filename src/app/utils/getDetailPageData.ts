@@ -1,18 +1,10 @@
-export const extractIdEndpoint = (endpoint: string) => {
-  const match = /(\w+)\/([\w-]+)\/?$/.exec(endpoint)
-  if (match) {
-    return match
-  }
-  throw Error('Could not extract ID from endpoint')
-}
-
 const URL_SUBTYPES_MAPPING = {
   openbareruimtes: 'openbareruimte',
   woonplaatsen: 'woonplaats',
   ligplaatsen: 'ligplaats',
 }
 
-export const getDetailPageData = (endpoint: string) => {
+export default (endpoint: string) => {
   // TODO: Add endpoint mapping when new router is introduced
   const url = endpoint
     .split('?')[0] // Remove query

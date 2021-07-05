@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import type { FunctionComponent } from 'react'
-import { getDetailPageData } from '../../../store/redux-first-router/actions'
+import getDetailPageData from '../../utils/getDetailPageData'
 import { toDataDetail } from '../../links'
 import DataSelectionFormatter from './DataSelectionFormatter/DataSelectionFormatter'
 import type { Data } from './types'
