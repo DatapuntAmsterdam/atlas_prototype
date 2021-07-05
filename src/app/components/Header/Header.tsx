@@ -7,7 +7,7 @@ import {
 } from '@amsterdam/asc-ui'
 import styled, { css } from 'styled-components'
 import type { FunctionComponent } from 'react'
-import { HeaderSearchProvider } from './HeaderSearchProvider'
+import { HeaderSearchProvider } from './HeaderSearchContext'
 import HeaderSearch from './HeaderSearch'
 import HeaderMenu from './HeaderMenu'
 
