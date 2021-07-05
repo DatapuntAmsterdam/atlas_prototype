@@ -2,26 +2,29 @@ import { useState } from 'react'
 import type { FunctionComponent } from 'react'
 import createNamedContext from '../../app/utils/createNamedContext'
 import useRequiredContext from '../../app/utils/useRequiredContext'
+import { queryParam } from '../../app/pages/SearchPage/query-params'
+import useParam from '../../app/utils/useParam'
 
 export interface HeaderSearchContextProps {
-  searchQuery: string
-  updateSearchQuery: (input: string) => void
+  searchInputValue: string
+  updateSearchInputValue: (input: string) => void
 }
 
 const HeaderSearchContext = createNamedContext<HeaderSearchContextProps | null>(
-  'SearchQueryPro',
+  'SearchInputValue',
   null,
 )
 
 const HeaderSearchProvider: FunctionComponent = ({ children }) => {
-  const [searchQuery, setSearchQuery] = useState<string>('')
+  const [searchQuery] = useParam(queryParam)
+  const [searchInputValue, setSearchInputValue] = useState<string>(searchQuery)
 
-  const updateSearchQuery = (query: string) => {
-    setSearchQuery(query)
+  const updateSearchInputValue = (query: string) => {
+    setSearchInputValue(query)
   }
 
   return (
-    <HeaderSearchContext.Provider value={{ searchQuery, updateSearchQuery }}>
+    <HeaderSearchContext.Provider value={{ searchInputValue, updateSearchInputValue }}>
       {children}
     </HeaderSearchContext.Provider>
   )

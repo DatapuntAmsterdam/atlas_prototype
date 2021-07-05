@@ -61,7 +61,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
   const [center] = useParam(centerParam)
   const location = useLocation()
 
-  const { updateSearchQuery } = useHeaderSearch()
+  const { updateSearchInputValue } = useHeaderSearch()
 
   const openEditorialSuggestion = (
     { id, slug }: { id: string; slug: string },
@@ -157,7 +157,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
       ...toDataDetail({ type, subtype, id }),
       search: toSearchParams([
         [viewParam, view],
-        [queryParam, inputValue],
+        [queryParam, content],
         [mapLayersParam, mapLayers],
         [locationParam, locationParameter],
         [zoomParam, zoom],
@@ -171,20 +171,22 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
     [content, highlightValue],
   )
 
+  const handleLinkClick = () => {
+    updateSearchInputValue(content)
+    trackEvent({
+      category: 'auto-suggest',
+      name: content,
+      action: label,
+    })
+  }
+
   return (
     <li>
       <StyledLink
         forwardedAs={RouterLink}
         inList
         className="auto-suggest__dropdown-item"
-        onClick={() => {
-          updateSearchQuery(content)
-          trackEvent({
-            category: 'auto-suggest',
-            name: content,
-            action: label,
-          })
-        }}
+        onClick={handleLinkClick}
         to={to}
       >
         <div

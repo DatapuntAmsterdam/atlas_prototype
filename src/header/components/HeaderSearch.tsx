@@ -26,14 +26,12 @@ const ACTIVE_ITEM_CLASS = 'auto-suggest__dropdown-item--active'
 const HeaderSearch: FunctionComponent = () => {
   const history = useHistory()
 
-  // const [searchQuery, setSearchQuery] = useParam(queryParam)
-  const { searchQuery, updateSearchQuery } = useHeaderSearch()
+  const { searchInputValue, updateSearchInputValue } = useHeaderSearch()
 
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState<AutoSuggestSearchResult[]>([])
-  const [inputValue, setInputValue] = useState(searchQuery) // TODO replace inputValue with searchQuery provider?
-  const [highlightValue, setHighlightValue] = useState(searchQuery)
+  const [highlightValue, setHighlightValue] = useState(searchInputValue)
   const [selectedElement, setSelectedElement] = useState<HTMLElement | null>(null)
   const [searchBarFilterValue, setSearchBarFilterValue] = useState(
     window.localStorage.getItem(LOCAL_STORAGE_KEY) || SearchType.Search,
@@ -47,8 +45,7 @@ const HeaderSearch: FunctionComponent = () => {
         el.classList.remove(ACTIVE_ITEM_CLASS)
       })
       activeElement.classList.add(ACTIVE_ITEM_CLASS)
-      // setInputValue(activeElement.innerText)
-      updateSearchQuery(activeElement.innerText)
+      updateSearchInputValue(activeElement.innerText)
       setSelectedElement(activeElement)
     },
     {
@@ -74,12 +71,11 @@ const HeaderSearch: FunctionComponent = () => {
           setLoading(false)
         })
     },
-    [inputValue, setLoading, setResults, searchBarFilterValue],
+    [searchInputValue, setLoading, setResults, searchBarFilterValue],
   )
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // setInputValue(e.target.value)
-    updateSearchQuery(e.target.value)
+    updateSearchInputValue(e.target.value)
     setSelectedElement(null)
 
     if (e.target.value?.length >= MIN_QUERY_LENGTH) {
@@ -110,7 +106,7 @@ const HeaderSearch: FunctionComponent = () => {
         if (config) {
           history.push({
             ...config.to,
-            search: toSearchParams([[queryParam, inputValue.trim()]]).toString(),
+            search: toSearchParams([[queryParam, searchInputValue.trim()]]).toString(),
           })
         }
       }
@@ -119,7 +115,7 @@ const HeaderSearch: FunctionComponent = () => {
         document.activeElement?.blur()
       }
     },
-    [inputValue, selectedElement, searchBarFilterValue],
+    [searchInputValue, selectedElement, searchBarFilterValue],
   )
 
   const onBlur = () => {
@@ -130,16 +126,15 @@ const HeaderSearch: FunctionComponent = () => {
   }
 
   const onFocus = () => {
-    if (`inputValue`.length > 2) {
+    if (searchInputValue.length > 2) {
       setShowSuggestions(true)
-      fetchResults(inputValue)
+      fetchResults(searchInputValue)
     }
   }
 
   const onClear = () => {
     setShowSuggestions(false)
-    updateSearchQuery('')
-    setInputValue('')
+    updateSearchInputValue('')
   }
 
   return (
@@ -152,7 +147,7 @@ const HeaderSearch: FunctionComponent = () => {
         onChange={onChangeDebounced}
         onClear={onClear}
         onKeyDown={keyDown}
-        value={searchQuery}
+        value={searchInputValue}
         setSearchBarFilterValue={setSearchBarFilterValue}
         searchBarFilterValue={searchBarFilterValue}
       >
@@ -164,7 +159,7 @@ const HeaderSearch: FunctionComponent = () => {
             ref={ref}
             loading={loading}
             suggestions={results}
-            inputValue={inputValue}
+            inputValue={searchInputValue}
           />
         )}
       </SearchBar>
