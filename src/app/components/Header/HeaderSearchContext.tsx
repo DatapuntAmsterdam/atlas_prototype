@@ -15,6 +15,8 @@ const HeaderSearchContext = createNamedContext<HeaderSearchContextProps | null>(
   null,
 )
 
+export default HeaderSearchContext
+
 const HeaderSearchProvider: FunctionComponent = ({ children }) => {
   const [searchQuery] = useParam(queryParam)
   const [searchInputValue, setSearchInputValue] = useState<string>(searchQuery)
