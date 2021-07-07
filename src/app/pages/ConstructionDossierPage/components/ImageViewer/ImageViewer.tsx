@@ -42,6 +42,10 @@ const NavigationButtons = styled.div`
   pointer-events: all;
 `
 
+const CloseButton = styled(Button)`
+  pointer-events: all;
+`
+
 const ZoomControls = styled.div`
   pointer-events: all;
 `
@@ -260,7 +264,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
             ) : null
           }
           topRightComponent={
-            <Button
+            <CloseButton
               type="button"
               variant="blank"
               title="Bestand sluiten"
