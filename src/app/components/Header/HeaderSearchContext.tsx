@@ -7,7 +7,7 @@ import useParam from '../../utils/useParam'
 
 export interface HeaderSearchContextProps {
   searchInputValue: string
-  updateSearchInputValue: (input: string) => void
+  setSearchInputValue: (input: string) => void
 }
 
 const HeaderSearchContext = createNamedContext<HeaderSearchContextProps | null>(
@@ -21,12 +21,8 @@ const HeaderSearchProvider: FunctionComponent = ({ children }) => {
   const [searchQuery] = useParam(queryParam)
   const [searchInputValue, setSearchInputValue] = useState<string>(searchQuery)
 
-  const updateSearchInputValue = (query: string) => {
-    setSearchInputValue(query)
-  }
-
   return (
-    <HeaderSearchContext.Provider value={{ searchInputValue, updateSearchInputValue }}>
+    <HeaderSearchContext.Provider value={{ searchInputValue, setSearchInputValue }}>
       {children}
     </HeaderSearchContext.Provider>
   )

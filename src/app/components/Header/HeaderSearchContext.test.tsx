@@ -62,11 +62,11 @@ describe('HeaderSearchContext', () => {
   })
 
   it('updates the search query', () => {
-    const updateSearchInputValueMock = jest.fn()
+    const setSearchInputValueMock = jest.fn()
 
     const value: HeaderSearchContextProps = {
       searchInputValue: 'foobar',
-      updateSearchInputValue: updateSearchInputValueMock,
+      setSearchInputValue: setSearchInputValueMock,
     }
     const { result } = renderHook(() => useHeaderSearch(), {
       wrapper: ({ children }) => (
@@ -75,9 +75,9 @@ describe('HeaderSearchContext', () => {
     })
 
     act(() => {
-      result.current.updateSearchInputValue('foobar123')
+      result.current.setSearchInputValue('foobar123')
     })
 
-    expect(updateSearchInputValueMock).toHaveBeenCalledWith('foobar123')
+    expect(setSearchInputValueMock).toHaveBeenCalledWith('foobar123')
   })
 })

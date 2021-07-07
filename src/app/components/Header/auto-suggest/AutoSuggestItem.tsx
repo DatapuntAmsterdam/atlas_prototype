@@ -62,7 +62,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
   const [center] = useParam(centerParam)
   const location = useLocation()
 
-  const { updateSearchInputValue } = useHeaderSearch()
+  const { setSearchInputValue } = useHeaderSearch()
 
   const openEditorialSuggestion = (
     { id, slug }: { id: string; slug: string },
@@ -173,7 +173,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
   )
 
   const handleLinkClick = () => {
-    updateSearchInputValue(content)
+    setSearchInputValue(content)
     trackEvent({
       category: 'auto-suggest',
       name: content,

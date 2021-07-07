@@ -25,7 +25,7 @@ const ACTIVE_ITEM_CLASS = 'auto-suggest__dropdown-item--active'
 const HeaderSearch: FunctionComponent = () => {
   const history = useHistory()
 
-  const { searchInputValue, updateSearchInputValue } = useHeaderSearch()
+  const { searchInputValue, setSearchInputValue } = useHeaderSearch()
 
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -44,7 +44,7 @@ const HeaderSearch: FunctionComponent = () => {
         el.classList.remove(ACTIVE_ITEM_CLASS)
       })
       activeElement.classList.add(ACTIVE_ITEM_CLASS)
-      updateSearchInputValue(activeElement.innerText)
+      setSearchInputValue(activeElement.innerText)
       setSelectedElement(activeElement)
     },
     {
@@ -74,7 +74,7 @@ const HeaderSearch: FunctionComponent = () => {
   )
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateSearchInputValue(e.target.value)
+    setSearchInputValue(e.target.value)
     setSelectedElement(null)
 
     if (e.target.value?.length >= MIN_QUERY_LENGTH) {
@@ -133,7 +133,7 @@ const HeaderSearch: FunctionComponent = () => {
 
   const onClear = () => {
     setShowSuggestions(false)
-    updateSearchInputValue('')
+    setSearchInputValue('')
   }
 
   return (
