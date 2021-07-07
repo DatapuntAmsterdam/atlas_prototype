@@ -39,6 +39,11 @@ const ImageViewerContainer = styled(OSDViewer)`
 
 const NavigationButtons = styled.div`
   display: flex;
+  pointer-events: all;
+`
+
+const CloseButton = styled(Button)`
+  pointer-events: all;
 `
 
 const ZoomControls = styled.div`
@@ -259,7 +264,7 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
             ) : null
           }
           topRightComponent={
-            <Button
+            <CloseButton
               type="button"
               variant="blank"
               title="Bestand sluiten"

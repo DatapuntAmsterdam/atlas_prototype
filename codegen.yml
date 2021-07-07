@@ -1,0 +1,12 @@
+overwrite: true
+schema: ${GRAPHQL_ENDPOINT:https://api.data.amsterdam.nl/cms_search/graphql/}
+documents: null
+generates:
+  src/api/cms_search/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
+      - add:
+          content: '/* eslint-disable */'
+    config:
+      useTypeImports: true
