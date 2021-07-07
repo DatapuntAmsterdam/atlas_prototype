@@ -1,90 +1,103 @@
 {
   "_links": {
-    "self": { "href": "https://acc.api.data.amsterdam.nl/iiif-metadata/bouwdossier/SA84102/" }
+      "self": {
+          "href": "https://acc.api.data.amsterdam.nl/iiif-metadata/bouwdossier/SA84102/"
+      }
   },
-  "titel": "Some address or another 646 A - 646 G",
-  "_display": "84102 - Some address or another 646 A - 646 G",
+  "titel": "Keizersgracht 646 A - 646 G",
+  "_display": "84102 - Keizersgracht 646 A - 646 G",
   "dossiernr": 84102,
   "stadsdeel": "SA",
   "datering": "1994-01-01",
   "dossier_type": "adresbeschikking",
+  "gebruiksdoel": "Woonfunctie",
+  "bwt_nummer": "42285/01/0438/1993",
   "dossier_status": null,
   "olo_liaan_nummer": null,
   "access": "PUBLIC",
+  "access_restricted_until": null,
   "activiteiten": [],
   "documenten": [
-    {
-      "subdossier_titel": "Huisnummerbeschikking, documenten",
-      "barcode": "SA00553016",
-      "bestanden": [
-        {
-          "filename": "SA-84102-SA00553016_00001.jpg",
-          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-84102-SA00553016_00001.jpg"
-        },
-        {
-          "filename": "SA-84102-SA00553016_00002.jpg",
-          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-84102-SA00553016_00002.jpg"
-        },
-        {
-          "filename": "SA-84102-SA00553016_00003.jpg",
-          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-84102-SA00553016_00003.jpg"
-        },
-        {
-          "filename": "SA-84102-SA00553016_00004.jpg",
-          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-84102-SA00553016_00004.jpg"
-        }
-      ],
-      "oorspronkelijk_pad": [],
-      "document_omschrijving": null,
-      "access": "PUBLIC"
-    }
+      {
+          "subdossier_titel": "Huisnummerbeschikking, documenten",
+          "barcode": "SA00553016",
+          "bestanden": [
+              {
+                  "filename": "SA-84102-SA00553016_00001.jpg",
+                  "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-84102-SA00553016_00001.jpg"
+              },
+              {
+                  "filename": "SA-84102-SA00553016_00002.jpg",
+                  "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-84102-SA00553016_00002.jpg"
+              },
+              {
+                  "filename": "SA-84102-SA00553016_00003.jpg",
+                  "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-84102-SA00553016_00003.jpg"
+              },
+              {
+                  "filename": "SA-84102-SA00553016_00004.jpg",
+                  "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-84102-SA00553016_00004.jpg"
+              }
+          ],
+          "oorspronkelijk_pad": [],
+          "document_omschrijving": null,
+          "access": "PUBLIC",
+          "access_restricted_until": null,
+          "copyright": "N",
+          "copyright_until": null,
+          "copyright_holders": null,
+          "copyright_manufacturers": null
+      }
   ],
   "adressen": [
-    {
-      "straat": "Some address or another",
-      "huisnummer_van": 646,
-      "huisnummer_tot": 646,
-      "nummeraanduidingen": [
-        "0363200000447583",
-        "0363200000447588",
-        "0363200000447585",
-        "0363200000447587",
-        "0363200000447582",
-        "0363200000447584",
-        "0363200000447586"
-      ],
-      "nummeraanduidingen_label": [
-        "Some address or whatnot 646B",
-        "Some address or whatnot 646G",
-        "Some address or whatnot 646D",
-        "Some address or whatnot 646F",
-        "Some address or whatnot 646A",
-        "Some address or whatnot 646C",
-        "Some address or whatnot 646E"
-      ],
-      "panden": ["0363100012165075"],
-      "verblijfsobjecten": [
-        "0363010000725808",
-        "0363010000788579",
-        "0363010000725776",
-        "0363010000705621",
-        "0363010000949357",
-        "0363010000768809",
-        "0363010000686758"
-      ],
-      "verblijfsobjecten_label": [
-        "Some address or whatnot 646E",
-        "Some address or whatnot 646G",
-        "Some address or whatnot 646D",
-        "Some address or whatnot 646C",
-        "Some address or whatnot 646A",
-        "Some address or whatnot 646F",
-        "Some address or whatnot 646B"
-      ],
-      "openbareruimte_id": "0363300000003984",
-      "huisnummer_letter": null,
-      "huisnummer_toevoeging": null,
-      "locatie_aanduiding": null
-    }
-  ]
+      {
+          "straat": "Keizersgracht",
+          "huisnummer_van": 646,
+          "huisnummer_tot": 646,
+          "nummeraanduidingen": [
+              "0363200000447582",
+              "0363200000447583",
+              "0363200000447584",
+              "0363200000447585",
+              "0363200000447586",
+              "0363200000447587",
+              "0363200000447588"
+          ],
+          "nummeraanduidingen_label": [
+              "Keizersgracht 646A",
+              "Keizersgracht 646B",
+              "Keizersgracht 646C",
+              "Keizersgracht 646D",
+              "Keizersgracht 646E",
+              "Keizersgracht 646F",
+              "Keizersgracht 646G"
+          ],
+          "panden": [
+              "0363100012165075"
+          ],
+          "verblijfsobjecten": [
+              "0363010000686758",
+              "0363010000705621",
+              "0363010000725776",
+              "0363010000725808",
+              "0363010000768809",
+              "0363010000788579",
+              "0363010000949357"
+          ],
+          "verblijfsobjecten_label": [
+              "Keizersgracht 646A",
+              "Keizersgracht 646B",
+              "Keizersgracht 646C",
+              "Keizersgracht 646D",
+              "Keizersgracht 646E",
+              "Keizersgracht 646F",
+              "Keizersgracht 646G"
+          ],
+          "openbareruimte_id": "0363300000003984",
+          "huisnummer_letter": null,
+          "huisnummer_toevoeging": null,
+          "locatie_aanduiding": null
+      }
+  ],
+  "source": "EDEPOT"
 }
