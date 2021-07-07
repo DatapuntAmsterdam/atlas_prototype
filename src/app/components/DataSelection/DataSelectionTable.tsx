@@ -24,7 +24,7 @@ const DataSelectionTable: FunctionComponent<DataSelectionTableProps> = ({ conten
       <thead className="c-ds-table__head">
         <tr className="c-ds-table__row c-ds-table__row--link">
           {content.head.map((field) => (
-            <th key={field} className="c-ds-table__cell">
+            <th key={field} className="c-ds-table__cell" scope="col">
               {field}
             </th>
           ))}
