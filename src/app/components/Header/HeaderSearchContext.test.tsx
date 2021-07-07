@@ -34,31 +34,21 @@ describe('HeaderSearchContext', () => {
   it('provides an empty value if the URL param is empty', () => {
     useParamMock.mockReturnValue(['', () => {}])
 
-    const Tests = () => {
-      expect(useHeaderSearch().searchInputValue).toEqual('')
-      return null
-    }
+    const { result } = renderHook(() => useHeaderSearch(), {
+      wrapper: ({ children }) => <HeaderSearchProvider>{children}</HeaderSearchProvider>,
+    })
 
-    render(
-      <HeaderSearchProvider>
-        <Tests />
-      </HeaderSearchProvider>,
-    )
+    expect(result.current.searchInputValue).toEqual('')
   })
 
   it('uses the URL param as search query', () => {
     useParamMock.mockReturnValue(['foobar', () => {}])
 
-    const Tests = () => {
-      expect(useHeaderSearch().searchInputValue ?? '').toEqual('foobar')
-      return null
-    }
+    const { result } = renderHook(() => useHeaderSearch(), {
+      wrapper: ({ children }) => <HeaderSearchProvider>{children}</HeaderSearchProvider>,
+    })
 
-    render(
-      <HeaderSearchProvider>
-        <Tests />
-      </HeaderSearchProvider>,
-    )
+    expect(result.current.searchInputValue ?? '').toEqual('foobar')
   })
 
   it('updates the search query', () => {
