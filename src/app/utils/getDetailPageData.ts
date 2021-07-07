@@ -4,7 +4,7 @@ const URL_SUBTYPES_MAPPING = {
   ligplaatsen: 'ligplaats',
 }
 
-export default (endpoint: string) => {
+const getDetailPageData = (endpoint: string) => {
   // TODO: Add endpoint mapping when new router is introduced
   const url = endpoint
     .split('?')[0] // Remove query
@@ -24,3 +24,5 @@ export default (endpoint: string) => {
     id: matches[3],
   }
 }
+
+export default getDetailPageData
