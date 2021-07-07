@@ -1,6 +1,7 @@
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 import { HotModuleReplacementPlugin } from 'webpack'
 import DeadCodePlugin from 'webpack-deadcode-plugin'
+import Dotenv from 'dotenv-webpack'
 import { merge } from 'webpack-merge'
 import type { WebpackConfiguration } from './webpack.common'
 import { createConfig, distPath } from './webpack.common'
@@ -33,6 +34,7 @@ export default merge<WebpackConfiguration>(createConfig({ mode: 'development' })
     usedExports: true,
   },
   plugins: [
+    new Dotenv(),
     new HotModuleReplacementPlugin(),
     new ReactRefreshWebpackPlugin(),
     new DeadCodePlugin({
