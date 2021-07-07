@@ -9,12 +9,11 @@ import type {
   BouwdossierAccess,
   Single as Bouwdossier,
 } from '../../../../../api/iiif-metadata/bouwdossier'
-import { getScopes, isAuthenticated, SCOPES } from '../../../../../shared/services/auth/auth'
-import { FEATURE_KEYCLOAK_AUTH, isFeatureEnabled } from '../../../../features'
+import { getScopes, SCOPES } from '../../../../../shared/services/auth/auth'
 import { toDataDetail } from '../../../../links'
+import { useAuthToken } from '../../AuthTokenContext'
 import formatAddresses from '../../utils/formatAddresses'
 import hasUserRights from '../../utils/hasUserRights'
-import { useAuthToken } from '../../AuthTokenContext'
 import ContentBlock, { DefinitionList, DefinitionListItem, SubHeading } from '../ContentBlock'
 import DocumentDetails from '../DocumentDetails'
 import DossierDetailsModal from '../DossierDetailsModal'
@@ -58,9 +57,6 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
     [dossier.documenten],
   )
 
-  // Only allow downloads from a signed in user if authenticated with Keycloak.
-  // TODO: This logic can be removed once we switch to Keycloak entirely.
-  const disableDownload = isAuthenticated() && !isFeatureEnabled(FEATURE_KEYCLOAK_AUTH)
   // Check user rights by the primary dossier object's access prop or if every child document is 'RESTRICTED'
   const restricted =
     dossier.access === 'RESTRICTED' ||
@@ -138,7 +134,7 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
           ) : null}
         </DefinitionList>
 
-        {hasRights && !disableDownload && !restricted && (
+        {hasRights && !restricted && (
           <DownloadButton
             type="button"
             variant="primary"

@@ -1,9 +1,8 @@
 /* eslint-disable global-require,@typescript-eslint/no-var-requires */
 
 import { rest } from 'msw'
-import environment from '../src/environment'
 import joinUrl from '../src/app/utils/joinUrl'
-import { isAuthenticated } from '../src/shared/services/auth/auth'
+import environment from '../src/environment'
 
 const typeaheadUrl = joinUrl([environment.API_ROOT, 'typeahead'])
 const iiifMetadataUrl = joinUrl([environment.API_ROOT, 'iiif-metadata/bouwdossier', ':id'])
@@ -14,10 +13,8 @@ const stadsdeelUrl = joinUrl([environment.API_ROOT, 'gebieden/stadsdeel', ':id']
 const handlers = [
   rest.get(typeaheadUrl, async (req, res, ctx) => {
     const typeaheadFixture = require('../src/api/typeahead/typeahead.json')
-    const typeaheadAuthFixture = require('../src/api/typeahead/typeahead_auth.json')
 
-    const fixture = isAuthenticated() ? typeaheadAuthFixture : typeaheadFixture
-    return res(ctx.json(fixture))
+    return res(ctx.json(typeaheadFixture))
   }),
 
   rest.get(iiifMetadataUrl, async (req, res, ctx) => {

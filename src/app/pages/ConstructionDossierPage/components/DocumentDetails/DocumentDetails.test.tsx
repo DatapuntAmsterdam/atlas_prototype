@@ -7,8 +7,7 @@ import withAppContext from '../../../../utils/withAppContext'
 import AuthTokenContext, { DecodedToken } from '../../AuthTokenContext'
 import FilesGallery from '../FilesGallery'
 import DocumentDetails from './DocumentDetails'
-import { SCOPES } from '../../../../../shared/services/auth/auth-legacy'
-import { getScopes } from '../../../../../shared/services/auth/auth'
+import { SCOPES, getScopes } from '../../../../../shared/services/auth/auth'
 
 jest.mock('../FilesGallery')
 jest.mock('../../../../../shared/services/auth/auth')

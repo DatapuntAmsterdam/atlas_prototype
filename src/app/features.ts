@@ -1,8 +1,3 @@
-/**
- * The Keycloak feature, when enabled the default login will be replaced with Keycloak.
- */
-export const FEATURE_KEYCLOAK_AUTH = 'KEYCLOAK_AUTH'
-
 const STORAGE_KEY = 'features'
 
 /**
