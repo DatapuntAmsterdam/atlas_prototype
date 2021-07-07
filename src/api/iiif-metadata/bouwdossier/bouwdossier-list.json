@@ -1,730 +1,755 @@
 {
   "_links": {
-    "self": {
-      "href": "https://api.data.amsterdam.nl/iiif-metadata/bouwdossier/?format=json"
-    },
-    "next": {
-      "href": "https://api.data.amsterdam.nl/iiif-metadata/bouwdossier/?format=json&page=2"
-    },
-    "previous": {
-      "href": null
-    }
+      "self": {
+          "href": "https://acc.api.data.amsterdam.nl/iiif-metadata/bouwdossier/"
+      },
+      "next": {
+          "href": "https://acc.api.data.amsterdam.nl/iiif-metadata/bouwdossier/?page=2"
+      },
+      "previous": {
+          "href": null
+      }
   },
-  "count": 314166,
+  "count": 521817,
   "results": [
-    {
-      "_links": {
-        "self": {
-          "href": "https://api.data.amsterdam.nl/iiif-metadata/bouwdossier/SA1/?format=json"
-        }
+      {
+          "_links": {
+              "self": {
+                  "href": "https://acc.api.data.amsterdam.nl/iiif-metadata/bouwdossier/SA1/"
+              }
+          },
+          "titel": "Haarlemmerdijk 55",
+          "_display": "1 - Haarlemmerdijk 55",
+          "dossiernr": 1,
+          "stadsdeel": "SA",
+          "datering": "1918-01-01",
+          "dossier_type": "verbouwing",
+          "gebruiksdoel": "Industriefunctie",
+          "bwt_nummer": "00003/00/1142/1918",
+          "dossier_status": null,
+          "olo_liaan_nummer": null,
+          "access": "PUBLIC",
+          "access_restricted_until": null,
+          "activiteiten": [],
+          "documenten": [
+              {
+                  "subdossier_titel": "Aanvraag en behandeling",
+                  "barcode": "SA00000001",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00001-SA00000001_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000001_00001.jpg"
+                      },
+                      {
+                          "filename": "SA-00001-SA00000001_00002.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000001_00002.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Aanvraag en behandeling",
+                  "barcode": "SA00000002",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00001-SA00000002_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000002_00001.jpg"
+                      },
+                      {
+                          "filename": "SA-00001-SA00000002_00002.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000002_00002.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Tekeningen",
+                  "barcode": "SA00000003",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00001-SA00000003_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000003_00001.jpg"
+                      },
+                      {
+                          "filename": "SA-00001-SA00000003_00002.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000003_00002.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Voortgang, documenten",
+                  "barcode": "SA00000004",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00001-SA00000004_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000004_00001.jpg"
+                      },
+                      {
+                          "filename": "SA-00001-SA00000004_00002.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000004_00002.jpg"
+                      },
+                      {
+                          "filename": "SA-00001-SA00000004_00003.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000004_00003.jpg"
+                      },
+                      {
+                          "filename": "SA-00001-SA00000004_00004.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000004_00004.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Voortgang, documenten",
+                  "barcode": "SA00000005",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00001-SA00000005_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000005_00001.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Voortgang, documenten",
+                  "barcode": "SA00000006",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00001-SA00000006_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000006_00001.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              }
+          ],
+          "adressen": [
+              {
+                  "straat": "Haarlemmerdijk",
+                  "huisnummer_van": 55,
+                  "huisnummer_tot": 55,
+                  "nummeraanduidingen": [
+                      "0363200000118146",
+                      "0363200000118147",
+                      "0363200000118148"
+                  ],
+                  "nummeraanduidingen_label": [
+                      "Haarlemmerdijk 55A",
+                      "Haarlemmerdijk 55B",
+                      "Haarlemmerdijk 55C"
+                  ],
+                  "panden": [
+                      "0363100012177587"
+                  ],
+                  "verblijfsobjecten": [
+                      "0363010000656008",
+                      "0363010000656009",
+                      "0363010000656010"
+                  ],
+                  "verblijfsobjecten_label": [
+                      "Haarlemmerdijk 55A",
+                      "Haarlemmerdijk 55B",
+                      "Haarlemmerdijk 55C"
+                  ],
+                  "openbareruimte_id": "0363300000003780",
+                  "huisnummer_letter": null,
+                  "huisnummer_toevoeging": null,
+                  "locatie_aanduiding": null
+              }
+          ],
+          "source": "EDEPOT"
       },
-      "titel": "Haarlemmerdijk 55",
-      "_display": "1 - Haarlemmerdijk 55",
-      "dossiernr": 1,
-      "stadsdeel": "SA",
-      "datering": "1918-01-01",
-      "dossier_type": "verbouwing",
-      "gebruiksdoel": "Industriefunctie",
-      "bwt_nummer": null,
-      "dossier_status": null,
-      "olo_liaan_nummer": null,
-      "access": "PUBLIC",
-      "access_restricted_until": null,
-      "activiteiten": [],
-      "documenten": [
-        {
-          "subdossier_titel": "Aanvraag en behandeling",
-          "barcode": "SA00000001",
-          "bestanden": [
-            {
-              "filename": "SA-00001-SA00000001_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000001_00001.jpg"
-            },
-            {
-              "filename": "SA-00001-SA00000001_00002.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000001_00002.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
+      {
+          "_links": {
+              "self": {
+                  "href": "https://acc.api.data.amsterdam.nl/iiif-metadata/bouwdossier/SA2/"
+              }
+          },
+          "titel": "Reguliersbreestraat 16 - 22",
+          "_display": "2 - Reguliersbreestraat 16 - 22",
+          "dossiernr": 2,
+          "stadsdeel": "SA",
+          "datering": "1928-01-01",
+          "dossier_type": "verbouwing",
+          "gebruiksdoel": "Bijeenkomstfunctie",
+          "bwt_nummer": "00017/00/1034/1928",
+          "dossier_status": null,
+          "olo_liaan_nummer": null,
           "access": "PUBLIC",
           "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Aanvraag en behandeling",
-          "barcode": "SA00000002",
-          "bestanden": [
-            {
-              "filename": "SA-00001-SA00000002_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000002_00001.jpg"
-            },
-            {
-              "filename": "SA-00001-SA00000002_00002.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000002_00002.jpg"
-            }
+          "activiteiten": [],
+          "documenten": [
+              {
+                  "subdossier_titel": "Voortgang, documenten",
+                  "barcode": "SA00000578",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00002-SA00000578_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000578_00001.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000578_00002.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000578_00002.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000578_00003.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000578_00003.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000578_00004.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000578_00004.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000578_00005.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000578_00005.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000578_00006.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000578_00006.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000578_00007.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000578_00007.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000578_00008.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000578_00008.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Aanvraag en behandeling",
+                  "barcode": "SA00000357",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00002-SA00000357_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000357_00001.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Aanvraag en behandeling",
+                  "barcode": "SA00000363",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00002-SA00000363_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000363_00001.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Aanvraag en behandeling",
+                  "barcode": "SA00001268",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00002-SA00001268_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00001268_00001.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00001268_00002.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00001268_00002.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Tekeningen",
+                  "barcode": "SA00000397",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00002-SA00000397_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000397_00001.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000397_00002.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000397_00002.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Tekeningen",
+                  "barcode": "SA00000404",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00002-SA00000404_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000404_00001.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000404_00002.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000404_00002.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Tekeningen",
+                  "barcode": "SA00000436",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00002-SA00000436_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000436_00001.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000436_00002.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000436_00002.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Tekeningen",
+                  "barcode": "SA00000478",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00002-SA00000478_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000478_00001.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000478_00002.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000478_00002.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Tekeningen",
+                  "barcode": "SA00000483",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00002-SA00000483_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000483_00001.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000483_00002.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000483_00002.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Adviezen, brandweer",
+                  "barcode": "SA00000599",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00002-SA00000599_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000599_00001.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000599_00002.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000599_00002.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000599_00003.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000599_00003.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000599_00004.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000599_00004.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000599_00005.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000599_00005.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000599_00006.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000599_00006.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000599_00007.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000599_00007.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Adviezen, welstand",
+                  "barcode": "SA00000600",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00002-SA00000600_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000600_00001.jpg"
+                      },
+                      {
+                          "filename": "SA-00002-SA00000600_00002.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000600_00002.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              }
           ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Tekeningen",
-          "barcode": "SA00000003",
-          "bestanden": [
-            {
-              "filename": "SA-00001-SA00000003_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000003_00001.jpg"
-            },
-            {
-              "filename": "SA-00001-SA00000003_00002.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000003_00002.jpg"
-            }
+          "adressen": [
+              {
+                  "straat": "Reguliersbreestraat",
+                  "huisnummer_van": 16,
+                  "huisnummer_tot": 22,
+                  "nummeraanduidingen": [
+                      "0363200000248350",
+                      "0363200000494304",
+                      "0363200000494305",
+                      "0363200003761441"
+                  ],
+                  "nummeraanduidingen_label": [
+                      "Reguliersbreestraat 18",
+                      "Reguliersbreestraat 20",
+                      "Reguliersbreestraat 22A",
+                      "Reguliersbreestraat 22B"
+                  ],
+                  "panden": [
+                      "0363100012168183"
+                  ],
+                  "verblijfsobjecten": [
+                      "0363010000789036",
+                      "0363010001010891",
+                      "0363010001010892",
+                      "0363010003761567"
+                  ],
+                  "verblijfsobjecten_label": [
+                      "Reguliersbreestraat 18",
+                      "Reguliersbreestraat 20",
+                      "Reguliersbreestraat 22A",
+                      "Reguliersbreestraat 22B"
+                  ],
+                  "openbareruimte_id": "0363300000004627",
+                  "huisnummer_letter": null,
+                  "huisnummer_toevoeging": null,
+                  "locatie_aanduiding": null
+              }
           ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Voortgang, documenten",
-          "barcode": "SA00000004",
-          "bestanden": [
-            {
-              "filename": "SA-00001-SA00000004_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000004_00001.jpg"
-            },
-            {
-              "filename": "SA-00001-SA00000004_00002.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000004_00002.jpg"
-            },
-            {
-              "filename": "SA-00001-SA00000004_00003.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000004_00003.jpg"
-            },
-            {
-              "filename": "SA-00001-SA00000004_00004.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000004_00004.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Voortgang, documenten",
-          "barcode": "SA00000005",
-          "bestanden": [
-            {
-              "filename": "SA-00001-SA00000005_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000005_00001.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Voortgang, documenten",
-          "barcode": "SA00000006",
-          "bestanden": [
-            {
-              "filename": "SA-00001-SA00000006_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00001-SA00000006_00001.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        }
-      ],
-      "adressen": [
-        {
-          "straat": "Haarlemmerdijk",
-          "huisnummer_van": 55,
-          "huisnummer_tot": 55,
-          "nummeraanduidingen": [
-            "0363200000118146",
-            "0363200000118148",
-            "0363200000118147"
-          ],
-          "nummeraanduidingen_label": [
-            "Haarlemmerdijk 55A",
-            "Haarlemmerdijk 55C",
-            "Haarlemmerdijk 55B"
-          ],
-          "panden": [
-            "0363100012177587"
-          ],
-          "verblijfsobjecten": [
-            "0363010000656008",
-            "0363010000656010",
-            "0363010000656009"
-          ],
-          "verblijfsobjecten_label": [
-            "Haarlemmerdijk 55A",
-            "Haarlemmerdijk 55C",
-            "Haarlemmerdijk 55B"
-          ],
-          "openbareruimte_id": "0363300000003780",
-          "huisnummer_letter": null,
-          "huisnummer_toevoeging": null,
-          "locatie_aanduiding": null
-        }
-      ]
-    },
-    {
-      "_links": {
-        "self": {
-          "href": "https://api.data.amsterdam.nl/iiif-metadata/bouwdossier/SA2/?format=json"
-        }
+          "source": "EDEPOT"
       },
-      "titel": "Reguliersbreestraat 16 - 22",
-      "_display": "2 - Reguliersbreestraat 16 - 22",
-      "dossiernr": 2,
-      "stadsdeel": "SA",
-      "datering": "1928-01-01",
-      "dossier_type": "verbouwing",
-      "gebruiksdoel": "Bijeenkomstfunctie",
-      "bwt_nummer": null,
-      "dossier_status": null,
-      "olo_liaan_nummer": null,
-      "access": "PUBLIC",
-      "access_restricted_until": null,
-      "activiteiten": [],
-      "documenten": [
-        {
-          "subdossier_titel": "Aanvraag en behandeling",
-          "barcode": "SA00000357",
-          "bestanden": [
-            {
-              "filename": "SA-00002-SA00000357_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000357_00001.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
+      {
+          "_links": {
+              "self": {
+                  "href": "https://acc.api.data.amsterdam.nl/iiif-metadata/bouwdossier/SA3/"
+              }
+          },
+          "titel": "Hoogte Kadijk 40",
+          "_display": "3 - Hoogte Kadijk 40",
+          "dossiernr": 3,
+          "stadsdeel": "SA",
+          "datering": "2003-01-01",
+          "dossier_type": "verbouwing",
+          "gebruiksdoel": "Woonfunctie",
+          "bwt_nummer": "00152/82/0024/2003",
+          "dossier_status": null,
+          "olo_liaan_nummer": null,
           "access": "PUBLIC",
           "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Aanvraag en behandeling",
-          "barcode": "SA00000363",
-          "bestanden": [
-            {
-              "filename": "SA-00002-SA00000363_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000363_00001.jpg"
-            }
+          "activiteiten": [],
+          "documenten": [
+              {
+                  "subdossier_titel": "Aanvraag en behandeling",
+                  "barcode": "SA00000007",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00003-SA00000007_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000007_00001.jpg"
+                      },
+                      {
+                          "filename": "SA-00003-SA00000007_00002.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000007_00002.jpg"
+                      },
+                      {
+                          "filename": "SA-00003-SA00000007_00003.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000007_00003.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Aanvraag en behandeling",
+                  "barcode": "SA00000012",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00003-SA00000012_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000012_00001.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "RESTRICTED",
+                  "access_restricted_until": "2043-01-01",
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Aanvraag en behandeling",
+                  "barcode": "SA00000022",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00003-SA00000022_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000022_00001.jpg"
+                      },
+                      {
+                          "filename": "SA-00003-SA00000022_00002.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000022_00002.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Tekeningen",
+                  "barcode": "SA00000027",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00003-SA00000027_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000027_00001.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Tekeningen",
+                  "barcode": "SA00000030",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00003-SA00000030_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000030_00001.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Voortgang, documenten",
+                  "barcode": "SA00458625",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00003-SA00458625_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00458625_00001.jpg"
+                      },
+                      {
+                          "filename": "SA-00003-SA00458625_00002.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00458625_00002.jpg"
+                      },
+                      {
+                          "filename": "SA-00003-SA00458625_00003.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00458625_00003.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              },
+              {
+                  "subdossier_titel": "Adviezen, brandweer",
+                  "barcode": "SA00000042",
+                  "bestanden": [
+                      {
+                          "filename": "SA-00003-SA00000042_00001.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000042_00001.jpg"
+                      },
+                      {
+                          "filename": "SA-00003-SA00000042_00002.jpg",
+                          "url": "https://acc.images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000042_00002.jpg"
+                      }
+                  ],
+                  "oorspronkelijk_pad": [],
+                  "document_omschrijving": null,
+                  "access": "PUBLIC",
+                  "access_restricted_until": null,
+                  "copyright": "N",
+                  "copyright_until": null,
+                  "copyright_holders": null,
+                  "copyright_manufacturers": null
+              }
           ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Aanvraag en behandeling",
-          "barcode": "SA00001268",
-          "bestanden": [
-            {
-              "filename": "SA-00002-SA00001268_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00001268_00001.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00001268_00002.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00001268_00002.jpg"
-            }
+          "adressen": [
+              {
+                  "straat": "Hoogte Kadijk",
+                  "huisnummer_van": 40,
+                  "huisnummer_tot": 40,
+                  "nummeraanduidingen": [
+                      "0363200000134811",
+                      "0363200000134812",
+                      "0363200000134813",
+                      "0363200000134814"
+                  ],
+                  "nummeraanduidingen_label": [
+                      "Hoogte Kadijk 40-1",
+                      "Hoogte Kadijk 40-2",
+                      "Hoogte Kadijk 40-3",
+                      "Hoogte Kadijk 40-H"
+                  ],
+                  "panden": [
+                      "0363100012181226"
+                  ],
+                  "verblijfsobjecten": [
+                      "0363010000672828",
+                      "0363010000672829",
+                      "0363010000672830",
+                      "0363010000672831"
+                  ],
+                  "verblijfsobjecten_label": [
+                      "Hoogte Kadijk 40-1",
+                      "Hoogte Kadijk 40-2",
+                      "Hoogte Kadijk 40-3",
+                      "Hoogte Kadijk 40-H"
+                  ],
+                  "openbareruimte_id": "0363300000003592",
+                  "huisnummer_letter": null,
+                  "huisnummer_toevoeging": null,
+                  "locatie_aanduiding": null
+              }
           ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Adviezen, brandweer",
-          "barcode": "SA00000599",
-          "bestanden": [
-            {
-              "filename": "SA-00002-SA00000599_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000599_00001.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000599_00002.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000599_00002.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000599_00003.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000599_00003.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000599_00004.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000599_00004.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000599_00005.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000599_00005.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000599_00006.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000599_00006.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000599_00007.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000599_00007.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Adviezen, welstand",
-          "barcode": "SA00000600",
-          "bestanden": [
-            {
-              "filename": "SA-00002-SA00000600_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000600_00001.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000600_00002.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000600_00002.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Tekeningen",
-          "barcode": "SA00000397",
-          "bestanden": [
-            {
-              "filename": "SA-00002-SA00000397_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000397_00001.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000397_00002.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000397_00002.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Tekeningen",
-          "barcode": "SA00000404",
-          "bestanden": [
-            {
-              "filename": "SA-00002-SA00000404_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000404_00001.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000404_00002.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000404_00002.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Tekeningen",
-          "barcode": "SA00000436",
-          "bestanden": [
-            {
-              "filename": "SA-00002-SA00000436_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000436_00001.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000436_00002.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000436_00002.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Tekeningen",
-          "barcode": "SA00000478",
-          "bestanden": [
-            {
-              "filename": "SA-00002-SA00000478_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000478_00001.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000478_00002.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000478_00002.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Tekeningen",
-          "barcode": "SA00000483",
-          "bestanden": [
-            {
-              "filename": "SA-00002-SA00000483_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000483_00001.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000483_00002.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000483_00002.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Voortgang, documenten",
-          "barcode": "SA00000578",
-          "bestanden": [
-            {
-              "filename": "SA-00002-SA00000578_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000578_00001.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000578_00002.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000578_00002.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000578_00003.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000578_00003.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000578_00004.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000578_00004.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000578_00005.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000578_00005.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000578_00006.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000578_00006.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000578_00007.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000578_00007.jpg"
-            },
-            {
-              "filename": "SA-00002-SA00000578_00008.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00002-SA00000578_00008.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        }
-      ],
-      "adressen": [
-        {
-          "straat": "Reguliersbreestraat",
-          "huisnummer_van": 16,
-          "huisnummer_tot": 22,
-          "nummeraanduidingen": [],
-          "nummeraanduidingen_label": [],
-          "panden": [],
-          "verblijfsobjecten": [],
-          "verblijfsobjecten_label": [],
-          "openbareruimte_id": "0363300000004627",
-          "huisnummer_letter": null,
-          "huisnummer_toevoeging": null,
-          "locatie_aanduiding": null
-        }
-      ]
-    },
-    {
-      "_links": {
-        "self": {
-          "href": "https://api.data.amsterdam.nl/iiif-metadata/bouwdossier/SA3/?format=json"
-        }
-      },
-      "titel": "Hoogte Kadijk 40",
-      "_display": "3 - Hoogte Kadijk 40",
-      "dossiernr": 3,
-      "stadsdeel": "SA",
-      "datering": "2003-01-01",
-      "dossier_type": "verbouwing",
-      "gebruiksdoel": "Woonfunctie",
-      "bwt_nummer": null,
-      "dossier_status": null,
-      "olo_liaan_nummer": null,
-      "access": "PUBLIC",
-      "access_restricted_until": null,
-      "activiteiten": [],
-      "documenten": [
-        {
-          "subdossier_titel": "Aanvraag en behandeling",
-          "barcode": "SA00000007",
-          "bestanden": [
-            {
-              "filename": "SA-00003-SA00000007_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000007_00001.jpg"
-            },
-            {
-              "filename": "SA-00003-SA00000007_00002.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000007_00002.jpg"
-            },
-            {
-              "filename": "SA-00003-SA00000007_00003.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000007_00003.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Aanvraag en behandeling",
-          "barcode": "SA00000012",
-          "bestanden": [
-            {
-              "filename": "SA-00003-SA00000012_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000012_00001.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "RESTRICTED",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Aanvraag en behandeling",
-          "barcode": "SA00000022",
-          "bestanden": [
-            {
-              "filename": "SA-00003-SA00000022_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000022_00001.jpg"
-            },
-            {
-              "filename": "SA-00003-SA00000022_00002.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000022_00002.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Adviezen, brandweer",
-          "barcode": "SA00000042",
-          "bestanden": [
-            {
-              "filename": "SA-00003-SA00000042_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000042_00001.jpg"
-            },
-            {
-              "filename": "SA-00003-SA00000042_00002.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000042_00002.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Tekeningen",
-          "barcode": "SA00000027",
-          "bestanden": [
-            {
-              "filename": "SA-00003-SA00000027_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000027_00001.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Tekeningen",
-          "barcode": "SA00000030",
-          "bestanden": [
-            {
-              "filename": "SA-00003-SA00000030_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00000030_00001.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        },
-        {
-          "subdossier_titel": "Voortgang, documenten",
-          "barcode": "SA00458625",
-          "bestanden": [
-            {
-              "filename": "SA-00003-SA00458625_00001.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00458625_00001.jpg"
-            },
-            {
-              "filename": "SA-00003-SA00458625_00002.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00458625_00002.jpg"
-            },
-            {
-              "filename": "SA-00003-SA00458625_00003.jpg",
-              "url": "https://images.data.amsterdam.nl/iiif/2/edepot:SA-00003-SA00458625_00003.jpg"
-            }
-          ],
-          "oorspronkelijk_pad": [],
-          "document_omschrijving": null,
-          "access": "PUBLIC",
-          "access_restricted_until": null,
-          "copyright": "N",
-          "copyright_until": null,
-          "copyright_holders": null,
-          "copyright_manufacturers": null
-        }
-      ],
-      "adressen": [
-        {
-          "straat": "Hoogte Kadijk",
-          "huisnummer_van": 40,
-          "huisnummer_tot": 40,
-          "nummeraanduidingen": [
-            "0363200000134811",
-            "0363200000134813",
-            "0363200000134812",
-            "0363200000134814"
-          ],
-          "nummeraanduidingen_label": [
-            "Hoogte Kadijk 40-H",
-            "Hoogte Kadijk 40-2",
-            "Hoogte Kadijk 40-1",
-            "Hoogte Kadijk 40-3"
-          ],
-          "panden": [
-            "0363100012181226"
-          ],
-          "verblijfsobjecten": [
-            "0363010000672828",
-            "0363010000672830",
-            "0363010000672829",
-            "0363010000672831"
-          ],
-          "verblijfsobjecten_label": [
-            "Hoogte Kadijk 40-H",
-            "Hoogte Kadijk 40-2",
-            "Hoogte Kadijk 40-1",
-            "Hoogte Kadijk 40-3"
-          ],
-          "openbareruimte_id": "0363300000003592",
-          "huisnummer_letter": null,
-          "huisnummer_toevoeging": null,
-          "locatie_aanduiding": null
-        }
-      ]
-    }
+          "source": "EDEPOT"
+      }
   ]
 }

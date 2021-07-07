@@ -11,8 +11,13 @@ export interface Bestand {
 
 export interface Document {
   access: BouwdossierAccess
+  access_restricted_until: string | null
   barcode: string | null
   bestanden: Bestand[]
+  copyright: string
+  copyright_until: string | null
+  copyright_holders: string | null
+  copyright_manufacturers: string | null
   document_omschrijving: string | null
   oorspronkelijk_pad: string[]
   subdossier_titel: string | null
@@ -44,6 +49,7 @@ export interface Single {
   dossiernr: number
   olo_liaan_nummer?: number | null
   stadsdeel: string
+  source: string
   titel: string
 }
 
