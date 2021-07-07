@@ -19,6 +19,7 @@ npm start
 ```
 
 Then, open the application in your browser at [localhost:3000](http://localhost:3000/).
+In case you want to override the environment variables while developing, you can copy and rename the `.env.example` to `.env` and change the variables to your needs.
 
 ### Docker
 
