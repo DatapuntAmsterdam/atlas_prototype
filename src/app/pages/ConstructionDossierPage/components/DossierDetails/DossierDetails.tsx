@@ -69,6 +69,10 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
     () => hasUserRights(restricted, scopes, token, isTokenExpired),
     [scopes, token],
   )
+  const displayMetadata = useMemo(
+    () => (dossier.source === 'WABO' && hasRights) || dossier.source !== 'WABO',
+    [hasRights, dossier],
+  )
   const restrictedFiles = useMemo(() => {
     return dossier.documenten
       .filter((document) => !hasDocumentAccess(document.access))
@@ -127,14 +131,18 @@ const DossierDetails: FunctionComponent<DossierDetailsProps> = ({
 
         <DefinitionList data-testid="definitionList">
           <DefinitionListItem term="Titel">{dossier.titel}</DefinitionListItem>
-          <DefinitionListItem term="Datering">{dossier.datering}</DefinitionListItem>
-          <DefinitionListItem term="Type">{dossier.dossier_type}</DefinitionListItem>
-          <DefinitionListItem term="Dossiernummer">{dossier.dossiernr}</DefinitionListItem>
-          <DefinitionListItem term="Openbaarheid">{dossier.access}</DefinitionListItem>
-          {dossier.olo_liaan_nummer ? (
-            <DefinitionListItem term="OLO of liaan nummer" data-testid="oloLiaanNumber">
-              {dossier.olo_liaan_nummer}
-            </DefinitionListItem>
+          {displayMetadata ? (
+            <>
+              <DefinitionListItem term="Datering">{dossier.datering}</DefinitionListItem>
+              <DefinitionListItem term="Type">{dossier.dossier_type}</DefinitionListItem>
+              <DefinitionListItem term="Dossiernummer">{dossier.dossiernr}</DefinitionListItem>
+              <DefinitionListItem term="Openbaarheid">{dossier.access}</DefinitionListItem>
+              {dossier.olo_liaan_nummer ? (
+                <DefinitionListItem term="OLO of liaan nummer" data-testid="oloLiaanNumber">
+                  {dossier.olo_liaan_nummer}
+                </DefinitionListItem>
+              ) : null}
+            </>
           ) : null}
         </DefinitionList>
 
