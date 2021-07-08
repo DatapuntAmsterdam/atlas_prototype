@@ -1,8 +1,8 @@
-import { SearchType } from '../../../app/pages/SearchPage/constants'
-import joinUrl from '../../../app/utils/joinUrl'
-import environment from '../../../environment'
-import { CmsType } from '../../../shared/config/cms.config'
-import { fetchProxy } from '../../../shared/services/api/api'
+import { SearchType } from '../../../../pages/SearchPage/constants'
+import joinUrl from '../../../../utils/joinUrl'
+import environment from '../../../../../environment'
+import { CmsType } from '../../../../../shared/config/cms.config'
+import { fetchProxy } from '../../../../../shared/services/api/api'
 
 // Minimun length for typeahead query in backend is 3 characters
 export const MIN_QUERY_LENGTH = 3

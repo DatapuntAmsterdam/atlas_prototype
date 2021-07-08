@@ -1,5 +1,5 @@
-import typeaheadFixture from '../../../api/typeahead/typeahead.json'
-import typeaheadAuthFixture from '../../../api/typeahead/typeahead_auth.json'
+import typeaheadFixture from '../../../../../api/typeahead/typeahead.json'
+import typeaheadAuthFixture from '../../../../../api/typeahead/typeahead_auth.json'
 import autoSuggestSearch, { SORT_ORDER, sortResponse, TypeaheadItem } from './auto-suggest'
 
 describe('The auto-suggest service', () => {

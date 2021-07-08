@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import type { FunctionComponent } from 'react'
-import { getDetailPageData } from '../../../store/redux-first-router/actions'
+import getDetailPageData from '../../utils/getDetailPageData'
 import { toDataDetail } from '../../links'
 import DataSelectionFormatter from './DataSelectionFormatter/DataSelectionFormatter'
 import type { Data } from './types'
@@ -24,7 +24,7 @@ const DataSelectionTable: FunctionComponent<DataSelectionTableProps> = ({ conten
       <thead className="c-ds-table__head">
         <tr className="c-ds-table__row c-ds-table__row--link">
           {content.head.map((field) => (
-            <th key={field} className="c-ds-table__cell">
+            <th key={field} className="c-ds-table__cell" scope="col">
               {field}
             </th>
           ))}

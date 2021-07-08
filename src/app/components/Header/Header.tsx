@@ -7,7 +7,8 @@ import {
 } from '@amsterdam/asc-ui'
 import styled, { css } from 'styled-components'
 import type { FunctionComponent } from 'react'
-import HeaderSearch from '../../../header/components/HeaderSearch'
+import { HeaderSearchProvider } from './HeaderSearchContext'
+import HeaderSearch from './HeaderSearch'
 import HeaderMenu from './HeaderMenu'
 
 const stickyStyle = css`
@@ -77,7 +78,9 @@ const Header: FunctionComponent<HeaderProps> = ({ homePage, hasMaxWidth }) => (
       logo={AmsterdamLogo}
       navigation={
         <>
-          <HeaderSearch />
+          <HeaderSearchProvider>
+            <HeaderSearch />
+          </HeaderSearchProvider>
           <HeaderMenu
             type="default"
             data-test="header-menu-default"

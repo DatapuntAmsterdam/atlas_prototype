@@ -2,7 +2,7 @@ import { Label, Select, srOnlyStyle } from '@amsterdam/asc-ui'
 import { useEffect } from 'react'
 import styled from 'styled-components'
 import type { FunctionComponent, ChangeEvent } from 'react'
-import type { SearchCategory } from '../../../header/components/auto-suggest/AutoSuggest'
+import type { SearchCategory } from '../Header/auto-suggest/AutoSuggest'
 import SEARCH_PAGE_CONFIG from '../../pages/SearchPage/config'
 
 const StyledLabel = styled(Label)`
