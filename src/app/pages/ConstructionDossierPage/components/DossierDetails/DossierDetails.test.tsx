@@ -40,7 +40,14 @@ const wrapperWithToken: FunctionComponent = ({ children }) =>
 describe('DossierDetails', () => {
   beforeEach(() => {
     FilesGalleryMock.mockImplementation(
-      ({ dossierId, document, selectedFiles, onFileSelectionChange, ...otherProps }) => {
+      ({
+        dossierId,
+        document,
+        selectedFiles,
+        onFileSelectionChange,
+        restricted,
+        ...otherProps
+      }) => {
         return <div {...otherProps} />
       },
     )
