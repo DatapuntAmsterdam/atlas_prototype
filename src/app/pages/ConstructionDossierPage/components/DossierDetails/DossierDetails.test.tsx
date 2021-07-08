@@ -82,6 +82,33 @@ describe('DossierDetails', () => {
     })
   })
 
+  it('renders a definition list with only a title with a WABO dossier', () => {
+    render(
+      withAppContext(
+        <DossierDetails dossierId="SDC9999" dossier={{ ...bouwdossierFixture, source: 'WABO' }} />,
+      ),
+      {
+        wrapper,
+      },
+    )
+
+    const definitionList = screen.getByTestId('definitionList')
+
+    const title = within(definitionList).getByText(bouwdossierFixture.titel)
+    expect(title).toBeInTheDocument()
+
+    // This fields shouldn't exist
+    const listElements = ['datering', 'dossier_type', 'dossiernr', 'access']
+
+    listElements.forEach((element) => {
+      expect(() =>
+        within(definitionList).getByText(`${bouwdossierFixture[element] as string}`),
+      ).toThrow()
+    })
+
+    expect(definitionList.childNodes.length).toBe(1)
+  })
+
   it('renders olo_liaan_nummer', () => {
     const { rerender } = render(
       withAppContext(
