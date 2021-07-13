@@ -27,6 +27,9 @@ const config: Config.InitialOptions = {
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/node_modules/', '/test/'],
   transformIgnorePatterns: ['node_modules/(?!escape-string-regexp)'],
+  transform: {
+    '\\.(gql|graphql)$': '@jagi/jest-transform-graphql',
+  },
 }
 
 export default config

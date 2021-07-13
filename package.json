@@ -73,6 +73,7 @@
     "@graphql-codegen/introspection": "^1.18.2",
     "@graphql-codegen/typescript": "^1.22.4",
     "@graphql-codegen/typescript-resolvers": "^1.19.5",
+    "@jagi/jest-transform-graphql": "^1.0.2",
     "@jest/types": "^27.0.2",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@svgr/webpack": "^5.5.0",

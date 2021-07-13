@@ -41,7 +41,7 @@ describe('fetchNearestDetail', () => {
     )
 
     expect(result).toEqual({
-      detailIsShape: undefined,
+      detailIsShape: false,
       distance: 0,
       display: 'ASD03 E 09114 G 0000',
       uri: 'https://acc.api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.11440911470000/',

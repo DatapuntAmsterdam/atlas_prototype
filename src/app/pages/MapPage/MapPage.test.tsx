@@ -10,6 +10,7 @@ import MapProvider from './MapProvider'
 import withAppContext from '../../utils/withAppContext'
 
 jest.mock('@amsterdam/react-maps')
+jest.mock('../../../api/cms_search/mapCollections.graphql')
 jest.mock('./components/MapMarker/MapMarker', () => () => <div data-testid="mapMarkers" />)
 jest.mock('./components/MapPanel/MapPanel', () => () => <div data-testid="mapPanel" />)
 jest.mock('./components/DrawTool/DrawResults', () => () => <div data-testid="drawResults" />)
@@ -37,13 +38,13 @@ describe('MapPage', () => {
   it('should show the PanoramaViewer when panoHeading and locatie parameters are set', async () => {
     render(
       withAppContext(
-        <MapProvider>
-          <UiProvider>
+        <UiProvider>
+          <MapProvider>
             <DataSelectionProvider>
               <MapPage />
             </DataSelectionProvider>
-          </UiProvider>
-        </MapProvider>,
+          </MapProvider>
+        </UiProvider>,
       ),
     )
 
