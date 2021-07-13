@@ -144,7 +144,7 @@
     "husky": "6.0.0",
     "identity-obj-proxy": "3.0.0",
     "isomorphic-fetch": "3.0.0",
-    "jasmine-core": "3.7.1",
+    "jasmine-core": "3.8.0",
     "jest": "26.6.3",
     "jest-canvas-mock": "^2.3.1",
     "jest-environment-jsdom": "27.0.6",
