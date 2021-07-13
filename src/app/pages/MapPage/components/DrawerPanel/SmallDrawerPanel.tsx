@@ -4,7 +4,7 @@ import DrawerPanel from './DrawerPanel'
 
 const SmallDrawerPanel = styled(DrawerPanel)`
   @media screen and ${breakpoint('min-width', 'tabletM')} {
-    width: 356px;
+    width: 460px;
   }
 `
 

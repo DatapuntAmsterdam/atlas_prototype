@@ -1,13 +1,14 @@
 import type { FunctionComponent } from 'react'
-import { useMemo } from 'react'
 import styled from 'styled-components'
-import MapPanel, { MapPanelOverlay } from '../../legacy/panel/MapPanel'
+import { themeSpacing } from '@amsterdam/asc-ui'
 import useParam from '../../../../utils/useParam'
 import { useMapContext } from '../../MapContext'
-import { mapLayersParam, zoomParam } from '../../query-params'
+import { mapLayersParam } from '../../query-params'
+import MapLegendPanel from '../MapLegendPanel/MapLegendPanel'
 
 const MapPanelContent = styled.div`
   overflow: hidden; // This can be removed if the new design for the legend is added
+  margin: ${themeSpacing(3)};
 
   .map-panel {
     // The embed mode hides the legend panel, so we need to force it to show.
@@ -35,20 +36,13 @@ const MapPanelContent = styled.div`
 
 const LegendPanel: FunctionComponent = () => {
   const { panelLayers } = useMapContext()
-  const [zoomLevel] = useParam(zoomParam)
   const [activeLayers, setActiveMapLayers] = useParam(mapLayersParam)
-
-  const overlays = useMemo<MapPanelOverlay[]>(
-    () => activeLayers.map((layer) => ({ id: layer, isVisible: true })),
-    [activeLayers],
-  )
 
   // TODO: Replace 'MapPanel' with something better.
   return (
     <MapPanelContent data-testid="legendPanel">
-      <MapPanel
+      <MapLegendPanel
         panelLayers={panelLayers}
-        overlays={overlays}
         onAddLayers={(mapLayers: string[]) => {
           if (mapLayers) {
             setActiveMapLayers([...activeLayers, ...mapLayers])
@@ -57,7 +51,6 @@ const LegendPanel: FunctionComponent = () => {
         onRemoveLayers={(mapLayers: string[]) => {
           setActiveMapLayers(activeLayers.filter((layer) => !mapLayers.includes(layer)))
         }}
-        zoomLevel={zoomLevel}
       />
     </MapPanelContent>
   )

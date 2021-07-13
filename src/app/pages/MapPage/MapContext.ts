@@ -2,7 +2,7 @@
 import type { Feature } from 'geojson'
 import type { TileLayerOptions, WMSOptions } from 'leaflet'
 import type { Dispatch, SetStateAction } from 'react'
-import type { MapCollection, MapLayer } from './legacy/services'
+import type { ExtendedMapGroup } from './legacy/services'
 import type { DrawerState } from './components/DrawerOverlay'
 import createNamedContext from '../../utils/createNamedContext'
 import useRequiredContext from '../../utils/useRequiredContext'
@@ -13,7 +13,7 @@ export interface WmsOverlay {
   id: string
   url: string
   options: WMSOptions
-  layer: MapLayer
+  layer: ExtendedMapGroup
   params?: {
     [key: string]: string
   }
@@ -24,7 +24,7 @@ export interface TmsOverlay {
   id: string
   url: string
   options: TileLayerOptions
-  layer: MapLayer
+  layer: ExtendedMapGroup
   params?: {
     [key: string]: string
   }
@@ -33,8 +33,7 @@ export interface TmsOverlay {
 export type Overlay = WmsOverlay | TmsOverlay
 
 export interface MapState {
-  panelLayers: MapCollection[]
-  mapLayers: MapLayer[]
+  panelLayers: any[]
   legendLeafletLayers: Overlay[]
   detailFeature: Feature | null
   showMapDrawVisualization: boolean

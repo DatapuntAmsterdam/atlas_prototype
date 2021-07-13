@@ -1,16 +1,15 @@
 import type { TileLayerOptions } from 'leaflet'
 import { createUrlWithToken } from '../../../../shared/services/api/api'
 import { getAccessToken } from '../../../../shared/services/auth/auth'
-import type { MapLayer } from '../legacy/services'
+import type { ExtendedMapGroup, ExtendedMapGroupLegendItem } from '../legacy/services'
 import MAP_CONFIG from '../legacy/services/map.config'
 import type { Overlay } from '../MapContext'
 
-const findLayer = (layers: MapLayer[], id: string) => {
-  const idParts = id.split('-').reverse()
-  return layers.find((layer) => idParts.includes(layer.id)) ?? null
+const findLayer = (layers: Array<ExtendedMapGroup & ExtendedMapGroupLegendItem>, id: string) => {
+  return layers.find((layer) => id === layer.id) ?? null
 }
 
-const generateOverlay = (layer: MapLayer, token: string) => {
+const generateOverlay = (layer: ExtendedMapGroup & ExtendedMapGroupLegendItem, token: string) => {
   if (layer.authScope && !token) {
     return null
   }
@@ -25,9 +24,11 @@ const generateOverlay = (layer: MapLayer, token: string) => {
 
   const overlay: Overlay = {
     id: layer.id,
+    // @ts-ignore
     type: layer.type,
     params,
     url,
+    // @ts-ignore
     layer,
     options: {
       ...MAP_CONFIG.OVERLAY_OPTIONS,
@@ -39,7 +40,7 @@ const generateOverlay = (layer: MapLayer, token: string) => {
   return overlay
 }
 
-function generateUrl(layer: MapLayer, token: string) {
+function generateUrl(layer: ExtendedMapGroup & ExtendedMapGroupLegendItem, token: string) {
   if (!layer.url) {
     return null
   }
@@ -53,21 +54,27 @@ function generateUrl(layer: MapLayer, token: string) {
   return url
 }
 
-export default function buildLeafletLayers(activeMapLayers: string[], mapLayers: MapLayer[]) {
+// Todo legacy code: a LOT is going on here, this should be refactored / simplified
+export default function buildLeafletLayers(
+  activeMapLayers: string[],
+  mapLayers: Array<ExtendedMapGroup & ExtendedMapGroupLegendItem>,
+) {
   return activeMapLayers
-    .map((activeMapLayer) => {
-      const layer = findLayer(mapLayers, activeMapLayer)
+    .map((activeLegendId) => {
+      const layer = findLayer(mapLayers, activeLegendId)
 
       if (!layer) {
         return null
       }
 
       const legendLayers = (layer.legendItems ?? [])
+        // @ts-ignore
         // eslint-disable-next-line no-underscore-dangle
         .map((legendItem) => (legendItem.__typename === 'MapLayer' ? legendItem.id : null))
         .filter((id): id is string => !!id)
         .map((id) => findLayer(mapLayers, id))
-        .filter((legendLayer): legendLayer is MapLayer => !!legendLayer)
+        // @ts-ignore
+        .filter((legendLayer): legendLayer is ExtendedMapGroup => !!legendLayer) as any
 
       return [layer, ...legendLayers].map((item) => generateOverlay(item, getAccessToken()))
     })

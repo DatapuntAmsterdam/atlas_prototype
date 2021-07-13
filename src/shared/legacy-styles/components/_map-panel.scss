@@ -67,50 +67,6 @@
     }
   }
 
-  &__toggle {
-    @extend %hover-focus-button;
-    align-items: center;
-    background-color: $primary-light;
-    border-radius: 0;
-    display: flex;
-    height: 100%;
-    padding: 4px;
-    width: 100%;
-
-    .map-panel--collapsed & {
-      border: solid 1px $secondary-gray20;
-      height: 40px;
-    }
-
-    &--icon {
-      height: $handle-height;
-      margin-left: 8px;
-      width: $handle-height;
-
-      svg {
-        fill: $secondary-gray60;
-        height: $handle-height;
-        padding: 4px;
-        width: $handle-height;
-      }
-
-      &-collapse {
-        transform: rotate(180deg);
-      }
-    }
-
-    &:hover,
-    &:focus {
-      .map-panel__heading-title {
-        color: $primary-dark;
-      }
-
-      svg {
-        fill: $primary-dark;
-      }
-    }
-  }
-
   .scroll-wrapper {
     max-height: calc(
       100% - #{$dashboard-heading-height} - #{$map-panel-offset} - #{$map-panel-heading-height}
@@ -139,8 +95,7 @@
     &--collapsed,
     &--has-no-active-layers,
     &--has-just-invisible-layers,
-    &__heading,
-    &__toggle {
+    &__heading {
       display: none;
     }
 
@@ -161,17 +116,6 @@
         top: 0;
         z-index: -1;
       }
-    }
-  }
-
-  .is-embed &,
-  .is-embed-preview & {
-    // adjustment for embed no map-panel-offset needed but need extra margin of 14
-    max-height: calc(100% - #{$dashboard-heading-height} - 14px);
-
-    &--has-no-active-layers,
-    &--has-just-invisible-layers {
-      display: none;
     }
   }
 }

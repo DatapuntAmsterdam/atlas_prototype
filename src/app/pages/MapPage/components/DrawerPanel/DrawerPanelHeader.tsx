@@ -5,7 +5,7 @@ import type { FunctionComponent, HTMLAttributes } from 'react'
 
 const HeaderContainer = styled.div`
   display: flex;
-  padding: ${themeSpacing(4)};
+  padding: ${themeSpacing(4, 2, 4, 3)};
 `
 
 const CloseButton = styled(Button)`

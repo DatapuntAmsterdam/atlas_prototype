@@ -7,7 +7,6 @@ import { DrawerState } from '../pages/MapPage/components/DrawerOverlay'
 
 const initialState: MapContextProps = {
   panelLayers: [],
-  mapLayers: [],
   legendLeafletLayers: [],
   showMapDrawVisualization: false,
   detailFeature: null,

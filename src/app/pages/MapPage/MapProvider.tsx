@@ -1,11 +1,7 @@
 import type { FunctionComponent } from 'react'
 import { useEffect, useMemo, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import type { MapCollection, MapLayer } from './legacy/services'
-import {
-  getMapLayers as fetchMapLayers,
-  getPanelLayers as fetchPanelLayers,
-} from './legacy/services'
+import { useClient } from 'urql'
 import useParam from '../../utils/useParam'
 import type { MapState } from './MapContext'
 import MapContext from './MapContext'
@@ -19,6 +15,11 @@ import buildLeafletLayers from './utils/buildLeafletLayers'
 import { DrawerState } from './components/DrawerOverlay'
 import useCompare from '../../utils/useCompare'
 import type { InfoBoxProps } from './legacy/types/details'
+import { useIsEmbedded } from '../../contexts/ui'
+import type { MapCollection } from '../../../api/cms_search/graphql'
+import type { MapPanelOverlay } from './components/MapLegendPanel/MapLegendPanel'
+// @ts-ignore
+import { mapCollectionSearchQuery } from '../../../api/cms_search/mapCollections.graphql'
 
 const MapContainer: FunctionComponent = ({ children }) => {
   const [activeMapLayers] = useParam(mapLayersParam)
@@ -31,36 +32,86 @@ const MapContainer: FunctionComponent = ({ children }) => {
   const [detailFeature, setDetailFeature] = useState<MapState['detailFeature']>(null)
   const [panoImageDate, setPanoImageDate] = useState<MapState['panoImageDate']>(null)
   const [showMapDrawVisualization, setShowMapDrawVisualization] = useState(false)
-  const [layers, setLayers] = useState<{ mapLayers: MapLayer[]; panelLayers: MapCollection[] }>({
-    mapLayers: [],
-    panelLayers: [],
-  })
+  const [mapLayers, setMapLayers] = useState<MapCollection[]>([])
   const [panelHeader, setPanelHeader] = useState<MapState['panelHeader']>({ title: 'Resultaten' })
   const [panoFullScreen, setPanoFullScreen] = useParam(panoFullScreenParam)
   const browserLocation = useLocation()
+  const isEmbedView = useIsEmbedded()
+  const graphqlClient = useClient()
 
   const panoActive = panoHeading !== null && location !== null
 
+  const overlays = useMemo<MapPanelOverlay[]>(
+    () => activeMapLayers.map((layer) => ({ id: layer, isVisible: true })),
+    [activeMapLayers],
+  )
+
+  // Todo: this should be refactored so we handle visibility of layers in components
+  const formattedMapLayers = useMemo(
+    () =>
+      mapLayers.map((panelLayer) => ({
+        ...panelLayer,
+        mapLayers: panelLayer.mapLayers.map((mapLayer) => ({
+          ...mapLayer,
+          legendItems: [
+            ...(mapLayer?.legendItems?.map((legendItem) => ({
+              ...legendItem,
+              url: legendItem?.url ?? mapLayer.url,
+              isVisible: overlays.some(
+                (overlay) =>
+                  (overlay.id === legendItem.id && overlay.isVisible) || legendItem.notSelectable,
+              ),
+            })) || []),
+          ],
+          isVisible: overlays.some((overlay) =>
+            [{ id: mapLayer.id }, ...(mapLayer.legendItems || [])].some(
+              (legendItem) => overlay.id === legendItem.id && overlay.isVisible,
+            ),
+          ),
+          isEmbedded: overlays.some((overlay) =>
+            [{ id: mapLayer.id }, ...(mapLayer.legendItems || [])].some(
+              (legendItem) => overlay.id === legendItem.id && isEmbedView,
+            ),
+          ),
+        })),
+      })),
+    [overlays, isEmbedView, mapLayers],
+  )
+
   const legendLeafletLayers = useMemo(
-    () => buildLeafletLayers(activeMapLayers, layers.mapLayers),
-    [activeMapLayers, layers.mapLayers],
+    () =>
+      buildLeafletLayers(
+        activeMapLayers,
+        // @ts-ignore
+        formattedMapLayers
+          .map((collection) =>
+            collection.mapLayers.map((mapLayer) => [mapLayer, ...mapLayer.legendItems]),
+          )
+          .flat()
+          .flat(),
+      ),
+    [activeMapLayers, mapLayers],
   )
 
   useEffect(() => {
-    Promise.all([fetchPanelLayers(), fetchMapLayers()])
-      .then(([panelLayersResult, mapLayersResult]) => {
-        setLayers({
-          panelLayers: panelLayersResult,
-          mapLayers: mapLayersResult,
-        })
-      })
-      .catch((error: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    ;(async () => {
+      try {
+        const query =
+          graphqlClient.query<{ mapCollectionSearch: { results: MapCollection[] } }>(
+            mapCollectionSearchQuery,
+          )
+        const result = await query.toPromise()
+        setMapLayers(result.data?.mapCollectionSearch.results ?? [])
+      } catch (error) {
         // eslint-disable-next-line no-console
-        console.error(`MapContainer: problem fetching panel and map layers: ${error}`)
-      })
+        console.error('MapContainer: problem fetching panel and map layers')
+      }
+    })()
   }, [])
 
   const pathChanged = useCompare(browserLocation.pathname)
+
   const locationChanged = useCompare(location)
 
   // Open DrawerPanel programmatically when: location parameter or pathname is changed, and panorama is not active
@@ -75,8 +126,8 @@ const MapContainer: FunctionComponent = ({ children }) => {
       value={{
         panoActive,
         panelHeader,
-        mapLayers: layers.mapLayers,
-        panelLayers: layers.panelLayers,
+        // @ts-ignore
+        panelLayers: formattedMapLayers,
         detailFeature,
         panoImageDate,
         legendLeafletLayers,

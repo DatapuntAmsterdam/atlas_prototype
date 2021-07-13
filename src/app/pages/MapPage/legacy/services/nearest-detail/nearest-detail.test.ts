@@ -1,6 +1,5 @@
 import { mocked } from 'ts-jest/utils'
 import { fetchWithToken } from '../../../../../../shared/services/api/api'
-import type { MapLayer } from '../index'
 import fetchNearestDetail from './nearest-detail'
 
 jest.mock('../../../../../../shared/services/api/api')
@@ -37,7 +36,7 @@ describe('fetchNearestDetail', () => {
 
     const result = await fetchNearestDetail(
       { latitude: 1, longitude: 2 },
-      [{ detailUrl: 'some/url' } as MapLayer],
+      [{ detailUrl: 'some/url' } as any],
       1,
     )
 
