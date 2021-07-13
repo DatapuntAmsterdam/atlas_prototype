@@ -145,23 +145,6 @@ describe('DocumentDetails', () => {
     expect(screen.queryByText(description)).toBeInTheDocument()
   })
 
-  it('does not render the description if the document source is WABO', () => {
-    render(
-      <DocumentDetails
-        index={0}
-        dossierId="SDNW30715372"
-        // dossier={{ ...dossierFixture, source: 'WABO' }}
-        dossier={dossierFixture}
-        document={documentFixture}
-        onRequestLoginLink={() => {}}
-        onDownloadFiles={() => {}}
-      />,
-      { wrapper },
-    )
-
-    expect(screen.queryByText('Beschrijving')).not.toBeInTheDocument()
-  })
-
   it('renders the original paths', () => {
     const { rerender } = render(
       <DocumentDetails
