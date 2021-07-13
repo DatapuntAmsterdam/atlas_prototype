@@ -70,6 +70,7 @@
     "@babel/preset-typescript": "^7.14.5",
     "@graphql-codegen/add": "^2.0.2",
     "@graphql-codegen/cli": "^1.21.6",
+    "@graphql-codegen/introspection": "^1.18.2",
     "@graphql-codegen/typescript": "^1.22.4",
     "@graphql-codegen/typescript-resolvers": "^1.19.5",
     "@jest/types": "^27.0.2",

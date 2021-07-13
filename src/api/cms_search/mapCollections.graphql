@@ -1,0 +1,51 @@
+query mapCollectionSearchQuery {
+  mapCollectionSearch(input: { limit: 9999 }) {
+    results {
+      id
+      title
+      mapLayers {
+        id
+        title
+        legendItems {
+          ... on MapGroup {
+            id
+            title
+            url
+            params
+            layers
+            iconUrl
+            imageRule
+            notSelectable
+            noDetail
+            type
+            legendIconURI
+          }
+          ... on LegendItem {
+            title
+            iconUrl
+            imageRule
+            notSelectable
+            legendIconURI
+          }
+        }
+        authScope
+        imageRule
+        iconUrl
+        url
+        params
+        layers
+        detailUrl
+        detailParams {
+          item
+          datasets
+        }
+        detailIsShape
+        type
+        noDetail
+        external
+        minZoom
+        legendIconURI
+      }
+    }
+  }
+}
