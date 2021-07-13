@@ -13,6 +13,7 @@ import { AuthTokenProvider } from './AuthTokenContext'
 import DossierDetails from './components/DossierDetails'
 import { documentCodeParam, fileNameParam } from './query-params'
 import GeneralErrorAlert from '../../components/Alerts/GeneralErrorAlert'
+import DossierNotFoundAlert from './components/DossierNotFoundAlert'
 
 const ImageViewer = lazy(
   () => import(/* webpackChunkName: "ImageViewer" */ './components/ImageViewer'),
@@ -41,6 +42,10 @@ const ConstructionDossierPage: FunctionComponent = () => {
     if (!fileName && isFulfilled(result)) {
       setDocumentTitle(result.value.titel)
     }
+
+    if (isRejected(result)) {
+      setDocumentTitle('Dossier niet gevonden')
+    }
   }, [fileName, result])
 
   if (isPending(result)) {
@@ -52,6 +57,10 @@ const ConstructionDossierPage: FunctionComponent = () => {
   }
 
   if (isRejected(result)) {
+    if (result?.reason.code === 404) {
+      return <DossierNotFoundAlert />
+    }
+
     return <GeneralErrorAlert />
   }
 
