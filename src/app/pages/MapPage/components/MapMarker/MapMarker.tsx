@@ -52,6 +52,7 @@ const MapMarker: FunctionComponent<MarkerProps> = ({ panoActive }) => {
       setLoading(false)
     }
     if (nearestDetails) {
+      // @ts-ignore
       const { type, subType, id } = nearestDetails
       history.push({
         ...toDataDetail({ type, subtype: subType ?? '', id }),

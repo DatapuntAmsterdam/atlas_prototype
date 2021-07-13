@@ -167,17 +167,21 @@ export type FilterOption = {
 
 export type LegendItem = {
   __typename?: 'LegendItem';
+  id?: Maybe<Scalars['String']>;
+  isVisible?: Maybe<Scalars['Boolean']>;
   title: Scalars['String'];
   iconUrl?: Maybe<Scalars['String']>;
   imageRule?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
   notSelectable: Scalars['Boolean'];
+  legendIconURI?: Maybe<Scalars['String']>;
 };
 
 export type MapCollection = {
   __typename?: 'MapCollection';
   id: Scalars['ID'];
   title: Scalars['String'];
-  mapLayers: Array<MapLayer>;
+  mapLayers: Array<MapGroup>;
   meta: Meta;
   href: Scalars['String'];
 };
@@ -190,8 +194,8 @@ export type MapCollectionSearchResult = SearchResult & {
   pageInfo: PageInfo;
 };
 
-export type MapLayer = {
-  __typename?: 'MapLayer';
+export type MapGroup = {
+  __typename?: 'MapGroup';
   id: Scalars['ID'];
   title: Scalars['String'];
   type: Scalars['String'];
@@ -210,27 +214,28 @@ export type MapLayer = {
   bounds?: Maybe<Array<Array<Scalars['Float']>>>;
   authScope?: Maybe<Scalars['String']>;
   category?: Maybe<Scalars['String']>;
-  legendItems?: Maybe<Array<MapLayerLegendItem>>;
+  legendItems?: Maybe<Array<MapGroupLegendItem>>;
   meta: Meta;
   href: Scalars['String'];
+  legendIconURI?: Maybe<Scalars['String']>;
 };
 
-export type MapLayerLegendItem = MapLayer | LegendItem;
+export type MapGroupLegendItem = MapGroup | LegendItem;
 
 export type MapLayerSearchResult = SearchResult & {
   __typename?: 'MapLayerSearchResult';
   totalCount: Scalars['Int'];
-  results: Array<MapLayer>;
+  results: Array<MapGroup>;
   filters?: Maybe<Array<Filter>>;
   pageInfo: PageInfo;
 };
 
-/** MapResult is a combination of MapLayer and MapCollection */
+/** MapResult is a combination of MapGroups and MapCollection */
 export type MapResult = {
   __typename?: 'MapResult';
   id: Scalars['ID'];
   title: Scalars['String'];
-  mapLayers?: Maybe<Array<MapLayer>>;
+  mapLayers?: Maybe<Array<MapGroup>>;
   meta: Meta;
   href: Scalars['String'];
   type?: Maybe<Scalars['String']>;
@@ -268,11 +273,8 @@ export type MapSearchResult = SearchResult & {
 
 export type Meta = {
   __typename?: 'Meta';
-  description?: Maybe<Scalars['String']>;
   themes: Array<Theme>;
-  datasetIds?: Maybe<Array<Scalars['Int']>>;
   thumbnail?: Maybe<Scalars['String']>;
-  date?: Maybe<Scalars['String']>;
 };
 
 export type PageInfo = {
@@ -350,7 +352,7 @@ export type QueryMapSearchArgs = {
   input?: Maybe<MapSearchInput>;
 };
 
-export type Results = DatasetResult | CmsResult | CombinedDataResult | MapLayer | MapCollection | CombinedMapResult;
+export type Results = DatasetResult | CmsResult | CombinedDataResult | MapGroup | MapCollection | CombinedMapResult;
 
 export type SearchResult = {
   totalCount: Scalars['Int'];
@@ -470,9 +472,9 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   MapCollection: ResolverTypeWrapper<MapCollection>;
   MapCollectionSearchResult: ResolverTypeWrapper<MapCollectionSearchResult>;
-  MapLayer: ResolverTypeWrapper<Omit<MapLayer, 'legendItems'> & { legendItems?: Maybe<Array<ResolversTypes['MapLayerLegendItem']>> }>;
+  MapGroup: ResolverTypeWrapper<Omit<MapGroup, 'legendItems'> & { legendItems?: Maybe<Array<ResolversTypes['MapGroupLegendItem']>> }>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
-  MapLayerLegendItem: ResolversTypes['MapLayer'] | ResolversTypes['LegendItem'];
+  MapGroupLegendItem: ResolversTypes['MapGroup'] | ResolversTypes['LegendItem'];
   MapLayerSearchResult: ResolverTypeWrapper<MapLayerSearchResult>;
   MapResult: ResolverTypeWrapper<MapResult>;
   MapSearchInput: MapSearchInput;
@@ -480,7 +482,7 @@ export type ResolversTypes = {
   Meta: ResolverTypeWrapper<Meta>;
   PageInfo: ResolverTypeWrapper<PageInfo>;
   Query: ResolverTypeWrapper<{}>;
-  Results: ResolversTypes['DatasetResult'] | ResolversTypes['CMSResult'] | ResolversTypes['CombinedDataResult'] | ResolversTypes['MapLayer'] | ResolversTypes['MapCollection'] | ResolversTypes['CombinedMapResult'];
+  Results: ResolversTypes['DatasetResult'] | ResolversTypes['CMSResult'] | ResolversTypes['CombinedDataResult'] | ResolversTypes['MapGroup'] | ResolversTypes['MapCollection'] | ResolversTypes['CombinedMapResult'];
   SearchResult: ResolversTypes['CMSSearchResult'] | ResolversTypes['DataSearchResult'] | ResolversTypes['DatasetSearchResult'] | ResolversTypes['MapCollectionSearchResult'] | ResolversTypes['MapLayerSearchResult'] | ResolversTypes['MapSearchResult'];
   Theme: ResolverTypeWrapper<Theme>;
 };
@@ -513,9 +515,9 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   MapCollection: MapCollection;
   MapCollectionSearchResult: MapCollectionSearchResult;
-  MapLayer: Omit<MapLayer, 'legendItems'> & { legendItems?: Maybe<Array<ResolversParentTypes['MapLayerLegendItem']>> };
+  MapGroup: Omit<MapGroup, 'legendItems'> & { legendItems?: Maybe<Array<ResolversParentTypes['MapGroupLegendItem']>> };
   Float: Scalars['Float'];
-  MapLayerLegendItem: ResolversParentTypes['MapLayer'] | ResolversParentTypes['LegendItem'];
+  MapGroupLegendItem: ResolversParentTypes['MapGroup'] | ResolversParentTypes['LegendItem'];
   MapLayerSearchResult: MapLayerSearchResult;
   MapResult: MapResult;
   MapSearchInput: MapSearchInput;
@@ -523,7 +525,7 @@ export type ResolversParentTypes = {
   Meta: Meta;
   PageInfo: PageInfo;
   Query: {};
-  Results: ResolversParentTypes['DatasetResult'] | ResolversParentTypes['CMSResult'] | ResolversParentTypes['CombinedDataResult'] | ResolversParentTypes['MapLayer'] | ResolversParentTypes['MapCollection'] | ResolversParentTypes['CombinedMapResult'];
+  Results: ResolversParentTypes['DatasetResult'] | ResolversParentTypes['CMSResult'] | ResolversParentTypes['CombinedDataResult'] | ResolversParentTypes['MapGroup'] | ResolversParentTypes['MapCollection'] | ResolversParentTypes['CombinedMapResult'];
   SearchResult: ResolversParentTypes['CMSSearchResult'] | ResolversParentTypes['DataSearchResult'] | ResolversParentTypes['DatasetSearchResult'] | ResolversParentTypes['MapCollectionSearchResult'] | ResolversParentTypes['MapLayerSearchResult'] | ResolversParentTypes['MapSearchResult'];
   Theme: Theme;
 };
@@ -650,17 +652,21 @@ export type FilterOptionResolvers<ContextType = any, ParentType extends Resolver
 };
 
 export type LegendItemResolvers<ContextType = any, ParentType extends ResolversParentTypes['LegendItem'] = ResolversParentTypes['LegendItem']> = {
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  isVisible?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   iconUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   imageRule?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   notSelectable?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  legendIconURI?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type MapCollectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['MapCollection'] = ResolversParentTypes['MapCollection']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  mapLayers?: Resolver<Array<ResolversTypes['MapLayer']>, ParentType, ContextType>;
+  mapLayers?: Resolver<Array<ResolversTypes['MapGroup']>, ParentType, ContextType>;
   meta?: Resolver<ResolversTypes['Meta'], ParentType, ContextType>;
   href?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -674,7 +680,7 @@ export type MapCollectionSearchResultResolvers<ContextType = any, ParentType ext
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type MapLayerResolvers<ContextType = any, ParentType extends ResolversParentTypes['MapLayer'] = ResolversParentTypes['MapLayer']> = {
+export type MapGroupResolvers<ContextType = any, ParentType extends ResolversParentTypes['MapGroup'] = ResolversParentTypes['MapGroup']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -693,19 +699,20 @@ export type MapLayerResolvers<ContextType = any, ParentType extends ResolversPar
   bounds?: Resolver<Maybe<Array<Array<ResolversTypes['Float']>>>, ParentType, ContextType>;
   authScope?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   category?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  legendItems?: Resolver<Maybe<Array<ResolversTypes['MapLayerLegendItem']>>, ParentType, ContextType>;
+  legendItems?: Resolver<Maybe<Array<ResolversTypes['MapGroupLegendItem']>>, ParentType, ContextType>;
   meta?: Resolver<ResolversTypes['Meta'], ParentType, ContextType>;
   href?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  legendIconURI?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type MapLayerLegendItemResolvers<ContextType = any, ParentType extends ResolversParentTypes['MapLayerLegendItem'] = ResolversParentTypes['MapLayerLegendItem']> = {
-  __resolveType: TypeResolveFn<'MapLayer' | 'LegendItem', ParentType, ContextType>;
+export type MapGroupLegendItemResolvers<ContextType = any, ParentType extends ResolversParentTypes['MapGroupLegendItem'] = ResolversParentTypes['MapGroupLegendItem']> = {
+  __resolveType: TypeResolveFn<'MapGroup' | 'LegendItem', ParentType, ContextType>;
 };
 
 export type MapLayerSearchResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['MapLayerSearchResult'] = ResolversParentTypes['MapLayerSearchResult']> = {
   totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  results?: Resolver<Array<ResolversTypes['MapLayer']>, ParentType, ContextType>;
+  results?: Resolver<Array<ResolversTypes['MapGroup']>, ParentType, ContextType>;
   filters?: Resolver<Maybe<Array<ResolversTypes['Filter']>>, ParentType, ContextType>;
   pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -714,7 +721,7 @@ export type MapLayerSearchResultResolvers<ContextType = any, ParentType extends 
 export type MapResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['MapResult'] = ResolversParentTypes['MapResult']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  mapLayers?: Resolver<Maybe<Array<ResolversTypes['MapLayer']>>, ParentType, ContextType>;
+  mapLayers?: Resolver<Maybe<Array<ResolversTypes['MapGroup']>>, ParentType, ContextType>;
   meta?: Resolver<ResolversTypes['Meta'], ParentType, ContextType>;
   href?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -746,11 +753,8 @@ export type MapSearchResultResolvers<ContextType = any, ParentType extends Resol
 };
 
 export type MetaResolvers<ContextType = any, ParentType extends ResolversParentTypes['Meta'] = ResolversParentTypes['Meta']> = {
-  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   themes?: Resolver<Array<ResolversTypes['Theme']>, ParentType, ContextType>;
-  datasetIds?: Resolver<Maybe<Array<ResolversTypes['Int']>>, ParentType, ContextType>;
   thumbnail?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  date?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -775,7 +779,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type ResultsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Results'] = ResolversParentTypes['Results']> = {
-  __resolveType: TypeResolveFn<'DatasetResult' | 'CMSResult' | 'CombinedDataResult' | 'MapLayer' | 'MapCollection' | 'CombinedMapResult', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'DatasetResult' | 'CMSResult' | 'CombinedDataResult' | 'MapGroup' | 'MapCollection' | 'CombinedMapResult', ParentType, ContextType>;
 };
 
 export type SearchResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['SearchResult'] = ResolversParentTypes['SearchResult']> = {
@@ -810,8 +814,8 @@ export type Resolvers<ContextType = any> = {
   LegendItem?: LegendItemResolvers<ContextType>;
   MapCollection?: MapCollectionResolvers<ContextType>;
   MapCollectionSearchResult?: MapCollectionSearchResultResolvers<ContextType>;
-  MapLayer?: MapLayerResolvers<ContextType>;
-  MapLayerLegendItem?: MapLayerLegendItemResolvers<ContextType>;
+  MapGroup?: MapGroupResolvers<ContextType>;
+  MapGroupLegendItem?: MapGroupLegendItemResolvers<ContextType>;
   MapLayerSearchResult?: MapLayerSearchResultResolvers<ContextType>;
   MapResult?: MapResultResolvers<ContextType>;
   MapSearchResult?: MapSearchResultResolvers<ContextType>;

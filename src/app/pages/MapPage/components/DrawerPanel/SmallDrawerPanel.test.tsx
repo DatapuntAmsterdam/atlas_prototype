@@ -10,7 +10,7 @@ describe('SmallDrawerPanel', () => {
   it('should set the width for a medium tablet', () => {
     const { container } = render(withAppContext(<SmallDrawerPanel />))
 
-    expect(container.firstChild).toHaveStyleRule('width', '356px', {
+    expect(container.firstChild).toHaveStyleRule('width', '460px', {
       media: `screen and ${breakpoints.tabletM('min-width')}`,
     })
   })

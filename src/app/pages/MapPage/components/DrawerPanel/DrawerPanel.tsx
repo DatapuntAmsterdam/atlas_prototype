@@ -33,20 +33,8 @@ const DrawerPanel = styled.div<DrawerPanelProps>`
     if (isMobile(deviceMode)) {
       return css`
         margin-top: ${themeSpacing(STACK_SPACING * stackLevel)};
-
-        ${stackLevel > 0 &&
-        css`
-          box-shadow: 0 0 0 ${themeSpacing(1)} rgba(0, 0, 0, 0.1);
-        `}
       `
     }
-
-    return css`
-      ${stackLevel > 0 &&
-      css`
-        box-shadow: 1px 0 2px 1px #00000057;
-      `}
-    `
   }}
 `
 

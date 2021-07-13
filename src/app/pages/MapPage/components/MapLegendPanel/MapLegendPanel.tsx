@@ -1,5 +1,6 @@
 import type { FunctionComponent } from 'react'
-import type { MapCollection } from '../services'
+import type { MapCollection } from '../../../../../api/cms_search/graphql'
+import type { ExtendedMapGroup } from '../../legacy/services'
 import MapLegend from './MapLegend'
 
 export interface MapPanelOverlay {
@@ -8,19 +9,15 @@ export interface MapPanelOverlay {
 }
 
 export interface MapPanelProps {
-  overlays: MapPanelOverlay[]
   onAddLayers: (layers: string[]) => void
   onRemoveLayers: (layers: string[]) => void
   panelLayers: MapCollection[]
-  zoomLevel: number
 }
 
-const MapPanel: FunctionComponent<MapPanelProps> = ({
-  overlays,
+const MapLegendPanel: FunctionComponent<MapPanelProps> = ({
   onAddLayers,
   onRemoveLayers,
   panelLayers,
-  zoomLevel,
 }) => {
   return (
     <div
@@ -30,15 +27,12 @@ const MapPanel: FunctionComponent<MapPanelProps> = ({
     >
       <div className="scroll-wrapper">
         {panelLayers.map(({ id, mapLayers, title }) => (
-          // @ts-ignore
           <MapLegend
             onAddLayers={onAddLayers}
             onRemoveLayers={onRemoveLayers}
             key={id}
-            activeMapLayers={mapLayers}
-            overlays={overlays}
+            activeMapLayers={mapLayers as ExtendedMapGroup[]}
             title={title}
-            zoomLevel={zoomLevel}
           />
         ))}
       </div>
@@ -46,4 +40,4 @@ const MapPanel: FunctionComponent<MapPanelProps> = ({
   )
 }
 
-export default MapPanel
+export default MapLegendPanel

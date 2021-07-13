@@ -1,0 +1,16 @@
+{
+  "_comment": "This file is used for Intellij IDE's",
+  "name": "CMS_Search GraphQL Schema",
+  "schemaPath": "./src/api/cms_search/graphql.schema.json",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "https://api.data.amsterdam.nl/cms_search/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": true
+      }
+    }
+  }
+}

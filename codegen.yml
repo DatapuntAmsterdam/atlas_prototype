@@ -1,6 +1,6 @@
 overwrite: true
 schema: ${GRAPHQL_ENDPOINT:https://api.data.amsterdam.nl/cms_search/graphql/}
-documents: null
+documents: "src/api/cms_search/*.graphql"
 generates:
   src/api/cms_search/graphql.ts:
     plugins:
@@ -10,3 +10,6 @@ generates:
           content: '/* eslint-disable */'
     config:
       useTypeImports: true
+  src/api/cms_search/graphql.schema.json:
+    plugins:
+      - "introspection"
