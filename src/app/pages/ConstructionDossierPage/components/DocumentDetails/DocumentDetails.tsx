@@ -78,14 +78,9 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
   // TODO: This logic can be removed once we switch to Keycloak entirely.
   const disableDownload = isAuthenticated() && !isFeatureEnabled(FEATURE_KEYCLOAK_AUTH)
   const restricted = dossier.access === 'RESTRICTED' || document.access === 'RESTRICTED'
-  // const displayMetadata = dossier.source !== 'WABO'
   const hasRights = useMemo(
     () => hasUserRights(restricted, scopes, token, isTokenExpired),
     [scopes, token],
-  )
-  const displayMetadata = useMemo(
-    () => (dossier.source === 'WABO' && hasRights) || dossier.source !== 'WABO',
-    [hasRights, dossier],
   )
 
   return (
@@ -118,7 +113,7 @@ const DocumentDetails: FunctionComponent<DocumentDetailsProps> = ({
           </>
         )}
       </DocumentHeaderBlock>
-      {displayMetadata && dossier.olo_liaan_nummer ? (
+      {dossier.olo_liaan_nummer ? (
         <DefinitionList data-testid="oloLiaanNumberDescription">
           {document.document_omschrijving && (
             <DefinitionListItem term="Beschrijving">
