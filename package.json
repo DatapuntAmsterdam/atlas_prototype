@@ -35,7 +35,7 @@
     "@turf/turf": "^6.4.0",
     "body-scroll-lock": "^3.1.5",
     "classnames": "2.3.1",
-    "core-js": "^3.15.1",
+    "core-js": "^3.15.2",
     "escape-string-regexp": "^5.0.0",
     "file-saver": "^2.0.5",
     "graphql": "^15.5.1",
