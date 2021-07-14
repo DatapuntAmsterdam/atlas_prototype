@@ -127,6 +127,7 @@ const MapPanel: FunctionComponent = () => {
             <DrawerPanelHeader>
               {panelHeader.type && <SubtitleHeading as="h6">{panelHeader.type}</SubtitleHeading>}
               <TitleHeading styleAs="h2">{panelHeader.title}</TitleHeading>
+              {panelHeader.customElement && panelHeader.customElement}
               {infoBox && <StyledDetailInfoBox {...infoBox} />}
             </DrawerPanelHeader>
             <DrawerContainer>

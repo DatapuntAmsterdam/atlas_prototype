@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import type { Feature } from 'geojson'
 import type { TileLayerOptions, WMSOptions } from 'leaflet'
-import type { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, ReactElement, SetStateAction } from 'react'
 import type { ExtendedMapGroup } from './legacy/services'
 import type { DrawerState } from './components/DrawerOverlay'
 import createNamedContext from '../../utils/createNamedContext'
@@ -43,7 +43,11 @@ export interface MapState {
   panoActive: boolean
   drawerState: DrawerState
   panoImageDate: string | null
-  panelHeader: { type?: string | null; title?: string | null }
+  panelHeader: {
+    type?: string | null
+    customElement?: ReactElement<any, any> | null
+    title?: string | null
+  }
   infoBox?: InfoBoxProps
 }
 

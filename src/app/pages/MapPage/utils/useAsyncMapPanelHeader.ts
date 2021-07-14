@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
-import { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
+import { ReactElement, useEffect } from 'react'
 import type { PromiseResult } from '@amsterdam/use-promise'
+import { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
 import { useMapContext } from '../MapContext'
 import { AuthError, ForbiddenError } from '../../../../shared/services/api/customError'
 
@@ -8,6 +8,7 @@ const useAsyncMapPanelHeader = <T = any>(
   results: PromiseResult<T>,
   title?: string | null,
   type?: string | null,
+  customElement?: ReactElement<any, any> | null,
 ) => {
   const { setPanelHeader } = useMapContext()
 
@@ -16,6 +17,7 @@ const useAsyncMapPanelHeader = <T = any>(
       setPanelHeader({
         title,
         type,
+        customElement,
       })
     }
 

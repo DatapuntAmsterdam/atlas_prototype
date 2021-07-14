@@ -1,6 +1,7 @@
 import { Alert, Heading, Link, Paragraph, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import usePromise, { isFulfilled, isPending, isRejected } from '@amsterdam/use-promise'
+import usePromise, { isPending, isRejected } from '@amsterdam/use-promise'
 import type { FunctionComponent } from 'react'
+import { useMemo } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { getScopes } from '../../../../../shared/services/auth/auth'
@@ -19,6 +20,7 @@ import mapSearch from '../../legacy/services/map-search/map-search'
 import { locationParam } from '../../query-params'
 import useAsyncMapPanelHeader from '../../utils/useAsyncMapPanelHeader'
 import PanoramaPreview from '../PanoramaPreview/PanoramaPreview'
+import { wgs84ToRd } from '../../../../../shared/services/coordinate-reference-system'
 
 const RESULT_LIMIT = 10
 
@@ -54,6 +56,14 @@ const StatusLabel = styled.span`
   font-weight: normal;
 `
 
+const CoordinatesLabel = styled.span`
+  color: ${themeColor('tint', 'level5')};
+`
+
+const Coordinates = styled.p`
+  margin-bottom: 0;
+`
+
 const StyledAuthAlert = styled(AuthAlert)`
   margin-top: ${themeSpacing(4)};
 `
@@ -67,13 +77,27 @@ const EXCLUDED_RESULTS = 'vestigingen'
 const MapSearchResults: FunctionComponent = () => {
   const [location] = useParam(locationParam)
   const result = usePromise(() => mapSearch(location), [location])
+  const { x: rdX, y: rdY } = useMemo(
+    () => (location ? wgs84ToRd(location) : { x: 0, y: 0 }),
+    [location],
+  )
+
+  const coordinates = useMemo(
+    () =>
+      `${rdX.toFixed(2)}, ${rdY.toFixed(2)} (${location?.lat.toFixed(7) ?? ''}, ${
+        location?.lng.toFixed(7) ?? ''
+      })`,
+    [rdX, rdY, location],
+  )
 
   useAsyncMapPanelHeader(
     result,
     'Zoekresultaten voor locatie',
-    isFulfilled(result)
-      ? `Locatie: ${result.value?.location.lat}, ${result.value?.location.lng}`
-      : null,
+    null,
+    <Coordinates>
+      <CoordinatesLabel>Coördinaten: </CoordinatesLabel>
+      {coordinates}
+    </Coordinates>,
   )
 
   if (isRejected(result)) {
@@ -86,7 +110,6 @@ const MapSearchResults: FunctionComponent = () => {
       </Alert>
     )
   }
-
   if (isPending(result)) {
     return <LoadingSpinner />
   }
