@@ -19,6 +19,15 @@ export const PANO_LABELS = [
     tags: ['mission-bi'],
   },
   {
+    id: 'pano2021bi',
+    layer: {
+      id: 'panobi',
+      legendItems: [{ id: 'pano-pano2021bi' }],
+    },
+    label: 'Alleen 2021',
+    tags: ['mission-bi', 'mission-2021'],
+  },
+  {
     id: 'pano2020bi',
     layer: {
       id: 'panobi',
