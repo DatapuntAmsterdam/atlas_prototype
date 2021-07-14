@@ -101,7 +101,7 @@
     "@types/react": "^17.0.14",
     "@types/react-dom": "^17.0.8",
     "@types/react-helmet": "^6.1.2",
-    "@types/react-router-dom": "^5.1.7",
+    "@types/react-router-dom": "^5.1.8",
     "@types/resize-observer-browser": "^0.1.5",
     "@types/styled-components": "^5.1.11",
     "@types/svgo": "^2.3.1",
