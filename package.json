@@ -158,7 +158,7 @@
     "lint-staged": "11.0.1",
     "lodash.clonedeep": "^4.5.0",
     "mini-css-extract-plugin": "^1.6.1",
-    "msw": "^0.30.0",
+    "msw": "^0.32.0",
     "postcss": "^8.3.5",
     "postcss-loader": "^6.1.0",
     "prettier": "2.3.2",
