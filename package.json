@@ -100,7 +100,7 @@
     "@types/proj4": "^2.5.1",
     "@types/react": "^17.0.13",
     "@types/react-dom": "^17.0.8",
-    "@types/react-helmet": "^6.1.1",
+    "@types/react-helmet": "^6.1.2",
     "@types/react-router-dom": "^5.1.7",
     "@types/resize-observer-browser": "^0.1.5",
     "@types/styled-components": "^5.1.11",
